@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of a <c>terms</c> aggregation when the field is a string.
-/// </para>
-/// </summary>
+/// <include file="StringTermsAggregate.g.xml" path="doc/member[@key='_types.aggregations.StringTermsAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StringTermsAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StringTermsAggregateConverter))]
 public sealed partial class StringTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

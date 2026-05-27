@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IoStatDevice']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IoStatDeviceConverter))]
 public sealed partial class IoStatDevice
 {
@@ -36,45 +37,21 @@ public sealed partial class IoStatDevice
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Linux device name.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#device_name']/*"/>
 	public string? DeviceName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of read and write operations for the device completed since starting Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#operations']/*"/>
 	public long? Operations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of kilobytes read for the device since starting Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#read_kilobytes']/*"/>
 	public long? ReadKilobytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of read operations for the device completed since starting Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#read_operations']/*"/>
 	public long? ReadOperations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of kilobytes written for the device since starting Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#write_kilobytes']/*"/>
 	public long? WriteKilobytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of write operations for the device completed since starting Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStatDevice.g.xml" path="doc/member[@key='nodes._types.IoStatDevice#write_operations']/*"/>
 	public long? WriteOperations { get; set; }
 }

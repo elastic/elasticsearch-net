@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="searchable_snapshots.mount.StorageOption#full_copy"><summary><para>
+Fully caches the snapshotted index’s shards in the Elasticsearch cluster.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.StorageOption#shared_cache"><summary><para>
+Uses a local cache containing only recently searched parts of the snapshotted index’s data.
+</para></summary></member>
+</doc>

@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeoDistanceTypeConverter))]
 public enum GeoDistanceType
 {
-	/// <summary>
-	/// <para>
-	/// The <c>arc</c> calculation is the most accurate.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceType.g.xml" path="doc/member[@key='_types.GeoDistanceType#arc']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "arc")]
 	Arc,
-	/// <summary>
-	/// <para>
-	/// The <c>plane</c> calculation is faster but less accurate.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceType.g.xml" path="doc/member[@key='_types.GeoDistanceType#plane']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "plane")]
 	Plane
 }

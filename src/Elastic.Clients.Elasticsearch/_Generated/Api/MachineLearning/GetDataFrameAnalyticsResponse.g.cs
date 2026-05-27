@@ -39,10 +39,6 @@ public sealed partial class GetDataFrameAnalyticsResponse : Elastic.Transport.Pr
 
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of data frame analytics job resources, which are sorted by the id value in ascending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsResponse.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Response#data_frame_analytics']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary> DataFrameAnalytics { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RequestEmbedding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RequestEmbeddingConverter))]
 public sealed partial class RequestEmbedding
 {
@@ -42,104 +43,17 @@ public sealed partial class RequestEmbedding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string, an array of strings, a <c>content</c> object, or an array of <c>content</c> objects.
-	/// </para>
-	/// <para>
-	/// string example:
-	/// </para>
-	/// <code>
-	/// "input": "Some text"
-	/// </code>
-	/// <para>
-	/// string array example:
-	/// </para>
-	/// <code>
-	/// "input": ["Some text", "Some more text"]
-	/// </code>
-	/// <para>
-	/// <c>content</c> object example:
-	/// </para>
-	/// <code>
-	/// "input": {
-	///     "content": {
-	///       "type": "image",
-	///       "format": "base64",
-	///       "value": "data:image/jpeg;base64,..."
-	///     }
-	///   }
-	/// </code>
-	/// <para>
-	/// <c>content</c> object array example:
-	/// </para>
-	/// <code>
-	/// "input": [
-	///   {
-	///     "content": {
-	///       "type": "text",
-	///       "format": "text",
-	///       "value": "Some text to generate an embedding"
-	///     }
-	///   },
-	///   {
-	///     "content": {
-	///       "type": "image",
-	///       "format": "base64",
-	///       "value": "data:image/jpeg;base64,..."
-	///     }
-	///   }
-	/// ]
-	/// </code>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#input']/*"/>
 	public required Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The input data type for the embedding model. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Not all models support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#input_type']/*"/>
 	public string? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RequestEmbedding']/*"/>
 public readonly partial struct RequestEmbeddingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RequestEmbedding Instance { get; init; }
@@ -159,109 +73,21 @@ public readonly partial struct RequestEmbeddingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor(Elastic.Clients.Elasticsearch.Inference.RequestEmbedding instance) => new Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RequestEmbedding(Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string, an array of strings, a <c>content</c> object, or an array of <c>content</c> objects.
-	/// </para>
-	/// <para>
-	/// string example:
-	/// </para>
-	/// <code>
-	/// "input": "Some text"
-	/// </code>
-	/// <para>
-	/// string array example:
-	/// </para>
-	/// <code>
-	/// "input": ["Some text", "Some more text"]
-	/// </code>
-	/// <para>
-	/// <c>content</c> object example:
-	/// </para>
-	/// <code>
-	/// "input": {
-	///     "content": {
-	///       "type": "image",
-	///       "format": "base64",
-	///       "value": "data:image/jpeg;base64,..."
-	///     }
-	///   }
-	/// </code>
-	/// <para>
-	/// <c>content</c> object array example:
-	/// </para>
-	/// <code>
-	/// "input": [
-	///   {
-	///     "content": {
-	///       "type": "text",
-	///       "format": "text",
-	///       "value": "Some text to generate an embedding"
-	///     }
-	///   },
-	///   {
-	///     "content": {
-	///       "type": "image",
-	///       "format": "base64",
-	///       "value": "data:image/jpeg;base64,..."
-	///     }
-	///   }
-	/// ]
-	/// </code>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor Input(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<string>, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject>> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input data type for the embedding model. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Not all models support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor InputType(string? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestEmbedding.g.xml" path="doc/member[@key='inference._types.RequestEmbedding#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestEmbeddingDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

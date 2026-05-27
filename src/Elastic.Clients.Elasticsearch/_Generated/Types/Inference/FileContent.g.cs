@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.FileContent']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.FileContentConverter))]
 public sealed partial class FileContent
 {
@@ -43,17 +44,9 @@ public sealed partial class FileContent
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The base64 encoded file data
-	/// </para>
-	/// </summary>
+	/// <include file="FileContent.g.xml" path="doc/member[@key='inference._types.FileContent#file_data']/*"/>
 	public required string FileData { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the file
-	/// </para>
-	/// </summary>
+	/// <include file="FileContent.g.xml" path="doc/member[@key='inference._types.FileContent#filename']/*"/>
 	public required string Filename { get; set; }
 }

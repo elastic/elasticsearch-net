@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ThinkingConfig#thinking_budget"><summary><para>
+Indicates the desired thinking budget in tokens.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.SnapshotLifecycle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.SnapshotLifecycleConverter))]
 public sealed partial class SnapshotLifecycle
 {
@@ -50,29 +51,16 @@ public sealed partial class SnapshotLifecycle
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastFailure { get; set; }
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastSuccess { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The last time the policy was modified.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotLifecycle.g.xml" path="doc/member[@key='slm._types.SnapshotLifecycle#modified_date']/*"/>
 	public System.DateTimeOffset? ModifiedDate { get; set; }
 	public required System.DateTimeOffset ModifiedDateMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The next time the policy will run.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotLifecycle.g.xml" path="doc/member[@key='slm._types.SnapshotLifecycle#next_execution']/*"/>
 	public System.DateTimeOffset? NextExecution { get; set; }
 	public required System.DateTimeOffset NextExecutionMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; set; }
 	public required Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The version of the snapshot policy.
-	/// Only the latest version is stored and incremented when the policy is updated.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotLifecycle.g.xml" path="doc/member[@key='slm._types.SnapshotLifecycle#version']/*"/>
 	public required long Version { get; set; }
 }

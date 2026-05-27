@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// The failure store lifecycle configures the data stream lifecycle configuration for failure indices.
-/// </para>
-/// </summary>
+/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FailureStoreLifecycleConverter))]
 public sealed partial class FailureStoreLifecycle
 {
@@ -41,29 +38,15 @@ public sealed partial class FailureStoreLifecycle
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle#enabled']/*"/>
 	public bool? Enabled { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The failure store lifecycle configures the data stream lifecycle configuration for failure indices.
-/// </para>
-/// </summary>
+/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle']/*"/>
 public readonly partial struct FailureStoreLifecycleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycle Instance { get; init; }
@@ -83,25 +66,14 @@ public readonly partial struct FailureStoreLifecycleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.DataRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycle.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycle#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.SetProcessor#copy_from"><summary><para>
+The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
+Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#field"><summary><para>
+The field to insert, upsert, or update.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#ignore_empty_value"><summary><para>
+If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#media_type"><summary><para>
+The media type for encoding <c>value</c>.
+Applies only when value is a template snippet.
+Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#override"><summary><para>
+If <c>true</c> processor will update fields with pre-existing non-null-valued field.
+When set to <c>false</c>, such fields will not be touched.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.SetProcessor#value"><summary><para>
+The value to be set for the field.
+Supports template snippets.
+May specify only one of <c>value</c> or <c>copy_from</c>.
+</para></summary></member>
+</doc>

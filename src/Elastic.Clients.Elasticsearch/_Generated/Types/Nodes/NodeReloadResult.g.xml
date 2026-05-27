@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.NodeReloadResult#keystore_digest"><summary><para>
+A SHA-256 hash of the keystore file contents.
+</para></summary></member>
+  <member key="nodes._types.NodeReloadResult#keystore_last_modified_time"><summary><para>
+The last modification time of the keystore file.
+</para></summary></member>
+  <member key="nodes._types.NodeReloadResult#keystore_path"><summary><para>
+The path to the keystore file.
+</para></summary></member>
+  <member key="nodes._types.NodeReloadResult#secure_setting_names"><summary><para>
+The names of the secure settings that were reloaded.
+</para></summary></member>
+</doc>

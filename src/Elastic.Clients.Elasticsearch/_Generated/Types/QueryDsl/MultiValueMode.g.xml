@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.MultiValueMode#avg"><summary><para>
+Distance is the average distance.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiValueMode#max"><summary><para>
+Distance is the maximum distance.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiValueMode#min"><summary><para>
+Distance is the minimum distance.
+</para></summary></member>
+  <member key="_types.query_dsl.MultiValueMode#sum"><summary><para>
+Distance is the sum of all distances.
+</para></summary></member>
+</doc>

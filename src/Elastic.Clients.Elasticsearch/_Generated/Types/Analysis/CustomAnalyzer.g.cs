@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CustomAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CustomAnalyzerConverter))]
 public sealed partial class CustomAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -51,6 +52,7 @@ public sealed partial class CustomAnalyzer : Elastic.Clients.Elasticsearch.Analy
 	public string Type => "custom";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CustomAnalyzer']/*"/>
 public readonly partial struct CustomAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer Instance { get; init; }

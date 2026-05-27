@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.EdgeNGramTokenizerConverter))]
 public sealed partial class EdgeNGramTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -46,6 +47,7 @@ public sealed partial class EdgeNGramTokenizer : Elastic.Clients.Elasticsearch.A
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenizer']/*"/>
 public readonly partial struct EdgeNGramTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer Instance { get; init; }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm._types.Policy#_meta"><summary><para>
+Arbitrary metadata that is not automatically generated or used by Elasticsearch.
+</para></summary></member>
+</doc>

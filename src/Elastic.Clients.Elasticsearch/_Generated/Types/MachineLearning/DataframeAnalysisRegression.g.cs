@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisRegressionConverter))]
 public sealed partial class DataframeAnalysisRegression
 {
@@ -42,149 +43,68 @@ public sealed partial class DataframeAnalysisRegression
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#alpha']/*"/>
 	public double? Alpha { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines which field of the document is to be predicted. It must match one of the fields in the index being used to train. If this field is missing from a document, then that document will not be used for training, but a prediction with the trained model will be generated for it. It is also known as continuous target variable.
-	/// For classification analysis, the data type of the field must be numeric (<c>integer</c>, <c>short</c>, <c>long</c>, <c>byte</c>), categorical (<c>ip</c> or <c>keyword</c>), or <c>boolean</c>. There must be no more than 30 different values in this field.
-	/// For regression analysis, the data type of the field must be numeric.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#dependent_variable']/*"/>
 	public required string DependentVariable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#downsample_factor']/*"/>
 	public double? DownsampleFactor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#early_stopping_enabled']/*"/>
 	public bool? EarlyStoppingEnabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta']/*"/>
 	public double? Eta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the rate at which <c>eta</c> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <c>eta</c> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta_growth_rate_per_tree']/*"/>
 	public double? EtaGrowthRatePerTree { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_bag_fraction']/*"/>
 	public double? FeatureBagFraction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? FeatureProcessors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#gamma']/*"/>
 	public double? Gamma { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#lambda']/*"/>
 	public double? Lambda { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The loss function used during regression. Available options are <c>mse</c> (mean squared error), <c>msle</c> (mean squared logarithmic error), <c>huber</c> (Pseudo-Huber loss).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function']/*"/>
 	public string? LossFunction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A positive number that is used as a parameter to the <c>loss_function</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function_parameter']/*"/>
 	public double? LossFunctionParameter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_optimization_rounds_per_hyperparameter']/*"/>
 	public int? MaxOptimizationRoundsPerHyperparameter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_trees']/*"/>
 	public int? MaxTrees { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#num_top_feature_importance_values']/*"/>
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#prediction_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? PredictionFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <c>source</c> and <c>analyzed_fields</c> are the same).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#randomize_seed']/*"/>
 	public double? RandomizeSeed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <c>soft_tree_depth_tolerance</c> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_limit']/*"/>
 	public int? SoftTreeDepthLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <c>soft_tree_depth_limit</c>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_tolerance']/*"/>
 	public double? SoftTreeDepthTolerance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#training_percent']/*"/>
 	public Elastic.Clients.Elasticsearch.Percentage? TrainingPercent { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression']/*"/>
 public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Instance { get; init; }
@@ -204,112 +124,70 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#alpha']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Alpha(double? value)
 	{
 		Instance.Alpha = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines which field of the document is to be predicted. It must match one of the fields in the index being used to train. If this field is missing from a document, then that document will not be used for training, but a prediction with the trained model will be generated for it. It is also known as continuous target variable.
-	/// For classification analysis, the data type of the field must be numeric (<c>integer</c>, <c>short</c>, <c>long</c>, <c>byte</c>), categorical (<c>ip</c> or <c>keyword</c>), or <c>boolean</c>. There must be no more than 30 different values in this field.
-	/// For regression analysis, the data type of the field must be numeric.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#dependent_variable']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> DependentVariable(string value)
 	{
 		Instance.DependentVariable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#downsample_factor']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> DownsampleFactor(double? value)
 	{
 		Instance.DownsampleFactor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#early_stopping_enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> EarlyStoppingEnabled(bool? value = true)
 	{
 		Instance.EarlyStoppingEnabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Eta(double? value)
 	{
 		Instance.Eta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the rate at which <c>eta</c> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <c>eta</c> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta_growth_rate_per_tree']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> EtaGrowthRatePerTree(double? value)
 	{
 		Instance.EtaGrowthRatePerTree = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_bag_fraction']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureBagFraction(double? value)
 	{
 		Instance.FeatureBagFraction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? value)
 	{
 		Instance.FeatureProcessors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor[] values)
 	{
 		Instance.FeatureProcessors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> FeatureProcessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
@@ -322,154 +200,98 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#gamma']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Gamma(double? value)
 	{
 		Instance.Gamma = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#lambda']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> Lambda(double? value)
 	{
 		Instance.Lambda = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The loss function used during regression. Available options are <c>mse</c> (mean squared error), <c>msle</c> (mean squared logarithmic error), <c>huber</c> (Pseudo-Huber loss).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> LossFunction(string? value)
 	{
 		Instance.LossFunction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A positive number that is used as a parameter to the <c>loss_function</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function_parameter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> LossFunctionParameter(double? value)
 	{
 		Instance.LossFunctionParameter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_optimization_rounds_per_hyperparameter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> MaxOptimizationRoundsPerHyperparameter(int? value)
 	{
 		Instance.MaxOptimizationRoundsPerHyperparameter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_trees']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> MaxTrees(int? value)
 	{
 		Instance.MaxTrees = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#prediction_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PredictionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#prediction_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> PredictionFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PredictionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <c>source</c> and <c>analyzed_fields</c> are the same).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#randomize_seed']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> RandomizeSeed(double? value)
 	{
 		Instance.RandomizeSeed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <c>soft_tree_depth_tolerance</c> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthLimit(int? value)
 	{
 		Instance.SoftTreeDepthLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <c>soft_tree_depth_limit</c>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_tolerance']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> SoftTreeDepthTolerance(double? value)
 	{
 		Instance.SoftTreeDepthTolerance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#training_percent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(Elastic.Clients.Elasticsearch.Percentage? value)
 	{
 		Instance.TrainingPercent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#training_percent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument> TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
 		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);
@@ -485,6 +307,7 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression']/*"/>
 public readonly partial struct DataframeAnalysisRegressionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Instance { get; init; }
@@ -504,112 +327,70 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#alpha']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Alpha(double? value)
 	{
 		Instance.Alpha = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines which field of the document is to be predicted. It must match one of the fields in the index being used to train. If this field is missing from a document, then that document will not be used for training, but a prediction with the trained model will be generated for it. It is also known as continuous target variable.
-	/// For classification analysis, the data type of the field must be numeric (<c>integer</c>, <c>short</c>, <c>long</c>, <c>byte</c>), categorical (<c>ip</c> or <c>keyword</c>), or <c>boolean</c>. There must be no more than 30 different values in this field.
-	/// For regression analysis, the data type of the field must be numeric.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#dependent_variable']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor DependentVariable(string value)
 	{
 		Instance.DependentVariable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#downsample_factor']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor DownsampleFactor(double? value)
 	{
 		Instance.DownsampleFactor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#early_stopping_enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor EarlyStoppingEnabled(bool? value = true)
 	{
 		Instance.EarlyStoppingEnabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Eta(double? value)
 	{
 		Instance.Eta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the rate at which <c>eta</c> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <c>eta</c> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#eta_growth_rate_per_tree']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor EtaGrowthRatePerTree(double? value)
 	{
 		Instance.EtaGrowthRatePerTree = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_bag_fraction']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureBagFraction(double? value)
 	{
 		Instance.FeatureBagFraction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? value)
 	{
 		Instance.FeatureProcessors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(params Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor[] values)
 	{
 		Instance.FeatureProcessors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
@@ -622,11 +403,7 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <c>feature_processors</c> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#feature_processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor FeatureProcessors<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>();
@@ -639,154 +416,98 @@ public readonly partial struct DataframeAnalysisRegressionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#gamma']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Gamma(double? value)
 	{
 		Instance.Gamma = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#lambda']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor Lambda(double? value)
 	{
 		Instance.Lambda = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The loss function used during regression. Available options are <c>mse</c> (mean squared error), <c>msle</c> (mean squared logarithmic error), <c>huber</c> (Pseudo-Huber loss).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor LossFunction(string? value)
 	{
 		Instance.LossFunction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A positive number that is used as a parameter to the <c>loss_function</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#loss_function_parameter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor LossFunctionParameter(double? value)
 	{
 		Instance.LossFunctionParameter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_optimization_rounds_per_hyperparameter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor MaxOptimizationRoundsPerHyperparameter(int? value)
 	{
 		Instance.MaxOptimizationRoundsPerHyperparameter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#max_trees']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor MaxTrees(int? value)
 	{
 		Instance.MaxTrees = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#prediction_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor PredictionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PredictionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the prediction field in the results. Defaults to <c>&lt;dependent_variable>_prediction</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#prediction_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor PredictionFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PredictionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <c>source</c> and <c>analyzed_fields</c> are the same).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#randomize_seed']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor RandomizeSeed(double? value)
 	{
 		Instance.RandomizeSeed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <c>soft_tree_depth_tolerance</c> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor SoftTreeDepthLimit(int? value)
 	{
 		Instance.SoftTreeDepthLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <c>soft_tree_depth_limit</c>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#soft_tree_depth_tolerance']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor SoftTreeDepthTolerance(double? value)
 	{
 		Instance.SoftTreeDepthTolerance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#training_percent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(Elastic.Clients.Elasticsearch.Percentage? value)
 	{
 		Instance.TrainingPercent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisRegression.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisRegression#training_percent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor TrainingPercent(System.Func<Elastic.Clients.Elasticsearch.PercentageFactory, Elastic.Clients.Elasticsearch.Percentage> action)
 	{
 		Instance.TrainingPercent = Elastic.Clients.Elasticsearch.PercentageFactory.Build(action);

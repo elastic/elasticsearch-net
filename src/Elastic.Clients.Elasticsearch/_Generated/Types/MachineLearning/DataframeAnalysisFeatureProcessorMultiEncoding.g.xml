@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorMultiEncoding#processors"><summary><para>
+The ordered array of custom processors to execute. Must be more than 1.
+</para></summary></member>
+</doc>

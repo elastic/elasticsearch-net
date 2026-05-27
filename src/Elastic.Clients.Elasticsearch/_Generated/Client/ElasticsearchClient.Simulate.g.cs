@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Simulate;
 public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Simulate.SimulateNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Simulate.SimulateNamespacedClient> class for mocking.
 	/// </summary>
 	protected SimulateNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
@@ -53,6 +55,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
@@ -61,6 +65,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
@@ -70,6 +76,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
@@ -78,6 +86,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
@@ -87,6 +97,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Simulate.IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);
@@ -96,12 +108,16 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.Simulate.IngestRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor();
@@ -111,6 +127,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
@@ -119,6 +137,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(index);
@@ -128,6 +148,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
@@ -136,6 +158,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>();
@@ -145,6 +169,8 @@ public partial class SimulateNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Simulate.IngestRequest, Elastic.Clients.Elasticsearch.Simulate.IngestResponse, Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Simulate/IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Simulate.IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(index);

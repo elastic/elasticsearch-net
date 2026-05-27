@@ -23,122 +23,43 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 public sealed partial class ExistsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// <para>
-	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
-	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
-	/// This can help with "jumping values" when hitting different shards in different refresh states.
-	/// A sample value can be something like the web session ID or the user name.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check a document.
-/// </para>
-/// <para>
-/// Verify that a document exists.
-/// For example, check to see if a document with the <c>_id</c> 0 exists:
-/// </para>
-/// <code>
-/// HEAD my-index-000001/_doc/0
-/// </code>
-/// <para>
-/// If the document exists, the API returns a status code of <c>200 - OK</c>.
-/// If the document doesn’t exist, the API returns <c>404 - Not Found</c>.
-/// </para>
-/// <para>
-/// <strong>Versioning support</strong>
-/// </para>
-/// <para>
-/// You can use the <c>version</c> parameter to check the document only if its current version is equal to the specified one.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
-/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
-/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ExistsRequestConverter))]
 public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ExistsRequestParameters>
 {
@@ -165,135 +86,45 @@ public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "exists";
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// <para>
-	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
-	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
-	/// This can help with "jumping values" when hitting different shards in different refresh states.
-	/// A sample value can be something like the web session ID or the user name.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check a document.
-/// </para>
-/// <para>
-/// Verify that a document exists.
-/// For example, check to see if a document with the <c>_id</c> 0 exists:
-/// </para>
-/// <code>
-/// HEAD my-index-000001/_doc/0
-/// </code>
-/// <para>
-/// If the document exists, the API returns a status code of <c>200 - OK</c>.
-/// If the document doesn’t exist, the API returns <c>404 - Not Found</c>.
-/// </para>
-/// <para>
-/// <strong>Versioning support</strong>
-/// </para>
-/// <para>
-/// You can use the <c>version</c> parameter to check the document only if its current version is equal to the specified one.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
-/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
-/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 public readonly partial struct ExistsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ExistsRequest Instance { get; init; }
@@ -318,211 +149,119 @@ public readonly partial struct ExistsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.ExistsRequest instance) => new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ExistsRequest(Elastic.Clients.Elasticsearch.ExistsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// <para>
-	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
-	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
-	/// This can help with "jumping values" when hitting different shards in different refresh states.
-	/// A sample value can be something like the web session ID or the user name.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;
@@ -585,33 +324,8 @@ public readonly partial struct ExistsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Check a document.
-/// </para>
-/// <para>
-/// Verify that a document exists.
-/// For example, check to see if a document with the <c>_id</c> 0 exists:
-/// </para>
-/// <code>
-/// HEAD my-index-000001/_doc/0
-/// </code>
-/// <para>
-/// If the document exists, the API returns a status code of <c>200 - OK</c>.
-/// If the document doesn’t exist, the API returns <c>404 - Not Found</c>.
-/// </para>
-/// <para>
-/// <strong>Versioning support</strong>
-/// </para>
-/// <para>
-/// You can use the <c>version</c> parameter to check the document only if its current version is equal to the specified one.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch has marked the old document as deleted and added an entirely new document.
-/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
-/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.exists.Request']/*"/>
 public readonly partial struct ExistsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.ExistsRequest Instance { get; init; }
@@ -656,200 +370,112 @@ public readonly partial struct ExistsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ExistsRequest instance) => new Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ExistsRequest(Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// <para>
-	/// If it is set to <c>_local</c>, the operation will prefer to be run on a local allocated shard when possible.
-	/// If it is set to a custom value, the value is used to guarantee that the same shards will be used for the same custom value.
-	/// This can help with "jumping values" when hitting different shards in different refresh states.
-	/// A sample value can be something like the web session ID or the user name.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explicit version number for concurrency control.
-	/// The specified version must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='_global.exists.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.ExistsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;

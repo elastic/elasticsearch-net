@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The completion tool function definition.
-/// </para>
-/// </summary>
+/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionToolFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionToolFunctionConverter))]
 public sealed partial class CompletionToolFunction
 {
@@ -47,41 +44,21 @@ public sealed partial class CompletionToolFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of what the function does.
-	/// This is used by the model to choose when and how to call the function.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the function.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The parameters the functional accepts. This should be formatted as a JSON object.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#parameters']/*"/>
 	public object? Parameters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to enable schema adherence when generating the function call.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#strict']/*"/>
 	public bool? Strict { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The completion tool function definition.
-/// </para>
-/// </summary>
+/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionToolFunction']/*"/>
 public readonly partial struct CompletionToolFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction Instance { get; init; }
@@ -101,45 +78,28 @@ public readonly partial struct CompletionToolFunctionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor(Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction instance) => new Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction(Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A description of what the function does.
-	/// This is used by the model to choose when and how to call the function.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the function.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor Name(string value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The parameters the functional accepts. This should be formatted as a JSON object.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor Parameters(object? value)
 	{
 		Instance.Parameters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to enable schema adherence when generating the function call.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolFunction#strict']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor Strict(bool? value = true)
 	{
 		Instance.Strict = value;

@@ -37,10 +37,6 @@ public sealed partial class PutComponentTemplateResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateResponse.g.xml" path="doc/member[@key='cluster.put_component_template.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

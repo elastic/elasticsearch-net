@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.delete.Request']/*"/>
 public sealed partial class DeleteLicenseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete the license.
-/// </para>
-/// <para>
-/// When the license expires, your subscription level reverts to Basic.
-/// </para>
-/// <para>
-/// If the operator privileges feature is enabled, only operator users can use this API.
-/// </para>
-/// </summary>
+/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.DeleteLicenseRequestConverter))]
 public sealed partial class DeleteLicenseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>
 {
@@ -72,32 +57,15 @@ public sealed partial class DeleteLicenseRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "license.delete";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete the license.
-/// </para>
-/// <para>
-/// When the license expires, your subscription level reverts to Basic.
-/// </para>
-/// <para>
-/// If the operator privileges feature is enabled, only operator users can use this API.
-/// </para>
-/// </summary>
+/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.delete.Request']/*"/>
 public readonly partial struct DeleteLicenseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest Instance { get; init; }
@@ -116,22 +84,14 @@ public readonly partial struct DeleteLicenseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLicenseRequest.g.xml" path="doc/member[@key='license.delete.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

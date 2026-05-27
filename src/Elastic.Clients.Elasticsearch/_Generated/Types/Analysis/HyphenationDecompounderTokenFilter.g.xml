@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#hyphenation_patterns_path"><summary><para>
+Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
+This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#max_subword_size"><summary><para>
+Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#min_subword_size"><summary><para>
+Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#min_word_size"><summary><para>
+Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#no_overlapping_matches"><summary><para>
+If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#no_sub_matches"><summary><para>
+If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#only_longest_match"><summary><para>
+If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#word_list"><summary><para>
+A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+Either this parameter or <c>word_list_path</c> must be specified.
+</para></summary></member>
+  <member key="_types.analysis.HyphenationDecompounderTokenFilter#word_list_path"><summary><para>
+Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+Either this parameter or <c>word_list</c> must be specified.
+</para></summary></member>
+</doc>

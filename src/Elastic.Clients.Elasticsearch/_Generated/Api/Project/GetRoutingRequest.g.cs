@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 public sealed partial class GetRoutingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a project routing expression.
-/// </para>
-/// </summary>
+/// <include file="GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.GetRoutingRequestConverter))]
 public sealed partial class GetRoutingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>
 {
@@ -58,19 +57,12 @@ public sealed partial class GetRoutingRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "project.get_routing";
 
-	/// <summary>
-	/// <para>
-	/// The name of project routing expression
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request#name']/*"/>
 	public required string Name { get => P<string>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a project routing expression.
-/// </para>
-/// </summary>
+/// <include file="GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 public readonly partial struct GetRoutingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.GetRoutingRequest Instance { get; init; }
@@ -95,11 +87,7 @@ public readonly partial struct GetRoutingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(Elastic.Clients.Elasticsearch.Project.GetRoutingRequest instance) => new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Project.GetRoutingRequest(Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of project routing expression
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor Name(string value)
 	{
 		Instance.Name = value;

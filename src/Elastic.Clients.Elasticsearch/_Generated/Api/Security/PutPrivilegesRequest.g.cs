@@ -23,77 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
 public sealed partial class PutPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Application names are formed from a prefix, with an optional suffix that conform to the following rules:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The prefix must begin with a lowercase ASCII letter.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The prefix must contain only ASCII letters or digits.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The prefix must be at least 3 characters long.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If the suffix exists, it must begin with either a dash <c>-</c> or <c>_</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The suffix cannot contain any of the following characters: <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>*</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// No part of the name can contain whitespace.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters <c>_</c>, <c>-</c>, and <c>.</c>.
-/// </para>
-/// <para>
-/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
-/// </para>
-/// </summary>
+/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutPrivilegesRequestConverter))]
 public sealed partial class PutPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>
 {
@@ -121,76 +60,13 @@ public sealed partial class PutPrivilegesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "security.put_privileges";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 	public required System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> Privileges { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Application names are formed from a prefix, with an optional suffix that conform to the following rules:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The prefix must begin with a lowercase ASCII letter.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The prefix must contain only ASCII letters or digits.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The prefix must be at least 3 characters long.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If the suffix exists, it must begin with either a dash <c>-</c> or <c>_</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The suffix cannot contain any of the following characters: <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>*</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// No part of the name can contain whitespace.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters <c>_</c>, <c>-</c>, and <c>.</c>.
-/// </para>
-/// <para>
-/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
-/// </para>
-/// </summary>
+/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_privileges.Request']/*"/>
 public readonly partial struct PutPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest Instance { get; init; }
@@ -209,11 +85,7 @@ public readonly partial struct PutPrivilegesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPrivilegesRequest.g.xml" path="doc/member[@key='security.put_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

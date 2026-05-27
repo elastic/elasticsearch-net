@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#count"><summary><para>
+Number of entries in the cache.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#evictions"><summary><para>
+Total number of cache evictions.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#hits"><summary><para>
+Total number of cache hits.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#hits_time_in_millis"><summary><para>
+Total combined time spent in cache for hits in milliseconds.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#memory"><summary><para>
+Human-readable amount of memory taken up by the cache.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#memory_in_bytes"><summary><para>
+Memory taken up by the cache in bytes.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#misses"><summary><para>
+Total number of cache misses.
+</para></summary></member>
+  <member key="xpack.usage.SecurityRolesDlsBitSetCache#misses_time_in_millis"><summary><para>
+Total combined time spent in cache for misses in milliseconds.
+</para></summary></member>
+</doc>

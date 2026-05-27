@@ -26,46 +26,22 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryStageConverter))]
 public enum RecoveryStage
 {
-	/// <summary>
-	/// <para>
-	/// Complete.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#DONE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "DONE")]
 	Done,
-	/// <summary>
-	/// <para>
-	/// Cleanup.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#FINALIZE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "FINALIZE")]
 	Finalize,
-	/// <summary>
-	/// <para>
-	/// Reading index metadata and copying bytes from source to destination.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#INDEX']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "INDEX")]
 	Index,
-	/// <summary>
-	/// <para>
-	/// Recovery has not started.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#INIT']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "INIT")]
 	Init,
-	/// <summary>
-	/// <para>
-	/// Replaying the transaction log.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#TRANSLOG']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "TRANSLOG")]
 	Translog,
-	/// <summary>
-	/// <para>
-	/// Verifying the integrity of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryStage.g.xml" path="doc/member[@key='indices.recovery.RecoveryStage#VERIFY_INDEX']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "VERIFY_INDEX")]
 	VerifyIndex
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ChunkRescorer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ChunkRescorerConverter))]
 public sealed partial class ChunkRescorer
 {
@@ -36,21 +37,14 @@ public sealed partial class ChunkRescorer
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking settings to apply
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkRescorer.g.xml" path="doc/member[@key='_types.ChunkRescorer#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of chunks per document to evaluate for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkRescorer.g.xml" path="doc/member[@key='_types.ChunkRescorer#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ChunkRescorer']/*"/>
 public readonly partial struct ChunkRescorerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ChunkRescorer Instance { get; init; }
@@ -70,33 +64,21 @@ public readonly partial struct ChunkRescorerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor(Elastic.Clients.Elasticsearch.ChunkRescorer instance) => new Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ChunkRescorer(Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Chunking settings to apply
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkRescorer.g.xml" path="doc/member[@key='_types.ChunkRescorer#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking settings to apply
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkRescorer.g.xml" path="doc/member[@key='_types.ChunkRescorer#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of chunks per document to evaluate for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkRescorer.g.xml" path="doc/member[@key='_types.ChunkRescorer#size']/*"/>
 	public Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor Size(int? value)
 	{
 		Instance.Size = value;

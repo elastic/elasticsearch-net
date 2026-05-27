@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TransformAuthorization']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TransformAuthorizationConverter))]
 public sealed partial class TransformAuthorization
 {
@@ -36,24 +37,12 @@ public sealed partial class TransformAuthorization
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If an API key was used for the most recent update to the transform, its name and identifier are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformAuthorization.g.xml" path="doc/member[@key='ml._types.TransformAuthorization#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ApiKeyAuthorization? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a user ID was used for the most recent update to the transform, its roles at the time of the update are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformAuthorization.g.xml" path="doc/member[@key='ml._types.TransformAuthorization#roles']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a service account was used for the most recent update to the transform, the account name is listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformAuthorization.g.xml" path="doc/member[@key='ml._types.TransformAuthorization#service_account']/*"/>
 	public string? ServiceAccount { get; set; }
 }

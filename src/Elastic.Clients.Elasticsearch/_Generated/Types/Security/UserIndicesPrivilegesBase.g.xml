@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.UserIndicesPrivilegesBase#allow_restricted_indices"><summary><para>
+Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
+</para></summary></member>
+  <member key="security._types.UserIndicesPrivilegesBase#field_security"><summary><para>
+The document fields that the owners of the role have read access to.
+</para></summary></member>
+  <member key="security._types.UserIndicesPrivilegesBase#names"><summary><para>
+A list of indices (or index name patterns) to which the permissions in this entry apply.
+</para></summary></member>
+  <member key="security._types.UserIndicesPrivilegesBase#privileges"><summary><para>
+The index level privileges that owners of the role have on the specified indices.
+</para></summary></member>
+  <member key="security._types.UserIndicesPrivilegesBase#query"><summary><para>
+Search queries that define the documents the user has access to. A document within the specified indices must match these queries for it to be accessible by the owners of the role.
+</para></summary></member>
+</doc>

@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
 public sealed partial class GetPolicyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get an enrich policy.
-/// </para>
-/// <para>
-/// Returns information about an enrich policy.
-/// </para>
-/// </summary>
+/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.GetPolicyRequestConverter))]
 public sealed partial class GetPolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestParameters>
 {
@@ -66,30 +58,15 @@ public sealed partial class GetPolicyRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "enrich.get_policy";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of enrich policy names used to limit the request.
-	/// To return information for all enrich policies, omit this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get an enrich policy.
-/// </para>
-/// <para>
-/// Returns information about an enrich policy.
-/// </para>
-/// </summary>
+/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.get_policy.Request']/*"/>
 public readonly partial struct GetPolicyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest Instance { get; init; }
@@ -113,23 +90,14 @@ public readonly partial struct GetPolicyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of enrich policy names used to limit the request.
-	/// To return information for all enrich policies, omit this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPolicyRequest.g.xml" path="doc/member[@key='enrich.get_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

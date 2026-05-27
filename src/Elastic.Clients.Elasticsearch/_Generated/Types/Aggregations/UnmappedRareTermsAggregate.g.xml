@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.UnmappedRareTermsAggregate"><summary><para>
+Result of a <c>rare_terms</c> aggregation when the field is unmapped. <c>buckets</c> is always empty.
+</para></summary></member>
+</doc>

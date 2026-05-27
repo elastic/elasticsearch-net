@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityLmd']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityLmdConverter))]
 public sealed partial class SettingsSimilarityLmd : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -41,6 +42,7 @@ public sealed partial class SettingsSimilarityLmd : Elastic.Clients.Elasticsearc
 	public string Type => "LMDirichlet";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityLmd']/*"/>
 public readonly partial struct SettingsSimilarityLmdDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd Instance { get; init; }

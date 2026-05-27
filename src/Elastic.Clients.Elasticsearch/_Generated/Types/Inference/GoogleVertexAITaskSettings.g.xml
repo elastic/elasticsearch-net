@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.GoogleVertexAITaskSettings#auto_truncate"><summary><para>
+For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAITaskSettings#max_tokens"><summary><para>
+For <c>completion</c> and <c>chat_completion</c> tasks, specifies the <c>max_tokens</c> value for requests sent to the Google Model Garden <c>anthropic</c> provider.
+If <c>provider</c> is not set to <c>anthropic</c>, this field is ignored.
+If <c>max_tokens</c> is specified - it must be a positive integer. If not specified, the default value of 1024 is used.
+Anthropic models require <c>max_tokens</c> to be set for each request. Please refer to the Anthropic documentation for more information.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAITaskSettings#thinking_config"><summary><para>
+For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
+Refer to the Google documentation for the allowable configurations for each model type.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAITaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of the top N documents that should be returned.
+</para></summary></member>
+</doc>

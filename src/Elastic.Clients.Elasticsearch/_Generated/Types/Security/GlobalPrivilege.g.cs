@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.GlobalPrivilege']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GlobalPrivilegeConverter))]
 public sealed partial class GlobalPrivilege
 {
@@ -45,6 +46,7 @@ public sealed partial class GlobalPrivilege
 	public required Elastic.Clients.Elasticsearch.Security.ApplicationGlobalUserPrivileges Application { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.GlobalPrivilege']/*"/>
 public readonly partial struct GlobalPrivilegeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Instance { get; init; }

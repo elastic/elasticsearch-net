@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MovingFunctionAggregationConverter))]
 public sealed partial class MovingFunctionAggregation
 {
@@ -36,51 +37,26 @@ public sealed partial class MovingFunctionAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script that should be executed on each window of data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#script']/*"/>
 	public string? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the window consists of the last n values excluding the current bucket.
-	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#shift']/*"/>
 	public int? Shift { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of window to "slide" across the histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#window']/*"/>
 	public int? Window { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation']/*"/>
 public readonly partial struct MovingFunctionAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation Instance { get; init; }
@@ -100,68 +76,42 @@ public readonly partial struct MovingFunctionAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script that should be executed on each window of data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor Script(string? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the window consists of the last n values excluding the current bucket.
-	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#shift']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor Shift(int? value)
 	{
 		Instance.Shift = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of window to "slide" across the histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingFunctionAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingFunctionAggregation#window']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor Window(int? value)
 	{
 		Instance.Window = value;

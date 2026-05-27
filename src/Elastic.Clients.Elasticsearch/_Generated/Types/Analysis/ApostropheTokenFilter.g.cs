@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ApostropheTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ApostropheTokenFilterConverter))]
 public sealed partial class ApostropheTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class ApostropheTokenFilter : Elastic.Clients.Elasticsearc
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ApostropheTokenFilter']/*"/>
 public readonly partial struct ApostropheTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter Instance { get; init; }

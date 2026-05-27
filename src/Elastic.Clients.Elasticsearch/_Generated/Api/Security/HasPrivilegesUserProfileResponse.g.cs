@@ -37,21 +37,9 @@ public sealed partial class HasPrivilegesUserProfileResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The subset of the requested profile IDs for which an error
-	/// was encountered. It does not include the missing profile IDs
-	/// or the profile IDs of the users that do not have all the
-	/// requested privileges. This field is absent if empty.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileResponse.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Response#errors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileErrors? Errors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The subset of the requested profile IDs of the users that
-	/// have all the requested privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileResponse.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Response#has_privilege_uids']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> HasPrivilegeUids { get; set; }
 }

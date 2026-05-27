@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchBody']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultisearchBodyConverter))]
 public sealed partial class MultisearchBody
 {
@@ -36,284 +37,110 @@ public sealed partial class MultisearchBody
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Ext { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#min_score']/*"/>
 	public double? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Rank? Rank { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Retriever? Retriever { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#seq_no_primary_term']/*"/>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#terminate_after']/*"/>
 	public long? TerminateAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#timeout']/*"/>
 	public string? Timeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_scores']/*"/>
 	public bool? TrackScores { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#version']/*"/>
 	public bool? Version { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchBody']/*"/>
 public readonly partial struct MultisearchBodyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody Instance { get; init; }
@@ -333,33 +160,21 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -380,58 +195,35 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -444,44 +236,28 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -495,36 +271,21 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -537,77 +298,42 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -621,33 +347,21 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -660,151 +374,91 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Rank? value)
 	{
 		Instance.Rank = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
 	{
 		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -817,60 +471,35 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -905,33 +534,21 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -952,101 +569,63 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1059,198 +638,105 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;
@@ -1271,6 +757,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchBody']/*"/>
 public readonly partial struct MultisearchBodyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody Instance { get; init; }
@@ -1290,44 +777,28 @@ public readonly partial struct MultisearchBodyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -1355,69 +826,42 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1430,12 +874,7 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1448,44 +887,28 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -1499,36 +922,21 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1541,12 +949,7 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1559,88 +962,49 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -1654,33 +1018,21 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1693,11 +1045,7 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn<T>(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1710,175 +1058,105 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rank(Elastic.Clients.Elasticsearch.Rank? value)
 	{
 		Instance.Rank = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
 	{
 		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -1891,11 +1169,7 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -1908,84 +1182,49 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -2034,33 +1273,21 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -2081,112 +1308,70 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2199,11 +1384,7 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2216,223 +1397,119 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultisearchBody.g.xml" path="doc/member[@key='_global.msearch.MultisearchBody#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;

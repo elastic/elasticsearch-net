@@ -37,10 +37,6 @@ public sealed partial class PutRoleResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When an existing role is updated, <c>created</c> is set to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleResponse.g.xml" path="doc/member[@key='security.put_role.Response#role']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.CreatedStatus Role { get; set; }
 }

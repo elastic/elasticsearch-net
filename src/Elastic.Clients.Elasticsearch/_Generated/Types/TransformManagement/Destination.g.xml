@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.Destination#index"><summary><para>
+The destination index for the transform. The mappings of the destination index are deduced based on the source
+fields when possible. If alternate mappings are required, use the create index API prior to starting the
+transform.
+</para></summary></member>
+  <member key="transform._types.Destination#pipeline"><summary><para>
+The unique identifier for an ingest pipeline.
+</para></summary></member>
+</doc>

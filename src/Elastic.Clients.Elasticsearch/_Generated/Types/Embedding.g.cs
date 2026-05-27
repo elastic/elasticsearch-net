@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Embedding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.EmbeddingConverter))]
 public sealed partial class Embedding
 {
@@ -47,6 +48,7 @@ public sealed partial class Embedding
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Embedding']/*"/>
 public readonly partial struct EmbeddingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Embedding Instance { get; init; }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.TransformStatsHealth']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformStatsHealthConverter))]
 public sealed partial class TransformStatsHealth
 {
@@ -42,11 +43,7 @@ public sealed partial class TransformStatsHealth
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If a non-healthy status is returned, contains a list of issues of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformStatsHealth.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformStatsHealth#issues']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>? Issues { get; set; }
 	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 }

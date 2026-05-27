@@ -23,30 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
 public sealed partial class GetPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_security</c> or <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetPrivilegesRequestConverter))]
 public sealed partial class GetPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>
 {
@@ -76,44 +60,15 @@ public sealed partial class GetPrivilegesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "security.get_privileges";
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// Application privileges are always associated with exactly one application.
-	/// If you do not specify this parameter, the API returns information about all privileges for all applications.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Application { get => P<Elastic.Clients.Elasticsearch.Name?>("application"); set => PO("application", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the privilege.
-	/// If you do not specify this parameter, the API returns information about all privileges for the requested application.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_security</c> or <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_privileges.Request']/*"/>
 public readonly partial struct GetPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest Instance { get; init; }
@@ -142,25 +97,14 @@ public readonly partial struct GetPrivilegesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// Application privileges are always associated with exactly one application.
-	/// If you do not specify this parameter, the API returns information about all privileges for all applications.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Application = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the privilege.
-	/// If you do not specify this parameter, the API returns information about all privileges for the requested application.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPrivilegesRequest.g.xml" path="doc/member[@key='security.get_privileges.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;

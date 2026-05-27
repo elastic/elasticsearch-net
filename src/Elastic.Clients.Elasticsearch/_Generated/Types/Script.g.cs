@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Script']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScriptConverter))]
 public sealed partial class Script
 {
@@ -36,37 +37,21 @@ public sealed partial class Script
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>id</c> for a stored script.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the language the script is written in.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies any named parameters that are passed into the script as variables.
-	/// Use parameters instead of hard-coded values to decrease compile time.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script source.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#source']/*"/>
 	public string? Source { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Script']/*"/>
 public readonly partial struct ScriptDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Script Instance { get; init; }
@@ -86,22 +71,14 @@ public readonly partial struct ScriptDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ScriptDescriptor(Elastic.Clients.Elasticsearch.Script instance) => new Elastic.Clients.Elasticsearch.ScriptDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The <c>id</c> for a stored script.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the language the script is written in.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
 		Instance.Lang = value;
@@ -133,36 +110,21 @@ public readonly partial struct ScriptDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies any named parameters that are passed into the script as variables.
-	/// Use parameters instead of hard-coded values to decrease compile time.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#params']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies any named parameters that are passed into the script as variables.
-	/// Use parameters instead of hard-coded values to decrease compile time.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#params']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies any named parameters that are passed into the script as variables.
-	/// Use parameters instead of hard-coded values to decrease compile time.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#params']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -176,11 +138,7 @@ public readonly partial struct ScriptDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script source.
-	/// </para>
-	/// </summary>
+	/// <include file="Script.g.xml" path="doc/member[@key='_types.Script#source']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptDescriptor Source(string? value)
 	{
 		Instance.Source = value;

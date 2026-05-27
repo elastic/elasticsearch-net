@@ -26,40 +26,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ScoreModeConverter))]
 public enum ScoreMode
 {
-	/// <summary>
-	/// <para>
-	/// Average the original score and the rescore query score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScoreMode.g.xml" path="doc/member[@key='_global.search._types.ScoreMode#avg']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
-	/// <summary>
-	/// <para>
-	/// Take the max of original score and the rescore query score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScoreMode.g.xml" path="doc/member[@key='_global.search._types.ScoreMode#max']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
-	/// <summary>
-	/// <para>
-	/// Take the min of the original score and the rescore query score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScoreMode.g.xml" path="doc/member[@key='_global.search._types.ScoreMode#min']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
 	Min,
-	/// <summary>
-	/// <para>
-	/// Multiply the original score by the rescore query score.
-	/// Useful for <c>function</c> query rescores.
-	/// </para>
-	/// </summary>
+	/// <include file="ScoreMode.g.xml" path="doc/member[@key='_global.search._types.ScoreMode#multiply']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
 	Multiply,
-	/// <summary>
-	/// <para>
-	/// Add the original score and the rescore query score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScoreMode.g.xml" path="doc/member[@key='_global.search._types.ScoreMode#total']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "total")]
 	Total
 }

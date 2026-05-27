@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.tags.Tags']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.TagsConverter))]
 public sealed partial class Tags
 {
@@ -49,11 +50,5 @@ public sealed partial class Tags
 	public required string Id { get; set; }
 	public required string Organisation { get; set; }
 	public required string Type { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional tags defined by user.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? UserDefinedTags { get; set; }
 }

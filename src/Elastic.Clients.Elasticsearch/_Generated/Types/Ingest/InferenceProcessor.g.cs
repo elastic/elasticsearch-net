@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InferenceProcessorConverter))]
 public sealed partial class InferenceProcessor
 {
@@ -42,90 +43,41 @@ public sealed partial class InferenceProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true and any of the input fields defined in input_ouput are missing
-	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
-	/// Only applies when using input_output configurations to explicitly list the input fields.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutput { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model, or the ID of the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceProcessor']/*"/>
 public readonly partial struct InferenceProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Instance { get; init; }
@@ -145,48 +97,28 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? value)
 	{
 		Instance.FieldMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap()
 	{
 		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>>? action)
 	{
 		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(action);
@@ -207,115 +139,70 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any of the input fields defined in input_ouput are missing
-	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
-	/// Only applies when using input_output configurations to explicitly list the input fields.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
 	{
 		Instance.InputOutput = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
 	{
 		Instance.InputOutput = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
@@ -328,44 +215,28 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model, or the ID of the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -378,34 +249,21 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -421,6 +279,7 @@ public readonly partial struct InferenceProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceProcessor']/*"/>
 public readonly partial struct InferenceProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Instance { get; init; }
@@ -440,60 +299,35 @@ public readonly partial struct InferenceProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? value)
 	{
 		Instance.FieldMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap()
 	{
 		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject>? action)
 	{
 		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maps the document field names to the known field names of the model.
-	/// This mapping takes precedence over any default mappings provided in the model configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#field_map']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>>? action)
 	{
 		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>.Build(action);
@@ -514,126 +348,77 @@ public readonly partial struct InferenceProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any of the input fields defined in input_ouput are missing
-	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
-	/// Only applies when using input_output configurations to explicitly list the input fields.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
 	{
 		Instance.InputOutput = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
 	{
 		Instance.InputOutput = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Input fields for inference and output (destination) fields for the inference results.
-	/// This option is incompatible with the target_field and field_map options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#input_output']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
@@ -646,44 +431,28 @@ public readonly partial struct InferenceProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model, or the ID of the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -696,11 +465,7 @@ public readonly partial struct InferenceProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -713,34 +478,21 @@ public readonly partial struct InferenceProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceProcessor.g.xml" path="doc/member[@key='ingest._types.InferenceProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

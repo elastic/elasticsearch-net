@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexState']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexStateConverter))]
 public sealed partial class IndexState
 {
@@ -39,18 +40,10 @@ public sealed partial class IndexState
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	public string? DataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Default settings, included when the request's <c>include_default</c> is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexState.g.xml" path="doc/member[@key='indices._types.IndexState#defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Data stream lifecycle applicable if this is a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexState.g.xml" path="doc/member[@key='indices._types.IndexState#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }

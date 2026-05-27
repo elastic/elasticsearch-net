@@ -37,111 +37,48 @@ public sealed partial class UpdateByQueryResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scroll responses pulled back by the update by query.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#batches']/*"/>
 	public long? Batches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#deleted']/*"/>
 	public long? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of failures if there were any unrecoverable errors during the process.
-	/// If this is non-empty then the request ended because of those failures.
-	/// Update by query is implemented using batches.
-	/// Any failure causes the entire process to end, but all failures in the current batch are collected into the array.
-	/// You can use the <c>conflicts</c> option to prevent reindex from ending when version conflicts occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were ignored because the script used for the update by query returned a noop value for <c>ctx.op</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#noops']/*"/>
 	public long? Noops { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of requests per second effectively run during the update by query.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of retries attempted by update by query.
-	/// <c>bulk</c> is the number of bulk actions retried.
-	/// <c>search</c> is the number of search actions retried.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Status of each slice if the update by query was sliced
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#slices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? Slices { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds the request slept to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#throttled_millis']/*"/>
 	public System.TimeSpan? ThrottledMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field should always be equal to zero in an _update_by_query response.
-	/// It only has meaning when using the task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be run again in order to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#throttled_until_millis']/*"/>
 	public System.TimeSpan? ThrottledUntilMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, some requests timed out during the update by query.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#timed_out']/*"/>
 	public bool? TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds from start to end of the whole operation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#took']/*"/>
 	public System.TimeSpan? Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully processed.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#total']/*"/>
 	public long? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully updated.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#updated']/*"/>
 	public long? Updated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of version conflicts that the update by query hit.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryResponse.g.xml" path="doc/member[@key='_global.update_by_query.Response#version_conflicts']/*"/>
 	public long? VersionConflicts { get; set; }
 }

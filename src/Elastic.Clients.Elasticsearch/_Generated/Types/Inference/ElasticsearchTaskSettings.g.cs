@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ElasticsearchTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ElasticsearchTaskSettingsConverter))]
 public sealed partial class ElasticsearchTaskSettings
 {
@@ -36,14 +37,11 @@ public sealed partial class ElasticsearchTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return the document instead of only the index.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchTaskSettings.g.xml" path="doc/member[@key='inference._types.ElasticsearchTaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ElasticsearchTaskSettings']/*"/>
 public readonly partial struct ElasticsearchTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct ElasticsearchTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return the document instead of only the index.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchTaskSettings.g.xml" path="doc/member[@key='inference._types.ElasticsearchTaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;

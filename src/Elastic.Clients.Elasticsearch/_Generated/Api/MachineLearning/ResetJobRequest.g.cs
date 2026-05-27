@@ -23,37 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
 public sealed partial class ResetJobRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#delete_user_annotations']/*"/>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should this request wait until the operation has completed before
-	/// returning.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Reset an anomaly detection job.
-/// </para>
-/// <para>
-/// All model state and results are deleted. The job is ready to start over as if
-/// it had just been created.
-/// It is not currently possible to reset multiple jobs using wildcards or a
-/// comma separated list.
-/// </para>
-/// </summary>
+/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ResetJobRequestConverter))]
 public sealed partial class ResetJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestParameters>
 {
@@ -80,42 +62,18 @@ public sealed partial class ResetJobRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ml.reset_job";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the job to reset.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#delete_user_annotations']/*"/>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should this request wait until the operation has completed before
-	/// returning.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Reset an anomaly detection job.
-/// </para>
-/// <para>
-/// All model state and results are deleted. The job is ready to start over as if
-/// it had just been created.
-/// It is not currently possible to reset multiple jobs using wildcards or a
-/// comma separated list.
-/// </para>
-/// </summary>
+/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.reset_job.Request']/*"/>
 public readonly partial struct ResetJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest Instance { get; init; }
@@ -140,36 +98,21 @@ public readonly partial struct ResetJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the job to reset.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#delete_user_annotations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor DeleteUserAnnotations(bool? value = true)
 	{
 		Instance.DeleteUserAnnotations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should this request wait until the operation has completed before
-	/// returning.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobRequest.g.xml" path="doc/member[@key='ml.reset_job.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ResetJobRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

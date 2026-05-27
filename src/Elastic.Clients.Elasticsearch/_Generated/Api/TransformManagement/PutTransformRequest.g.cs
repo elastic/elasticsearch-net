@@ -23,59 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 public sealed partial class PutTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
-	/// check for the existence of the source indices and a check that the destination index is not part of the source
-	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
-	/// until after the transform is created. The validations are always run when you start the transform, however, with
-	/// the exception of privilege checks.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#defer_validation']/*"/>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a transform.
-/// </para>
-/// <para>
-/// Creates a transform.
-/// </para>
-/// <para>
-/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-/// unique row per entity.
-/// </para>
-/// <para>
-/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-/// in the latest object.
-/// </para>
-/// <para>
-/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-/// attempts unauthorized operations.
-/// </para>
-/// <para>
-/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-/// give users any privileges on <c>.data-frame-internal*</c> indices.
-/// </para>
-/// </summary>
+/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.PutTransformRequestConverter))]
 public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestParameters>
 {
@@ -110,139 +70,48 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "transform.put_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
-	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
-	/// check for the existence of the source indices and a check that the destination index is not part of the source
-	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
-	/// until after the transform is created. The validations are always run when you start the transform, however, with
-	/// the exception of privilege checks.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#defer_validation']/*"/>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public required Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
-	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
-	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public required Elastic.Clients.Elasticsearch.TransformManagement.Source Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a transform.
-/// </para>
-/// <para>
-/// Creates a transform.
-/// </para>
-/// <para>
-/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-/// unique row per entity.
-/// </para>
-/// <para>
-/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-/// in the latest object.
-/// </para>
-/// <para>
-/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-/// attempts unauthorized operations.
-/// </para>
-/// <para>
-/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-/// give users any privileges on <c>.data-frame-internal*</c> indices.
-/// </para>
-/// </summary>
+/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 public readonly partial struct PutTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest Instance { get; init; }
@@ -269,161 +138,98 @@ public readonly partial struct PutTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
-	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
-	/// check for the existence of the source indices and a check that the destination index is not part of the source
-	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
-	/// until after the transform is created. The validations are always run when you start the transform, however, with
-	/// the exception of privilege checks.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#defer_validation']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor DeferValidation(bool? value = true)
 	{
 		Instance.DeferValidation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
-	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
-	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? value)
 	{
 		Instance.Latest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Latest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Latest<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<T>> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -437,183 +243,112 @@ public readonly partial struct PutTransformRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? value)
 	{
 		Instance.Pivot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Pivot()
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Pivot(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Pivot<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<T>>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor RetentionPolicy<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor Sync<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>.Build(action);
@@ -676,38 +411,8 @@ public readonly partial struct PutTransformRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create a transform.
-/// </para>
-/// <para>
-/// Creates a transform.
-/// </para>
-/// <para>
-/// A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
-/// a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
-/// unique row per entity.
-/// </para>
-/// <para>
-/// You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
-/// you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
-/// the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
-/// in the latest object.
-/// </para>
-/// <para>
-/// You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
-/// <c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
-/// transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
-/// those roles do not have the required privileges on the source and destination indices, the transform fails when it
-/// attempts unauthorized operations.
-/// </para>
-/// <para>
-/// NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
-/// <c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
-/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
-/// give users any privileges on <c>.data-frame-internal*</c> indices.
-/// </para>
-/// </summary>
+/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.put_transform.Request']/*"/>
 public readonly partial struct PutTransformRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest Instance { get; init; }
@@ -734,150 +439,91 @@ public readonly partial struct PutTransformRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
-	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When the transform is created, a series of validations occur to ensure its success. For example, there is a
-	/// check for the existence of the source indices and a check that the destination index is not part of the source
-	/// index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
-	/// until after the transform is created. The validations are always run when you start the transform, however, with
-	/// the exception of privilege checks.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#defer_validation']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> DeferValidation(bool? value = true)
 	{
 		Instance.DeferValidation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the transform is running continuously. Also
-	/// determines the retry interval in the event of transient failures while the transform is searching or indexing.
-	/// The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? value)
 	{
 		Instance.Latest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Latest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -891,137 +537,84 @@ public readonly partial struct PutTransformRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? value)
 	{
 		Instance.Pivot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Pivot()
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
-	/// and the aggregation to reduce the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Pivot(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
-	/// destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformRequest.g.xml" path="doc/member[@key='transform.put_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>.Build(action);

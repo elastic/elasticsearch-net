@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RrfRank']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RrfRankConverter))]
 public sealed partial class RrfRank
 {
@@ -36,21 +37,14 @@ public sealed partial class RrfRank
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How much influence documents in individual result sets per query have over the final ranked result set
-	/// </para>
-	/// </summary>
+	/// <include file="RrfRank.g.xml" path="doc/member[@key='_types.RrfRank#rank_constant']/*"/>
 	public long? RankConstant { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size of the individual result sets per query
-	/// </para>
-	/// </summary>
+	/// <include file="RrfRank.g.xml" path="doc/member[@key='_types.RrfRank#rank_window_size']/*"/>
 	public long? RankWindowSize { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RrfRank']/*"/>
 public readonly partial struct RrfRankDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RrfRank Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct RrfRankDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RrfRankDescriptor(Elastic.Clients.Elasticsearch.RrfRank instance) => new Elastic.Clients.Elasticsearch.RrfRankDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RrfRank(Elastic.Clients.Elasticsearch.RrfRankDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// How much influence documents in individual result sets per query have over the final ranked result set
-	/// </para>
-	/// </summary>
+	/// <include file="RrfRank.g.xml" path="doc/member[@key='_types.RrfRank#rank_constant']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRankDescriptor RankConstant(long? value)
 	{
 		Instance.RankConstant = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Size of the individual result sets per query
-	/// </para>
-	/// </summary>
+	/// <include file="RrfRank.g.xml" path="doc/member[@key='_types.RrfRank#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRankDescriptor RankWindowSize(long? value)
 	{
 		Instance.RankWindowSize = value;

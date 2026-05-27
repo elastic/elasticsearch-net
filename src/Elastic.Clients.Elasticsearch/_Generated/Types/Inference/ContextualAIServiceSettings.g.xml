@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ContextualAIServiceSettings#api_key"><summary><para>
+A valid API key for your Contexutual AI account.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.ContextualAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Contextual AI documentation for the list of available rerank models.
+</para></summary></member>
+  <member key="inference._types.ContextualAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Contextual AI.
+The <c>contextualai</c> service sets a default number of requests allowed per minute depending on the task type.
+For <c>rerank</c>, it is set to <c>1000</c>.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.CommonTermsQueryConverter))]
 public sealed partial class CommonTermsQuery
 {
@@ -51,14 +52,7 @@ public sealed partial class CommonTermsQuery
 
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CommonTermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public double? CutoffFrequency { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -69,6 +63,7 @@ public sealed partial class CommonTermsQuery
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery']/*"/>
 public readonly partial struct CommonTermsQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery Instance { get; init; }
@@ -94,14 +89,7 @@ public readonly partial struct CommonTermsQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CommonTermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -165,6 +153,7 @@ public readonly partial struct CommonTermsQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery']/*"/>
 public readonly partial struct CommonTermsQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery Instance { get; init; }
@@ -190,14 +179,7 @@ public readonly partial struct CommonTermsQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CommonTermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CommonTermsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

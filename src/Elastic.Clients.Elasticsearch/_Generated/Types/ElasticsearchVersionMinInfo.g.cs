@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Reduced (minimal) info ElasticsearchVersion
-/// </para>
-/// </summary>
+/// <include file="ElasticsearchVersionMinInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionMinInfo']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ElasticsearchVersionMinInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ElasticsearchVersionMinInfoConverter))]
 public sealed partial class ElasticsearchVersionMinInfo
 {

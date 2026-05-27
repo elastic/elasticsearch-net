@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ConstantScoreQueryConverter))]
 public sealed partial class ConstantScoreQuery
 {
@@ -42,27 +43,15 @@ public sealed partial class ConstantScoreQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery']/*"/>
 public readonly partial struct ConstantScoreQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery Instance { get; init; }
@@ -82,40 +71,21 @@ public readonly partial struct ConstantScoreQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -137,6 +107,7 @@ public readonly partial struct ConstantScoreQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery']/*"/>
 public readonly partial struct ConstantScoreQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery Instance { get; init; }
@@ -156,53 +127,28 @@ public readonly partial struct ConstantScoreQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter query you wish to run. Any returned documents must match this query.
-	/// Filter queries do not calculate relevance scores.
-	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
-	/// </para>
-	/// </summary>
+	/// <include file="ConstantScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ConstantScoreQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

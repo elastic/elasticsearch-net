@@ -23,55 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 public sealed partial class ResolveIndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#mode']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? Mode { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>?>("mode"); set => Q("mode", value); }
 }
 
-/// <summary>
-/// <para>
-/// Resolve indices.
-/// </para>
-/// <para>
-/// Resolve the names and/or index patterns for indices, aliases, and data streams.
-/// Multiple patterns and remote clusters are supported.
-/// </para>
-/// </summary>
+/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ResolveIndexRequestConverter))]
 public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>
 {
@@ -98,75 +68,27 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "indices.resolve_index";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated name(s) or index pattern(s) of the indices, aliases, and data streams to resolve.
-	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#mode']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? Mode { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>?>("mode"); set => Q("mode", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Resolve indices.
-/// </para>
-/// <para>
-/// Resolve the names and/or index patterns for indices, aliases, and data streams.
-/// Multiple patterns and remote clusters are supported.
-/// </para>
-/// </summary>
+/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 public readonly partial struct ResolveIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest Instance { get; init; }
@@ -191,107 +113,56 @@ public readonly partial struct ResolveIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated name(s) or index pattern(s) of the indices, aliases, and data streams to resolve.
-	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor Mode(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? value)
 	{
 		Instance.Mode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor Mode(params Elastic.Clients.Elasticsearch.IndexManagement.IndexMode[] values)
 	{
 		Instance.Mode = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TermRangeQueryConverter))]
 public sealed partial class TermRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
@@ -42,56 +43,30 @@ public sealed partial class TermRangeQuery : Elastic.Clients.Elasticsearch.Query
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gt']/*"/>
 	public string? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gte']/*"/>
 	public string? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lt']/*"/>
 	public string? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lte']/*"/>
 	public string? Lte { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "term";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery']/*"/>
 public readonly partial struct TermRangeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery Instance { get; init; }
@@ -111,14 +86,7 @@ public readonly partial struct TermRangeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -137,44 +105,28 @@ public readonly partial struct TermRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Gt(string? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Gte(string? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Lt(string? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Lte(string? value)
 	{
 		Instance.Lte = value;
@@ -187,11 +139,7 @@ public readonly partial struct TermRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
@@ -207,6 +155,7 @@ public readonly partial struct TermRangeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery']/*"/>
 public readonly partial struct TermRangeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery Instance { get; init; }
@@ -226,14 +175,7 @@ public readonly partial struct TermRangeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -252,44 +194,28 @@ public readonly partial struct TermRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Gt(string? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Gte(string? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Lt(string? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Lte(string? value)
 	{
 		Instance.Lte = value;
@@ -302,11 +228,7 @@ public readonly partial struct TermRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="TermRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;

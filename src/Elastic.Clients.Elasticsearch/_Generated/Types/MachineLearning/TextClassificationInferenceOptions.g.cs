@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Text classification configuration options
-/// </para>
-/// </summary>
+/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextClassificationInferenceOptionsConverter))]
 public sealed partial class TextClassificationInferenceOptions
 {
@@ -41,41 +38,22 @@ public sealed partial class TextClassificationInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#classification_labels']/*"/>
 	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Text classification configuration options
-/// </para>
-/// </summary>
+/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions']/*"/>
 public readonly partial struct TextClassificationInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions Instance { get; init; }
@@ -95,66 +73,42 @@ public readonly partial struct TextClassificationInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ClassificationLabels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

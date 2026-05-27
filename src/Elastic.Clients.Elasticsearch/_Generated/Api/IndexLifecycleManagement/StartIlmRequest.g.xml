@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.start.Request"><summary><para>
+Start the ILM plugin.
+</para>
+<para>
+Start the index lifecycle management plugin if it is currently stopped.
+ILM is started automatically when the cluster is formed.
+Restarting ILM is necessary only when it has been stopped using the stop ILM API.
+</para></summary></member>
+  <member key="ilm.start.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ilm.start.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AdjacencyMatrixAggregationConverter))]
 public sealed partial class AdjacencyMatrixAggregation
 {
@@ -36,22 +37,14 @@ public sealed partial class AdjacencyMatrixAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Separator used to concatenate filter names. Defaults to &amp;.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#separator']/*"/>
 	public string? Separator { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation']/*"/>
 public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation Instance { get; init; }
@@ -71,36 +64,21 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<TDocument>.Build(action);
@@ -121,11 +99,7 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Separator used to concatenate filter names. Defaults to &amp;.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument> Separator(string? value)
 	{
 		Instance.Separator = value;
@@ -146,6 +120,7 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation']/*"/>
 public readonly partial struct AdjacencyMatrixAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation Instance { get; init; }
@@ -165,48 +140,28 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters used to create buckets.
-	/// At least one filter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringQuery<T>.Build(action);
@@ -234,11 +189,7 @@ public readonly partial struct AdjacencyMatrixAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Separator used to concatenate filter names. Defaults to &amp;.
-	/// </para>
-	/// </summary>
+	/// <include file="AdjacencyMatrixAggregation.g.xml" path="doc/member[@key='_types.aggregations.AdjacencyMatrixAggregation#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor Separator(string? value)
 	{
 		Instance.Separator = value;

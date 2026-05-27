@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 public sealed partial class GetSearchApplicationRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get search application details.
-/// </para>
-/// </summary>
+/// <include file="GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.GetSearchApplicationRequestConverter))]
 public sealed partial class GetSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>
 {
@@ -58,19 +57,12 @@ public sealed partial class GetSearchApplicationRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "search_application.get";
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get search application details.
-/// </para>
-/// </summary>
+/// <include file="GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get.Request']/*"/>
 public readonly partial struct GetSearchApplicationRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest Instance { get; init; }
@@ -95,11 +87,7 @@ public readonly partial struct GetSearchApplicationRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.get.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

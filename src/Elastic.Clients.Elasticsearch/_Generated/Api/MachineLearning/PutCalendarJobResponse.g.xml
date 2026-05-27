@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_calendar_job.Response#calendar_id"><summary><para>
+A string that uniquely identifies a calendar.
+</para></summary></member>
+  <member key="ml.put_calendar_job.Response#description"><summary><para>
+A description of the calendar.
+</para></summary></member>
+  <member key="ml.put_calendar_job.Response#job_ids"><summary><para>
+A list of anomaly detection job identifiers or group names.
+</para></summary></member>
+</doc>

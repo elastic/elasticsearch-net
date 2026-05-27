@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
 public sealed partial class PutGroqRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Groq inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>groq</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutGroqRequestConverter))]
 public sealed partial class PutGroqRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>
 {
@@ -74,50 +66,24 @@ public sealed partial class PutGroqRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "inference.put_groq";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#groq_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id GroqInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("groq_inference_id"); set => PR("groq_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.GroqTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.GroqTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>groq</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#service']/*"/>
 	public string Service => "groq";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>groq</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Groq inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>groq</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_groq.Request']/*"/>
 public readonly partial struct PutGroqRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutGroqRequest Instance { get; init; }
@@ -144,55 +110,35 @@ public readonly partial struct PutGroqRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutGroqRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutGroqRequest(Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#groq_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor GroqInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.GroqInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.GroqTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>groq</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>groq</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGroqRequest.g.xml" path="doc/member[@key='inference.put_groq.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor.Build(action);

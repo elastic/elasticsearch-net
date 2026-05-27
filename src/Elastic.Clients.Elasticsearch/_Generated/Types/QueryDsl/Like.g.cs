@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-/// <summary>
-/// <para>
-/// Text that we want similar documents for or a lookup to a document's field for the text.
-/// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-mlt-query#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="Like.g.xml" path="doc/member[@key='_types.query_dsl.Like']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.Like']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.LikeConverter))]
 public sealed partial class Like : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {

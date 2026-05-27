@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The dense embedding result object for byte representation
-/// </para>
-/// </summary>
+/// <include file="DenseEmbeddingByteResult.g.xml" path="doc/member[@key='inference._types.DenseEmbeddingByteResult']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.DenseEmbeddingByteResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DenseEmbeddingByteResultConverter))]
 public sealed partial class DenseEmbeddingByteResult
 {

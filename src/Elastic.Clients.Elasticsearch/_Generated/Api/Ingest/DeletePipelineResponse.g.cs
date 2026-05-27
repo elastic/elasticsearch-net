@@ -37,10 +37,6 @@ public sealed partial class DeletePipelineResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePipelineResponse.g.xml" path="doc/member[@key='ingest.delete_pipeline.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

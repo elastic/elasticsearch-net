@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ExponentialHistogramPropertyConverter))]
 public sealed partial class ExponentialHistogramProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -40,11 +41,7 @@ public sealed partial class ExponentialHistogramProperty : Elastic.Clients.Elast
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
@@ -53,6 +50,7 @@ public sealed partial class ExponentialHistogramProperty : Elastic.Clients.Elast
 	public string Type => "exponential_histogram";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty']/*"/>
 public readonly partial struct ExponentialHistogramPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty Instance { get; init; }
@@ -96,33 +94,21 @@ public readonly partial struct ExponentialHistogramPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -174,6 +160,7 @@ public readonly partial struct ExponentialHistogramPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty']/*"/>
 public readonly partial struct ExponentialHistogramPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty Instance { get; init; }
@@ -223,33 +210,21 @@ public readonly partial struct ExponentialHistogramPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExponentialHistogramProperty.g.xml" path="doc/member[@key='_types.mapping.ExponentialHistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

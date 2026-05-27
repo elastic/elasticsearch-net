@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.HyphenationDecompounderTokenFilterConverter))]
 public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,78 +43,39 @@ public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
-	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#hyphenation_patterns_path']/*"/>
 	public required string HyphenationPatternsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#max_subword_size']/*"/>
 	public int? MaxSubwordSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#min_subword_size']/*"/>
 	public int? MinSubwordSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#min_word_size']/*"/>
 	public int? MinWordSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#no_overlapping_matches']/*"/>
 	public bool? NoOverlappingMatches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#no_sub_matches']/*"/>
 	public bool? NoSubMatches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#only_longest_match']/*"/>
 	public bool? OnlyLongestMatch { get; set; }
 
 	public string Type => "hyphenation_decompounder";
 
 	public string? Version { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
-	/// Either this parameter or <c>word_list_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#word_list']/*"/>
 	public System.Collections.Generic.ICollection<string>? WordList { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
-	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
-	/// Either this parameter or <c>word_list</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#word_list_path']/*"/>
 	public string? WordListPath { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter']/*"/>
 public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter Instance { get; init; }
@@ -133,78 +95,49 @@ public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
-	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#hyphenation_patterns_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string value)
 	{
 		Instance.HyphenationPatternsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#max_subword_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MaxSubwordSize(int? value)
 	{
 		Instance.MaxSubwordSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#min_subword_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MinSubwordSize(int? value)
 	{
 		Instance.MinSubwordSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#min_word_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MinWordSize(int? value)
 	{
 		Instance.MinWordSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#no_overlapping_matches']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor NoOverlappingMatches(bool? value = true)
 	{
 		Instance.NoOverlappingMatches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#no_sub_matches']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor NoSubMatches(bool? value = true)
 	{
 		Instance.NoSubMatches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#only_longest_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? value = true)
 	{
 		Instance.OnlyLongestMatch = value;
@@ -217,37 +150,21 @@ public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
-	/// Either this parameter or <c>word_list_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#word_list']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordList(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.WordList = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
-	/// Either this parameter or <c>word_list_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#word_list']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordList(params string[] values)
 	{
 		Instance.WordList = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
-	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
-	/// Either this parameter or <c>word_list</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="HyphenationDecompounderTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HyphenationDecompounderTokenFilter#word_list_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordListPath(string? value)
 	{
 		Instance.WordListPath = value;

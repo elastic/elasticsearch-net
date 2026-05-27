@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.HuggingFaceServiceSettingsConverter))]
 public sealed partial class HuggingFaceServiceSettings
 {
@@ -43,47 +44,20 @@ public sealed partial class HuggingFaceServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid access token for your HuggingFace account.
-	/// You can create or find your access tokens on the HuggingFace settings page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the HuggingFace model to use for the inference task.
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, this field is optional but may be required for certain models — particularly when using serverless inference endpoints.
-	/// For the <c>text_embedding</c> task, this field should not be included. Otherwise, the request will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#model_id']/*"/>
 	public string? ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Hugging Face.
-	/// By default, the <c>hugging_face</c> service sets the number of requests allowed per minute to 3000 for all supported tasks.
-	/// Hugging Face does not publish a universal rate limit — actual limits may vary.
-	/// It is recommended to adjust this value based on the capacity and limits of your specific deployment environment.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, the deployed model must be compatible with the Hugging Face Chat Completion interface (see the linked external documentation for details). The endpoint URL for the request must include <c>/v1/chat/completions</c>.
-	/// If the model supports the OpenAI Chat Completion schema, a toggle should appear in the interface. Enabling this toggle doesn't change any model behavior, it reveals the full endpoint URL needed (which should include <c>/v1/chat/completions</c>) when configuring the inference endpoint in Elasticsearch. If the model doesn't support this schema, the toggle may not be shown.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#url']/*"/>
 	public required string Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings']/*"/>
 public readonly partial struct HuggingFaceServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings Instance { get; init; }
@@ -103,84 +77,42 @@ public readonly partial struct HuggingFaceServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings(Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid access token for your HuggingFace account.
-	/// You can create or find your access tokens on the HuggingFace settings page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the HuggingFace model to use for the inference task.
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, this field is optional but may be required for certain models — particularly when using serverless inference endpoints.
-	/// For the <c>text_embedding</c> task, this field should not be included. Otherwise, the request will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Hugging Face.
-	/// By default, the <c>hugging_face</c> service sets the number of requests allowed per minute to 3000 for all supported tasks.
-	/// Hugging Face does not publish a universal rate limit — actual limits may vary.
-	/// It is recommended to adjust this value based on the capacity and limits of your specific deployment environment.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Hugging Face.
-	/// By default, the <c>hugging_face</c> service sets the number of requests allowed per minute to 3000 for all supported tasks.
-	/// Hugging Face does not publish a universal rate limit — actual limits may vary.
-	/// It is recommended to adjust this value based on the capacity and limits of your specific deployment environment.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Hugging Face.
-	/// By default, the <c>hugging_face</c> service sets the number of requests allowed per minute to 3000 for all supported tasks.
-	/// Hugging Face does not publish a universal rate limit — actual limits may vary.
-	/// It is recommended to adjust this value based on the capacity and limits of your specific deployment environment.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, the deployed model must be compatible with the Hugging Face Chat Completion interface (see the linked external documentation for details). The endpoint URL for the request must include <c>/v1/chat/completions</c>.
-	/// If the model supports the OpenAI Chat Completion schema, a toggle should appear in the interface. Enabling this toggle doesn't change any model behavior, it reveals the full endpoint URL needed (which should include <c>/v1/chat/completions</c>) when configuring the inference endpoint in Elasticsearch. If the model doesn't support this schema, the toggle may not be shown.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceServiceSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor Url(string value)
 	{
 		Instance.Url = value;

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// Chunking configuration object
-/// </para>
-/// </summary>
+/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceChunkingSettingsConverter))]
 public sealed partial class InferenceChunkingSettings
 {
@@ -41,100 +38,27 @@ public sealed partial class InferenceChunkingSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// This value should not exceed the window size for the associated model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#max_chunk_size']/*"/>
 	public int? MaxChunkSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#overlap']/*"/>
 	public int? Overlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#sentence_overlap']/*"/>
 	public int? SentenceOverlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
-	/// Values can be <c>markdown</c> or <c>plaintext</c>.
-	/// </para>
-	/// <para>
-	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#separator_group']/*"/>
 	public string? SeparatorGroup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#separators']/*"/>
 	public System.Collections.Generic.ICollection<string>? Separators { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>max_chunk_size</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// either <c>separators</c> or<c>separator_group</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Learn more about different chunking strategies in the linked documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#strategy']/*"/>
 	public string? Strategy { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Chunking configuration object
-/// </para>
-/// </summary>
+/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
 public readonly partial struct InferenceChunkingSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Instance { get; init; }
@@ -154,134 +78,49 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// This value should not exceed the window size for the associated model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#max_chunk_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor MaxChunkSize(int? value)
 	{
 		Instance.MaxChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Overlap(int? value)
 	{
 		Instance.Overlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#sentence_overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SentenceOverlap(int? value)
 	{
 		Instance.SentenceOverlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
-	/// Values can be <c>markdown</c> or <c>plaintext</c>.
-	/// </para>
-	/// <para>
-	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#separator_group']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SeparatorGroup(string? value)
 	{
 		Instance.SeparatorGroup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#separators']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Separators = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#separators']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(params string[] values)
 	{
 		Instance.Separators = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>max_chunk_size</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// either <c>separators</c> or<c>separator_group</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Learn more about different chunking strategies in the linked documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Strategy(string? value)
 	{
 		Instance.Strategy = value;

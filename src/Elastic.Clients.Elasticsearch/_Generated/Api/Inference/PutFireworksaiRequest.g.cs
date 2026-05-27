@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
 public sealed partial class PutFireworksaiRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Fireworks AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>fireworksai</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutFireworksaiRequestConverter))]
 public sealed partial class PutFireworksaiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestParameters>
 {
@@ -74,69 +66,30 @@ public sealed partial class PutFireworksaiRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "inference.put_fireworksai";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#fireworksai_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id FireworksaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("fireworksai_inference_id"); set => PR("fireworksai_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.FireworksAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.FireworksAITaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>fireworksai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#service']/*"/>
 	public string Service => "fireworksai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>fireworksai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.FireworksAIServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// Not applicable to the <c>text_embedding</c> task type.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAITaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Fireworks AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>fireworksai</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_fireworksai.Request']/*"/>
 public readonly partial struct PutFireworksaiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequest Instance { get; init; }
@@ -163,136 +116,77 @@ public readonly partial struct PutFireworksaiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequest(Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#fireworksai_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor FireworksaiInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.FireworksaiInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.FireworksAITaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>fireworksai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.FireworksAIServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>fireworksai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// Not applicable to the <c>text_embedding</c> task type.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.FireworksAITaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// Not applicable to the <c>text_embedding</c> task type.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// Not applicable to the <c>text_embedding</c> task type.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFireworksaiRequest.g.xml" path="doc/member[@key='inference.put_fireworksai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutFireworksaiRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor.Build(action);

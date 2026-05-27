@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 public sealed partial class CloneSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clone a snapshot.
-/// </para>
-/// <para>
-/// Clone part of all of a snapshot into another snapshot in the same repository.
-/// </para>
-/// </summary>
+/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CloneSnapshotRequestConverter))]
 public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>
 {
@@ -76,53 +66,24 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "snapshot.clone";
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository that both source and target snapshot belong to.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#snapshot']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
-	/// <summary>
-	/// <para>
-	/// The target snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#target_snapshot']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name TargetSnapshot { get => P<Elastic.Clients.Elasticsearch.Name>("target_snapshot"); set => PR("target_snapshot", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of indices to include in the snapshot.
-	/// Multi-target syntax is supported.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#indices']/*"/>
 	public required string Indices { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Clone a snapshot.
-/// </para>
-/// <para>
-/// Clone part of all of a snapshot into another snapshot in the same repository.
-/// </para>
-/// </summary>
+/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 public readonly partial struct CloneSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest Instance { get; init; }
@@ -149,58 +110,35 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest(Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository that both source and target snapshot belong to.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Repository = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Snapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The target snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#target_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor TargetSnapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.TargetSnapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of indices to include in the snapshot.
-	/// Multi-target syntax is supported.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Indices(string value)
 	{
 		Instance.Indices = value;

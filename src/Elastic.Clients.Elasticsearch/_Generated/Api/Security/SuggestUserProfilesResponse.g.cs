@@ -37,24 +37,12 @@ public sealed partial class SuggestUserProfilesResponse : Elastic.Transport.Prod
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of profile documents, ordered by relevance, that match the search criteria.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesResponse.g.xml" path="doc/member[@key='security.suggest_user_profiles.Response#profiles']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds it took Elasticsearch to run the request.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesResponse.g.xml" path="doc/member[@key='security.suggest_user_profiles.Response#took']/*"/>
 	public required long Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the number of matching profiles.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesResponse.g.xml" path="doc/member[@key='security.suggest_user_profiles.Response#total']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; set; }
 }

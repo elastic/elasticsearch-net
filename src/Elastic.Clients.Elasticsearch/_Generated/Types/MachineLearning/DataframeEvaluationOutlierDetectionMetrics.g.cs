@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationOutlierDetectionMetricsConverter))]
 public sealed partial class DataframeEvaluationOutlierDetectionMetrics
 {
@@ -36,35 +37,20 @@ public sealed partial class DataframeEvaluationOutlierDetectionMetrics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#confusion_matrix']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? ConfusionMatrix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#precision']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#recall']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Recall { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics']/*"/>
 public readonly partial struct DataframeEvaluationOutlierDetectionMetricsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics Instance { get; init; }
@@ -84,66 +70,42 @@ public readonly partial struct DataframeEvaluationOutlierDetectionMetricsDescrip
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? value)
 	{
 		Instance.AucRoc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc()
 	{
 		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor AucRoc(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor>? action)
 	{
 		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.ConfusionMatrix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix()
 	{
 		Instance.ConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor ConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.ConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -157,33 +119,21 @@ public readonly partial struct DataframeEvaluationOutlierDetectionMetricsDescrip
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision()
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -197,33 +147,21 @@ public readonly partial struct DataframeEvaluationOutlierDetectionMetricsDescrip
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Recall = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall()
 	{
 		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetectionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetectionMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

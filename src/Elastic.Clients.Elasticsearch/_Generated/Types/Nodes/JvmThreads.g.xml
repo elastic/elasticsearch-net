@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.JvmThreads#count"><summary><para>
+Number of active threads in use by JVM.
+</para></summary></member>
+  <member key="nodes._types.JvmThreads#peak_count"><summary><para>
+Highest number of threads used by JVM.
+</para></summary></member>
+</doc>

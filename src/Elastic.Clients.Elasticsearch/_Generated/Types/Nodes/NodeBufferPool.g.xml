@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.NodeBufferPool#count"><summary><para>
+Number of buffer pools.
+</para></summary></member>
+  <member key="nodes._types.NodeBufferPool#total_capacity"><summary><para>
+Total capacity of buffer pools.
+</para></summary></member>
+  <member key="nodes._types.NodeBufferPool#total_capacity_in_bytes"><summary><para>
+Total capacity of buffer pools in bytes.
+</para></summary></member>
+  <member key="nodes._types.NodeBufferPool#used"><summary><para>
+Size of buffer pools.
+</para></summary></member>
+  <member key="nodes._types.NodeBufferPool#used_in_bytes"><summary><para>
+Size of buffer pools in bytes.
+</para></summary></member>
+</doc>

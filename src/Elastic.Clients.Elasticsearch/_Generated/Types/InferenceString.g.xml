@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.InferenceString#format"><summary><para>
+The format of the data. If null, the default data format for the given type is used.
+</para></summary></member>
+  <member key="_types.InferenceString#type"><summary><para>
+The type of data that the value represents.
+</para></summary></member>
+  <member key="_types.InferenceString#value"><summary><para>
+String which may be raw text, or the string representation of some other data such as an image in base64.
+</para></summary></member>
+</doc>

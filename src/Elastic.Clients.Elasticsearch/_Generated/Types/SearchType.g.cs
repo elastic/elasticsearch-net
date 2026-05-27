@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SearchTypeConverter))]
 public enum SearchType
 {
-	/// <summary>
-	/// <para>
-	/// Documents are scored using global term and document frequencies across all shards. This is usually slower but more accurate.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchType.g.xml" path="doc/member[@key='_types.SearchType#dfs_query_then_fetch']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "dfs_query_then_fetch")]
 	DfsQueryThenFetch,
-	/// <summary>
-	/// <para>
-	/// Documents are scored using local term and document frequencies for the shard. This is usually faster but less accurate.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchType.g.xml" path="doc/member[@key='_types.SearchType#query_then_fetch']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "query_then_fetch")]
 	QueryThenFetch
 }

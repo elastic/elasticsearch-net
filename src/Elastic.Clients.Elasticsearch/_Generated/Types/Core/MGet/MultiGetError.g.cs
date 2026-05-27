@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.mget.MultiGetError']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MGet.Json.MultiGetErrorConverter))]
 public sealed partial class MultiGetError
 {

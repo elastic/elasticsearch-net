@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NerInferenceUpdateOptionsConverter))]
 public sealed partial class NerInferenceUpdateOptions
 {
@@ -36,21 +37,14 @@ public sealed partial class NerInferenceUpdateOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions']/*"/>
 public readonly partial struct NerInferenceUpdateOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions Instance { get; init; }
@@ -70,44 +64,28 @@ public readonly partial struct NerInferenceUpdateOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor Tokenization()
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor>? action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(action);

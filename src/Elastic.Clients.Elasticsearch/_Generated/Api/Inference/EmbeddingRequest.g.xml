@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.embedding.Request"><summary><para>
+Perform dense embedding inference on the service.
+</para></summary></member>
+  <member key="inference.embedding.Request#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.embedding.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

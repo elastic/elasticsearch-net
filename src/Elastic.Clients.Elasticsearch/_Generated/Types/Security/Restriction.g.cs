@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.Restriction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RestrictionConverter))]
 public sealed partial class Restriction
 {
@@ -42,15 +43,11 @@ public sealed partial class Restriction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of workflows to which the API key is restricted.
-	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
-	/// </para>
-	/// </summary>
+	/// <include file="Restriction.g.xml" path="doc/member[@key='security._types.Restriction#workflows']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.Restriction']/*"/>
 public readonly partial struct RestrictionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.Restriction Instance { get; init; }
@@ -70,24 +67,14 @@ public readonly partial struct RestrictionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(Elastic.Clients.Elasticsearch.Security.Restriction instance) => new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of workflows to which the API key is restricted.
-	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
-	/// </para>
-	/// </summary>
+	/// <include file="Restriction.g.xml" path="doc/member[@key='security._types.Restriction#workflows']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> value)
 	{
 		Instance.Workflows = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of workflows to which the API key is restricted.
-	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
-	/// </para>
-	/// </summary>
+	/// <include file="Restriction.g.xml" path="doc/member[@key='security._types.Restriction#workflows']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(params Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow[] values)
 	{
 		Instance.Workflows = [.. values];

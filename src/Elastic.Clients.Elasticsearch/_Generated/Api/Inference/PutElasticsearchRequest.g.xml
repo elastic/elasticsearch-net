@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_elasticsearch.Request"><summary><para>
+Create an Elasticsearch inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+</para>
+<para>
+info
+Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+</para>
+<para>
+If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+</para>
+<para>
+info
+You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+</para>
+<para>
+After creating the endpoint, wait for the model deployment to complete before using it.
+To verify the deployment status, use the get trained model statistics API.
+Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#chunking_settings"><summary><para>
+The chunking configuration object.
+Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+Not applicable to the <c>rerank</c> task type.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#elasticsearch_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+The must not match the <c>model_id</c>.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>elasticsearch</c>.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>elasticsearch</c> service.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#task_settings"><summary><para>
+Settings to configure the inference task.
+These settings are specific to the task type you specified.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+</para></summary></member>
+  <member key="inference.put_elasticsearch.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

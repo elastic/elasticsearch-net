@@ -26,31 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.BoundaryScannerConverter))]
 public enum BoundaryScanner
 {
-	/// <summary>
-	/// <para>
-	/// Use the characters specified by <c>boundary_chars</c> as highlighting boundaries.
-	/// The <c>boundary_max_scan</c> setting controls how far to scan for boundary characters.
-	/// Only valid for the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="BoundaryScanner.g.xml" path="doc/member[@key='_global.search._types.BoundaryScanner#chars']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "chars")]
 	Chars,
-	/// <summary>
-	/// <para>
-	/// Break highlighted fragments at the next sentence boundary, as determined by Java’s <c>BreakIterator</c>.
-	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
-	/// When used with the <c>unified</c> highlighter, the <c>sentence</c> scanner splits sentences bigger than <c>fragment_size</c> at the first word boundary next to fragment_size.
-	/// You can set <c>fragment_size</c> to <c>0</c> to never split any sentence.
-	/// </para>
-	/// </summary>
+	/// <include file="BoundaryScanner.g.xml" path="doc/member[@key='_global.search._types.BoundaryScanner#sentence']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "sentence")]
 	Sentence,
-	/// <summary>
-	/// <para>
-	/// Break highlighted fragments at the next word boundary, as determined by Java’s <c>BreakIterator</c>.
-	/// You can specify the locale to use with <c>boundary_scanner_locale</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="BoundaryScanner.g.xml" path="doc/member[@key='_global.search._types.BoundaryScanner#word']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "word")]
 	Word
 }

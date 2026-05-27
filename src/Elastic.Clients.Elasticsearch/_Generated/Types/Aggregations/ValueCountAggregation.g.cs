@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ValueCountAggregationConverter))]
 public sealed partial class ValueCountAggregation
 {
@@ -36,24 +37,16 @@ public sealed partial class ValueCountAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation']/*"/>
 public readonly partial struct ValueCountAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation Instance { get; init; }
@@ -73,22 +66,14 @@ public readonly partial struct ValueCountAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -101,12 +86,7 @@ public readonly partial struct ValueCountAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -145,6 +125,7 @@ public readonly partial struct ValueCountAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation']/*"/>
 public readonly partial struct ValueCountAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation Instance { get; init; }
@@ -164,22 +145,14 @@ public readonly partial struct ValueCountAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -192,12 +165,7 @@ public readonly partial struct ValueCountAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregation.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

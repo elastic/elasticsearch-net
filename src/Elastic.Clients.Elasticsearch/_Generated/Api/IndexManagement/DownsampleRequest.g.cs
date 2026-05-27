@@ -23,40 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 public sealed partial class DownsampleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Downsample an index.
-/// </para>
-/// <para>
-/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
-/// for each metric field grouped by a configured time interval and their dimensions.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
-/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
-/// </para>
-/// <para>
-/// NOTE: Only indices in a time series data stream are supported.
-/// Neither field nor document level security can be defined on the source index.
-/// The source index must be read-only (<c>index.blocks.write: true</c>).
-/// </para>
-/// </summary>
+/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DownsampleRequestConverter))]
 public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>
 {
@@ -90,52 +64,16 @@ public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.downsample";
 
-	/// <summary>
-	/// <para>
-	/// Name of the time series index to downsample.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#target_index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName TargetIndex { get => P<Elastic.Clients.Elasticsearch.IndexName>("target_index"); set => PR("target_index", value); }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Downsample an index.
-/// </para>
-/// <para>
-/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
-/// for each metric field grouped by a configured time interval and their dimensions.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
-/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
-/// </para>
-/// <para>
-/// NOTE: Only indices in a time series data stream are supported.
-/// Neither field nor document level security can be defined on the source index.
-/// The source index must be read-only (<c>index.blocks.write: true</c>).
-/// </para>
-/// </summary>
+/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 public readonly partial struct DownsampleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Instance { get; init; }
@@ -162,22 +100,14 @@ public readonly partial struct DownsampleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the time series index to downsample.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#target_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.TargetIndex = value;
@@ -252,36 +182,8 @@ public readonly partial struct DownsampleRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Downsample an index.
-/// </para>
-/// <para>
-/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
-/// for each metric field grouped by a configured time interval and their dimensions.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
-/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
-/// </para>
-/// <para>
-/// NOTE: Only indices in a time series data stream are supported.
-/// Neither field nor document level security can be defined on the source index.
-/// The source index must be read-only (<c>index.blocks.write: true</c>).
-/// </para>
-/// </summary>
+/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 public readonly partial struct DownsampleRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Instance { get; init; }
@@ -308,22 +210,14 @@ public readonly partial struct DownsampleRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the time series index to downsample.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request#target_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.TargetIndex = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.XlmRobertaTokenizationConfigConverter))]
 public sealed partial class XlmRobertaTokenizationConfig
 {
@@ -36,42 +37,23 @@ public sealed partial class XlmRobertaTokenizationConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the tokenizer lower case the text
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#do_lower_case']/*"/>
 	public bool? DoLowerCase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum input sequence length for the model
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#max_sequence_length']/*"/>
 	public int? MaxSequenceLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#span']/*"/>
 	public int? Span { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should tokenization input be automatically truncated before sending to the model for inference
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Is tokenization completed with special tokens
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#with_special_tokens']/*"/>
 	public bool? WithSpecialTokens { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig']/*"/>
 public readonly partial struct XlmRobertaTokenizationConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig Instance { get; init; }
@@ -91,55 +73,35 @@ public readonly partial struct XlmRobertaTokenizationConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Should the tokenizer lower case the text
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#do_lower_case']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor DoLowerCase(bool? value = true)
 	{
 		Instance.DoLowerCase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum input sequence length for the model
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#max_sequence_length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor MaxSequenceLength(int? value)
 	{
 		Instance.MaxSequenceLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#span']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor Span(int? value)
 	{
 		Instance.Span = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should tokenization input be automatically truncated before sending to the model for inference
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
 		Instance.Truncate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Is tokenization completed with special tokens
-	/// </para>
-	/// </summary>
+	/// <include file="XlmRobertaTokenizationConfig.g.xml" path="doc/member[@key='ml._types.XlmRobertaTokenizationConfig#with_special_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? value = true)
 	{
 		Instance.WithSpecialTokens = value;

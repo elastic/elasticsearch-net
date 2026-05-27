@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TermQueryConverter))]
 public sealed partial class TermQuery
 {
@@ -49,34 +50,19 @@ public sealed partial class TermQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#case_insensitive']/*"/>
 	public bool? CaseInsensitive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#value']/*"/>
 	public required Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermQuery']/*"/>
 public readonly partial struct TermQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermQuery Instance { get; init; }
@@ -96,26 +82,14 @@ public readonly partial struct TermQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -140,11 +114,7 @@ public readonly partial struct TermQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.FieldValue value)
 	{
 		Instance.Value = value;
@@ -160,6 +130,7 @@ public readonly partial struct TermQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermQuery']/*"/>
 public readonly partial struct TermQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermQuery Instance { get; init; }
@@ -179,26 +150,14 @@ public readonly partial struct TermQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -223,11 +182,7 @@ public readonly partial struct TermQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor Value(Elastic.Clients.Elasticsearch.FieldValue value)
 	{
 		Instance.Value = value;

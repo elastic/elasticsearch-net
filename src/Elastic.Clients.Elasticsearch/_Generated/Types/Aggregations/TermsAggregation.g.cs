@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TermsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TermsAggregationConverter))]
 public sealed partial class TermsAggregation
 {
@@ -36,108 +37,51 @@ public sealed partial class TermsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return terms.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#min_doc_count']/*"/>
 	public int? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_min_doc_count']/*"/>
 	public long? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#show_term_doc_count_error']/*"/>
 	public bool? ShowTermDocCountError { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Coerced unmapped fields into the specified type.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#value_type']/*"/>
 	public string? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TermsAggregation']/*"/>
 public readonly partial struct TermsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation Instance { get; init; }
@@ -157,56 +101,35 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? value)
 	{
 		Instance.CollectMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return terms.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return terms.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -219,35 +142,21 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -266,36 +175,21 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
@@ -334,57 +228,35 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#show_term_doc_count_error']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? value = true)
 	{
 		Instance.ShowTermDocCountError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coerced unmapped fields into the specified type.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#value_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument> ValueType(string? value)
 	{
 		Instance.ValueType = value;
@@ -405,6 +277,7 @@ public readonly partial struct TermsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TermsAggregation']/*"/>
 public readonly partial struct TermsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation Instance { get; init; }
@@ -424,56 +297,35 @@ public readonly partial struct TermsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines how child aggregations should be calculated: breadth-first or depth-first.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? value)
 	{
 		Instance.CollectMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return terms.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return terms.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -486,35 +338,21 @@ public readonly partial struct TermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Accepts regular expressions and partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -533,48 +371,28 @@ public readonly partial struct TermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
@@ -613,57 +431,35 @@ public readonly partial struct TermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return the <c>doc_count_error_upper_bound</c>, which is an upper bound to the error on the <c>doc_count</c> returned by each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#show_term_doc_count_error']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor ShowTermDocCountError(bool? value = true)
 	{
 		Instance.ShowTermDocCountError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coerced unmapped fields into the specified type.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregation#value_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor ValueType(string? value)
 	{
 		Instance.ValueType = value;

@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
 public sealed partial class BulkDeleteRoleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Bulk delete roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The bulk delete roles API cannot delete roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.BulkDeleteRoleRequestConverter))]
 public sealed partial class BulkDeleteRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>
 {
@@ -69,30 +60,15 @@ public sealed partial class BulkDeleteRoleRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.bulk_delete_role";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// An array of role names to delete
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#names']/*"/>
 	public required System.Collections.Generic.ICollection<string> Names { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Bulk delete roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The bulk delete roles API cannot delete roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_delete_role.Request']/*"/>
 public readonly partial struct BulkDeleteRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest Instance { get; init; }
@@ -111,33 +87,21 @@ public readonly partial struct BulkDeleteRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of role names to delete
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Names = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of role names to delete
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleRequest.g.xml" path="doc/member[@key='security.bulk_delete_role.Request#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor Names(params string[] values)
 	{
 		Instance.Names = [.. values];

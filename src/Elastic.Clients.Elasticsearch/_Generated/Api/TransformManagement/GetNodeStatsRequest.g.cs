@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 public sealed partial class GetNodeStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get node stats.
-/// </para>
-/// <para>
-/// Get per-node information about transform usage.
-/// </para>
-/// </summary>
+/// <include file="GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.GetNodeStatsRequestConverter))]
 public sealed partial class GetNodeStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetNodeStatsRequest : Elastic.Clients.Elasticsearch.
 	internal override string OperationName => "transform.get_node_stats";
 }
 
-/// <summary>
-/// <para>
-/// Get node stats.
-/// </para>
-/// <para>
-/// Get per-node information about transform usage.
-/// </para>
-/// </summary>
+/// <include file="GetNodeStatsRequest.g.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.Request']/*"/>
 public readonly partial struct GetNodeStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest Instance { get; init; }

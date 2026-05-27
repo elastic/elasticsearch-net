@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LowercaseNormalizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.LowercaseNormalizerConverter))]
 public sealed partial class LowercaseNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
 {
@@ -39,6 +40,7 @@ public sealed partial class LowercaseNormalizer : Elastic.Clients.Elasticsearch.
 	public string Type => "lowercase";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LowercaseNormalizer']/*"/>
 public readonly partial struct LowercaseNormalizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer Instance { get; init; }

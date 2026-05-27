@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RescorerRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RescorerRetrieverConverter))]
 public sealed partial class RescorerRetriever
 {
@@ -43,36 +44,21 @@ public sealed partial class RescorerRetriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#_name']/*"/>
 	public string? Name { get; set; }
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore> Rescore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RescorerRetriever']/*"/>
 public readonly partial struct RescorerRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.RescorerRetriever Instance { get; init; }
@@ -92,33 +78,21 @@ public readonly partial struct RescorerRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RescorerRetriever instance) => new Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RescorerRetriever(Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -131,22 +105,14 @@ public readonly partial struct RescorerRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
@@ -177,22 +143,14 @@ public readonly partial struct RescorerRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
@@ -208,6 +166,7 @@ public readonly partial struct RescorerRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RescorerRetriever']/*"/>
 public readonly partial struct RescorerRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RescorerRetriever Instance { get; init; }
@@ -227,33 +186,21 @@ public readonly partial struct RescorerRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor(Elastic.Clients.Elasticsearch.RescorerRetriever instance) => new Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RescorerRetriever(Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -266,11 +213,7 @@ public readonly partial struct RescorerRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -283,22 +226,14 @@ public readonly partial struct RescorerRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
@@ -341,33 +276,21 @@ public readonly partial struct RescorerRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="RescorerRetriever.g.xml" path="doc/member[@key='_types.RescorerRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsHighlight']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsHighlightConverter))]
 public sealed partial class SettingsHighlight
 {
@@ -39,6 +40,7 @@ public sealed partial class SettingsHighlight
 	public int? MaxAnalyzedOffset { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsHighlight']/*"/>
 public readonly partial struct SettingsHighlightDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight Instance { get; init; }

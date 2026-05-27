@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform.TransformSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformSummaryConverter))]
 public sealed partial class TransformSummary
 {
@@ -44,72 +45,36 @@ public sealed partial class TransformSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The security privileges that the transform uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the transform, this property is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#authorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization? Authorization { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time the transform was created.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#create_time']/*"/>
 	public System.DateTimeOffset? CreateTime { get; set; }
 	public System.DateTimeOffset? CreateTimeString { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#dest']/*"/>
 	public required Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#source']/*"/>
 	public required Elastic.Clients.Elasticsearch.TransformManagement.Source Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The version of Elasticsearch that existed on the node when the transform was created.
-	/// </para>
-	/// </summary>
+	/// <include file="TransformSummary.g.xml" path="doc/member[@key='transform.get_transform.TransformSummary#version']/*"/>
 	public string? Version { get; set; }
 }

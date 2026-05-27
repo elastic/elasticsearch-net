@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.exists_source.Request"><summary><para>
+Check for a document source.
+</para>
+<para>
+Check whether a document source exists in an index.
+For example:
+</para>
+<code>
+HEAD my-index-000001/_source/1
+</code>
+<para>
+A document's source is not available if it is disabled in the mapping.
+</para></summary></member>
+  <member key="_global.exists_source.Request#_source"><summary><para>
+Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
+</para></summary></member>
+  <member key="_global.exists_source.Request#_source_excludes"><summary><para>
+A comma-separated list of source fields to exclude in the response.
+</para></summary></member>
+  <member key="_global.exists_source.Request#_source_includes"><summary><para>
+A comma-separated list of source fields to include in the response.
+</para></summary></member>
+  <member key="_global.exists_source.Request#id"><summary><para>
+A unique identifier for the document.
+</para></summary></member>
+  <member key="_global.exists_source.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases.
+It supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="_global.exists_source.Request#preference"><summary><para>
+The node or shard the operation should be performed on.
+By default, the operation is randomized between the shard replicas.
+</para></summary></member>
+  <member key="_global.exists_source.Request#realtime"><summary><para>
+If <c>true</c>, the request is real-time as opposed to near-real-time.
+</para></summary></member>
+  <member key="_global.exists_source.Request#refresh"><summary><para>
+If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
+Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
+</para></summary></member>
+  <member key="_global.exists_source.Request#routing"><summary><para>
+A custom value used to route operations to a specific shard.
+</para></summary></member>
+  <member key="_global.exists_source.Request#version"><summary><para>
+The version number for concurrency control.
+It must match the current version of the document for the request to succeed.
+</para></summary></member>
+  <member key="_global.exists_source.Request#version_type"><summary><para>
+The version type.
+</para></summary></member>
+</doc>

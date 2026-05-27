@@ -23,112 +23,49 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 public sealed partial class ValidateQueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#all_shards']/*"/>
 	public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns detailed information if an error has occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#explain']/*"/>
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#rewrite']/*"/>
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 }
 
-/// <summary>
-/// <para>
-/// Validate a query.
-/// </para>
-/// <para>
-/// Validates a query without running it.
-/// </para>
-/// </summary>
+/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ValidateQueryRequestConverter))]
 public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>
 {
@@ -154,126 +91,51 @@ public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "indices.validate_query";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to search.
-	/// Supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#all_shards']/*"/>
 	public bool? AllShards { get => Q<bool?>("all_shards"); set => Q("all_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns detailed information if an error has occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#explain']/*"/>
 	public bool? Explain { get => Q<bool?>("explain"); set => Q("explain", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#rewrite']/*"/>
 	public bool? Rewrite { get => Q<bool?>("rewrite"); set => Q("rewrite", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Validate a query.
-/// </para>
-/// <para>
-/// Validates a query without running it.
-/// </para>
-/// </summary>
+/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 public readonly partial struct ValidateQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Instance { get; init; }
@@ -297,202 +159,119 @@ public readonly partial struct ValidateQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to search.
-	/// Supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#all_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AllShards(bool? value = true)
 	{
 		Instance.AllShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns detailed information if an error has occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Rewrite(bool? value = true)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -560,14 +339,8 @@ public readonly partial struct ValidateQueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Validate a query.
-/// </para>
-/// <para>
-/// Validates a query without running it.
-/// </para>
-/// </summary>
+/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest Instance { get; init; }
@@ -591,191 +364,112 @@ public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to search.
-	/// Supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the validation is executed on all shards instead of one random shard per index.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#all_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AllShards(bool? value = true)
 	{
 		Instance.AllShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to use as default where no field prefix is given in the query string.
-	/// This parameter can only be used when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns detailed information if an error has occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns a more detailed explanation showing the actual Lucene query that will be executed.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Rewrite(bool? value = true)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);

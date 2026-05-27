@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.SourceIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SourceIndexConverter))]
 public sealed partial class SourceIndex
 {
@@ -45,6 +46,7 @@ public sealed partial class SourceIndex
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.SourceIndex']/*"/>
 public readonly partial struct SourceIndexDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex Instance { get; init; }

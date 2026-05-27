@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TextExpansionQueryConverter))]
 public sealed partial class TextExpansionQuery
 {
@@ -50,40 +51,22 @@ public sealed partial class TextExpansionQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The text expansion NLP model to use
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query text
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_text']/*"/>
 	public required string ModelText { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfig? PruningConfig { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery']/*"/>
 public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery Instance { get; init; }
@@ -103,14 +86,7 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -129,55 +105,35 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text expansion NLP model to use
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query text
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_text']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> ModelText(string value)
 	{
 		Instance.ModelText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
@@ -199,6 +155,7 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery']/*"/>
 public readonly partial struct TextExpansionQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery Instance { get; init; }
@@ -218,14 +175,7 @@ public readonly partial struct TextExpansionQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -244,55 +194,35 @@ public readonly partial struct TextExpansionQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text expansion NLP model to use
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query text
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#model_text']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor ModelText(string value)
 	{
 		Instance.ModelText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionQuery.g.xml" path="doc/member[@key='_types.query_dsl.TextExpansionQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);

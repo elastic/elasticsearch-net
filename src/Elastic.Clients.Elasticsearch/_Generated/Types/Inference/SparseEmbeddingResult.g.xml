@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.SparseEmbeddingResult#is_truncated"><summary><para>
+Indicates if the text input was truncated in the request sent to the service
+</para></summary></member>
+</doc>

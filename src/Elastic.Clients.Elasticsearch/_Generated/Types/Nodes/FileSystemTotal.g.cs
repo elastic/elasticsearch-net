@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.FileSystemTotal']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.FileSystemTotalConverter))]
 public sealed partial class FileSystemTotal
 {
@@ -36,49 +37,21 @@ public sealed partial class FileSystemTotal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total disk space available to this Java virtual machine on all file stores.
-	/// Depending on OS or process level restrictions, this might appear less than <c>free</c>.
-	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#available']/*"/>
 	public string? Available { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes available to this Java virtual machine on all file stores.
-	/// Depending on OS or process level restrictions, this might appear less than <c>free_in_bytes</c>.
-	/// This is the actual amount of free disk space the Elasticsearch node can utilise.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#available_in_bytes']/*"/>
 	public long? AvailableInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total unallocated disk space in all file stores.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#free']/*"/>
 	public string? Free { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of unallocated bytes in all file stores.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all file stores.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#total']/*"/>
 	public string? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all file stores in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystemTotal.g.xml" path="doc/member[@key='nodes._types.FileSystemTotal#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 }

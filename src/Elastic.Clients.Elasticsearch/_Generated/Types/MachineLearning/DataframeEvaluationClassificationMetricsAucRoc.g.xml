@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeEvaluationClassificationMetricsAucRoc#class_name"><summary><para>
+Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationClassificationMetricsAucRoc#include_curve"><summary><para>
+Whether or not the curve should be returned in addition to the score. Default value is false.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.RetentionPolicy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TimeRetentionPolicyConverter))]
 public sealed partial class TimeRetentionPolicy
 {
@@ -43,22 +44,14 @@ public sealed partial class TimeRetentionPolicy
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
-	/// value are removed from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#max_age']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.RetentionPolicy']/*"/>
 public readonly partial struct TimeRetentionPolicyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Instance { get; init; }
@@ -78,34 +71,21 @@ public readonly partial struct TimeRetentionPolicyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
-	/// value are removed from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#max_age']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument> MaxAge(Elastic.Clients.Elasticsearch.Duration value)
 	{
 		Instance.MaxAge = value;
@@ -121,6 +101,7 @@ public readonly partial struct TimeRetentionPolicyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.RetentionPolicy']/*"/>
 public readonly partial struct TimeRetentionPolicyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Instance { get; init; }
@@ -140,34 +121,21 @@ public readonly partial struct TimeRetentionPolicyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to calculate the age of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum age of a document in the destination index. Documents that are older than the configured
-	/// value are removed from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeRetentionPolicy.g.xml" path="doc/member[@key='transform._types.RetentionPolicy#max_age']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration value)
 	{
 		Instance.MaxAge = value;

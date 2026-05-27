@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.MultiplexerTokenFilterConverter))]
 public sealed partial class MultiplexerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,18 +43,10 @@ public sealed partial class MultiplexerTokenFilter : Elastic.Clients.Elasticsear
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of token filters to apply to incoming tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiplexerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter#filters']/*"/>
 	public required System.Collections.Generic.ICollection<string> Filters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then emit the original token in addition to the filtered tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiplexerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter#preserve_original']/*"/>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "multiplexer";
@@ -61,6 +54,7 @@ public sealed partial class MultiplexerTokenFilter : Elastic.Clients.Elasticsear
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter']/*"/>
 public readonly partial struct MultiplexerTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter Instance { get; init; }
@@ -80,33 +74,21 @@ public readonly partial struct MultiplexerTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter(Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of token filters to apply to incoming tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiplexerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor Filters(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of token filters to apply to incoming tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiplexerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor Filters(params string[] values)
 	{
 		Instance.Filters = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then emit the original token in addition to the filtered tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiplexerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MultiplexerTokenFilter#preserve_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

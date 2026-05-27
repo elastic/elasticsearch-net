@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.AzureRepository']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.AzureRepositoryConverter))]
 public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
@@ -36,23 +37,16 @@ public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snap
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureRepository.g.xml" path="doc/member[@key='snapshot._types.AzureRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Azure repository type.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureRepository.g.xml" path="doc/member[@key='snapshot._types.AzureRepository#type']/*"/>
 	public string Type => "azure";
 
 	public string? Uuid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.AzureRepository']/*"/>
 public readonly partial struct AzureRepositoryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Instance { get; init; }
@@ -72,33 +66,21 @@ public readonly partial struct AzureRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureRepository.g.xml" path="doc/member[@key='snapshot._types.AzureRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureRepository.g.xml" path="doc/member[@key='snapshot._types.AzureRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureRepository.g.xml" path="doc/member[@key='snapshot._types.AzureRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(action);

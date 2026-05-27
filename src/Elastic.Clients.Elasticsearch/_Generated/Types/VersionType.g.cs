@@ -26,27 +26,13 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.VersionTypeConverter))]
 public enum VersionType
 {
-	/// <summary>
-	/// <para>
-	/// Only index the document if the specified version is strictly higher than the version of the stored document or if there is no existing document.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionType.g.xml" path="doc/member[@key='_types.VersionType#external']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "external")]
 	External,
-	/// <summary>
-	/// <para>
-	/// Only index the document if the specified version is equal or higher than the version of the stored document or if there is no existing document.
-	/// NOTE: The <c>external_gte</c> version type is meant for special use cases and should be used with care.
-	/// If used incorrectly, it can result in loss of data.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionType.g.xml" path="doc/member[@key='_types.VersionType#external_gte']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "external_gte")]
 	ExternalGte,
-	/// <summary>
-	/// <para>
-	/// Use internal versioning that starts at 1 and increments with each update or delete.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionType.g.xml" path="doc/member[@key='_types.VersionType#internal']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "internal")]
 	Internal
 }

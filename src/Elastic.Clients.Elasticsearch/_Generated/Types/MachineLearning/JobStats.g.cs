@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.JobStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.JobStatsConverter))]
 public sealed partial class JobStats
 {
@@ -47,77 +48,33 @@ public sealed partial class JobStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For open anomaly detection jobs only, contains messages relating to the selection of a node to run the job.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#assignment_explanation']/*"/>
 	public string? AssignmentExplanation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that describes the quantity of input to the job and any related error counts.
-	/// The <c>data_count</c> values are cumulative for the lifetime of a job.
-	/// If a model snapshot is reverted or old results are deleted, the job counts are not reset.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#data_counts']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataCounts DataCounts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates that the process of deleting the job is in progress but not yet completed. It is only reported when <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#deleting']/*"/>
 	public bool? Deleting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that provides statistical information about forecasts belonging to this job.
-	/// Some statistics are omitted if no forecasts have been made.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#forecasts_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.JobForecastStatistics ForecastsStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that provides information about the size and contents of the model.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#model_size_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats ModelSizeStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains properties for the node that runs the job.
-	/// This information is available only for open jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#node']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For open jobs only, the elapsed time for which the job has been open.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#open_time']/*"/>
 	public System.DateTimeOffset? OpenTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The status of the anomaly detection job, which can be one of the following values: <c>closed</c>, <c>closing</c>, <c>failed</c>, <c>opened</c>, <c>opening</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.JobState State { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that provides statistical information about timing aspect of this job.
-	/// </para>
-	/// </summary>
+	/// <include file="JobStats.g.xml" path="doc/member[@key='ml._types.JobStats#timing_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats TimingStats { get; set; }
 }

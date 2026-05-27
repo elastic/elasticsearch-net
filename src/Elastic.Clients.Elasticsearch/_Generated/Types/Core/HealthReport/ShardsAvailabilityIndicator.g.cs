@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// SHARDS_AVAILABILITY
-/// </para>
-/// </summary>
+/// <include file="ShardsAvailabilityIndicator.g.xml" path="doc/member[@key='_global.health_report.ShardsAvailabilityIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.ShardsAvailabilityIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.ShardsAvailabilityIndicatorConverter))]
 public sealed partial class ShardsAvailabilityIndicator
 {

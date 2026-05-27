@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelDeploymentAllocationStatus#allocation_count"><summary><para>
+The current number of nodes where the model is allocated.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentAllocationStatus#state"><summary><para>
+The detailed allocation state related to the nodes.
+</para></summary></member>
+  <member key="ml._types.TrainedModelDeploymentAllocationStatus#target_allocation_count"><summary><para>
+The desired number of nodes for model allocation.
+</para></summary></member>
+</doc>

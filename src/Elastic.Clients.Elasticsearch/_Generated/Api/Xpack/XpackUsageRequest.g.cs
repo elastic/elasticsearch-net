@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 public sealed partial class XpackUsageRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get usage information.
-/// </para>
-/// <para>
-/// Get information about the features that are currently enabled and available under the current license.
-/// The API also provides some usage statistics.
-/// </para>
-/// </summary>
+/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.XpackUsageRequestConverter))]
 public sealed partial class XpackUsageRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>
 {
@@ -65,25 +54,12 @@ public sealed partial class XpackUsageRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "xpack.usage";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get usage information.
-/// </para>
-/// <para>
-/// Get information about the features that are currently enabled and available under the current license.
-/// The API also provides some usage statistics.
-/// </para>
-/// </summary>
+/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.Request']/*"/>
 public readonly partial struct XpackUsageRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest Instance { get; init; }
@@ -102,13 +78,7 @@ public readonly partial struct XpackUsageRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest instance) => new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackUsageRequest.g.xml" path="doc/member[@key='xpack.usage.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

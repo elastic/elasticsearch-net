@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.JvmClasses#current_loaded_count"><summary><para>
+Number of classes currently loaded by JVM.
+</para></summary></member>
+  <member key="nodes._types.JvmClasses#total_loaded_count"><summary><para>
+Total number of classes loaded since the JVM started.
+</para></summary></member>
+  <member key="nodes._types.JvmClasses#total_unloaded_count"><summary><para>
+Total number of classes unloaded since the JVM started.
+</para></summary></member>
+</doc>

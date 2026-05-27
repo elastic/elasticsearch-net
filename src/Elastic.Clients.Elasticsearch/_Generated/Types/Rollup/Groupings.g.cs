@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.Groupings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GroupingsConverter))]
 public sealed partial class Groupings
 {
@@ -36,31 +37,17 @@ public sealed partial class Groupings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? DateHistogram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? Histogram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? Terms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.Groupings']/*"/>
 public readonly partial struct GroupingsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.Groupings Instance { get; init; }
@@ -80,72 +67,42 @@ public readonly partial struct GroupingsDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.Groupings instance) => new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? value)
 	{
 		Instance.DateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>> action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? value)
 	{
 		Instance.Histogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Histogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>> action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>.Build(action);
@@ -166,6 +123,7 @@ public readonly partial struct GroupingsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.Groupings']/*"/>
 public readonly partial struct GroupingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.Groupings Instance { get; init; }
@@ -185,108 +143,63 @@ public readonly partial struct GroupingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(Elastic.Clients.Elasticsearch.Rollup.Groupings instance) => new Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.Groupings(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping? value)
 	{
 		Instance.DateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor> action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A date histogram group aggregates a date field into time-based buckets.
-	/// This group is mandatory; you currently cannot roll up documents without a timestamp and a <c>date_histogram</c> group.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#date_histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor DateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<T>> action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping? value)
 	{
 		Instance.Histogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor> action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The histogram group aggregates one or more numeric fields into numeric histogram intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#histogram']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Histogram<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<T>> action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The terms group can be used on keyword or numeric fields to allow bucketing via the terms aggregation at a later point.
-	/// The indexer enumerates and stores all values of a field for each time-period.
-	/// This can be potentially costly for high-cardinality groups such as IP addresses, especially if the time-bucket is particularly sparse.
-	/// </para>
-	/// </summary>
+	/// <include file="Groupings.g.xml" path="doc/member[@key='rollup._types.Groupings#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<T>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<T>.Build(action);

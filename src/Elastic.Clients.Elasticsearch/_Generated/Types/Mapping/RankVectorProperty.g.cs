@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-/// <summary>
-/// <para>
-/// Technical preview
-/// </para>
-/// </summary>
+/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RankVectorPropertyConverter))]
 public sealed partial class RankVectorProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -47,11 +44,7 @@ public sealed partial class RankVectorProperty : Elastic.Clients.Elasticsearch.M
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
@@ -59,11 +52,8 @@ public sealed partial class RankVectorProperty : Elastic.Clients.Elasticsearch.M
 	public string Type => "rank_vectors";
 }
 
-/// <summary>
-/// <para>
-/// Technical preview
-/// </para>
-/// </summary>
+/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
 public readonly partial struct RankVectorPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty Instance { get; init; }
@@ -119,33 +109,21 @@ public readonly partial struct RankVectorPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -191,11 +169,8 @@ public readonly partial struct RankVectorPropertyDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// Technical preview
-/// </para>
-/// </summary>
+/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankVectorProperty']/*"/>
 public readonly partial struct RankVectorPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty Instance { get; init; }
@@ -257,33 +232,21 @@ public readonly partial struct RankVectorPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankVectorProperty.g.xml" path="doc/member[@key='_types.mapping.RankVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

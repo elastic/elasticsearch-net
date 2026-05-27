@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Provides information about each cluster request relevant to doing a cross-cluster search.
-/// </para>
-/// </summary>
+/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ResolveClusterInfoConverter))]
 public sealed partial class ResolveClusterInfo
 {
@@ -48,40 +45,18 @@ public sealed partial class ResolveClusterInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the remote cluster is connected to the local (querying) cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo#connected']/*"/>
 	public required bool Connected { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Provides error messages that are likely to occur if you do a search with this index expression
-	/// on the specified cluster (for example, lack of security privileges to query an index).
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo#error']/*"/>
 	public string? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether the index expression provided in the request matches any indices, aliases or data streams
-	/// on the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo#matching_indices']/*"/>
 	public bool? MatchingIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The <c>skip_unavailable</c> setting for a remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo#skip_unavailable']/*"/>
 	public required bool SkipUnavailable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Provides version information about the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ResolveClusterInfo.g.xml" path="doc/member[@key='indices.resolve_cluster.ResolveClusterInfo#version']/*"/>
 	public Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo? Version { get; set; }
 }

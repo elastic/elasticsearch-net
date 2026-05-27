@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MedianAbsoluteDeviationAggregateConverter))]
 public sealed partial class MedianAbsoluteDeviationAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -46,12 +47,7 @@ public sealed partial class MedianAbsoluteDeviationAggregate : Elastic.Clients.E
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "median_absolute_deviation";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregate.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

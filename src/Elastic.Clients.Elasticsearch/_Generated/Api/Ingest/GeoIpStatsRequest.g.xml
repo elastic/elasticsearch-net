@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.geo_ip_stats.Request"><summary><para>
+Get GeoIP statistics.
+</para>
+<para>
+Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
+</para></summary></member>
+</doc>

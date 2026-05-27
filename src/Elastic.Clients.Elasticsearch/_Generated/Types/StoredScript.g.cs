@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StoredScript']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.StoredScriptConverter))]
 public sealed partial class StoredScript
 {
@@ -43,24 +44,15 @@ public sealed partial class StoredScript
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The language the script is written in.
-	/// For search templates, use <c>mustache</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StoredScript.g.xml" path="doc/member[@key='_types.StoredScript#lang']/*"/>
 	public required Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script source.
-	/// For search templates, an object containing the search template.
-	/// </para>
-	/// </summary>
+	/// <include file="StoredScript.g.xml" path="doc/member[@key='_types.StoredScript#source']/*"/>
 	public required string Source { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StoredScript']/*"/>
 public readonly partial struct StoredScriptDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.StoredScript Instance { get; init; }
@@ -80,12 +72,7 @@ public readonly partial struct StoredScriptDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.StoredScriptDescriptor(Elastic.Clients.Elasticsearch.StoredScript instance) => new Elastic.Clients.Elasticsearch.StoredScriptDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.StoredScript(Elastic.Clients.Elasticsearch.StoredScriptDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The language the script is written in.
-	/// For search templates, use <c>mustache</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StoredScript.g.xml" path="doc/member[@key='_types.StoredScript#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage value)
 	{
 		Instance.Language = value;
@@ -117,12 +104,7 @@ public readonly partial struct StoredScriptDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script source.
-	/// For search templates, an object containing the search template.
-	/// </para>
-	/// </summary>
+	/// <include file="StoredScript.g.xml" path="doc/member[@key='_types.StoredScript#source']/*"/>
 	public Elastic.Clients.Elasticsearch.StoredScriptDescriptor Source(string value)
 	{
 		Instance.Source = value;

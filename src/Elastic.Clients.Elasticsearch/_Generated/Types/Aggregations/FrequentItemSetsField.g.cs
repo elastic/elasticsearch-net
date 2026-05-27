@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FrequentItemSetsFieldConverter))]
 public sealed partial class FrequentItemSetsField
 {
@@ -42,24 +43,15 @@ public sealed partial class FrequentItemSetsField
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField']/*"/>
 public readonly partial struct FrequentItemSetsFieldDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Instance { get; init; }
@@ -79,12 +71,7 @@ public readonly partial struct FrequentItemSetsFieldDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
@@ -103,12 +90,7 @@ public readonly partial struct FrequentItemSetsFieldDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
@@ -124,6 +106,7 @@ public readonly partial struct FrequentItemSetsFieldDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField']/*"/>
 public readonly partial struct FrequentItemSetsFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Instance { get; init; }
@@ -143,12 +126,7 @@ public readonly partial struct FrequentItemSetsFieldDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
@@ -167,12 +145,7 @@ public readonly partial struct FrequentItemSetsFieldDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// Can be regular expression strings or arrays of strings of exact terms.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsField.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsField#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;

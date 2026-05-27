@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 public sealed partial class RemovePolicyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Remove policies from an index.
-/// </para>
-/// <para>
-/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
-/// It also stops managing the indices.
-/// </para>
-/// </summary>
+/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.RemovePolicyRequestConverter))]
 public sealed partial class RemovePolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>
 {
@@ -62,23 +57,12 @@ public sealed partial class RemovePolicyRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ilm.remove_policy";
 
-	/// <summary>
-	/// <para>
-	/// The name of the index to remove policy on
-	/// </para>
-	/// </summary>
+	/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 }
 
-/// <summary>
-/// <para>
-/// Remove policies from an index.
-/// </para>
-/// <para>
-/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
-/// It also stops managing the indices.
-/// </para>
-/// </summary>
+/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 public readonly partial struct RemovePolicyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest Instance { get; init; }
@@ -103,11 +87,7 @@ public readonly partial struct RemovePolicyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the index to remove policy on
-	/// </para>
-	/// </summary>
+	/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
@@ -170,15 +150,8 @@ public readonly partial struct RemovePolicyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Remove policies from an index.
-/// </para>
-/// <para>
-/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
-/// It also stops managing the indices.
-/// </para>
-/// </summary>
+/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.remove_policy.Request']/*"/>
 public readonly partial struct RemovePolicyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest Instance { get; init; }
@@ -202,11 +175,7 @@ public readonly partial struct RemovePolicyRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the index to remove policy on
-	/// </para>
-	/// </summary>
+	/// <include file="RemovePolicyRequest.g.xml" path="doc/member[@key='ilm.remove_policy.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;

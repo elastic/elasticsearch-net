@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SoraniAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SoraniAnalyzerConverter))]
 public sealed partial class SoraniAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -43,6 +44,7 @@ public sealed partial class SoraniAnalyzer : Elastic.Clients.Elasticsearch.Analy
 	public string Type => "sorani";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SoraniAnalyzer']/*"/>
 public readonly partial struct SoraniAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SoraniAnalyzer Instance { get; init; }

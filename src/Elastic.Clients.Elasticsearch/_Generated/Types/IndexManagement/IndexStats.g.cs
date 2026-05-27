@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.stats.IndexStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexStatsConverter))]
 public sealed partial class IndexStats
 {
@@ -38,123 +39,55 @@ public sealed partial class IndexStats
 
 	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about completions across all shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#completion']/*"/>
 	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about documents across all primary shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the field data cache across all shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#fielddata']/*"/>
 	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about flush operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#flush']/*"/>
 	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about get operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#get']/*"/>
 	public Elastic.Clients.Elasticsearch.GetStats? Get { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indexing operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#indexing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indices operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about merge operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#merges']/*"/>
 	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the query cache across all shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#query_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about recovery operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#recovery']/*"/>
 	public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about refresh operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.RefreshStats? Refresh { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the request cache across all shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about search operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#search']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchStats? Search { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about segments across all shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#segments']/*"/>
 	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the size of shards assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#store']/*"/>
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about transaction log operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#translog']/*"/>
 	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about index warming operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexStats.g.xml" path="doc/member[@key='indices.stats.IndexStats#warmer']/*"/>
 	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; set; }
 }

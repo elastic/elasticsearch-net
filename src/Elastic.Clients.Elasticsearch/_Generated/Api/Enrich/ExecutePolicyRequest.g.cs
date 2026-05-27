@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
 public sealed partial class ExecutePolicyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run an enrich policy.
-/// </para>
-/// <para>
-/// Create the enrich index for an existing enrich policy.
-/// </para>
-/// </summary>
+/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.ExecutePolicyRequestConverter))]
 public sealed partial class ExecutePolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestParameters>
 {
@@ -74,36 +62,18 @@ public sealed partial class ExecutePolicyRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "enrich.execute_policy";
 
-	/// <summary>
-	/// <para>
-	/// Enrich policy to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run an enrich policy.
-/// </para>
-/// <para>
-/// Create the enrich index for an existing enrich policy.
-/// </para>
-/// </summary>
+/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.execute_policy.Request']/*"/>
 public readonly partial struct ExecutePolicyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest Instance { get; init; }
@@ -128,33 +98,21 @@ public readonly partial struct ExecutePolicyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Enrich policy to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ExecutePolicyRequest.g.xml" path="doc/member[@key='enrich.execute_policy.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

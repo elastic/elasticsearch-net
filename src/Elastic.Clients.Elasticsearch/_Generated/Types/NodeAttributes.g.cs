@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.NodeAttributes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.NodeAttributesConverter))]
 public sealed partial class NodeAttributes
 {
@@ -45,38 +46,18 @@ public sealed partial class NodeAttributes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lists node attributes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeAttributes.g.xml" path="doc/member[@key='_types.NodeAttributes#attributes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ephemeral ID of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeAttributes.g.xml" path="doc/member[@key='_types.NodeAttributes#ephemeral_id']/*"/>
 	public required string EphemeralId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeAttributes.g.xml" path="doc/member[@key='_types.NodeAttributes#id']/*"/>
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeAttributes.g.xml" path="doc/member[@key='_types.NodeAttributes#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The host and port where transport HTTP connections are accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeAttributes.g.xml" path="doc/member[@key='_types.NodeAttributes#transport_address']/*"/>
 	public required string TransportAddress { get; set; }
 }

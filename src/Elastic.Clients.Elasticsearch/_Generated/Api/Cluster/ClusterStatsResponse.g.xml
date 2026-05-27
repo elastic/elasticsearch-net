@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.Response#_nodes"><summary><para>
+Contains statistics about the number of nodes selected by the request’s node filters.
+</para></summary></member>
+  <member key="cluster.stats.Response#ccs"><summary><para>
+Cross-cluster stats
+</para></summary></member>
+  <member key="cluster.stats.Response#cluster_name"><summary><para>
+Name of the cluster, based on the cluster name setting.
+</para></summary></member>
+  <member key="cluster.stats.Response#cluster_uuid"><summary><para>
+Unique identifier for the cluster.
+</para></summary></member>
+  <member key="cluster.stats.Response#indices"><summary><para>
+Contains statistics about indices with shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.Response#nodes"><summary><para>
+Contains statistics about nodes selected by the request’s node filters.
+</para></summary></member>
+  <member key="cluster.stats.Response#repositories"><summary><para>
+Contains stats on repository feature usage exposed in cluster stats for telemetry.
+</para></summary></member>
+  <member key="cluster.stats.Response#snapshots"><summary><para>
+Contains stats cluster snapshots.
+</para></summary></member>
+  <member key="cluster.stats.Response#status"><summary><para>
+Health status of the cluster, based on the state of its primary and replica shards.
+</para></summary></member>
+  <member key="cluster.stats.Response#timestamp"><summary><para>
+Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
+</para></summary></member>
+</doc>

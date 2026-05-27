@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.PinnedDocConverter))]
 public sealed partial class PinnedDoc
 {
@@ -42,21 +43,14 @@ public sealed partial class PinnedDoc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedDoc.g.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc#_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedDoc.g.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc']/*"/>
 public readonly partial struct PinnedDocDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc Instance { get; init; }
@@ -76,22 +70,14 @@ public readonly partial struct PinnedDocDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc(Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedDoc.g.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedDoc.g.xml" path="doc/member[@key='_types.query_dsl.PinnedDoc#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;

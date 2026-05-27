@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.GarbageCollectorTotal']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.GarbageCollectorTotalConverter))]
 public sealed partial class GarbageCollectorTotal
 {
@@ -36,24 +37,12 @@ public sealed partial class GarbageCollectorTotal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of JVM garbage collectors that collect objects.
-	/// </para>
-	/// </summary>
+	/// <include file="GarbageCollectorTotal.g.xml" path="doc/member[@key='nodes._types.GarbageCollectorTotal#collection_count']/*"/>
 	public long? CollectionCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total time spent by JVM collecting objects.
-	/// </para>
-	/// </summary>
+	/// <include file="GarbageCollectorTotal.g.xml" path="doc/member[@key='nodes._types.GarbageCollectorTotal#collection_time']/*"/>
 	public string? CollectionTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total time, in milliseconds, spent by JVM collecting objects.
-	/// </para>
-	/// </summary>
+	/// <include file="GarbageCollectorTotal.g.xml" path="doc/member[@key='nodes._types.GarbageCollectorTotal#collection_time_in_millis']/*"/>
 	public long? CollectionTimeInMillis { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql._types.HitsSequence']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.HitsSequenceConverterFactory))]
 public sealed partial class HitsSequence<TEvent>
 {
@@ -42,17 +43,9 @@ public sealed partial class HitsSequence<TEvent>
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains events matching the query. Each object represents a matching event.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsSequence.g.xml" path="doc/member[@key='eql._types.HitsSequence#events']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsSequence.g.xml" path="doc/member[@key='eql._types.HitsSequence#join_keys']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<object>? JoinKeys { get; set; }
 }

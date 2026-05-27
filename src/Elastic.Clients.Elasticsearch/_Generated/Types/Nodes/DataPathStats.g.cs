@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.DataPathStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.DataPathStatsConverter))]
 public sealed partial class DataPathStats
 {
@@ -36,18 +37,10 @@ public sealed partial class DataPathStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total amount of disk space available to this Java virtual machine on this file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#available']/*"/>
 	public string? Available { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes available to this Java virtual machine on this file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#available_in_bytes']/*"/>
 	public long? AvailableInBytes { get; set; }
 	public string? DiskQueue { get; set; }
 	public long? DiskReads { get; set; }
@@ -57,52 +50,24 @@ public sealed partial class DataPathStats
 	public string? DiskWriteSize { get; set; }
 	public long? DiskWriteSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of unallocated disk space in the file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#free']/*"/>
 	public string? Free { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of unallocated bytes in the file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mount point of the file store (for example: <c>/dev/sda2</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#mount']/*"/>
 	public string? Mount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to the file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#path']/*"/>
 	public string? Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of the file store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#total']/*"/>
 	public string? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of the file store in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Type of the file store (ex: ext4).
-	/// </para>
-	/// </summary>
+	/// <include file="DataPathStats.g.xml" path="doc/member[@key='nodes._types.DataPathStats#type']/*"/>
 	public string? Type { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamIndexConverter))]
 public sealed partial class DataStreamIndex
 {
@@ -43,45 +44,21 @@ public sealed partial class DataStreamIndex
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the current ILM lifecycle policy configured for this backing index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#ilm_policy']/*"/>
 	public string? IlmPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index mode of this backing index of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#index_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? IndexMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the backing index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#index_name']/*"/>
 	public required string IndexName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Universally unique identifier (UUID) for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#index_uuid']/*"/>
 	public required string IndexUuid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the lifecycle system that's currently managing this backing index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#managed_by']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? ManagedBy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if ILM should take precedence over DSL in case both are configured to manage this index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamIndex.g.xml" path="doc/member[@key='indices._types.DataStreamIndex#prefer_ilm']/*"/>
 	public bool? PreferIlm { get; set; }
 }

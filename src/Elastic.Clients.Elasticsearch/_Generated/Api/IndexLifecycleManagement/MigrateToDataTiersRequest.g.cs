@@ -23,61 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 public sealed partial class MigrateToDataTiersRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
-	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Migrate to data tiers routing.
-/// </para>
-/// <para>
-/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
-/// Optionally, delete one legacy index template.
-/// Using node roles enables ILM to automatically move the indices between data tiers.
-/// </para>
-/// <para>
-/// Migrating away from custom node attributes routing can be manually performed.
-/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
-/// </para>
-/// <list type="number">
-/// <item>
-/// <para>
-/// Stop setting the custom hot attribute on new indices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Remove custom allocation settings from existing ILM policies.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Replace custom allocation settings from existing indices with the corresponding tier preference.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// ILM must be stopped before performing the migration.
-/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
-/// </para>
-/// </summary>
+/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.MigrateToDataTiersRequestConverter))]
 public sealed partial class MigrateToDataTiersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>
 {
@@ -99,61 +57,17 @@ public sealed partial class MigrateToDataTiersRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "ilm.migrate_to_data_tiers";
 
-	/// <summary>
-	/// <para>
-	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
-	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public string? LegacyTemplateToDelete { get; set; }
 	public string? NodeAttribute { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Migrate to data tiers routing.
-/// </para>
-/// <para>
-/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
-/// Optionally, delete one legacy index template.
-/// Using node roles enables ILM to automatically move the indices between data tiers.
-/// </para>
-/// <para>
-/// Migrating away from custom node attributes routing can be manually performed.
-/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
-/// </para>
-/// <list type="number">
-/// <item>
-/// <para>
-/// Stop setting the custom hot attribute on new indices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Remove custom allocation settings from existing ILM policies.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Replace custom allocation settings from existing indices with the corresponding tier preference.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// ILM must be stopped before performing the migration.
-/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
-/// </para>
-/// </summary>
+/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request']/*"/>
 public readonly partial struct MigrateToDataTiersRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Instance { get; init; }
@@ -172,25 +86,14 @@ public readonly partial struct MigrateToDataTiersRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
-	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataTiersRequest.g.xml" path="doc/member[@key='ilm.migrate_to_data_tiers.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Mean Reciprocal Rank
-/// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricMeanReciprocalRankConverter))]
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
@@ -42,27 +38,15 @@ public sealed partial class RankEvalMetricMeanReciprocalRank
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank#relevant_rating_threshold']/*"/>
 	public int? RelevantRatingThreshold { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Mean Reciprocal Rank
-/// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank']/*"/>
 public readonly partial struct RankEvalMetricMeanReciprocalRankDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank Instance { get; init; }
@@ -82,22 +66,14 @@ public readonly partial struct RankEvalMetricMeanReciprocalRankDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank#k']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricMeanReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricMeanReciprocalRank#relevant_rating_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor RelevantRatingThreshold(int? value)
 	{
 		Instance.RelevantRatingThreshold = value;

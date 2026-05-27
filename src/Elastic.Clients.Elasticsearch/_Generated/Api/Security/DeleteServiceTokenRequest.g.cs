@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
 public sealed partial class DeleteServiceTokenRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete service account tokens.
-/// </para>
-/// <para>
-/// Delete service account tokens for a service in a specified namespace.
-/// </para>
-/// </summary>
+/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DeleteServiceTokenRequestConverter))]
 public sealed partial class DeleteServiceTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>
 {
@@ -67,43 +59,21 @@ public sealed partial class DeleteServiceTokenRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "security.delete_service_token";
 
-	/// <summary>
-	/// <para>
-	/// The name of the service account token.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The namespace, which is a top-level grouping of service accounts.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#namespace']/*"/>
 	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#service']/*"/>
 	public required string Service { get => P<string>("service"); set => PR("service", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete service account tokens.
-/// </para>
-/// <para>
-/// Delete service account tokens for a service in a specified namespace.
-/// </para>
-/// </summary>
+/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_service_token.Request']/*"/>
 public readonly partial struct DeleteServiceTokenRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest Instance { get; init; }
@@ -128,44 +98,28 @@ public readonly partial struct DeleteServiceTokenRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest instance) => new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the service account token.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The namespace, which is a top-level grouping of service accounts.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor Namespace(string value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#service']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor Service(string value)
 	{
 		Instance.Service = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenRequest.g.xml" path="doc/member[@key='security.delete_service_token.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

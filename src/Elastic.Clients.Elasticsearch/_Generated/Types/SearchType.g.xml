@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.SearchType#dfs_query_then_fetch"><summary><para>
+Documents are scored using global term and document frequencies across all shards. This is usually slower but more accurate.
+</para></summary></member>
+  <member key="_types.SearchType#query_then_fetch"><summary><para>
+Documents are scored using local term and document frequencies for the shard. This is usually faster but less accurate.
+</para></summary></member>
+</doc>

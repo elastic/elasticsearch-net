@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsAnalysis']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsAnalysisConverter))]
 public sealed partial class IndexSettingsAnalysis
 {
@@ -43,6 +44,7 @@ public sealed partial class IndexSettingsAnalysis
 	public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsAnalysis']/*"/>
 public readonly partial struct IndexSettingsAnalysisDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis Instance { get; init; }

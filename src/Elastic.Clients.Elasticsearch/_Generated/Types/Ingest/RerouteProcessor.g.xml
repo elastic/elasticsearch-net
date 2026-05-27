@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.RerouteProcessor#dataset"><summary><para>
+Field references or a static value for the dataset part of the data stream name.
+In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
+Example values are nginx.access and nginx.error.
+</para>
+<para>
+Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
+of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+</para>
+<para>
+default {{data_stream.dataset}}
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#destination"><summary><para>
+A static value for the target. Can’t be set when the dataset or namespace option is set.
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#namespace"><summary><para>
+Field references or a static value for the namespace part of the data stream name. See the criteria for
+index names for allowed characters. Must be no longer than 100 characters.
+</para>
+<para>
+Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
+When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
+of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
+</para>
+<para>
+default {{data_stream.namespace}}
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RerouteProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.PhraseSuggestCollateQuery#id"><summary><para>
+The search template ID.
+</para></summary></member>
+  <member key="_global.search._types.PhraseSuggestCollateQuery#source"><summary><para>
+The query source.
+</para></summary></member>
+</doc>

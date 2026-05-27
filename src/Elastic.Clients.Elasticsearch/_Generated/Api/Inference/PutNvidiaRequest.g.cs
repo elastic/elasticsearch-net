@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
 public sealed partial class PutNvidiaRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Nvidia inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>nvidia</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutNvidiaRequestConverter))]
 public sealed partial class PutNvidiaRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>
 {
@@ -74,70 +66,30 @@ public sealed partial class PutNvidiaRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.put_nvidia";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#nvidia_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id NvidiaInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("nvidia_inference_id"); set => PR("nvidia_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>nvidia</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#service']/*"/>
 	public string Service => "nvidia";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>nvidia</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Nvidia inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>nvidia</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_nvidia.Request']/*"/>
 public readonly partial struct PutNvidiaRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest Instance { get; init; }
@@ -164,137 +116,77 @@ public readonly partial struct PutNvidiaRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest(Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#nvidia_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor NvidiaInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.NvidiaInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>nvidia</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>nvidia</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutNvidiaRequest.g.xml" path="doc/member[@key='inference.put_nvidia.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor.Build(action);

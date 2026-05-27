@@ -23,36 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 public sealed partial class ForgetFollowerRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Forget a follower.
-/// </para>
-/// <para>
-/// Remove the cross-cluster replication follower retention leases from the leader.
-/// </para>
-/// <para>
-/// A following index takes out retention leases on its leader index.
-/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
-/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
-/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
-/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
-/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
-/// </para>
-/// <para>
-/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
-/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
-/// </para>
-/// </summary>
+/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ForgetFollowerRequestConverter))]
 public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>
 {
@@ -79,18 +59,10 @@ public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ccr.forget_follower";
 
-	/// <summary>
-	/// <para>
-	/// Name of the leader index for which specified follower retention leases should be removed
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public string? FollowerCluster { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexName? FollowerIndex { get; set; }
@@ -98,26 +70,8 @@ public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearc
 	public string? LeaderRemoteCluster { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Forget a follower.
-/// </para>
-/// <para>
-/// Remove the cross-cluster replication follower retention leases from the leader.
-/// </para>
-/// <para>
-/// A following index takes out retention leases on its leader index.
-/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
-/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
-/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
-/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
-/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
-/// </para>
-/// <para>
-/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
-/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
-/// </para>
-/// </summary>
+/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 public readonly partial struct ForgetFollowerRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Instance { get; init; }
@@ -142,22 +96,14 @@ public readonly partial struct ForgetFollowerRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the leader index for which specified follower retention leases should be removed
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -244,26 +190,8 @@ public readonly partial struct ForgetFollowerRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Forget a follower.
-/// </para>
-/// <para>
-/// Remove the cross-cluster replication follower retention leases from the leader.
-/// </para>
-/// <para>
-/// A following index takes out retention leases on its leader index.
-/// These leases are used to increase the likelihood that the shards of the leader index retain the history of operations that the shards of the following index need to run replication.
-/// When a follower index is converted to a regular index by the unfollow API (either by directly calling the API or by index lifecycle management tasks), these leases are removed.
-/// However, removal of the leases can fail, for example when the remote cluster containing the leader index is unavailable.
-/// While the leases will eventually expire on their own, their extended existence can cause the leader index to hold more history than necessary and prevent index lifecycle management from performing some operations on the leader index.
-/// This API exists to enable manually removing the leases when the unfollow API is unable to do so.
-/// </para>
-/// <para>
-/// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
-/// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
-/// </para>
-/// </summary>
+/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.forget_follower.Request']/*"/>
 public readonly partial struct ForgetFollowerRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Instance { get; init; }
@@ -287,22 +215,14 @@ public readonly partial struct ForgetFollowerRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the leader index for which specified follower retention leases should be removed
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ForgetFollowerRequest.g.xml" path="doc/member[@key='ccr.forget_follower.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

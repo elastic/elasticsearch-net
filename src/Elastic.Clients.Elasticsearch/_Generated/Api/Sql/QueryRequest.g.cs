@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.query.Request']/*"/>
 public sealed partial class QueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You can also specify a format using the <c>Accept</c> HTTP header.
-	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get SQL search results.
-/// </para>
-/// <para>
-/// Run an SQL request.
-/// </para>
-/// </summary>
+/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.QueryRequestConverter))]
 public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>
 {
@@ -64,172 +54,66 @@ public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "sql.query";
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You can also specify a format using the <c>Accept</c> HTTP header.
-	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
-	/// If <c>false</c>, the API returns an error with no partial results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The default catalog (cluster) for queries.
-	/// If unspecified, the queries execute on the data in the local cluster only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#catalog']/*"/>
 	public string? Catalog { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
-	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#columnar']/*"/>
 	public bool? Columnar { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cursor used to retrieve a set of paginated results.
-	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
-	/// It ignores other request body parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#cursor']/*"/>
 	public string? Cursor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#fetch_size']/*"/>
 	public int? FetchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
-	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#field_multi_value_leniency']/*"/>
 	public bool? FieldMultiValueLeniency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the search can run on frozen indices.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#index_using_frozen']/*"/>
 	public bool? IndexUsingFrozen { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The retention period for an async or saved synchronous search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
-	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_on_completion']/*"/>
 	public bool? KeepOnCompletion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum retention period for the scroll cursor.
-	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
-	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#page_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#params']/*"/>
 	public System.Collections.Generic.ICollection<object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#query']/*"/>
 	public string? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timeout before the request fails.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#request_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// If the search doesn't finish within this period, the search becomes async.
-	/// </para>
-	/// <para>
-	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get SQL search results.
-/// </para>
-/// <para>
-/// Run an SQL request.
-/// </para>
-/// </summary>
+/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.query.Request']/*"/>
 public readonly partial struct QueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.QueryRequest Instance { get; init; }
@@ -248,275 +132,161 @@ public readonly partial struct QueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance) => new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You can also specify a format using the <c>Accept</c> HTTP header.
-	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
-	/// If <c>false</c>, the API returns an error with no partial results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default catalog (cluster) for queries.
-	/// If unspecified, the queries execute on the data in the local cluster only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#catalog']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Catalog(string? value)
 	{
 		Instance.Catalog = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
-	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The cursor used to retrieve a set of paginated results.
-	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
-	/// It ignores other request body parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#cursor']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Cursor(string? value)
 	{
 		Instance.Cursor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
-	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#field_multi_value_leniency']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FieldMultiValueLeniency(bool? value = true)
 	{
 		Instance.FieldMultiValueLeniency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the search can run on frozen indices.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#index_using_frozen']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor IndexUsingFrozen(bool? value = true)
 	{
 		Instance.IndexUsingFrozen = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retention period for an async or saved synchronous search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
-	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum retention period for the scroll cursor.
-	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
-	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#page_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.PageTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(params object[] values)
 	{
 		Instance.Params = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Query(string? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timeout before the request fails.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#request_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.RequestTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -565,27 +335,14 @@ public readonly partial struct QueryRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// If the search doesn't finish within this period, the search becomes async.
-	/// </para>
-	/// <para>
-	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;
@@ -653,14 +410,8 @@ public readonly partial struct QueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get SQL search results.
-/// </para>
-/// <para>
-/// Run an SQL request.
-/// </para>
-/// </summary>
+/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.query.Request']/*"/>
 public readonly partial struct QueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Sql.QueryRequest Instance { get; init; }
@@ -679,252 +430,147 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance) => new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You can also specify a format using the <c>Accept</c> HTTP header.
-	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
-	/// If <c>false</c>, the API returns an error with no partial results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default catalog (cluster) for queries.
-	/// If unspecified, the queries execute on the data in the local cluster only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#catalog']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Catalog(string? value)
 	{
 		Instance.Catalog = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
-	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The cursor used to retrieve a set of paginated results.
-	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
-	/// It ignores other request body parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#cursor']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Cursor(string? value)
 	{
 		Instance.Cursor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
-	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#field_multi_value_leniency']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? value = true)
 	{
 		Instance.FieldMultiValueLeniency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the search can run on frozen indices.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#index_using_frozen']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? value = true)
 	{
 		Instance.IndexUsingFrozen = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retention period for an async or saved synchronous search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
-	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum retention period for the scroll cursor.
-	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
-	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#page_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.PageTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(params object[] values)
 	{
 		Instance.Params = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Query(string? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timeout before the request fails.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#request_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.RequestTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields for the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -959,27 +605,14 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// If the search doesn't finish within this period, the search becomes async.
-	/// </para>
-	/// <para>
-	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRequest.g.xml" path="doc/member[@key='sql.query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

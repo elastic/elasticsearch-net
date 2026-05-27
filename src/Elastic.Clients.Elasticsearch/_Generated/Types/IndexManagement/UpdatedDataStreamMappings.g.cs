@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.UpdatedDataStreamMappingsConverter))]
 public sealed partial class UpdatedDataStreamMappings
 {
@@ -43,40 +44,18 @@ public sealed partial class UpdatedDataStreamMappings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the mappings were successfully applied to the data stream (or would have been, if running in <c>dry_run</c>
-	/// mode), it is <c>true</c>. If an error occurred, it is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamMappings.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings#applied_to_data_stream']/*"/>
 	public required bool AppliedToDataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The mappings that are effective on this data stream, taking into account the mappings from the matching index
-	/// template and the mappings specific to this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamMappings.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings#effective_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? EffectiveMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A message explaining why the mappings could not be applied to the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamMappings.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings#error']/*"/>
 	public string? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The mappings that are specfic to this data stream that will override any mappings from the matching index template.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamMappings.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The data stream name.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamMappings.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.UpdatedDataStreamMappings#name']/*"/>
 	public required string Name { get; set; }
 }

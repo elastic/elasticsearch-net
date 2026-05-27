@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.CompactNodeInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CompactNodeInfoConverter))]
 public sealed partial class CompactNodeInfo
 {
@@ -42,12 +43,6 @@ public sealed partial class CompactNodeInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A human-readable name for the node.
-	/// You can set this name using the <c>node.name</c> property in <c>elasticsearch.yml</c>.
-	/// The default value is the machine's hostname.
-	/// </para>
-	/// </summary>
+	/// <include file="CompactNodeInfo.g.xml" path="doc/member[@key='snapshot.verify_repository.CompactNodeInfo#name']/*"/>
 	public required string Name { get; set; }
 }

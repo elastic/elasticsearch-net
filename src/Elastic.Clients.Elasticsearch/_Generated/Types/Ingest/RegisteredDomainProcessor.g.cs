@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RegisteredDomainProcessorConverter))]
 public sealed partial class RegisteredDomainProcessor
 {
@@ -42,67 +43,32 @@ public sealed partial class RegisteredDomainProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source FQDN.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Object field containing extracted domain components. If an empty string,
-	/// the processor adds components to the document’s root.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor']/*"/>
 public readonly partial struct RegisteredDomainProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor Instance { get; init; }
@@ -122,123 +88,77 @@ public readonly partial struct RegisteredDomainProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source FQDN.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source FQDN.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -251,36 +171,21 @@ public readonly partial struct RegisteredDomainProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object field containing extracted domain components. If an empty string,
-	/// the processor adds components to the document’s root.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object field containing extracted domain components. If an empty string,
-	/// the processor adds components to the document’s root.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -296,6 +201,7 @@ public readonly partial struct RegisteredDomainProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor']/*"/>
 public readonly partial struct RegisteredDomainProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor Instance { get; init; }
@@ -315,123 +221,77 @@ public readonly partial struct RegisteredDomainProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source FQDN.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source FQDN.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -444,11 +304,7 @@ public readonly partial struct RegisteredDomainProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -461,36 +317,21 @@ public readonly partial struct RegisteredDomainProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object field containing extracted domain components. If an empty string,
-	/// the processor adds components to the document’s root.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object field containing extracted domain components. If an empty string,
-	/// the processor adds components to the document’s root.
-	/// </para>
-	/// </summary>
+	/// <include file="RegisteredDomainProcessor.g.xml" path="doc/member[@key='ingest._types.RegisteredDomainProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

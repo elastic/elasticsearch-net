@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ExtendedStatsAggregationConverter))]
 public sealed partial class ExtendedStatsAggregation
 {
@@ -36,31 +37,19 @@ public sealed partial class ExtendedStatsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of standard deviations above/below the mean to display.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#sigma']/*"/>
 	public double? Sigma { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation']/*"/>
 public readonly partial struct ExtendedStatsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation Instance { get; init; }
@@ -80,22 +69,14 @@ public readonly partial struct ExtendedStatsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -108,12 +89,7 @@ public readonly partial struct ExtendedStatsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -138,11 +114,7 @@ public readonly partial struct ExtendedStatsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of standard deviations above/below the mean to display.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#sigma']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument> Sigma(double? value)
 	{
 		Instance.Sigma = value;
@@ -163,6 +135,7 @@ public readonly partial struct ExtendedStatsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation']/*"/>
 public readonly partial struct ExtendedStatsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation Instance { get; init; }
@@ -182,22 +155,14 @@ public readonly partial struct ExtendedStatsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -210,12 +175,7 @@ public readonly partial struct ExtendedStatsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -240,11 +200,7 @@ public readonly partial struct ExtendedStatsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of standard deviations above/below the mean to display.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsAggregation#sigma']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor Sigma(double? value)
 	{
 		Instance.Sigma = value;

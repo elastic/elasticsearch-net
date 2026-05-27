@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 public sealed partial class GetIlmStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the ILM status.
-/// </para>
-/// <para>
-/// Get the current index lifecycle management status.
-/// </para>
-/// </summary>
+/// <include file="GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.GetIlmStatusRequestConverter))]
 public sealed partial class GetIlmStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetIlmStatusRequest : Elastic.Clients.Elasticsearch.
 	internal override string OperationName => "ilm.get_status";
 }
 
-/// <summary>
-/// <para>
-/// Get the ILM status.
-/// </para>
-/// <para>
-/// Get the current index lifecycle management status.
-/// </para>
-/// </summary>
+/// <include file="GetIlmStatusRequest.g.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_status.Request']/*"/>
 public readonly partial struct GetIlmStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest Instance { get; init; }

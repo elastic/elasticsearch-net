@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// Represents an inference endpoint as returned by the GET API
-/// </para>
-/// </summary>
+/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceEndpointInfoConverter))]
 public sealed partial class InferenceEndpointInfo
 {
@@ -50,47 +47,21 @@ public sealed partial class InferenceEndpointInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>embedding</c>, <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpointInfo.g.xml" path="doc/member[@key='inference._types.InferenceEndpointInfo#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; set; }
 }

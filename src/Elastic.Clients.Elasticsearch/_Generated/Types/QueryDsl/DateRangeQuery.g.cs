@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.DateRangeQueryConverter))]
 public sealed partial class DateRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
@@ -42,70 +43,36 @@ public sealed partial class DateRangeQuery : Elastic.Clients.Elasticsearch.Query
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.DateMath? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.DateMath? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.DateMath? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "date";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery']/*"/>
 public readonly partial struct DateRangeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery Instance { get; init; }
@@ -125,14 +92,7 @@ public readonly partial struct DateRangeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -151,55 +111,35 @@ public readonly partial struct DateRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Gt(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Gte(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Lt(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Lte(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Lte = value;
@@ -212,22 +152,14 @@ public readonly partial struct DateRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -243,6 +175,7 @@ public readonly partial struct DateRangeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery']/*"/>
 public readonly partial struct DateRangeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery Instance { get; init; }
@@ -262,14 +195,7 @@ public readonly partial struct DateRangeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -288,55 +214,35 @@ public readonly partial struct DateRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Gt(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Gte(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Lt(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Lte(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Lte = value;
@@ -349,22 +255,14 @@ public readonly partial struct DateRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.DateRangeQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.RemoveAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RemoveActionConverter))]
 public sealed partial class RemoveAction
 {
@@ -36,46 +37,23 @@ public sealed partial class RemoveAction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Alias for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#aliases']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Data streams or indices for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias must exist to perform the action.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#must_exist']/*"/>
 	public bool? MustExist { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.RemoveAction']/*"/>
 public readonly partial struct RemoveActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction Instance { get; init; }
@@ -95,71 +73,42 @@ public readonly partial struct RemoveActionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction(Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Alias for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
 		Instance.Alias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
 	{
 		Instance.Aliases = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data streams or indices for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias must exist to perform the action.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveAction.g.xml" path="doc/member[@key='indices.update_aliases.RemoveAction#must_exist']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveActionDescriptor MustExist(bool? value = true)
 	{
 		Instance.MustExist = value;

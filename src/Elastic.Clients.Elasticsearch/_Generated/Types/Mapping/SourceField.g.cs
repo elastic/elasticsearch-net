@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SourceField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SourceFieldConverter))]
 public sealed partial class SourceField
 {
@@ -44,6 +45,7 @@ public sealed partial class SourceField
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? Mode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SourceField']/*"/>
 public readonly partial struct SourceFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SourceField Instance { get; init; }

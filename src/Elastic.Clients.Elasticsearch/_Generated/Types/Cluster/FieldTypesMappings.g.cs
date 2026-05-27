@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.FieldTypesMappingsConverter))]
 public sealed partial class FieldTypesMappings
 {
@@ -44,52 +45,24 @@ public sealed partial class FieldTypesMappings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about field data types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#field_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FieldTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about runtime field data types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#runtime_field_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> RuntimeFieldTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Source mode usage count.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#source_modes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> SourceModes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of fields in all non-system indices, accounting for mapping deduplication.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#total_deduplicated_field_count']/*"/>
 	public long? TotalDeduplicatedFieldCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all mappings after deduplication and compression.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#total_deduplicated_mapping_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalDeduplicatedMappingSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all mappings, in bytes, after deduplication and compression.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#total_deduplicated_mapping_size_in_bytes']/*"/>
 	public long? TotalDeduplicatedMappingSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of fields in all non-system indices.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypesMappings.g.xml" path="doc/member[@key='cluster.stats.FieldTypesMappings#total_field_count']/*"/>
 	public long? TotalFieldCount { get; set; }
 }

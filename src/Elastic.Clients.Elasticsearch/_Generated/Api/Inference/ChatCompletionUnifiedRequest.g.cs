@@ -23,31 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
 public sealed partial class ChatCompletionUnifiedRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform chat completion inference on the service.
-/// </para>
-/// <para>
-/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
-/// It only works with the <c>chat_completion</c> task type.
-/// </para>
-/// <para>
-/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
-/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
-/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
-/// To determine whether a given inference service supports this task type, please see the page for that service.
-/// </para>
-/// </summary>
+/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ChatCompletionUnifiedRequestConverter))]
 public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>
 {
@@ -85,37 +70,16 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 
 	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion ChatCompletionRequest { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform chat completion inference on the service.
-/// </para>
-/// <para>
-/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
-/// It only works with the <c>chat_completion</c> task type.
-/// </para>
-/// <para>
-/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
-/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
-/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
-/// To determine whether a given inference service supports this task type, please see the page for that service.
-/// </para>
-/// </summary>
+/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.chat_completion_unified.Request']/*"/>
 public readonly partial struct ChatCompletionUnifiedRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest Instance { get; init; }
@@ -142,22 +106,14 @@ public readonly partial struct ChatCompletionUnifiedRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest instance) => new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ChatCompletionUnifiedRequest.g.xml" path="doc/member[@key='inference.chat_completion_unified.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

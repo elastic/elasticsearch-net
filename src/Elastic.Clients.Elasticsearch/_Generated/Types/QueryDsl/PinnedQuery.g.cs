@@ -45,37 +45,9 @@ public sealed partial class PinnedQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? Docs { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>("docs"); set => SetVariant("docs", value); }
-
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>>("ids"); set => SetVariant("ids", value); }
-
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public float? Boost { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 	public string? QueryName { get; set; }
 
@@ -117,36 +89,18 @@ public readonly partial struct PinnedQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>();
@@ -159,60 +113,30 @@ public readonly partial struct PinnedQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Organic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument> Organic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -253,36 +177,18 @@ public readonly partial struct PinnedQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(params Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents listed in the order they are to appear in results.
-	/// Required if <c>ids</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>();
@@ -295,71 +201,36 @@ public readonly partial struct PinnedQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document IDs listed in the order they are to appear in results.
-	/// Required if <c>docs</c> is not specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Organic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor Organic<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Organic = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

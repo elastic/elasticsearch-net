@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 public sealed partial class MigrateReindexRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Reindex legacy backing indices.
-/// </para>
-/// <para>
-/// Reindex all legacy backing indices for a data stream.
-/// This operation occurs in a persistent task.
-/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
-/// </para>
-/// </summary>
+/// <include file="MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MigrateReindexRequestConverter))]
 public sealed partial class MigrateReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>
 {
@@ -67,16 +61,8 @@ public sealed partial class MigrateReindexRequest : Elastic.Clients.Elasticsearc
 	public required Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex Reindex { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Reindex legacy backing indices.
-/// </para>
-/// <para>
-/// Reindex all legacy backing indices for a data stream.
-/// This operation occurs in a persistent task.
-/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
-/// </para>
-/// </summary>
+/// <include file="MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 public readonly partial struct MigrateReindexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest Instance { get; init; }

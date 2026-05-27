@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Hyperparameter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.HyperparameterConverter))]
 public sealed partial class Hyperparameter
 {
@@ -44,38 +45,18 @@ public sealed partial class Hyperparameter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A positive number showing how much the parameter influences the variation of the loss function. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="Hyperparameter.g.xml" path="doc/member[@key='ml._types.Hyperparameter#absolute_importance']/*"/>
 	public double? AbsoluteImportance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the hyperparameter.
-	/// </para>
-	/// </summary>
+	/// <include file="Hyperparameter.g.xml" path="doc/member[@key='ml._types.Hyperparameter#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A number between 0 and 1 showing the proportion of influence on the variation of the loss function among all tuned hyperparameters. For hyperparameters with values that are not specified by the user but tuned during hyperparameter optimization.
-	/// </para>
-	/// </summary>
+	/// <include file="Hyperparameter.g.xml" path="doc/member[@key='ml._types.Hyperparameter#relative_importance']/*"/>
 	public double? RelativeImportance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the hyperparameter is specified by the user (true) or optimized (false).
-	/// </para>
-	/// </summary>
+	/// <include file="Hyperparameter.g.xml" path="doc/member[@key='ml._types.Hyperparameter#supplied']/*"/>
 	public required bool Supplied { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value of the hyperparameter, either optimized or specified by the user.
-	/// </para>
-	/// </summary>
+	/// <include file="Hyperparameter.g.xml" path="doc/member[@key='ml._types.Hyperparameter#value']/*"/>
 	public required double Value { get; set; }
 }

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// DATA_STREAM_LIFECYCLE
-/// </para>
-/// </summary>
+/// <include file="DataStreamLifecycleIndicator.g.xml" path="doc/member[@key='_global.health_report.DataStreamLifecycleIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.DataStreamLifecycleIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.DataStreamLifecycleIndicatorConverter))]
 public sealed partial class DataStreamLifecycleIndicator
 {

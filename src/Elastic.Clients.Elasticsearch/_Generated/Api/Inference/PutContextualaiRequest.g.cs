@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
 public sealed partial class PutContextualaiRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Contextual AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>contexualai</c> service.
-/// </para>
-/// <para>
-/// To review the available <c>rerank</c> models, refer to <a href="https://docs.contextual.ai/api-reference/rerank/rerank#body-model">https://docs.contextual.ai/api-reference/rerank/rerank#body-model</a>.
-/// </para>
-/// </summary>
+/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutContextualaiRequestConverter))]
 public sealed partial class PutContextualaiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>
 {
@@ -77,61 +66,27 @@ public sealed partial class PutContextualaiRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "inference.put_contextualai";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#contextualai_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ContextualaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("contextualai_inference_id"); set => PR("contextualai_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>contextualai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#service']/*"/>
 	public string Service => "contextualai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>contextualai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ContextualAIServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Contextual AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>contexualai</c> service.
-/// </para>
-/// <para>
-/// To review the available <c>rerank</c> models, refer to <a href="https://docs.contextual.ai/api-reference/rerank/rerank#body-model">https://docs.contextual.ai/api-reference/rerank/rerank#body-model</a>.
-/// </para>
-/// </summary>
+/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_contextualai.Request']/*"/>
 public readonly partial struct PutContextualaiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest Instance { get; init; }
@@ -158,91 +113,56 @@ public readonly partial struct PutContextualaiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest(Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#contextualai_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ContextualaiInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ContextualaiInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>contextualai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.ContextualAIServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>contextualai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutContextualaiRequest.g.xml" path="doc/member[@key='inference.put_contextualai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor.Build(action);

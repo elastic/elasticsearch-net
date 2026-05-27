@@ -23,38 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 public sealed partial class ScrollRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run a scrolling search.
-/// </para>
-/// <para>
-/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
-/// </para>
-/// <para>
-/// The scroll API gets large sets of results from a single scrolling search request.
-/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
-/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
-/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
-/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
-/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
-/// </para>
-/// <para>
-/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
-/// </para>
-/// <para>
-/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
-/// </para>
-/// </summary>
+/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScrollRequestConverter))]
 public sealed partial class ScrollRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScrollRequestParameters>
 {
@@ -82,50 +60,18 @@ public sealed partial class ScrollRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "scroll";
 
-	/// <summary>
-	/// <para>
-	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The scroll ID of the search.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#scroll_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run a scrolling search.
-/// </para>
-/// <para>
-/// IMPORTANT: The scroll API is no longer recommend for deep pagination. If you need to preserve the index state while paging through more than 10,000 hits, use the <c>search_after</c> parameter with a point in time (PIT).
-/// </para>
-/// <para>
-/// The scroll API gets large sets of results from a single scrolling search request.
-/// To get the necessary scroll ID, submit a search API request that includes an argument for the <c>scroll</c> query parameter.
-/// The <c>scroll</c> parameter indicates how long Elasticsearch should retain the search context for the request.
-/// The search response returns a scroll ID in the <c>_scroll_id</c> response body parameter.
-/// You can then use the scroll ID with the scroll API to retrieve the next batch of results for the request.
-/// If the Elasticsearch security features are enabled, the access to the results of a specific scroll ID is restricted to the user or API key that submitted the search.
-/// </para>
-/// <para>
-/// You can also use the scroll API to specify a new scroll parameter that extends or shortens the retention period for the search context.
-/// </para>
-/// <para>
-/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
-/// </para>
-/// </summary>
+/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scroll.Request']/*"/>
 public readonly partial struct ScrollRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ScrollRequest Instance { get; init; }
@@ -144,33 +90,21 @@ public readonly partial struct ScrollRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ScrollRequest instance) => new Elastic.Clients.Elasticsearch.ScrollRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.ScrollRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The scroll ID of the search.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollRequest.g.xml" path="doc/member[@key='_global.scroll.Request#scroll_id']/*"/>
 	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId value)
 	{
 		Instance.ScrollId = value;

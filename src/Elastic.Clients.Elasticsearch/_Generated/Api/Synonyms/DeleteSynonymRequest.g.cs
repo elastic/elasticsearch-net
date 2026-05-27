@@ -23,37 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="DeleteSynonymRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
 public sealed partial class DeleteSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a synonym set.
-/// </para>
-/// <para>
-/// You can only delete a synonyms set that is not in use by any index analyzer.
-/// </para>
-/// <para>
-/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-/// These synonym filters can be used as part of search analyzers.
-/// </para>
-/// <para>
-/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-/// </para>
-/// <para>
-/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-/// A delete request in this case will return a 400 response code.
-/// </para>
-/// <para>
-/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-/// Once finished, you can delete the index.
-/// When the synonyms set is not used in analyzers, you will be able to delete it.
-/// </para>
-/// </summary>
+/// <include file="DeleteSynonymRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.DeleteSynonymRequestConverter))]
 public sealed partial class DeleteSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>
 {
@@ -80,41 +57,12 @@ public sealed partial class DeleteSynonymRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "synonyms.delete_synonym";
 
-	/// <summary>
-	/// <para>
-	/// The synonyms set identifier to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a synonym set.
-/// </para>
-/// <para>
-/// You can only delete a synonyms set that is not in use by any index analyzer.
-/// </para>
-/// <para>
-/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
-/// These synonym filters can be used as part of search analyzers.
-/// </para>
-/// <para>
-/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
-/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
-/// </para>
-/// <para>
-/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
-/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
-/// A delete request in this case will return a 400 response code.
-/// </para>
-/// <para>
-/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
-/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
-/// Once finished, you can delete the index.
-/// When the synonyms set is not used in analyzers, you will be able to delete it.
-/// </para>
-/// </summary>
+/// <include file="DeleteSynonymRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym.Request']/*"/>
 public readonly partial struct DeleteSynonymRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest Instance { get; init; }
@@ -139,11 +87,7 @@ public readonly partial struct DeleteSynonymRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The synonyms set identifier to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

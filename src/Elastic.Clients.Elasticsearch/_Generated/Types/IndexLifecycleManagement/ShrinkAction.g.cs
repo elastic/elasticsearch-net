@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.ShrinkAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ShrinkActionConverter))]
 public sealed partial class ShrinkAction
 {
@@ -41,6 +42,7 @@ public sealed partial class ShrinkAction
 	public int? NumberOfShards { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.ShrinkAction']/*"/>
 public readonly partial struct ShrinkActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Instance { get; init; }

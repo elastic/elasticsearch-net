@@ -23,9 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/common-options#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="Fuzziness.g.xml" path="doc/member[@key='_types.Fuzziness']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Fuzziness']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.FuzzinessConverter))]
 public sealed partial class Fuzziness : Elastic.Clients.Elasticsearch.Union<string, int>
 {

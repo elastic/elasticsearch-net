@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Text expansion inference options
-/// </para>
-/// </summary>
+/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextExpansionInferenceOptionsConverter))]
 public sealed partial class TextExpansionInferenceOptions
 {
@@ -41,27 +38,16 @@ public sealed partial class TextExpansionInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Text expansion inference options
-/// </para>
-/// </summary>
+/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions']/*"/>
 public readonly partial struct TextExpansionInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions Instance { get; init; }
@@ -81,33 +67,21 @@ public readonly partial struct TextExpansionInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

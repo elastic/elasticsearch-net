@@ -37,17 +37,9 @@ public sealed partial class GetSynonymResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of synonyms rules that the synonyms set contains.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymResponse.g.xml" path="doc/member[@key='synonyms.get_synonym.Response#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Synonym rule details.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymResponse.g.xml" path="doc/member[@key='synonyms.get_synonym.Response#synonyms_set']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead> SynonymsSet { get; set; }
 }

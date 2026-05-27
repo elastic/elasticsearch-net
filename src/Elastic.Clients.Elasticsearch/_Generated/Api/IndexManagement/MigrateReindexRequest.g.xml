@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.migrate_reindex.Request"><summary><para>
+Reindex legacy backing indices.
+</para>
+<para>
+Reindex all legacy backing indices for a data stream.
+This operation occurs in a persistent task.
+The persistent task ID is returned immediately and the reindexing work is completed in that task.
+</para></summary></member>
+</doc>

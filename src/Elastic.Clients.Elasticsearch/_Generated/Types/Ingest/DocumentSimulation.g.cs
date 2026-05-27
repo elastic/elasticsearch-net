@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-/// <summary>
-/// <para>
-/// The simulated document, with optional metadata.
-/// </para>
-/// </summary>
+/// <include file="DocumentSimulation.g.xml" path="doc/member[@key='ingest._types.DocumentSimulation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DocumentSimulation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DocumentSimulationConverter))]
 public sealed partial class DocumentSimulation
 {
@@ -50,40 +47,18 @@ public sealed partial class DocumentSimulation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the document. This ID must be unique within the <c>_index</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentSimulation.g.xml" path="doc/member[@key='ingest._types.DocumentSimulation#_id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index containing the document.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentSimulation.g.xml" path="doc/member[@key='ingest._types.DocumentSimulation#_index']/*"/>
 	public required string Index { get; set; }
 	public required Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional metadata
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to send the document to a specific primary shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentSimulation.g.xml" path="doc/member[@key='ingest._types.DocumentSimulation#_routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// JSON body for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentSimulation.g.xml" path="doc/member[@key='ingest._types.DocumentSimulation#_source']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
 	public long? Version { get; set; }
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }

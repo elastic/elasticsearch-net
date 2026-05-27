@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.NodeInfoSettingsTransport#ignore_deserialization_errors"><summary><para>
+Only used in unit tests
+</para></summary></member>
+</doc>

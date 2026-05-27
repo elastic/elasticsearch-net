@@ -23,58 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
 public sealed partial class PutClusterSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Return settings in flat format
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update the cluster settings.
-/// </para>
-/// <para>
-/// Configure and update dynamic settings on a running cluster.
-/// You can also configure dynamic settings locally on an unstarted or shut down node in <c>elasticsearch.yml</c>.
-/// </para>
-/// <para>
-/// Updates made with this API can be persistent, which apply across cluster restarts, or transient, which reset after a cluster restart.
-/// You can also reset transient or persistent settings by assigning them a null value.
-/// </para>
-/// <para>
-/// If you configure the same setting using multiple methods, Elasticsearch applies the settings in following order of precedence: 1) Transient setting; 2) Persistent setting; 3) <c>elasticsearch.yml</c> setting; 4) Default setting value.
-/// For example, you can apply a transient setting to override a persistent setting or <c>elasticsearch.yml</c> setting.
-/// However, a change to an <c>elasticsearch.yml</c> setting will not override a defined transient or persistent setting.
-/// </para>
-/// <para>
-/// TIP: In Elastic Cloud, use the user settings feature to configure all cluster settings. This method automatically rejects unsafe settings that could break your cluster.
-/// If you run Elasticsearch on your own hardware, use this API to configure dynamic cluster settings.
-/// Only use <c>elasticsearch.yml</c> for static cluster settings and node settings.
-/// The API doesn’t require a restart and ensures a setting’s value is the same on all nodes.
-/// </para>
-/// <para>
-/// WARNING: Transient cluster settings are no longer recommended. Use persistent cluster settings instead.
-/// If a cluster becomes unstable, transient settings can clear unexpectedly, resulting in a potentially undesired cluster configuration.
-/// </para>
-/// </summary>
+/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PutClusterSettingsRequestConverter))]
 public sealed partial class PutClusterSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>
 {
@@ -96,70 +60,24 @@ public sealed partial class PutClusterSettingsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "cluster.put_settings";
 
-	/// <summary>
-	/// <para>
-	/// Return settings in flat format
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The settings that persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#persistent']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Persistent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that do not persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#transient']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Transient { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update the cluster settings.
-/// </para>
-/// <para>
-/// Configure and update dynamic settings on a running cluster.
-/// You can also configure dynamic settings locally on an unstarted or shut down node in <c>elasticsearch.yml</c>.
-/// </para>
-/// <para>
-/// Updates made with this API can be persistent, which apply across cluster restarts, or transient, which reset after a cluster restart.
-/// You can also reset transient or persistent settings by assigning them a null value.
-/// </para>
-/// <para>
-/// If you configure the same setting using multiple methods, Elasticsearch applies the settings in following order of precedence: 1) Transient setting; 2) Persistent setting; 3) <c>elasticsearch.yml</c> setting; 4) Default setting value.
-/// For example, you can apply a transient setting to override a persistent setting or <c>elasticsearch.yml</c> setting.
-/// However, a change to an <c>elasticsearch.yml</c> setting will not override a defined transient or persistent setting.
-/// </para>
-/// <para>
-/// TIP: In Elastic Cloud, use the user settings feature to configure all cluster settings. This method automatically rejects unsafe settings that could break your cluster.
-/// If you run Elasticsearch on your own hardware, use this API to configure dynamic cluster settings.
-/// Only use <c>elasticsearch.yml</c> for static cluster settings and node settings.
-/// The API doesn’t require a restart and ensures a setting’s value is the same on all nodes.
-/// </para>
-/// <para>
-/// WARNING: Transient cluster settings are no longer recommended. Use persistent cluster settings instead.
-/// If a cluster becomes unstable, transient settings can clear unexpectedly, resulting in a potentially undesired cluster configuration.
-/// </para>
-/// </summary>
+/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_settings.Request']/*"/>
 public readonly partial struct PutClusterSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest Instance { get; init; }
@@ -178,66 +96,42 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest(Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Return settings in flat format
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#persistent']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Persistent(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Persistent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#persistent']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Persistent()
 	{
 		Instance.Persistent = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#persistent']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Persistent(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Persistent = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -251,33 +145,21 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that do not persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#transient']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Transient(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Transient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that do not persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#transient']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Transient()
 	{
 		Instance.Transient = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that do not persist after the cluster restarts.
-	/// </para>
-	/// </summary>
+	/// <include file="PutClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.put_settings.Request#transient']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Transient(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Transient = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

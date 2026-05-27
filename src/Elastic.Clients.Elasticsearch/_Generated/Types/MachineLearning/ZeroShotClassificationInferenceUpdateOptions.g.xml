@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.ZeroShotClassificationInferenceUpdateOptions#labels"><summary><para>
+The labels to predict.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceUpdateOptions#multi_label"><summary><para>
+Update the configured multi label option. Indicates if more than one true label exists. Defaults to the configured value.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceUpdateOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.ZeroShotClassificationInferenceUpdateOptions#tokenization"><summary><para>
+The tokenization options to update when inferring
+</para></summary></member>
+</doc>

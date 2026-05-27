@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.LookupQueryVectorBuilderConverter))]
 public sealed partial class LookupQueryVectorBuilder
 {
@@ -44,35 +45,20 @@ public sealed partial class LookupQueryVectorBuilder
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the document to fetch the vector from
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index to fetch the document from
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the field containing the vector
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#path']/*"/>
 	public required string Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The routing value to use when fetching the document
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#routing']/*"/>
 	public string? Routing { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder']/*"/>
 public readonly partial struct LookupQueryVectorBuilderDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder Instance { get; init; }
@@ -92,44 +78,28 @@ public readonly partial struct LookupQueryVectorBuilderDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor(Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder instance) => new Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder(Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the document to fetch the vector from
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#id']/*"/>
 	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor Id(string value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index to fetch the document from
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#index']/*"/>
 	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor Index(string value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field containing the vector
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#path']/*"/>
 	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor Path(string value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The routing value to use when fetching the document
-	/// </para>
-	/// </summary>
+	/// <include file="LookupQueryVectorBuilder.g.xml" path="doc/member[@key='_types.LookupQueryVectorBuilder#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;

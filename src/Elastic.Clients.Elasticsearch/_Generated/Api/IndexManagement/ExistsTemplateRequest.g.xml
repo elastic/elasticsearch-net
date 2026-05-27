@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.exists_template.Request"><summary><para>
+Check existence of index templates.
+</para>
+<para>
+Get information about whether index templates exist.
+Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
+</para>
+<para>
+IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+</para></summary></member>
+  <member key="indices.exists_template.Request#flat_settings"><summary><para>
+Indicates whether to use a flat format for the response.
+</para></summary></member>
+  <member key="indices.exists_template.Request#local"><summary><para>
+Indicates whether to get information from the local node only.
+</para></summary></member>
+  <member key="indices.exists_template.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="indices.exists_template.Request#name"><summary><para>
+A comma-separated list of index template names used to limit the request.
+Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+</doc>

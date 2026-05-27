@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.NlpTokenizationUpdateOptions#span"><summary><para>
+Span options to apply
+</para></summary></member>
+  <member key="ml._types.NlpTokenizationUpdateOptions#truncate"><summary><para>
+Truncate options to apply
+</para></summary></member>
+</doc>

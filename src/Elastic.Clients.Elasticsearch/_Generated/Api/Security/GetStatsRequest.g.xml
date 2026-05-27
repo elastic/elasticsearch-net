@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_stats.Request"><summary><para>
+Get security stats.
+</para>
+<para>
+Gather security usage statistics from all node(s) within the cluster.
+</para></summary></member>
+</doc>

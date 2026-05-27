@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelDeploymentNodesStatsConverter))]
 public sealed partial class TrainedModelDeploymentNodesStats
 {
@@ -46,99 +47,47 @@ public sealed partial class TrainedModelDeploymentNodesStats
 
 	public Elastic.Clients.Elasticsearch.ByteSize? AverageInferenceProcessMemoryRssBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The average time for each inference call to complete on this node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#average_inference_time_ms']/*"/>
 	public System.TimeSpan? AverageInferenceTimeMs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The average time for each inference call to complete on this node, excluding cache
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#average_inference_time_ms_excluding_cache_hits']/*"/>
 	public System.TimeSpan? AverageInferenceTimeMsExcludingCacheHits { get; set; }
 	public System.TimeSpan? AverageInferenceTimeMsLastMinute { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of errors when evaluating the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#error_count']/*"/>
 	public int? ErrorCount { get; set; }
 	public long? InferenceCacheHitCount { get; set; }
 	public long? InferenceCacheHitCountLastMinute { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of inference calls made against this node for this model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#inference_count']/*"/>
 	public long? InferenceCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The epoch time stamp of the last inference call for the model on this node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#last_access']/*"/>
 	public System.DateTimeOffset? LastAccess { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information pertaining to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#node']/*"/>
 	public System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of allocations assigned to this node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#number_of_allocations']/*"/>
 	public int? NumberOfAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inference requests queued to be processed.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#number_of_pending_requests']/*"/>
 	public int? NumberOfPendingRequests { get; set; }
 	public required long PeakThroughputPerMinute { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inference requests that were not processed because the queue was full.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#rejected_execution_count']/*"/>
 	public int? RejectedExecutionCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current routing state and reason for the current routing state for this allocation.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#routing_state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason RoutingState { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The epoch timestamp when the allocation started.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#start_time']/*"/>
 	public System.DateTimeOffset? StartTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of threads used by each allocation during inference.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#threads_per_allocation']/*"/>
 	public int? ThreadsPerAllocation { get; set; }
 	public required int ThroughputLastMinute { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inference requests that timed out before being processed.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentNodesStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentNodesStats#timeout_count']/*"/>
 	public int? TimeoutCount { get; set; }
 }

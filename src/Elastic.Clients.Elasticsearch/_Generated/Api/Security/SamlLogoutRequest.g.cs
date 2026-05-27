@@ -23,26 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
 public sealed partial class SamlLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Logout of SAML.
-/// </para>
-/// <para>
-/// Submits a request to invalidate an access token and refresh token.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
-/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
-/// </para>
-/// </summary>
+/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlLogoutRequestConverter))]
 public sealed partial class SamlLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>
 {
@@ -70,39 +58,15 @@ public sealed partial class SamlLogoutRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "security.saml_logout";
 
-	/// <summary>
-	/// <para>
-	/// The refresh token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent refresh token that was received after refreshing the original access token.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request#refresh_token']/*"/>
 	public string? RefreshToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request#token']/*"/>
 	public required string Token { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Logout of SAML.
-/// </para>
-/// <para>
-/// Submits a request to invalidate an access token and refresh token.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
-/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
-/// </para>
-/// </summary>
+/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_logout.Request']/*"/>
 public readonly partial struct SamlLogoutRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest Instance { get; init; }
@@ -121,24 +85,14 @@ public readonly partial struct SamlLogoutRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The refresh token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent refresh token that was received after refreshing the original access token.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request#refresh_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor RefreshToken(string? value)
 	{
 		Instance.RefreshToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlLogoutRequest.g.xml" path="doc/member[@key='security.saml_logout.Request#token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor Token(string value)
 	{
 		Instance.Token = value;

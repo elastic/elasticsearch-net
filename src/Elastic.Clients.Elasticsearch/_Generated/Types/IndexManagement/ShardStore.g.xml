@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.shard_stores.ShardStore#allocation"><summary><para>
+The status of the store copy, whether it is used as a primary, replica, or not used at all.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStore#allocation_id"><summary><para>
+The allocation ID of the store copy.
+</para></summary></member>
+  <member key="indices.shard_stores.ShardStore#store_exception"><summary><para>
+Any exception encountered while opening the shard index or from an earlier engine failure.
+</para></summary></member>
+</doc>

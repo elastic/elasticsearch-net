@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.put_geoip_database.Request"><summary><para>
+Create or update a GeoIP database configuration.
+</para>
+<para>
+Refer to the create or update IP geolocation database configuration API.
+</para></summary></member>
+  <member key="ingest.put_geoip_database.Request#id"><summary><para>
+ID of the database configuration to create or update.
+</para></summary></member>
+  <member key="ingest.put_geoip_database.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ingest.put_geoip_database.Request#maxmind"><summary><para>
+The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
+At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
+</para></summary></member>
+  <member key="ingest.put_geoip_database.Request#name"><summary><para>
+The provider-assigned name of the IP geolocation database to download.
+</para></summary></member>
+  <member key="ingest.put_geoip_database.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

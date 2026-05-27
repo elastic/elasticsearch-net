@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 public sealed partial class PingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Ping the cluster.
-/// </para>
-/// <para>
-/// Get information about whether the cluster is running.
-/// </para>
-/// </summary>
+/// <include file="PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.PingRequestConverter))]
 public sealed partial class PingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.PingRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class PingRequest : Elastic.Clients.Elasticsearch.Requests
 	internal override string OperationName => "ping";
 }
 
-/// <summary>
-/// <para>
-/// Ping the cluster.
-/// </para>
-/// <para>
-/// Get information about whether the cluster is running.
-/// </para>
-/// </summary>
+/// <include file="PingRequest.g.xml" path="doc/member[@key='_global.ping.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.ping.Request']/*"/>
 public readonly partial struct PingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.PingRequest Instance { get; init; }

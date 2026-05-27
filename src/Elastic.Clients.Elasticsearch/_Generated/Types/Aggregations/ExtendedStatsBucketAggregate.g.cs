@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ExtendedStatsBucketAggregateConverter))]
 public sealed partial class ExtendedStatsBucketAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

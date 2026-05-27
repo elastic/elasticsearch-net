@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextExpansionInferenceUpdateOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextExpansionInferenceUpdateOptionsConverter))]
 public sealed partial class TextExpansionInferenceUpdateOptions
 {
@@ -36,15 +37,12 @@ public sealed partial class TextExpansionInferenceUpdateOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceUpdateOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextExpansionInferenceUpdateOptions']/*"/>
 public readonly partial struct TextExpansionInferenceUpdateOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions Instance { get; init; }
@@ -64,11 +62,7 @@ public readonly partial struct TextExpansionInferenceUpdateOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextExpansionInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextExpansionInferenceUpdateOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceUpdateOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;

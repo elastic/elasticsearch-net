@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.info.Request"><summary><para>
+Get cluster info.
+</para>
+<para>
+Get basic build, version, and cluster information.
+::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
+</para></summary></member>
+</doc>

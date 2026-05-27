@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
 public sealed partial class PutDeepseekRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a DeepSeek inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>deepseek</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutDeepseekRequestConverter))]
 public sealed partial class PutDeepseekRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestParameters>
 {
@@ -74,51 +66,24 @@ public sealed partial class PutDeepseekRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "inference.put_deepseek";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#deepseek_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id DeepseekInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("deepseek_inference_id"); set => PR("deepseek_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>deepseek</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#service']/*"/>
 	public string Service => "deepseek";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>deepseek</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a DeepSeek inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>deepseek</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_deepseek.Request']/*"/>
 public readonly partial struct PutDeepseekRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequest Instance { get; init; }
@@ -145,57 +110,35 @@ public readonly partial struct PutDeepseekRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequest(Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#deepseek_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor DeepseekInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DeepseekInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>deepseek</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>deepseek</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDeepseekRequest.g.xml" path="doc/member[@key='inference.put_deepseek.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor.Build(action);

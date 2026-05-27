@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.ShardsStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.ShardsStatsConverter))]
 public sealed partial class ShardsStats
 {
@@ -47,45 +48,21 @@ public sealed partial class ShardsStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that initialized, started, and finalized successfully.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#done']/*"/>
 	public required long Done { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that failed to be included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#failed']/*"/>
 	public required long Failed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that are finalizing but are not done.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#finalizing']/*"/>
 	public required long Finalizing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that are still initializing.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#initializing']/*"/>
 	public required long Initializing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that have started but are not finalized.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#started']/*"/>
 	public required long Started { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of shards included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStats.g.xml" path="doc/member[@key='snapshot._types.ShardsStats#total']/*"/>
 	public required long Total { get; set; }
 }

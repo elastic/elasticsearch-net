@@ -23,69 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
 public sealed partial class UpdateUserProfileDataRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update user profile data.
-/// </para>
-/// <para>
-/// Update specific data for the user profile that is associated with a unique ID.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_user_profile</c> cluster privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The <c>update_profile_data</c> global privilege for the namespaces that are referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// This API updates the <c>labels</c> and <c>data</c> fields of an existing user profile document with JSON objects.
-/// New keys and their values are added to the profile document and conflicting keys are replaced by data that's included in the request.
-/// </para>
-/// <para>
-/// For both labels and data, content is namespaced by the top-level fields.
-/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
-/// </para>
-/// </summary>
+/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UpdateUserProfileDataRequestConverter))]
 public sealed partial class UpdateUserProfileDataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>
 {
@@ -112,93 +65,27 @@ public sealed partial class UpdateUserProfileDataRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "security.update_user_profile_data";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#uid']/*"/>
 	public required string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// Non-searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// The data object is not searchable, but can be retrieved with the get user profile API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#data']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Data { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#labels']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Labels { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update user profile data.
-/// </para>
-/// <para>
-/// Update specific data for the user profile that is associated with a unique ID.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_user_profile</c> cluster privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The <c>update_profile_data</c> global privilege for the namespaces that are referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// This API updates the <c>labels</c> and <c>data</c> fields of an existing user profile document with JSON objects.
-/// New keys and their values are added to the profile document and conflicting keys are replaced by data that's included in the request.
-/// </para>
-/// <para>
-/// For both labels and data, content is namespaced by the top-level fields.
-/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
-/// </para>
-/// </summary>
+/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_user_profile_data.Request']/*"/>
 public readonly partial struct UpdateUserProfileDataRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest Instance { get; init; }
@@ -223,89 +110,49 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Uid(string value)
 	{
 		Instance.Uid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor IfPrimaryTerm(long? value)
 	{
 		Instance.IfPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#if_seq_no']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor IfSeqNo(long? value)
 	{
 		Instance.IfSeqNo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Non-searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// The data object is not searchable, but can be retrieved with the get user profile API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Data = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Non-searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// The data object is not searchable, but can be retrieved with the get user profile API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data()
 	{
 		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Non-searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// The data object is not searchable, but can be retrieved with the get user profile API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Data(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Data = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -319,39 +166,21 @@ public readonly partial struct UpdateUserProfileDataRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Labels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels()
 	{
 		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Searchable data that you want to associate with the user profile.
-	/// This field supports a nested data structure.
-	/// Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataRequest.g.xml" path="doc/member[@key='security.update_user_profile_data.Request#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

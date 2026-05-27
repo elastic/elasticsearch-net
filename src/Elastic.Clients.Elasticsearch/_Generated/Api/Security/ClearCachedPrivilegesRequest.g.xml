@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.clear_cached_privileges.Request"><summary><para>
+Clear the privileges cache.
+</para>
+<para>
+Evict privileges from the native application privilege cache.
+The cache is also automatically cleared for applications that have their privileges updated.
+</para></summary></member>
+  <member key="security.clear_cached_privileges.Request#application"><summary><para>
+A comma-separated list of applications.
+To clear all applications, use an asterism (<c>*</c>).
+It does not support other wildcard patterns.
+</para></summary></member>
+</doc>

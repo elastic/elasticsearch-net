@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityDfr']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityDfrConverter))]
 public sealed partial class SettingsSimilarityDfr : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -51,6 +52,7 @@ public sealed partial class SettingsSimilarityDfr : Elastic.Clients.Elasticsearc
 	public string Type => "DFR";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityDfr']/*"/>
 public readonly partial struct SettingsSimilarityDfrDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr Instance { get; init; }

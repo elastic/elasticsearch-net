@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsPrefixConverter))]
 public sealed partial class IntervalsPrefix
 {
@@ -42,29 +43,17 @@ public sealed partial class IntervalsPrefix
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the top-level field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#prefix']/*"/>
 	public required string Prefix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix']/*"/>
 public readonly partial struct IntervalsPrefixDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix Instance { get; init; }
@@ -84,46 +73,28 @@ public readonly partial struct IntervalsPrefixDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the top-level field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument> Prefix(string value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.UseField = value;
@@ -139,6 +110,7 @@ public readonly partial struct IntervalsPrefixDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix']/*"/>
 public readonly partial struct IntervalsPrefixDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix Instance { get; init; }
@@ -158,46 +130,28 @@ public readonly partial struct IntervalsPrefixDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the top-level field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor Prefix(string value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsPrefix.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsPrefix#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.UseField = value;

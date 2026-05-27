@@ -23,44 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 public sealed partial class SetUpgradeModeRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, it enables <c>upgrade_mode</c> which temporarily halts all
-	/// transform tasks and prohibits new transform tasks from
-	/// starting.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#enabled']/*"/>
 	public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the request to be completed.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Set upgrade_mode for transform indices.
-/// </para>
-/// <para>
-/// Sets a cluster wide upgrade_mode setting that prepares transform
-/// indices for an upgrade.
-/// When upgrading your cluster, in some circumstances you must restart your
-/// nodes and reindex your transform indices. In those circumstances,
-/// there must be no transforms running. You can close the transforms,
-/// do the upgrade, then open all the transforms again. Alternatively,
-/// you can use this API to temporarily halt tasks associated with the transforms
-/// and prevent new transforms from opening. You can also use this API
-/// during upgrades that do not require you to reindex your transform
-/// indices, though stopping transforms is not a requirement in that case.
-/// You can see the current value for the upgrade_mode setting by using the get
-/// transform info API.
-/// </para>
-/// </summary>
+/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SetUpgradeModeRequestConverter))]
 public sealed partial class SetUpgradeModeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>
 {
@@ -82,42 +57,15 @@ public sealed partial class SetUpgradeModeRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "transform.set_upgrade_mode";
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, it enables <c>upgrade_mode</c> which temporarily halts all
-	/// transform tasks and prohibits new transform tasks from
-	/// starting.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#enabled']/*"/>
 	public bool? Enabled { get => Q<bool?>("enabled"); set => Q("enabled", value); }
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the request to be completed.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Set upgrade_mode for transform indices.
-/// </para>
-/// <para>
-/// Sets a cluster wide upgrade_mode setting that prepares transform
-/// indices for an upgrade.
-/// When upgrading your cluster, in some circumstances you must restart your
-/// nodes and reindex your transform indices. In those circumstances,
-/// there must be no transforms running. You can close the transforms,
-/// do the upgrade, then open all the transforms again. Alternatively,
-/// you can use this API to temporarily halt tasks associated with the transforms
-/// and prevent new transforms from opening. You can also use this API
-/// during upgrades that do not require you to reindex your transform
-/// indices, though stopping transforms is not a requirement in that case.
-/// You can see the current value for the upgrade_mode setting by using the get
-/// transform info API.
-/// </para>
-/// </summary>
+/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.set_upgrade_mode.Request']/*"/>
 public readonly partial struct SetUpgradeModeRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest Instance { get; init; }
@@ -136,24 +84,14 @@ public readonly partial struct SetUpgradeModeRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, it enables <c>upgrade_mode</c> which temporarily halts all
-	/// transform tasks and prohibits new transform tasks from
-	/// starting.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the request to be completed.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeRequest.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

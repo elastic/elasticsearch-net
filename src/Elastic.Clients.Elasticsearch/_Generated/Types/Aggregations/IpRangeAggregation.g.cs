@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.IpRangeAggregationConverter))]
 public sealed partial class IpRangeAggregation
 {
@@ -36,21 +37,14 @@ public sealed partial class IpRangeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are used to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation']/*"/>
 public readonly partial struct IpRangeAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation Instance { get; init; }
@@ -70,55 +64,35 @@ public readonly partial struct IpRangeAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are used to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are used to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>();
@@ -145,6 +119,7 @@ public readonly partial struct IpRangeAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation']/*"/>
 public readonly partial struct IpRangeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation Instance { get; init; }
@@ -164,55 +139,35 @@ public readonly partial struct IpRangeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are used to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are used to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of IP ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>();

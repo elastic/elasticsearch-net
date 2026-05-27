@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.get_script_context.Request"><summary><para>
+Get script contexts.
+</para>
+<para>
+Get a list of supported script contexts and their methods.
+</para></summary></member>
+</doc>

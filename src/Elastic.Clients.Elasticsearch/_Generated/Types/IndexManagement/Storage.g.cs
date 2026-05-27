@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Storage']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.StorageConverter))]
 public sealed partial class Storage
 {
@@ -42,25 +43,15 @@ public sealed partial class Storage
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
-	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
-	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
-	/// of memory maps so you need disable the ability to use memory-mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="Storage.g.xml" path="doc/member[@key='indices._types.Storage#allow_mmap']/*"/>
 	public bool? AllowMmap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How often store statistics are refreshed
-	/// </para>
-	/// </summary>
+	/// <include file="Storage.g.xml" path="doc/member[@key='indices._types.Storage#stats_refresh_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? StatsRefreshInterval { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Storage']/*"/>
 public readonly partial struct StorageDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.Storage Instance { get; init; }
@@ -80,25 +71,14 @@ public readonly partial struct StorageDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.Storage instance) => new Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.Storage(Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.
-	/// This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This
-	/// setting is useful, for example, if you are in an environment where you can not control the ability to create a lot
-	/// of memory maps so you need disable the ability to use memory-mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="Storage.g.xml" path="doc/member[@key='indices._types.Storage#allow_mmap']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor AllowMmap(bool? value = true)
 	{
 		Instance.AllowMmap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How often store statistics are refreshed
-	/// </para>
-	/// </summary>
+	/// <include file="Storage.g.xml" path="doc/member[@key='indices._types.Storage#stats_refresh_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor StatsRefreshInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.StatsRefreshInterval = value;

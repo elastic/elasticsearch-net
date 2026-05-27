@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContextualAIServiceSettingsConverter))]
 public sealed partial class ContextualAIServiceSettings
 {
@@ -43,35 +44,17 @@ public sealed partial class ContextualAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Contexutual AI account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Contextual AI documentation for the list of available rerank models.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Contextual AI.
-	/// The <c>contextualai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>rerank</c>, it is set to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings']/*"/>
 public readonly partial struct ContextualAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ContextualAIServiceSettings Instance { get; init; }
@@ -91,66 +74,35 @@ public readonly partial struct ContextualAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.ContextualAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ContextualAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Contexutual AI account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Contextual AI documentation for the list of available rerank models.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Contextual AI.
-	/// The <c>contextualai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>rerank</c>, it is set to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Contextual AI.
-	/// The <c>contextualai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>rerank</c>, it is set to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Contextual AI.
-	/// The <c>contextualai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>rerank</c>, it is set to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAIServiceSettings.g.xml" path="doc/member[@key='inference._types.ContextualAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

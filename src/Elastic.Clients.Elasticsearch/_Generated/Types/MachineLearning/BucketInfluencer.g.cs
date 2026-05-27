@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.BucketInfluencer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.BucketInfluencerConverter))]
 public sealed partial class BucketInfluencer
 {
@@ -51,84 +52,36 @@ public sealed partial class BucketInfluencer
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A normalized score between 0-100, which is calculated for each bucket influencer. This score might be updated as
-	/// newer data is analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#anomaly_score']/*"/>
 	public required double AnomalyScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#bucket_span']/*"/>
 	public required System.TimeSpan BucketSpan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field name of the influencer.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#influencer_field_name']/*"/>
 	public required string InfluencerFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The score between 0-100 for each bucket influencer. This score is the initial value that was calculated at the
-	/// time the bucket was processed.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#initial_anomaly_score']/*"/>
 	public required double InitialAnomalyScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#is_interim']/*"/>
 	public required bool IsInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The probability that the bucket has this behavior, in the range 0 to 1. This value can be held to a high precision
-	/// of over 300 decimal places, so the <c>anomaly_score</c> is provided as a human-readable and friendly interpretation of
-	/// this.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#probability']/*"/>
 	public required double Probability { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Internal.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#raw_anomaly_score']/*"/>
 	public required double RawAnomalyScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Internal. This value is always set to <c>bucket_influencer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#result_type']/*"/>
 	public required string ResultType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket for which these results were calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket for which these results were calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketInfluencer.g.xml" path="doc/member[@key='ml._types.BucketInfluencer#timestamp_string']/*"/>
 	public System.DateTimeOffset? TimestampString { get; set; }
 }

@@ -23,31 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 public sealed partial class CompletionRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform completion inference on the service.
-/// </para>
-/// <para>
-/// Get responses for completion tasks.
-/// This API works only with the completion task type.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
-/// </para>
-/// </summary>
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionRequestConverter))]
 public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>
 {
@@ -81,51 +66,21 @@ public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "inference.completion";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform completion inference on the service.
-/// </para>
-/// <para>
-/// Get responses for completion tasks.
-/// This API works only with the completion task type.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
-/// </para>
-/// </summary>
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 public readonly partial struct CompletionRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CompletionRequest Instance { get; init; }
@@ -152,57 +107,35 @@ public readonly partial struct CompletionRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.CompletionRequest instance) => new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CompletionRequest(Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_api_key.Request"><summary><para>
+Get API key information.
+</para>
+<para>
+Retrieves information for one or more API keys.
+NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+</para></summary></member>
+  <member key="security.get_api_key.Request#active_only"><summary><para>
+A boolean flag that can be used to query API keys that are currently active. An API key is considered active if it is neither invalidated, nor expired at query time. You can specify this together with other parameters such as <c>owner</c> or <c>name</c>. If <c>active_only</c> is false, the response will include both active and inactive (expired or invalidated) keys.
+</para></summary></member>
+  <member key="security.get_api_key.Request#id"><summary><para>
+An API key id.
+This parameter cannot be used with any of <c>name</c>, <c>realm_name</c> or <c>username</c>.
+</para></summary></member>
+  <member key="security.get_api_key.Request#name"><summary><para>
+An API key name.
+This parameter cannot be used with any of <c>id</c>, <c>realm_name</c> or <c>username</c>.
+It supports prefix search with wildcard.
+</para></summary></member>
+  <member key="security.get_api_key.Request#owner"><summary><para>
+A boolean flag that can be used to query API keys owned by the currently authenticated user.
+The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
+</para></summary></member>
+  <member key="security.get_api_key.Request#realm_name"><summary><para>
+The name of an authentication realm.
+This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
+</para></summary></member>
+  <member key="security.get_api_key.Request#username"><summary><para>
+The username of a user.
+This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
+</para></summary></member>
+  <member key="security.get_api_key.Request#with_limited_by"><summary><para>
+Return the snapshot of the owner user's role descriptors
+associated with the API key. An API key's actual
+permission is the intersection of its assigned role
+descriptors and the owner user's role descriptors.
+</para></summary></member>
+  <member key="security.get_api_key.Request#with_profile_uid"><summary><para>
+Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
+</para></summary></member>
+</doc>

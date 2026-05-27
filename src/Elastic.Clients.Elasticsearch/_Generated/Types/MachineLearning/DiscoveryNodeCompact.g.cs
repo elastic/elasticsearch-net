@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Alternative representation of DiscoveryNode used in ml.get_job_stats and ml.get_datafeed_stats
-/// </para>
-/// </summary>
+/// <include file="DiscoveryNodeCompact.g.xml" path="doc/member[@key='ml._types.DiscoveryNodeCompact']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DiscoveryNodeCompact']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DiscoveryNodeCompactConverter))]
 public sealed partial class DiscoveryNodeCompact
 {

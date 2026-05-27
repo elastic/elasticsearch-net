@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CategorizationAnalyzerDefinitionConverter))]
 public sealed partial class CategorizationAnalyzerDefinition
 {
@@ -36,28 +37,17 @@ public sealed partial class CategorizationAnalyzerDefinition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more character filters. In addition to the built-in character filters, other plugins can provide more character filters. If this property is not specified, no character filters are applied prior to categorization. If you are customizing some other aspect of the analyzer and you need to achieve the equivalent of <c>categorization_filters</c> (which are not permitted when some other aspect of the analyzer is customized), add them here as pattern replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#char_filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more token filters. In addition to the built-in token filters, other plugins can provide more token filters. If this property is not specified, no token filters are applied prior to categorization.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name or definition of the tokenizer to use after character filters are applied. This property is compulsory if <c>categorization_analyzer</c> is specified as an object. Machine learning provides a tokenizer called <c>ml_standard</c> that tokenizes in a way that has been determined to produce good categorization results on a variety of log file formats for logs in English. If you want to use that tokenizer but change the character or token filters, specify "tokenizer": "ml_standard" in your <c>categorization_analyzer</c>. Additionally, the <c>ml_classic</c> tokenizer is available, which tokenizes in the same way as the non-customizable tokenizer in old versions of the product (before 6.2). <c>ml_classic</c> was the default categorization tokenizer in versions 6.2 to 7.13, so if you need categorization identical to the default for jobs created in these versions, specify "tokenizer": "ml_classic" in your <c>categorization_analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenizer? Tokenizer { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition']/*"/>
 public readonly partial struct CategorizationAnalyzerDefinitionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition Instance { get; init; }
@@ -77,33 +67,21 @@ public readonly partial struct CategorizationAnalyzerDefinitionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition instance) => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// One or more character filters. In addition to the built-in character filters, other plugins can provide more character filters. If this property is not specified, no character filters are applied prior to categorization. If you are customizing some other aspect of the analyzer and you need to achieve the equivalent of <c>categorization_filters</c> (which are not permitted when some other aspect of the analyzer is customized), add them here as pattern replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor CharFilter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? value)
 	{
 		Instance.CharFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more character filters. In addition to the built-in character filters, other plugins can provide more character filters. If this property is not specified, no character filters are applied prior to categorization. If you are customizing some other aspect of the analyzer and you need to achieve the equivalent of <c>categorization_filters</c> (which are not permitted when some other aspect of the analyzer is customized), add them here as pattern replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
 	{
 		Instance.CharFilter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more character filters. In addition to the built-in character filters, other plugins can provide more character filters. If this property is not specified, no character filters are applied prior to categorization. If you are customizing some other aspect of the analyzer and you need to achieve the equivalent of <c>categorization_filters</c> (which are not permitted when some other aspect of the analyzer is customized), add them here as pattern replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
@@ -116,33 +94,21 @@ public readonly partial struct CategorizationAnalyzerDefinitionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more token filters. In addition to the built-in token filters, other plugins can provide more token filters. If this property is not specified, no token filters are applied prior to categorization.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more token filters. In addition to the built-in token filters, other plugins can provide more token filters. If this property is not specified, no token filters are applied prior to categorization.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more token filters. In addition to the built-in token filters, other plugins can provide more token filters. If this property is not specified, no token filters are applied prior to categorization.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
@@ -155,22 +121,14 @@ public readonly partial struct CategorizationAnalyzerDefinitionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name or definition of the tokenizer to use after character filters are applied. This property is compulsory if <c>categorization_analyzer</c> is specified as an object. Machine learning provides a tokenizer called <c>ml_standard</c> that tokenizes in a way that has been determined to produce good categorization results on a variety of log file formats for logs in English. If you want to use that tokenizer but change the character or token filters, specify "tokenizer": "ml_standard" in your <c>categorization_analyzer</c>. Additionally, the <c>ml_classic</c> tokenizer is available, which tokenizes in the same way as the non-customizable tokenizer in old versions of the product (before 6.2). <c>ml_classic</c> was the default categorization tokenizer in versions 6.2 to 7.13, so if you need categorization identical to the default for jobs created in these versions, specify "tokenizer": "ml_classic" in your <c>categorization_analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? value)
 	{
 		Instance.Tokenizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name or definition of the tokenizer to use after character filters are applied. This property is compulsory if <c>categorization_analyzer</c> is specified as an object. Machine learning provides a tokenizer called <c>ml_standard</c> that tokenizes in a way that has been determined to produce good categorization results on a variety of log file formats for logs in English. If you want to use that tokenizer but change the character or token filters, specify "tokenizer": "ml_standard" in your <c>categorization_analyzer</c>. Additionally, the <c>ml_classic</c> tokenizer is available, which tokenizes in the same way as the non-customizable tokenizer in old versions of the product (before 6.2). <c>ml_classic</c> was the default categorization tokenizer in versions 6.2 to 7.13, so if you need categorization identical to the default for jobs created in these versions, specify "tokenizer": "ml_classic" in your <c>categorization_analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizationAnalyzerDefinition.g.xml" path="doc/member[@key='ml._types.CategorizationAnalyzerDefinition#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinitionDescriptor Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
 		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SimpleQueryStringQueryConverter))]
 public sealed partial class SimpleQueryStringQuery
 {
@@ -42,112 +43,51 @@ public sealed partial class SimpleQueryStringQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of fields you wish to search.
-	/// Accepts wildcard expressions.
-	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
-	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of enabled operators for the simple query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? Flags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_max_expansions']/*"/>
 	public int? FuzzyMaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_prefix_length']/*"/>
 	public int? FuzzyPrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_transpositions']/*"/>
 	public bool? FuzzyTranspositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#lenient']/*"/>
 	public bool? Lenient { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query string in the simple query string syntax you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#quote_field_suffix']/*"/>
 	public string? QuoteFieldSuffix { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery']/*"/>
 public readonly partial struct SimpleQueryStringQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Instance { get; init; }
@@ -167,163 +107,98 @@ public readonly partial struct SimpleQueryStringQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields you wish to search.
-	/// Accepts wildcard expressions.
-	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
-	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields you wish to search.
-	/// Accepts wildcard expressions.
-	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
-	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of enabled operators for the simple query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? value)
 	{
 		Instance.FuzzyMaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? value)
 	{
 		Instance.FuzzyPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query string in the simple query string syntax you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -336,11 +211,7 @@ public readonly partial struct SimpleQueryStringQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#quote_field_suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? value)
 	{
 		Instance.QuoteFieldSuffix = value;
@@ -356,6 +227,7 @@ public readonly partial struct SimpleQueryStringQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery']/*"/>
 public readonly partial struct SimpleQueryStringQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery Instance { get; init; }
@@ -375,163 +247,98 @@ public readonly partial struct SimpleQueryStringQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the parser creates a match_phrase query for each multi-position token.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields you wish to search.
-	/// Accepts wildcard expressions.
-	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
-	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields you wish to search.
-	/// Accepts wildcard expressions.
-	/// You also can boost relevance scores for matches to particular fields using a caret (<c>^</c>) notation.
-	/// Defaults to the <c>index.query.default_field index</c> setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of enabled operators for the simple query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? value)
 	{
 		Instance.FuzzyMaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? value)
 	{
 		Instance.FuzzyPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query string in the simple query string syntax you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -544,11 +351,7 @@ public readonly partial struct SimpleQueryStringQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringQuery#quote_field_suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? value)
 	{
 		Instance.QuoteFieldSuffix = value;

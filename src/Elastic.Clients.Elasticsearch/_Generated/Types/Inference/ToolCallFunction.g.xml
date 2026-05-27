@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ToolCallFunction"><summary><para>
+The function that the model called.
+</para></summary></member>
+  <member key="inference._types.ToolCallFunction#arguments"><summary><para>
+The arguments to call the function with in JSON format.
+</para></summary></member>
+  <member key="inference._types.ToolCallFunction#name"><summary><para>
+The name of the function to call.
+</para></summary></member>
+</doc>

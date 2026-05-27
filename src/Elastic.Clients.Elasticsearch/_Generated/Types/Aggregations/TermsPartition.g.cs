@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TermsPartition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TermsPartitionConverter))]
 public sealed partial class TermsPartition
 {
@@ -43,17 +44,9 @@ public sealed partial class TermsPartition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of partitions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsPartition.g.xml" path="doc/member[@key='_types.aggregations.TermsPartition#num_partitions']/*"/>
 	public required long NumPartitions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The partition number for this request.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsPartition.g.xml" path="doc/member[@key='_types.aggregations.TermsPartition#partition']/*"/>
 	public required long Partition { get; set; }
 }

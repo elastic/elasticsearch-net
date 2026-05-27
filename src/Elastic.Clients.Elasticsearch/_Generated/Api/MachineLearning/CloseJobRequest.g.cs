@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
 public sealed partial class CloseJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Close anomaly detection jobs.
-/// </para>
-/// <para>
-/// A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.
-/// When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.
-/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
-/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
-/// </para>
-/// </summary>
+/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CloseJobRequestConverter))]
 public sealed partial class CloseJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestParameters>
 {
@@ -64,46 +57,21 @@ public sealed partial class CloseJobRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ml.close_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a group name, or a wildcard expression. You can close multiple anomaly detection jobs in a single API request by using a group name, a comma-separated list of jobs, or a wildcard expression. You can close all jobs by using <c>_all</c> or by specifying <c>*</c> as the job identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the descriptiion for the <c>force</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#force']/*"/>
 	public bool? Force { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Close anomaly detection jobs.
-/// </para>
-/// <para>
-/// A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.
-/// When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.
-/// If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.
-/// When a datafeed that has a specified end date stops, it automatically closes its associated job.
-/// </para>
-/// </summary>
+/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.close_job.Request']/*"/>
 public readonly partial struct CloseJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest Instance { get; init; }
@@ -128,44 +96,28 @@ public readonly partial struct CloseJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a group name, or a wildcard expression. You can close multiple anomaly detection jobs in a single API request by using a group name, a comma-separated list of jobs, or a wildcard expression. You can close all jobs by using <c>_all</c> or by specifying <c>*</c> as the job identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the descriptiion for the <c>force</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CloseJobRequest.g.xml" path="doc/member[@key='ml.close_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

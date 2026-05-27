@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricDetailConverter))]
 public sealed partial class RankEvalMetricDetail
 {
@@ -45,31 +46,15 @@ public sealed partial class RankEvalMetricDetail
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The hits section shows a grouping of the search results with their supplied ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#hits']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The metric_details give additional information about the calculated quality metric (e.g. how many of the retrieved documents were relevant). The content varies for each metric but allows for better interpretation of the results
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#metric_details']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> MetricDetails { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The metric_score in the details section shows the contribution of this query to the global quality metric score
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#metric_score']/*"/>
 	public required double MetricScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unrated_docs section contains an _index and _id entry for each document in the search result for this query that didn’t have a ratings value. This can be used to ask the user to supply ratings for these documents
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDetail.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDetail#unrated_docs']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; set; }
 }

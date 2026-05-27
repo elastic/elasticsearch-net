@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ScriptProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.ScriptProcessorConverter))]
 public sealed partial class ScriptProcessor
 {
@@ -36,74 +37,35 @@ public sealed partial class ScriptProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// ID of a stored script.
-	/// If no <c>source</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Script language.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inline script.
-	/// If no <c>id</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#source']/*"/>
 	public string? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ScriptProcessor']/*"/>
 public readonly partial struct ScriptProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor Instance { get; init; }
@@ -123,112 +85,70 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// ID of a stored script.
-	/// If no <c>source</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script language.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
 		Instance.Lang = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -241,33 +161,21 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -281,24 +189,14 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inline script.
-	/// If no <c>id</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#source']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Source(string? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -319,6 +217,7 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ScriptProcessor']/*"/>
 public readonly partial struct ScriptProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor Instance { get; init; }
@@ -338,112 +237,70 @@ public readonly partial struct ScriptProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// ID of a stored script.
-	/// If no <c>source</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script language.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
 		Instance.Lang = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -456,11 +313,7 @@ public readonly partial struct ScriptProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -473,33 +326,21 @@ public readonly partial struct ScriptProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Object containing parameters for the script.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -513,24 +354,14 @@ public readonly partial struct ScriptProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inline script.
-	/// If no <c>id</c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#source']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Source(string? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptProcessor.g.xml" path="doc/member[@key='ingest._types.ScriptProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

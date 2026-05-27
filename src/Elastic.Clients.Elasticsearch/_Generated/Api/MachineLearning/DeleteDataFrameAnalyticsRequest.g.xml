@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_data_frame_analytics.Request"><summary><para>
+Delete a data frame analytics job.
+</para></summary></member>
+  <member key="ml.delete_data_frame_analytics.Request#force"><summary><para>
+If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
+</para></summary></member>
+  <member key="ml.delete_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job.
+</para></summary></member>
+  <member key="ml.delete_data_frame_analytics.Request#timeout"><summary><para>
+The time to wait for the job to be deleted.
+</para></summary></member>
+</doc>

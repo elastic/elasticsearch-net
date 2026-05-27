@@ -23,40 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
 public sealed partial class GetRecordsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of records.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of records to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly records for an anomaly detection job.
-/// </para>
-/// <para>
-/// Records contain the detailed analytical results. They describe the anomalous
-/// activity that has been identified in the input data based on the detector
-/// configuration.
-/// There can be many anomaly records depending on the characteristics and size
-/// of the input data. In practice, there are often too many to be able to
-/// manually process them. The machine learning features therefore perform a
-/// sophisticated aggregation of the anomaly records into buckets.
-/// The number of record results depends on the number of anomalies found in each
-/// bucket, which relates to the number of time series being modeled and the
-/// number of detectors.
-/// </para>
-/// </summary>
+/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetRecordsRequestConverter))]
 public sealed partial class GetRecordsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestParameters>
 {
@@ -83,88 +62,37 @@ public sealed partial class GetRecordsRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "ml.get_records";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of records.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of records to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#desc']/*"/>
 	public bool? Desc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#exclude_interim']/*"/>
 	public bool? ExcludeInterim { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>record_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#record_score']/*"/>
 	public double? RecordScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly records for an anomaly detection job.
-/// </para>
-/// <para>
-/// Records contain the detailed analytical results. They describe the anomalous
-/// activity that has been identified in the input data based on the detector
-/// configuration.
-/// There can be many anomaly records depending on the characteristics and size
-/// of the input data. In practice, there are often too many to be able to
-/// manually process them. The machine learning features therefore perform a
-/// sophisticated aggregation of the anomaly records into buckets.
-/// The number of record results depends on the number of anomalies found in each
-/// bucket, which relates to the number of time series being modeled and the
-/// number of detectors.
-/// </para>
-/// </summary>
+/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
 public readonly partial struct GetRecordsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Instance { get; init; }
@@ -189,66 +117,42 @@ public readonly partial struct GetRecordsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of records.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of records to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
@@ -273,44 +177,28 @@ public readonly partial struct GetRecordsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>record_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#record_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor RecordScore(double? value)
 	{
 		Instance.RecordScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
@@ -373,23 +261,8 @@ public readonly partial struct GetRecordsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly records for an anomaly detection job.
-/// </para>
-/// <para>
-/// Records contain the detailed analytical results. They describe the anomalous
-/// activity that has been identified in the input data based on the detector
-/// configuration.
-/// There can be many anomaly records depending on the characteristics and size
-/// of the input data. In practice, there are often too many to be able to
-/// manually process them. The machine learning features therefore perform a
-/// sophisticated aggregation of the anomaly records into buckets.
-/// The number of record results depends on the number of anomalies found in each
-/// bucket, which relates to the number of time series being modeled and the
-/// number of detectors.
-/// </para>
-/// </summary>
+/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_records.Request']/*"/>
 public readonly partial struct GetRecordsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest Instance { get; init; }
@@ -414,66 +287,42 @@ public readonly partial struct GetRecordsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of records.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of records to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
@@ -498,44 +347,28 @@ public readonly partial struct GetRecordsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>record_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#record_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> RecordScore(double? value)
 	{
 		Instance.RecordScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRecordsRequest.g.xml" path="doc/member[@key='ml.get_records.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetRecordsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;

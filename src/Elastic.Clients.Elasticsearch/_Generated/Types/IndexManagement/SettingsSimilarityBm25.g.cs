@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityBm25']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityBm25Converter))]
 public sealed partial class SettingsSimilarityBm25 : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -43,6 +44,7 @@ public sealed partial class SettingsSimilarityBm25 : Elastic.Clients.Elasticsear
 	public string Type => "BM25";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityBm25']/*"/>
 public readonly partial struct SettingsSimilarityBm25Descriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 Instance { get; init; }

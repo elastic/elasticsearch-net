@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.start_job.Request"><summary><para>
+Start rollup jobs.
+</para>
+<para>
+If you try to start a job that does not exist, an exception occurs.
+If you try to start a job that is already started, nothing happens.
+</para></summary></member>
+  <member key="rollup.start_job.Request#id"><summary><para>
+Identifier for the rollup job.
+</para></summary></member>
+</doc>

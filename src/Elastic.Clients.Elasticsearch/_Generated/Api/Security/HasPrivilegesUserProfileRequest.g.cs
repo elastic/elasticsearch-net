@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
 public sealed partial class HasPrivilegesUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Check user profile privileges.
-/// </para>
-/// <para>
-/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.HasPrivilegesUserProfileRequestConverter))]
 public sealed partial class HasPrivilegesUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>
 {
@@ -67,33 +59,15 @@ public sealed partial class HasPrivilegesUserProfileRequest : Elastic.Clients.El
 
 	internal override string OperationName => "security.has_privileges_user_profile";
 
-	/// <summary>
-	/// <para>
-	/// An object containing all the privileges to be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#privileges']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#uids']/*"/>
 	public required System.Collections.Generic.ICollection<string> Uids { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Check user profile privileges.
-/// </para>
-/// <para>
-/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.Request']/*"/>
 public readonly partial struct HasPrivilegesUserProfileRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest Instance { get; init; }
@@ -112,55 +86,35 @@ public readonly partial struct HasPrivilegesUserProfileRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An object containing all the privileges to be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck value)
 	{
 		Instance.Privileges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object containing all the privileges to be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges()
 	{
 		Instance.Privileges = Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object containing all the privileges to be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor>? action)
 	{
 		Instance.Privileges = Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#uids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Uids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesUserProfileRequest.g.xml" path="doc/member[@key='security.has_privileges_user_profile.Request#uids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(params string[] values)
 	{
 		Instance.Uids = [.. values];

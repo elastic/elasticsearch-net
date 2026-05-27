@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycleStep']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsLifecycleStepConverter))]
 public sealed partial class IndexSettingsLifecycleStep
 {
@@ -36,15 +37,11 @@ public sealed partial class IndexSettingsLifecycleStep
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).
-	/// See Shard allocation for shrink.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycleStep.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycleStep#wait_time_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeThreshold { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycleStep']/*"/>
 public readonly partial struct IndexSettingsLifecycleStepDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep Instance { get; init; }
@@ -64,12 +61,7 @@ public readonly partial struct IndexSettingsLifecycleStepDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Time to wait for the cluster to resolve allocation issues during an ILM shrink action. Must be greater than 1h (1 hour).
-	/// See Shard allocation for shrink.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycleStep.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycleStep#wait_time_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor WaitTimeThreshold(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitTimeThreshold = value;

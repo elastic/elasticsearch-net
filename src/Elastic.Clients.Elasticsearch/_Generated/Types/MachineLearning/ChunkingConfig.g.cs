@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ChunkingConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ChunkingConfigConverter))]
 public sealed partial class ChunkingConfig
 {
@@ -42,24 +43,14 @@ public sealed partial class ChunkingConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the mode is <c>auto</c>, the chunk size is dynamically calculated;
-	/// this is the recommended value when the datafeed does not use aggregations.
-	/// If the mode is <c>manual</c>, chunking is applied according to the specified <c>time_span</c>;
-	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingConfig.g.xml" path="doc/member[@key='ml._types.ChunkingConfig#mode']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Mode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingConfig.g.xml" path="doc/member[@key='ml._types.ChunkingConfig#time_span']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? TimeSpan { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ChunkingConfig']/*"/>
 public readonly partial struct ChunkingConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig Instance { get; init; }
@@ -79,25 +70,14 @@ public readonly partial struct ChunkingConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If the mode is <c>auto</c>, the chunk size is dynamically calculated;
-	/// this is the recommended value when the datafeed does not use aggregations.
-	/// If the mode is <c>manual</c>, chunking is applied according to the specified <c>time_span</c>;
-	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingConfig.g.xml" path="doc/member[@key='ml._types.ChunkingConfig#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor Mode(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode value)
 	{
 		Instance.Mode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time span that each search will be querying. This setting is applicable only when the <c>mode</c> is set to <c>manual</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingConfig.g.xml" path="doc/member[@key='ml._types.ChunkingConfig#time_span']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor TimeSpan(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.TimeSpan = value;

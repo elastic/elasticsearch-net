@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.JoinProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.JoinPropertyConverter))]
 public sealed partial class JoinProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -41,11 +42,7 @@ public sealed partial class JoinProperty : Elastic.Clients.Elasticsearch.Mapping
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Relations { get; set; }
@@ -54,6 +51,7 @@ public sealed partial class JoinProperty : Elastic.Clients.Elasticsearch.Mapping
 	public string Type => "join";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.JoinProperty']/*"/>
 public readonly partial struct JoinPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.JoinProperty Instance { get; init; }
@@ -103,33 +101,21 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -207,6 +193,7 @@ public readonly partial struct JoinPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.JoinProperty']/*"/>
 public readonly partial struct JoinPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.JoinProperty Instance { get; init; }
@@ -262,33 +249,21 @@ public readonly partial struct JoinPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="JoinProperty.g.xml" path="doc/member[@key='_types.mapping.JoinProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

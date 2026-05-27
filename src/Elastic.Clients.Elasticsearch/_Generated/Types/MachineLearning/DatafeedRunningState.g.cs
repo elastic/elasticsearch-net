@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DatafeedRunningState']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedRunningStateConverter))]
 public sealed partial class DatafeedRunningState
 {
@@ -43,25 +44,12 @@ public sealed partial class DatafeedRunningState
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the datafeed is "real-time"; meaning that the datafeed has no configured <c>end</c> time.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedRunningState.g.xml" path="doc/member[@key='ml._types.DatafeedRunningState#real_time_configured']/*"/>
 	public required bool RealTimeConfigured { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the datafeed has finished running on the available past data.
-	/// For datafeeds without a configured <c>end</c> time, this means that the datafeed is now running on "real-time" data.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedRunningState.g.xml" path="doc/member[@key='ml._types.DatafeedRunningState#real_time_running']/*"/>
 	public required bool RealTimeRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Provides the latest time interval the datafeed has searched.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedRunningState.g.xml" path="doc/member[@key='ml._types.DatafeedRunningState#search_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval? SearchInterval { get; set; }
 }

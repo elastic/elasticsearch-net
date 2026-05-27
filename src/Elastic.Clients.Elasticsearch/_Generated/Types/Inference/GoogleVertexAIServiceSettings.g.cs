@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleVertexAIServiceSettingsConverter))]
 public sealed partial class GoogleVertexAIServiceSettings
 {
@@ -42,145 +43,38 @@ public sealed partial class GoogleVertexAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// By default, the model's standard output dimension is used.
-	/// Refer to the Google documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the location to use for the inference task for the Google Vertex AI inference task.
-	/// For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c> <c>location</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>location</c> is ignored.
-	/// Refer to the Google documentation for the list of supported locations.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#location']/*"/>
 	public string? Location { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only applicable for the <c>text_embedding</c> task type.
-	/// Controls the batch size of chunked inference requests sent to Google Vertex AI.
-	/// </para>
-	/// <para>
-	/// Setting this parameter lower reduces the risk of exceeding token limits but may result in more API calls. Setting it higher increases throughput but may risk hitting token limits.
-	/// </para>
-	/// <para>
-	/// To estimate a safe <c>max_batch_size</c> value, you can use it together with the <c>max_chunk_size</c> parameter using the following formula:
-	/// <c>max_batch_size ≈ max_chunk_size × 1.3 × 512 ÷ 20000</c>
-	/// </para>
-	/// <para>
-	/// Where:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>1.3</c> is an approximate tokens-per-word ratio
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>512</c> is the maximum number of chunks that can be generated per document
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>20000</c> is the Google Vertex AI token limit per request
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// This estimate assumes the worst-case scenario with a document generating the maximum 512 chunks.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#max_batch_size']/*"/>
 	public int? MaxBatchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// For Google Vertex AI <c>model_id</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>model_id</c> will be used for some providers that require it, otherwise - ignored.
-	/// Refer to the Google documentation for the list of supported models for Google Vertex AI.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#model_id']/*"/>
 	public string? ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the project to use for the Google Vertex AI inference task.
-	/// For Google Vertex AI <c>project_id</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>project_id</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#project_id']/*"/>
 	public string? ProjectId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the Google Model Garden Provider for <c>completion</c> and <c>chat_completion</c> tasks.
-	/// In order for a Google Model Garden endpoint to be used <c>provider</c> must be defined and be other than <c>google</c>.
-	/// Modes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Google Model Garden (third-party models): set <c>provider</c> to a supported non-<c>google</c> value and provide <c>url</c> and/or <c>streaming_url</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Google Vertex AI: omit <c>provider</c> or set it to <c>google</c>. In this mode, do not set <c>url</c> or <c>streaming_url</c> and Elastic will construct the endpoint url from <c>location</c>, <c>model_id</c>, and <c>project_id</c> parameters.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#provider']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? Provider { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A valid service account in JSON format for the Google Vertex AI API.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#service_account_json']/*"/>
 	public required string ServiceAccountJson { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL for streaming <c>completion</c> and <c>chat_completion</c> requests to a Google Model Garden provider endpoint.
-	/// If both <c>streaming_url</c> and <c>url</c> are provided, each is used for its respective mode.
-	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
-	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
-	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
-	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
-	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>streaming_url</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#streaming_url']/*"/>
 	public string? StreamingUrl { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL for non-streaming <c>completion</c> requests to a Google Model Garden provider endpoint.
-	/// If both <c>url</c> and <c>streaming_url</c> are provided, each is used for its respective mode.
-	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
-	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
-	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
-	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
-	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>url</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings']/*"/>
 public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings Instance { get; init; }
@@ -200,202 +94,84 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// By default, the model's standard output dimension is used.
-	/// Refer to the Google documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the location to use for the inference task for the Google Vertex AI inference task.
-	/// For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c> <c>location</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>location</c> is ignored.
-	/// Refer to the Google documentation for the list of supported locations.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#location']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Location(string? value)
 	{
 		Instance.Location = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable for the <c>text_embedding</c> task type.
-	/// Controls the batch size of chunked inference requests sent to Google Vertex AI.
-	/// </para>
-	/// <para>
-	/// Setting this parameter lower reduces the risk of exceeding token limits but may result in more API calls. Setting it higher increases throughput but may risk hitting token limits.
-	/// </para>
-	/// <para>
-	/// To estimate a safe <c>max_batch_size</c> value, you can use it together with the <c>max_chunk_size</c> parameter using the following formula:
-	/// <c>max_batch_size ≈ max_chunk_size × 1.3 × 512 ÷ 20000</c>
-	/// </para>
-	/// <para>
-	/// Where:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>1.3</c> is an approximate tokens-per-word ratio
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>512</c> is the maximum number of chunks that can be generated per document
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>20000</c> is the Google Vertex AI token limit per request
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// This estimate assumes the worst-case scenario with a document generating the maximum 512 chunks.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#max_batch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor MaxBatchSize(int? value)
 	{
 		Instance.MaxBatchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// For Google Vertex AI <c>model_id</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>model_id</c> will be used for some providers that require it, otherwise - ignored.
-	/// Refer to the Google documentation for the list of supported models for Google Vertex AI.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the project to use for the Google Vertex AI inference task.
-	/// For Google Vertex AI <c>project_id</c> is mandatory.
-	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>project_id</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#project_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ProjectId(string? value)
 	{
 		Instance.ProjectId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the Google Model Garden Provider for <c>completion</c> and <c>chat_completion</c> tasks.
-	/// In order for a Google Model Garden endpoint to be used <c>provider</c> must be defined and be other than <c>google</c>.
-	/// Modes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Google Model Garden (third-party models): set <c>provider</c> to a supported non-<c>google</c> value and provide <c>url</c> and/or <c>streaming_url</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Google Vertex AI: omit <c>provider</c> or set it to <c>google</c>. In this mode, do not set <c>url</c> or <c>streaming_url</c> and Elastic will construct the endpoint url from <c>location</c>, <c>model_id</c>, and <c>project_id</c> parameters.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#provider']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Provider(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? value)
 	{
 		Instance.Provider = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid service account in JSON format for the Google Vertex AI API.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#service_account_json']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ServiceAccountJson(string value)
 	{
 		Instance.ServiceAccountJson = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL for streaming <c>completion</c> and <c>chat_completion</c> requests to a Google Model Garden provider endpoint.
-	/// If both <c>streaming_url</c> and <c>url</c> are provided, each is used for its respective mode.
-	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
-	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
-	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
-	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
-	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>streaming_url</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#streaming_url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor StreamingUrl(string? value)
 	{
 		Instance.StreamingUrl = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL for non-streaming <c>completion</c> requests to a Google Model Garden provider endpoint.
-	/// If both <c>url</c> and <c>streaming_url</c> are provided, each is used for its respective mode.
-	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
-	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
-	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
-	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
-	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>url</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

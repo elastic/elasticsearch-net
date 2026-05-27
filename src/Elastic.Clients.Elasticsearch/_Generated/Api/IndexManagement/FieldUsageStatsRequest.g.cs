@@ -23,60 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 public sealed partial class FieldUsageStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get field usage stats.
-/// </para>
-/// <para>
-/// Get field usage information for each shard and field of an index.
-/// Field usage statistics are automatically captured when queries are running on a cluster.
-/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
-/// </para>
-/// <para>
-/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
-/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
-/// </para>
-/// </summary>
+/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FieldUsageStatsRequestConverter))]
 public sealed partial class FieldUsageStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>
 {
@@ -103,65 +68,24 @@ public sealed partial class FieldUsageStatsRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "indices.field_usage_stats";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of index names used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get field usage stats.
-/// </para>
-/// <para>
-/// Get field usage information for each shard and field of an index.
-/// Field usage statistics are automatically captured when queries are running on a cluster.
-/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
-/// </para>
-/// <para>
-/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
-/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
-/// </para>
-/// </summary>
+/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 public readonly partial struct FieldUsageStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest Instance { get; init; }
@@ -186,88 +110,49 @@ public readonly partial struct FieldUsageStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of index names used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -330,20 +215,8 @@ public readonly partial struct FieldUsageStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get field usage stats.
-/// </para>
-/// <para>
-/// Get field usage information for each shard and field of an index.
-/// Field usage statistics are automatically captured when queries are running on a cluster.
-/// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
-/// </para>
-/// <para>
-/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
-/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
-/// </para>
-/// </summary>
+/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 public readonly partial struct FieldUsageStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest Instance { get; init; }
@@ -367,88 +240,49 @@ public readonly partial struct FieldUsageStatsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of index names used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;

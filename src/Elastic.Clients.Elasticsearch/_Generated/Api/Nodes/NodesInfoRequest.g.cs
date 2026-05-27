@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.Request']/*"/>
 public sealed partial class NodesInfoRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get node information.
-/// </para>
-/// <para>
-/// By default, the API returns all attributes and core settings for cluster nodes.
-/// </para>
-/// </summary>
+/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodesInfoRequestConverter))]
 public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>
 {
@@ -81,43 +69,21 @@ public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "nodes.info";
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#metric']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>?>("metric"); set => PO("metric", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get node information.
-/// </para>
-/// <para>
-/// By default, the API returns all attributes and core settings for cluster nodes.
-/// </para>
-/// </summary>
+/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.Request']/*"/>
 public readonly partial struct NodesInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest Instance { get; init; }
@@ -151,55 +117,35 @@ public readonly partial struct NodesInfoRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric[] values)
 	{
 		Instance.Metric = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesInfoRequest.g.xml" path="doc/member[@key='nodes.info.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterNetworkTypes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterNetworkTypesConverter))]
 public sealed partial class ClusterNetworkTypes
 {
@@ -43,17 +44,9 @@ public sealed partial class ClusterNetworkTypes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the HTTP network types used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNetworkTypes.g.xml" path="doc/member[@key='cluster.stats.ClusterNetworkTypes#http_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> HttpTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the transport network types used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNetworkTypes.g.xml" path="doc/member[@key='cluster.stats.ClusterNetworkTypes#transport_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> TransportTypes { get; set; }
 }

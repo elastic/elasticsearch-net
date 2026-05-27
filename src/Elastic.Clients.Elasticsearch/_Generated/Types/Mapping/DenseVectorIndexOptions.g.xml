@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.DenseVectorIndexOptions#confidence_interval"><summary><para>
+The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
+<c>1.0</c> or exactly <c>0</c>. When the value is <c>0</c>, this indicates that dynamic quantiles should be calculated for
+optimized quantization. When between <c>0.90</c> and <c>1.0</c>, this value restricts the values used when calculating
+the quantization thresholds.
+</para>
+<para>
+For example, a value of <c>0.95</c> will only use the middle <c>95%</c> of the values when calculating the quantization
+thresholds (e.g. the highest and lowest <c>2.5%</c> of values will be ignored).
+</para>
+<para>
+Defaults to <c>1/(dims + 1)</c> for <c>int8</c> quantized vectors and <c>0</c> for <c>int4</c> for dynamic quantile calculation.
+</para>
+<para>
+Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#ef_construction"><summary><para>
+The number of candidates to track while assembling the list of nearest neighbors for each new node.
+</para>
+<para>
+Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#flat_index_threshold"><summary><para>
+The segment document count threshold below which HNSW graph construction is skipped in favor of brute-force flat
+search. <c>-1</c> (default) defers to format defaults: <c>300</c> for <c>bbq_hnsw</c>, <c>150</c> for <c>hnsw</c>, <c>int8_hnsw</c>, and
+<c>int4_hnsw</c>. <c>0</c> always builds the graph. A positive value overrides the format default.
+</para>
+<para>
+Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>int4_hnsw</c>, and <c>bbq_hnsw</c> index types.
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#m"><summary><para>
+The number of neighbors each node will be connected to in the HNSW graph.
+</para>
+<para>
+Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#on_disk_rescore"><summary><para>
+<c>true</c> if vector rescoring should be done on-disk
+</para>
+<para>
+Only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#rescore_vector"><summary><para>
+The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+</para></summary></member>
+  <member key="_types.mapping.DenseVectorIndexOptions#type"><summary><para>
+The type of kNN algorithm to use.
+</para></summary></member>
+</doc>

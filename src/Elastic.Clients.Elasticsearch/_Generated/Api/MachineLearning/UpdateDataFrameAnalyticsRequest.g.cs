@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
 public sealed partial class UpdateDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update a data frame analytics job.
-/// </para>
-/// </summary>
+/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateDataFrameAnalyticsRequestConverter))]
 public sealed partial class UpdateDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>
 {
@@ -58,57 +57,24 @@ public sealed partial class UpdateDataFrameAnalyticsRequest : Elastic.Clients.El
 
 	internal override string OperationName => "ml.update_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#allow_lazy_start']/*"/>
 	public bool? AllowLazyStart { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#max_num_threads']/*"/>
 	public int? MaxNumThreads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#model_memory_limit']/*"/>
 	public string? ModelMemoryLimit { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a data frame analytics job.
-/// </para>
-/// </summary>
+/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request']/*"/>
 public readonly partial struct UpdateDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Instance { get; init; }
@@ -133,65 +99,35 @@ public readonly partial struct UpdateDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#allow_lazy_start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? value = true)
 	{
 		Instance.AllowLazyStart = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#max_num_threads']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? value)
 	{
 		Instance.MaxNumThreads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.update_data_frame_analytics.Request#model_memory_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? value)
 	{
 		Instance.ModelMemoryLimit = value;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.InferenceConfigClassification#num_top_classes"><summary><para>
+Specifies the number of top class predictions to return.
+</para></summary></member>
+  <member key="ingest._types.InferenceConfigClassification#num_top_feature_importance_values"><summary><para>
+Specifies the maximum number of feature importance values per document.
+</para></summary></member>
+  <member key="ingest._types.InferenceConfigClassification#prediction_field_type"><summary><para>
+Specifies the type of the predicted field to write.
+Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
+</para></summary></member>
+  <member key="ingest._types.InferenceConfigClassification#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction.
+</para></summary></member>
+  <member key="ingest._types.InferenceConfigClassification#top_classes_results_field"><summary><para>
+Specifies the field to which the top classes are written.
+</para></summary></member>
+</doc>

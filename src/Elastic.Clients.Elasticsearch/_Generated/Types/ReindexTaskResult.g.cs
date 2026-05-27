@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// The final result of a completed reindex operation, as stored in the task result.
-/// This is the serialized form of <c>BulkByScrollResponse</c>.
-/// </para>
-/// </summary>
+/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ReindexTaskResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ReindexTaskResultConverter))]
 public sealed partial class ReindexTaskResult
 {
@@ -42,101 +38,45 @@ public sealed partial class ReindexTaskResult
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scroll responses pulled back by the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#batches']/*"/>
 	public long? Batches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully created.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#created']/*"/>
 	public long? Created { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#deleted']/*"/>
 	public long? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Any failures encountered during the reindex. If non-empty, the reindex ended because of these failures.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were ignored because the script returned a <c>noop</c> value for <c>ctx.op</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#noops']/*"/>
 	public long? Noops { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of requests per second effectively executed during the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of retries attempted by reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of milliseconds the request slept to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#throttled_millis']/*"/>
 	public System.TimeSpan? ThrottledMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field should always be equal to zero in a completed reindex result.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#throttled_until_millis']/*"/>
 	public System.TimeSpan? ThrottledUntilMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether any of the requests executed during the reindex timed out.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#timed_out']/*"/>
 	public bool? TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total milliseconds the entire operation took.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#took']/*"/>
 	public System.TimeSpan? Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully processed.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#total']/*"/>
 	public long? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully updated.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#updated']/*"/>
 	public long? Updated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of version conflicts that occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexTaskResult.g.xml" path="doc/member[@key='_types.ReindexTaskResult#version_conflicts']/*"/>
 	public long? VersionConflicts { get; set; }
 }

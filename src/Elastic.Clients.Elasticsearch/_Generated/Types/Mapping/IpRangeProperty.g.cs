@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IpRangeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.IpRangePropertyConverter))]
 public sealed partial class IpRangeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class IpRangeProperty : Elastic.Clients.Elasticsearch.Mapp
 	public int? IgnoreAbove { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -58,6 +55,7 @@ public sealed partial class IpRangeProperty : Elastic.Clients.Elasticsearch.Mapp
 	public string Type => "ip_range";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IpRangeProperty']/*"/>
 public readonly partial struct IpRangePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty Instance { get; init; }
@@ -137,33 +135,21 @@ public readonly partial struct IpRangePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -215,6 +201,7 @@ public readonly partial struct IpRangePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IpRangeProperty']/*"/>
 public readonly partial struct IpRangePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty Instance { get; init; }
@@ -300,33 +287,21 @@ public readonly partial struct IpRangePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeProperty.g.xml" path="doc/member[@key='_types.mapping.IpRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

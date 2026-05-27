@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.update.Request']/*"/>
 public sealed partial class UpdateInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update an inference endpoint.
-/// </para>
-/// <para>
-/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
-/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
-/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// </summary>
+/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.update.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.UpdateInferenceRequestConverter))]
 public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>
 {
@@ -85,35 +76,16 @@ public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "inference.update";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of inference task that the model performs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 	public required Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update an inference endpoint.
-/// </para>
-/// <para>
-/// Modify <c>task_settings</c>, secrets (within <c>service_settings</c>), or <c>num_allocations</c> for an inference endpoint, depending on the specific endpoint service and <c>task_type</c>.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
-/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
-/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// </summary>
+/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.update.Request']/*"/>
 public readonly partial struct UpdateInferenceRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest Instance { get; init; }
@@ -147,22 +119,14 @@ public readonly partial struct UpdateInferenceRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of inference task that the model performs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceRequest.g.xml" path="doc/member[@key='inference.update.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;

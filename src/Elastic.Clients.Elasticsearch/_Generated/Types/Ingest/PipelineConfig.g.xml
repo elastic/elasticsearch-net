@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.PipelineConfig#description"><summary><para>
+Description of the ingest pipeline.
+</para></summary></member>
+  <member key="ingest._types.PipelineConfig#processors"><summary><para>
+Processors used to perform transformations on documents before indexing.
+Processors run sequentially in the order specified.
+</para></summary></member>
+  <member key="ingest._types.PipelineConfig#version"><summary><para>
+Version number used by external systems to track ingest pipelines.
+</para></summary></member>
+</doc>

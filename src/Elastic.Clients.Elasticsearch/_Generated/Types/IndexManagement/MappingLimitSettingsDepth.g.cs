@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDepth']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsDepthConverter))]
 public sealed partial class MappingLimitSettingsDepth
 {
@@ -36,15 +37,11 @@ public sealed partial class MappingLimitSettingsDepth
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined
-	/// at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsDepth.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDepth#limit']/*"/>
 	public long? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDepth']/*"/>
 public readonly partial struct MappingLimitSettingsDepthDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth Instance { get; init; }
@@ -64,12 +61,7 @@ public readonly partial struct MappingLimitSettingsDepthDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined
-	/// at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsDepth.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDepth#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor Limit(long? value)
 	{
 		Instance.Limit = value;

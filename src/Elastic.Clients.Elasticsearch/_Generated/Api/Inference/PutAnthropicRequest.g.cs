@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
 public sealed partial class PutAnthropicRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Anthropic inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAnthropicRequestConverter))]
 public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>
 {
@@ -74,59 +66,27 @@ public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "inference.put_anthropic";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#anthropic_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AnthropicInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("anthropic_inference_id"); set => PR("anthropic_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>completion</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>anthropic</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#service']/*"/>
 	public string Service => "anthropic";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Anthropic inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_anthropic.Request']/*"/>
 public readonly partial struct PutAnthropicRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest Instance { get; init; }
@@ -153,80 +113,49 @@ public readonly partial struct PutAnthropicRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest(Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#anthropic_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor AnthropicInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AnthropicInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>completion</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAnthropicRequest.g.xml" path="doc/member[@key='inference.put_anthropic.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor> action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor.Build(action);

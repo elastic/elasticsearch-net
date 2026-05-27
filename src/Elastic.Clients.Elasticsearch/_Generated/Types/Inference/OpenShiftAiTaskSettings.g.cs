@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenShiftAiTaskSettingsConverter))]
 public sealed partial class OpenShiftAiTaskSettings
 {
@@ -36,21 +37,14 @@ public sealed partial class OpenShiftAiTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, whether to return the source documents in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiTaskSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiTaskSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings']/*"/>
 public readonly partial struct OpenShiftAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct OpenShiftAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, whether to return the source documents in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiTaskSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiTaskSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiTaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

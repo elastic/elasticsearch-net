@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KeepTypesTokenFilterConverter))]
 public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,24 +43,17 @@ public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to keep or remove the specified token types.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepTypesTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
 	public string Type => "keep_types";
 
-	/// <summary>
-	/// <para>
-	/// List of token types to keep or remove.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepTypesTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter#types']/*"/>
 	public required System.Collections.Generic.ICollection<string> Types { get; set; }
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter']/*"/>
 public readonly partial struct KeepTypesTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Instance { get; init; }
@@ -79,33 +73,21 @@ public readonly partial struct KeepTypesTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to keep or remove the specified token types.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepTypesTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? value)
 	{
 		Instance.Mode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of token types to keep or remove.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepTypesTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of token types to keep or remove.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepTypesTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepTypesTokenFilter#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];

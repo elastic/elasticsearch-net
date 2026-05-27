@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoShapeFieldQueryConverter))]
 public sealed partial class GeoShapeFieldQuery
 {
@@ -36,22 +37,15 @@ public sealed partial class GeoShapeFieldQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? IndexedShape { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation operator used to search a geo field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? Relation { get; set; }
 	public object? Shape { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery']/*"/>
 public readonly partial struct GeoShapeFieldQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Instance { get; init; }
@@ -71,33 +65,21 @@ public readonly partial struct GeoShapeFieldQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? value)
 	{
 		Instance.IndexedShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> IndexedShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation operator used to search a geo field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.Relation = value;
@@ -124,6 +106,7 @@ public readonly partial struct GeoShapeFieldQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery']/*"/>
 public readonly partial struct GeoShapeFieldQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Instance { get; init; }
@@ -143,44 +126,28 @@ public readonly partial struct GeoShapeFieldQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? value)
 	{
 		Instance.IndexedShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor IndexedShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query using an indexed shape retrieved from the the specified document and path.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor IndexedShape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<T>> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation operator used to search a geo field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.Relation = value;

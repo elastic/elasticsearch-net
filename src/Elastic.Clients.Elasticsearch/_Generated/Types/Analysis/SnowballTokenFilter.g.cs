@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SnowballTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SnowballTokenFilterConverter))]
 public sealed partial class SnowballTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class SnowballTokenFilter : Elastic.Clients.Elasticsearch.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the language used by the stemmer.
-	/// </para>
-	/// </summary>
+	/// <include file="SnowballTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SnowballTokenFilter#language']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? Language { get; set; }
 
 	public string Type => "snowball";
@@ -48,6 +45,7 @@ public sealed partial class SnowballTokenFilter : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SnowballTokenFilter']/*"/>
 public readonly partial struct SnowballTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter Instance { get; init; }
@@ -67,11 +65,7 @@ public readonly partial struct SnowballTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter(Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Controls the language used by the stemmer.
-	/// </para>
-	/// </summary>
+	/// <include file="SnowballTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SnowballTokenFilter#language']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? value)
 	{
 		Instance.Language = value;

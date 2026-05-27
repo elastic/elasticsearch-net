@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DynamicProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DynamicPropertyConverter))]
 public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -54,11 +55,7 @@ public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapp
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? Norms { get; set; }
 	public Elastic.Clients.Elasticsearch.FieldValue? NullValue { get; set; }
@@ -77,6 +74,7 @@ public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapp
 	public string Type => "{dynamic_type}";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DynamicProperty']/*"/>
 public readonly partial struct DynamicPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Instance { get; init; }
@@ -222,33 +220,21 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -372,6 +358,7 @@ public readonly partial struct DynamicPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DynamicProperty']/*"/>
 public readonly partial struct DynamicPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Instance { get; init; }
@@ -523,33 +510,21 @@ public readonly partial struct DynamicPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DynamicProperty.g.xml" path="doc/member[@key='_types.mapping.DynamicProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.StorageOptionConverter))]
 public enum StorageOption
 {
-	/// <summary>
-	/// <para>
-	/// Fully caches the snapshotted index’s shards in the Elasticsearch cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageOption.g.xml" path="doc/member[@key='searchable_snapshots.mount.StorageOption#full_copy']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "full_copy")]
 	FullCopy,
-	/// <summary>
-	/// <para>
-	/// Uses a local cache containing only recently searched parts of the snapshotted index’s data.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageOption.g.xml" path="doc/member[@key='searchable_snapshots.mount.StorageOption#shared_cache']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "shared_cache")]
 	SharedCache
 }

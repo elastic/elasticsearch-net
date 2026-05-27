@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptLanguages;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.LanguageContext']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.GetScriptLanguages.Json.LanguageContextConverter))]
 public sealed partial class LanguageContext
 {

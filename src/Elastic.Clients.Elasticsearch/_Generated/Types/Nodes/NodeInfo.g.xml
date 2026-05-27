@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes.info.NodeInfo#build_hash"><summary><para>
+Short hash of the last git commit in this release.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#host"><summary><para>
+The node’s host name.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#ip"><summary><para>
+The node’s IP address.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#name"><summary><para>
+The node's name
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#total_indexing_buffer"><summary><para>
+Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by Indexing Buffer settings.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#total_indexing_buffer_in_bytes"><summary><para>
+Same as total_indexing_buffer, but expressed in bytes.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#transport_address"><summary><para>
+Host and port where transport HTTP connections are accepted.
+</para></summary></member>
+  <member key="nodes.info.NodeInfo#version"><summary><para>
+Elasticsearch version running on this node.
+</para></summary></member>
+</doc>

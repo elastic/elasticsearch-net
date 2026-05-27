@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ThinkingConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ThinkingConfigConverter))]
 public sealed partial class ThinkingConfig
 {
@@ -36,14 +37,11 @@ public sealed partial class ThinkingConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates the desired thinking budget in tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="ThinkingConfig.g.xml" path="doc/member[@key='inference._types.ThinkingConfig#thinking_budget']/*"/>
 	public int? ThinkingBudget { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ThinkingConfig']/*"/>
 public readonly partial struct ThinkingConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ThinkingConfig Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct ThinkingConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor(Elastic.Clients.Elasticsearch.Inference.ThinkingConfig instance) => new Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ThinkingConfig(Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Indicates the desired thinking budget in tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="ThinkingConfig.g.xml" path="doc/member[@key='inference._types.ThinkingConfig#thinking_budget']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor ThinkingBudget(int? value)
 	{
 		Instance.ThinkingBudget = value;

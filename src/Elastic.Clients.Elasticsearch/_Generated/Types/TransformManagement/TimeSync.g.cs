@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.TimeSync']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TimeSyncConverter))]
 public sealed partial class TimeSync
 {
@@ -42,23 +43,14 @@ public sealed partial class TimeSync
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time delay between the current time and the latest input data time.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.TimeSync']/*"/>
 public readonly partial struct TimeSyncDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Instance { get; init; }
@@ -78,37 +70,21 @@ public readonly partial struct TimeSyncDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The time delay between the current time and the latest input data time.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Delay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -124,6 +100,7 @@ public readonly partial struct TimeSyncDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.TimeSync']/*"/>
 public readonly partial struct TimeSyncDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Instance { get; init; }
@@ -143,37 +120,21 @@ public readonly partial struct TimeSyncDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.TimeSync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The time delay between the current time and the latest input data time.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Delay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is used to identify new documents in the source. In general, it’s a good idea to use a field
-	/// that contains the ingest timestamp. If you use a different field, you might need to set the delay such that it
-	/// accounts for data transmission delays.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSync.g.xml" path="doc/member[@key='transform._types.TimeSync#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;

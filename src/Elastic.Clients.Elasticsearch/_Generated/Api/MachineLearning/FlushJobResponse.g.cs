@@ -39,11 +39,6 @@ public sealed partial class FlushJobResponse : Elastic.Transport.Products.Elasti
 
 	public required bool Flushed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Provides the timestamp (in milliseconds since the epoch) of the end of
-	/// the last bucket that was processed.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobResponse.g.xml" path="doc/member[@key='ml.flush_job.Response#last_finalized_bucket_end']/*"/>
 	public int? LastFinalizedBucketEnd { get; set; }
 }

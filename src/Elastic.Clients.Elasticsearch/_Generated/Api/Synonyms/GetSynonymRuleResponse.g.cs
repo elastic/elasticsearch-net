@@ -37,18 +37,9 @@ public sealed partial class GetSynonymRuleResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the synonym rule.
-	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The synonyms that conform the synonym rule in Solr format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Response#synonyms']/*"/>
 	public required string Synonyms { get; set; }
 }

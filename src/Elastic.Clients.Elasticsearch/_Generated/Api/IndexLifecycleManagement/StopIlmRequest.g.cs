@@ -23,36 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 public sealed partial class StopIlmRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop the ILM plugin.
-/// </para>
-/// <para>
-/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
-/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
-/// </para>
-/// <para>
-/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
-/// Use the get ILM status API to check whether ILM is running.
-/// </para>
-/// </summary>
+/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.StopIlmRequestConverter))]
 public sealed partial class StopIlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>
 {
@@ -74,34 +57,15 @@ public sealed partial class StopIlmRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "ilm.stop";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop the ILM plugin.
-/// </para>
-/// <para>
-/// Halt all lifecycle management operations and stop the index lifecycle management plugin.
-/// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
-/// </para>
-/// <para>
-/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
-/// Use the get ILM status API to check whether ILM is running.
-/// </para>
-/// </summary>
+/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.stop.Request']/*"/>
 public readonly partial struct StopIlmRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest Instance { get; init; }
@@ -120,22 +84,14 @@ public readonly partial struct StopIlmRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StopIlmRequest.g.xml" path="doc/member[@key='ilm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

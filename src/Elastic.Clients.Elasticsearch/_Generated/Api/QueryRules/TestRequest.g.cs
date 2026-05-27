@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
 public sealed partial class TestRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Test a query ruleset.
-/// </para>
-/// <para>
-/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
-/// </para>
-/// </summary>
+/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.TestRequestConverter))]
 public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.TestRequestParameters>
 {
@@ -68,30 +64,15 @@ public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "query_rules.test";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset to be created or updated
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The match criteria to apply to rules in the given query ruleset.
-	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#match_criteria']/*"/>
 	public required System.Collections.Generic.IDictionary<string, object> MatchCriteria { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Test a query ruleset.
-/// </para>
-/// <para>
-/// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
-/// </para>
-/// </summary>
+/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.test.Request']/*"/>
 public readonly partial struct TestRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.TestRequest Instance { get; init; }
@@ -118,47 +99,28 @@ public readonly partial struct TestRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.TestRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.TestRequest(Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset to be created or updated
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The match criteria to apply to rules in the given query ruleset.
-	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#match_criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Collections.Generic.IDictionary<string, object> value)
 	{
 		Instance.MatchCriteria = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The match criteria to apply to rules in the given query ruleset.
-	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#match_criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria()
 	{
 		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The match criteria to apply to rules in the given query ruleset.
-	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="TestRequest.g.xml" path="doc/member[@key='query_rules.test.Request#match_criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor MatchCriteria(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.MatchCriteria = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

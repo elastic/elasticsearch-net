@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalytics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsConverter))]
 public sealed partial class DataframeAnalytics
 {
@@ -46,52 +47,24 @@ public sealed partial class DataframeAnalytics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For running jobs only, contains messages relating to the selection of a node to run the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#assignment_explanation']/*"/>
 	public string? AssignmentExplanation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that provides counts for the quantity of documents skipped, used in training, or available for testing.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#data_counts']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts DataCounts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object describing memory usage of the analytics. It is present only after the job is started and memory usage is reported.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#memory_usage']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage MemoryUsage { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains properties for the node that runs the job. This information is available only for running jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#node']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeAttributes? Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The progress report of the data frame analytics job by phase.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#progress']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress> Progress { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The status of the data frame analytics job, which can be one of the following values: failed, started, starting, stopping, stopped.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalytics.g.xml" path="doc/member[@key='ml._types.DataframeAnalytics#state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeState State { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterIndices']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterIndicesConverter))]
 public sealed partial class ClusterIndices
 {
@@ -52,103 +53,45 @@ public sealed partial class ClusterIndices
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about analyzers and analyzer components used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes? Analysis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about memory used for completion in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#completion']/*"/>
 	public required Elastic.Clients.Elasticsearch.CompletionStats Completion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of indices with shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#count']/*"/>
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indexed dense vector
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#dense_vector']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats DenseVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains counts for documents in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#docs']/*"/>
 	public required Elastic.Clients.Elasticsearch.DocStats Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the field data cache of selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#fielddata']/*"/>
 	public required Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about field mappings in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the query cache of selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#query_cache']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Holds a snapshot of the search usage statistics.
-	/// Used to hold the stats for a single node that's part of a ClusterStatsNodeResponse, as well as to
-	/// accumulate stats for the entire cluster and return them as part of the ClusterStatsResponse.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#search']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats Search { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about segments in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#segments']/*"/>
 	public required Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indices with shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about indexed sparse vector
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#sparse_vector']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats SparseVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the size of shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#store']/*"/>
 	public required Elastic.Clients.Elasticsearch.StoreStats Store { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about analyzers and analyzer components used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndices.g.xml" path="doc/member[@key='cluster.stats.ClusterIndices#versions']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? Versions { get; set; }
 }

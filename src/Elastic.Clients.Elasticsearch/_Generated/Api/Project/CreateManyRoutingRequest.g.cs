@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 public sealed partial class CreateManyRoutingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create or update project routing expressions.
-/// </para>
-/// </summary>
+/// <include file="CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.CreateManyRoutingRequestConverter))]
 public sealed partial class CreateManyRoutingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>
 {
@@ -62,11 +61,8 @@ public sealed partial class CreateManyRoutingRequest : Elastic.Clients.Elasticse
 	public required System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression> Expressions { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update project routing expressions.
-/// </para>
-/// </summary>
+/// <include file="CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 public readonly partial struct CreateManyRoutingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest Instance { get; init; }

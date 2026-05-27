@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.SamplerAggregationExecutionHint#bytes_hash"><summary><para>
+Hold hashes of the field values - with potential for hash collisions.
+</para></summary></member>
+  <member key="_types.aggregations.SamplerAggregationExecutionHint#global_ordinals"><summary><para>
+Hold ordinals of the field as determined by the Lucene index.
+</para></summary></member>
+  <member key="_types.aggregations.SamplerAggregationExecutionHint#map"><summary><para>
+Hold field values directly.
+</para></summary></member>
+</doc>

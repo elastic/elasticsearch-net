@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoHashLocation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeoHashLocationConverter))]
 public sealed partial class GeoHashLocation
 {
@@ -45,6 +46,7 @@ public sealed partial class GeoHashLocation
 	public required string Geohash { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoHashLocation']/*"/>
 public readonly partial struct GeoHashLocationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GeoHashLocation Instance { get; init; }

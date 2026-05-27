@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SlowlogTresholds']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SlowlogTresholdsConverter))]
 public sealed partial class SlowlogTresholds
 {
@@ -40,6 +41,7 @@ public sealed partial class SlowlogTresholds
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Query { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SlowlogTresholds']/*"/>
 public readonly partial struct SlowlogTresholdsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds Instance { get; init; }

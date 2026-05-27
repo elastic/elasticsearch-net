@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
 public sealed partial class GetReindexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the reindex task to complete when <c>wait_for_completion</c> is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the reindex task completes, then returns the result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a reindex task.
-/// </para>
-/// <para>
-/// Get the status and progress of a specific reindex task.
-/// </para>
-/// </summary>
+/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetReindexRequestConverter))]
 public sealed partial class GetReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetReindexRequestParameters>
 {
@@ -74,36 +62,18 @@ public sealed partial class GetReindexRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "get_reindex";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the reindex task to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.TaskId TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the reindex task to complete when <c>wait_for_completion</c> is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the reindex task completes, then returns the result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a reindex task.
-/// </para>
-/// <para>
-/// Get the status and progress of a specific reindex task.
-/// </para>
-/// </summary>
+/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_reindex.Request']/*"/>
 public readonly partial struct GetReindexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GetReindexRequest Instance { get; init; }
@@ -128,33 +98,21 @@ public readonly partial struct GetReindexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(Elastic.Clients.Elasticsearch.GetReindexRequest instance) => new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.GetReindexRequest(Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the reindex task to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the reindex task to complete when <c>wait_for_completion</c> is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the reindex task completes, then returns the result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexRequest.g.xml" path="doc/member[@key='_global.get_reindex.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

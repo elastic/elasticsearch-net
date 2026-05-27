@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowerIndexConverter))]
 public sealed partial class FollowerIndex
 {
@@ -45,38 +46,18 @@ public sealed partial class FollowerIndex
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndex.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex#follower_index']/*"/>
 	public required string FollowerIndexValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index in the leader cluster that is followed.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndex.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex#leader_index']/*"/>
 	public required string LeaderIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that encapsulates cross-cluster replication parameters. If the follower index's status is paused, this object is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndex.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex#parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters? Parameters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster that contains the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndex.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex#remote_cluster']/*"/>
 	public required string RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The status of the index following: <c>active</c> or <c>paused</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndex.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndex#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Status { get; set; }
 }

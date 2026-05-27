@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentageScoreHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PercentageScoreHeuristicConverter))]
 public sealed partial class PercentageScoreHeuristic
 {
@@ -37,6 +38,7 @@ public sealed partial class PercentageScoreHeuristic
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentageScoreHeuristic']/*"/>
 public readonly partial struct PercentageScoreHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic Instance { get; init; }

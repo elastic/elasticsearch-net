@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ApiKeyAuthorization']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ApiKeyAuthorizationConverter))]
 public sealed partial class ApiKeyAuthorization
 {
@@ -43,17 +44,9 @@ public sealed partial class ApiKeyAuthorization
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyAuthorization.g.xml" path="doc/member[@key='ml._types.ApiKeyAuthorization#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyAuthorization.g.xml" path="doc/member[@key='ml._types.ApiKeyAuthorization#name']/*"/>
 	public required string Name { get; set; }
 }

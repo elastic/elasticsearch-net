@@ -23,104 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 public sealed partial class RolloverRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
-	/// Only allowed on data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#lazy']/*"/>
 	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Roll over to a new index.
-/// </para>
-/// <para>
-/// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
-/// </para>
-/// <para>
-/// The rollover API creates a new index for a data stream or index alias.
-/// The API behavior depends on the rollover target.
-/// </para>
-/// <para>
-/// <strong>Roll over a data stream</strong>
-/// </para>
-/// <para>
-/// If you roll over a data stream, the API creates a new write index for the stream.
-/// The stream's previous write index becomes a regular backing index.
-/// A rollover also increments the data stream's generation.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with a write index</strong>
-/// </para>
-/// <para>
-/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
-/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
-/// </para>
-/// <para>
-/// If an index alias points to multiple indices, one of the indices must be a write index.
-/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
-/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with one index</strong>
-/// </para>
-/// <para>
-/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
-/// </para>
-/// <para>
-/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
-/// </para>
-/// <para>
-/// <strong>Increment index names for an alias</strong>
-/// </para>
-/// <para>
-/// When you roll over an index alias, you can specify a name for the new index.
-/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
-/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
-/// This number is always six characters and zero-padded, regardless of the previous index's name.
-/// </para>
-/// <para>
-/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
-/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
-/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
-/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
-/// </para>
-/// </summary>
+/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RolloverRequestConverter))]
 public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>
 {
@@ -152,153 +76,42 @@ public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.rollover";
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream or index alias to roll over.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#alias']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexAlias Alias { get => P<Elastic.Clients.Elasticsearch.IndexAlias>("alias"); set => PR("alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// Supports date math.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#new_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? NewIndex { get => P<Elastic.Clients.Elasticsearch.IndexName?>("new_index"); set => PO("new_index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
-	/// Only allowed on data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#lazy']/*"/>
 	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? Conditions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Roll over to a new index.
-/// </para>
-/// <para>
-/// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
-/// </para>
-/// <para>
-/// The rollover API creates a new index for a data stream or index alias.
-/// The API behavior depends on the rollover target.
-/// </para>
-/// <para>
-/// <strong>Roll over a data stream</strong>
-/// </para>
-/// <para>
-/// If you roll over a data stream, the API creates a new write index for the stream.
-/// The stream's previous write index becomes a regular backing index.
-/// A rollover also increments the data stream's generation.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with a write index</strong>
-/// </para>
-/// <para>
-/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
-/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
-/// </para>
-/// <para>
-/// If an index alias points to multiple indices, one of the indices must be a write index.
-/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
-/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with one index</strong>
-/// </para>
-/// <para>
-/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
-/// </para>
-/// <para>
-/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
-/// </para>
-/// <para>
-/// <strong>Increment index names for an alias</strong>
-/// </para>
-/// <para>
-/// When you roll over an index alias, you can specify a name for the new index.
-/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
-/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
-/// This number is always six characters and zero-padded, regardless of the previous index's name.
-/// </para>
-/// <para>
-/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
-/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
-/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
-/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
-/// </para>
-/// </summary>
+/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 public readonly partial struct RolloverRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Instance { get; init; }
@@ -328,131 +141,77 @@ public readonly partial struct RolloverRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream or index alias to roll over.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias value)
 	{
 		Instance.Alias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// Supports date math.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#new_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor NewIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.NewIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
-	/// Only allowed on data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#lazy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Lazy(bool? value = true)
 	{
 		Instance.Lazy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
@@ -466,24 +225,14 @@ public readonly partial struct RolloverRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -517,129 +266,70 @@ public readonly partial struct RolloverRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? value)
 	{
 		Instance.Conditions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions()
 	{
 		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Conditions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor>? action)
 	{
 		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Mappings<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -709,62 +399,8 @@ public readonly partial struct RolloverRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Roll over to a new index.
-/// </para>
-/// <para>
-/// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
-/// </para>
-/// <para>
-/// The rollover API creates a new index for a data stream or index alias.
-/// The API behavior depends on the rollover target.
-/// </para>
-/// <para>
-/// <strong>Roll over a data stream</strong>
-/// </para>
-/// <para>
-/// If you roll over a data stream, the API creates a new write index for the stream.
-/// The stream's previous write index becomes a regular backing index.
-/// A rollover also increments the data stream's generation.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with a write index</strong>
-/// </para>
-/// <para>
-/// TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
-/// Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
-/// </para>
-/// <para>
-/// If an index alias points to multiple indices, one of the indices must be a write index.
-/// The rollover API creates a new write index for the alias with <c>is_write_index</c> set to <c>true</c>.
-/// The API also <c>sets is_write_index</c> to <c>false</c> for the previous write index.
-/// </para>
-/// <para>
-/// <strong>Roll over an index alias with one index</strong>
-/// </para>
-/// <para>
-/// If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
-/// </para>
-/// <para>
-/// NOTE: A rollover creates a new index and is subject to the <c>wait_for_active_shards</c> setting.
-/// </para>
-/// <para>
-/// <strong>Increment index names for an alias</strong>
-/// </para>
-/// <para>
-/// When you roll over an index alias, you can specify a name for the new index.
-/// If you don't specify a name and the current index ends with <c>-</c> and a number, such as <c>my-index-000001</c> or <c>my-index-3</c>, the new index name increments that number.
-/// For example, if you roll over an alias with a current index of <c>my-index-000001</c>, the rollover creates a new index named <c>my-index-000002</c>.
-/// This number is always six characters and zero-padded, regardless of the previous index's name.
-/// </para>
-/// <para>
-/// If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
-/// For example, you can create an alias that points to an index named <c>&lt;my-index-{now/d}-000001></c>.
-/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
-/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
-/// </para>
-/// </summary>
+/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 public readonly partial struct RolloverRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest Instance { get; init; }
@@ -794,119 +430,70 @@ public readonly partial struct RolloverRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream or index alias to roll over.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias value)
 	{
 		Instance.Alias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to create.
-	/// Supports date math.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#new_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> NewIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.NewIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
-	/// Only allowed on data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#lazy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Lazy(bool? value = true)
 	{
 		Instance.Lazy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
@@ -920,24 +507,14 @@ public readonly partial struct RolloverRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the target index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -964,117 +541,63 @@ public readonly partial struct RolloverRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? value)
 	{
 		Instance.Conditions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions()
 	{
 		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditions for the rollover.
-	/// If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
-	/// If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
-	/// If conditions are specified, at least one of them must be a <c>max_*</c> condition.
-	/// The index will rollover if any <c>max_*</c> condition is satisfied and all <c>min_*</c> conditions are satisfied.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#conditions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Conditions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor>? action)
 	{
 		Instance.Conditions = Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping paramaters.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// Data streams do not support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

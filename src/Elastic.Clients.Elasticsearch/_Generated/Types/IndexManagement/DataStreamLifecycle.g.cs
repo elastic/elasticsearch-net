@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
-/// </para>
-/// </summary>
+/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamLifecycle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamLifecycleConverter))]
 public sealed partial class DataStreamLifecycle
 {
@@ -41,65 +38,30 @@ public sealed partial class DataStreamLifecycle
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? Downsampling { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
-	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling_method']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? DownsamplingMethod { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The least amount of time data should be kept by elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#effective_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? EffectiveRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only available with feature flag dlm_searchable_snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#frozen_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? FrozenAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration source that can influence the retention of a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#retention_determined_by']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? RetentionDeterminedBy { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
-/// </para>
-/// </summary>
+/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamLifecycle']/*"/>
 public readonly partial struct DataStreamLifecycleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Instance { get; init; }
@@ -119,46 +81,28 @@ public readonly partial struct DataStreamLifecycleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.DataRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Downsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? value)
 	{
 		Instance.Downsampling = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Downsampling(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
 		Instance.Downsampling = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Downsampling(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
@@ -171,57 +115,35 @@ public readonly partial struct DataStreamLifecycleDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
-	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#downsampling_method']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor DownsamplingMethod(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? value)
 	{
 		Instance.DownsamplingMethod = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The least amount of time data should be kept by elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#effective_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor EffectiveRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.EffectiveRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only available with feature flag dlm_searchable_snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#frozen_after']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor FrozenAfter(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.FrozenAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration source that can influence the retention of a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycle.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycle#retention_determined_by']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor RetentionDeterminedBy(Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? value)
 	{
 		Instance.RetentionDeterminedBy = value;

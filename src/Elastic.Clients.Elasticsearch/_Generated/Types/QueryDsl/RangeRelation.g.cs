@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RangeRelationConverter))]
 public enum RangeRelation
 {
-	/// <summary>
-	/// <para>
-	/// Matches documents with a range field value that entirely contains the query’s range.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeRelation.g.xml" path="doc/member[@key='_types.query_dsl.RangeRelation#contains']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "contains")]
 	Contains,
-	/// <summary>
-	/// <para>
-	/// Matches documents with a range field value that intersects the query’s range.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeRelation.g.xml" path="doc/member[@key='_types.query_dsl.RangeRelation#intersects']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "intersects")]
 	Intersects,
-	/// <summary>
-	/// <para>
-	/// Matches documents with a range field value entirely within the query’s range.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeRelation.g.xml" path="doc/member[@key='_types.query_dsl.RangeRelation#within']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "within")]
 	Within
 }

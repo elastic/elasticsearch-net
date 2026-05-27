@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Value count aggregation result. <c>value</c> is always present.
-/// </para>
-/// </summary>
+/// <include file="ValueCountAggregate.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ValueCountAggregateConverter))]
 public sealed partial class ValueCountAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -51,12 +48,7 @@ public sealed partial class ValueCountAggregate : Elastic.Clients.Elasticsearch.
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "value_count";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="ValueCountAggregate.g.xml" path="doc/member[@key='_types.aggregations.ValueCountAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

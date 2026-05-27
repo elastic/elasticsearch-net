@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
 public sealed partial class PutTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
-	/// the request defers definition decompression and skips relevant
-	/// validations.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#defer_definition_decompression']/*"/>
 	public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to wait for all child operations (e.g. model download)
-	/// to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a trained model.
-/// </para>
-/// <para>
-/// Enable you to supply a trained model that is not created by data frame analytics.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelRequestConverter))]
 public sealed partial class PutTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters>
 {
@@ -77,130 +62,51 @@ public sealed partial class PutTrainedModelRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "ml.put_trained_model";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
-	/// the request defers definition decompression and skips relevant
-	/// validations.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#defer_definition_decompression']/*"/>
 	public bool? DeferDefinitionDecompression { get => Q<bool?>("defer_definition_decompression"); set => Q("defer_definition_decompression", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to wait for all child operations (e.g. model download)
-	/// to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// The compressed (GZipped and Base64 encoded) inference definition of the
-	/// model. If compressed_definition is specified, then definition cannot be
-	/// specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#compressed_definition']/*"/>
 	public string? CompressedDefinition { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference definition for the model. If definition is specified, then
-	/// compressed_definition cannot be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Definition? Definition { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A human-readable description of the inference trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? InferenceConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Input? Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object map that contains metadata about the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#metadata']/*"/>
 	public object? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The estimated memory usage in bytes to keep the trained model in memory.
-	/// This property is supported only if defer_definition_decompression is true
-	/// or the model definition is not supplied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_size_bytes']/*"/>
 	public long? ModelSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The platform architecture (if applicable) of the trained mode. If the model
-	/// only works on one platform, because it is heavily optimized for a particular
-	/// processor architecture and OS combination, then this field specifies which.
-	/// The format of the string must match the platform identifiers used by Elasticsearch,
-	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
-	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
-	/// architecture or OS features), leave this field unset.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#platform_architecture']/*"/>
 	public string? PlatformArchitecture { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#tags']/*"/>
 	public System.Collections.Generic.ICollection<string>? Tags { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a trained model.
-/// </para>
-/// <para>
-/// Enable you to supply a trained model that is not created by data frame analytics.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
 public readonly partial struct PutTrainedModelRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Instance { get; init; }
@@ -225,255 +131,147 @@ public readonly partial struct PutTrainedModelRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
-	/// the request defers definition decompression and skips relevant
-	/// validations.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#defer_definition_decompression']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor DeferDefinitionDecompression(bool? value = true)
 	{
 		Instance.DeferDefinitionDecompression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to wait for all child operations (e.g. model download)
-	/// to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The compressed (GZipped and Base64 encoded) inference definition of the
-	/// model. If compressed_definition is specified, then definition cannot be
-	/// specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#compressed_definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor CompressedDefinition(string? value)
 	{
 		Instance.CompressedDefinition = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference definition for the model. If definition is specified, then
-	/// compressed_definition cannot be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? value)
 	{
 		Instance.Definition = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference definition for the model. If definition is specified, then
-	/// compressed_definition cannot be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Definition(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> action)
 	{
 		Instance.Definition = Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A human-readable description of the inference trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<T>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Input(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> action)
 	{
 		Instance.Input = Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object map that contains metadata about the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Metadata(object? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The estimated memory usage in bytes to keep the trained model in memory.
-	/// This property is supported only if defer_definition_decompression is true
-	/// or the model definition is not supplied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_size_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelSizeBytes(long? value)
 	{
 		Instance.ModelSizeBytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? value)
 	{
 		Instance.ModelType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The platform architecture (if applicable) of the trained mode. If the model
-	/// only works on one platform, because it is heavily optimized for a particular
-	/// processor architecture and OS combination, then this field specifies which.
-	/// The format of the string must match the platform identifiers used by Elasticsearch,
-	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
-	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
-	/// architecture or OS features), leave this field unset.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#platform_architecture']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PlatformArchitecture(string? value)
 	{
 		Instance.PlatformArchitecture = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? value)
 	{
 		Instance.PrefixStrings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings()
 	{
 		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor PrefixStrings(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor>? action)
 	{
 		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#tags']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Tags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#tags']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor Tags(params string[] values)
 	{
 		Instance.Tags = [.. values];
@@ -536,14 +334,8 @@ public readonly partial struct PutTrainedModelRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create a trained model.
-/// </para>
-/// <para>
-/// Enable you to supply a trained model that is not created by data frame analytics.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Request']/*"/>
 public readonly partial struct PutTrainedModelRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Instance { get; init; }
@@ -568,241 +360,140 @@ public readonly partial struct PutTrainedModelRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> and a <c>compressed_definition</c> is provided,
-	/// the request defers definition decompression and skips relevant
-	/// validations.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#defer_definition_decompression']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> DeferDefinitionDecompression(bool? value = true)
 	{
 		Instance.DeferDefinitionDecompression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to wait for all child operations (e.g. model download)
-	/// to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The compressed (GZipped and Base64 encoded) inference definition of the
-	/// model. If compressed_definition is specified, then definition cannot be
-	/// specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#compressed_definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> CompressedDefinition(string? value)
 	{
 		Instance.CompressedDefinition = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference definition for the model. If definition is specified, then
-	/// compressed_definition cannot be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition? value)
 	{
 		Instance.Definition = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference definition for the model. If definition is specified, then
-	/// compressed_definition cannot be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Definition(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor> action)
 	{
 		Instance.Definition = Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A human-readable description of the inference trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression
-	/// or classification configuration. It must match the underlying
-	/// definition.trained_model's target_type. For pre-packaged models such as
-	/// ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Input(Elastic.Clients.Elasticsearch.MachineLearning.Input? value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Input(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor> action)
 	{
 		Instance.Input = Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object map that contains metadata about the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Metadata(object? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The estimated memory usage in bytes to keep the trained model in memory.
-	/// This property is supported only if defer_definition_decompression is true
-	/// or the model definition is not supplied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_size_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelSizeBytes(long? value)
 	{
 		Instance.ModelSizeBytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#model_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> ModelType(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? value)
 	{
 		Instance.ModelType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The platform architecture (if applicable) of the trained mode. If the model
-	/// only works on one platform, because it is heavily optimized for a particular
-	/// processor architecture and OS combination, then this field specifies which.
-	/// The format of the string must match the platform identifiers used by Elasticsearch,
-	/// so one of, <c>linux-x86_64</c>, <c>linux-aarch64</c>, <c>darwin-x86_64</c>, <c>darwin-aarch64</c>,
-	/// or <c>windows-x86_64</c>. For portable models (those that work independent of processor
-	/// architecture or OS features), leave this field unset.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#platform_architecture']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PlatformArchitecture(string? value)
 	{
 		Instance.PlatformArchitecture = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? value)
 	{
 		Instance.PrefixStrings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings()
 	{
 		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional prefix strings applied at inference
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#prefix_strings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> PrefixStrings(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor>? action)
 	{
 		Instance.PrefixStrings = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#tags']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Tags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of tags to organize the model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelRequest.g.xml" path="doc/member[@key='ml.put_trained_model.Request#tags']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor<TDocument> Tags(params string[] values)
 	{
 		Instance.Tags = [.. values];

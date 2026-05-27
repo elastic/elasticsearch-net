@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingStateAndReason']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelAssignmentRoutingStateAndReasonConverter))]
 public sealed partial class TrainedModelAssignmentRoutingStateAndReason
 {
@@ -42,18 +43,9 @@ public sealed partial class TrainedModelAssignmentRoutingStateAndReason
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The reason for the current state. It is usually populated only when the
-	/// <c>routing_state</c> is <c>failed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingStateAndReason.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingStateAndReason#reason']/*"/>
 	public string? Reason { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current routing state.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingStateAndReason.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingStateAndReason#routing_state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
 }

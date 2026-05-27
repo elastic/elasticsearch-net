@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_data_lifecycle.Request"><summary><para>
+Delete data stream lifecycles.
+</para>
+<para>
+Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+</para></summary></member>
+  <member key="indices.delete_data_lifecycle.Request#expand_wildcards"><summary><para>
+Whether wildcard expressions should get expanded to open or closed indices (default: open)
+</para></summary></member>
+  <member key="indices.delete_data_lifecycle.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="indices.delete_data_lifecycle.Request#name"><summary><para>
+A comma-separated list of data streams of which the data stream lifecycle will be deleted.
+Use <c>*</c> to get all data streams
+</para></summary></member>
+  <member key="indices.delete_data_lifecycle.Request#timeout"><summary><para>
+The period to wait for a response.
+</para></summary></member>
+</doc>

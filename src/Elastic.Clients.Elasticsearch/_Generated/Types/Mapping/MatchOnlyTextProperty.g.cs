@@ -23,15 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-/// <summary>
-/// <para>
-/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
-/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
-/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
-/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
-/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
-/// </para>
-/// </summary>
+/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.MatchOnlyTextPropertyConverter))]
 public sealed partial class MatchOnlyTextProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,41 +38,20 @@ public sealed partial class MatchOnlyTextProperty : Elastic.Clients.Elasticsearc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to copy the values of multiple fields into a group
-	/// field, which can then be queried as a single field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#copy_to']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 
 	public string Type => "match_only_text";
 }
 
-/// <summary>
-/// <para>
-/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
-/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
-/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
-/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
-/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
-/// </para>
-/// </summary>
+/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
 public readonly partial struct MatchOnlyTextPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Instance { get; init; }
@@ -99,81 +71,49 @@ public readonly partial struct MatchOnlyTextPropertyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Allows you to copy the values of multiple fields into a group
-	/// field, which can then be queried as a single field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#copy_to']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CopyTo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to copy the values of multiple fields into a group
-	/// field, which can then be queried as a single field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#copy_to']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.CopyTo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -201,15 +141,8 @@ public readonly partial struct MatchOnlyTextPropertyDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field
-/// effectively stores data the same way as a text field that only indexes documents (index_options: docs) and
-/// disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries
-/// that need positions such as the match_phrase query perform slower as they need to look at the _source document
-/// to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.
-/// </para>
-/// </summary>
+/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty']/*"/>
 public readonly partial struct MatchOnlyTextPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty Instance { get; init; }
@@ -229,93 +162,56 @@ public readonly partial struct MatchOnlyTextPropertyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Allows you to copy the values of multiple fields into a group
-	/// field, which can then be queried as a single field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#copy_to']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CopyTo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to copy the values of multiple fields into a group
-	/// field, which can then be queried as a single field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#copy_to']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.CopyTo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchOnlyTextProperty.g.xml" path="doc/member[@key='_types.mapping.MatchOnlyTextProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

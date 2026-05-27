@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.invalidate_token.Request"><summary><para>
+Invalidate a token.
+</para>
+<para>
+The access tokens returned by the get token API have a finite period of time for which they are valid.
+After that time period, they can no longer be used.
+The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+</para>
+<para>
+The refresh tokens returned by the get token API are only valid for 24 hours.
+They can also be used exactly once.
+If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
+</para>
+<para>
+NOTE: While all parameters are optional, at least one of them is required.
+More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
+If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
+</para></summary></member>
+  <member key="security.invalidate_token.Request#realm_name"><summary><para>
+The name of an authentication realm.
+This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+</para></summary></member>
+  <member key="security.invalidate_token.Request#refresh_token"><summary><para>
+A refresh token.
+This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+</para></summary></member>
+  <member key="security.invalidate_token.Request#token"><summary><para>
+An access token.
+This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+</para></summary></member>
+  <member key="security.invalidate_token.Request#username"><summary><para>
+The username of a user.
+This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+</para></summary></member>
+</doc>

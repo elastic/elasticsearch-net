@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Category']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CategoryConverter))]
 public sealed partial class Category
 {
@@ -49,83 +50,39 @@ public sealed partial class Category
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the category. category_id is unique at the job level, even when per-partition categorization is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#category_id']/*"/>
 	public required long CategoryId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of examples of actual values that matched the category.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#examples']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Examples { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// [experimental] A Grok pattern that could be used in Logstash or an ingest pipeline to extract fields from messages that match the category. This field is experimental and may be changed or removed in a future release. The Grok patterns that are found are not optimal, but are often a good starting point for manual tweaking.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#grok_pattern']/*"/>
 	public string? GrokPattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of the fields that matched the category. The value is increased by 10% to enable matching for similar fields that have not been analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#max_matching_length']/*"/>
 	public required long MaxMatchingLength { get; set; }
 	public required string Mlcategory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of messages that have been matched by this category. This is only guaranteed to have the latest accurate count after a job _flush or _close
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#num_matches']/*"/>
 	public long? NumMatches { get; set; }
 	public string? P { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If per-partition categorization is enabled, this property identifies the field used to segment the categorization. It is not present when per-partition categorization is disabled.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#partition_field_name']/*"/>
 	public string? PartitionFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If per-partition categorization is enabled, this property identifies the value of the partition_field_name for the category. It is not present when per-partition categorization is disabled.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#partition_field_value']/*"/>
 	public string? PartitionFieldValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of category_id entries that this current category encompasses. Any new message that is processed by the categorizer will match against this category and not any of the categories in this list. This is only guaranteed to have the latest accurate list of categories after a job _flush or _close
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#preferred_to_categories']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? PreferredToCategories { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A regular expression that is used to search for values that match the category.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#regex']/*"/>
 	public required string Regex { get; set; }
 	public required string ResultType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A space separated list of the common tokens that are matched in values of the category.
-	/// </para>
-	/// </summary>
+	/// <include file="Category.g.xml" path="doc/member[@key='ml._types.Category#terms']/*"/>
 	public required string Terms { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardSegmentRoutingConverter))]
 public sealed partial class ShardSegmentRouting
 {
@@ -44,24 +45,12 @@ public sealed partial class ShardSegmentRouting
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node ID of the node that holds the shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#node']/*"/>
 	public required string Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the shard is a primary shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#primary']/*"/>
 	public required bool Primary { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The state of the shard, such as <c>STARTED</c> or <c>RELOCATING</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardSegmentRouting.g.xml" path="doc/member[@key='indices.segments.ShardSegmentRouting#state']/*"/>
 	public required string State { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.ExploreControls']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.ExploreControlsConverter))]
 public sealed partial class ExploreControls
 {
@@ -42,41 +43,20 @@ public sealed partial class ExploreControls
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Each hop considers a sample of the best-matching documents on each shard.
-	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
-	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
-	/// Very large sample sizes can dilute the quality of the results and increase execution times.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_size']/*"/>
 	public int? SampleSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
-	/// This timeout is honored on a best-effort basis.
-	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filters associated terms so only those that are significantly associated with your query are included.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#use_significance']/*"/>
 	public required bool UseSignificance { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.ExploreControls']/*"/>
 public readonly partial struct ExploreControlsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Graph.ExploreControls Instance { get; init; }
@@ -96,62 +76,35 @@ public readonly partial struct ExploreControlsDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? value)
 	{
 		Instance.SampleDiversity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleDiversity(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> action)
 	{
 		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Each hop considers a sample of the best-matching documents on each shard.
-	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
-	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
-	/// Very large sample sizes can dilute the quality of the results and increase execution times.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> SampleSize(int? value)
 	{
 		Instance.SampleSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
-	/// This timeout is honored on a best-effort basis.
-	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters associated terms so only those that are significantly associated with your query are included.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#use_significance']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument> UseSignificance(bool value = true)
 	{
 		Instance.UseSignificance = value;
@@ -167,6 +120,7 @@ public readonly partial struct ExploreControlsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.ExploreControls']/*"/>
 public readonly partial struct ExploreControlsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.ExploreControls Instance { get; init; }
@@ -186,74 +140,42 @@ public readonly partial struct ExploreControlsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor(Elastic.Clients.Elasticsearch.Graph.ExploreControls instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversity? value)
 	{
 		Instance.SampleDiversity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> action)
 	{
 		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid the top-matching documents sample being dominated by a single source of results, it is sometimes necessary to request diversity in the sample.
-	/// You can do this by selecting a single-value field and setting a maximum number of documents per value for that field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_diversity']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleDiversity<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<T>> action)
 	{
 		Instance.SampleDiversity = Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Each hop considers a sample of the best-matching documents on each shard.
-	/// Using samples improves the speed of execution and keeps exploration focused on meaningfully-connected terms.
-	/// Very small values (less than 50) might not provide sufficient weight-of-evidence to identify significant connections between terms.
-	/// Very large sample sizes can dilute the quality of the results and increase execution times.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#sample_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor SampleSize(int? value)
 	{
 		Instance.SampleSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of time in milliseconds after which exploration will be halted and the results gathered so far are returned.
-	/// This timeout is honored on a best-effort basis.
-	/// Execution might overrun this timeout if, for example, a long pause is encountered while FieldData is loaded for a field.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters associated terms so only those that are significantly associated with your query are included.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreControls.g.xml" path="doc/member[@key='graph._types.ExploreControls#use_significance']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor UseSignificance(bool value = true)
 	{
 		Instance.UseSignificance = value;

@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
 public sealed partial class StopDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Stop data frame analytics jobs.
-/// </para>
-/// <para>
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// </para>
-/// </summary>
+/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StopDataFrameAnalyticsRequestConverter))]
 public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestParameters>
 {
@@ -62,71 +57,21 @@ public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elas
 
 	internal override string OperationName => "ml.stop_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty data_frame_analytics
-	/// array when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is false, the request returns a 404
-	/// status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the data frame analytics job is stopped forcefully.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#force']/*"/>
 	public bool? Force { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// stops. Defaults to 20 seconds.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Stop data frame analytics jobs.
-/// </para>
-/// <para>
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// </para>
-/// </summary>
+/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request']/*"/>
 public readonly partial struct StopDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest Instance { get; init; }
@@ -151,71 +96,28 @@ public readonly partial struct StopDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty data_frame_analytics
-	/// array when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is false, the request returns a 404
-	/// status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the data frame analytics job is stopped forcefully.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// stops. Defaults to 20 seconds.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.stop_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

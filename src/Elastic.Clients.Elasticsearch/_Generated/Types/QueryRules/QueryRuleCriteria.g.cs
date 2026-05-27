@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.QueryRuleCriteriaConverter))]
 public sealed partial class QueryRuleCriteria
 {
@@ -42,84 +43,17 @@ public sealed partial class QueryRuleCriteria
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The metadata field to match against.
-	/// This metadata will be used to match against <c>match_criteria</c> sent in the rule.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#metadata']/*"/>
 	public string? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of criteria. The following criteria types are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>always</c>: Matches all queries, regardless of input.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>contains</c>: Matches that contain this value anywhere in the field meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>exact</c>: Only exact matches meet the criteria defined by the rule. Applicable for string or numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>fuzzy</c>: Exact matches or matches within the allowed Levenshtein Edit Distance meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>gt</c>: Matches with a value greater than this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>gte</c>: Matches with a value greater than or equal to this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>lt</c>: Matches with a value less than this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>lte</c>: Matches with a value less than or equal to this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>prefix</c>: Matches that start with this value meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>suffix</c>: Matches that end with this value meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The values to match against the <c>metadata</c> field.
-	/// Only one value must match for the criteria to be met.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#values']/*"/>
 	public System.Collections.Generic.ICollection<object>? Values { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria']/*"/>
 public readonly partial struct QueryRuleCriteriaDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria Instance { get; init; }
@@ -139,102 +73,28 @@ public readonly partial struct QueryRuleCriteriaDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria instance) => new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The metadata field to match against.
-	/// This metadata will be used to match against <c>match_criteria</c> sent in the rule.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Metadata(string? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of criteria. The following criteria types are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>always</c>: Matches all queries, regardless of input.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>contains</c>: Matches that contain this value anywhere in the field meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>exact</c>: Only exact matches meet the criteria defined by the rule. Applicable for string or numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>fuzzy</c>: Exact matches or matches within the allowed Levenshtein Edit Distance meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>gt</c>: Matches with a value greater than this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>gte</c>: Matches with a value greater than or equal to this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>lt</c>: Matches with a value less than this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>lte</c>: Matches with a value less than or equal to this value meet the criteria defined by the rule. Only applicable for numerical values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>prefix</c>: Matches that start with this value meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>suffix</c>: Matches that end with this value meet the criteria defined by the rule. Only applicable for string values.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType value)
 	{
 		Instance.Type = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values to match against the <c>metadata</c> field.
-	/// Only one value must match for the criteria to be met.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#values']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Values(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Values = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The values to match against the <c>metadata</c> field.
-	/// Only one value must match for the criteria to be met.
-	/// It is required for all criteria types except <c>always</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRuleCriteria.g.xml" path="doc/member[@key='query_rules._types.QueryRuleCriteria#values']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor Values(params object[] values)
 	{
 		Instance.Values = [.. values];

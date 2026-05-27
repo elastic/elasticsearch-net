@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
-/// the different buckets, the result is a dictionary.
-/// </para>
-/// </summary>
+/// <include file="Buckets.g.xml" path="doc/member[@key='_types.aggregations.Buckets']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.Buckets']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketsConverterFactory))]
 public sealed partial class Buckets<TBucket> : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IDictionary<string, TBucket>, System.Collections.Generic.ICollection<TBucket>>
 {

@@ -23,39 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
 public sealed partial class GetSecuritySettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get security index settings.
-/// </para>
-/// <para>
-/// Get the user-configurable settings for the security internal index (<c>.security</c> and associated indices).
-/// Only a subset of the index settings — those that are user-configurable—will be shown.
-/// This includes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>index.auto_expand_replicas</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>index.number_of_replicas</c>
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetSecuritySettingsRequestConverter))]
 public sealed partial class GetSecuritySettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>
 {
@@ -77,37 +54,12 @@ public sealed partial class GetSecuritySettingsRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "security.get_settings";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get security index settings.
-/// </para>
-/// <para>
-/// Get the user-configurable settings for the security internal index (<c>.security</c> and associated indices).
-/// Only a subset of the index settings — those that are user-configurable—will be shown.
-/// This includes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>index.auto_expand_replicas</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>index.number_of_replicas</c>
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_settings.Request']/*"/>
 public readonly partial struct GetSecuritySettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest Instance { get; init; }
@@ -126,12 +78,7 @@ public readonly partial struct GetSecuritySettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSecuritySettingsRequest.g.xml" path="doc/member[@key='security.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

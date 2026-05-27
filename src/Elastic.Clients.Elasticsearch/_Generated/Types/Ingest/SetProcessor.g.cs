@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.SetProcessorConverter))]
 public sealed partial class SetProcessor
 {
@@ -42,93 +43,41 @@ public sealed partial class SetProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to insert, upsert, or update.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_empty_value']/*"/>
 	public bool? IgnoreEmptyValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#media_type']/*"/>
 	public string? MediaType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#override']/*"/>
 	public bool? Override { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to be set for the field.
-	/// Supports template snippets.
-	/// May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#value']/*"/>
 	public object? Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetProcessor']/*"/>
 public readonly partial struct SetProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SetProcessor Instance { get; init; }
@@ -148,161 +97,98 @@ public readonly partial struct SetProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SetProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetProcessor(Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> CopyFrom(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert, upsert, or update.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert, upsert, or update.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_empty_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> IgnoreEmptyValue(bool? value = true)
 	{
 		Instance.IgnoreEmptyValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#media_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> MediaType(string? value)
 	{
 		Instance.MediaType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -315,37 +201,21 @@ public readonly partial struct SetProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be set for the field.
-	/// Supports template snippets.
-	/// May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument> Value(object? value)
 	{
 		Instance.Value = value;
@@ -361,6 +231,7 @@ public readonly partial struct SetProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetProcessor']/*"/>
 public readonly partial struct SetProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SetProcessor Instance { get; init; }
@@ -380,161 +251,98 @@ public readonly partial struct SetProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SetProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetProcessor(Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be copied to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// Supported data types are <c>boolean</c>, <c>number</c>, <c>array</c>, <c>object</c>, <c>string</c>, <c>date</c>, etc.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor CopyFrom<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert, upsert, or update.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert, upsert, or update.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>value</c> is a template snippet that evaluates to <c>null</c> or the empty string, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_empty_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor IgnoreEmptyValue(bool? value = true)
 	{
 		Instance.IgnoreEmptyValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#media_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor MediaType(string? value)
 	{
 		Instance.MediaType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -547,11 +355,7 @@ public readonly partial struct SetProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -564,37 +368,21 @@ public readonly partial struct SetProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be set for the field.
-	/// Supports template snippets.
-	/// May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SetProcessor.g.xml" path="doc/member[@key='ingest._types.SetProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor Value(object? value)
 	{
 		Instance.Value = value;

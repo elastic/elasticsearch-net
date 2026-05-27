@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 public sealed partial class GetAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get auto-follow patterns.
-/// </para>
-/// <para>
-/// Get cross-cluster replication auto-follow patterns.
-/// </para>
-/// </summary>
+/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.GetAutoFollowPatternRequestConverter))]
 public sealed partial class GetAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestParameters>
 {
@@ -68,32 +58,15 @@ public sealed partial class GetAutoFollowPatternRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "ccr.get_auto_follow_pattern";
 
-	/// <summary>
-	/// <para>
-	/// The auto-follow pattern collection that you want to retrieve.
-	/// If you do not specify a name, the API returns information for all collections.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get auto-follow patterns.
-/// </para>
-/// <para>
-/// Get cross-cluster replication auto-follow patterns.
-/// </para>
-/// </summary>
+/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request']/*"/>
 public readonly partial struct GetAutoFollowPatternRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest Instance { get; init; }
@@ -117,25 +90,14 @@ public readonly partial struct GetAutoFollowPatternRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The auto-follow pattern collection that you want to retrieve.
-	/// If you do not specify a name, the API returns information for all collections.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.GetAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

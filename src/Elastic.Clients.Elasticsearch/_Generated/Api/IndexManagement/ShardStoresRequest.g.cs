@@ -23,82 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 public sealed partial class ShardStoresRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index shard stores.
-/// </para>
-/// <para>
-/// Get store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream's backing indices.
-/// </para>
-/// <para>
-/// The index shard stores API returns the following information:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The node on which each replica shard exists.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The allocation ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A unique ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Any errors encountered while opening the shard index or from an earlier failure.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
-/// </para>
-/// </summary>
+/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStoresRequestConverter))]
 public sealed partial class ShardStoresRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>
 {
@@ -124,87 +67,24 @@ public sealed partial class ShardStoresRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "indices.shard_stores";
 
-	/// <summary>
-	/// <para>
-	/// List of data streams, indices, and aliases used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index shard stores.
-/// </para>
-/// <para>
-/// Get store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream's backing indices.
-/// </para>
-/// <para>
-/// The index shard stores API returns the following information:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The node on which each replica shard exists.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The allocation ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A unique ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Any errors encountered while opening the shard index or from an earlier failure.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
-/// </para>
-/// </summary>
+/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 public readonly partial struct ShardStoresRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest Instance { get; init; }
@@ -228,86 +108,49 @@ public readonly partial struct ShardStoresRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// List of data streams, indices, and aliases used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Status(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? value)
 	{
 		Instance.Status = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor Status(params Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus[] values)
 	{
 		Instance.Status = [.. values];
@@ -375,43 +218,8 @@ public readonly partial struct ShardStoresRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get index shard stores.
-/// </para>
-/// <para>
-/// Get store information about replica shards in one or more indices.
-/// For data streams, the API retrieves store information for the stream's backing indices.
-/// </para>
-/// <para>
-/// The index shard stores API returns the following information:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The node on which each replica shard exists.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The allocation ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A unique ID for each replica shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Any errors encountered while opening the shard index or from an earlier failure.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
-/// </para>
-/// </summary>
+/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 public readonly partial struct ShardStoresRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest Instance { get; init; }
@@ -435,86 +243,49 @@ public readonly partial struct ShardStoresRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// List of data streams, indices, and aliases used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams,
-	/// this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? value)
 	{
 		Instance.Status = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of shard health statuses used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request#status']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument> Status(params Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus[] values)
 	{
 		Instance.Status = [.. values];

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_ip_location_database.IpDatabaseConfigurationMetadata']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.IpDatabaseConfigurationMetadataConverter))]
 public sealed partial class IpDatabaseConfigurationMetadata
 {

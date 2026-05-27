@@ -23,59 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
 public sealed partial class GetJobsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#exclude_generated']/*"/>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection jobs configuration info.
-/// </para>
-/// <para>
-/// You can get information for multiple anomaly detection jobs in a single API
-/// request by using a group name, a comma-separated list of jobs, or a wildcard
-/// expression. You can get information for all anomaly detection jobs by using
-/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
-/// </para>
-/// </summary>
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetJobsRequestConverter))]
 public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestParameters>
 {
@@ -101,66 +61,18 @@ public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "ml.get_jobs";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, or a wildcard expression. If you do not specify one of these
-	/// options, the API returns information for all anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? JobId { get => P<Elastic.Clients.Elasticsearch.Ids?>("job_id"); set => PO("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#exclude_generated']/*"/>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection jobs configuration info.
-/// </para>
-/// <para>
-/// You can get information for multiple anomaly detection jobs in a single API
-/// request by using a group name, a comma-separated list of jobs, or a wildcard
-/// expression. You can get information for all anomaly detection jobs by using
-/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the <c>&lt;job_id></c>.
-/// </para>
-/// </summary>
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_jobs.Request']/*"/>
 public readonly partial struct GetJobsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest Instance { get; init; }
@@ -184,60 +96,21 @@ public readonly partial struct GetJobsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, or a wildcard expression. If you do not specify one of these
-	/// options, the API returns information for all anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If this parameter is <c>false</c>, the request returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='ml.get_jobs.Request#exclude_generated']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobsRequestDescriptor ExcludeGenerated(bool? value = true)
 	{
 		Instance.ExcludeGenerated = value;

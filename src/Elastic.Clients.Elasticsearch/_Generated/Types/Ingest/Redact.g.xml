@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.Redact#_is_redacted"><summary><para>
+indicates if document has been redacted
+</para></summary></member>
+</doc>

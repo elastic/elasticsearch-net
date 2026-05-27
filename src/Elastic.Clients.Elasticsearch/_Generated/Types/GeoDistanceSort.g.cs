@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoDistanceSort']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeoDistanceSortConverter))]
 public sealed partial class GeoDistanceSort
 {
@@ -53,6 +54,7 @@ public sealed partial class GeoDistanceSort
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoDistanceSort']/*"/>
 public readonly partial struct GeoDistanceSortDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.GeoDistanceSort Instance { get; init; }
@@ -159,6 +161,7 @@ public readonly partial struct GeoDistanceSortDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoDistanceSort']/*"/>
 public readonly partial struct GeoDistanceSortDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GeoDistanceSort Instance { get; init; }

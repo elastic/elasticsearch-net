@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.NoriPartOfSpeechTokenFilter#stoptags"><summary><para>
+An array of part-of-speech tags that should be removed.
+</para></summary></member>
+</doc>

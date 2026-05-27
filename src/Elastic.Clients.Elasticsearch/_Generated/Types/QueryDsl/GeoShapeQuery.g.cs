@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoShapeQueryConverter))]
 public sealed partial class GeoShapeQuery
 {
@@ -43,28 +44,17 @@ public sealed partial class GeoShapeQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery']/*"/>
 public readonly partial struct GeoShapeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Instance { get; init; }
@@ -84,14 +74,7 @@ public readonly partial struct GeoShapeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -110,12 +93,7 @@ public readonly partial struct GeoShapeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -155,6 +133,7 @@ public readonly partial struct GeoShapeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery']/*"/>
 public readonly partial struct GeoShapeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery Instance { get; init; }
@@ -174,14 +153,7 @@ public readonly partial struct GeoShapeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -200,12 +172,7 @@ public readonly partial struct GeoShapeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoShapeQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;

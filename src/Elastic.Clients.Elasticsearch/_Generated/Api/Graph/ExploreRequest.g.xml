@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="graph.explore.Request"><summary><para>
+Explore graph analytics.
+</para>
+<para>
+Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
+The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
+An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
+Subsequent requests enable you to spider out from one more vertices of interest.
+You can exclude vertices that have already been returned.
+</para></summary></member>
+  <member key="graph.explore.Request#connections"><summary><para>
+Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
+</para></summary></member>
+  <member key="graph.explore.Request#controls"><summary><para>
+Direct the Graph API how to build the graph.
+</para></summary></member>
+  <member key="graph.explore.Request#index"><summary><para>
+Name of the index.
+</para></summary></member>
+  <member key="graph.explore.Request#query"><summary><para>
+A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
+</para></summary></member>
+  <member key="graph.explore.Request#routing"><summary><para>
+Custom value used to route operations to a specific shard.
+</para></summary></member>
+  <member key="graph.explore.Request#timeout"><summary><para>
+Specifies the period of time to wait for a response from each shard.
+If no response is received before the timeout expires, the request fails and returns an error.
+Defaults to no timeout.
+</para></summary></member>
+  <member key="graph.explore.Request#vertices"><summary><para>
+Specifies one or more fields that contain the terms you want to include in the graph as vertices.
+</para></summary></member>
+</doc>

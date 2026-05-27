@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanOrQueryConverter))]
 public sealed partial class SpanOrQuery
 {
@@ -42,25 +43,15 @@ public sealed partial class SpanOrQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery']/*"/>
 public readonly partial struct SpanOrQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Instance { get; init; }
@@ -80,47 +71,28 @@ public readonly partial struct SpanOrQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
 		Instance.Clauses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
 		Instance.Clauses = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument> Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
@@ -148,6 +120,7 @@ public readonly partial struct SpanOrQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery']/*"/>
 public readonly partial struct SpanOrQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery Instance { get; init; }
@@ -167,47 +140,28 @@ public readonly partial struct SpanOrQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
 		Instance.Clauses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
 		Instance.Clauses = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
@@ -220,11 +174,7 @@ public readonly partial struct SpanOrQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanOrQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanOrQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor Clauses<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();

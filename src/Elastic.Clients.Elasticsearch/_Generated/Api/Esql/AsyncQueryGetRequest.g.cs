@@ -23,51 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
 public sealed partial class AsyncQueryGetRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for complete query results.
-	/// If the request completes during the period specified in this parameter, complete query results are returned.
-	/// Otherwise, the response returns an <c>is_running</c> value of <c>true</c> and no results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async ES|QL query results.
-/// </para>
-/// <para>
-/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.AsyncQueryGetRequestConverter))]
 public sealed partial class AsyncQueryGetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestParameters>
 {
@@ -94,58 +68,24 @@ public sealed partial class AsyncQueryGetRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "esql.async_query_get";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for complete query results.
-	/// If the request completes during the period specified in this parameter, complete query results are returned.
-	/// Otherwise, the response returns an <c>is_running</c> value of <c>true</c> and no results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async ES|QL query results.
-/// </para>
-/// <para>
-/// Get the current status and available results or stored results for an ES|QL asynchronous query.
-/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_get.Request']/*"/>
 public readonly partial struct AsyncQueryGetRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest Instance { get; init; }
@@ -170,62 +110,35 @@ public readonly partial struct AsyncQueryGetRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for complete query results.
-	/// If the request completes during the period specified in this parameter, complete query results are returned.
-	/// Otherwise, the response returns an <c>is_running</c> value of <c>true</c> and no results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryGetRequest.g.xml" path="doc/member[@key='esql.async_query_get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

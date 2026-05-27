@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_privileges.Request"><summary><para>
+Delete application privileges.
+</para>
+<para>
+To use this API, you must have one of the following privileges:
+</para>
+<list type="bullet">
+<item>
+<para>
+The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
+</para>
+</item>
+<item>
+<para>
+The "Manage Application Privileges" global privilege for the application being referenced in the request.
+</para>
+</item>
+</list></summary></member>
+  <member key="security.delete_privileges.Request#application"><summary><para>
+The name of the application.
+Application privileges are always associated with exactly one application.
+</para></summary></member>
+  <member key="security.delete_privileges.Request#name"><summary><para>
+The name of the privilege.
+</para></summary></member>
+  <member key="security.delete_privileges.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+</doc>

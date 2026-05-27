@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.NestedAggregation#path"><summary><para>
+The path to the field of type <c>nested</c>.
+</para></summary></member>
+</doc>

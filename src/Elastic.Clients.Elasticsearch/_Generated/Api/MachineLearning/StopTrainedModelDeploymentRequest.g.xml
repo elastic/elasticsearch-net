@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.stop_trained_model_deployment.Request"><summary><para>
+Stop a trained model deployment.
+</para></summary></member>
+  <member key="ml.stop_trained_model_deployment.Request#allow_no_match"><summary><para>
+Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
+contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
+there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
+If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
+</para></summary></member>
+  <member key="ml.stop_trained_model_deployment.Request#force"><summary><para>
+Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
+restart the model deployment.
+</para></summary></member>
+  <member key="ml.stop_trained_model_deployment.Request#id"><summary><para>
+If provided, must be the same identifier as in the path.
+</para></summary></member>
+  <member key="ml.stop_trained_model_deployment.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+</doc>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.recovery.Request"><summary><para>
+Get index recovery information.
+</para>
+<para>
+Get information about ongoing and completed shard recoveries for one or more indices.
+For data streams, the API returns information for the stream's backing indices.
+</para>
+<para>
+All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
+</para>
+<para>
+Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
+When a shard recovery completes, the recovered shard is available for search and indexing.
+</para>
+<para>
+Recovery automatically occurs during the following processes:
+</para>
+<list type="bullet">
+<item>
+<para>
+When creating an index for the first time.
+</para>
+</item>
+<item>
+<para>
+When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
+</para>
+</item>
+<item>
+<para>
+Creation of new replica shard copies from the primary.
+</para>
+</item>
+<item>
+<para>
+Relocation of a shard copy to a different node in the same cluster.
+</para>
+</item>
+<item>
+<para>
+A snapshot restore operation.
+</para>
+</item>
+<item>
+<para>
+A clone, shrink, or split operation.
+</para>
+</item>
+</list>
+<para>
+You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
+</para>
+<para>
+The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
+It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
+This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
+</para></summary></member>
+  <member key="indices.recovery.Request#active_only"><summary><para>
+If <c>true</c>, the response only includes ongoing shard recoveries.
+</para></summary></member>
+  <member key="indices.recovery.Request#allow_no_indices"><summary><para>
+A setting that does two separate checks on the index expression.
+If <c>false</c>, the request returns an error (1) if any wildcard expression
+(including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+complete set of resolved indices, aliases or data streams is empty after all
+expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+indices are allowed and the request returns an empty result.
+</para></summary></member>
+  <member key="indices.recovery.Request#detailed"><summary><para>
+If <c>true</c>, the response includes detailed information about shard recoveries.
+</para></summary></member>
+  <member key="indices.recovery.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.recovery.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="indices.recovery.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and aliases used to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+</doc>

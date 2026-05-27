@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="GetRulesetRequest.g.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
 public sealed partial class GetRulesetRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a query ruleset.
-/// </para>
-/// <para>
-/// Get details about a query ruleset.
-/// </para>
-/// </summary>
+/// <include file="GetRulesetRequest.g.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.GetRulesetRequestConverter))]
 public sealed partial class GetRulesetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class GetRulesetRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "query_rules.get_ruleset";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset
-	/// </para>
-	/// </summary>
+	/// <include file="GetRulesetRequest.g.xml" path="doc/member[@key='query_rules.get_ruleset.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a query ruleset.
-/// </para>
-/// <para>
-/// Get details about a query ruleset.
-/// </para>
-/// </summary>
+/// <include file="GetRulesetRequest.g.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_ruleset.Request']/*"/>
 public readonly partial struct GetRulesetRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct GetRulesetRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequest(Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset
-	/// </para>
-	/// </summary>
+	/// <include file="GetRulesetRequest.g.xml" path="doc/member[@key='query_rules.get_ruleset.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.GetRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;

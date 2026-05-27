@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.WildcardQueryConverter))]
 public sealed partial class WildcardQuery
 {
@@ -42,47 +43,25 @@ public sealed partial class WildcardQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#case_insensitive']/*"/>
 	public bool? CaseInsensitive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#rewrite']/*"/>
 	public string? Rewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#value']/*"/>
 	public string? Value { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#wildcard']/*"/>
 	public string? Wildcard { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery']/*"/>
 public readonly partial struct WildcardQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery Instance { get; init; }
@@ -102,25 +81,14 @@ public readonly partial struct WildcardQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -145,33 +113,21 @@ public readonly partial struct WildcardQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> Value(string? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument> Wildcard(string? value)
 	{
 		Instance.Wildcard = value;
@@ -187,6 +143,7 @@ public readonly partial struct WildcardQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery']/*"/>
 public readonly partial struct WildcardQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery Instance { get; init; }
@@ -206,25 +163,14 @@ public readonly partial struct WildcardQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -249,33 +195,21 @@ public readonly partial struct WildcardQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor Value(string? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardQuery.g.xml" path="doc/member[@key='_types.query_dsl.WildcardQuery#wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor Wildcard(string? value)
 	{
 		Instance.Wildcard = value;

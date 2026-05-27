@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.get_reindex.Request"><summary><para>
+Get a reindex task.
+</para>
+<para>
+Get the status and progress of a specific reindex task.
+</para></summary></member>
+  <member key="_global.get_reindex.Request#task_id"><summary><para>
+The ID of the reindex task to retrieve.
+</para></summary></member>
+  <member key="_global.get_reindex.Request#timeout"><summary><para>
+The period to wait for the reindex task to complete when <c>wait_for_completion</c> is <c>true</c>.
+</para></summary></member>
+  <member key="_global.get_reindex.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request blocks until the reindex task completes, then returns the result.
+</para></summary></member>
+</doc>

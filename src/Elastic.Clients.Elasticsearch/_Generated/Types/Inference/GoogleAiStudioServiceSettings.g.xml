@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.GoogleAiStudioServiceSettings#api_key"><summary><para>
+A valid API key of your Google Gemini account.
+</para></summary></member>
+  <member key="inference._types.GoogleAiStudioServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Google documentation for the list of supported models.
+</para></summary></member>
+  <member key="inference._types.GoogleAiStudioServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Google AI Studio.
+By default, the <c>googleaistudio</c> service sets the number of requests allowed per minute to 360.
+</para></summary></member>
+</doc>

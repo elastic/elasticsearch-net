@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.ShardStore']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStoreConverter))]
 public sealed partial class ShardStore
 {
@@ -44,26 +45,14 @@ public sealed partial class ShardStore
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The status of the store copy, whether it is used as a primary, replica, or not used at all.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStore.g.xml" path="doc/member[@key='indices.shard_stores.ShardStore#allocation']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The allocation ID of the store copy.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStore.g.xml" path="doc/member[@key='indices.shard_stores.ShardStore#allocation_id']/*"/>
 	public string? AllocationId { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode Node { get; set; }
 	public required string NodeId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Any exception encountered while opening the shard index or from an earlier engine failure.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStore.g.xml" path="doc/member[@key='indices.shard_stores.ShardStore#store_exception']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException? StoreException { get; set; }
 }

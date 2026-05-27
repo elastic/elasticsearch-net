@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.OverallBucket']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.OverallBucketConverter))]
 public sealed partial class OverallBucket
 {
@@ -47,52 +48,24 @@ public sealed partial class OverallBucket
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of the bucket in seconds. Matches the job with the longest bucket_span value.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#bucket_span']/*"/>
 	public required System.TimeSpan BucketSpan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#is_interim']/*"/>
 	public required bool IsInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects that contain the max_anomaly_score per job_id.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#jobs']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob> Jobs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The top_n average of the maximum bucket anomaly_score per job.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#overall_score']/*"/>
 	public required double OverallScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Internal. This is always set to overall_bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#result_type']/*"/>
 	public required string ResultType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket for which these results were calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket for which these results were calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="OverallBucket.g.xml" path="doc/member[@key='ml._types.OverallBucket#timestamp_string']/*"/>
 	public System.DateTimeOffset? TimestampString { get; set; }
 }

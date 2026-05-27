@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CardinalityAggregationConverter))]
 public sealed partial class CardinalityAggregation
 {
@@ -36,39 +37,22 @@ public sealed partial class CardinalityAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which cardinality aggregations is run.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique count below which counts are expected to be close to accurate.
-	/// This allows to trade memory for accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#precision_threshold']/*"/>
 	public int? PrecisionThreshold { get; set; }
 	public bool? Rehash { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation']/*"/>
 public readonly partial struct CardinalityAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Instance { get; init; }
@@ -88,57 +72,35 @@ public readonly partial struct CardinalityAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which cardinality aggregations is run.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique count below which counts are expected to be close to accurate.
-	/// This allows to trade memory for accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#precision_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? value)
 	{
 		Instance.PrecisionThreshold = value;
@@ -183,6 +145,7 @@ public readonly partial struct CardinalityAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation']/*"/>
 public readonly partial struct CardinalityAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation Instance { get; init; }
@@ -202,57 +165,35 @@ public readonly partial struct CardinalityAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which cardinality aggregations is run.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique count below which counts are expected to be close to accurate.
-	/// This allows to trade memory for accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CardinalityAggregation#precision_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor PrecisionThreshold(int? value)
 	{
 		Instance.PrecisionThreshold = value;

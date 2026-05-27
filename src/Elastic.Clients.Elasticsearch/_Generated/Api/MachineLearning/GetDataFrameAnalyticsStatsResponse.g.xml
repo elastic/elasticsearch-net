@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_data_frame_analytics_stats.Response#data_frame_analytics"><summary><para>
+An array of objects that contain usage information for data frame analytics jobs, which are sorted by the id value in ascending order.
+</para></summary></member>
+</doc>

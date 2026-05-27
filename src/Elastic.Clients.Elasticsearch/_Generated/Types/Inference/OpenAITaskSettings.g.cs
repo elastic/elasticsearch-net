@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenAITaskSettingsConverter))]
 public sealed partial class OpenAITaskSettings
 {
@@ -36,29 +37,14 @@ public sealed partial class OpenAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#headers']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAITaskSettings']/*"/>
 public readonly partial struct OpenAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings Instance { get; init; }
@@ -78,54 +64,21 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers()
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -139,12 +92,7 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

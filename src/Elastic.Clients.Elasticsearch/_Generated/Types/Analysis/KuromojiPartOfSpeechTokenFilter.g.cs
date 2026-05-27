@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiPartOfSpeechTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KuromojiPartOfSpeechTokenFilterConverter))]
 public sealed partial class KuromojiPartOfSpeechTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -49,6 +50,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : Elastic.Clients.El
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiPartOfSpeechTokenFilter']/*"/>
 public readonly partial struct KuromojiPartOfSpeechTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiPartOfSpeechTokenFilter Instance { get; init; }

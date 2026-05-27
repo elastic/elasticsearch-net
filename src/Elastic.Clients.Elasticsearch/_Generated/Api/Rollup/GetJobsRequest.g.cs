@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 public sealed partial class GetJobsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get rollup job information.
-/// </para>
-/// <para>
-/// Get the configuration, stats, and status of rollup jobs.
-/// </para>
-/// <para>
-/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-/// </para>
-/// </summary>
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GetJobsRequestConverter))]
 public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestParameters>
 {
@@ -65,28 +56,12 @@ public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "rollup.get_jobs";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// If it is <c>_all</c> or omitted, the API returns all rollup jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get rollup job information.
-/// </para>
-/// <para>
-/// Get the configuration, stats, and status of rollup jobs.
-/// </para>
-/// <para>
-/// NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
-/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
-/// For details about a historical rollup job, the rollup capabilities API may be more useful.
-/// </para>
-/// </summary>
+/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.Request']/*"/>
 public readonly partial struct GetJobsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest Instance { get; init; }
@@ -110,12 +85,7 @@ public readonly partial struct GetJobsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// If it is <c>_all</c> or omitted, the API returns all rollup jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobsRequest.g.xml" path="doc/member[@key='rollup.get_jobs.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;

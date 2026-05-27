@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 public sealed partial class PutAliasRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// </para>
-/// <para>
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutAliasRequestConverter))]
 public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>
 {
@@ -76,92 +62,36 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.put_alias";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices to add.
-	/// Supports wildcards (<c>*</c>).
-	/// Wildcard patterns that match both data streams and indices return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Alias to update.
-	/// If the alias doesn’t exist, the request creates it.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
 	public string? IndexRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
-	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
-	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#is_write_index']/*"/>
 	public bool? IsWriteIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
 	public string? SearchRouting { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// </para>
-/// <para>
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 public readonly partial struct PutAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Instance { get; init; }
@@ -186,135 +116,77 @@ public readonly partial struct PutAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices to add.
-	/// Supports wildcards (<c>*</c>).
-	/// Wildcard patterns that match both data streams and indices return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Alias to update.
-	/// If the alias doesn’t exist, the request creates it.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
-	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
-	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
@@ -377,14 +249,8 @@ public readonly partial struct PutAliasRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// </para>
-/// <para>
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 public readonly partial struct PutAliasRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Instance { get; init; }
@@ -409,124 +275,70 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices to add.
-	/// Supports wildcards (<c>*</c>).
-	/// Wildcard patterns that match both data streams and indices return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Alias to update.
-	/// If the alias doesn’t exist, the request creates it.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
-	/// If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
-	/// Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterIndicesShardsIndex#primaries"><summary><para>
+Contains statistics about the number of primary shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShardsIndex#replication"><summary><para>
+Contains statistics about the number of replication shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShardsIndex#shards"><summary><para>
+Contains statistics about the number of shards assigned to selected nodes.
+</para></summary></member>
+</doc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelAssignmentRoutingTable#current_allocations"><summary><para>
+Current number of allocations.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentRoutingTable#reason"><summary><para>
+The reason for the current state. It is usually populated only when the
+<c>routing_state</c> is <c>failed</c>.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentRoutingTable#routing_state"><summary><para>
+The current routing state.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentRoutingTable#target_allocations"><summary><para>
+Target number of allocations.
+</para></summary></member>
+</doc>

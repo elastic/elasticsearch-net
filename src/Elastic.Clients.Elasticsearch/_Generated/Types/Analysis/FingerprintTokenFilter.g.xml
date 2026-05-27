@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.FingerprintTokenFilter#max_output_size"><summary><para>
+Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
+</para></summary></member>
+  <member key="_types.analysis.FingerprintTokenFilter#separator"><summary><para>
+Character to use to concatenate the token stream input. Defaults to a space.
+</para></summary></member>
+</doc>

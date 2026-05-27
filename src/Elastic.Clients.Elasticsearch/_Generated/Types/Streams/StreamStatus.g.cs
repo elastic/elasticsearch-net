@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Streams;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.status.StreamStatus']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.StreamStatusConverter))]
 public sealed partial class StreamStatus
 {
@@ -42,10 +43,6 @@ public sealed partial class StreamStatus
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the stream feature is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamStatus.g.xml" path="doc/member[@key='streams.status.StreamStatus#enabled']/*"/>
 	public required bool Enabled { get; set; }
 }

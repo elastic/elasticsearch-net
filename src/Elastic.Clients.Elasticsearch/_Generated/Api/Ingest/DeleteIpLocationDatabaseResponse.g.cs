@@ -37,10 +37,6 @@ public sealed partial class DeleteIpLocationDatabaseResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseResponse.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

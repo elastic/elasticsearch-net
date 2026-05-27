@@ -23,35 +23,20 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
 public sealed partial class ExistsComponentTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only.
-	/// Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check component templates.
-/// </para>
-/// <para>
-/// Returns information about whether a particular component template exists.
-/// </para>
-/// </summary>
+/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ExistsComponentTemplateRequestConverter))]
 public sealed partial class ExistsComponentTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters>
 {
@@ -78,41 +63,19 @@ public sealed partial class ExistsComponentTemplateRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "cluster.exists_component_template";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of component template names used to limit the request.
-	/// Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only.
-	/// Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check component templates.
-/// </para>
-/// <para>
-/// Returns information about whether a particular component template exists.
-/// </para>
-/// </summary>
+/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.exists_component_template.Request']/*"/>
 public readonly partial struct ExistsComponentTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest Instance { get; init; }
@@ -137,12 +100,7 @@ public readonly partial struct ExistsComponentTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of component template names used to limit the request.
-	/// Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
@@ -150,25 +108,14 @@ public readonly partial struct ExistsComponentTemplateRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only.
-	/// Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.exists_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

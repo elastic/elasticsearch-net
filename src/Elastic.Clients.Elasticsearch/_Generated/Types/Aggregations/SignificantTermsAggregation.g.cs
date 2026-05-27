@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SignificantTermsAggregationConverter))]
 public sealed partial class SignificantTermsAggregation
 {
@@ -36,128 +37,56 @@ public sealed partial class SignificantTermsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Terms to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant terms.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Terms to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.EmptyObject? Jlh { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only return terms that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#min_doc_count']/*"/>
 	public long? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? PValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_min_doc_count']/*"/>
 	public long? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be used to control the volumes of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation']/*"/>
 public readonly partial struct SignificantTermsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation Instance { get; init; }
@@ -177,353 +106,210 @@ public readonly partial struct SignificantTermsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.BackgroundFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? value)
 	{
 		Instance.ChiSquare = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ChiSquare(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> action)
 	{
 		Instance.ChiSquare = Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant terms.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant terms.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? value)
 	{
 		Instance.Gnd = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Gnd()
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Gnd(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor>? action)
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Jlh(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Jlh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Jlh()
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Jlh(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return terms that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? value)
 	{
 		Instance.MutualInformation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> MutualInformation()
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> MutualInformation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor>? action)
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? value)
 	{
 		Instance.Percentage = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Percentage()
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue(Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? value)
 	{
 		Instance.PValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue()
 	{
 		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor>? action)
 	{
 		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? value)
 	{
 		Instance.ScriptHeuristic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> action)
 	{
 		Instance.ScriptHeuristic = Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to control the volumes of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -544,6 +330,7 @@ public readonly partial struct SignificantTermsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation']/*"/>
 public readonly partial struct SignificantTermsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation Instance { get; init; }
@@ -563,364 +350,217 @@ public readonly partial struct SignificantTermsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.BackgroundFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor BackgroundFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor BackgroundFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? value)
 	{
 		Instance.ChiSquare = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ChiSquare(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> action)
 	{
 		Instance.ChiSquare = Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant terms.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant terms.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? value)
 	{
 		Instance.Gnd = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Gnd()
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Gnd(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor>? action)
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Jlh(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Jlh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Jlh()
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Jlh(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return terms that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? value)
 	{
 		Instance.MutualInformation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor MutualInformation()
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor MutualInformation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor>? action)
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? value)
 	{
 		Instance.Percentage = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Percentage()
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue(Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? value)
 	{
 		Instance.PValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue()
 	{
 		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
-	/// </para>
-	/// <para>
-	/// The p-value is the probability of obtaining test results at least as extreme as
-	/// the results actually observed, under the assumption that the null hypothesis is
-	/// correct. The p-value is calculated assuming that the foreground set and the
-	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
-	/// hypothesis that the probabilities are the same.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#p_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor>? action)
 	{
 		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? value)
 	{
 		Instance.ScriptHeuristic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ScriptHeuristic(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> action)
 	{
 		Instance.ScriptHeuristic = Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the <c>min_doc_count</c>.
-	/// Terms will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to control the volumes of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

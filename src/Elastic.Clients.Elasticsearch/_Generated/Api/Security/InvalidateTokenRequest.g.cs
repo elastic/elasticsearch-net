@@ -23,30 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
 public sealed partial class InvalidateTokenRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Invalidate a token.
-/// </para>
-/// <para>
-/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-/// After that time period, they can no longer be used.
-/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-/// </para>
-/// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours.
-/// They can also be used exactly once.
-/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-/// </para>
-/// <para>
-/// NOTE: While all parameters are optional, at least one of them is required.
-/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
-/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
-/// </para>
-/// </summary>
+/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.InvalidateTokenRequestConverter))]
 public sealed partial class InvalidateTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>
 {
@@ -68,59 +52,21 @@ public sealed partial class InvalidateTokenRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "security.invalidate_token";
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? RealmName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A refresh token.
-	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#refresh_token']/*"/>
 	public string? RefreshToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An access token.
-	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#token']/*"/>
 	public string? Token { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Invalidate a token.
-/// </para>
-/// <para>
-/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-/// After that time period, they can no longer be used.
-/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-/// </para>
-/// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours.
-/// They can also be used exactly once.
-/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-/// </para>
-/// <para>
-/// NOTE: While all parameters are optional, at least one of them is required.
-/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
-/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
-/// </para>
-/// </summary>
+/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_token.Request']/*"/>
 public readonly partial struct InvalidateTokenRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest Instance { get; init; }
@@ -139,48 +85,28 @@ public readonly partial struct InvalidateTokenRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest instance) => new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.RealmName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A refresh token.
-	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#refresh_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RefreshToken(string? value)
 	{
 		Instance.RefreshToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An access token.
-	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Token(string? value)
 	{
 		Instance.Token = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateTokenRequest.g.xml" path="doc/member[@key='security.invalidate_token.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LatLonGeoLocation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.LatLonGeoLocationConverter))]
 public sealed partial class LatLonGeoLocation
 {
@@ -43,21 +44,14 @@ public sealed partial class LatLonGeoLocation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Latitude
-	/// </para>
-	/// </summary>
+	/// <include file="LatLonGeoLocation.g.xml" path="doc/member[@key='_types.LatLonGeoLocation#lat']/*"/>
 	public required double Lat { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Longitude
-	/// </para>
-	/// </summary>
+	/// <include file="LatLonGeoLocation.g.xml" path="doc/member[@key='_types.LatLonGeoLocation#lon']/*"/>
 	public required double Lon { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LatLonGeoLocation']/*"/>
 public readonly partial struct LatLonGeoLocationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LatLonGeoLocation Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct LatLonGeoLocationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor(Elastic.Clients.Elasticsearch.LatLonGeoLocation instance) => new Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Latitude
-	/// </para>
-	/// </summary>
+	/// <include file="LatLonGeoLocation.g.xml" path="doc/member[@key='_types.LatLonGeoLocation#lat']/*"/>
 	public Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor Lat(double value)
 	{
 		Instance.Lat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Longitude
-	/// </para>
-	/// </summary>
+	/// <include file="LatLonGeoLocation.g.xml" path="doc/member[@key='_types.LatLonGeoLocation#lon']/*"/>
 	public Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor Lon(double value)
 	{
 		Instance.Lon = value;

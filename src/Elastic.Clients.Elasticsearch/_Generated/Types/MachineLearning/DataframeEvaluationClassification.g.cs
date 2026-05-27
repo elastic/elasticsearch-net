@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationClassificationConverter))]
 public sealed partial class DataframeEvaluationClassification
 {
@@ -42,35 +43,20 @@ public sealed partial class DataframeEvaluationClassification
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#actual_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? Metrics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? PredictedField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#top_classes_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification']/*"/>
 public readonly partial struct DataframeEvaluationClassificationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Instance { get; init; }
@@ -90,99 +76,63 @@ public readonly partial struct DataframeEvaluationClassificationDescriptor<TDocu
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#top_classes_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TopClassesField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#top_classes_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TopClassesField = value;
@@ -198,6 +148,7 @@ public readonly partial struct DataframeEvaluationClassificationDescriptor<TDocu
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification']/*"/>
 public readonly partial struct DataframeEvaluationClassificationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Instance { get; init; }
@@ -217,99 +168,63 @@ public readonly partial struct DataframeEvaluationClassificationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor PredictedField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#top_classes_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor TopClassesField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TopClassesField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassification.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassification#top_classes_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor TopClassesField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TopClassesField = value;

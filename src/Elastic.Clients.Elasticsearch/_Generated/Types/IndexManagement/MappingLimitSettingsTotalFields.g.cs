@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsTotalFieldsConverter))]
 public sealed partial class MappingLimitSettingsTotalFields
 {
@@ -36,27 +37,14 @@ public sealed partial class MappingLimitSettingsTotalFields
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
-	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
-	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
-	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
-	/// The fields that were not added to the mapping will be added to the _ignored field.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsTotalFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields#ignore_dynamic_beyond_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<bool, string>? IgnoreDynamicBeyondLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
-	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
-	/// degradations and memory issues, especially in clusters with a high load or few resources.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsTotalFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<long, string>? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields']/*"/>
 public readonly partial struct MappingLimitSettingsTotalFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields Instance { get; init; }
@@ -76,28 +64,14 @@ public readonly partial struct MappingLimitSettingsTotalFieldsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// This setting determines what happens when a dynamically mapped field would exceed the total fields limit. When set
-	/// to false (the default), the index request of the document that tries to add a dynamic field to the mapping will fail
-	/// with the message Limit of total fields [X] has been exceeded. When set to true, the index request will not fail.
-	/// Instead, fields that would exceed the limit are not added to the mapping, similar to dynamic: false.
-	/// The fields that were not added to the mapping will be added to the _ignored field.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsTotalFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields#ignore_dynamic_beyond_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor IgnoreDynamicBeyondLimit(Elastic.Clients.Elasticsearch.Union<bool, string>? value)
 	{
 		Instance.IgnoreDynamicBeyondLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.
-	/// The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance
-	/// degradations and memory issues, especially in clusters with a high load or few resources.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsTotalFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsTotalFields#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor Limit(Elastic.Clients.Elasticsearch.Union<long, string>? value)
 	{
 		Instance.Limit = value;

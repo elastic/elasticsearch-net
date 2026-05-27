@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 public sealed partial class ClearScrollRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear a scrolling search.
-/// </para>
-/// <para>
-/// Clear the search context and results for a scrolling search.
-/// </para>
-/// </summary>
+/// <include file="ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ClearScrollRequestConverter))]
 public sealed partial class ClearScrollRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ClearScrollRequestParameters>
 {
@@ -56,23 +52,12 @@ public sealed partial class ClearScrollRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "clear_scroll";
 
-	/// <summary>
-	/// <para>
-	/// The scroll IDs to clear.
-	/// To clear all scroll IDs, use <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request#scroll_id']/*"/>
 	public Elastic.Clients.Elasticsearch.ScrollIds? ScrollId { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Clear a scrolling search.
-/// </para>
-/// <para>
-/// Clear the search context and results for a scrolling search.
-/// </para>
-/// </summary>
+/// <include file="ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.clear_scroll.Request']/*"/>
 public readonly partial struct ClearScrollRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ClearScrollRequest Instance { get; init; }
@@ -91,12 +76,7 @@ public readonly partial struct ClearScrollRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ClearScrollRequest instance) => new Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ClearScrollRequest(Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The scroll IDs to clear.
-	/// To clear all scroll IDs, use <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearScrollRequest.g.xml" path="doc/member[@key='_global.clear_scroll.Request#scroll_id']/*"/>
 	public Elastic.Clients.Elasticsearch.ClearScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollIds? value)
 	{
 		Instance.ScrollId = value;

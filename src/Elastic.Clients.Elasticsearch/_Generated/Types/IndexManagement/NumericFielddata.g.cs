@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.NumericFielddata']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.NumericFielddataConverter))]
 public sealed partial class NumericFielddata
 {
@@ -45,6 +46,7 @@ public sealed partial class NumericFielddata
 	public required Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.NumericFielddata']/*"/>
 public readonly partial struct NumericFielddataDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata Instance { get; init; }

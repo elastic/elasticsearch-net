@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.reset_transform.Request"><summary><para>
+Reset a transform.
+</para>
+<para>
+Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
+If the destination index was created by the transform, it is deleted.
+</para></summary></member>
+  <member key="transform.reset_transform.Request#force"><summary><para>
+If this value is <c>true</c>, the transform is reset regardless of its current state. If it's <c>false</c>, the transform
+must be stopped before it can be reset.
+</para></summary></member>
+  <member key="transform.reset_transform.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="transform.reset_transform.Request#transform_id"><summary><para>
+Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
+</para></summary></member>
+</doc>

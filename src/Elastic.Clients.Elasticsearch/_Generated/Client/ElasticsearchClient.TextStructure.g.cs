@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure;
 public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.TextStructure.TextStructureNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.TextStructure.TextStructureNamespacedClient> class for mocking.
 	/// </summary>
 	protected TextStructureNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 	{
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure(Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
@@ -61,6 +65,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
@@ -69,6 +75,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
@@ -78,12 +86,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
@@ -92,6 +104,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
@@ -101,6 +115,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
@@ -109,6 +125,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindFieldStructureRequest.g.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_field_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
@@ -118,12 +136,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor();
@@ -133,6 +155,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>();
@@ -142,12 +166,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor();
@@ -157,6 +185,8 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/FindMessageStructureRequest.g.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.find_message_structure.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>();
@@ -166,12 +196,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse TestGrokPattern(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse TestGrokPattern(System.Action<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor();
@@ -181,12 +215,16 @@ public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsear
 		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request);
 	}
 
+	/// <include file="../Api/TextStructure/TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse> TestGrokPatternAsync(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/TextStructure/TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse> TestGrokPatternAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor();

@@ -37,32 +37,15 @@ public sealed partial class InvalidateApiKeyResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of errors that were encountered when invalidating the API keys.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyResponse.g.xml" path="doc/member[@key='security.invalidate_api_key.Response#error_count']/*"/>
 	public required int ErrorCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Details about the errors.
-	/// This field is not present in the response when <c>error_count</c> is <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyResponse.g.xml" path="doc/member[@key='security.invalidate_api_key.Response#error_details']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? ErrorDetails { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The IDs of the API keys that were invalidated as part of this request.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyResponse.g.xml" path="doc/member[@key='security.invalidate_api_key.Response#invalidated_api_keys']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> InvalidatedApiKeys { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The IDs of the API keys that were already invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyResponse.g.xml" path="doc/member[@key='security.invalidate_api_key.Response#previously_invalidated_api_keys']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; set; }
 }

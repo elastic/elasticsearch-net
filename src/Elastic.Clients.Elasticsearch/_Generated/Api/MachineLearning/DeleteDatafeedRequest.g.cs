@@ -23,22 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
 public sealed partial class DeleteDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete a started datafeed; this method is quicker than
-	/// stopping and deleting the datafeed.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a datafeed.
-/// </para>
-/// </summary>
+/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteDatafeedRequestConverter))]
 public sealed partial class DeleteDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestParameters>
 {
@@ -65,30 +59,15 @@ public sealed partial class DeleteDatafeedRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.delete_datafeed";
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed. This
-	/// identifier can contain lowercase alphanumeric characters (a-z and 0-9),
-	/// hyphens, and underscores. It must start and end with alphanumeric
-	/// characters.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request#datafeed_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete a started datafeed; this method is quicker than
-	/// stopping and deleting the datafeed.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a datafeed.
-/// </para>
-/// </summary>
+/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_datafeed.Request']/*"/>
 public readonly partial struct DeleteDatafeedRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest Instance { get; init; }
@@ -113,26 +92,14 @@ public readonly partial struct DeleteDatafeedRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed. This
-	/// identifier can contain lowercase alphanumeric characters (a-z and 0-9),
-	/// hyphens, and underscores. It must start and end with alphanumeric
-	/// characters.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete a started datafeed; this method is quicker than
-	/// stopping and deleting the datafeed.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedRequest.g.xml" path="doc/member[@key='ml.delete_datafeed.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDatafeedRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;

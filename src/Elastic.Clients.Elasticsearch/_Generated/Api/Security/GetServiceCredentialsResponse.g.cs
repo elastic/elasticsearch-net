@@ -39,11 +39,7 @@ public sealed partial class GetServiceCredentialsResponse : Elastic.Transport.Pr
 
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Service account credentials collected from all nodes of the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceCredentialsResponse.g.xml" path="doc/member[@key='security.get_service_credentials.Response#nodes_credentials']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.NodesCredentials NodesCredentials { get; set; }
 	public required string ServiceAccount { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> Tokens { get; set; }

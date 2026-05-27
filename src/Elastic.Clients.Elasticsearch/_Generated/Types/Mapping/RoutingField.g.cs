@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RoutingField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RoutingFieldConverter))]
 public sealed partial class RoutingField
 {
@@ -45,6 +46,7 @@ public sealed partial class RoutingField
 	public required bool Required { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RoutingField']/*"/>
 public readonly partial struct RoutingFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RoutingField Instance { get; init; }

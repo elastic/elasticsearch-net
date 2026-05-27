@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.ShapeFieldQuery#indexed_shape"><summary><para>
+Queries using a pre-indexed shape.
+</para></summary></member>
+  <member key="_types.query_dsl.ShapeFieldQuery#relation"><summary><para>
+Spatial relation between the query shape and the document shape.
+</para></summary></member>
+  <member key="_types.query_dsl.ShapeFieldQuery#shape"><summary><para>
+Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
+</para></summary></member>
+</doc>

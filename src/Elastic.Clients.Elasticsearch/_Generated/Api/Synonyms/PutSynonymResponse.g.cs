@@ -37,18 +37,9 @@ public sealed partial class PutSynonymResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updating a synonyms set can reload the associated analyzers in case refresh is set to true.
-	/// This information is the analyzers reloading result.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymResponse.g.xml" path="doc/member[@key='synonyms.put_synonym.Response#reload_analyzers_details']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult? ReloadAnalyzersDetails { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The update operation result.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymResponse.g.xml" path="doc/member[@key='synonyms.put_synonym.Response#result']/*"/>
 	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

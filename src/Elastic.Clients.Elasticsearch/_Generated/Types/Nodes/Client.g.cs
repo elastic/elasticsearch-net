@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Client']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ClientConverter))]
 public sealed partial class Client
 {
@@ -36,82 +37,36 @@ public sealed partial class Client
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reported agent for the HTTP client.
-	/// If unavailable, this property is not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#agent']/*"/>
 	public string? Agent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time at which the client closed the connection if the connection is closed.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#closed_time_millis']/*"/>
 	public long? ClosedTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unique ID for the HTTP client.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#id']/*"/>
 	public long? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time of the most recent request from this client.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#last_request_time_millis']/*"/>
 	public long? LastRequestTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URI of the client’s most recent request.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#last_uri']/*"/>
 	public string? LastUri { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Local address for the HTTP connection.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#local_address']/*"/>
 	public string? LocalAddress { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time at which the client opened the connection.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#opened_time_millis']/*"/>
 	public long? OpenedTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Remote address for the HTTP connection.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#remote_address']/*"/>
 	public string? RemoteAddress { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of requests from this client.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#request_count']/*"/>
 	public long? RequestCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Cumulative size in bytes of all requests from this client.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#request_size_bytes']/*"/>
 	public long? RequestSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value from the client’s <c>x-opaque-id</c> HTTP header.
-	/// If unavailable, this property is not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="Client.g.xml" path="doc/member[@key='nodes._types.Client#x_opaque_id']/*"/>
 	public string? XOpaqueId { get; set; }
 }

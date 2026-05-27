@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AlibabaCloudTaskSettingsConverter))]
 public sealed partial class AlibabaCloudTaskSettings
 {
@@ -36,35 +37,14 @@ public sealed partial class AlibabaCloudTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>sparse_embedding</c> or <c>text_embedding</c> task, specify the type of input passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ingest</c> for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c> for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AlibabaCloudTaskSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings#input_type']/*"/>
 	public string? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>sparse_embedding</c> task, it affects whether the token name will be returned in the response.
-	/// It defaults to <c>false</c>, which means only the token ID will be returned in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudTaskSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings#return_token']/*"/>
 	public bool? ReturnToken { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings']/*"/>
 public readonly partial struct AlibabaCloudTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings Instance { get; init; }
@@ -84,36 +64,14 @@ public readonly partial struct AlibabaCloudTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>sparse_embedding</c> or <c>text_embedding</c> task, specify the type of input passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ingest</c> for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c> for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AlibabaCloudTaskSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor InputType(string? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>sparse_embedding</c> task, it affects whether the token name will be returned in the response.
-	/// It defaults to <c>false</c>, which means only the token ID will be returned in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudTaskSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudTaskSettings#return_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor ReturnToken(bool? value = true)
 	{
 		Instance.ReturnToken = value;

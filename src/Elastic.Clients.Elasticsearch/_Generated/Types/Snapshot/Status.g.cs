@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.Status']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.StatusConverter))]
 public sealed partial class Status
 {
@@ -49,70 +50,25 @@ public sealed partial class Status
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the current cluster state is included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#include_global_state']/*"/>
 	public required bool IncludeGlobalState { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository that includes the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#repository']/*"/>
 	public required string Repository { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics for the shards in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#shards_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#snapshot']/*"/>
 	public required string Snapshot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current snapshot state:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>FAILED</c>: The snapshot finished with an error and failed to store any data.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>STARTED</c>: The snapshot is currently running.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>SUCCESS</c>: The snapshot completed.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#state']/*"/>
 	public required string State { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Details about the number (<c>file_count</c>) and size (<c>size_in_bytes</c>) of files included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The universally unique identifier (UUID) for the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="Status.g.xml" path="doc/member[@key='snapshot._types.Status#uuid']/*"/>
 	public required string Uuid { get; set; }
 }

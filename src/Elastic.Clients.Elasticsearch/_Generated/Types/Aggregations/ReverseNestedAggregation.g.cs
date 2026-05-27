@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ReverseNestedAggregationConverter))]
 public sealed partial class ReverseNestedAggregation
 {
@@ -36,15 +37,11 @@ public sealed partial class ReverseNestedAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the nested object field that should be joined back to.
-	/// The default is empty, which means that it joins back to the root/main document level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReverseNestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation']/*"/>
 public readonly partial struct ReverseNestedAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation Instance { get; init; }
@@ -64,24 +61,14 @@ public readonly partial struct ReverseNestedAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the nested object field that should be joined back to.
-	/// The default is empty, which means that it joins back to the root/main document level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReverseNestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the nested object field that should be joined back to.
-	/// The default is empty, which means that it joins back to the root/main document level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReverseNestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Path = value;
@@ -102,6 +89,7 @@ public readonly partial struct ReverseNestedAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation']/*"/>
 public readonly partial struct ReverseNestedAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation Instance { get; init; }
@@ -121,24 +109,14 @@ public readonly partial struct ReverseNestedAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the nested object field that should be joined back to.
-	/// The default is empty, which means that it joins back to the root/main document level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReverseNestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the nested object field that should be joined back to.
-	/// The default is empty, which means that it joins back to the root/main document level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReverseNestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Path = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GroqServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GroqServiceSettingsConverter))]
 public sealed partial class GroqServiceSettings
 {
@@ -42,42 +43,17 @@ public sealed partial class GroqServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for accessing Groq API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#api_key']/*"/>
 	public string? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Groq model documentation for the list of supported models and versions.
-	/// Service has been tested and confirmed to be working for <c>completion</c> and <c>chat_completion</c> tasks with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>llama-3.3-70b-versatile</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Groq API.
-	/// By default, the <c>groq</c> service sets the number of requests allowed per minute to 1000. Refer to Groq documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GroqServiceSettings']/*"/>
 public readonly partial struct GroqServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings Instance { get; init; }
@@ -97,71 +73,35 @@ public readonly partial struct GroqServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GroqServiceSettings(Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for accessing Groq API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor ApiKey(string? value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Groq model documentation for the list of supported models and versions.
-	/// Service has been tested and confirmed to be working for <c>completion</c> and <c>chat_completion</c> tasks with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>llama-3.3-70b-versatile</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Groq API.
-	/// By default, the <c>groq</c> service sets the number of requests allowed per minute to 1000. Refer to Groq documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Groq API.
-	/// By default, the <c>groq</c> service sets the number of requests allowed per minute to 1000. Refer to Groq documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Groq API.
-	/// By default, the <c>groq</c> service sets the number of requests allowed per minute to 1000. Refer to Groq documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="GroqServiceSettings.g.xml" path="doc/member[@key='inference._types.GroqServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

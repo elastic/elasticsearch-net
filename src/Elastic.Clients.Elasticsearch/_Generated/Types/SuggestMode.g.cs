@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SuggestModeConverter))]
 public enum SuggestMode
 {
-	/// <summary>
-	/// <para>
-	/// Suggest any matching suggestions based on terms in the suggest text.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestMode.g.xml" path="doc/member[@key='_types.SuggestMode#always']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "always")]
 	Always,
-	/// <summary>
-	/// <para>
-	/// Only generate suggestions for terms that are not in the shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestMode.g.xml" path="doc/member[@key='_types.SuggestMode#missing']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "missing")]
 	Missing,
-	/// <summary>
-	/// <para>
-	/// Only suggest terms that occur in more docs on the shard than the original term.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestMode.g.xml" path="doc/member[@key='_types.SuggestMode#popular']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "popular")]
 	Popular
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.mget.Operation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MGet.Json.MultiGetOperationConverter))]
 public sealed partial class MultiGetOperation
 {
@@ -42,44 +43,25 @@ public sealed partial class MultiGetOperation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The stored fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	public long? Version { get; set; }
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.mget.Operation']/*"/>
 public readonly partial struct MultiGetOperationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation Instance { get; init; }
@@ -99,77 +81,49 @@ public readonly partial struct MultiGetOperationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation instance) => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stored fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stored fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
@@ -197,6 +151,7 @@ public readonly partial struct MultiGetOperationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.mget.Operation']/*"/>
 public readonly partial struct MultiGetOperationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation Instance { get; init; }
@@ -216,88 +171,56 @@ public readonly partial struct MultiGetOperationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation instance) => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key for the primary shard the document resides on. Required if routing is used during indexing.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, excludes all _source fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stored fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stored fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetOperation.g.xml" path="doc/member[@key='_global.mget.Operation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;

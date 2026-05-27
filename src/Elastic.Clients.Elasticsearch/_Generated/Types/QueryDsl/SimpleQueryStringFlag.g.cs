@@ -27,97 +27,43 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Flags]
 public enum SimpleQueryStringFlags
 {
-	/// <summary>
-	/// <para>
-	/// Enables all optional operators.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#ALL']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "ALL")]
 	All = 1 << 0,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>+</c> AND operator.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#AND']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "AND")]
 	And = 1 << 1,
-	/// <summary>
-	/// <para>
-	/// Enables <c>\</c> as an escape character.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#ESCAPE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "ESCAPE")]
 	Escape = 1 << 2,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>~N</c> operator after a word, where <c>N</c> is an integer denoting the allowed edit distance for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#FUZZY']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "FUZZY")]
 	Fuzzy = 1 << 3,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>~N</c> operator, after a phrase where <c>N</c> is the maximum number of positions allowed between matching tokens.
-	/// Synonymous to <c>SLOP</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#NEAR']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "NEAR")]
 	Near = 1 << 4,
-	/// <summary>
-	/// <para>
-	/// Disables all operators.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#NONE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "NONE")]
 	None = 1 << 5,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>-</c> NOT operator.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#NOT']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "NOT")]
 	Not = 1 << 6,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>\|</c> OR operator.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#OR']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "OR")]
 	Or = 1 << 7,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>"</c> quotes operator used to search for phrases.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#PHRASE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "PHRASE")]
 	Phrase = 1 << 8,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>(</c> and <c>)</c> operators to control operator precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#PRECEDENCE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "PRECEDENCE")]
 	Precedence = 1 << 9,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>*</c> prefix operator.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#PREFIX']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "PREFIX")]
 	Prefix = 1 << 10,
-	/// <summary>
-	/// <para>
-	/// Enables the <c>~N</c> operator, after a phrase where <c>N</c> is maximum number of positions allowed between matching tokens.
-	/// Synonymous to <c>NEAR</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#SLOP']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "SLOP")]
 	Slop = 1 << 11,
-	/// <summary>
-	/// <para>
-	/// Enables whitespace as split characters.
-	/// </para>
-	/// </summary>
+	/// <include file="SimpleQueryStringFlag.g.xml" path="doc/member[@key='_types.query_dsl.SimpleQueryStringFlag#WHITESPACE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "WHITESPACE")]
 	Whitespace = 1 << 12
 }

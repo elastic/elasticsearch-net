@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DataStreamFailureStoreTemplate"><summary><para>
+Template equivalent of DataStreamFailureStore that allows nullable values.
+</para></summary></member>
+  <member key="indices._types.DataStreamFailureStoreTemplate#enabled"><summary><para>
+If defined, it turns the failure store on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream failure store
+that's disabled (enabled: <c>false</c>) will redirect no new failed indices to the failure store; however, it will
+not remove any existing data from the failure store.
+</para></summary></member>
+  <member key="indices._types.DataStreamFailureStoreTemplate#lifecycle"><summary><para>
+If defined, it specifies the lifecycle configuration for the failure store of this data stream.
+</para></summary></member>
+</doc>
