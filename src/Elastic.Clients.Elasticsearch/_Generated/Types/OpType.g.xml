@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.OpType#create"><summary><para>
+Only index documents that do not already exist.
+</para></summary></member>
+  <member key="_types.OpType#index"><summary><para>
+Overwrite any documents that already exist.
+</para></summary></member>
+</doc>

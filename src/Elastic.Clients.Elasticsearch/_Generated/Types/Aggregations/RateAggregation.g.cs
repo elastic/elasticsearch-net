@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RateAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RateAggregationConverter))]
 public sealed partial class RateAggregation
 {
@@ -36,39 +37,22 @@ public sealed partial class RateAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How the rate is calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval used to calculate the rate.
-	/// By default, the interval of the <c>date_histogram</c> is used.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RateAggregation']/*"/>
 public readonly partial struct RateAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RateAggregation Instance { get; init; }
@@ -88,22 +72,14 @@ public readonly partial struct RateAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RateAggregation(Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -116,23 +92,14 @@ public readonly partial struct RateAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the rate is calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? value)
 	{
 		Instance.Mode = value;
@@ -157,12 +124,7 @@ public readonly partial struct RateAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval used to calculate the rate.
-	/// By default, the interval of the <c>date_histogram</c> is used.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? value)
 	{
 		Instance.Unit = value;
@@ -183,6 +145,7 @@ public readonly partial struct RateAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RateAggregation']/*"/>
 public readonly partial struct RateAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RateAggregation Instance { get; init; }
@@ -202,22 +165,14 @@ public readonly partial struct RateAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RateAggregation(Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -230,23 +185,14 @@ public readonly partial struct RateAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the rate is calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? value)
 	{
 		Instance.Mode = value;
@@ -271,12 +217,7 @@ public readonly partial struct RateAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval used to calculate the rate.
-	/// By default, the interval of the <c>date_histogram</c> is used.
-	/// </para>
-	/// </summary>
+	/// <include file="RateAggregation.g.xml" path="doc/member[@key='_types.aggregations.RateAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? value)
 	{
 		Instance.Unit = value;

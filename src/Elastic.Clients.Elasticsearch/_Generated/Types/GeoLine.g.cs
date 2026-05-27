@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// A GeoJson GeoLine.
-/// </para>
-/// </summary>
+/// <include file="GeoLine.g.xml" path="doc/member[@key='_types.GeoLine']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoLine']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeoLineConverter))]
 public sealed partial class GeoLine
 {
@@ -48,17 +45,9 @@ public sealed partial class GeoLine
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of <c>[lon, lat]</c> coordinates
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLine.g.xml" path="doc/member[@key='_types.GeoLine#coordinates']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> Coordinates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Always <c>"LineString"</c>
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLine.g.xml" path="doc/member[@key='_types.GeoLine#type']/*"/>
 	public required string Type { get; set; }
 }

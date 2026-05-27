@@ -37,18 +37,9 @@ public sealed partial class StartDatafeedResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the node that the job was started on. In serverless this will be the "serverless".
-	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedResponse.g.xml" path="doc/member[@key='ml.start_datafeed.Response#node']/*"/>
 	public required System.Collections.Generic.ICollection<string> Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always <c>true</c>. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedResponse.g.xml" path="doc/member[@key='ml.start_datafeed.Response#started']/*"/>
 	public required bool Started { get; set; }
 }

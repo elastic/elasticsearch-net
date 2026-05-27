@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.MachineLearning']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MachineLearningConverter))]
 public sealed partial class MachineLearning
 {
@@ -54,11 +55,7 @@ public sealed partial class MachineLearning
 	public required bool Enabled { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Job usage statistics. The <c>_all</c> entry is always present and gathers statistics for all jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="MachineLearning.g.xml" path="doc/member[@key='xpack.usage.MachineLearning#jobs']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; set; }
 	public required int NodeCount { get; set; }
 }

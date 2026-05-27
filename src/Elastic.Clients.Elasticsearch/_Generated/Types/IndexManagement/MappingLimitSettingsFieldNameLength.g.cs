@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsFieldNameLength']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsFieldNameLengthConverter))]
 public sealed partial class MappingLimitSettingsFieldNameLength
 {
@@ -36,16 +37,11 @@ public sealed partial class MappingLimitSettingsFieldNameLength
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Setting for the maximum length of a field name. This setting isn’t really something that addresses mappings explosion but
-	/// might still be useful if you want to limit the field length. It usually shouldn’t be necessary to set this setting. The
-	/// default is okay unless a user starts to add a huge number of fields with really long names. Default is <c>Long.MAX_VALUE</c> (no limit).
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsFieldNameLength.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsFieldNameLength#limit']/*"/>
 	public long? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsFieldNameLength']/*"/>
 public readonly partial struct MappingLimitSettingsFieldNameLengthDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength Instance { get; init; }
@@ -65,13 +61,7 @@ public readonly partial struct MappingLimitSettingsFieldNameLengthDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Setting for the maximum length of a field name. This setting isn’t really something that addresses mappings explosion but
-	/// might still be useful if you want to limit the field length. It usually shouldn’t be necessary to set this setting. The
-	/// default is okay unless a user starts to add a huge number of fields with really long names. Default is <c>Long.MAX_VALUE</c> (no limit).
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsFieldNameLength.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsFieldNameLength#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor Limit(long? value)
 	{
 		Instance.Limit = value;

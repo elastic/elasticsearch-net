@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.WatsonxServiceSettingsConverter))]
 public sealed partial class WatsonxServiceSettings
 {
@@ -46,58 +47,26 @@ public sealed partial class WatsonxServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Watsonx account.
-	/// You can find your Watsonx API keys or you can create a new one on the API keys page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A version parameter that takes a version date in the format of <c>YYYY-MM-DD</c>.
-	/// For the active version data parameters, refer to the Wastonx documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#api_version']/*"/>
 	public required string ApiVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
-	/// Refer to the IBM library - Foundation models in Watsonx.ai.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The identifier of the IBM Cloud project to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#project_id']/*"/>
 	public required string ProjectId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL of the inference endpoint that you created on Watsonx.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#url']/*"/>
 	public required string Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings']/*"/>
 public readonly partial struct WatsonxServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings Instance { get; init; }
@@ -117,99 +86,56 @@ public readonly partial struct WatsonxServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings(Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Watsonx account.
-	/// You can find your Watsonx API keys or you can create a new one on the API keys page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A version parameter that takes a version date in the format of <c>YYYY-MM-DD</c>.
-	/// For the active version data parameters, refer to the Wastonx documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#api_version']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor ApiVersion(string value)
 	{
 		Instance.ApiVersion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
-	/// Refer to the IBM library - Foundation models in Watsonx.ai.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier of the IBM Cloud project to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#project_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor ProjectId(string value)
 	{
 		Instance.ProjectId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL of the inference endpoint that you created on Watsonx.
-	/// </para>
-	/// </summary>
+	/// <include file="WatsonxServiceSettings.g.xml" path="doc/member[@key='inference._types.WatsonxServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor Url(string value)
 	{
 		Instance.Url = value;

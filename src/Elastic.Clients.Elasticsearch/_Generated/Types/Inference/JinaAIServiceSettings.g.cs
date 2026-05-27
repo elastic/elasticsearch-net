@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAIServiceSettingsConverter))]
 public sealed partial class JinaAIServiceSettings
 {
@@ -43,71 +44,29 @@ public sealed partial class JinaAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your JinaAI account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// By default, the model's standard output dimension is used.
-	/// Refer to the Jina documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the data type returned by the model.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
-	/// Use <c>float</c> for the default float embeddings.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#element_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? ElementType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For the <c>embedding</c> task, whether the model supports multimodal inputs. If true, requests sent to the Jina model
-	/// will use the multimodal request format (a list of objects). If false, requests sent to the model will use the same
-	/// format as the <c>text_embedding</c> task (a list of strings). Setting this to <c>false</c> allows the <c>embedding</c> task to be
-	/// used with models that do not support multimodal requests.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#multimodal_model']/*"/>
 	public bool? MultimodalModel { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from JinaAI.
-	/// By default, the <c>jinaai</c> service sets the number of requests allowed per minute to 2000 for all task types.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// The default values varies with the embedding type.
-	/// For example, a float embedding type uses a <c>dot_product</c> similarity measure by default.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? Similarity { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings']/*"/>
 public readonly partial struct JinaAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings Instance { get; init; }
@@ -127,116 +86,63 @@ public readonly partial struct JinaAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your JinaAI account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// By default, the model's standard output dimension is used.
-	/// Refer to the Jina documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the data type returned by the model.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
-	/// Use <c>float</c> for the default float embeddings.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#element_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ElementType(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? value)
 	{
 		Instance.ElementType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For the <c>embedding</c> task, whether the model supports multimodal inputs. If true, requests sent to the Jina model
-	/// will use the multimodal request format (a list of objects). If false, requests sent to the model will use the same
-	/// format as the <c>text_embedding</c> task (a list of strings). Setting this to <c>false</c> allows the <c>embedding</c> task to be
-	/// used with models that do not support multimodal requests.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#multimodal_model']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor MultimodalModel(bool? value = true)
 	{
 		Instance.MultimodalModel = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from JinaAI.
-	/// By default, the <c>jinaai</c> service sets the number of requests allowed per minute to 2000 for all task types.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from JinaAI.
-	/// By default, the <c>jinaai</c> service sets the number of requests allowed per minute to 2000 for all task types.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from JinaAI.
-	/// By default, the <c>jinaai</c> service sets the number of requests allowed per minute to 2000 for all task types.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// The default values varies with the embedding type.
-	/// For example, a float embedding type uses a <c>dot_product</c> similarity measure by default.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAIServiceSettings.g.xml" path="doc/member[@key='inference._types.JinaAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? value)
 	{
 		Instance.Similarity = value;

@@ -37,17 +37,9 @@ public sealed partial class GetTrainedModelsStatsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of trained model statistics that matched the requested ID patterns. Could be higher than the number of items in the trained_model_stats array as the size of the array is restricted by the supplied size parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsResponse.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Response#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of trained model statistics, which are sorted by the model_id value in ascending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsResponse.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Response#trained_model_stats']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats> TrainedModelStats { get; set; }
 }

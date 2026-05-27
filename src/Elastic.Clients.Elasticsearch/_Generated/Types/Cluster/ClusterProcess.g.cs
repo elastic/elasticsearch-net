@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterProcess']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterProcessConverter))]
 public sealed partial class ClusterProcess
 {
@@ -43,17 +44,9 @@ public sealed partial class ClusterProcess
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about CPU used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcess.g.xml" path="doc/member[@key='cluster.stats.ClusterProcess#cpu']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Cpu { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about open file descriptors in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcess.g.xml" path="doc/member[@key='cluster.stats.ClusterProcess#open_file_descriptors']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; set; }
 }

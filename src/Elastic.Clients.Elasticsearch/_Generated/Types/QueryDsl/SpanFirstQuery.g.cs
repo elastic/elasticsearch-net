@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanFirstQueryConverter))]
 public sealed partial class SpanFirstQuery
 {
@@ -43,32 +44,18 @@ public sealed partial class SpanFirstQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum end position permitted in a match.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#end']/*"/>
 	public required int End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery']/*"/>
 public readonly partial struct SpanFirstQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Instance { get; init; }
@@ -88,47 +75,28 @@ public readonly partial struct SpanFirstQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum end position permitted in a match.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#end']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> End(int value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
@@ -150,6 +118,7 @@ public readonly partial struct SpanFirstQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery']/*"/>
 public readonly partial struct SpanFirstQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery Instance { get; init; }
@@ -169,58 +138,35 @@ public readonly partial struct SpanFirstQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum end position permitted in a match.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#end']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor End(int value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any other span type query.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFirstQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFirstQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);

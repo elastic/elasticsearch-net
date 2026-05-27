@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SignificantTextAggregationConverter))]
 public sealed partial class SignificantTextAggregation
 {
@@ -36,128 +37,59 @@ public sealed partial class SignificantTextAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant text.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to out duplicate text to deal with noisy data.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#filter_duplicate_text']/*"/>
 	public bool? FilterDuplicateText { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.EmptyObject? Jlh { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#min_doc_count']/*"/>
 	public long? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the values should actually be added to the candidate list or not with respect to the min_doc_count.
-	/// Values will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_min_doc_count']/*"/>
 	public long? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#source_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation']/*"/>
 public readonly partial struct SignificantTextAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation Instance { get; init; }
@@ -177,332 +109,210 @@ public readonly partial struct SignificantTextAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.BackgroundFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> BackgroundFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? value)
 	{
 		Instance.ChiSquare = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ChiSquare(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> action)
 	{
 		Instance.ChiSquare = Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant text.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant text.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to out duplicate text to deal with noisy data.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#filter_duplicate_text']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> FilterDuplicateText(bool? value = true)
 	{
 		Instance.FilterDuplicateText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? value)
 	{
 		Instance.Gnd = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Gnd()
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Gnd(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor>? action)
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Jlh(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Jlh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Jlh()
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Jlh(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? value)
 	{
 		Instance.MutualInformation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> MutualInformation()
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> MutualInformation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor>? action)
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? value)
 	{
 		Instance.Percentage = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Percentage()
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? value)
 	{
 		Instance.ScriptHeuristic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ScriptHeuristic(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> action)
 	{
 		Instance.ScriptHeuristic = Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the values should actually be added to the candidate list or not with respect to the min_doc_count.
-	/// Values will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#source_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#source_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument> SourceFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceFields = value;
@@ -523,6 +333,7 @@ public readonly partial struct SignificantTextAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation']/*"/>
 public readonly partial struct SignificantTextAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation Instance { get; init; }
@@ -542,343 +353,217 @@ public readonly partial struct SignificantTextAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.BackgroundFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor BackgroundFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#background_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor BackgroundFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.BackgroundFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? value)
 	{
 		Instance.ChiSquare = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#chi_square']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ChiSquare(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> action)
 	{
 		Instance.ChiSquare = Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether the aggregation will use field values directly or global ordinals.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant text.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return significant text.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to out duplicate text to deal with noisy data.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#filter_duplicate_text']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor FilterDuplicateText(bool? value = true)
 	{
 		Instance.FilterDuplicateText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? value)
 	{
 		Instance.Gnd = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Gnd()
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#gnd']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Gnd(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor>? action)
 	{
 		Instance.Gnd = Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Values to include.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Jlh(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Jlh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Jlh()
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use JLH score as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#jlh']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Jlh(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Jlh = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return values that are found in more than <c>min_doc_count</c> hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? value)
 	{
 		Instance.MutualInformation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor MutualInformation()
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#mutual_information']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor MutualInformation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor>? action)
 	{
 		Instance.MutualInformation = Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? value)
 	{
 		Instance.Percentage = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Percentage()
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? value)
 	{
 		Instance.ScriptHeuristic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Customized score, implemented via a script.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#script_heuristic']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ScriptHeuristic(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> action)
 	{
 		Instance.ScriptHeuristic = Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regulates the certainty a shard has if the values should actually be added to the candidate list or not with respect to the min_doc_count.
-	/// Values will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#source_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor SourceFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the JSON <c>_source</c> fields from which text will be analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="SignificantTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.SignificantTextAggregation#source_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor SourceFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceFields = value;

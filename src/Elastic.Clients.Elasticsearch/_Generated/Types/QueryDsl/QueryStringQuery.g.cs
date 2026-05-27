@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.QueryStringQueryConverter))]
 public sealed partial class QueryStringQuery
 {
@@ -42,191 +43,85 @@ public sealed partial class QueryStringQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#allow_leading_wildcard']/*"/>
 	public bool? AllowLeadingWildcard { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Default field to search if no field is provided in the query string.
-	/// Supports wildcards (<c>*</c>).
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#enable_position_increments']/*"/>
 	public bool? EnablePositionIncrements { get; set; }
 	public bool? Escape { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to search. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_max_expansions']/*"/>
 	public int? FuzzyMaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_prefix_length']/*"/>
 	public int? FuzzyPrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_rewrite']/*"/>
 	public string? FuzzyRewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_transpositions']/*"/>
 	public bool? FuzzyTranspositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#lenient']/*"/>
 	public bool? Lenient { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#max_determinized_states']/*"/>
 	public int? MaxDeterminizedStates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens for phrases.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#phrase_slop']/*"/>
 	public double? PhraseSlop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query string you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert quoted text in the query string into tokens.
-	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_analyzer']/*"/>
 	public string? QuoteAnalyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// You can use this suffix to use a different analysis method for exact matches.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_field_suffix']/*"/>
 	public string? QuoteFieldSuffix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#rewrite']/*"/>
 	public string? Rewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#tie_breaker']/*"/>
 	public double? TieBreaker { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines how the query matches and scores documents.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery']/*"/>
 public readonly partial struct QueryStringQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery Instance { get; init; }
@@ -246,106 +141,63 @@ public readonly partial struct QueryStringQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#allow_leading_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> AllowLeadingWildcard(bool? value = true)
 	{
 		Instance.AllowLeadingWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default field to search if no field is provided in the query string.
-	/// Supports wildcards (<c>*</c>).
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> DefaultField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DefaultField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default field to search if no field is provided in the query string.
-	/// Supports wildcards (<c>*</c>).
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> DefaultField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.DefaultField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#enable_position_increments']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> EnablePositionIncrements(bool? value = true)
 	{
 		Instance.EnablePositionIncrements = value;
@@ -358,143 +210,91 @@ public readonly partial struct QueryStringQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to search. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to search. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> FuzzyMaxExpansions(int? value)
 	{
 		Instance.FuzzyMaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> FuzzyPrefixLength(int? value)
 	{
 		Instance.FuzzyPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#max_determinized_states']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> MaxDeterminizedStates(int? value)
 	{
 		Instance.MaxDeterminizedStates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens for phrases.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#phrase_slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> PhraseSlop(double? value)
 	{
 		Instance.PhraseSlop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query string you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -507,68 +307,42 @@ public readonly partial struct QueryStringQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert quoted text in the query string into tokens.
-	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> QuoteAnalyzer(string? value)
 	{
 		Instance.QuoteAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// You can use this suffix to use a different analysis method for exact matches.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_field_suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> QuoteFieldSuffix(string? value)
 	{
 		Instance.QuoteFieldSuffix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the query matches and scores documents.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? value)
 	{
 		Instance.Type = value;
@@ -584,6 +358,7 @@ public readonly partial struct QueryStringQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery']/*"/>
 public readonly partial struct QueryStringQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery Instance { get; init; }
@@ -603,106 +378,63 @@ public readonly partial struct QueryStringQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the wildcard characters <c>*</c> and <c>?</c> are allowed as the first character of the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#allow_leading_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor AllowLeadingWildcard(bool? value = true)
 	{
 		Instance.AllowLeadingWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query string into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query attempts to analyze wildcard terms in the query string.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default field to search if no field is provided in the query string.
-	/// Supports wildcards (<c>*</c>).
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor DefaultField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DefaultField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default field to search if no field is provided in the query string.
-	/// Supports wildcards (<c>*</c>).
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor DefaultField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.DefaultField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Default boolean logic used to interpret text in the query string if no operators are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, enable position increments in queries constructed from a <c>query_string</c> search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#enable_position_increments']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor EnablePositionIncrements(bool? value = true)
 	{
 		Instance.EnablePositionIncrements = value;
@@ -715,143 +447,91 @@ public readonly partial struct QueryStringQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to search. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to search. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query expands for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor FuzzyMaxExpansions(int? value)
 	{
 		Instance.FuzzyMaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor FuzzyPrefixLength(int? value)
 	{
 		Instance.FuzzyPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#max_determinized_states']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor MaxDeterminizedStates(int? value)
 	{
 		Instance.MaxDeterminizedStates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens for phrases.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#phrase_slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor PhraseSlop(double? value)
 	{
 		Instance.PhraseSlop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query string you wish to parse and use for search.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -864,68 +544,42 @@ public readonly partial struct QueryStringQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert quoted text in the query string into tokens.
-	/// For quoted text, this parameter overrides the analyzer specified in the <c>analyzer</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor QuoteAnalyzer(string? value)
 	{
 		Instance.QuoteAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suffix appended to quoted text in the query string.
-	/// You can use this suffix to use a different analysis method for exact matches.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#quote_field_suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor QuoteFieldSuffix(string? value)
 	{
 		Instance.QuoteFieldSuffix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to combine the queries generated from the individual search terms in the resulting <c>dis_max</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert date values in the query string to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the query matches and scores documents.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryStringQuery.g.xml" path="doc/member[@key='_types.query_dsl.QueryStringQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? value)
 	{
 		Instance.Type = value;

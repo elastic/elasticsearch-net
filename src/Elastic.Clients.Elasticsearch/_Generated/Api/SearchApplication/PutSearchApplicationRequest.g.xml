@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.put.Request"><summary><para>
+Create or update a search application.
+</para></summary></member>
+  <member key="search_application.put.Request#create"><summary><para>
+If <c>true</c>, this request cannot replace or update existing Search Applications.
+</para></summary></member>
+  <member key="search_application.put.Request#name"><summary><para>
+The name of the search application to be created or updated.
+</para></summary></member>
+</doc>

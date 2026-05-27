@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.ScriptRescore']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ScriptRescoreConverter))]
 public sealed partial class ScriptRescore
 {
@@ -45,6 +46,7 @@ public sealed partial class ScriptRescore
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.ScriptRescore']/*"/>
 public readonly partial struct ScriptRescoreDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore Instance { get; init; }

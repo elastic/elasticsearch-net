@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetUserPrivilegesRequest.g.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
 public sealed partial class GetUserPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get user privileges.
-/// </para>
-/// <para>
-/// Get the security privileges for the logged in user.
-/// All users can use this API, but only to determine their own privileges.
-/// To check the privileges of other users, you must use the run as feature.
-/// To check whether a user has a specific list of privileges, use the has privileges API.
-/// </para>
-/// </summary>
+/// <include file="GetUserPrivilegesRequest.g.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetUserPrivilegesRequestConverter))]
 public sealed partial class GetUserPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>
 {
@@ -60,17 +53,8 @@ public sealed partial class GetUserPrivilegesRequest : Elastic.Clients.Elasticse
 	internal override string OperationName => "security.get_user_privileges";
 }
 
-/// <summary>
-/// <para>
-/// Get user privileges.
-/// </para>
-/// <para>
-/// Get the security privileges for the logged in user.
-/// All users can use this API, but only to determine their own privileges.
-/// To check the privileges of other users, you must use the run as feature.
-/// To check whether a user has a specific list of privileges, use the has privileges API.
-/// </para>
-/// </summary>
+/// <include file="GetUserPrivilegesRequest.g.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_privileges.Request']/*"/>
 public readonly partial struct GetUserPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest Instance { get; init; }

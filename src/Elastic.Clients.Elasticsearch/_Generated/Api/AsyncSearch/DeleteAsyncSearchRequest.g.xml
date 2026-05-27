@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="async_search.delete.Request"><summary><para>
+Delete an async search.
+</para>
+<para>
+If the asynchronous search is still running, it is cancelled.
+Otherwise, the saved search results are deleted.
+If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
+</para></summary></member>
+  <member key="async_search.delete.Request#id"><summary><para>
+A unique identifier for the async search.
+</para></summary></member>
+</doc>

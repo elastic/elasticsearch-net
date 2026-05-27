@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DownsampleConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DownsampleConfigConverter))]
 public sealed partial class DownsampleConfig
 {
@@ -42,21 +43,14 @@ public sealed partial class DownsampleConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval at which to aggregate the original time series index.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleConfig.g.xml" path="doc/member[@key='indices._types.DownsampleConfig#fixed_interval']/*"/>
 	public required string FixedInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sampling method used to reduce the documents; it can be either <c>aggregate</c> or <c>last_value</c>. Defaults to <c>aggregate</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleConfig.g.xml" path="doc/member[@key='indices._types.DownsampleConfig#sampling_method']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? SamplingMethod { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DownsampleConfig']/*"/>
 public readonly partial struct DownsampleConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Instance { get; init; }
@@ -76,22 +70,14 @@ public readonly partial struct DownsampleConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The interval at which to aggregate the original time series index.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleConfig.g.xml" path="doc/member[@key='indices._types.DownsampleConfig#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor FixedInterval(string value)
 	{
 		Instance.FixedInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sampling method used to reduce the documents; it can be either <c>aggregate</c> or <c>last_value</c>. Defaults to <c>aggregate</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsampleConfig.g.xml" path="doc/member[@key='indices._types.DownsampleConfig#sampling_method']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor SamplingMethod(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? value)
 	{
 		Instance.SamplingMethod = value;

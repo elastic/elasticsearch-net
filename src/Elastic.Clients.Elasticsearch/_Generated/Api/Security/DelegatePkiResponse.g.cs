@@ -37,25 +37,13 @@ public sealed partial class DelegatePkiResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An access token associated with the subject distinguished name of the client's certificate.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiResponse.g.xml" path="doc/member[@key='security.delegate_pki.Response#access_token']/*"/>
 	public required string AccessToken { get; set; }
 	public Elastic.Clients.Elasticsearch.Security.Authentication? Authentication { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The amount of time (in seconds) before the token expires.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiResponse.g.xml" path="doc/member[@key='security.delegate_pki.Response#expires_in']/*"/>
 	public required long ExpiresIn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of token.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiResponse.g.xml" path="doc/member[@key='security.delegate_pki.Response#type']/*"/>
 	public required string Type { get; set; }
 }

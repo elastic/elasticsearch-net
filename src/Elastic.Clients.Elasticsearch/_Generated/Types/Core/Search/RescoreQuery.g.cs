@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.RescoreQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.RescoreQueryConverter))]
 public sealed partial class RescoreQuery
 {
@@ -42,36 +43,20 @@ public sealed partial class RescoreQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the original query versus the rescore query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#query_weight']/*"/>
 	public double? QueryWeight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the rescore query versus the original query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query_weight']/*"/>
 	public double? RescoreQueryWeight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.RescoreQuery']/*"/>
 public readonly partial struct RescoreQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Instance { get; init; }
@@ -91,57 +76,35 @@ public readonly partial struct RescoreQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the original query versus the rescore query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#query_weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> QueryWeight(double? value)
 	{
 		Instance.QueryWeight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the rescore query versus the original query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query_weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> RescoreQueryWeight(double? value)
 	{
 		Instance.RescoreQueryWeight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? value)
 	{
 		Instance.ScoreMode = value;
@@ -157,6 +120,7 @@ public readonly partial struct RescoreQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.RescoreQuery']/*"/>
 public readonly partial struct RescoreQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Instance { get; init; }
@@ -176,69 +140,42 @@ public readonly partial struct RescoreQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery(Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query to use for rescoring.
-	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the original query versus the rescore query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#query_weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor QueryWeight(double? value)
 	{
 		Instance.QueryWeight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Relative importance of the rescore query versus the original query.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#rescore_query_weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor RescoreQueryWeight(double? value)
 	{
 		Instance.RescoreQueryWeight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreQuery.g.xml" path="doc/member[@key='_global.search._types.RescoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? value)
 	{
 		Instance.ScoreMode = value;

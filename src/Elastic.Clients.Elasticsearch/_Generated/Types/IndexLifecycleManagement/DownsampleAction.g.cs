@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.DownsampleAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.DownsampleActionConverter))]
 public sealed partial class DownsampleAction
 {
@@ -46,6 +47,7 @@ public sealed partial class DownsampleAction
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeout { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.DownsampleAction']/*"/>
 public readonly partial struct DownsampleActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction Instance { get; init; }

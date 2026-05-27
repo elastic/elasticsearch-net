@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetRoleMappingRequest.g.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
 public sealed partial class GetRoleMappingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get role mappings.
-/// </para>
-/// <para>
-/// Role mappings define which roles are assigned to each user.
-/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-/// </para>
-/// </summary>
+/// <include file="GetRoleMappingRequest.g.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetRoleMappingRequestConverter))]
 public sealed partial class GetRoleMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>
 {
@@ -62,24 +56,12 @@ public sealed partial class GetRoleMappingRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.get_role_mapping";
 
-	/// <summary>
-	/// <para>
-	/// The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleMappingRequest.g.xml" path="doc/member[@key='security.get_role_mapping.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get role mappings.
-/// </para>
-/// <para>
-/// Role mappings define which roles are assigned to each user.
-/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-/// </para>
-/// </summary>
+/// <include file="GetRoleMappingRequest.g.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role_mapping.Request']/*"/>
 public readonly partial struct GetRoleMappingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest Instance { get; init; }
@@ -103,11 +85,7 @@ public readonly partial struct GetRoleMappingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The distinct name that identifies the role mapping. The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way. You can specify multiple mapping names as a comma-separated list. If you do not specify this parameter, the API returns information about all role mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleMappingRequest.g.xml" path="doc/member[@key='security.get_role_mapping.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;

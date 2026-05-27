@@ -23,69 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
 public sealed partial class HotThreadsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, known idle threads (e.g. waiting in a socket select, or to get
-	/// a task from an empty queue) are filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#ignore_idle_threads']/*"/>
 	public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
-	/// <summary>
-	/// <para>
-	/// The interval to do the second sampling of threads.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Duration?>("interval"); set => Q("interval", value); }
 
-	/// <summary>
-	/// <para>
-	/// Number of samples of thread stacktrace.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#snapshots']/*"/>
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
-	/// <summary>
-	/// <para>
-	/// The sort order for 'cpu' type
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of hot threads to provide information for.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#threads']/*"/>
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received
-	/// before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type to sample.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#type']/*"/>
 	public Elastic.Clients.Elasticsearch.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("type"); set => Q("type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the hot threads for nodes.
-/// </para>
-/// <para>
-/// Get a breakdown of the hot threads on each selected node in the cluster.
-/// The output is plain text with a breakdown of the top hot threads for each node.
-/// </para>
-/// </summary>
+/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.HotThreadsRequestConverter))]
 public sealed partial class HotThreadsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>
 {
@@ -111,74 +76,33 @@ public sealed partial class HotThreadsRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "nodes.hot_threads";
 
-	/// <summary>
-	/// <para>
-	/// List of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, known idle threads (e.g. waiting in a socket select, or to get
-	/// a task from an empty queue) are filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#ignore_idle_threads']/*"/>
 	public bool? IgnoreIdleThreads { get => Q<bool?>("ignore_idle_threads"); set => Q("ignore_idle_threads", value); }
 
-	/// <summary>
-	/// <para>
-	/// The interval to do the second sampling of threads.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get => Q<Elastic.Clients.Elasticsearch.Duration?>("interval"); set => Q("interval", value); }
 
-	/// <summary>
-	/// <para>
-	/// Number of samples of thread stacktrace.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#snapshots']/*"/>
 	public long? Snapshots { get => Q<long?>("snapshots"); set => Q("snapshots", value); }
 
-	/// <summary>
-	/// <para>
-	/// The sort order for 'cpu' type
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of hot threads to provide information for.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#threads']/*"/>
 	public long? Threads { get => Q<long?>("threads"); set => Q("threads", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received
-	/// before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type to sample.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#type']/*"/>
 	public Elastic.Clients.Elasticsearch.ThreadType? Type { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("type"); set => Q("type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the hot threads for nodes.
-/// </para>
-/// <para>
-/// Get a breakdown of the hot threads on each selected node in the cluster.
-/// The output is plain text with a breakdown of the top hot threads for each node.
-/// </para>
-/// </summary>
+/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.hot_threads.Request']/*"/>
 public readonly partial struct HotThreadsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest Instance { get; init; }
@@ -202,90 +126,56 @@ public readonly partial struct HotThreadsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest(Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// List of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, known idle threads (e.g. waiting in a socket select, or to get
-	/// a task from an empty queue) are filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#ignore_idle_threads']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor IgnoreIdleThreads(bool? value = true)
 	{
 		Instance.IgnoreIdleThreads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval to do the second sampling of threads.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Interval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of samples of thread stacktrace.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#snapshots']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Snapshots(long? value)
 	{
 		Instance.Snapshots = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order for 'cpu' type
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadType? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of hot threads to provide information for.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#threads']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Threads(long? value)
 	{
 		Instance.Threads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received
-	/// before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type to sample.
-	/// </para>
-	/// </summary>
+	/// <include file="HotThreadsRequest.g.xml" path="doc/member[@key='nodes.hot_threads.Request#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Type(Elastic.Clients.Elasticsearch.ThreadType? value)
 	{
 		Instance.Type = value;

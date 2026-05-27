@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureOpenAITaskSettingsConverter))]
 public sealed partial class AzureOpenAITaskSettings
 {
@@ -36,29 +37,14 @@ public sealed partial class AzureOpenAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings']/*"/>
 public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings Instance { get; init; }
@@ -78,54 +64,21 @@ public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings(Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers()
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -139,12 +92,7 @@ public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAITaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

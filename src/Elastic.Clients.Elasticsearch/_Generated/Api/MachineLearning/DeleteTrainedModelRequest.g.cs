@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
 public sealed partial class DeleteTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an unreferenced trained model.
-/// </para>
-/// <para>
-/// The request deletes a trained inference model that is not referenced by an ingest pipeline.
-/// </para>
-/// </summary>
+/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteTrainedModelRequestConverter))]
 public sealed partial class DeleteTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestParameters>
 {
@@ -74,36 +62,18 @@ public sealed partial class DeleteTrainedModelRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "ml.delete_trained_model";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an unreferenced trained model.
-/// </para>
-/// <para>
-/// The request deletes a trained inference model that is not referenced by an ingest pipeline.
-/// </para>
-/// </summary>
+/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model.Request']/*"/>
 public readonly partial struct DeleteTrainedModelRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest Instance { get; init; }
@@ -128,33 +98,21 @@ public readonly partial struct DeleteTrainedModelRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelRequest.g.xml" path="doc/member[@key='ml.delete_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SecuritySettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SecuritySettingsConverter))]
 public sealed partial class SecuritySettings
 {
@@ -39,6 +40,7 @@ public sealed partial class SecuritySettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SecuritySettings']/*"/>
 public readonly partial struct SecuritySettingsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.SecuritySettings Instance { get; init; }
@@ -90,6 +92,7 @@ public readonly partial struct SecuritySettingsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SecuritySettings']/*"/>
 public readonly partial struct SecuritySettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SecuritySettings Instance { get; init; }

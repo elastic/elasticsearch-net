@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
 public sealed partial class ListReindexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include detailed task status information in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 }
 
-/// <summary>
-/// <para>
-/// List active reindex tasks.
-/// </para>
-/// <para>
-/// Get information about all currently running reindex tasks.
-/// </para>
-/// </summary>
+/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ListReindexRequestConverter))]
 public sealed partial class ListReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ListReindexRequestParameters>
 {
@@ -62,22 +54,12 @@ public sealed partial class ListReindexRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "list_reindex";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include detailed task status information in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 }
 
-/// <summary>
-/// <para>
-/// List active reindex tasks.
-/// </para>
-/// <para>
-/// Get information about all currently running reindex tasks.
-/// </para>
-/// </summary>
+/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.list_reindex.Request']/*"/>
 public readonly partial struct ListReindexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ListReindexRequest Instance { get; init; }
@@ -96,11 +78,7 @@ public readonly partial struct ListReindexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ListReindexRequest instance) => new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ListReindexRequest(Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include detailed task status information in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexRequest.g.xml" path="doc/member[@key='_global.list_reindex.Request#detailed']/*"/>
 	public Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor Detailed(bool? value = true)
 	{
 		Instance.Detailed = value;

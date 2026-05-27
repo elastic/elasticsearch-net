@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_credentials.NodesCredentials']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.NodesCredentialsConverter))]
 public sealed partial class NodesCredentials
 {
@@ -43,17 +44,9 @@ public sealed partial class NodesCredentials
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// File-backed tokens collected from all nodes
-	/// </para>
-	/// </summary>
+	/// <include file="NodesCredentials.g.xml" path="doc/member[@key='security.get_service_credentials.NodesCredentials#file_tokens']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> FileTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// General status showing how nodes respond to the above collection request
-	/// </para>
-	/// </summary>
+	/// <include file="NodesCredentials.g.xml" path="doc/member[@key='security.get_service_credentials.NodesCredentials#_nodes']/*"/>
 	public required Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.Vertex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.VertexConverter))]
 public sealed partial class Vertex
 {

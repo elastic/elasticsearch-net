@@ -23,37 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a policy.
-/// </para>
-/// <para>
-/// Create or update a snapshot lifecycle policy.
-/// If the policy already exists, this request increments the policy version.
-/// Only the latest version of a policy is stored.
-/// </para>
-/// </summary>
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.PutLifecycleRequestConverter))]
 public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>
 {
@@ -80,77 +62,33 @@ public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "slm.put_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the snapshot lifecycle policy you want to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#policy_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Configuration for each snapshot created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? Config { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#repository']/*"/>
 	public string? Repository { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retention rules used to retain and delete snapshots created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#retention']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? Retention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#schedule']/*"/>
 	public string? Schedule { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a policy.
-/// </para>
-/// <para>
-/// Create or update a snapshot lifecycle policy.
-/// If the policy already exists, this request increments the policy version.
-/// Only the latest version of a policy is stored.
-/// </para>
-/// </summary>
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 public readonly partial struct PutLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Instance { get; init; }
@@ -175,125 +113,77 @@ public readonly partial struct PutLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the snapshot lifecycle policy you want to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#policy_id']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.PolicyId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for each snapshot created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? value)
 	{
 		Instance.Config = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for each snapshot created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config()
 	{
 		Instance.Config = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for each snapshot created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor>? action)
 	{
 		Instance.Config = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name automatically assigned to each snapshot created by the policy. Date math is supported. To prevent conflicting snapshot names, a UUID is automatically appended to each snapshot name.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Repository used to store snapshots created by this policy. This repository must exist prior to the policy’s creation. You can create a repository using the snapshot repository API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Repository(string? value)
 	{
 		Instance.Repository = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retention rules used to retain and delete snapshots created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#retention']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? value)
 	{
 		Instance.Retention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retention rules used to retain and delete snapshots created by the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#retention']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Retention(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor> action)
 	{
 		Instance.Retention = Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Periodic or absolute schedule at which the policy creates snapshots. SLM applies schedule changes immediately.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request#schedule']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor Schedule(string? value)
 	{
 		Instance.Schedule = value;

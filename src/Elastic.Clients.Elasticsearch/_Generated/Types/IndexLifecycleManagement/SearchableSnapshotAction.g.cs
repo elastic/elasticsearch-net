@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.SearchableSnapshotActionConverter))]
 public sealed partial class SearchableSnapshotAction
 {
@@ -46,6 +47,7 @@ public sealed partial class SearchableSnapshotAction
 	public required string SnapshotRepository { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.SearchableSnapshotAction']/*"/>
 public readonly partial struct SearchableSnapshotActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Instance { get; init; }

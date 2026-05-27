@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.Access']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AccessConverter))]
 public sealed partial class Access
 {
@@ -36,21 +37,14 @@ public sealed partial class Access
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? Replication { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? Search { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.Access']/*"/>
 public readonly partial struct AccessDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.Access Instance { get; init; }
@@ -70,33 +64,21 @@ public readonly partial struct AccessDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.Access instance) => new Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? value)
 	{
 		Instance.Replication = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
 		Instance.Replication = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Replication(params System.Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>();
@@ -109,33 +91,21 @@ public readonly partial struct AccessDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
 		Instance.Search = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(params Elastic.Clients.Elasticsearch.Security.SearchAccess[] values)
 	{
 		Instance.Search = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument> Search(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();
@@ -162,6 +132,7 @@ public readonly partial struct AccessDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.Access']/*"/>
 public readonly partial struct AccessDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.Access Instance { get; init; }
@@ -181,33 +152,21 @@ public readonly partial struct AccessDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.AccessDescriptor(Elastic.Clients.Elasticsearch.Security.Access instance) => new Elastic.Clients.Elasticsearch.Security.AccessDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Security.AccessDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? value)
 	{
 		Instance.Replication = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(params Elastic.Clients.Elasticsearch.Security.ReplicationAccess[] values)
 	{
 		Instance.Replication = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster replication.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#replication']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Replication(params System.Action<Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>();
@@ -220,33 +179,21 @@ public readonly partial struct AccessDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? value)
 	{
 		Instance.Search = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(params Elastic.Clients.Elasticsearch.Security.SearchAccess[] values)
 	{
 		Instance.Search = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();
@@ -259,11 +206,7 @@ public readonly partial struct AccessDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permission entries for cross-cluster search.
-	/// </para>
-	/// </summary>
+	/// <include file="Access.g.xml" path="doc/member[@key='security._types.Access#search']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessDescriptor Search<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.SearchAccess>();

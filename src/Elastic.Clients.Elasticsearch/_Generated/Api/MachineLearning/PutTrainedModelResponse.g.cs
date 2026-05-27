@@ -39,113 +39,53 @@ public sealed partial class PutTrainedModelResponse : Elastic.Transport.Products
 
 	public string? CompressedDefinition { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information on the creator of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#created_by']/*"/>
 	public string? CreatedBy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time when the trained model was created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#create_time']/*"/>
 	public System.DateTimeOffset? CreateTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Any field map described in the inference configuration takes precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#default_field_map']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? DefaultFieldMap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The free-text description of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The estimated heap usage in bytes to keep the trained model in memory.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#estimated_heap_memory_usage_bytes']/*"/>
 	public int? EstimatedHeapMemoryUsageBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The estimated number of operations to use the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#estimated_operations']/*"/>
 	public int? EstimatedOperations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// True if the full model definition is present.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#fully_defined']/*"/>
 	public bool? FullyDefined { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The default configuration for inference. This can be either a regression, classification, or one of the many NLP focused configurations. It must match the underlying definition.trained_model's target_type. For pre-packaged models such as ELSER the config is not required.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate? InferenceConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The input field names for the model definition.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#input']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The license level of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#license_level']/*"/>
 	public string? LicenseLevel { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelLocation? Location { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object containing metadata about the trained model. For example, models created by data frame analytics contain analysis_config and input objects.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#model_id']/*"/>
 	public required string ModelId { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig? ModelPackage { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model type
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#model_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelType { get; set; }
 	public string? PlatformArchitecture { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma delimited string of tags. A trained model can have many tags, or none.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#tags']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Tags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch version number in which the trained model was created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelResponse.g.xml" path="doc/member[@key='ml.put_trained_model.Response#version']/*"/>
 	public string? Version { get; set; }
 }

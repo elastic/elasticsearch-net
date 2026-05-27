@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GlobalAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GlobalAggregationConverter))]
 public sealed partial class GlobalAggregation
 {
@@ -37,6 +38,7 @@ public sealed partial class GlobalAggregation
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GlobalAggregation']/*"/>
 public readonly partial struct GlobalAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation Instance { get; init; }

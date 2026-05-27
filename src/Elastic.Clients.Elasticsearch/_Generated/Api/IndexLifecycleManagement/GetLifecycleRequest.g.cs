@@ -23,28 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 public sealed partial class GetLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get lifecycle policies.
-/// </para>
-/// </summary>
+/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.GetLifecycleRequestConverter))]
 public sealed partial class GetLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>
 {
@@ -70,33 +61,18 @@ public sealed partial class GetLifecycleRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ilm.get_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("policy"); set => PO("policy", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get lifecycle policies.
-/// </para>
-/// </summary>
+/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Request']/*"/>
 public readonly partial struct GetLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest Instance { get; init; }
@@ -120,33 +96,21 @@ public readonly partial struct GetLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLifecycleRequest.g.xml" path="doc/member[@key='ilm.get_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

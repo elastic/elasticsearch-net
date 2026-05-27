@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.BoxplotAggregation#compression"><summary><para>
+Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
+</para></summary></member>
+  <member key="_types.aggregations.BoxplotAggregation#execution_hint"><summary><para>
+The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+</para></summary></member>
+  <member key="_types.aggregations.BoxplotAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.BoxplotAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+</doc>

@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user.Request']/*"/>
 public sealed partial class GetUserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get users.
-/// </para>
-/// <para>
-/// Get information about users in the native realm and built-in users.
-/// </para>
-/// </summary>
+/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetUserRequestConverter))]
 public sealed partial class GetUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>
 {
@@ -66,29 +58,15 @@ public sealed partial class GetUserRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "security.get_user";
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#username']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? Username { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>?>("username"); set => PO("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get users.
-/// </para>
-/// <para>
-/// Get information about users in the native realm and built-in users.
-/// </para>
-/// </summary>
+/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user.Request']/*"/>
 public readonly partial struct GetUserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetUserRequest Instance { get; init; }
@@ -112,33 +90,21 @@ public readonly partial struct GetUserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(params Elastic.Clients.Elasticsearch.Username[] values)
 	{
 		Instance.Username = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserRequest.g.xml" path="doc/member[@key='security.get_user.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;

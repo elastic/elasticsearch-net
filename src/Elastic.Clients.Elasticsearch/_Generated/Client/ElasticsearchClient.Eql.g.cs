@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient> class for mocking.
 	/// </summary>
 	protected EqlNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 	{
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
@@ -52,6 +54,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
@@ -61,12 +65,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
@@ -75,6 +83,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
@@ -84,12 +94,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
@@ -98,6 +112,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
@@ -107,12 +123,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
@@ -121,6 +141,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
@@ -130,12 +152,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
@@ -144,6 +170,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
@@ -153,12 +181,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
@@ -167,6 +199,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
@@ -176,12 +210,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -190,6 +228,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -199,6 +239,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
@@ -207,6 +249,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
@@ -216,12 +260,16 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -230,6 +278,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
@@ -239,6 +289,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
@@ -247,6 +299,8 @@ public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.Namespa
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Eql/EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);

@@ -39,28 +39,8 @@ public sealed partial class MultiTermLookup
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field from which to retrieve terms.
-	/// It is required if <c>script</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get => GetVariant<Elastic.Clients.Elasticsearch.Field>("field"); set => SetVariant("field", value); }
-
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? Script { get => GetVariant<Elastic.Clients.Elasticsearch.Script>("script"); set => SetVariant("script", value); }
-
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
 	public object? Missing { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup(Elastic.Clients.Elasticsearch.Field value) => new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup { Field = value };
@@ -104,72 +84,36 @@ public readonly partial struct MultiTermLookupDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup instance) => new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field from which to retrieve terms.
-	/// It is required if <c>script</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field from which to retrieve terms.
-	/// It is required if <c>script</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -204,72 +148,36 @@ public readonly partial struct MultiTermLookupDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup instance) => new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field from which to retrieve terms.
-	/// It is required if <c>script</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field from which to retrieve terms.
-	/// It is required if <c>script</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script to calculate terms to aggregate on.
-	/// It is required if <c>field</c> is not provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

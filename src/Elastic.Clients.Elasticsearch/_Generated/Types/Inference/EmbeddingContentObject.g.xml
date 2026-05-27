@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.EmbeddingContentObject"><summary><para>
+A wrapper object which contains the fields required to specify multimodal inputs
+</para></summary></member>
+  <member key="inference._types.EmbeddingContentObject#content"><summary><para>
+An object containing the input data for the model to embed
+</para></summary></member>
+</doc>

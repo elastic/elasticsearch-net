@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ZeroTermsQueryConverter))]
 public enum ZeroTermsQuery
 {
-	/// <summary>
-	/// <para>
-	/// Returns all documents, similar to a <c>match_all</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroTermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ZeroTermsQuery#all']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
-	/// <summary>
-	/// <para>
-	/// No documents are returned if the <c>analyzer</c> removes all tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroTermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ZeroTermsQuery#none']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "none")]
 	None
 }

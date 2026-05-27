@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuTokenizerConverter))]
 public sealed partial class IcuTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -49,6 +50,7 @@ public sealed partial class IcuTokenizer : Elastic.Clients.Elasticsearch.Analysi
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuTokenizer']/*"/>
 public readonly partial struct IcuTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer Instance { get; init; }

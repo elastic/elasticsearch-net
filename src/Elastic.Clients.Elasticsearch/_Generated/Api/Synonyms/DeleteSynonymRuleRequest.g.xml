@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.delete_synonym_rule.Request"><summary><para>
+Delete a synonym rule.
+</para>
+<para>
+Delete a synonym rule from a synonym set.
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Request#refresh"><summary><para>
+If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
+If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Request#rule_id"><summary><para>
+The ID of the synonym rule to delete.
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Request#set_id"><summary><para>
+The ID of the synonym set to update.
+</para></summary></member>
+</doc>

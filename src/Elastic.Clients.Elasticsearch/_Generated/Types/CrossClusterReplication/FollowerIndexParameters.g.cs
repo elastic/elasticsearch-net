@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowerIndexParametersConverter))]
 public sealed partial class FollowerIndexParameters
 {
@@ -36,78 +37,33 @@ public sealed partial class FollowerIndexParameters
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_outstanding_read_requests']/*"/>
 	public long? MaxOutstandingReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_outstanding_write_requests']/*"/>
 	public int? MaxOutstandingWriteRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_read_request_operation_count']/*"/>
 	public int? MaxReadRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
-	/// retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
-	/// deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_write_buffer_count']/*"/>
 	public int? MaxWriteBufferCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_write_request_operation_count']/*"/>
 	public int? MaxWriteRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
-	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
-	/// Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowerIndexParameters.g.xml" path="doc/member[@key='ccr.follow_info.FollowerIndexParameters#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 }

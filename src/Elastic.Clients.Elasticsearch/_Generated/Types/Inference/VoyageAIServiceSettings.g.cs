@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.VoyageAIServiceSettingsConverter))]
 public sealed partial class VoyageAIServiceSettings
 {
@@ -42,45 +43,20 @@ public sealed partial class VoyageAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions for resulting output embeddings.
-	/// This setting maps to <c>output_dimension</c> in the VoyageAI documentation.
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The data type for the embeddings to be returned.
-	/// This setting maps to <c>output_dtype</c> in the VoyageAI documentation.
-	/// Permitted values: float, int8, bit.
-	/// <c>int8</c> is a synonym of <c>byte</c> in the VoyageAI documentation.
-	/// <c>bit</c> is a synonym of <c>binary</c> in the VoyageAI documentation.
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#embedding_type']/*"/>
 	public float? EmbeddingType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the VoyageAI documentation for the list of available text embedding and rerank models.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from VoyageAI.
-	/// The <c>voyageai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For both <c>text_embedding</c> and <c>rerank</c>, it is set to <c>2000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings']/*"/>
 public readonly partial struct VoyageAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings Instance { get; init; }
@@ -100,80 +76,42 @@ public readonly partial struct VoyageAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions for resulting output embeddings.
-	/// This setting maps to <c>output_dimension</c> in the VoyageAI documentation.
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The data type for the embeddings to be returned.
-	/// This setting maps to <c>output_dtype</c> in the VoyageAI documentation.
-	/// Permitted values: float, int8, bit.
-	/// <c>int8</c> is a synonym of <c>byte</c> in the VoyageAI documentation.
-	/// <c>bit</c> is a synonym of <c>binary</c> in the VoyageAI documentation.
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#embedding_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor EmbeddingType(float? value)
 	{
 		Instance.EmbeddingType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the VoyageAI documentation for the list of available text embedding and rerank models.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from VoyageAI.
-	/// The <c>voyageai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For both <c>text_embedding</c> and <c>rerank</c>, it is set to <c>2000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from VoyageAI.
-	/// The <c>voyageai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For both <c>text_embedding</c> and <c>rerank</c>, it is set to <c>2000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from VoyageAI.
-	/// The <c>voyageai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For both <c>text_embedding</c> and <c>rerank</c>, it is set to <c>2000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAIServiceSettings.g.xml" path="doc/member[@key='inference._types.VoyageAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

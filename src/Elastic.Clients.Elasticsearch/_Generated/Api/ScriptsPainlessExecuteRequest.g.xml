@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.scripts_painless_execute.Request"><summary><para>
+Run a script.
+</para>
+<para>
+Runs a script and returns a result.
+Use this API to build and test scripts, such as when defining a script for a runtime field.
+This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+</para>
+<para>
+The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+</para>
+<para>
+Each context requires a script, but additional parameters depend on the context you're using for that script.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.Request#context"><summary><para>
+The context that the script should run in.
+NOTE: Result ordering in the field contexts is not guaranteed.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.Request#context_setup"><summary><para>
+Additional parameters for the <c>context</c>.
+NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
+</para></summary></member>
+  <member key="_global.scripts_painless_execute.Request#script"><summary><para>
+The Painless script to run.
+</para></summary></member>
+</doc>

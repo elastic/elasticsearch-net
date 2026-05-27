@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeInfoSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoSettingsConverter))]
 public sealed partial class NodeInfoSettings
 {

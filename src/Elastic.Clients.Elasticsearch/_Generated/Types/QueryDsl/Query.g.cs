@@ -39,428 +39,71 @@ public partial class Query
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? Bool { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>("bool"); set => SetVariant("bool", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery? Boosting { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery>("boosting"); set => SetVariant("boosting", value); }
-
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery? CombinedFields { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery>("combined_fields"); set => SetVariant("combined_fields", value); }
 	[System.Obsolete("Deprecated in '7.3.0'.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery? Common { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery>("common"); set => SetVariant("common", value); }
-
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery? ConstantScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery>("constant_score"); set => SetVariant("constant_score", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery? DisMax { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery>("dis_max"); set => SetVariant("dis_max", value); }
-
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery? DistanceFeature { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery>("distance_feature"); set => SetVariant("distance_feature", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>("exists"); set => SetVariant("exists", value); }
-
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery? FunctionScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery>("function_score"); set => SetVariant("function_score", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery? Fuzzy { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery>("fuzzy"); set => SetVariant("fuzzy", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery? GeoBoundingBox { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery>("geo_bounding_box"); set => SetVariant("geo_bounding_box", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery? GeoDistance { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery>("geo_distance"); set => SetVariant("geo_distance", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery? GeoGrid { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery>("geo_grid"); set => SetVariant("geo_grid", value); }
 	[System.Obsolete("Deprecated in '7.12.0'. Use geo-shape instead.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery? GeoPolygon { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery>("geo_polygon"); set => SetVariant("geo_polygon", value); }
-
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery? GeoShape { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery>("geo_shape"); set => SetVariant("geo_shape", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery? HasChild { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery>("has_child"); set => SetVariant("has_child", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery? HasParent { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery>("has_parent"); set => SetVariant("has_parent", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>("ids"); set => SetVariant("ids", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery? Intervals { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>("intervals"); set => SetVariant("intervals", value); }
-
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get => GetVariant<Elastic.Clients.Elasticsearch.KnnQuery>("knn"); set => SetVariant("knn", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>("match"); set => SetVariant("match", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>("match_all"); set => SetVariant("match_all", value); }
-
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery? MatchBoolPrefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery>("match_bool_prefix"); set => SetVariant("match_bool_prefix", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery? MatchNone { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery>("match_none"); set => SetVariant("match_none", value); }
-
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery? MatchPhrase { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery>("match_phrase"); set => SetVariant("match_phrase", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery? MatchPhrasePrefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery>("match_phrase_prefix"); set => SetVariant("match_phrase_prefix", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery? MoreLikeThis { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery>("more_like_this"); set => SetVariant("more_like_this", value); }
-
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery? MultiMatch { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery>("multi_match"); set => SetVariant("multi_match", value); }
-
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery? Nested { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery>("nested"); set => SetVariant("nested", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery? ParentId { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery>("parent_id"); set => SetVariant("parent_id", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery? Percolate { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery>("percolate"); set => SetVariant("percolate", value); }
-
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery? Pinned { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery>("pinned"); set => SetVariant("pinned", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>("prefix"); set => SetVariant("prefix", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery? QueryString { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery>("query_string"); set => SetVariant("query_string", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>("range"); set => SetVariant("range", value); }
-
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery? RankFeature { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery>("rank_feature"); set => SetVariant("rank_feature", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery? Regexp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery>("regexp"); set => SetVariant("regexp", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery? Rule { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery>("rule"); set => SetVariant("rule", value); }
-
-	/// <summary>
-	/// <para>
-	/// Filters documents based on a provided script.
-	/// The script query is typically used in a filter context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery? Script { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery>("script"); set => SetVariant("script", value); }
-
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery? ScriptScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery>("script_score"); set => SetVariant("script_score", value); }
-
-	/// <summary>
-	/// <para>
-	/// A semantic query to semantic_text field types
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery? Semantic { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery>("semantic"); set => SetVariant("semantic", value); }
-
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery? Shape { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery>("shape"); set => SetVariant("shape", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? SimpleQueryString { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>("simple_query_string"); set => SetVariant("simple_query_string", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? SpanContaining { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>("span_containing"); set => SetVariant("span_containing", value); }
-
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? SpanFieldMasking { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>("span_field_masking"); set => SetVariant("span_field_masking", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? SpanFirst { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>("span_first"); set => SetVariant("span_first", value); }
-
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? SpanMulti { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery>("span_multi"); set => SetVariant("span_multi", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? SpanNear { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery>("span_near"); set => SetVariant("span_near", value); }
-
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? SpanNot { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery>("span_not"); set => SetVariant("span_not", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? SpanOr { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery>("span_or"); set => SetVariant("span_or", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? SpanTerm { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery>("span_term"); set => SetVariant("span_term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? SpanWithin { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery>("span_within"); set => SetVariant("span_within", value); }
-
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery? SparseVector { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery>("sparse_vector"); set => SetVariant("sparse_vector", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? Term { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>("term"); set => SetVariant("term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>("terms"); set => SetVariant("terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery? TermsSet { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery>("terms_set"); set => SetVariant("terms_set", value); }
-
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	[System.Obsolete("Deprecated in '8.15.0'.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? TextExpansion { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery>("text_expansion"); set => SetVariant("text_expansion", value); }
 	[System.Obsolete("Deprecated in '7.0.0'. https://www.elastic.co/guide/en/elasticsearch/reference/7.x/removal-of-types.html")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery? Type { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery>("type"); set => SetVariant("type", value); }
-
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	[System.Obsolete("Deprecated in '8.15.0'.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? WeightedTokens { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery>("weighted_tokens"); set => SetVariant("weighted_tokens", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>("wildcard"); set => SetVariant("wildcard", value); }
-
-	/// <summary>
-	/// <para>
-	/// A query that accepts any other query as base64 encoded string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery? Wrapper { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery>("wrapper"); set => SetVariant("wrapper", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Bool = value };
@@ -579,77 +222,42 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.Query instance) => new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
 		Instance.Bool = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Bool()
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Boosting(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery? value)
 	{
 		Instance.Boosting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Boosting(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>> action)
 	{
 		Instance.Boosting = Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> CombinedFields(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery? value)
 	{
 		Instance.CombinedFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> CombinedFields(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>> action)
 	{
 		Instance.CombinedFields = Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>.Build(action);
@@ -670,213 +278,114 @@ public readonly partial struct QueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ConstantScore(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery? value)
 	{
 		Instance.ConstantScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ConstantScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>> action)
 	{
 		Instance.ConstantScore = Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DisMax(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery? value)
 	{
 		Instance.DisMax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DisMax(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>> action)
 	{
 		Instance.DisMax = Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DistanceFeature(Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery? value)
 	{
 		Instance.DistanceFeature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
 		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
 		Instance.Exists = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery? value)
 	{
 		Instance.FunctionScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FunctionScore()
 	{
 		Instance.FunctionScore = Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FunctionScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument>>? action)
 	{
 		Instance.FunctionScore = Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery? value)
 	{
 		Instance.GeoBoundingBox = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoBoundingBox(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>> action)
 	{
 		Instance.GeoBoundingBox = Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery? value)
 	{
 		Instance.GeoDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoDistance(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>> action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoGrid(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery? value)
 	{
 		Instance.GeoGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoGrid(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument>.Build(action);
@@ -897,569 +406,300 @@ public readonly partial struct QueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery? value)
 	{
 		Instance.GeoShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> GeoShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>> action)
 	{
 		Instance.GeoShape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery? value)
 	{
 		Instance.HasChild = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> HasChild(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>> action)
 	{
 		Instance.HasChild = Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery? value)
 	{
 		Instance.HasParent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> HasParent(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>> action)
 	{
 		Instance.HasParent = Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Ids()
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery? value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Intervals(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>> action)
 	{
 		Instance.Intervals = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnQuery? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
 	{
 		Instance.MatchAll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchAll()
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery? value)
 	{
 		Instance.MatchBoolPrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchBoolPrefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument>> action)
 	{
 		Instance.MatchBoolPrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchNone(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery? value)
 	{
 		Instance.MatchNone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchNone()
 	{
 		Instance.MatchNone = Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchNone(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor>? action)
 	{
 		Instance.MatchNone = Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchPhrase(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery? value)
 	{
 		Instance.MatchPhrase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchPhrase(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument>> action)
 	{
 		Instance.MatchPhrase = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchPhrasePrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery? value)
 	{
 		Instance.MatchPhrasePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchPhrasePrefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>> action)
 	{
 		Instance.MatchPhrasePrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MoreLikeThis(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery? value)
 	{
 		Instance.MoreLikeThis = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MoreLikeThis(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument>> action)
 	{
 		Instance.MoreLikeThis = Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MultiMatch(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery? value)
 	{
 		Instance.MultiMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MultiMatch(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument>> action)
 	{
 		Instance.MultiMatch = Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery? value)
 	{
 		Instance.Nested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>> action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ParentId(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery? value)
 	{
 		Instance.ParentId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ParentId()
 	{
 		Instance.ParentId = Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ParentId(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor>? action)
 	{
 		Instance.ParentId = Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery? value)
 	{
 		Instance.Percolate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Percolate(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>> action)
 	{
 		Instance.Percolate = Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery? value)
 	{
 		Instance.Pinned = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Pinned(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery? value)
 	{
 		Instance.QueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument>> action)
 	{
 		Instance.QueryString = Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery? value)
 	{
 		Instance.RankFeature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> RankFeature(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument>> action)
 	{
 		Instance.RankFeature = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery? value)
 	{
 		Instance.Regexp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument>> action)
 	{
 		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument>.Build(action);
@@ -1478,406 +718,216 @@ public readonly partial struct QueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters documents based on a provided script.
-	/// The script query is typically used in a filter context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters documents based on a provided script.
-	/// The script query is typically used in a filter context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery? value)
 	{
 		Instance.ScriptScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>> action)
 	{
 		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A semantic query to semantic_text field types
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery? value)
 	{
 		Instance.Semantic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A semantic query to semantic_text field types
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Semantic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor> action)
 	{
 		Instance.Semantic = Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery? value)
 	{
 		Instance.Shape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>> action)
 	{
 		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
 	{
 		Instance.SimpleQueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? value)
 	{
 		Instance.SpanContaining = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? value)
 	{
 		Instance.SpanFieldMasking = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanFieldMasking(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? value)
 	{
 		Instance.SpanFirst = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanFirst(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? value)
 	{
 		Instance.SpanMulti = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanMulti(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? value)
 	{
 		Instance.SpanNear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanNear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? value)
 	{
 		Instance.SpanNot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanNot(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? value)
 	{
 		Instance.SpanOr = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanOr(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? value)
 	{
 		Instance.SpanTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanTerm(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? value)
 	{
 		Instance.SpanWithin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SpanWithin(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery? value)
 	{
 		Instance.SparseVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> SparseVector(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>> action)
 	{
 		Instance.SparseVector = Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TermsSet(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery? value)
 	{
 		Instance.TermsSet = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TermsSet(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument>> action)
 	{
 		Instance.TermsSet = Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument>.Build(action);
@@ -1885,11 +935,6 @@ public readonly partial struct QueryDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? value)
 	{
 		Instance.TextExpansion = value;
@@ -1897,11 +942,6 @@ public readonly partial struct QueryDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> TextExpansion(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>> action)
 	{
 		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument>.Build(action);
@@ -1923,11 +963,6 @@ public readonly partial struct QueryDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> WeightedTokens(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? value)
 	{
 		Instance.WeightedTokens = value;
@@ -1935,55 +970,30 @@ public readonly partial struct QueryDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> WeightedTokens(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>> action)
 	{
 		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that accepts any other query as base64 encoded string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Wrapper(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery? value)
 	{
 		Instance.Wrapper = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that accepts any other query as base64 encoded string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Wrapper(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor> action)
 	{
 		Instance.Wrapper = Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.Build(action);
@@ -2018,110 +1028,60 @@ public readonly partial struct QueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.Query instance) => new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
 		Instance.Bool = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Bool()
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Bool<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Boosting(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery? value)
 	{
 		Instance.Boosting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Boosting(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor> action)
 	{
 		Instance.Boosting = Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching a <c>positive</c> query while reducing the relevance score of documents that also match a <c>negative</c> query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Boosting<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<T>> action)
 	{
 		Instance.Boosting = Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor CombinedFields(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery? value)
 	{
 		Instance.CombinedFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor CombinedFields(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor> action)
 	{
 		Instance.CombinedFields = Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>combined_fields</c> query supports searching multiple text fields as if their contents had been indexed into one combined field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor CombinedFields<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<T>> action)
 	{
 		Instance.CombinedFields = Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<T>.Build(action);
@@ -2149,314 +1109,168 @@ public readonly partial struct QueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ConstantScore(Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery? value)
 	{
 		Instance.ConstantScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ConstantScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor> action)
 	{
 		Instance.ConstantScore = Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps a filter query and returns every matching document with a relevance score equal to the <c>boost</c> parameter value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ConstantScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<T>> action)
 	{
 		Instance.ConstantScore = Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DisMax(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery? value)
 	{
 		Instance.DisMax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DisMax(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor> action)
 	{
 		Instance.DisMax = Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents matching one or more wrapped queries, called query clauses or clauses.
-	/// If a returned document matches multiple query clauses, the <c>dis_max</c> query assigns the document the highest relevance score from any matching clause, plus a tie breaking increment for any additional matching subqueries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DisMax<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<T>> action)
 	{
 		Instance.DisMax = Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature(Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery? value)
 	{
 		Instance.DistanceFeature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
 		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents closer to a provided origin date or point.
-	/// For example, you can use this query to give more weight to documents closer to a certain date or location.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor DistanceFeature<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery> action)
 	{
 		Instance.DistanceFeature = Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
 		Instance.Exists = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Exists<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery? value)
 	{
 		Instance.FunctionScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FunctionScore()
 	{
 		Instance.FunctionScore = Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FunctionScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor>? action)
 	{
 		Instance.FunctionScore = Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>function_score</c> enables you to modify the score of documents that are retrieved by a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FunctionScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<T>>? action)
 	{
 		Instance.FunctionScore = Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Fuzzy(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms similar to the search term, as measured by a Levenshtein edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Fuzzy<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<T>> action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery? value)
 	{
 		Instance.GeoBoundingBox = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoBoundingBox(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor> action)
 	{
 		Instance.GeoBoundingBox = Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches geo_point and geo_shape values that intersect a bounding box.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoBoundingBox<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<T>> action)
 	{
 		Instance.GeoBoundingBox = Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery? value)
 	{
 		Instance.GeoDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoDistance(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor> action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values within a given distance of a geopoint.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoDistance<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<T>> action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoGrid(Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery? value)
 	{
 		Instance.GeoGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoGrid(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches <c>geo_point</c> and <c>geo_shape</c> values that intersect a grid cell from a GeoGrid aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoGrid<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<T>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<T>.Build(action);
@@ -2484,786 +1298,414 @@ public readonly partial struct QueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery? value)
 	{
 		Instance.GeoShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor> action)
 	{
 		Instance.GeoShape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter documents indexed using either the <c>geo_shape</c> or the <c>geo_point</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor GeoShape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<T>> action)
 	{
 		Instance.GeoShape = Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery? value)
 	{
 		Instance.HasChild = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasChild(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor> action)
 	{
 		Instance.HasChild = Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns parent documents whose joined child documents match a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasChild<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<T>> action)
 	{
 		Instance.HasChild = Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery? value)
 	{
 		Instance.HasParent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasParent(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor> action)
 	{
 		Instance.HasParent = Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents whose joined parent document matches a provided query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor HasParent<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<T>> action)
 	{
 		Instance.HasParent = Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Ids()
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery? value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Intervals(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor> action)
 	{
 		Instance.Intervals = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on the order and proximity of matching terms.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Intervals<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<T>> action)
 	{
 		Instance.Intervals = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Knn(Elastic.Clients.Elasticsearch.KnnQuery? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Knn(System.Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Finds the k nearest vectors to a query vector, as measured by a similarity
-	/// metric. knn query finds nearest vectors through approximate search on indexed
-	/// dense_vectors.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<T>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
 	{
 		Instance.MatchAll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchAll()
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery? value)
 	{
 		Instance.MatchBoolPrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchBoolPrefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor> action)
 	{
 		Instance.MatchBoolPrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes its input and constructs a <c>bool</c> query from the terms.
-	/// Each term except the last is used in a <c>term</c> query.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchBoolPrefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<T>> action)
 	{
 		Instance.MatchBoolPrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchNone(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery? value)
 	{
 		Instance.MatchNone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchNone()
 	{
 		Instance.MatchNone = Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches no documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchNone(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor>? action)
 	{
 		Instance.MatchNone = Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrase(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery? value)
 	{
 		Instance.MatchPhrase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrase(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor> action)
 	{
 		Instance.MatchPhrase = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzes the text and creates a phrase query out of the analyzed text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrase<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<T>> action)
 	{
 		Instance.MatchPhrase = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrasePrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery? value)
 	{
 		Instance.MatchPhrasePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrasePrefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor> action)
 	{
 		Instance.MatchPhrasePrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain the words of a provided text, in the same order as provided.
-	/// The last term of the provided text is treated as a prefix, matching any words that begin with that term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchPhrasePrefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<T>> action)
 	{
 		Instance.MatchPhrasePrefix = Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MoreLikeThis(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery? value)
 	{
 		Instance.MoreLikeThis = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MoreLikeThis(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor> action)
 	{
 		Instance.MoreLikeThis = Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that are "like" a given set of documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MoreLikeThis<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<T>> action)
 	{
 		Instance.MoreLikeThis = Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MultiMatch(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery? value)
 	{
 		Instance.MultiMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MultiMatch(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor> action)
 	{
 		Instance.MultiMatch = Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to search for a provided text, number, date or boolean value across multiple fields.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MultiMatch<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<T>> action)
 	{
 		Instance.MultiMatch = Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Nested(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery? value)
 	{
 		Instance.Nested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor> action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wraps another query to search nested fields.
-	/// If an object matches the search, the nested query returns the root parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<T>> action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ParentId(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery? value)
 	{
 		Instance.ParentId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ParentId()
 	{
 		Instance.ParentId = Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns child documents joined to a specific parent document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ParentId(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor>? action)
 	{
 		Instance.ParentId = Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery? value)
 	{
 		Instance.Percolate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Percolate(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor> action)
 	{
 		Instance.Percolate = Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches queries stored in an index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Percolate<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<T>> action)
 	{
 		Instance.Percolate = Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery? value)
 	{
 		Instance.Pinned = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Pinned(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Promotes selected documents to rank higher than those matching a given query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Pinned<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<T>> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery? value)
 	{
 		Instance.QueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor> action)
 	{
 		Instance.QueryString = Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a strict syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryString<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<T>> action)
 	{
 		Instance.QueryString = Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery? value)
 	{
 		Instance.RankFeature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor RankFeature(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor> action)
 	{
 		Instance.RankFeature = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the relevance score of documents based on the numeric value of a <c>rank_feature</c> or <c>rank_features</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor RankFeature<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<T>> action)
 	{
 		Instance.RankFeature = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery? value)
 	{
 		Instance.Regexp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor> action)
 	{
 		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Regexp<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<T>> action)
 	{
 		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<T>.Build(action);
@@ -3288,586 +1730,312 @@ public readonly partial struct QueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters documents based on a provided script.
-	/// The script query is typically used in a filter context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters documents based on a provided script.
-	/// The script query is typically used in a filter context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery? value)
 	{
 		Instance.ScriptScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor> action)
 	{
 		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a script to provide a custom score for returned documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor ScriptScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<T>> action)
 	{
 		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A semantic query to semantic_text field types
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Semantic(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery? value)
 	{
 		Instance.Semantic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A semantic query to semantic_text field types
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Semantic(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor> action)
 	{
 		Instance.Semantic = Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery? value)
 	{
 		Instance.Shape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Shape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor> action)
 	{
 		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries documents that contain fields indexed using the <c>shape</c> type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Shape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<T>> action)
 	{
 		Instance.Shape = Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
 	{
 		Instance.SimpleQueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SimpleQueryString<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery? value)
 	{
 		Instance.SpanContaining = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanContaining(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor> action)
 	{
 		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which enclose another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanContaining<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<T>> action)
 	{
 		Instance.SpanContaining = Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery? value)
 	{
 		Instance.SpanFieldMasking = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFieldMasking(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor> action)
 	{
 		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wrapper to allow span queries to participate in composite single-field span queries by <em>lying</em> about their search field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFieldMasking<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<T>> action)
 	{
 		Instance.SpanFieldMasking = Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery? value)
 	{
 		Instance.SpanFirst = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFirst(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor> action)
 	{
 		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans near the beginning of a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanFirst<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<T>> action)
 	{
 		Instance.SpanFirst = Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery? value)
 	{
 		Instance.SpanMulti = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanMulti(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor> action)
 	{
 		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows you to wrap a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query) as a <c>span</c> query, so it can be nested.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanMulti<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<T>> action)
 	{
 		Instance.SpanMulti = Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNear(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery? value)
 	{
 		Instance.SpanNear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor> action)
 	{
 		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans which are near one another.
-	/// You can specify <c>slop</c>, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNear<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<T>> action)
 	{
 		Instance.SpanNear = Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNot(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery? value)
 	{
 		Instance.SpanNot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNot(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor> action)
 	{
 		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes matches which overlap with another span query or which are within x tokens before (controlled by the parameter <c>pre</c>) or y tokens after (controlled by the parameter <c>post</c>) another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanNot<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<T>> action)
 	{
 		Instance.SpanNot = Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanOr(Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery? value)
 	{
 		Instance.SpanOr = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanOr(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor> action)
 	{
 		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches the union of its span clauses.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanOr<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<T>> action)
 	{
 		Instance.SpanOr = Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanTerm(Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery? value)
 	{
 		Instance.SpanTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanTerm(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor> action)
 	{
 		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches spans containing a term.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanTerm<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<T>> action)
 	{
 		Instance.SpanTerm = Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery? value)
 	{
 		Instance.SpanWithin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanWithin(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor> action)
 	{
 		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns matches which are enclosed inside another span query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SpanWithin<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>> action)
 	{
 		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SparseVector(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery? value)
 	{
 		Instance.SparseVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SparseVector(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor> action)
 	{
 		Instance.SparseVector = Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Using input query vectors or a natural language processing model to convert a query into a list of token-weight pairs, queries against a sparse vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor SparseVector<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<T>> action)
 	{
 		Instance.SparseVector = Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TermsSet(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery? value)
 	{
 		Instance.TermsSet = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TermsSet(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor> action)
 	{
 		Instance.TermsSet = Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a minimum number of exact terms in a provided field.
-	/// To return a document, a required number of terms must exactly match the field values, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TermsSet<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<T>> action)
 	{
 		Instance.TermsSet = Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<T>.Build(action);
@@ -3875,11 +2043,6 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery? value)
 	{
 		Instance.TextExpansion = value;
@@ -3887,11 +2050,6 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor> action)
 	{
 		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor.Build(action);
@@ -3899,11 +2057,6 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Uses a natural language processing model to convert the query text into a list of token-weight pairs which are then used in a query against a sparse vector or rank features field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor TextExpansion<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<T>> action)
 	{
 		Instance.TextExpansion = Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<T>.Build(action);
@@ -3925,11 +2078,6 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery? value)
 	{
 		Instance.WeightedTokens = value;
@@ -3937,11 +2085,6 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor> action)
 	{
 		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor.Build(action);
@@ -3949,66 +2092,36 @@ public readonly partial struct QueryDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.15.0'.")]
-	/// <summary>
-	/// <para>
-	/// Supports returning text_expansion query results by sending in precomputed tokens with the query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor WeightedTokens<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<T>> action)
 	{
 		Instance.WeightedTokens = Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that accepts any other query as base64 encoded string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wrapper(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery? value)
 	{
 		Instance.Wrapper = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that accepts any other query as base64 encoded string.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wrapper(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor> action)
 	{
 		Instance.Wrapper = Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.Build(action);

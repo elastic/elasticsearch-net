@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RolesStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RolesStatsConverter))]
 public sealed partial class RolesStats
 {
@@ -42,10 +43,6 @@ public sealed partial class RolesStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document-level security (DLS) statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="RolesStats.g.xml" path="doc/member[@key='security._types.RolesStats#dls']/*"/>
 	public required Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls Dls { get; set; }
 }

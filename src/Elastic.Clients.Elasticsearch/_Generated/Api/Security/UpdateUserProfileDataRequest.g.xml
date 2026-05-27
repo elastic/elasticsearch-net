@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.update_user_profile_data.Request"><summary><para>
+Update user profile data.
+</para>
+<para>
+Update specific data for the user profile that is associated with a unique ID.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para>
+<para>
+To use this API, you must have one of the following privileges:
+</para>
+<list type="bullet">
+<item>
+<para>
+The <c>manage_user_profile</c> cluster privilege.
+</para>
+</item>
+<item>
+<para>
+The <c>update_profile_data</c> global privilege for the namespaces that are referenced in the request.
+</para>
+</item>
+</list>
+<para>
+This API updates the <c>labels</c> and <c>data</c> fields of an existing user profile document with JSON objects.
+New keys and their values are added to the profile document and conflicting keys are replaced by data that's included in the request.
+</para>
+<para>
+For both labels and data, content is namespaced by the top-level fields.
+The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#data"><summary><para>
+Non-searchable data that you want to associate with the user profile.
+This field supports a nested data structure.
+Within the <c>data</c> object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+The data object is not searchable, but can be retrieved with the get user profile API.
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#if_primary_term"><summary><para>
+Only perform the operation if the document has this primary term.
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#if_seq_no"><summary><para>
+Only perform the operation if the document has this sequence number.
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#labels"><summary><para>
+Searchable data that you want to associate with the user profile.
+This field supports a nested data structure.
+Within the labels object, top-level keys cannot begin with an underscore (<c>_</c>) or contain a period (<c>.</c>).
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#refresh"><summary><para>
+If 'true', Elasticsearch refreshes the affected shards to make this operation
+visible to search.
+If 'wait_for', it waits for a refresh to make this operation visible to search.
+If 'false', nothing is done with refreshes.
+</para></summary></member>
+  <member key="security.update_user_profile_data.Request#uid"><summary><para>
+A unique identifier for the user profile.
+</para></summary></member>
+</doc>

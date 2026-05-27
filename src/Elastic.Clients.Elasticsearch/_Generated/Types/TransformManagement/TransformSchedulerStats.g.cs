@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_node_stats.TransformSchedulerStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformSchedulerStatsConverter))]
 public sealed partial class TransformSchedulerStats
 {

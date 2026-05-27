@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.NestedProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.NestedPropertyConverter))]
 public sealed partial class NestedProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -44,11 +45,7 @@ public sealed partial class NestedProperty : Elastic.Clients.Elasticsearch.Mappi
 	public bool? IncludeInParent { get; set; }
 	public bool? IncludeInRoot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -57,6 +54,7 @@ public sealed partial class NestedProperty : Elastic.Clients.Elasticsearch.Mappi
 	public string Type => "nested";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.NestedProperty']/*"/>
 public readonly partial struct NestedPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.NestedProperty Instance { get; init; }
@@ -130,33 +128,21 @@ public readonly partial struct NestedPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -208,6 +194,7 @@ public readonly partial struct NestedPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.NestedProperty']/*"/>
 public readonly partial struct NestedPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.NestedProperty Instance { get; init; }
@@ -287,33 +274,21 @@ public readonly partial struct NestedPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedProperty.g.xml" path="doc/member[@key='_types.mapping.NestedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

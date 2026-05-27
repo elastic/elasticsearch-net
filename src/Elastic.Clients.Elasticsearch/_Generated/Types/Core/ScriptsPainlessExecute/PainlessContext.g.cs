@@ -26,81 +26,37 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.Json.PainlessContextConverter))]
 public enum PainlessContext
 {
-	/// <summary>
-	/// <para>
-	/// The context for boolean fields. The script returns a <c>true</c> or <c>false</c> response.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#boolean_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "boolean_field")]
 	BooleanField,
-	/// <summary>
-	/// <para>
-	/// The context for composite runtime fields. The script returns a map of values.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#composite_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "composite_field")]
 	CompositeField,
-	/// <summary>
-	/// <para>
-	/// The context for date fields. <c>emit</c> takes a long value and the script returns a sorted list of dates.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#date_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "date_field")]
 	DateField,
-	/// <summary>
-	/// <para>
-	/// The context for double numeric fields. The script returns a sorted list of double values.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#double_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "double_field")]
 	DoubleField,
-	/// <summary>
-	/// <para>
-	/// Treats scripts as if they were run inside a script query.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#filter']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "filter")]
 	Filter,
-	/// <summary>
-	/// <para>
-	/// The context for geo-point fields. <c>emit</c> takes two double parameters, the latitude and longitude values, and the script returns an object in GeoJSON format containing the coordinates for the geo point.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#geo_point_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "geo_point_field")]
 	GeoPointField,
-	/// <summary>
-	/// <para>
-	/// The context for <c>ip</c> fields. The script returns a sorted list of IP addresses.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#ip_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "ip_field")]
 	IpField,
-	/// <summary>
-	/// <para>
-	/// The context for keyword fields. The script returns a sorted list of string values.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#keyword_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "keyword_field")]
 	KeywordField,
-	/// <summary>
-	/// <para>
-	/// The context for long numeric fields. The script returns a sorted list of long values.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#long_field']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "long_field")]
 	LongField,
-	/// <summary>
-	/// <para>
-	/// The default context if no other context is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#painless_test']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "painless_test")]
 	PainlessTest,
-	/// <summary>
-	/// <para>
-	/// Treats scripts as if they were run inside a <c>script_score</c> function in a <c>function_score</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContext.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContext#score']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "score")]
 	Score
 }

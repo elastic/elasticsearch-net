@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.DanglingIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.Json.DanglingIndexConverter))]
 public sealed partial class DanglingIndex
 {

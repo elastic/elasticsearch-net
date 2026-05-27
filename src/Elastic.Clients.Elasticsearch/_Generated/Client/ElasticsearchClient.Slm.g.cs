@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient> class for mocking.
 	/// </summary>
 	protected SnapshotLifecycleManagementNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 	{
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
@@ -52,6 +54,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
@@ -61,12 +65,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
@@ -75,6 +83,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
@@ -84,12 +94,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
@@ -98,6 +112,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
@@ -107,12 +123,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
@@ -121,6 +141,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteLifecycleRequest.g.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
@@ -130,12 +152,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
@@ -144,6 +170,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
@@ -153,12 +181,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
@@ -167,6 +199,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/ExecuteRetentionRequest.g.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.execute_retention.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
@@ -176,12 +210,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -190,6 +228,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -199,6 +239,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
@@ -207,6 +249,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
@@ -216,12 +260,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -230,6 +278,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
@@ -239,6 +289,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
@@ -247,6 +299,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetLifecycleRequest.g.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
@@ -256,12 +310,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
@@ -270,6 +328,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
@@ -279,12 +339,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
@@ -293,6 +357,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
@@ -302,12 +368,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
@@ -316,6 +386,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
@@ -325,12 +397,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
@@ -339,6 +415,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/GetSlmStatusRequest.g.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.get_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
@@ -348,12 +426,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
@@ -362,6 +444,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
@@ -371,12 +455,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
@@ -385,6 +473,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/PutLifecycleRequest.g.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.put_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
@@ -394,12 +484,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
@@ -408,6 +502,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
@@ -417,12 +513,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
@@ -431,6 +531,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
@@ -440,12 +542,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
@@ -454,6 +560,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
@@ -463,12 +571,16 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
@@ -477,6 +589,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clien
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SnapshotLifecycleManagement/StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();

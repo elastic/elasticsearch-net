@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelLocation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelLocationConverter))]
 public sealed partial class TrainedModelLocation
 {

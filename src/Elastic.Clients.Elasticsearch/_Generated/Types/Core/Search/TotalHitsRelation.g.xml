@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.TotalHitsRelation#eq"><summary><para>
+Accurate
+</para></summary></member>
+  <member key="_global.search._types.TotalHitsRelation#gte"><summary><para>
+Lower bound, including returned events or sequences
+</para></summary></member>
+</doc>

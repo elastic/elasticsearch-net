@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SharedFileSystemRepositoryConverter))]
 public sealed partial class SharedFileSystemRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
@@ -42,23 +43,16 @@ public sealed partial class SharedFileSystemRepository : Elastic.Clients.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SharedFileSystemRepository.g.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository#settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The shared file system repository type.
-	/// </para>
-	/// </summary>
+	/// <include file="SharedFileSystemRepository.g.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository#type']/*"/>
 	public string Type => "fs";
 
 	public string? Uuid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository']/*"/>
 public readonly partial struct SharedFileSystemRepositoryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository Instance { get; init; }
@@ -78,22 +72,14 @@ public readonly partial struct SharedFileSystemRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepository(Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SharedFileSystemRepository.g.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SharedFileSystemRepository.g.xml" path="doc/member[@key='snapshot._types.SharedFileSystemRepository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettingsDescriptor> action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SharedFileSystemRepositorySettingsDescriptor.Build(action);

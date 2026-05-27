@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ChiSquareHeuristicConverter))]
 public sealed partial class ChiSquareHeuristic
 {
@@ -43,21 +44,14 @@ public sealed partial class ChiSquareHeuristic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="ChiSquareHeuristic.g.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic#background_is_superset']/*"/>
 	public required bool BackgroundIsSuperset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
+	/// <include file="ChiSquareHeuristic.g.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic#include_negatives']/*"/>
 	public required bool IncludeNegatives { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic']/*"/>
 public readonly partial struct ChiSquareHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct ChiSquareHeuristicDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="ChiSquareHeuristic.g.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic#background_is_superset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor BackgroundIsSuperset(bool value = true)
 	{
 		Instance.BackgroundIsSuperset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
+	/// <include file="ChiSquareHeuristic.g.xml" path="doc/member[@key='_types.aggregations.ChiSquareHeuristic#include_negatives']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor IncludeNegatives(bool value = true)
 	{
 		Instance.IncludeNegatives = value;

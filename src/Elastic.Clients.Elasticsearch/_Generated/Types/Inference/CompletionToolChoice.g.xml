@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.CompletionToolChoice"><summary><para>
+Controls which tool is called by the model.
+</para></summary></member>
+  <member key="inference._types.CompletionToolChoice#function"><summary><para>
+The tool choice function.
+</para></summary></member>
+  <member key="inference._types.CompletionToolChoice#type"><summary><para>
+The type of the tool.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FiltersAggregationConverter))]
 public sealed partial class FiltersAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class FiltersAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the named filters aggregation returns the buckets as an object.
-	/// Set to <c>false</c> to return the buckets as an array of objects.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#keyed']/*"/>
 	public bool? Keyed => false;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket']/*"/>
 	public bool? OtherBucket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket_key']/*"/>
 	public string? OtherBucketKey { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation']/*"/>
 public readonly partial struct FiltersAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Instance { get; init; }
@@ -85,44 +70,28 @@ public readonly partial struct FiltersAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> OtherBucket(bool? value = true)
 	{
 		Instance.OtherBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? value)
 	{
 		Instance.OtherBucketKey = value;
@@ -143,6 +112,7 @@ public readonly partial struct FiltersAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation']/*"/>
 public readonly partial struct FiltersAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Instance { get; init; }
@@ -162,55 +132,35 @@ public readonly partial struct FiltersAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfQueryFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor OtherBucket(bool? value = true)
 	{
 		Instance.OtherBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FiltersAggregation.g.xml" path="doc/member[@key='_types.aggregations.FiltersAggregation#other_bucket_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor OtherBucketKey(string? value)
 	{
 		Instance.OtherBucketKey = value;

@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteFilterRequest.g.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
 public sealed partial class DeleteFilterRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a filter.
-/// </para>
-/// <para>
-/// If an anomaly detection job references the filter, you cannot delete the
-/// filter. You must update or delete the job before you can delete the filter.
-/// </para>
-/// </summary>
+/// <include file="DeleteFilterRequest.g.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteFilterRequestConverter))]
 public sealed partial class DeleteFilterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestParameters>
 {
@@ -62,23 +57,12 @@ public sealed partial class DeleteFilterRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ml.delete_filter";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteFilterRequest.g.xml" path="doc/member[@key='ml.delete_filter.Request#filter_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a filter.
-/// </para>
-/// <para>
-/// If an anomaly detection job references the filter, you cannot delete the
-/// filter. You must update or delete the job before you can delete the filter.
-/// </para>
-/// </summary>
+/// <include file="DeleteFilterRequest.g.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_filter.Request']/*"/>
 public readonly partial struct DeleteFilterRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest Instance { get; init; }
@@ -103,11 +87,7 @@ public readonly partial struct DeleteFilterRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteFilterRequest.g.xml" path="doc/member[@key='ml.delete_filter.Request#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.FilterId = value;

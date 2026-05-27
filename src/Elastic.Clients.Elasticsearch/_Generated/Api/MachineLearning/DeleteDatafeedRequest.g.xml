@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_datafeed.Request"><summary><para>
+Delete a datafeed.
+</para></summary></member>
+  <member key="ml.delete_datafeed.Request#datafeed_id"><summary><para>
+A numerical character string that uniquely identifies the datafeed. This
+identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+hyphens, and underscores. It must start and end with alphanumeric
+characters.
+</para></summary></member>
+  <member key="ml.delete_datafeed.Request#force"><summary><para>
+Use to forcefully delete a started datafeed; this method is quicker than
+stopping and deleting the datafeed.
+</para></summary></member>
+</doc>

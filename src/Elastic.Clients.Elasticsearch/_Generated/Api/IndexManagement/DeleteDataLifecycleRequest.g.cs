@@ -23,38 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 public sealed partial class DeleteDataLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data stream lifecycles.
-/// </para>
-/// <para>
-/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DeleteDataLifecycleRequestConverter))]
 public sealed partial class DeleteDataLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>
 {
@@ -81,44 +65,21 @@ public sealed partial class DeleteDataLifecycleRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "indices.delete_data_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted.
-	/// Use <c>*</c> to get all data streams
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data stream lifecycles.
-/// </para>
-/// <para>
-/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 public readonly partial struct DeleteDataLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest Instance { get; init; }
@@ -143,56 +104,35 @@ public readonly partial struct DeleteDataLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted.
-	/// Use <c>*</c> to get all data streams
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

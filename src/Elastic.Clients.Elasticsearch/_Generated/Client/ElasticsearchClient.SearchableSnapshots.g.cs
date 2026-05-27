@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient> class for mocking.
 	/// </summary>
 	protected SearchableSnapshotsNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 	{
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
@@ -61,6 +65,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(nodeId);
@@ -69,6 +75,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse CacheStats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(nodeId);
@@ -78,12 +86,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
@@ -92,6 +104,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor();
@@ -101,6 +115,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(nodeId);
@@ -109,6 +125,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/CacheStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse> CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(nodeId);
@@ -118,12 +136,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
@@ -132,6 +154,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
@@ -141,6 +165,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor(indices);
@@ -149,6 +175,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor(indices);
@@ -158,6 +186,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
@@ -166,6 +196,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
@@ -175,6 +207,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(indices);
@@ -184,12 +218,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
@@ -198,6 +236,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor();
@@ -207,6 +247,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor(indices);
@@ -215,6 +257,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor(indices);
@@ -224,6 +268,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
@@ -232,6 +278,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>();
@@ -241,6 +289,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/ClearCacheRequest.g.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument>(indices);
@@ -250,12 +300,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
@@ -264,6 +318,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Mount(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
@@ -273,12 +329,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse> MountAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
@@ -287,6 +347,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse> MountAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(repository, snapshot);
@@ -296,12 +358,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
@@ -310,6 +376,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
@@ -319,6 +387,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -327,6 +397,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -336,6 +408,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
@@ -344,6 +418,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
@@ -353,6 +429,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
@@ -362,12 +440,16 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
@@ -376,6 +458,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor();
@@ -385,6 +469,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -393,6 +479,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(indices);
@@ -402,6 +490,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
@@ -410,6 +500,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>();
@@ -419,6 +511,8 @@ public partial class SearchableSnapshotsNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/SearchableSnapshots/SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);

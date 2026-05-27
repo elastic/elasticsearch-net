@@ -26,11 +26,7 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SlicesCalculationConverter))]
 public enum SlicesCalculation
 {
-	/// <summary>
-	/// <para>
-	/// Let Elasticsearch choose a reasonable number for most data streams and indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SlicesCalculation.g.xml" path="doc/member[@key='_types.SlicesCalculation#auto']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "auto")]
 	Auto
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms._types.SynonymRule']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.SynonymRuleConverter))]
 public sealed partial class SynonymRule
 {
@@ -42,22 +43,14 @@ public sealed partial class SynonymRule
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the synonym rule.
-	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRule.g.xml" path="doc/member[@key='synonyms._types.SynonymRule#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The synonyms that conform the synonym rule in Solr format.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRule.g.xml" path="doc/member[@key='synonyms._types.SynonymRule#synonyms']/*"/>
 	public required string Synonyms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms._types.SynonymRule']/*"/>
 public readonly partial struct SynonymRuleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.SynonymRule Instance { get; init; }
@@ -77,23 +70,14 @@ public readonly partial struct SynonymRuleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor(Elastic.Clients.Elasticsearch.Synonyms.SynonymRule instance) => new Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.SynonymRule(Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the synonym rule.
-	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRule.g.xml" path="doc/member[@key='synonyms._types.SynonymRule#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The synonyms that conform the synonym rule in Solr format.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymRule.g.xml" path="doc/member[@key='synonyms._types.SynonymRule#synonyms']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor Synonyms(string value)
 	{
 		Instance.Synonyms = value;

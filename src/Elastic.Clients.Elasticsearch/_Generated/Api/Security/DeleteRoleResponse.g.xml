@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_role.Response#found"><summary><para>
+If the role is successfully deleted, <c>found</c> is <c>true</c>.
+Otherwise, <c>found</c> is <c>false</c>.
+</para></summary></member>
+</doc>

@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="GeoIpStatsRequest.g.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
 public sealed partial class GeoIpStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get GeoIP statistics.
-/// </para>
-/// <para>
-/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
-/// </para>
-/// </summary>
+/// <include file="GeoIpStatsRequest.g.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoIpStatsRequestConverter))]
 public sealed partial class GeoIpStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GeoIpStatsRequest : Elastic.Clients.Elasticsearch.Re
 	internal override string OperationName => "ingest.geo_ip_stats";
 }
 
-/// <summary>
-/// <para>
-/// Get GeoIP statistics.
-/// </para>
-/// <para>
-/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
-/// </para>
-/// </summary>
+/// <include file="GeoIpStatsRequest.g.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.Request']/*"/>
 public readonly partial struct GeoIpStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest Instance { get; init; }

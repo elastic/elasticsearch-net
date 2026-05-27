@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.NestedAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.NestedAggregationConverter))]
 public sealed partial class NestedAggregation
 {
@@ -36,14 +37,11 @@ public sealed partial class NestedAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.NestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.NestedAggregation']/*"/>
 public readonly partial struct NestedAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Instance { get; init; }
@@ -63,22 +61,14 @@ public readonly partial struct NestedAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.NestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.NestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Path = value;
@@ -99,6 +89,7 @@ public readonly partial struct NestedAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.NestedAggregation']/*"/>
 public readonly partial struct NestedAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation Instance { get; init; }
@@ -118,22 +109,14 @@ public readonly partial struct NestedAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.NestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the field of type <c>nested</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedAggregation.g.xml" path="doc/member[@key='_types.aggregations.NestedAggregation#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Path = value;

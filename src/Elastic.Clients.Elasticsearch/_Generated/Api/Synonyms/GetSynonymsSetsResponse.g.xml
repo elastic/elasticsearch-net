@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.get_synonyms_sets.Response#count"><summary><para>
+The total number of synonyms sets defined.
+</para></summary></member>
+  <member key="synonyms.get_synonyms_sets.Response#results"><summary><para>
+The identifier and total number of defined synonym rules for each synonyms set.
+</para></summary></member>
+</doc>

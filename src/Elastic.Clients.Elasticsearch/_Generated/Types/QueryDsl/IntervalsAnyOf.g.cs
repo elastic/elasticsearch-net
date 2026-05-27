@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsAnyOfConverter))]
 public sealed partial class IntervalsAnyOf
 {
@@ -42,21 +43,14 @@ public sealed partial class IntervalsAnyOf
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf']/*"/>
 public readonly partial struct IntervalsAnyOfDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Instance { get; init; }
@@ -76,55 +70,35 @@ public readonly partial struct IntervalsAnyOfDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor<TDocument> Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
@@ -146,6 +120,7 @@ public readonly partial struct IntervalsAnyOfDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf']/*"/>
 public readonly partial struct IntervalsAnyOfDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Instance { get; init; }
@@ -165,66 +140,42 @@ public readonly partial struct IntervalsAnyOfDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
@@ -237,11 +188,7 @@ public readonly partial struct IntervalsAnyOfDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAnyOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAnyOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor Intervals<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();

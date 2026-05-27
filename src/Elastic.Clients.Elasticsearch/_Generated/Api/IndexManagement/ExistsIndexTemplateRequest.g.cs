@@ -23,38 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 public sealed partial class ExistsIndexTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check index templates.
-/// </para>
-/// <para>
-/// Check whether index templates exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ExistsIndexTemplateRequestConverter))]
 public sealed partial class ExistsIndexTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>
 {
@@ -81,43 +65,21 @@ public sealed partial class ExistsIndexTemplateRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "indices.exists_index_template";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check index templates.
-/// </para>
-/// <para>
-/// Check whether index templates exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 public readonly partial struct ExistsIndexTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest Instance { get; init; }
@@ -142,44 +104,28 @@ public readonly partial struct ExistsIndexTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

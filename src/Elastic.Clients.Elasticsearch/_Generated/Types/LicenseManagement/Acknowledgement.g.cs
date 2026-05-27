@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post.Acknowledgement']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.AcknowledgementConverter))]
 public sealed partial class Acknowledgement
 {

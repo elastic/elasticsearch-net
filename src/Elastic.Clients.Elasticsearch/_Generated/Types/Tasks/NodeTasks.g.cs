@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks._types.NodeTasks']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.NodeTasksConverter))]
 public sealed partial class NodeTasks
 {

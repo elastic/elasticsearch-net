@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.GeoGridProcessor#children_field"><summary><para>
+If specified and children tiles exist, save those tile addresses to this field as an array of strings.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#field"><summary><para>
+The field to interpret as a geo-tile.=
+The field format is determined by the <c>tile_type</c>.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#non_children_field"><summary><para>
+If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#parent_field"><summary><para>
+If specified and a parent tile exists, save that tile address to this field.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#precision_field"><summary><para>
+If specified, save the tile precision (zoom) as an integer to this field.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#target_field"><summary><para>
+The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#target_format"><summary><para>
+Which format to save the generated polygon in.
+</para></summary></member>
+  <member key="ingest._types.GeoGridProcessor#tile_type"><summary><para>
+Three tile formats are understood: geohash, geotile and geohex.
+</para></summary></member>
+</doc>

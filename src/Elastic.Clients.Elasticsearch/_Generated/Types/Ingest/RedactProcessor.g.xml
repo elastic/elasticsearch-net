@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.RedactProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#field"><summary><para>
+The field to be redacted
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#patterns"><summary><para>
+A list of grok expressions to match and redact named captures with
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#prefix"><summary><para>
+Start a redacted section with this token
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#skip_if_unlicensed"><summary><para>
+If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#suffix"><summary><para>
+End a redacted section with this token
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.RedactProcessor#trace_redact"><summary><para>
+If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
+</para></summary></member>
+</doc>

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Contains statistics about the number of nodes selected by the request.
-/// </para>
-/// </summary>
+/// <include file="NodeStatistics.g.xml" path="doc/member[@key='_types.NodeStatistics']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.NodeStatistics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.NodeStatisticsConverter))]
 public sealed partial class NodeStatistics
 {
@@ -49,25 +46,13 @@ public sealed partial class NodeStatistics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeStatistics.g.xml" path="doc/member[@key='_types.NodeStatistics#failed']/*"/>
 	public required int Failed { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of nodes that responded successfully to the request.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeStatistics.g.xml" path="doc/member[@key='_types.NodeStatistics#successful']/*"/>
 	public required int Successful { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of nodes selected by the request.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeStatistics.g.xml" path="doc/member[@key='_types.NodeStatistics#total']/*"/>
 	public required int Total { get; set; }
 }

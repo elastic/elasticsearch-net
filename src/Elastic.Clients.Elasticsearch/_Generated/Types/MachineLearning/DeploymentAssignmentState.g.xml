@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DeploymentAssignmentState#failed"><summary><para>
+The deployment is on a failed state and must be re-deployed.
+</para></summary></member>
+  <member key="ml._types.DeploymentAssignmentState#started"><summary><para>
+The deployment is usable; at least one node has the model allocated.
+</para></summary></member>
+  <member key="ml._types.DeploymentAssignmentState#starting"><summary><para>
+The deployment has recently started but is not yet usable; the model is not allocated on any nodes.
+</para></summary></member>
+  <member key="ml._types.DeploymentAssignmentState#stopping"><summary><para>
+The deployment is preparing to stop and deallocate the model from the relevant nodes.
+</para></summary></member>
+</doc>

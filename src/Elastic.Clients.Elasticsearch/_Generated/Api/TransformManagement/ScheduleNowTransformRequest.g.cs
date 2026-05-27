@@ -23,28 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 public sealed partial class ScheduleNowTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the scheduling to take place
-	/// </para>
-	/// </summary>
+	/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Schedule a transform to start now.
-/// </para>
-/// <para>
-/// Instantly run a transform to process data.
-/// If you run this API, the transform will process the new data instantly,
-/// without waiting for the configured frequency interval. After the API is called,
-/// the transform will be processed again at <c>now + frequency</c> unless the API
-/// is called again in the meantime.
-/// </para>
-/// </summary>
+/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.ScheduleNowTransformRequestConverter))]
 public sealed partial class ScheduleNowTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>
 {
@@ -71,33 +59,15 @@ public sealed partial class ScheduleNowTransformRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "transform.schedule_now_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the scheduling to take place
-	/// </para>
-	/// </summary>
+	/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Schedule a transform to start now.
-/// </para>
-/// <para>
-/// Instantly run a transform to process data.
-/// If you run this API, the transform will process the new data instantly,
-/// without waiting for the configured frequency interval. After the API is called,
-/// the transform will be processed again at <c>now + frequency</c> unless the API
-/// is called again in the meantime.
-/// </para>
-/// </summary>
+/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.schedule_now_transform.Request']/*"/>
 public readonly partial struct ScheduleNowTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest Instance { get; init; }
@@ -122,22 +92,14 @@ public readonly partial struct ScheduleNowTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the scheduling to take place
-	/// </para>
-	/// </summary>
+	/// <include file="ScheduleNowTransformRequest.g.xml" path="doc/member[@key='transform.schedule_now_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

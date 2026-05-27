@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.MistralServiceSettings#api_key"><summary><para>
+A valid API key of your Mistral account.
+You can find your Mistral API keys or you can create a new one on the API Keys page.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.MistralServiceSettings#max_input_tokens"><summary><para>
+The maximum number of tokens per input before chunking occurs.
+</para></summary></member>
+  <member key="inference._types.MistralServiceSettings#model"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Mistral models documentation for the list of available models.
+</para></summary></member>
+  <member key="inference._types.MistralServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from the Mistral API.
+By default, the <c>mistral</c> service sets the number of requests allowed per minute to 240.
+</para></summary></member>
+</doc>

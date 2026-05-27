@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.RollupJobConfiguration']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.RollupJobConfigurationConverter))]
 public sealed partial class RollupJobConfiguration
 {

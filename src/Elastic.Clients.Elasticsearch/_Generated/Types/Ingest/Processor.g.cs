@@ -39,371 +39,51 @@ public sealed partial class Processor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessor? Append { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor>("append"); set => SetVariant("append", value); }
-
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor? Attachment { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor>("attachment"); set => SetVariant("attachment", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessor? Bytes { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>("bytes"); set => SetVariant("bytes", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessor? Cef { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.CefProcessor>("cef"); set => SetVariant("cef", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessor? Circle { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor>("circle"); set => SetVariant("circle", value); }
-
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor? CommunityId { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor>("community_id"); set => SetVariant("community_id", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor? Convert { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor>("convert"); set => SetVariant("convert", value); }
-
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessor? Csv { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor>("csv"); set => SetVariant("csv", value); }
-
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessor? Date { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.DateProcessor>("date"); set => SetVariant("date", value); }
-
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor? DateIndexName { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor>("date_index_name"); set => SetVariant("date_index_name", value); }
-
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessor? Dissect { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor>("dissect"); set => SetVariant("dissect", value); }
-
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor? DotExpander { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor>("dot_expander"); set => SetVariant("dot_expander", value); }
-
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessor? Drop { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.DropProcessor>("drop"); set => SetVariant("drop", value); }
-
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor? Enrich { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor>("enrich"); set => SetVariant("enrich", value); }
-
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessor? Fail { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.FailProcessor>("fail"); set => SetVariant("fail", value); }
-
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor? Fingerprint { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor>("fingerprint"); set => SetVariant("fingerprint", value); }
-
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor? Foreach { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor>("foreach"); set => SetVariant("foreach", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor? GeoGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor>("geo_grid"); set => SetVariant("geo_grid", value); }
-
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor? Geoip { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor>("geoip"); set => SetVariant("geoip", value); }
-
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessor? Grok { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor>("grok"); set => SetVariant("grok", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessor? Gsub { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor>("gsub"); set => SetVariant("gsub", value); }
-
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor? HtmlStrip { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor>("html_strip"); set => SetVariant("html_strip", value); }
-
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor? Inference { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor>("inference"); set => SetVariant("inference", value); }
-
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor? IpLocation { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor>("ip_location"); set => SetVariant("ip_location", value); }
-
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.JoinProcessor? Join { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor>("join"); set => SetVariant("join", value); }
-
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? Json { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor>("json"); set => SetVariant("json", value); }
-
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor? Kv { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>("kv"); set => SetVariant("kv", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor? Lowercase { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor>("lowercase"); set => SetVariant("lowercase", value); }
-
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor? NetworkDirection { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor>("network_direction"); set => SetVariant("network_direction", value); }
-
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? Pipeline { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>("pipeline"); set => SetVariant("pipeline", value); }
-
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessor? Redact { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RedactProcessor>("redact"); set => SetVariant("redact", value); }
-
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor? RegisteredDomain { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor>("registered_domain"); set => SetVariant("registered_domain", value); }
-
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor? Remove { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>("remove"); set => SetVariant("remove", value); }
-
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessor? Rename { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor>("rename"); set => SetVariant("rename", value); }
-
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor? Reroute { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor>("reroute"); set => SetVariant("reroute", value); }
-
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor? Script { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor>("script"); set => SetVariant("script", value); }
-
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.SetProcessor? Set { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.SetProcessor>("set"); set => SetVariant("set", value); }
-
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor? SetSecurityUser { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor>("set_security_user"); set => SetVariant("set_security_user", value); }
-
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessor? Sort { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.SortProcessor>("sort"); set => SetVariant("sort", value); }
-
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.SplitProcessor? Split { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor>("split"); set => SetVariant("split", value); }
-
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor? Terminate { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor>("terminate"); set => SetVariant("terminate", value); }
-
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessor? Trim { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor>("trim"); set => SetVariant("trim", value); }
-
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor? Uppercase { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor>("uppercase"); set => SetVariant("uppercase", value); }
-
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor? UriParts { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor>("uri_parts"); set => SetVariant("uri_parts", value); }
-
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor? UrlDecode { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor>("urldecode"); set => SetVariant("urldecode", value); }
-
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor? UserAgent { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor>("user_agent"); set => SetVariant("user_agent", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Append = value };
@@ -491,1176 +171,588 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.Processor instance) => new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor? value)
 	{
 		Instance.Append = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Append(System.Action<Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Append = Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor? value)
 	{
 		Instance.Attachment = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Attachment(System.Action<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Attachment = Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor? value)
 	{
 		Instance.Bytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Bytes(System.Action<Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Bytes = Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Cef(Elastic.Clients.Elasticsearch.Ingest.CefProcessor? value)
 	{
 		Instance.Cef = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Cef(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor? value)
 	{
 		Instance.Circle = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Circle(System.Action<Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Circle = Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> CommunityId(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor? value)
 	{
 		Instance.CommunityId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> CommunityId()
 	{
 		Instance.CommunityId = Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> CommunityId(System.Action<Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.CommunityId = Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor? value)
 	{
 		Instance.Convert = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Convert(System.Action<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Convert = Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor? value)
 	{
 		Instance.Csv = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Csv(System.Action<Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Csv = Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor? value)
 	{
 		Instance.Date = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Date(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Date = Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor? value)
 	{
 		Instance.DateIndexName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> DateIndexName(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument>> action)
 	{
 		Instance.DateIndexName = Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor? value)
 	{
 		Instance.Dissect = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Dissect(System.Action<Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Dissect = Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor? value)
 	{
 		Instance.DotExpander = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> DotExpander(System.Action<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument>> action)
 	{
 		Instance.DotExpander = Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor? value)
 	{
 		Instance.Drop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Drop()
 	{
 		Instance.Drop = Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Drop(System.Action<Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.Drop = Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor? value)
 	{
 		Instance.Enrich = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Enrich(System.Action<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Enrich = Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor? value)
 	{
 		Instance.Fail = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Fail(System.Action<Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Fail = Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Fingerprint(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor? value)
 	{
 		Instance.Fingerprint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Fingerprint(System.Action<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Fingerprint = Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor? value)
 	{
 		Instance.Foreach = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Foreach(System.Action<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Foreach = Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor? value)
 	{
 		Instance.GeoGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> GeoGrid(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor? value)
 	{
 		Instance.Geoip = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Geoip(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Geoip = Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor? value)
 	{
 		Instance.Grok = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Grok(System.Action<Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Grok = Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor? value)
 	{
 		Instance.Gsub = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Gsub(System.Action<Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Gsub = Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> HtmlStrip(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor? value)
 	{
 		Instance.HtmlStrip = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> HtmlStrip(System.Action<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument>> action)
 	{
 		Instance.HtmlStrip = Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor? value)
 	{
 		Instance.Inference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Inference(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> IpLocation(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor? value)
 	{
 		Instance.IpLocation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> IpLocation(System.Action<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>> action)
 	{
 		Instance.IpLocation = Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor? value)
 	{
 		Instance.Join = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Join(System.Action<Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Join = Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? value)
 	{
 		Instance.Json = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Json(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Json = Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor? value)
 	{
 		Instance.Kv = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Kv(System.Action<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Kv = Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor? value)
 	{
 		Instance.Lowercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Lowercase(System.Action<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Lowercase = Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NetworkDirection(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor? value)
 	{
 		Instance.NetworkDirection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NetworkDirection()
 	{
 		Instance.NetworkDirection = Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> NetworkDirection(System.Action<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.NetworkDirection = Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor? value)
 	{
 		Instance.Redact = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Redact(System.Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Redact = Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> RegisteredDomain(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor? value)
 	{
 		Instance.RegisteredDomain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> RegisteredDomain(System.Action<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument>> action)
 	{
 		Instance.RegisteredDomain = Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor? value)
 	{
 		Instance.Remove = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Remove(System.Action<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor? value)
 	{
 		Instance.Rename = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Rename(System.Action<Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Rename = Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Reroute(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor? value)
 	{
 		Instance.Reroute = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Reroute()
 	{
 		Instance.Reroute = Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Reroute(System.Action<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.Reroute = Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor? value)
 	{
 		Instance.Set = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Set(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Set = Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor? value)
 	{
 		Instance.SetSecurityUser = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> SetSecurityUser(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>> action)
 	{
 		Instance.SetSecurityUser = Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor? value)
 	{
 		Instance.Split = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Split(System.Action<Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Split = Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Terminate(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor? value)
 	{
 		Instance.Terminate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Terminate()
 	{
 		Instance.Terminate = Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Terminate(System.Action<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument>>? action)
 	{
 		Instance.Terminate = Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor? value)
 	{
 		Instance.Trim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Trim(System.Action<Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Trim = Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor? value)
 	{
 		Instance.Uppercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Uppercase(System.Action<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Uppercase = Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UriParts(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor? value)
 	{
 		Instance.UriParts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UriParts(System.Action<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument>> action)
 	{
 		Instance.UriParts = Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor? value)
 	{
 		Instance.UrlDecode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UrlDecode(System.Action<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>> action)
 	{
 		Instance.UrlDecode = Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor? value)
 	{
 		Instance.UserAgent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UserAgent(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>> action)
 	{
 		Instance.UserAgent = Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>.Build(action);
@@ -1695,1727 +787,864 @@ public readonly partial struct ProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.Processor instance) => new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor? value)
 	{
 		Instance.Append = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Append(System.Action<Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor> action)
 	{
 		Instance.Append = Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Appends one or more values to an existing array if the field already exists and it is an array.
-	/// Converts a scalar to an array and appends one or more values to it if the field exists and it is a scalar.
-	/// Creates an array containing the provided values if the field doesn’t exist.
-	/// Accepts a single value or an array of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Append<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<T>> action)
 	{
 		Instance.Append = Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor? value)
 	{
 		Instance.Attachment = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Attachment(System.Action<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor> action)
 	{
 		Instance.Attachment = Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The attachment processor lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF) by using the Apache text extraction library Tika.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Attachment<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<T>> action)
 	{
 		Instance.Attachment = Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor? value)
 	{
 		Instance.Bytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Bytes(System.Action<Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor> action)
 	{
 		Instance.Bytes = Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a human readable byte value (for example <c>1kb</c>) to its value in bytes (for example <c>1024</c>).
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// Supported human readable units are "b", "kb", "mb", "gb", "tb", "pb" case insensitive.
-	/// An error will occur if the field is not a supported format or resultant value exceeds 2^63.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Bytes<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<T>> action)
 	{
 		Instance.Bytes = Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef(Elastic.Clients.Elasticsearch.Ingest.CefProcessor? value)
 	{
 		Instance.Cef = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor> action)
 	{
 		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a CEF message into a structured format.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<T>> action)
 	{
 		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor? value)
 	{
 		Instance.Circle = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Circle(System.Action<Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor> action)
 	{
 		Instance.Circle = Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts circle definitions of shapes to regular polygons which approximate them.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Circle<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<T>> action)
 	{
 		Instance.Circle = Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor CommunityId(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor? value)
 	{
 		Instance.CommunityId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor CommunityId()
 	{
 		Instance.CommunityId = Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor CommunityId(System.Action<Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor>? action)
 	{
 		Instance.CommunityId = Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes the Community ID for network flow data as defined in the
-	/// Community ID Specification. You can use a community ID to correlate network
-	/// events related to a single flow.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor CommunityId<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<T>>? action)
 	{
 		Instance.CommunityId = Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor? value)
 	{
 		Instance.Convert = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Convert(System.Action<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor> action)
 	{
 		Instance.Convert = Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a field in the currently ingested document to a different type, such as converting a string to an integer.
-	/// If the field value is an array, all members will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Convert<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<T>> action)
 	{
 		Instance.Convert = Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor? value)
 	{
 		Instance.Csv = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Csv(System.Action<Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor> action)
 	{
 		Instance.Csv = Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts fields from CSV line out of a single text field within a document.
-	/// Any empty field in CSV will be skipped.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Csv<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<T>> action)
 	{
 		Instance.Csv = Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor? value)
 	{
 		Instance.Date = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Date(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor> action)
 	{
 		Instance.Date = Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses dates from fields, and then uses the date or timestamp as the timestamp for the document.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Date<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<T>> action)
 	{
 		Instance.Date = Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor? value)
 	{
 		Instance.DateIndexName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DateIndexName(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor> action)
 	{
 		Instance.DateIndexName = Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the date math index name support.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DateIndexName<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<T>> action)
 	{
 		Instance.DateIndexName = Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor? value)
 	{
 		Instance.Dissect = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Dissect(System.Action<Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor> action)
 	{
 		Instance.Dissect = Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field by matching the text field against a delimiter-based pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Dissect<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<T>> action)
 	{
 		Instance.Dissect = Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor? value)
 	{
 		Instance.DotExpander = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DotExpander(System.Action<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor> action)
 	{
 		Instance.DotExpander = Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands a field with dots into an object field.
-	/// This processor allows fields with dots in the name to be accessible by other processors in the pipeline.
-	/// Otherwise these fields can’t be accessed by any processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor DotExpander<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<T>> action)
 	{
 		Instance.DotExpander = Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor? value)
 	{
 		Instance.Drop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Drop()
 	{
 		Instance.Drop = Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Drop(System.Action<Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor>? action)
 	{
 		Instance.Drop = Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Drops the document without raising any errors.
-	/// This is useful to prevent the document from getting indexed based on some condition.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Drop<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<T>>? action)
 	{
 		Instance.Drop = Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor? value)
 	{
 		Instance.Enrich = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Enrich(System.Action<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor> action)
 	{
 		Instance.Enrich = Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>enrich</c> processor can enrich documents with data from another index.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Enrich<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<T>> action)
 	{
 		Instance.Enrich = Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor? value)
 	{
 		Instance.Fail = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fail(System.Action<Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor> action)
 	{
 		Instance.Fail = Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Raises an exception.
-	/// This is useful for when you expect a pipeline to fail and want to relay a specific message to the requester.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fail<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<T>> action)
 	{
 		Instance.Fail = Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fingerprint(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor? value)
 	{
 		Instance.Fingerprint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fingerprint(System.Action<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor> action)
 	{
 		Instance.Fingerprint = Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Computes a hash of the document’s content. You can use this hash for
-	/// content fingerprinting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Fingerprint<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<T>> action)
 	{
 		Instance.Fingerprint = Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor? value)
 	{
 		Instance.Foreach = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Foreach(System.Action<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor> action)
 	{
 		Instance.Foreach = Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an ingest processor on each element of an array or object.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Foreach<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<T>> action)
 	{
 		Instance.Foreach = Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor? value)
 	{
 		Instance.GeoGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor GeoGrid(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts geo-grid definitions of grid tiles or cells to regular bounding boxes or polygons which describe their shape.
-	/// This is useful if there is a need to interact with the tile shapes as spatially indexable fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor GeoGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<T>> action)
 	{
 		Instance.GeoGrid = Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor? value)
 	{
 		Instance.Geoip = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Geoip(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor> action)
 	{
 		Instance.Geoip = Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>geoip</c> processor adds information about the geographical location of an IPv4 or IPv6 address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Geoip<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<T>> action)
 	{
 		Instance.Geoip = Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor? value)
 	{
 		Instance.Grok = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Grok(System.Action<Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor> action)
 	{
 		Instance.Grok = Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Grok<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<T>> action)
 	{
 		Instance.Grok = Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor? value)
 	{
 		Instance.Gsub = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Gsub(System.Action<Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor> action)
 	{
 		Instance.Gsub = Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string field by applying a regular expression and a replacement.
-	/// If the field is an array of string, all members of the array will be converted.
-	/// If any non-string values are encountered, the processor will throw an exception.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Gsub<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<T>> action)
 	{
 		Instance.Gsub = Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor HtmlStrip(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor? value)
 	{
 		Instance.HtmlStrip = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor HtmlStrip(System.Action<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor> action)
 	{
 		Instance.HtmlStrip = Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes HTML tags from the field.
-	/// If the field is an array of strings, HTML tags will be removed from all members of the array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor HtmlStrip<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<T>> action)
 	{
 		Instance.HtmlStrip = Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor? value)
 	{
 		Instance.Inference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Inference(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses a pre-trained data frame analytics model or a model deployed for natural language processing tasks to infer against the data that is being ingested in the pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Inference<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<T>> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor IpLocation(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor? value)
 	{
 		Instance.IpLocation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor IpLocation(System.Action<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor> action)
 	{
 		Instance.IpLocation = Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Currently an undocumented alias for GeoIP Processor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor IpLocation<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<T>> action)
 	{
 		Instance.IpLocation = Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor? value)
 	{
 		Instance.Join = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Join(System.Action<Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor> action)
 	{
 		Instance.Join = Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Joins each element of an array into a single string using a separator character between each element.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Join<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor<T>> action)
 	{
 		Instance.Join = Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? value)
 	{
 		Instance.Json = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor> action)
 	{
 		Instance.Json = Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a string containing JSON data into a structured object, string, or other value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<T>> action)
 	{
 		Instance.Json = Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor? value)
 	{
 		Instance.Kv = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Kv(System.Action<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor> action)
 	{
 		Instance.Kv = Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This processor helps automatically parse messages (or specific event fields) which are of the <c>foo=bar</c> variety.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Kv<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<T>> action)
 	{
 		Instance.Kv = Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor? value)
 	{
 		Instance.Lowercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Lowercase(System.Action<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor> action)
 	{
 		Instance.Lowercase = Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its lowercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Lowercase<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<T>> action)
 	{
 		Instance.Lowercase = Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NetworkDirection(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor? value)
 	{
 		Instance.NetworkDirection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NetworkDirection()
 	{
 		Instance.NetworkDirection = Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NetworkDirection(System.Action<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor>? action)
 	{
 		Instance.NetworkDirection = Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the network direction given a source IP address, destination IP
-	/// address, and a list of internal networks.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor NetworkDirection<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<T>>? action)
 	{
 		Instance.NetworkDirection = Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor> action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes another pipeline.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Pipeline<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<T>> action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor? value)
 	{
 		Instance.Redact = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Redact(System.Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor> action)
 	{
 		Instance.Redact = Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Redact processor uses the Grok rules engine to obscure text in the input document matching the given Grok patterns.
-	/// The processor can be used to obscure Personal Identifying Information (PII) by configuring it to detect known patterns such as email or IP addresses.
-	/// Text that matches a Grok pattern is replaced with a configurable string such as <c>&lt;EMAIL></c> where an email address is matched or simply replace all matches with the text <c>&lt;REDACTED></c> if preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Redact<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<T>> action)
 	{
 		Instance.Redact = Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RegisteredDomain(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor? value)
 	{
 		Instance.RegisteredDomain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RegisteredDomain(System.Action<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor> action)
 	{
 		Instance.RegisteredDomain = Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts the registered domain (also known as the effective top-level
-	/// domain or eTLD), sub-domain, and top-level domain from a fully qualified
-	/// domain name (FQDN). Uses the registered domains defined in the Mozilla
-	/// Public Suffix List.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor RegisteredDomain<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<T>> action)
 	{
 		Instance.RegisteredDomain = Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor? value)
 	{
 		Instance.Remove = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Remove(System.Action<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor> action)
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes existing fields.
-	/// If one field doesn’t exist, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Remove<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<T>> action)
 	{
 		Instance.Remove = Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor? value)
 	{
 		Instance.Rename = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Rename(System.Action<Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor> action)
 	{
 		Instance.Rename = Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Renames an existing field.
-	/// If the field doesn’t exist or the new name is already used, an exception will be thrown.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Rename<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<T>> action)
 	{
 		Instance.Rename = Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Reroute(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor? value)
 	{
 		Instance.Reroute = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Reroute()
 	{
 		Instance.Reroute = Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Reroute(System.Action<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor>? action)
 	{
 		Instance.Reroute = Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routes a document to another target index or data stream.
-	/// When setting the <c>destination</c> option, the target is explicitly specified and the dataset and namespace options can’t be set.
-	/// When the <c>destination</c> option is not set, this processor is in a data stream mode. Note that in this mode, the reroute processor can only be used on data streams that follow the data stream naming scheme.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Reroute<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<T>>? action)
 	{
 		Instance.Reroute = Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Script(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs an inline or stored script on incoming documents.
-	/// The script runs in the <c>ingest</c> context.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Script<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<T>>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor? value)
 	{
 		Instance.Set = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Set(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor> action)
 	{
 		Instance.Set = Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adds a field with the specified value.
-	/// If the field already exists, its value will be replaced with the provided one.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Set<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<T>> action)
 	{
 		Instance.Set = Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor? value)
 	{
 		Instance.SetSecurityUser = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor SetSecurityUser(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor> action)
 	{
 		Instance.SetSecurityUser = Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets user-related details (such as <c>username</c>, <c>roles</c>, <c>email</c>, <c>full_name</c>, <c>metadata</c>, <c>api_key</c>, <c>realm</c> and <c>authentication_type</c>) from the current authenticated user to the current document by pre-processing the ingest.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor SetSecurityUser<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<T>> action)
 	{
 		Instance.SetSecurityUser = Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts the elements of an array ascending or descending.
-	/// Homogeneous arrays of numbers will be sorted numerically, while arrays of strings or heterogeneous arrays of strings + numbers will be sorted lexicographically.
-	/// Throws an error when the field is not an array.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<T>> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor? value)
 	{
 		Instance.Split = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Split(System.Action<Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor> action)
 	{
 		Instance.Split = Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Splits a field into an array using a separator character.
-	/// Only works on string fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Split<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor<T>> action)
 	{
 		Instance.Split = Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Terminate(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor? value)
 	{
 		Instance.Terminate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Terminate()
 	{
 		Instance.Terminate = Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Terminate(System.Action<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor>? action)
 	{
 		Instance.Terminate = Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terminates the current ingest pipeline, causing no further processors to be run.
-	/// This will normally be executed conditionally, using the <c>if</c> option.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Terminate<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<T>>? action)
 	{
 		Instance.Terminate = Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor? value)
 	{
 		Instance.Trim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Trim(System.Action<Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor> action)
 	{
 		Instance.Trim = Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trims whitespace from a field.
-	/// If the field is an array of strings, all members of the array will be trimmed.
-	/// This only works on leading and trailing whitespace.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Trim<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<T>> action)
 	{
 		Instance.Trim = Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor? value)
 	{
 		Instance.Uppercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Uppercase(System.Action<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor> action)
 	{
 		Instance.Uppercase = Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Converts a string to its uppercase equivalent.
-	/// If the field is an array of strings, all members of the array will be converted.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Uppercase<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<T>> action)
 	{
 		Instance.Uppercase = Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UriParts(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor? value)
 	{
 		Instance.UriParts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UriParts(System.Action<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor> action)
 	{
 		Instance.UriParts = Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parses a Uniform Resource Identifier (URI) string and extracts its components as an object.
-	/// This URI object includes properties for the URI’s domain, path, fragment, port, query, scheme, user info, username, and password.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UriParts<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<T>> action)
 	{
 		Instance.UriParts = Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor? value)
 	{
 		Instance.UrlDecode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UrlDecode(System.Action<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor> action)
 	{
 		Instance.UrlDecode = Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// URL-decodes a string.
-	/// If the field is an array of strings, all members of the array will be decoded.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UrlDecode<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<T>> action)
 	{
 		Instance.UrlDecode = Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor? value)
 	{
 		Instance.UserAgent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UserAgent(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor> action)
 	{
 		Instance.UserAgent = Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>user_agent</c> processor extracts details from the user agent string a browser sends with its web requests.
-	/// This processor adds this information by default under the <c>user_agent</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UserAgent<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<T>> action)
 	{
 		Instance.UserAgent = Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<T>.Build(action);

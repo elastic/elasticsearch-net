@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// BERT and MPNet tokenization configuration options
-/// </para>
-/// </summary>
+/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NlpBertTokenizationConfigConverter))]
 public sealed partial class NlpBertTokenizationConfig
 {
@@ -41,47 +38,24 @@ public sealed partial class NlpBertTokenizationConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the tokenizer lower case the text
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#do_lower_case']/*"/>
 	public bool? DoLowerCase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum input sequence length for the model
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#max_sequence_length']/*"/>
 	public int? MaxSequenceLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#span']/*"/>
 	public int? Span { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should tokenization input be automatically truncated before sending to the model for inference
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Is tokenization completed with special tokens
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#with_special_tokens']/*"/>
 	public bool? WithSpecialTokens { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// BERT and MPNet tokenization configuration options
-/// </para>
-/// </summary>
+/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig']/*"/>
 public readonly partial struct NlpBertTokenizationConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig Instance { get; init; }
@@ -101,55 +75,35 @@ public readonly partial struct NlpBertTokenizationConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Should the tokenizer lower case the text
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#do_lower_case']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor DoLowerCase(bool? value = true)
 	{
 		Instance.DoLowerCase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum input sequence length for the model
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#max_sequence_length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor MaxSequenceLength(int? value)
 	{
 		Instance.MaxSequenceLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#span']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor Span(int? value)
 	{
 		Instance.Span = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should tokenization input be automatically truncated before sending to the model for inference
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
 		Instance.Truncate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Is tokenization completed with special tokens
-	/// </para>
-	/// </summary>
+	/// <include file="NlpBertTokenizationConfig.g.xml" path="doc/member[@key='ml._types.NlpBertTokenizationConfig#with_special_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor WithSpecialTokens(bool? value = true)
 	{
 		Instance.WithSpecialTokens = value;

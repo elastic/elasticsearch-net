@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunctionCountCorrelation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketCorrelationFunctionCountCorrelationConverter))]
 public sealed partial class BucketCorrelationFunctionCountCorrelation
 {
@@ -42,14 +43,11 @@ public sealed partial class BucketCorrelationFunctionCountCorrelation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunctionCountCorrelation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunctionCountCorrelation#indicator']/*"/>
 	public required Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunctionCountCorrelation']/*"/>
 public readonly partial struct BucketCorrelationFunctionCountCorrelationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct BucketCorrelationFunctionCountCorrelationDescript
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunctionCountCorrelation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunctionCountCorrelation#indicator']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor Indicator(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator value)
 	{
 		Instance.Indicator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunctionCountCorrelation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunctionCountCorrelation#indicator']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor Indicator(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor> action)
 	{
 		Instance.Indicator = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorDescriptor.Build(action);

@@ -37,82 +37,36 @@ public sealed partial class GetReindexResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the reindex task has been cancelled.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#cancelled']/*"/>
 	public required bool Cancelled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether the reindex task has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#completed']/*"/>
 	public required bool Completed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A sanitized description of the reindex operation (source and destination indices, and optionally remote host info).
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The error that caused the reindex task to fail, if any.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#error']/*"/>
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the reindex task, in <c>nodeId:taskNum</c> format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.TaskId Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The final result of the completed reindex operation, if the task has finished successfully.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#response']/*"/>
 	public Elastic.Clients.Elasticsearch.ReindexTaskResult? Response { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed running time of the reindex task, in a human-readable format.
-	/// Only present when the request includes the <c>?human=true</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#running_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed running time of the reindex task, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#running_time_in_nanos']/*"/>
 	public required System.TimeSpan RunningTimeInNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time at which the reindex task started, as an ISO 8601 formatted string.
-	/// Only present when the request includes the <c>?human=true</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#start_time']/*"/>
 	public string? StartTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time at which the reindex task started, in milliseconds since the Unix epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#start_time_in_millis']/*"/>
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current progress of the reindex operation.
-	/// </para>
-	/// </summary>
+	/// <include file="GetReindexResponse.g.xml" path="doc/member[@key='_global.get_reindex.Response#status']/*"/>
 	public Elastic.Clients.Elasticsearch.ReindexStatus? Status { get; set; }
 }

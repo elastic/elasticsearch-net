@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="enrich.execute_policy.Request"><summary><para>
+Run an enrich policy.
+</para>
+<para>
+Create the enrich index for an existing enrich policy.
+</para></summary></member>
+  <member key="enrich.execute_policy.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="enrich.execute_policy.Request#name"><summary><para>
+Enrich policy to execute.
+</para></summary></member>
+  <member key="enrich.execute_policy.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request blocks other enrich policy execution requests until complete.
+</para></summary></member>
+</doc>

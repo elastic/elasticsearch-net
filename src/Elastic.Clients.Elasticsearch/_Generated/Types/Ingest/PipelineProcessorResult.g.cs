@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.PipelineProcessorResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PipelineProcessorResultConverter))]
 public sealed partial class PipelineProcessorResult
 {

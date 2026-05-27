@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 public sealed partial class DeleteRoutingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a project routing expression.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.DeleteRoutingRequestConverter))]
 public sealed partial class DeleteRoutingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>
 {
@@ -58,19 +57,12 @@ public sealed partial class DeleteRoutingRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "project.delete_routing";
 
-	/// <summary>
-	/// <para>
-	/// The name of project routing expression
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request#name']/*"/>
 	public required string Name { get => P<string>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a project routing expression.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 public readonly partial struct DeleteRoutingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest Instance { get; init; }
@@ -95,11 +87,7 @@ public readonly partial struct DeleteRoutingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest instance) => new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of project routing expression
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor Name(string value)
 	{
 		Instance.Name = value;

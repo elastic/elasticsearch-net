@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketScriptAggregationConverter))]
 public sealed partial class BucketScriptAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class BucketScriptAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script to run for this aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation']/*"/>
 public readonly partial struct BucketScriptAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation Instance { get; init; }
@@ -85,67 +70,42 @@ public readonly partial struct BucketScriptAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run for this aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run for this aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run for this aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketScriptAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketScriptAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

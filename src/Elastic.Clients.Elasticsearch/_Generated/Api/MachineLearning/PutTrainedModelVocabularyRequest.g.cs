@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
 public sealed partial class PutTrainedModelVocabularyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a trained model vocabulary.
-/// </para>
-/// <para>
-/// This API is supported only for natural language processing (NLP) models.
-/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelVocabularyRequestConverter))]
 public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>
 {
@@ -69,44 +64,21 @@ public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.E
 
 	internal override string OperationName => "ml.put_trained_model_vocabulary";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The optional model merges if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#merges']/*"/>
 	public System.Collections.Generic.ICollection<string>? Merges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The optional vocabulary value scores if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#scores']/*"/>
 	public System.Collections.Generic.ICollection<double>? Scores { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model vocabulary, which must not be empty.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#vocabulary']/*"/>
 	public required System.Collections.Generic.ICollection<string> Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a trained model vocabulary.
-/// </para>
-/// <para>
-/// This API is supported only for natural language processing (NLP) models.
-/// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request']/*"/>
 public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Instance { get; init; }
@@ -133,77 +105,49 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional model merges if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#merges']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Merges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional model merges if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#merges']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Merges(params string[] values)
 	{
 		Instance.Merges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional vocabulary value scores if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#scores']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Scores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional vocabulary value scores if required by the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#scores']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Scores(params double[] values)
 	{
 		Instance.Scores = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model vocabulary, which must not be empty.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#vocabulary']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Vocabulary = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model vocabulary, which must not be empty.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelVocabularyRequest.g.xml" path="doc/member[@key='ml.put_trained_model_vocabulary.Request#vocabulary']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor Vocabulary(params string[] values)
 	{
 		Instance.Vocabulary = [.. values];

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongRangeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.LongRangePropertyConverter))]
 public sealed partial class LongRangeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class LongRangeProperty : Elastic.Clients.Elasticsearch.Ma
 	public int? IgnoreAbove { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -58,6 +55,7 @@ public sealed partial class LongRangeProperty : Elastic.Clients.Elasticsearch.Ma
 	public string Type => "long_range";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongRangeProperty']/*"/>
 public readonly partial struct LongRangePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty Instance { get; init; }
@@ -137,33 +135,21 @@ public readonly partial struct LongRangePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -215,6 +201,7 @@ public readonly partial struct LongRangePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongRangeProperty']/*"/>
 public readonly partial struct LongRangePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty Instance { get; init; }
@@ -300,33 +287,21 @@ public readonly partial struct LongRangePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongRangeProperty.g.xml" path="doc/member[@key='_types.mapping.LongRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

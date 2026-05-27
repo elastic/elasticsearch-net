@@ -23,28 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
 public sealed partial class DeleteDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the job to be deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a data frame analytics job.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteDataFrameAnalyticsRequestConverter))]
 public sealed partial class DeleteDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestParameters>
 {
@@ -71,33 +62,18 @@ public sealed partial class DeleteDataFrameAnalyticsRequest : Elastic.Clients.El
 
 	internal override string OperationName => "ml.delete_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the job to be deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a data frame analytics job.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request']/*"/>
 public readonly partial struct DeleteDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest Instance { get; init; }
@@ -122,33 +98,21 @@ public readonly partial struct DeleteDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time to wait for the job to be deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.delete_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

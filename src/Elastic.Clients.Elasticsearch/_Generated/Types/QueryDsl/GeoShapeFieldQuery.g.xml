@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.GeoShapeFieldQuery#indexed_shape"><summary><para>
+Query using an indexed shape retrieved from the the specified document and path.
+</para></summary></member>
+  <member key="_types.query_dsl.GeoShapeFieldQuery#relation"><summary><para>
+Spatial relation operator used to search a geo field.
+</para></summary></member>
+</doc>

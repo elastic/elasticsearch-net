@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateDataStreamConfigurationConverter))]
 public sealed partial class IndexTemplateDataStreamConfiguration
 {
@@ -36,21 +37,14 @@ public sealed partial class IndexTemplateDataStreamConfiguration
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the data stream supports custom routing.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateDataStreamConfiguration.g.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration#allow_custom_routing']/*"/>
 	public bool? AllowCustomRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the data stream is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateDataStreamConfiguration.g.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration#hidden']/*"/>
 	public bool? Hidden { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration']/*"/>
 public readonly partial struct IndexTemplateDataStreamConfigurationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct IndexTemplateDataStreamConfigurationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, the data stream supports custom routing.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateDataStreamConfiguration.g.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration#allow_custom_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor AllowCustomRouting(bool? value = true)
 	{
 		Instance.AllowCustomRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the data stream is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateDataStreamConfiguration.g.xml" path="doc/member[@key='indices._types.IndexTemplateDataStreamConfiguration#hidden']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor Hidden(bool? value = true)
 	{
 		Instance.Hidden = value;

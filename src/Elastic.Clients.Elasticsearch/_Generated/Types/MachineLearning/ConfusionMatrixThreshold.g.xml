@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.evaluate_data_frame.ConfusionMatrixThreshold#fn"><summary><para>
+False Negative
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.ConfusionMatrixThreshold#fp"><summary><para>
+False Positive
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.ConfusionMatrixThreshold#tn"><summary><para>
+True Negative
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.ConfusionMatrixThreshold#tp"><summary><para>
+True Positive
+</para></summary></member>
+</doc>

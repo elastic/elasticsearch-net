@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.FieldTypesMappings#field_types"><summary><para>
+Contains statistics about field data types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#runtime_field_types"><summary><para>
+Contains statistics about runtime field data types used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#source_modes"><summary><para>
+Source mode usage count.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#total_deduplicated_field_count"><summary><para>
+Total number of fields in all non-system indices, accounting for mapping deduplication.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#total_deduplicated_mapping_size"><summary><para>
+Total size of all mappings after deduplication and compression.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#total_deduplicated_mapping_size_in_bytes"><summary><para>
+Total size of all mappings, in bytes, after deduplication and compression.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypesMappings#total_field_count"><summary><para>
+Total number of fields in all non-system indices.
+</para></summary></member>
+</doc>

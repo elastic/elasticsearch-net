@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr._types.ShardStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ShardStatsConverter))]
 public sealed partial class ShardStats
 {
@@ -69,207 +70,92 @@ public sealed partial class ShardStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total of transferred bytes read from the leader.
-	/// This is only an estimate and does not account for compression if enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#bytes_read']/*"/>
 	public required long BytesRead { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of failed reads.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#failed_read_requests']/*"/>
 	public required long FailedReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of failed bulk write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#failed_write_requests']/*"/>
 	public required long FailedWriteRequests { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? FatalException { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index aliases version the follower is synced up to.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_aliases_version']/*"/>
 	public required long FollowerAliasesVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current global checkpoint on the follower.
-	/// The difference between the <c>leader_global_checkpoint</c> and the <c>follower_global_checkpoint</c> is an indication of how much the follower is lagging the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_global_checkpoint']/*"/>
 	public required long FollowerGlobalCheckpoint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_index']/*"/>
 	public required string FollowerIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The mapping version the follower is synced up to.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_mapping_version']/*"/>
 	public required long FollowerMappingVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current maximum sequence number on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_max_seq_no']/*"/>
 	public required long FollowerMaxSeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index settings version the follower is synced up to.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#follower_settings_version']/*"/>
 	public required long FollowerSettingsVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The starting sequence number of the last batch of operations requested from the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#last_requested_seq_no']/*"/>
 	public required long LastRequestedSeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current global checkpoint on the leader known to the follower task.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#leader_global_checkpoint']/*"/>
 	public required long LeaderGlobalCheckpoint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index in the leader cluster being followed.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#leader_index']/*"/>
 	public required string LeaderIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current maximum sequence number on the leader known to the follower task.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#leader_max_seq_no']/*"/>
 	public required long LeaderMaxSeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of operations read from the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#operations_read']/*"/>
 	public required long OperationsRead { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of operations written on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#operations_written']/*"/>
 	public required long OperationsWritten { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of active read requests from the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#outstanding_read_requests']/*"/>
 	public required int OutstandingReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of active bulk write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#outstanding_write_requests']/*"/>
 	public required int OutstandingWriteRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects representing failed reads.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#read_exceptions']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#remote_cluster']/*"/>
 	public required string RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The numerical shard ID, with values from 0 to one less than the number of replicas.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#shard_id']/*"/>
 	public required int ShardId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of successful fetches.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#successful_read_requests']/*"/>
 	public required long SuccessfulReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of bulk write requests run on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#successful_write_requests']/*"/>
 	public required long SuccessfulWriteRequests { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds since a read request was sent to the leader.
-	/// When the follower is caught up to the leader, this number will increase up to the configured <c>read_poll_timeout</c> at which point another read request will be sent to the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#time_since_last_read_millis']/*"/>
 	public required System.TimeSpan TimeSinceLastReadMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time reads spent running on the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#total_read_remote_exec_time_millis']/*"/>
 	public required System.TimeSpan TotalReadRemoteExecTimeMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time reads were outstanding, measured from the time a read was sent to the leader to the time a reply was returned to the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#total_read_time_millis']/*"/>
 	public required System.TimeSpan TotalReadTimeMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent writing on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#total_write_time_millis']/*"/>
 	public required System.TimeSpan TotalWriteTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of write operations queued on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#write_buffer_operation_count']/*"/>
 	public required long WriteBufferOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of bytes of operations currently queued for writing.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStats.g.xml" path="doc/member[@key='ccr._types.ShardStats#write_buffer_size_in_bytes']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; set; }
 }

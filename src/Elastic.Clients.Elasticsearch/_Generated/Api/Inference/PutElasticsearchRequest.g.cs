@@ -23,41 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
 public sealed partial class PutElasticsearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Elasticsearch inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
-/// </para>
-/// <para>
-/// info
-/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
-/// </para>
-/// <para>
-/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
-/// </para>
-/// <para>
-/// info
-/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
-/// </para>
-/// <para>
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
-/// </summary>
+/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutElasticsearchRequestConverter))]
 public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>
 {
@@ -91,85 +66,30 @@ public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "inference.put_elasticsearch";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// The must not match the <c>model_id</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#elasticsearch_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ElasticsearchInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("elasticsearch_inference_id"); set => PR("elasticsearch_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>elasticsearch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#service']/*"/>
 	public string Service => "elasticsearch";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elasticsearch</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Elasticsearch inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
-/// </para>
-/// <para>
-/// info
-/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
-/// </para>
-/// <para>
-/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
-/// </para>
-/// <para>
-/// info
-/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
-/// </para>
-/// <para>
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
-/// </summary>
+/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elasticsearch.Request']/*"/>
 public readonly partial struct PutElasticsearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest Instance { get; init; }
@@ -196,131 +116,77 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest(Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// The must not match the <c>model_id</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#elasticsearch_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ElasticsearchInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ElasticsearchInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elasticsearch</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elasticsearch</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElasticsearchRequest.g.xml" path="doc/member[@key='inference.put_elasticsearch.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettingsDescriptor.Build(action);

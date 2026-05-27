@@ -23,24 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="MlInfoRequest.g.xml" path="doc/member[@key='ml.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.info.Request']/*"/>
 public sealed partial class MlInfoRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get machine learning information.
-/// </para>
-/// <para>
-/// Get defaults and limits used by machine learning.
-/// This endpoint is designed to be used by a user interface that needs to fully
-/// understand machine learning configurations where some options are not
-/// specified, meaning that the defaults should be used. This endpoint may be
-/// used to find out what those defaults are. It also provides information about
-/// the maximum size of machine learning jobs that could run in the current
-/// cluster configuration.
-/// </para>
-/// </summary>
+/// <include file="MlInfoRequest.g.xml" path="doc/member[@key='ml.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.MlInfoRequestConverter))]
 public sealed partial class MlInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequestParameters>
 {
@@ -63,20 +53,8 @@ public sealed partial class MlInfoRequest : Elastic.Clients.Elasticsearch.Reques
 	internal override string OperationName => "ml.info";
 }
 
-/// <summary>
-/// <para>
-/// Get machine learning information.
-/// </para>
-/// <para>
-/// Get defaults and limits used by machine learning.
-/// This endpoint is designed to be used by a user interface that needs to fully
-/// understand machine learning configurations where some options are not
-/// specified, meaning that the defaults should be used. This endpoint may be
-/// used to find out what those defaults are. It also provides information about
-/// the maximum size of machine learning jobs that could run in the current
-/// cluster configuration.
-/// </para>
-/// </summary>
+/// <include file="MlInfoRequest.g.xml" path="doc/member[@key='ml.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.info.Request']/*"/>
 public readonly partial struct MlInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.MlInfoRequest Instance { get; init; }

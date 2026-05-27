@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SearchAccess']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SearchAccessConverter))]
 public sealed partial class SearchAccess
 {
@@ -42,35 +43,20 @@ public sealed partial class SearchAccess
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#allow_restricted_indices']/*"/>
 	public bool? AllowRestrictedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#names']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#query']/*"/>
 	public object? Query { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SearchAccess']/*"/>
 public readonly partial struct SearchAccessDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.SearchAccess Instance { get; init; }
@@ -90,77 +76,49 @@ public readonly partial struct SearchAccessDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.SearchAccess instance) => new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SearchAccess(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#allow_restricted_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> AllowRestrictedIndices(bool? value = true)
 	{
 		Instance.AllowRestrictedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? value)
 	{
 		Instance.FieldSecurity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> FieldSecurity()
 	{
 		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> FieldSecurity(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>>? action)
 	{
 		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
 		Instance.Names = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor<TDocument> Query(object? value)
 	{
 		Instance.Query = value;
@@ -176,6 +134,7 @@ public readonly partial struct SearchAccessDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.SearchAccess']/*"/>
 public readonly partial struct SearchAccessDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SearchAccess Instance { get; init; }
@@ -195,88 +154,56 @@ public readonly partial struct SearchAccessDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor(Elastic.Clients.Elasticsearch.Security.SearchAccess instance) => new Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SearchAccess(Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#allow_restricted_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor AllowRestrictedIndices(bool? value = true)
 	{
 		Instance.AllowRestrictedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor FieldSecurity(Elastic.Clients.Elasticsearch.Security.FieldSecurity? value)
 	{
 		Instance.FieldSecurity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor FieldSecurity()
 	{
 		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor FieldSecurity(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor>? action)
 	{
 		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor FieldSecurity<T>(System.Action<Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<T>>? action)
 	{
 		Instance.FieldSecurity = Elastic.Clients.Elasticsearch.Security.FieldSecurityDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
 		Instance.Names = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAccess.g.xml" path="doc/member[@key='security._types.SearchAccess#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SearchAccessDescriptor Query(object? value)
 	{
 		Instance.Query = value;

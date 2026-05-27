@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 public sealed partial class StartIlmRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start the ILM plugin.
-/// </para>
-/// <para>
-/// Start the index lifecycle management plugin if it is currently stopped.
-/// ILM is started automatically when the cluster is formed.
-/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
-/// </para>
-/// </summary>
+/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.StartIlmRequestConverter))]
 public sealed partial class StartIlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>
 {
@@ -71,31 +57,15 @@ public sealed partial class StartIlmRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ilm.start";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start the ILM plugin.
-/// </para>
-/// <para>
-/// Start the index lifecycle management plugin if it is currently stopped.
-/// ILM is started automatically when the cluster is formed.
-/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
-/// </para>
-/// </summary>
+/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.start.Request']/*"/>
 public readonly partial struct StartIlmRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest Instance { get; init; }
@@ -114,22 +84,14 @@ public readonly partial struct StartIlmRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartIlmRequest.g.xml" path="doc/member[@key='ilm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

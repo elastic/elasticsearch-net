@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TargetMeanEncodingPreprocessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TargetMeanEncodingPreprocessorConverter))]
 public sealed partial class TargetMeanEncodingPreprocessor
 {
@@ -51,6 +52,7 @@ public sealed partial class TargetMeanEncodingPreprocessor
 	public required System.Collections.Generic.IDictionary<string, double> TargetMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TargetMeanEncodingPreprocessor']/*"/>
 public readonly partial struct TargetMeanEncodingPreprocessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor Instance { get; init; }

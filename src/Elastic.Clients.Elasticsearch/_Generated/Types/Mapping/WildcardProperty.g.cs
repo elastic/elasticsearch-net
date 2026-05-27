@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.WildcardProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.WildcardPropertyConverter))]
 public sealed partial class WildcardProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -42,11 +43,7 @@ public sealed partial class WildcardProperty : Elastic.Clients.Elasticsearch.Map
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -56,6 +53,7 @@ public sealed partial class WildcardProperty : Elastic.Clients.Elasticsearch.Map
 	public string Type => "wildcard";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.WildcardProperty']/*"/>
 public readonly partial struct WildcardPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.WildcardProperty Instance { get; init; }
@@ -117,33 +115,21 @@ public readonly partial struct WildcardPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -201,6 +187,7 @@ public readonly partial struct WildcardPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.WildcardProperty']/*"/>
 public readonly partial struct WildcardPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.WildcardProperty Instance { get; init; }
@@ -268,33 +255,21 @@ public readonly partial struct WildcardPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="WildcardProperty.g.xml" path="doc/member[@key='_types.mapping.WildcardProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

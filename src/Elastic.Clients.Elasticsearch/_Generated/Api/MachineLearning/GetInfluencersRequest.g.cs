@@ -23,81 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
 public sealed partial class GetInfluencersRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, the results are sorted in descending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#desc']/*"/>
 	public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps earlier than this time.
-	/// The default value means it is unset and results are not limited to
-	/// specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#end']/*"/>
 	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the output excludes interim results. By default, interim results
-	/// are included.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#exclude_interim']/*"/>
 	public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of influencers.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with anomaly scores greater than or equal to this
-	/// value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#influencer_score']/*"/>
 	public double? InfluencerScore { get => Q<double?>("influencer_score"); set => Q("influencer_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of influencers to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Field?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps after this time. The default value
-	/// means it is unset and results are not limited to specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for influencers.
-/// </para>
-/// <para>
-/// Influencers are the entities that have contributed to, or are to blame for,
-/// the anomalies. Influencer results are available only if an
-/// <c>influencer_field_name</c> is specified in the job configuration.
-/// </para>
-/// </summary>
+/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetInfluencersRequestConverter))]
 public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>
 {
@@ -124,94 +80,39 @@ public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.get_influencers";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the results are sorted in descending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#desc']/*"/>
 	public bool? Desc { get => Q<bool?>("desc"); set => Q("desc", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps earlier than this time.
-	/// The default value means it is unset and results are not limited to
-	/// specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#end']/*"/>
 	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the output excludes interim results. By default, interim results
-	/// are included.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#exclude_interim']/*"/>
 	public bool? ExcludeInterim { get => Q<bool?>("exclude_interim"); set => Q("exclude_interim", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of influencers.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with anomaly scores greater than or equal to this
-	/// value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#influencer_score']/*"/>
 	public double? InfluencerScore { get => Q<double?>("influencer_score"); set => Q("influencer_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of influencers to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Sort { get => Q<Elastic.Clients.Elasticsearch.Field?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps after this time. The default value
-	/// means it is unset and results are not limited to specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for influencers.
-/// </para>
-/// <para>
-/// Influencers are the entities that have contributed to, or are to blame for,
-/// the anomalies. Influencer results are available only if an
-/// <c>influencer_field_name</c> is specified in the job configuration.
-/// </para>
-/// </summary>
+/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
 public readonly partial struct GetInfluencersRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest Instance { get; init; }
@@ -236,153 +137,91 @@ public readonly partial struct GetInfluencersRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the results are sorted in descending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps earlier than this time.
-	/// The default value means it is unset and results are not limited to
-	/// specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the output excludes interim results. By default, interim results
-	/// are included.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of influencers.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with anomaly scores greater than or equal to this
-	/// value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#influencer_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor InfluencerScore(double? value)
 	{
 		Instance.InfluencerScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of influencers to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps after this time. The default value
-	/// means it is unset and results are not limited to specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
 		Instance.Page = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Page()
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);
@@ -445,16 +284,8 @@ public readonly partial struct GetInfluencersRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for influencers.
-/// </para>
-/// <para>
-/// Influencers are the entities that have contributed to, or are to blame for,
-/// the anomalies. Influencer results are available only if an
-/// <c>influencer_field_name</c> is specified in the job configuration.
-/// </para>
-/// </summary>
+/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_influencers.Request']/*"/>
 public readonly partial struct GetInfluencersRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest Instance { get; init; }
@@ -479,153 +310,91 @@ public readonly partial struct GetInfluencersRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the results are sorted in descending order.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps earlier than this time.
-	/// The default value means it is unset and results are not limited to
-	/// specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the output excludes interim results. By default, interim results
-	/// are included.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of influencers.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with anomaly scores greater than or equal to this
-	/// value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#influencer_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> InfluencerScore(double? value)
 	{
 		Instance.InfluencerScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of influencers to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort field for the requested influencers. By default, the
-	/// influencers are sorted by the <c>influencer_score</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns influencers with timestamps after this time. The default value
-	/// means it is unset and results are not limited to specific timestamps.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
 		Instance.Page = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Page()
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetInfluencersRequest.g.xml" path="doc/member[@key='ml.get_influencers.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor<TDocument> Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);

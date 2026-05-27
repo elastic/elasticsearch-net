@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="ValidateDetectorRequest.g.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
 public sealed partial class ValidateDetectorRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateDetectorRequest.g.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ValidateDetectorRequestConverter))]
 public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>
 {
@@ -62,11 +61,8 @@ public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsea
 	public required Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateDetectorRequest.g.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
 public readonly partial struct ValidateDetectorRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Instance { get; init; }
@@ -165,11 +161,8 @@ public readonly partial struct ValidateDetectorRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateDetectorRequest.g.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate_detector.Request']/*"/>
 public readonly partial struct ValidateDetectorRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Instance { get; init; }

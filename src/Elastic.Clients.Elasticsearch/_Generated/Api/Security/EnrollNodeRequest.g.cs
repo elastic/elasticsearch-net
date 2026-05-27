@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="EnrollNodeRequest.g.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
 public sealed partial class EnrollNodeRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Enroll a node.
-/// </para>
-/// <para>
-/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-/// </para>
-/// <para>
-/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
-/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
-/// </para>
-/// </summary>
+/// <include file="EnrollNodeRequest.g.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.EnrollNodeRequestConverter))]
 public sealed partial class EnrollNodeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>
 {
@@ -61,18 +53,8 @@ public sealed partial class EnrollNodeRequest : Elastic.Clients.Elasticsearch.Re
 	internal override string OperationName => "security.enroll_node";
 }
 
-/// <summary>
-/// <para>
-/// Enroll a node.
-/// </para>
-/// <para>
-/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-/// </para>
-/// <para>
-/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
-/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
-/// </para>
-/// </summary>
+/// <include file="EnrollNodeRequest.g.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_node.Request']/*"/>
 public readonly partial struct EnrollNodeRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest Instance { get; init; }

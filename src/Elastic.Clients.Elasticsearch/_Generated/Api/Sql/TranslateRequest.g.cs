@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.translate.Request']/*"/>
 public sealed partial class TranslateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Translate SQL into Elasticsearch queries.
-/// </para>
-/// <para>
-/// Translate an SQL search into a search API request containing Query DSL.
-/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
-/// </para>
-/// </summary>
+/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.translate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.TranslateRequestConverter))]
 public sealed partial class TranslateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>
 {
@@ -63,44 +58,21 @@ public sealed partial class TranslateRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "sql.translate";
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#fetch_size']/*"/>
 	public int? FetchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#query']/*"/>
 	public required string Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Translate SQL into Elasticsearch queries.
-/// </para>
-/// <para>
-/// Translate an SQL search into a search API request containing Query DSL.
-/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
-/// </para>
-/// </summary>
+/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.translate.Request']/*"/>
 public readonly partial struct TranslateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.TranslateRequest Instance { get; init; }
@@ -119,66 +91,42 @@ public readonly partial struct TranslateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance) => new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -241,15 +189,8 @@ public readonly partial struct TranslateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Translate SQL into Elasticsearch queries.
-/// </para>
-/// <para>
-/// Translate an SQL search into a search API request containing Query DSL.
-/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
-/// </para>
-/// </summary>
+/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.translate.Request']/*"/>
 public readonly partial struct TranslateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Sql.TranslateRequest Instance { get; init; }
@@ -268,55 +209,35 @@ public readonly partial struct TranslateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance) => new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of rows (or entries) to return in one response.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query DSL for additional filtering.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The SQL query to run.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ISO-8601 time zone ID for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslateRequest.g.xml" path="doc/member[@key='sql.translate.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

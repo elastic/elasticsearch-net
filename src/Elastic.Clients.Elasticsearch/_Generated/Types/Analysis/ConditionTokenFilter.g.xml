@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.ConditionTokenFilter#filter"><summary><para>
+Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+</para></summary></member>
+  <member key="_types.analysis.ConditionTokenFilter#script"><summary><para>
+Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+</para></summary></member>
+</doc>

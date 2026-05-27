@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.Json.TemplateConfigConverter))]
 public sealed partial class TemplateConfig
 {
@@ -36,43 +37,18 @@ public sealed partial class TemplateConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TemplateConfig.g.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to use. If no <c>source</c> is specified,
-	/// this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="TemplateConfig.g.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="TemplateConfig.g.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query execution is profiled.
-	/// </para>
-	/// </summary>
+	/// <include file="TemplateConfig.g.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
-	/// parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="TemplateConfig.g.xml" path="doc/member[@key='_global.msearch_template.TemplateConfig#source']/*"/>
 	public string? Source { get; set; }
 }

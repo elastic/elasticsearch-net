@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteCalendarRequest.g.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
 public sealed partial class DeleteCalendarRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a calendar.
-/// </para>
-/// <para>
-/// Remove all scheduled events from a calendar, then delete it.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarRequest.g.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteCalendarRequestConverter))]
 public sealed partial class DeleteCalendarRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class DeleteCalendarRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.delete_calendar";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarRequest.g.xml" path="doc/member[@key='ml.delete_calendar.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a calendar.
-/// </para>
-/// <para>
-/// Remove all scheduled events from a calendar, then delete it.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarRequest.g.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar.Request']/*"/>
 public readonly partial struct DeleteCalendarRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct DeleteCalendarRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarRequest.g.xml" path="doc/member[@key='ml.delete_calendar.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;

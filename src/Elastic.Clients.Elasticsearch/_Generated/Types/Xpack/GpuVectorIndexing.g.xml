@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.GpuVectorIndexing"><summary><para>
+GPU vector indexing usage statistics.
+</para></summary></member>
+  <member key="xpack.usage.GpuVectorIndexing#index_build_count"><summary><para>
+Total GPU index builds across the cluster.
+</para></summary></member>
+  <member key="xpack.usage.GpuVectorIndexing#nodes"><summary><para>
+Per-node GPU details including type, memory, enabled status, and build count.
+</para></summary></member>
+  <member key="xpack.usage.GpuVectorIndexing#nodes_with_gpu"><summary><para>
+Count of data nodes with GPU support.
+</para></summary></member>
+</doc>

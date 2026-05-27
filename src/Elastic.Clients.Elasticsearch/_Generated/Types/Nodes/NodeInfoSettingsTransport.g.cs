@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeInfoSettingsTransport']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoSettingsTransportConverter))]
 public sealed partial class NodeInfoSettingsTransport
 {
@@ -44,11 +45,7 @@ public sealed partial class NodeInfoSettingsTransport
 
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures? Features { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only used in unit tests
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfoSettingsTransport.g.xml" path="doc/member[@key='nodes.info.NodeInfoSettingsTransport#ignore_deserialization_errors']/*"/>
 	public bool? IgnoreDeserializationErrors { get; set; }
 	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; set; }
 	public string? TypeDefault { get; set; }

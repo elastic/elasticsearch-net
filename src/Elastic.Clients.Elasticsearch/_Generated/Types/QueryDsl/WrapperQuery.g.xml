@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.WrapperQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.WrapperQuery#query"><summary><para>
+A base64 encoded query.
+The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
+</para></summary></member>
+</doc>

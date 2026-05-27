@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#cache_size"><summary><para>
+The size of the trained model cache.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#deployment_id"><summary><para>
+The unique identifier for the trained model deployment.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#model_bytes"><summary><para>
+The size of the trained model in bytes.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#model_id"><summary><para>
+The unique identifier for the trained model.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#number_of_allocations"><summary><para>
+The total number of allocations this model is assigned across ML nodes.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#queue_capacity"><summary><para>
+Number of inference requests are allowed in the queue at a time.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignmentTaskParameters#threads_per_allocation"><summary><para>
+Number of threads per allocation.
+</para></summary></member>
+</doc>

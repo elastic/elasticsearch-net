@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FunctionScoreQueryConverter))]
 public sealed partial class FunctionScoreQuery
 {
@@ -36,60 +37,30 @@ public sealed partial class FunctionScoreQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines how he newly computed score is combined with the score of the query
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? Functions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Restricts the new score to not exceed the provided limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#max_boost']/*"/>
 	public double? MaxBoost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Excludes documents that do not meet the provided score threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#min_score']/*"/>
 	public double? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how the computed scores are combined
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery']/*"/>
 public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery Instance { get; init; }
@@ -109,58 +80,35 @@ public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how he newly computed score is combined with the score of the query
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? value)
 	{
 		Instance.BoostMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? value)
 	{
 		Instance.Functions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions(params Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore[] values)
 	{
 		Instance.Functions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Functions(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>();
@@ -173,44 +121,28 @@ public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restricts the new score to not exceed the provided limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#max_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> MaxBoost(double? value)
 	{
 		Instance.MaxBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Excludes documents that do not meet the provided score threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -223,11 +155,7 @@ public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how the computed scores are combined
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? value)
 	{
 		Instance.ScoreMode = value;
@@ -248,6 +176,7 @@ public readonly partial struct FunctionScoreQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery']/*"/>
 public readonly partial struct FunctionScoreQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery Instance { get; init; }
@@ -267,58 +196,35 @@ public readonly partial struct FunctionScoreQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how he newly computed score is combined with the score of the query
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#boost_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? value)
 	{
 		Instance.BoostMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? value)
 	{
 		Instance.Functions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions(params Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore[] values)
 	{
 		Instance.Functions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>();
@@ -331,11 +237,7 @@ public readonly partial struct FunctionScoreQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more functions that compute a new score for each document returned by the query.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#functions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Functions<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>();
@@ -348,55 +250,35 @@ public readonly partial struct FunctionScoreQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restricts the new score to not exceed the provided limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#max_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor MaxBoost(double? value)
 	{
 		Instance.MaxBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Excludes documents that do not meet the provided score threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query that determines the documents for which a new score is computed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -409,11 +291,7 @@ public readonly partial struct FunctionScoreQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how the computed scores are combined
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? value)
 	{
 		Instance.ScoreMode = value;

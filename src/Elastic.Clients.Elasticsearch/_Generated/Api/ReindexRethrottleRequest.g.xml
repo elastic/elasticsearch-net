@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.reindex_rethrottle.Request"><summary><para>
+Throttle a reindex operation.
+</para>
+<para>
+Change the number of requests per second for a particular reindex operation.
+For example:
+</para>
+<code>
+POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
+</code>
+<para>
+Rethrottling that speeds up the query takes effect immediately.
+Rethrottling that slows down the query will take effect after completing the current batch.
+This behavior prevents scroll timeouts.
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Request#requests_per_second"><summary><para>
+The throttle for this request in sub-requests per second.
+It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Request#task_id"><summary><para>
+The task identifier, which can be found by using the tasks API.
+</para></summary></member>
+</doc>

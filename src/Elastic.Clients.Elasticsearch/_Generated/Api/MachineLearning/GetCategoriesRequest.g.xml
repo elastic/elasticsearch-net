@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_categories.Request"><summary><para>
+Get anomaly detection job results for categories.
+</para></summary></member>
+  <member key="ml.get_categories.Request#category_id"><summary><para>
+Identifier for the category, which is unique in the job. If you specify
+neither the category ID nor the partition_field_value, the API returns
+information about all categories. If you specify only the
+partition_field_value, it returns information about all categories for
+the specified partition.
+</para></summary></member>
+  <member key="ml.get_categories.Request#from"><summary><para>
+Skips the specified number of categories.
+</para></summary></member>
+  <member key="ml.get_categories.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.get_categories.Request#page"><summary><para>
+Configures pagination.
+This parameter has the <c>from</c> and <c>size</c> properties.
+</para></summary></member>
+  <member key="ml.get_categories.Request#partition_field_value"><summary><para>
+Only return categories for the specified partition.
+</para></summary></member>
+  <member key="ml.get_categories.Request#size"><summary><para>
+Specifies the maximum number of categories to obtain.
+</para></summary></member>
+</doc>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="sql.get_async.Request"><summary><para>
+Get async SQL search results.
+</para>
+<para>
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</para>
+<para>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</para></summary></member>
+  <member key="sql.get_async.Request#delimiter"><summary><para>
+The separator for CSV results.
+The API supports this parameter only for CSV responses.
+</para></summary></member>
+  <member key="sql.get_async.Request#format"><summary><para>
+The format for the response.
+You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+If you specify both, the API uses this parameter.
+</para></summary></member>
+  <member key="sql.get_async.Request#id"><summary><para>
+The identifier for the search.
+</para></summary></member>
+  <member key="sql.get_async.Request#keep_alive"><summary><para>
+The retention period for the search and its results.
+It defaults to the <c>keep_alive</c> period for the original SQL search.
+</para></summary></member>
+  <member key="sql.get_async.Request#wait_for_completion_timeout"><summary><para>
+The period to wait for complete results.
+It defaults to no timeout, meaning the request waits for complete search results.
+</para></summary></member>
+</doc>

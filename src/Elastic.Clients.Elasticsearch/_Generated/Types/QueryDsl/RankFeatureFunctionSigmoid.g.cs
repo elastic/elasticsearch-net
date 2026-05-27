@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionSigmoidConverter))]
 public sealed partial class RankFeatureFunctionSigmoid
 {
@@ -43,21 +44,14 @@ public sealed partial class RankFeatureFunctionSigmoid
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configurable Exponent.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSigmoid.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid#exponent']/*"/>
 	public required float Exponent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSigmoid.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid#pivot']/*"/>
 	public required float Pivot { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid']/*"/>
 public readonly partial struct RankFeatureFunctionSigmoidDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct RankFeatureFunctionSigmoidDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Configurable Exponent.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSigmoid.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid#exponent']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor Exponent(float value)
 	{
 		Instance.Exponent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSigmoid.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSigmoid#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor Pivot(float value)
 	{
 		Instance.Pivot = value;

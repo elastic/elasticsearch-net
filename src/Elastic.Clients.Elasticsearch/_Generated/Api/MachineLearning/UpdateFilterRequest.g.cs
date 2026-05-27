@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
 public sealed partial class UpdateFilterRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update a filter.
-/// </para>
-/// <para>
-/// Updates the description of a filter, adds items, or removes items from the list.
-/// </para>
-/// </summary>
+/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateFilterRequestConverter))]
 public sealed partial class UpdateFilterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestParameters>
 {
@@ -61,43 +57,21 @@ public sealed partial class UpdateFilterRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ml.update_filter";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#filter_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The items to add to the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#add_items']/*"/>
 	public System.Collections.Generic.ICollection<string>? AddItems { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description for the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The items to remove from the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#remove_items']/*"/>
 	public System.Collections.Generic.ICollection<string>? RemoveItems { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a filter.
-/// </para>
-/// <para>
-/// Updates the description of a filter, adds items, or removes items from the list.
-/// </para>
-/// </summary>
+/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_filter.Request']/*"/>
 public readonly partial struct UpdateFilterRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest Instance { get; init; }
@@ -122,66 +96,42 @@ public readonly partial struct UpdateFilterRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.FilterId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items to add to the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#add_items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.AddItems = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items to add to the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#add_items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor AddItems(params string[] values)
 	{
 		Instance.AddItems = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description for the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items to remove from the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#remove_items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RemoveItems = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items to remove from the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateFilterRequest.g.xml" path="doc/member[@key='ml.update_filter.Request#remove_items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequestDescriptor RemoveItems(params string[] values)
 	{
 		Instance.RemoveItems = [.. values];

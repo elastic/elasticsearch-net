@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsDestinationConverter))]
 public sealed partial class DataframeAnalyticsDestination
 {
@@ -42,21 +43,14 @@ public sealed partial class DataframeAnalyticsDestination
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the destination index to store the results of the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination']/*"/>
 public readonly partial struct DataframeAnalyticsDestinationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Instance { get; init; }
@@ -76,33 +70,21 @@ public readonly partial struct DataframeAnalyticsDestinationDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the destination index to store the results of the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ResultsField = value;
@@ -118,6 +100,7 @@ public readonly partial struct DataframeAnalyticsDestinationDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination']/*"/>
 public readonly partial struct DataframeAnalyticsDestinationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Instance { get; init; }
@@ -137,33 +120,21 @@ public readonly partial struct DataframeAnalyticsDestinationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the destination index to store the results of the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsDestination.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsDestination#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ResultsField = value;

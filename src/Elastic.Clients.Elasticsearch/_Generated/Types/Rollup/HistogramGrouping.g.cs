@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.HistogramGrouping']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.HistogramGroupingConverter))]
 public sealed partial class HistogramGrouping
 {
@@ -43,25 +44,14 @@ public sealed partial class HistogramGrouping
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to build histograms for.
-	/// All fields specified must be some kind of numeric.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval of histogram buckets to be generated when rolling up.
-	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
-	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#interval']/*"/>
 	public required long Interval { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.HistogramGrouping']/*"/>
 public readonly partial struct HistogramGroupingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Instance { get; init; }
@@ -81,39 +71,21 @@ public readonly partial struct HistogramGroupingDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to build histograms for.
-	/// All fields specified must be some kind of numeric.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to build histograms for.
-	/// All fields specified must be some kind of numeric.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval of histogram buckets to be generated when rolling up.
-	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
-	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Interval(long value)
 	{
 		Instance.Interval = value;
@@ -129,6 +101,7 @@ public readonly partial struct HistogramGroupingDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.HistogramGrouping']/*"/>
 public readonly partial struct HistogramGroupingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Instance { get; init; }
@@ -148,39 +121,21 @@ public readonly partial struct HistogramGroupingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to build histograms for.
-	/// All fields specified must be some kind of numeric.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to build histograms for.
-	/// All fields specified must be some kind of numeric.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval of histogram buckets to be generated when rolling up.
-	/// For example, a value of <c>5</c> creates buckets that are five units wide (<c>0-5</c>, <c>5-10</c>, etc).
-	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramGrouping.g.xml" path="doc/member[@key='rollup._types.HistogramGrouping#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Interval(long value)
 	{
 		Instance.Interval = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoBoundingBoxQueryConverter))]
 public sealed partial class GeoBoundingBoxQuery
 {
@@ -43,38 +44,22 @@ public sealed partial class GeoBoundingBoxQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
 	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery']/*"/>
 public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery Instance { get; init; }
@@ -94,14 +79,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -132,12 +110,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -157,12 +130,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? value)
 	{
 		Instance.ValidationMethod = value;
@@ -178,6 +146,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery']/*"/>
 public readonly partial struct GeoBoundingBoxQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery Instance { get; init; }
@@ -197,14 +166,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -235,12 +197,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -260,12 +217,7 @@ public readonly partial struct GeoBoundingBoxQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundingBoxQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoBoundingBoxQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? value)
 	{
 		Instance.ValidationMethod = value;

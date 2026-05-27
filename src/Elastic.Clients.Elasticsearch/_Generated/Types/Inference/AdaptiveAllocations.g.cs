@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AdaptiveAllocations']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AdaptiveAllocationsConverter))]
 public sealed partial class AdaptiveAllocations
 {
@@ -36,31 +37,17 @@ public sealed partial class AdaptiveAllocations
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turn on <c>adaptive_allocations</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of allocations to scale to.
-	/// If set, it must be greater than or equal to <c>min_number_of_allocations</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#max_number_of_allocations']/*"/>
 	public int? MaxNumberOfAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of allocations to scale to.
-	/// If set, it must be greater than or equal to 0.
-	/// If not defined, the deployment scales to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#min_number_of_allocations']/*"/>
 	public int? MinNumberOfAllocations { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AdaptiveAllocations']/*"/>
 public readonly partial struct AdaptiveAllocationsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations Instance { get; init; }
@@ -80,36 +67,21 @@ public readonly partial struct AdaptiveAllocationsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor(Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations instance) => new Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations(Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Turn on <c>adaptive_allocations</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of allocations to scale to.
-	/// If set, it must be greater than or equal to <c>min_number_of_allocations</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#max_number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor MaxNumberOfAllocations(int? value)
 	{
 		Instance.MaxNumberOfAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of allocations to scale to.
-	/// If set, it must be greater than or equal to 0.
-	/// If not defined, the deployment scales to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocations.g.xml" path="doc/member[@key='inference._types.AdaptiveAllocations#min_number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor MinNumberOfAllocations(int? value)
 	{
 		Instance.MinNumberOfAllocations = value;

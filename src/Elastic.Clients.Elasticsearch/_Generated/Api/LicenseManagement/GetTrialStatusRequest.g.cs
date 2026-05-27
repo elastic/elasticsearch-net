@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="GetTrialStatusRequest.g.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
 public sealed partial class GetTrialStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the trial status.
-/// </para>
-/// </summary>
+/// <include file="GetTrialStatusRequest.g.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.GetTrialStatusRequestConverter))]
 public sealed partial class GetTrialStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>
 {
@@ -54,11 +53,8 @@ public sealed partial class GetTrialStatusRequest : Elastic.Clients.Elasticsearc
 	internal override string OperationName => "license.get_trial_status";
 }
 
-/// <summary>
-/// <para>
-/// Get the trial status.
-/// </para>
-/// </summary>
+/// <include file="GetTrialStatusRequest.g.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_trial_status.Request']/*"/>
 public readonly partial struct GetTrialStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest Instance { get; init; }

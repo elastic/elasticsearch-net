@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DetectionRule#actions"><summary><para>
+The set of actions to be triggered when the rule applies. If more than one action is specified the effects of all actions are combined.
+</para></summary></member>
+  <member key="ml._types.DetectionRule#conditions"><summary><para>
+An array of numeric conditions when the rule applies. A rule must either have a non-empty scope or at least one condition. Multiple conditions are combined together with a logical AND.
+</para></summary></member>
+  <member key="ml._types.DetectionRule#scope"><summary><para>
+A scope of series where the rule applies. A rule must either have a non-empty scope or at least one condition. By default, the scope includes all series. Scoping is allowed for any of the fields that are also specified in <c>by_field_name</c>, <c>over_field_name</c>, or <c>partition_field_name</c>.
+</para></summary></member>
+</doc>

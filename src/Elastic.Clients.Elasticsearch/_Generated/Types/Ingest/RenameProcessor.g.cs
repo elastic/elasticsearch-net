@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RenameProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RenameProcessorConverter))]
 public sealed partial class RenameProcessor
 {
@@ -43,67 +44,32 @@ public sealed partial class RenameProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be renamed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The new name of the field.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#target_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RenameProcessor']/*"/>
 public readonly partial struct RenameProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RenameProcessor Instance { get; init; }
@@ -123,124 +89,77 @@ public readonly partial struct RenameProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RenameProcessor(Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be renamed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be renamed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -253,36 +172,21 @@ public readonly partial struct RenameProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The new name of the field.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The new name of the field.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -298,6 +202,7 @@ public readonly partial struct RenameProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RenameProcessor']/*"/>
 public readonly partial struct RenameProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RenameProcessor Instance { get; init; }
@@ -317,124 +222,77 @@ public readonly partial struct RenameProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RenameProcessor(Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be renamed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be renamed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -447,11 +305,7 @@ public readonly partial struct RenameProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -464,36 +318,21 @@ public readonly partial struct RenameProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The new name of the field.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The new name of the field.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RenameProcessor.g.xml" path="doc/member[@key='ingest._types.RenameProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

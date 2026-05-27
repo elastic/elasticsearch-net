@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_data_frame_analytics_stats.Request"><summary><para>
+Get data frame analytics job stats.
+</para></summary></member>
+  <member key="ml.get_data_frame_analytics_stats.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="number">
+<item>
+<para>
+Contains wildcard expressions and there are no data frame analytics
+jobs that match.
+</para>
+</item>
+<item>
+<para>
+Contains the <c>_all</c> string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+The default value returns an empty data_frame_analytics array when there
+are no matches and the subset of results when there are partial matches.
+If this parameter is <c>false</c>, the request returns a 404 status code when
+there are no matches or only partial matches.
+</para></summary></member>
+  <member key="ml.get_data_frame_analytics_stats.Request#from"><summary><para>
+Skips the specified number of data frame analytics jobs.
+</para></summary></member>
+  <member key="ml.get_data_frame_analytics_stats.Request#id"><summary><para>
+Identifier for the data frame analytics job. If you do not specify this
+option, the API returns information for the first hundred data frame
+analytics jobs.
+</para></summary></member>
+  <member key="ml.get_data_frame_analytics_stats.Request#size"><summary><para>
+Specifies the maximum number of data frame analytics jobs to obtain.
+</para></summary></member>
+  <member key="ml.get_data_frame_analytics_stats.Request#verbose"><summary><para>
+Defines whether the stats response should be verbose.
+</para></summary></member>
+</doc>

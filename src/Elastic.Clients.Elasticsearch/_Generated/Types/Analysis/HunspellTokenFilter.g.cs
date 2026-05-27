@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.HunspellTokenFilterConverter))]
 public sealed partial class HunspellTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,33 +43,16 @@ public sealed partial class HunspellTokenFilter : Elastic.Clients.Elasticsearch.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, duplicate tokens are removed from the filter’s output. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#dedup']/*"/>
 	public bool? Dedup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more <c>.dic</c> files (e.g, <c>en_US.dic</c>, my_custom.dic) to use for the Hunspell dictionary.
-	/// By default, the <c>hunspell</c> filter uses all <c>.dic</c> files in the <c>&lt;$ES_PATH_CONF>/hunspell/&lt;locale></c> directory specified using the <c>lang</c>, <c>language</c>, or <c>locale</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#dictionary']/*"/>
 	public string? Dictionary { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Locale directory used to specify the <c>.aff</c> and <c>.dic</c> files for a Hunspell dictionary.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#locale']/*"/>
 	public required string Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only the longest stemmed version of each token is included in the output. If <c>false</c>, all stemmed versions of the token are included. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#longest_only']/*"/>
 	public bool? LongestOnly { get; set; }
 
 	public string Type => "hunspell";
@@ -76,6 +60,7 @@ public sealed partial class HunspellTokenFilter : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter']/*"/>
 public readonly partial struct HunspellTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter Instance { get; init; }
@@ -95,45 +80,28 @@ public readonly partial struct HunspellTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, duplicate tokens are removed from the filter’s output. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#dedup']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Dedup(bool? value = true)
 	{
 		Instance.Dedup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more <c>.dic</c> files (e.g, <c>en_US.dic</c>, my_custom.dic) to use for the Hunspell dictionary.
-	/// By default, the <c>hunspell</c> filter uses all <c>.dic</c> files in the <c>&lt;$ES_PATH_CONF>/hunspell/&lt;locale></c> directory specified using the <c>lang</c>, <c>language</c>, or <c>locale</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#dictionary']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Dictionary(string? value)
 	{
 		Instance.Dictionary = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Locale directory used to specify the <c>.aff</c> and <c>.dic</c> files for a Hunspell dictionary.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor Locale(string value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only the longest stemmed version of each token is included in the output. If <c>false</c>, all stemmed versions of the token are included. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HunspellTokenFilter.g.xml" path="doc/member[@key='_types.analysis.HunspellTokenFilter#longest_only']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor LongestOnly(bool? value = true)
 	{
 		Instance.LongestOnly = value;

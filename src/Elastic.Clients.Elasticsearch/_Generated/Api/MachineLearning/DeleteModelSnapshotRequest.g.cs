@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
 public sealed partial class DeleteModelSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a model snapshot.
-/// </para>
-/// <para>
-/// You cannot delete the active model snapshot. To delete that snapshot, first
-/// revert to a different one. To identify the active model snapshot, refer to
-/// the <c>model_snapshot_id</c> in the results from the get jobs API.
-/// </para>
-/// </summary>
+/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteModelSnapshotRequestConverter))]
 public sealed partial class DeleteModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestParameters>
 {
@@ -63,31 +57,15 @@ public sealed partial class DeleteModelSnapshotRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "ml.delete_model_snapshot";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request#snapshot_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a model snapshot.
-/// </para>
-/// <para>
-/// You cannot delete the active model snapshot. To delete that snapshot, first
-/// revert to a different one. To identify the active model snapshot, refer to
-/// the <c>model_snapshot_id</c> in the results from the get jobs API.
-/// </para>
-/// </summary>
+/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_model_snapshot.Request']/*"/>
 public readonly partial struct DeleteModelSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest Instance { get; init; }
@@ -112,22 +90,14 @@ public readonly partial struct DeleteModelSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteModelSnapshotRequest.g.xml" path="doc/member[@key='ml.delete_model_snapshot.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SnapshotId = value;

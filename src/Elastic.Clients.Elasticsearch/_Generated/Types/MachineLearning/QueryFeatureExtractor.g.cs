@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.QueryFeatureExtractor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.QueryFeatureExtractorConverter))]
 public sealed partial class QueryFeatureExtractor
 {
@@ -48,6 +49,7 @@ public sealed partial class QueryFeatureExtractor
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.QueryFeatureExtractor']/*"/>
 public readonly partial struct QueryFeatureExtractorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor Instance { get; init; }
@@ -100,6 +102,7 @@ public readonly partial struct QueryFeatureExtractorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.QueryFeatureExtractor']/*"/>
 public readonly partial struct QueryFeatureExtractorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor Instance { get; init; }

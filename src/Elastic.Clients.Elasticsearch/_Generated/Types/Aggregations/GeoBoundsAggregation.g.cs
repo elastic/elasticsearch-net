@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoBoundsAggregationConverter))]
 public sealed partial class GeoBoundsAggregation
 {
@@ -36,30 +37,18 @@ public sealed partial class GeoBoundsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the bounding box should be allowed to overlap the international date line.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#wrap_longitude']/*"/>
 	public bool? WrapLongitude { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation']/*"/>
 public readonly partial struct GeoBoundsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation Instance { get; init; }
@@ -79,34 +68,21 @@ public readonly partial struct GeoBoundsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -131,11 +107,7 @@ public readonly partial struct GeoBoundsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the bounding box should be allowed to overlap the international date line.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#wrap_longitude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument> WrapLongitude(bool? value = true)
 	{
 		Instance.WrapLongitude = value;
@@ -156,6 +128,7 @@ public readonly partial struct GeoBoundsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation']/*"/>
 public readonly partial struct GeoBoundsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation Instance { get; init; }
@@ -175,34 +148,21 @@ public readonly partial struct GeoBoundsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -227,11 +187,7 @@ public readonly partial struct GeoBoundsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the bounding box should be allowed to overlap the international date line.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoBoundsAggregation#wrap_longitude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor WrapLongitude(bool? value = true)
 	{
 		Instance.WrapLongitude = value;

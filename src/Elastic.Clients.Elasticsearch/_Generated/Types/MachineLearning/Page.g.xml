@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.Page#from"><summary><para>
+Skips the specified number of items.
+</para></summary></member>
+  <member key="ml._types.Page#size"><summary><para>
+Specifies the maximum number of items to obtain.
+</para></summary></member>
+</doc>

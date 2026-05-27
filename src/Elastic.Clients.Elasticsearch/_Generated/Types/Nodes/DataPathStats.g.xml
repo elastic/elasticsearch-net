@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.DataPathStats#available"><summary><para>
+Total amount of disk space available to this Java virtual machine on this file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#available_in_bytes"><summary><para>
+Total number of bytes available to this Java virtual machine on this file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#free"><summary><para>
+Total amount of unallocated disk space in the file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#free_in_bytes"><summary><para>
+Total number of unallocated bytes in the file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#mount"><summary><para>
+Mount point of the file store (for example: <c>/dev/sda2</c>).
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#path"><summary><para>
+Path to the file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#total"><summary><para>
+Total size of the file store.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#total_in_bytes"><summary><para>
+Total size of the file store in bytes.
+</para></summary></member>
+  <member key="nodes._types.DataPathStats#type"><summary><para>
+Type of the file store (ex: ext4).
+</para></summary></member>
+</doc>

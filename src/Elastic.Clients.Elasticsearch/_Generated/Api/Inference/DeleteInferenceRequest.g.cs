@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.delete.Request']/*"/>
 public sealed partial class DeleteInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an inference endpoint.
-/// </para>
-/// <para>
-/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
-/// </para>
-/// </summary>
+/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DeleteInferenceRequestConverter))]
 public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>
 {
@@ -79,43 +67,21 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "inference.delete";
 
-	/// <summary>
-	/// <para>
-	/// The inference identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an inference endpoint.
-/// </para>
-/// <para>
-/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
-/// </para>
-/// </summary>
+/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.delete.Request']/*"/>
 public readonly partial struct DeleteInferenceRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest Instance { get; init; }
@@ -145,44 +111,28 @@ public readonly partial struct DeleteInferenceRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteInferenceRequest.g.xml" path="doc/member[@key='inference.delete.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;

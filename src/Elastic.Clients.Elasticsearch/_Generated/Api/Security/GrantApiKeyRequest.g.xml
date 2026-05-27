@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.grant_api_key.Request"><summary><para>
+Grant an API key.
+</para>
+<para>
+Create an API key on behalf of another user.
+This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
+The caller must have authentication credentials for the user on whose behalf the API key will be created.
+It is not possible to use this API to create an API key without that user's credentials.
+The supported user authentication credential types are:
+</para>
+<list type="bullet">
+<item>
+<para>
+username and password
+</para>
+</item>
+<item>
+<para>
+Elasticsearch access tokens
+</para>
+</item>
+<item>
+<para>
+JWTs
+</para>
+</item>
+</list>
+<para>
+The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
+In this case, the API key will be created on behalf of the impersonated user.
+</para>
+<para>
+This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+</para>
+<para>
+A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
+If applicable, it also returns expiration information for the API key in milliseconds.
+</para>
+<para>
+By default, API keys never expire. You can specify expiration information when you create the API keys.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#access_token"><summary><para>
+The user's access token.
+If you specify the <c>access_token</c> grant type, this parameter is required.
+It is not valid with other grant types.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#api_key"><summary><para>
+The API key.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#grant_type"><summary><para>
+The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#password"><summary><para>
+The user's password.
+If you specify the <c>password</c> grant type, this parameter is required.
+It is not valid with other grant types.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#refresh"><summary><para>
+If 'true', Elasticsearch refreshes the affected shards to make this operation
+visible to search.
+If 'wait_for', it waits for a refresh to make this operation visible to search.
+If 'false', nothing is done with refreshes.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#run_as"><summary><para>
+The name of the user to be impersonated.
+</para></summary></member>
+  <member key="security.grant_api_key.Request#username"><summary><para>
+The user name that identifies the user.
+If you specify the <c>password</c> grant type, this parameter is required.
+It is not valid with other grant types.
+</para></summary></member>
+</doc>

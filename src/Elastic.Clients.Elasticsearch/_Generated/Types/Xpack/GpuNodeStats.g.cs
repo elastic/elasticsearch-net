@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-/// <summary>
-/// <para>
-/// Per-node GPU statistics for vector indexing.
-/// </para>
-/// </summary>
+/// <include file="GpuNodeStats.g.xml" path="doc/member[@key='xpack.usage.GpuNodeStats']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.GpuNodeStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.GpuNodeStatsConverter))]
 public sealed partial class GpuNodeStats
 {
@@ -50,31 +47,15 @@ public sealed partial class GpuNodeStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether GPU vector indexing is enabled on this node.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuNodeStats.g.xml" path="doc/member[@key='xpack.usage.GpuNodeStats#enabled']/*"/>
 	public required bool Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of GPU index builds performed on this node.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuNodeStats.g.xml" path="doc/member[@key='xpack.usage.GpuNodeStats#index_build_count']/*"/>
 	public required long IndexBuildCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// GPU memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuNodeStats.g.xml" path="doc/member[@key='xpack.usage.GpuNodeStats#memory_in_bytes']/*"/>
 	public required long MemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// GPU device type (e.g., "NVIDIA L4", "NVIDIA A100").
-	/// </para>
-	/// </summary>
+	/// <include file="GpuNodeStats.g.xml" path="doc/member[@key='xpack.usage.GpuNodeStats#type']/*"/>
 	public required string Type { get; set; }
 }

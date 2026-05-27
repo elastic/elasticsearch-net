@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.S3Repository']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.S3RepositoryConverter))]
 public sealed partial class S3Repository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
@@ -42,28 +43,16 @@ public sealed partial class S3Repository : Elastic.Clients.Elasticsearch.Snapsho
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// <para>
-	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
-	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
-	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
-	/// </para>
-	/// </summary>
+	/// <include file="S3Repository.g.xml" path="doc/member[@key='snapshot._types.S3Repository#settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The S3 repository type.
-	/// </para>
-	/// </summary>
+	/// <include file="S3Repository.g.xml" path="doc/member[@key='snapshot._types.S3Repository#type']/*"/>
 	public string Type => "s3";
 
 	public string? Uuid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.S3Repository']/*"/>
 public readonly partial struct S3RepositoryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.S3Repository Instance { get; init; }
@@ -83,32 +72,14 @@ public readonly partial struct S3RepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.S3Repository instance) => new Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.S3Repository(Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// <para>
-	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
-	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
-	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
-	/// </para>
-	/// </summary>
+	/// <include file="S3Repository.g.xml" path="doc/member[@key='snapshot._types.S3Repository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// <para>
-	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
-	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
-	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
-	/// </para>
-	/// </summary>
+	/// <include file="S3Repository.g.xml" path="doc/member[@key='snapshot._types.S3Repository#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor> action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor.Build(action);

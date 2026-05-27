@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.VersionProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.VersionPropertyConverter))]
 public sealed partial class VersionProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -42,11 +43,7 @@ public sealed partial class VersionProperty : Elastic.Clients.Elasticsearch.Mapp
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -55,6 +52,7 @@ public sealed partial class VersionProperty : Elastic.Clients.Elasticsearch.Mapp
 	public string Type => "version";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.VersionProperty']/*"/>
 public readonly partial struct VersionPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.VersionProperty Instance { get; init; }
@@ -116,33 +114,21 @@ public readonly partial struct VersionPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -194,6 +180,7 @@ public readonly partial struct VersionPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.VersionProperty']/*"/>
 public readonly partial struct VersionPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.VersionProperty Instance { get; init; }
@@ -261,33 +248,21 @@ public readonly partial struct VersionPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VersionProperty.g.xml" path="doc/member[@key='_types.mapping.VersionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

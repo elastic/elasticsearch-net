@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.AsciiFoldingTokenFilter#preserve_original"><summary><para>
+If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

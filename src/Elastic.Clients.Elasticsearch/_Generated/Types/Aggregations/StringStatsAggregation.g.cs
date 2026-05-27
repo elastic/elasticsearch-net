@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StringStatsAggregationConverter))]
 public sealed partial class StringStatsAggregation
 {
@@ -36,30 +37,18 @@ public sealed partial class StringStatsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shows the probability distribution for all characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#show_distribution']/*"/>
 	public bool? ShowDistribution { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation']/*"/>
 public readonly partial struct StringStatsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation Instance { get; init; }
@@ -79,34 +68,21 @@ public readonly partial struct StringStatsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -131,11 +107,7 @@ public readonly partial struct StringStatsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Shows the probability distribution for all characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#show_distribution']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? value = true)
 	{
 		Instance.ShowDistribution = value;
@@ -156,6 +128,7 @@ public readonly partial struct StringStatsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation']/*"/>
 public readonly partial struct StringStatsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation Instance { get; init; }
@@ -175,34 +148,21 @@ public readonly partial struct StringStatsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -227,11 +187,7 @@ public readonly partial struct StringStatsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Shows the probability distribution for all characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StringStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StringStatsAggregation#show_distribution']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor ShowDistribution(bool? value = true)
 	{
 		Instance.ShowDistribution = value;

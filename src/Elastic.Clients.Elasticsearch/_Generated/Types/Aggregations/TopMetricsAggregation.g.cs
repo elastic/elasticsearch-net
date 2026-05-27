@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TopMetricsAggregationConverter))]
 public sealed partial class TopMetricsAggregation
 {
@@ -36,44 +37,24 @@ public sealed partial class TopMetricsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from which to return metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation']/*"/>
 public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation Instance { get; init; }
@@ -93,55 +74,35 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue[] values)
 	{
 		Instance.Metrics = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Metrics(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>();
@@ -154,12 +115,7 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -184,44 +140,28 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from which to return metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -248,6 +188,7 @@ public readonly partial struct TopMetricsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation']/*"/>
 public readonly partial struct TopMetricsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation Instance { get; init; }
@@ -267,55 +208,35 @@ public readonly partial struct TopMetricsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(params Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue[] values)
 	{
 		Instance.Metrics = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>();
@@ -328,11 +249,7 @@ public readonly partial struct TopMetricsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields of the top document to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Metrics<T>(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>();
@@ -345,12 +262,7 @@ public readonly partial struct TopMetricsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -375,44 +287,28 @@ public readonly partial struct TopMetricsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from which to return metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -425,11 +321,7 @@ public readonly partial struct TopMetricsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

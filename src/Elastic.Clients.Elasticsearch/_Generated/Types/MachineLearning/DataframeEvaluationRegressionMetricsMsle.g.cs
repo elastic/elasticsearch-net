@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsMsle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionMetricsMsleConverter))]
 public sealed partial class DataframeEvaluationRegressionMetricsMsle
 {
@@ -36,14 +37,11 @@ public sealed partial class DataframeEvaluationRegressionMetricsMsle
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetricsMsle.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsMsle#offset']/*"/>
 	public double? Offset { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsMsle']/*"/>
 public readonly partial struct DataframeEvaluationRegressionMetricsMsleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct DataframeEvaluationRegressionMetricsMsleDescripto
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the transition point at which you switch from minimizing quadratic error to minimizing quadratic log error. Defaults to 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetricsMsle.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsMsle#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor Offset(double? value)
 	{
 		Instance.Offset = value;

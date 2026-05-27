@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Retries']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RetriesConverter))]
 public sealed partial class Retries
 {
@@ -43,17 +44,9 @@ public sealed partial class Retries
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of bulk actions retried.
-	/// </para>
-	/// </summary>
+	/// <include file="Retries.g.xml" path="doc/member[@key='_types.Retries#bulk']/*"/>
 	public required long Bulk { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of search actions retried.
-	/// </para>
-	/// </summary>
+	/// <include file="Retries.g.xml" path="doc/member[@key='_types.Retries#search']/*"/>
 	public required long Search { get; set; }
 }

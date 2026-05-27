@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.InferenceConfigRegression#num_top_feature_importance_values"><summary><para>
+Specifies the maximum number of feature importance values per document.
+</para></summary></member>
+  <member key="ingest._types.InferenceConfigRegression#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction.
+</para></summary></member>
+</doc>

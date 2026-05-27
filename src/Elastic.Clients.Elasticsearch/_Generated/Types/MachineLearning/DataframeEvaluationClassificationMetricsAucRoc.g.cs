@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationClassificationMetricsAucRocConverter))]
 public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 {
@@ -36,21 +37,14 @@ public sealed partial class DataframeEvaluationClassificationMetricsAucRoc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetricsAucRoc.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc#class_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? ClassName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether or not the curve should be returned in addition to the score. Default value is false.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetricsAucRoc.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc#include_curve']/*"/>
 	public bool? IncludeCurve { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc']/*"/>
 public readonly partial struct DataframeEvaluationClassificationMetricsAucRocDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct DataframeEvaluationClassificationMetricsAucRocDes
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the only class that is treated as positive during AUC ROC calculation. Other classes are treated as negative ("one-vs-all" strategy). All the evaluated documents must have class_name in the list of their top classes.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetricsAucRoc.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc#class_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor ClassName(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.ClassName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether or not the curve should be returned in addition to the score. Default value is false.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetricsAucRoc.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetricsAucRoc#include_curve']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor IncludeCurve(bool? value = true)
 	{
 		Instance.IncludeCurve = value;

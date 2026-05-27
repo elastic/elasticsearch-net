@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.PatternCaptureTokenFilterConverter))]
 public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,18 +43,10 @@ public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elastics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of regular expressions to match.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternCaptureTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter#patterns']/*"/>
 	public required System.Collections.Generic.ICollection<string> Patterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> (the default) it will emit the original token.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternCaptureTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter#preserve_original']/*"/>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "pattern_capture";
@@ -61,6 +54,7 @@ public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elastics
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter']/*"/>
 public readonly partial struct PatternCaptureTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter Instance { get; init; }
@@ -80,33 +74,21 @@ public readonly partial struct PatternCaptureTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of regular expressions to match.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternCaptureTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of regular expressions to match.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternCaptureTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c> (the default) it will emit the original token.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternCaptureTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternCaptureTokenFilter#preserve_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

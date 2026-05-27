@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
 public sealed partial class IndexSettingsTimeSeries
 {
 	public IndexSettingsTimeSeries()
@@ -39,6 +40,7 @@ public sealed partial class IndexSettingsTimeSeries
 	public System.DateTimeOffset? StartTime { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsTimeSeries']/*"/>
 public readonly partial struct IndexSettingsTimeSeriesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Instance { get; init; }

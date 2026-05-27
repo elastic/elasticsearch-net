@@ -23,28 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
 public sealed partial class SamlInvalidateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Invalidate SAML.
-/// </para>
-/// <para>
-/// Submit a SAML LogoutRequest message to Elasticsearch for consumption.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The logout request comes from the SAML IdP during an IdP initiated Single Logout.
-/// The custom web application can use this API to have Elasticsearch process the <c>LogoutRequest</c>.
-/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
-/// Thus the user can be redirected back to their IdP.
-/// </para>
-/// </summary>
+/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlInvalidateRequestConverter))]
 public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>
 {
@@ -72,50 +58,18 @@ public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.saml_invalidate";
 
-	/// <summary>
-	/// <para>
-	/// The Assertion Consumer Service URL that matches the one of the SAML realm in Elasticsearch that should be used. You must specify either this parameter or the <c>realm</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#acs']/*"/>
 	public string? Acs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query part of the URL that the user was redirected to by the SAML IdP to initiate the Single Logout.
-	/// This query should include a single parameter named <c>SAMLRequest</c> that contains a SAML logout request that is deflated and Base64 encoded.
-	/// If the SAML IdP has signed the logout request, the URL should include two extra parameters named <c>SigAlg</c> and <c>Signature</c> that contain the algorithm used for the signature and the signature value itself.
-	/// In order for Elasticsearch to be able to verify the IdP's signature, the value of the <c>query_string</c> field must be an exact match to the string provided by the browser.
-	/// The client application must not attempt to parse or process the string in any way.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#query_string']/*"/>
 	public required string QueryString { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch the configuration. You must specify either this parameter or the <c>acs</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#realm']/*"/>
 	public string? Realm { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Invalidate SAML.
-/// </para>
-/// <para>
-/// Submit a SAML LogoutRequest message to Elasticsearch for consumption.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The logout request comes from the SAML IdP during an IdP initiated Single Logout.
-/// The custom web application can use this API to have Elasticsearch process the <c>LogoutRequest</c>.
-/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
-/// Thus the user can be redirected back to their IdP.
-/// </para>
-/// </summary>
+/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_invalidate.Request']/*"/>
 public readonly partial struct SamlInvalidateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Instance { get; init; }
@@ -134,37 +88,21 @@ public readonly partial struct SamlInvalidateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The Assertion Consumer Service URL that matches the one of the SAML realm in Elasticsearch that should be used. You must specify either this parameter or the <c>realm</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#acs']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Acs(string? value)
 	{
 		Instance.Acs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query part of the URL that the user was redirected to by the SAML IdP to initiate the Single Logout.
-	/// This query should include a single parameter named <c>SAMLRequest</c> that contains a SAML logout request that is deflated and Base64 encoded.
-	/// If the SAML IdP has signed the logout request, the URL should include two extra parameters named <c>SigAlg</c> and <c>Signature</c> that contain the algorithm used for the signature and the signature value itself.
-	/// In order for Elasticsearch to be able to verify the IdP's signature, the value of the <c>query_string</c> field must be an exact match to the string provided by the browser.
-	/// The client application must not attempt to parse or process the string in any way.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#query_string']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor QueryString(string value)
 	{
 		Instance.QueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch the configuration. You must specify either this parameter or the <c>acs</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateRequest.g.xml" path="doc/member[@key='security.saml_invalidate.Request#realm']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor Realm(string? value)
 	{
 		Instance.Realm = value;

@@ -23,32 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
 public sealed partial class ActivateUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Activate a user profile.
-/// </para>
-/// <para>
-/// Create or update a user profile on behalf of another user.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// The calling application must have either an <c>access_token</c> or a combination of <c>username</c> and <c>password</c> for the user that the profile document is intended for.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// This API creates or updates a profile document for end users with information that is extracted from the user's authentication object including <c>username</c>, <c>full_name,</c> <c>roles</c>, and the authentication realm.
-/// For example, in the JWT <c>access_token</c> case, the profile user's <c>username</c> is extracted from the JWT token claim pointed to by the <c>claims.principal</c> setting of the JWT realm that authenticated the token.
-/// </para>
-/// <para>
-/// When updating a profile document, the API enables the document if it was disabled.
-/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
-/// </para>
-/// </summary>
+/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ActivateUserProfileRequestConverter))]
 public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>
 {
@@ -76,64 +58,21 @@ public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "security.activate_user_profile";
 
-	/// <summary>
-	/// <para>
-	/// The user's Elasticsearch access token or JWT.
-	/// Both <c>access</c> and <c>id</c> JWT token types are supported and they depend on the underlying JWT realm configuration.
-	/// If you specify the <c>access_token</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#access_token']/*"/>
 	public string? AccessToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of grant.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#grant_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The username that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#username']/*"/>
 	public string? Username { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Activate a user profile.
-/// </para>
-/// <para>
-/// Create or update a user profile on behalf of another user.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// The calling application must have either an <c>access_token</c> or a combination of <c>username</c> and <c>password</c> for the user that the profile document is intended for.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// This API creates or updates a profile document for end users with information that is extracted from the user's authentication object including <c>username</c>, <c>full_name,</c> <c>roles</c>, and the authentication realm.
-/// For example, in the JWT <c>access_token</c> case, the profile user's <c>username</c> is extracted from the JWT token claim pointed to by the <c>claims.principal</c> setting of the JWT realm that authenticated the token.
-/// </para>
-/// <para>
-/// When updating a profile document, the API enables the document if it was disabled.
-/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
-/// </para>
-/// </summary>
+/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.activate_user_profile.Request']/*"/>
 public readonly partial struct ActivateUserProfileRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Instance { get; init; }
@@ -152,51 +91,28 @@ public readonly partial struct ActivateUserProfileRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The user's Elasticsearch access token or JWT.
-	/// Both <c>access</c> and <c>id</c> JWT token types are supported and they depend on the underlying JWT realm configuration.
-	/// If you specify the <c>access_token</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#access_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor AccessToken(string? value)
 	{
 		Instance.AccessToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of grant.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.GrantType value)
 	{
 		Instance.GrantType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="ActivateUserProfileRequest.g.xml" path="doc/member[@key='security.activate_user_profile.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor Username(string? value)
 	{
 		Instance.Username = value;

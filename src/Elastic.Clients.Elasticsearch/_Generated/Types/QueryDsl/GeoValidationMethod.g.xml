@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.GeoValidationMethod#coerce"><summary><para>
+Accept geo points with invalid latitude or longitude and additionally try and infer correct coordinates.
+</para></summary></member>
+  <member key="_types.query_dsl.GeoValidationMethod#ignore_malformed"><summary><para>
+Accept geo points with invalid latitude or longitude.
+</para></summary></member>
+</doc>

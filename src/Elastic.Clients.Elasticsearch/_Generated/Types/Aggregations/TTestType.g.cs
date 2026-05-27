@@ -26,25 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TTestTypeConverter))]
 public enum TTestType
 {
-	/// <summary>
-	/// <para>
-	/// Performs two-sample unequal variance test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestType.g.xml" path="doc/member[@key='_types.aggregations.TTestType#heteroscedastic']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "heteroscedastic")]
 	Heteroscedastic,
-	/// <summary>
-	/// <para>
-	/// Performs two-sample equal variance test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestType.g.xml" path="doc/member[@key='_types.aggregations.TTestType#homoscedastic']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "homoscedastic")]
 	Homoscedastic,
-	/// <summary>
-	/// <para>
-	/// Performs paired t-test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestType.g.xml" path="doc/member[@key='_types.aggregations.TTestType#paired']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "paired")]
 	Paired
 }

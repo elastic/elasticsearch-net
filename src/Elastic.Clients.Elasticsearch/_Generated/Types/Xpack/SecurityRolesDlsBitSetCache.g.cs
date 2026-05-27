@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.SecurityRolesDlsBitSetCacheConverter))]
 public sealed partial class SecurityRolesDlsBitSetCache
 {
@@ -48,59 +49,27 @@ public sealed partial class SecurityRolesDlsBitSetCache
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of entries in the cache.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of cache evictions.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#evictions']/*"/>
 	public required long Evictions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of cache hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#hits']/*"/>
 	public required long Hits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total combined time spent in cache for hits in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#hits_time_in_millis']/*"/>
 	public required System.TimeSpan HitsTimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human-readable amount of memory taken up by the cache.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory taken up by the cache in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#memory_in_bytes']/*"/>
 	public required long MemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of cache misses.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#misses']/*"/>
 	public required long Misses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total combined time spent in cache for misses in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="SecurityRolesDlsBitSetCache.g.xml" path="doc/member[@key='xpack.usage.SecurityRolesDlsBitSetCache#misses_time_in_millis']/*"/>
 	public required System.TimeSpan MissesTimeInMillis { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsRangeConverter))]
 public sealed partial class IntervalsRange
 {
@@ -36,50 +37,26 @@ public sealed partial class IntervalsRange
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gt']/*"/>
 	public string? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gte']/*"/>
 	public string? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lt']/*"/>
 	public string? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lte']/*"/>
 	public string? Lte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange']/*"/>
 public readonly partial struct IntervalsRangeDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange Instance { get; init; }
@@ -99,79 +76,49 @@ public readonly partial struct IntervalsRangeDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> Gt(string? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> Gte(string? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> Lt(string? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> Lte(string? value)
 	{
 		Instance.Lte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.UseField = value;
@@ -192,6 +139,7 @@ public readonly partial struct IntervalsRangeDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange']/*"/>
 public readonly partial struct IntervalsRangeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange Instance { get; init; }
@@ -211,79 +159,49 @@ public readonly partial struct IntervalsRangeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>prefix</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor Gt(string? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lower term, either gte or gt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor Gte(string? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor Lt(string? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Upper term, either lte or lt must be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor Lte(string? value)
 	{
 		Instance.Lte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>prefix</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsRange.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsRange#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.UseField = value;

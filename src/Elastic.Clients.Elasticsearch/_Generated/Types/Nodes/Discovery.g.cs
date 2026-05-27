@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Discovery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.DiscoveryConverter))]
 public sealed partial class Discovery
 {
@@ -38,28 +39,13 @@ public sealed partial class Discovery
 
 	public Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats? ClusterApplierStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for the cluster state queue of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Discovery.g.xml" path="doc/member[@key='nodes._types.Discovery#cluster_state_queue']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue? ClusterStateQueue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains low-level statistics about how long various activities took during cluster state updates while the node was the elected master.
-	/// Omitted if the node is not master-eligible.
-	/// Every field whose name ends in <c>_time</c> within this object is also represented as a raw number of milliseconds in a field whose name ends in <c>_time_millis</c>.
-	/// The human-readable fields with a <c>_time</c> suffix are only returned if requested with the <c>?human=true</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="Discovery.g.xml" path="doc/member[@key='nodes._types.Discovery#cluster_state_update']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>? ClusterStateUpdate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for the published cluster states of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Discovery.g.xml" path="doc/member[@key='nodes._types.Discovery#published_cluster_states']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates? PublishedClusterStates { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState? SerializedClusterStates { get; set; }
 }

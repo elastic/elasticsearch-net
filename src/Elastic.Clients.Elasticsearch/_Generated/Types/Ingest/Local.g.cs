@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Local']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.LocalConverter))]
 public sealed partial class Local
 {

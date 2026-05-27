@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 public sealed partial class CreateFromRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create an index from a source index.
-/// </para>
-/// <para>
-/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
-/// </para>
-/// </summary>
+/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateFromRequestConverter))]
 public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>
 {
@@ -61,30 +57,16 @@ public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.create_from";
 
-	/// <summary>
-	/// <para>
-	/// The destination index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#dest']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Dest { get => P<Elastic.Clients.Elasticsearch.IndexName>("dest"); set => PR("dest", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#source']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Source { get => P<Elastic.Clients.Elasticsearch.IndexName>("source"); set => PR("source", value); }
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom? CreateFrom { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an index from a source index.
-/// </para>
-/// <para>
-/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
-/// </para>
-/// </summary>
+/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 public readonly partial struct CreateFromRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest Instance { get; init; }
@@ -109,22 +91,14 @@ public readonly partial struct CreateFromRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The destination index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor Dest(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor Source(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Source = value;
@@ -211,14 +185,8 @@ public readonly partial struct CreateFromRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create an index from a source index.
-/// </para>
-/// <para>
-/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
-/// </para>
-/// </summary>
+/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 public readonly partial struct CreateFromRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest Instance { get; init; }
@@ -243,22 +211,14 @@ public readonly partial struct CreateFromRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The destination index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Source = value;

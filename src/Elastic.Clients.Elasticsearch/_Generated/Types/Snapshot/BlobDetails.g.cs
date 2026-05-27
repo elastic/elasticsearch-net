@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.BlobDetailsConverter))]
 public sealed partial class BlobDetails
 {
@@ -49,54 +50,25 @@ public sealed partial class BlobDetails
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the blob.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the blob was overwritten while the read operations were ongoing.
-	/// /**
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#overwritten']/*"/>
 	public required bool Overwritten { get; set; }
 	public required bool ReadEarly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The position, in bytes, at which read operations completed.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#read_end']/*"/>
 	public required long ReadEnd { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of every read operation performed on the blob.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#reads']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Reads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The position, in bytes, at which read operations started.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#read_start']/*"/>
 	public required long ReadStart { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of the blob.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#size']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of the blob in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="BlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.BlobDetails#size_bytes']/*"/>
 	public required long SizeBytes { get; set; }
 }

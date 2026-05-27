@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsAuthorization']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsAuthorizationConverter))]
 public sealed partial class DataframeAnalyticsAuthorization
 {
@@ -36,24 +37,12 @@ public sealed partial class DataframeAnalyticsAuthorization
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If an API key was used for the most recent update to the job, its name and identifier are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsAuthorization.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsAuthorization#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ApiKeyAuthorization? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a user ID was used for the most recent update to the job, its roles at the time of the update are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsAuthorization.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsAuthorization#roles']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a service account was used for the most recent update to the job, the account name is listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsAuthorization.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsAuthorization#service_account']/*"/>
 	public string? ServiceAccount { get; set; }
 }

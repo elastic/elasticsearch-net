@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.Destination']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Reindex.Json.DestinationConverter))]
 public sealed partial class Destination
 {
@@ -42,48 +43,23 @@ public sealed partial class Destination
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream, index, or index alias you are copying to.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#op_type']/*"/>
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the pipeline to use.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#pipeline']/*"/>
 	public string? Pipeline { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, a document's routing is preserved unless it's changed by the script.
-	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
-	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
-	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The versioning to use for the indexing operation.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.Destination']/*"/>
 public readonly partial struct DestinationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Reindex.Destination Instance { get; init; }
@@ -103,61 +79,35 @@ public readonly partial struct DestinationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.Destination instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.Destination(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream, index, or index alias you are copying to.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#op_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor OpType(Elastic.Clients.Elasticsearch.OpType? value)
 	{
 		Instance.OpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the pipeline to use.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, a document's routing is preserved unless it's changed by the script.
-	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
-	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
-	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The versioning to use for the indexing operation.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='_global.reindex.Destination#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;

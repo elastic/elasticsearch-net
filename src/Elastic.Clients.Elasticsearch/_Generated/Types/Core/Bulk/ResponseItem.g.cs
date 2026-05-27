@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.bulk.ResponseItem']/*"/>
 public abstract partial class ResponseItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -42,76 +43,33 @@ public abstract partial class ResponseItem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional information about the failed operation.
-	/// The property is returned only for failed operations.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#error']/*"/>
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; set; }
 	public bool? ForcedRefresh { get; set; }
 	public Elastic.Clients.Elasticsearch.InlineGet<System.Collections.Generic.IReadOnlyDictionary<string, object>>? Get { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document ID associated with the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_id']/*"/>
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index associated with the operation.
-	/// If the operation targeted a data stream, this is the backing index into which the document was written.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The primary term assigned to the document for the operation.
-	/// This property is returned only for successful operations.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_primary_term']/*"/>
 	public long? PrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The result of the operation.
-	/// Possible values are <c>created</c>, <c>updated</c>, <c>deleted</c>, <c>noop</c>, and <c>not_found</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#result']/*"/>
 	public string? Result { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sequence number assigned to the document for the operation.
-	/// Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_seq_no']/*"/>
 	public long? SeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shard information for the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The HTTP status code returned for the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#status']/*"/>
 	public required int Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document version associated with the operation.
-	/// The document version is incremented each time the document is updated.
-	/// This property is returned only for successful actions.
-	/// </para>
-	/// </summary>
+	/// <include file="ResponseItem.g.xml" path="doc/member[@key='_global.bulk.ResponseItem#_version']/*"/>
 	public long? Version { get; set; }
 }

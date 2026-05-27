@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MergeScheduler']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MergeSchedulerConverter))]
 public sealed partial class MergeScheduler
 {
@@ -40,6 +41,7 @@ public sealed partial class MergeScheduler
 	public int? MaxThreadCount { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MergeScheduler']/*"/>
 public readonly partial struct MergeSchedulerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler Instance { get; init; }

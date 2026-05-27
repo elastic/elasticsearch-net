@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.PerRepositoryStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PerRepositoryStatsConverter))]
 public sealed partial class PerRepositoryStats
 {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.get_status.Request"><summary><para>
+Get the ILM status.
+</para>
+<para>
+Get the current index lifecycle management status.
+</para></summary></member>
+</doc>

@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 public sealed partial class TermsEnumRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get terms in an index.
-/// </para>
-/// <para>
-/// Discover terms that match a partial string in an index.
-/// This API is designed for low-latency look-ups used in auto-complete scenarios.
-/// </para>
-/// <para>
-/// info
-/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
-/// </para>
-/// </summary>
+/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TermsEnumRequestConverter))]
 public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>
 {
@@ -73,85 +64,33 @@ public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "terms_enum";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases to search.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#case_insensitive']/*"/>
 	public bool? CaseInsensitive { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string after which terms in the index should be returned.
-	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#search_after']/*"/>
 	public string? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of matching terms to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms.
-	/// If it is not provided, all terms in the field are considered.
-	/// </para>
-	/// <para>
-	/// info
-	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#string']/*"/>
 	public string? String { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of time to spend collecting results.
-	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get terms in an index.
-/// </para>
-/// <para>
-/// Discover terms that match a partial string in an index.
-/// This API is designed for low-latency look-ups used in auto-complete scenarios.
-/// </para>
-/// <para>
-/// info
-/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
-/// </para>
-/// </summary>
+/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 public readonly partial struct TermsEnumRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TermsEnumRequest Instance { get; init; }
@@ -178,130 +117,77 @@ public readonly partial struct TermsEnumRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.TermsEnumRequest instance) => new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases to search.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.IndexFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string after which terms in the index should be returned.
-	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor SearchAfter(string? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of matching terms to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms.
-	/// If it is not provided, all terms in the field are considered.
-	/// </para>
-	/// <para>
-	/// info
-	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#string']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor String(string? value)
 	{
 		Instance.String = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of time to spend collecting results.
-	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -364,19 +250,8 @@ public readonly partial struct TermsEnumRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get terms in an index.
-/// </para>
-/// <para>
-/// Discover terms that match a partial string in an index.
-/// This API is designed for low-latency look-ups used in auto-complete scenarios.
-/// </para>
-/// <para>
-/// info
-/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
-/// </para>
-/// </summary>
+/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.terms_enum.Request']/*"/>
 public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TermsEnumRequest Instance { get; init; }
@@ -404,119 +279,70 @@ public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TermsEnumRequest instance) => new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases to search.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, the provided search string is matched against index terms without case sensitivity.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms. If not provided, all terms in the field are considered.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.IndexFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter an index shard if the provided query rewrites to <c>match_none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string after which terms in the index should be returned.
-	/// It allows for a form of pagination if the last result from one request is passed as the <c>search_after</c> parameter for a subsequent request.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> SearchAfter(string? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of matching terms to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to match at the start of indexed terms.
-	/// If it is not provided, all terms in the field are considered.
-	/// </para>
-	/// <para>
-	/// info
-	/// The prefix string cannot be larger than the largest possible keyword value, which is Lucene's term byte-length limit of 32766.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#string']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> String(string? value)
 	{
 		Instance.String = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of time to spend collecting results.
-	/// If the timeout is exceeded the <c>complete</c> flag set to <c>false</c> in the response and the results may be partial or empty.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsEnumRequest.g.xml" path="doc/member[@key='_global.terms_enum.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

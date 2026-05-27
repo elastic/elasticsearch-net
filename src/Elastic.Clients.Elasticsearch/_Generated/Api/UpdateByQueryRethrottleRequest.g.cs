@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 public sealed partial class UpdateByQueryRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To turn off throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle an update by query operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular update by query operation.
-/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.UpdateByQueryRethrottleRequestConverter))]
 public sealed partial class UpdateByQueryRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class UpdateByQueryRethrottleRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "update_by_query_rethrottle";
 
-	/// <summary>
-	/// <para>
-	/// The ID for the task.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To turn off throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle an update by query operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular update by query operation.
-/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request']/*"/>
 public readonly partial struct UpdateByQueryRethrottleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest Instance { get; init; }
@@ -118,23 +92,14 @@ public readonly partial struct UpdateByQueryRethrottleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID for the task.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To turn off throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.update_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRethrottleRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;

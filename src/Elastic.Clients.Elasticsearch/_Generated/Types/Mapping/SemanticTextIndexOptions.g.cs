@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SemanticTextIndexOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SemanticTextIndexOptionsConverter))]
 public sealed partial class SemanticTextIndexOptions
 {
@@ -40,6 +41,7 @@ public sealed partial class SemanticTextIndexOptions
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? SparseVector { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SemanticTextIndexOptions']/*"/>
 public readonly partial struct SemanticTextIndexOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions Instance { get; init; }

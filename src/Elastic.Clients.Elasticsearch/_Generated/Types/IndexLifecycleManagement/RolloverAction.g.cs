@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.RolloverAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.RolloverActionConverter))]
 public sealed partial class RolloverAction
 {
@@ -41,11 +42,7 @@ public sealed partial class RolloverAction
 	public long? MaxPrimaryShardDocs { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The <c>max_size</c> condition has been deprecated in 9.3.0 and <c>max_primary_shard_size</c> should be used instead
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverAction.g.xml" path="doc/member[@key='ilm._types.RolloverAction#max_size']/*"/>
 	[System.Obsolete("Deprecated in '9.3.0'.")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
@@ -55,6 +52,7 @@ public sealed partial class RolloverAction
 	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.RolloverAction']/*"/>
 public readonly partial struct RolloverActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction Instance { get; init; }
@@ -105,11 +103,7 @@ public readonly partial struct RolloverActionDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '9.3.0'.")]
-	/// <summary>
-	/// <para>
-	/// The <c>max_size</c> condition has been deprecated in 9.3.0 and <c>max_primary_shard_size</c> should be used instead
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverAction.g.xml" path="doc/member[@key='ilm._types.RolloverAction#max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor MaxSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxSize = value;
@@ -117,11 +111,7 @@ public readonly partial struct RolloverActionDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '9.3.0'.")]
-	/// <summary>
-	/// <para>
-	/// The <c>max_size</c> condition has been deprecated in 9.3.0 and <c>max_primary_shard_size</c> should be used instead
-	/// </para>
-	/// </summary>
+	/// <include file="RolloverAction.g.xml" path="doc/member[@key='ilm._types.RolloverAction#max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor MaxSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);

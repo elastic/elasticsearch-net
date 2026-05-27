@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStream']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamConverter))]
 public sealed partial class DataStream
 {
@@ -52,152 +53,63 @@ public sealed partial class DataStream
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the data stream allows custom routing on write request.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#allow_custom_routing']/*"/>
 	public bool? AllowCustomRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about failure store backing indices
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStore? FailureStore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Current generation for the data stream. This number acts as a cumulative count of the stream’s rollovers, starting at 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#generation']/*"/>
 	public required int Generation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the data stream is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#hidden']/*"/>
 	public required bool Hidden { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the current ILM lifecycle policy in the stream’s matching index template.
-	/// This lifecycle policy is set in the <c>index.lifecycle.name</c> setting.
-	/// If the template does not include a lifecycle policy, this property is not included in the response.
-	/// NOTE: A data stream’s backing indices may be assigned different lifecycle policies. To retrieve the lifecycle policy for individual backing indices, use the get index settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#ilm_policy']/*"/>
 	public string? IlmPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index mode for the data stream that will be used for newly created backing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#index_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? IndexMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of objects containing information about the data stream’s backing indices.
-	/// The last item in this array contains information about the stream’s current write index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains the configuration for the data stream lifecycle of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The mappings specific to this data stream that will take precedence over the mappings in the matching index
-	/// template.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom metadata for the stream, copied from the <c>_meta</c> object of the stream’s matching index template.
-	/// If empty, the response omits this property.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#_meta']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the lifecycle system that'll manage the next generation of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#next_generation_managed_by']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy NextGenerationManagedBy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if ILM should take precedence over DSL in case both are configured to managed this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#prefer_ilm']/*"/>
 	public required bool PreferIlm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the data stream is created and managed by cross-cluster replication and the local cluster can not write into this data stream or change its mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#replicated']/*"/>
 	public bool? Replicated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the next write to this data stream will trigger a rollover first and the document will be indexed in the new backing index. If the rollover fails the indexing request will fail too.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#rollover_on_write']/*"/>
 	public required bool RolloverOnWrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings specific to this data stream that will take precedence over the settings in the matching index
-	/// template.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Health status of the data stream.
-	/// This health status is based on the state of the primary and replica shards of the stream’s backing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the data stream is created and managed by an Elastic stack component and cannot be modified through normal user interaction.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#system']/*"/>
 	public bool? System { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index template used to create the data stream’s backing indices.
-	/// The template’s index pattern must match the name of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#template']/*"/>
 	public required string Template { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about the <c>@timestamp</c> field in the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStream.g.xml" path="doc/member[@key='indices._types.DataStream#timestamp_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField TimestampField { get; set; }
 }

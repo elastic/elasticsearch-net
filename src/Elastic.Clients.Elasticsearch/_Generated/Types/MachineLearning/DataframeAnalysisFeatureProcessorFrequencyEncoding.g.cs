@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisFeatureProcessorFrequencyEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 {
@@ -44,22 +45,15 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#feature_name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public required System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Instance { get; init; }
@@ -79,11 +73,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#feature_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.FeatureName = value;
@@ -102,33 +92,21 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Collections.Generic.IDictionary<string, double> value)
 	{
 		Instance.FrequencyMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap()
 	{
 		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument> FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
 		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);
@@ -151,6 +129,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding Instance { get; init; }
@@ -170,11 +149,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#feature_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.FeatureName = value;
@@ -193,33 +168,21 @@ public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodin
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Collections.Generic.IDictionary<string, double> value)
 	{
 		Instance.FrequencyMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap()
 	{
 		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorFrequencyEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor FrequencyMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble>? action)
 	{
 		Instance.FrequencyMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDouble.Build(action);

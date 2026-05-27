@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AdaptiveAllocationsSettingsConverter))]
 public sealed partial class AdaptiveAllocationsSettings
 {
@@ -42,31 +43,17 @@ public sealed partial class AdaptiveAllocationsSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, adaptive_allocations is enabled
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#enabled']/*"/>
 	public required bool Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of allocations to scale to.
-	/// If set, it must be greater than or equal to min_number_of_allocations.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#max_number_of_allocations']/*"/>
 	public int? MaxNumberOfAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the minimum number of allocations to scale to.
-	/// If set, it must be greater than or equal to 0.
-	/// If not defined, the deployment scales to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#min_number_of_allocations']/*"/>
 	public int? MinNumberOfAllocations { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings']/*"/>
 public readonly partial struct AdaptiveAllocationsSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings Instance { get; init; }
@@ -86,36 +73,21 @@ public readonly partial struct AdaptiveAllocationsSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, adaptive_allocations is enabled
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor Enabled(bool value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of allocations to scale to.
-	/// If set, it must be greater than or equal to min_number_of_allocations.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#max_number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor MaxNumberOfAllocations(int? value)
 	{
 		Instance.MaxNumberOfAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the minimum number of allocations to scale to.
-	/// If set, it must be greater than or equal to 0.
-	/// If not defined, the deployment scales to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveAllocationsSettings.g.xml" path="doc/member[@key='ml._types.AdaptiveAllocationsSettings#min_number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor MinNumberOfAllocations(int? value)
 	{
 		Instance.MinNumberOfAllocations = value;

@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 public sealed partial class ClosePointInTimeRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Close a point in time.
-/// </para>
-/// <para>
-/// A point in time must be opened explicitly before being used in search requests.
-/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
-/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
-/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
-/// </para>
-/// </summary>
+/// <include file="ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ClosePointInTimeRequestConverter))]
 public sealed partial class ClosePointInTimeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ClosePointInTimeRequestParameters>
 {
@@ -65,25 +58,12 @@ public sealed partial class ClosePointInTimeRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "close_point_in_time";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the point-in-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Close a point in time.
-/// </para>
-/// <para>
-/// A point in time must be opened explicitly before being used in search requests.
-/// The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
-/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
-/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
-/// </para>
-/// </summary>
+/// <include file="ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.close_point_in_time.Request']/*"/>
 public readonly partial struct ClosePointInTimeRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ClosePointInTimeRequest Instance { get; init; }
@@ -102,11 +82,7 @@ public readonly partial struct ClosePointInTimeRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.ClosePointInTimeRequest instance) => new Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the point-in-time.
-	/// </para>
-	/// </summary>
+	/// <include file="ClosePointInTimeRequest.g.xml" path="doc/member[@key='_global.close_point_in_time.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

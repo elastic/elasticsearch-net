@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql._types.EqlHits']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.EqlHitsConverterFactory))]
 public sealed partial class EqlHits<TEvent>
 {
@@ -36,24 +37,12 @@ public sealed partial class EqlHits<TEvent>
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains events matching the query. Each object represents a matching event.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlHits.g.xml" path="doc/member[@key='eql._types.EqlHits#events']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlHits.g.xml" path="doc/member[@key='eql._types.EqlHits#sequences']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the number of matching events or sequences.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlHits.g.xml" path="doc/member[@key='eql._types.EqlHits#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; set; }
 }

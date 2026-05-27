@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.WeightedAverageAggregate"><summary><para>
+Weighted average aggregation result. <c>value</c> is missing if the weight was set to zero.
+</para></summary></member>
+  <member key="_types.aggregations.WeightedAverageAggregate#value"><summary><para>
+The metric value. A missing value generally means that there was no data to aggregate,
+unless specified otherwise.
+</para></summary></member>
+</doc>

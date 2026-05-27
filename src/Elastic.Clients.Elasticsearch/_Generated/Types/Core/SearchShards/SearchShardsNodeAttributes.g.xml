@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search_shards.SearchShardsNodeAttributes#attributes"><summary><para>
+Lists node attributes.
+</para></summary></member>
+  <member key="_global.search_shards.SearchShardsNodeAttributes#ephemeral_id"><summary><para>
+The ephemeral ID of the node.
+</para></summary></member>
+  <member key="_global.search_shards.SearchShardsNodeAttributes#name"><summary><para>
+The human-readable identifier of the node.
+</para></summary></member>
+  <member key="_global.search_shards.SearchShardsNodeAttributes#transport_address"><summary><para>
+The host and port where transport HTTP connections are accepted.
+</para></summary></member>
+</doc>

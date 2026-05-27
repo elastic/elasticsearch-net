@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SparseVectorPropertyConverter))]
 public sealed partial class SparseVectorProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -40,19 +41,10 @@ public sealed partial class SparseVectorProperty : Elastic.Clients.Elasticsearch
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? IndexOptions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -61,6 +53,7 @@ public sealed partial class SparseVectorProperty : Elastic.Clients.Elasticsearch
 	public string Type => "sparse_vector";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty']/*"/>
 public readonly partial struct SparseVectorPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty Instance { get; init; }
@@ -104,69 +97,42 @@ public readonly partial struct SparseVectorPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? value)
 	{
 		Instance.IndexOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions()
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor>? action)
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -218,6 +184,7 @@ public readonly partial struct SparseVectorPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty']/*"/>
 public readonly partial struct SparseVectorPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty Instance { get; init; }
@@ -267,69 +234,42 @@ public readonly partial struct SparseVectorPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? value)
 	{
 		Instance.IndexOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions()
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional index options for the sparse vector field that controls the
-	/// token pruning behavior of the sparse vector field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor>? action)
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorProperty.g.xml" path="doc/member[@key='_types.mapping.SparseVectorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.TermsGrouping']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.TermsGroupingConverter))]
 public sealed partial class TermsGrouping
 {
@@ -42,16 +43,11 @@ public sealed partial class TermsGrouping
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to collect terms for.
-	/// This array can contain fields that are both keyword and numerics.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsGrouping.g.xml" path="doc/member[@key='rollup._types.TermsGrouping#fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.TermsGrouping']/*"/>
 public readonly partial struct TermsGroupingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Instance { get; init; }
@@ -71,26 +67,14 @@ public readonly partial struct TermsGroupingDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to collect terms for.
-	/// This array can contain fields that are both keyword and numerics.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsGrouping.g.xml" path="doc/member[@key='rollup._types.TermsGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to collect terms for.
-	/// This array can contain fields that are both keyword and numerics.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsGrouping.g.xml" path="doc/member[@key='rollup._types.TermsGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
@@ -106,6 +90,7 @@ public readonly partial struct TermsGroupingDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.TermsGrouping']/*"/>
 public readonly partial struct TermsGroupingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Instance { get; init; }
@@ -125,26 +110,14 @@ public readonly partial struct TermsGroupingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.TermsGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.TermsGrouping(Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to collect terms for.
-	/// This array can contain fields that are both keyword and numerics.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsGrouping.g.xml" path="doc/member[@key='rollup._types.TermsGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The set of fields that you wish to collect terms for.
-	/// This array can contain fields that are both keyword and numerics.
-	/// Order does not matter.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsGrouping.g.xml" path="doc/member[@key='rollup._types.TermsGrouping#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.TermsGroupingDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;

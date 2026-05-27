@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CefProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.CefProcessorConverter))]
 public sealed partial class CefProcessor
 {
@@ -42,80 +43,38 @@ public sealed partial class CefProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field containing the CEF message.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and value is anempty string in extensions, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_empty_values']/*"/>
 	public bool? IgnoreEmptyValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>target_field</c> is 'cef'
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#timezone']/*"/>
 	public string? Timezone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CefProcessor']/*"/>
 public readonly partial struct CefProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CefProcessor Instance { get; init; }
@@ -135,133 +94,84 @@ public readonly partial struct CefProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CefProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CefProcessor(Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the CEF message.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the CEF message.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and value is anempty string in extensions, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_empty_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> IgnoreEmptyValues(bool? value = true)
 	{
 		Instance.IgnoreEmptyValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -274,47 +184,28 @@ public readonly partial struct CefProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>target_field</c> is 'cef'
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>target_field</c> is 'cef'
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument> Timezone(string? value)
 	{
 		Instance.Timezone = value;
@@ -330,6 +221,7 @@ public readonly partial struct CefProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CefProcessor']/*"/>
 public readonly partial struct CefProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CefProcessor Instance { get; init; }
@@ -349,133 +241,84 @@ public readonly partial struct CefProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CefProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CefProcessor(Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the CEF message.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the CEF message.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and value is anempty string in extensions, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_empty_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor IgnoreEmptyValues(bool? value = true)
 	{
 		Instance.IgnoreEmptyValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -488,11 +331,7 @@ public readonly partial struct CefProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -505,47 +344,28 @@ public readonly partial struct CefProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>target_field</c> is 'cef'
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>target_field</c> is 'cef'
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="CefProcessor.g.xml" path="doc/member[@key='ingest._types.CefProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor Timezone(string? value)
 	{
 		Instance.Timezone = value;

@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetBuiltinPrivilegesRequest.g.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
 public sealed partial class GetBuiltinPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get builtin privileges.
-/// </para>
-/// <para>
-/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="GetBuiltinPrivilegesRequest.g.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetBuiltinPrivilegesRequestConverter))]
 public sealed partial class GetBuiltinPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetBuiltinPrivilegesRequest : Elastic.Clients.Elasti
 	internal override string OperationName => "security.get_builtin_privileges";
 }
 
-/// <summary>
-/// <para>
-/// Get builtin privileges.
-/// </para>
-/// <para>
-/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="GetBuiltinPrivilegesRequest.g.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_builtin_privileges.Request']/*"/>
 public readonly partial struct GetBuiltinPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest Instance { get; init; }

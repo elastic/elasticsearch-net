@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketSortAggregationConverter))]
 public sealed partial class BucketSortAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class BucketSortAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Buckets in positions prior to <c>from</c> will be truncated.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// Defaults to all buckets of the parent aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation']/*"/>
 public readonly partial struct BucketSortAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Instance { get; init; }
@@ -85,67 +70,42 @@ public readonly partial struct BucketSortAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Buckets in positions prior to <c>from</c> will be truncated.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// Defaults to all buckets of the parent aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -172,6 +132,7 @@ public readonly partial struct BucketSortAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation']/*"/>
 public readonly partial struct BucketSortAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation Instance { get; init; }
@@ -191,67 +152,42 @@ public readonly partial struct BucketSortAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Buckets in positions prior to <c>from</c> will be truncated.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// Defaults to all buckets of the parent aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -264,11 +200,7 @@ public readonly partial struct BucketSortAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of fields to sort on.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSortAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketSortAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

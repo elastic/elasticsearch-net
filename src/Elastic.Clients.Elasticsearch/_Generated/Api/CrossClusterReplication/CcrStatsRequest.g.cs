@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 public sealed partial class CcrStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cross-cluster replication stats.
-/// </para>
-/// <para>
-/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
-/// </para>
-/// </summary>
+/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.CcrStatsRequestConverter))]
 public sealed partial class CcrStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestParameters>
 {
@@ -71,31 +57,15 @@ public sealed partial class CcrStatsRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ccr.stats";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cross-cluster replication stats.
-/// </para>
-/// <para>
-/// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
-/// </para>
-/// </summary>
+/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.stats.Request']/*"/>
 public readonly partial struct CcrStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest Instance { get; init; }
@@ -114,24 +84,14 @@ public readonly partial struct CcrStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CcrStatsRequest.g.xml" path="doc/member[@key='ccr.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

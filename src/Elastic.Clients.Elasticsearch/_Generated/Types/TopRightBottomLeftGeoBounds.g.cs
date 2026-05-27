@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TopRightBottomLeftGeoBounds']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TopRightBottomLeftGeoBoundsConverter))]
 public sealed partial class TopRightBottomLeftGeoBounds
 {
@@ -47,6 +48,7 @@ public sealed partial class TopRightBottomLeftGeoBounds
 	public required Elastic.Clients.Elasticsearch.GeoLocation TopRight { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TopRightBottomLeftGeoBounds']/*"/>
 public readonly partial struct TopRightBottomLeftGeoBoundsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds Instance { get; init; }

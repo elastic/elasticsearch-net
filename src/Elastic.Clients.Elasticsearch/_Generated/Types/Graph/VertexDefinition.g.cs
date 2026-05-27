@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.VertexDefinition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.VertexDefinitionConverter))]
 public sealed partial class VertexDefinition
 {
@@ -42,50 +43,26 @@ public sealed partial class VertexDefinition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#exclude']/*"/>
 	public System.Collections.Generic.ICollection<string>? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.
-	/// This setting acts as a certainty threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#min_doc_count']/*"/>
 	public long? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#shard_min_doc_count']/*"/>
 	public long? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of vertex terms returned for each field.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.VertexDefinition']/*"/>
 public readonly partial struct VertexDefinitionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Graph.VertexDefinition Instance { get; init; }
@@ -105,77 +82,49 @@ public readonly partial struct VertexDefinitionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance) => new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Exclude(params string[] values)
 	{
 		Instance.Exclude = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(params Elastic.Clients.Elasticsearch.Graph.VertexInclude[] values)
 	{
 		Instance.Include = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Include(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexInclude>();
@@ -188,34 +137,21 @@ public readonly partial struct VertexDefinitionDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.
-	/// This setting acts as a certainty threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of vertex terms returned for each field.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -231,6 +167,7 @@ public readonly partial struct VertexDefinitionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.VertexDefinition']/*"/>
 public readonly partial struct VertexDefinitionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.VertexDefinition Instance { get; init; }
@@ -250,77 +187,49 @@ public readonly partial struct VertexDefinitionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexDefinition instance) => new Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexDefinition(Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prevents the specified terms from being included in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Exclude(params string[] values)
 	{
 		Instance.Exclude = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies a field in the documents of interest.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(params Elastic.Clients.Elasticsearch.Graph.VertexInclude[] values)
 	{
 		Instance.Include = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifies the terms of interest that form the starting points from which you want to spider out.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Include(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexInclude>();
@@ -333,34 +242,21 @@ public readonly partial struct VertexDefinitionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.
-	/// This setting acts as a certainty threshold.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of vertex terms returned for each field.
-	/// </para>
-	/// </summary>
+	/// <include file="VertexDefinition.g.xml" path="doc/member[@key='graph._types.VertexDefinition#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor Size(int? value)
 	{
 		Instance.Size = value;

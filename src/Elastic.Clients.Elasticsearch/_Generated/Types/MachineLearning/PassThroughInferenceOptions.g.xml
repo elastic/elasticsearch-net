@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.PassThroughInferenceOptions"><summary><para>
+Pass through configuration options
+</para></summary></member>
+  <member key="ml._types.PassThroughInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.PassThroughInferenceOptions#tokenization"><summary><para>
+The tokenization options
+</para></summary></member>
+</doc>

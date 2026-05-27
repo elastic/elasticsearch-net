@@ -39,11 +39,6 @@ public sealed partial class RetentionPolicy
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy? Time { get => GetVariant<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy>("time"); set => SetVariant("time", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy value) => new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy { Time = value };
@@ -86,22 +81,12 @@ public readonly partial struct RetentionPolicyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument> Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy? value)
 	{
 		Instance.Time = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument> Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<TDocument>.Build(action);
@@ -136,33 +121,18 @@ public readonly partial struct RetentionPolicyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy instance) => new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy? value)
 	{
 		Instance.Time = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to set the retention policy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor Time<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<T>> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicyDescriptor<T>.Build(action);

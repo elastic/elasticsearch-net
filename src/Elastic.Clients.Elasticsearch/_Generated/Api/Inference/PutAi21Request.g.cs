@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
 public sealed partial class PutAi21RequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a AI21 inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>ai21</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAi21RequestConverter))]
 public sealed partial class PutAi21Request : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAi21RequestParameters>
 {
@@ -74,50 +66,24 @@ public sealed partial class PutAi21Request : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "inference.put_ai21";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#ai21_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Ai21InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("ai21_inference_id"); set => PR("ai21_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.Ai21TaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>ai21</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#service']/*"/>
 	public string Service => "ai21";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>ai21</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a AI21 inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>ai21</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_ai21.Request']/*"/>
 public readonly partial struct PutAi21RequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAi21Request Instance { get; init; }
@@ -144,55 +110,35 @@ public readonly partial struct PutAi21RequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAi21Request instance) => new Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAi21Request(Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#ai21_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor Ai21InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Ai21InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.Ai21TaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>ai21</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>ai21</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Request.g.xml" path="doc/member[@key='inference.put_ai21.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor.Build(action);

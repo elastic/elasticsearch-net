@@ -23,31 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
 public sealed partial class StartDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Start datafeeds.
-/// </para>
-/// <para>
-/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
-/// multiple times throughout its lifecycle.
-/// </para>
-/// <para>
-/// Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.
-/// </para>
-/// <para>
-/// If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.
-/// If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.
-/// </para>
-/// <para>
-/// When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
-/// update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
-/// authorization headers when you created or updated the datafeed, those credentials are used instead.
-/// </para>
-/// </summary>
+/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StartDatafeedRequestConverter))]
 public sealed partial class StartDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestParameters>
 {
@@ -74,58 +57,21 @@ public sealed partial class StartDatafeedRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "ml.start_datafeed";
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
-	/// alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
-	/// characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#datafeed_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Start datafeeds.
-/// </para>
-/// <para>
-/// A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
-/// multiple times throughout its lifecycle.
-/// </para>
-/// <para>
-/// Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.
-/// </para>
-/// <para>
-/// If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.
-/// If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.
-/// </para>
-/// <para>
-/// When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
-/// update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
-/// authorization headers when you created or updated the datafeed, those credentials are used instead.
-/// </para>
-/// </summary>
+/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_datafeed.Request']/*"/>
 public readonly partial struct StartDatafeedRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest Instance { get; init; }
@@ -150,46 +96,28 @@ public readonly partial struct StartDatafeedRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
-	/// alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
-	/// characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDatafeedRequest.g.xml" path="doc/member[@key='ml.start_datafeed.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

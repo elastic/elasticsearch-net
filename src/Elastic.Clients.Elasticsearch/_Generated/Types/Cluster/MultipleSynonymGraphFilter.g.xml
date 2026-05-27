@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.MultipleSynonymGraphFilter#analyzer_count"><summary><para>
+Number of analyzers across the cluster whose filter chain contains more than one synonym_graph filter.
+</para></summary></member>
+  <member key="cluster.stats.MultipleSynonymGraphFilter#index_count"><summary><para>
+Number of indices that contain at least one analyzer with more than one synonym_graph filter.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ImageUrl']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ImageUrlConverter))]
 public sealed partial class ImageUrl
 {
@@ -42,17 +43,9 @@ public sealed partial class ImageUrl
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the detail level of the image
-	/// </para>
-	/// </summary>
+	/// <include file="ImageUrl.g.xml" path="doc/member[@key='inference._types.ImageUrl#detail']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ImageUrlDetail? Detail { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The base64 encoded image data as a data URI
-	/// </para>
-	/// </summary>
+	/// <include file="ImageUrl.g.xml" path="doc/member[@key='inference._types.ImageUrl#url']/*"/>
 	public required string Url { get; set; }
 }

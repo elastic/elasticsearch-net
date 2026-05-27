@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.modify_data_stream.IndexAndDataStreamAction#data_stream"><summary><para>
+Data stream targeted by the action.
+</para></summary></member>
+  <member key="indices.modify_data_stream.IndexAndDataStreamAction#index"><summary><para>
+Index for the action.
+</para></summary></member>
+</doc>

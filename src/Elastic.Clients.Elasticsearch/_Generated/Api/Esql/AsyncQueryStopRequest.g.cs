@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
 public sealed partial class AsyncQueryStopRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop async ES|QL query.
-/// </para>
-/// <para>
-/// This API interrupts the query execution and returns the results so far.
-/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.AsyncQueryStopRequestConverter))]
 public sealed partial class AsyncQueryStopRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>
 {
@@ -69,33 +59,15 @@ public sealed partial class AsyncQueryStopRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "esql.async_query_stop";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop async ES|QL query.
-/// </para>
-/// <para>
-/// This API interrupts the query execution and returns the results so far.
-/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_stop.Request']/*"/>
 public readonly partial struct AsyncQueryStopRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest Instance { get; init; }
@@ -120,25 +92,14 @@ public readonly partial struct AsyncQueryStopRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryStopRequest.g.xml" path="doc/member[@key='esql.async_query_stop.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestDescriptor DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.ScriptScoreFunction#script"><summary><para>
+A script that computes a score.
+</para></summary></member>
+</doc>

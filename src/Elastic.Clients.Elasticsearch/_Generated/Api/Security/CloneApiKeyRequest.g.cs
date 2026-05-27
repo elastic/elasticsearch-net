@@ -23,28 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
 public sealed partial class CloneApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clone an API key.
-/// </para>
-/// <para>
-/// Create a copy of an existing API key with a new ID.
-/// The cloned key inherits the role descriptors of the source key.
-/// This is intended for applications (such as Kibana) that need to
-/// create API keys on behalf of a user using an existing API key credential,
-/// since derived API keys (API keys created by API keys) are not otherwise supported.
-/// </para>
-/// </summary>
+/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CloneApiKeyRequestConverter))]
 public sealed partial class CloneApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestParameters>
 {
@@ -72,60 +60,24 @@ public sealed partial class CloneApiKeyRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "security.clone_api_key";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// The credentials of the API key to clone.
-	/// This is the secret value returned when the key was originally created.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the cloned API key.
-	/// By default, API keys never expire.
-	/// Set to <c>null</c> to explicitly create a key with no expiration.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata to associate with the cloned API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A name for the cloned API key.
-	/// If not provided, the name of the source key is used.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Clone an API key.
-/// </para>
-/// <para>
-/// Create a copy of an existing API key with a new ID.
-/// The cloned key inherits the role descriptors of the source key.
-/// This is intended for applications (such as Kibana) that need to
-/// create API keys on behalf of a user using an existing API key credential,
-/// since derived API keys (API keys created by API keys) are not otherwise supported.
-/// </para>
-/// </summary>
+/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clone_api_key.Request']/*"/>
 public readonly partial struct CloneApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest Instance { get; init; }
@@ -144,75 +96,42 @@ public readonly partial struct CloneApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest(Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The credentials of the API key to clone.
-	/// This is the secret value returned when the key was originally created.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the cloned API key.
-	/// By default, API keys never expire.
-	/// Set to <c>null</c> to explicitly create a key with no expiration.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata to associate with the cloned API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata to associate with the cloned API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata to associate with the cloned API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -226,12 +145,7 @@ public readonly partial struct CloneApiKeyRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A name for the cloned API key.
-	/// If not provided, the name of the source key is used.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneApiKeyRequest.g.xml" path="doc/member[@key='security.clone_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;

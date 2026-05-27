@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CjkWidthTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CjkWidthTokenFilterConverter))]
 public sealed partial class CjkWidthTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class CjkWidthTokenFilter : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CjkWidthTokenFilter']/*"/>
 public readonly partial struct CjkWidthTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter Instance { get; init; }

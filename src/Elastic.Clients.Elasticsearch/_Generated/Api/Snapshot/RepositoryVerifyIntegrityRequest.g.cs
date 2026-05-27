@@ -23,142 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 public sealed partial class RepositoryVerifyIntegrityRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#blob_thread_pool_concurrency']/*"/>
 	public int? BlobThreadPoolConcurrency { get => Q<int?>("blob_thread_pool_concurrency"); set => Q("blob_thread_pool_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of index snapshots to verify concurrently within each index verification.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_snapshot_verification_concurrency']/*"/>
 	public int? IndexSnapshotVerificationConcurrency { get => Q<int?>("index_snapshot_verification_concurrency"); set => Q("index_snapshot_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of indices to verify concurrently.
-	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_verification_concurrency']/*"/>
 	public int? IndexVerificationConcurrency { get => Q<int?>("index_verification_concurrency"); set => Q("index_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_bytes_per_sec']/*"/>
 	public string? MaxBytesPerSec { get => Q<string?>("max_bytes_per_sec"); set => Q("max_bytes_per_sec", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
-	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_failed_shard_snapshots']/*"/>
 	public int? MaxFailedShardSnapshots { get => Q<int?>("max_failed_shard_snapshots"); set => Q("max_failed_shard_snapshots", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshot metadata operations to run concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#meta_thread_pool_concurrency']/*"/>
 	public int? MetaThreadPoolConcurrency { get => Q<int?>("meta_thread_pool_concurrency"); set => Q("meta_thread_pool_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of snapshots to verify concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#snapshot_verification_concurrency']/*"/>
 	public int? SnapshotVerificationConcurrency { get => Q<int?>("snapshot_verification_concurrency"); set => Q("snapshot_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to verify the checksum of every data blob in the repository.
-	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#verify_blob_contents']/*"/>
 	public bool? VerifyBlobContents { get => Q<bool?>("verify_blob_contents"); set => Q("verify_blob_contents", value); }
 }
 
-/// <summary>
-/// <para>
-/// Verify the repository integrity.
-/// </para>
-/// <para>
-/// Verify the integrity of the contents of a snapshot repository.
-/// </para>
-/// <para>
-/// This API enables you to perform a comprehensive check of the contents of a repository, looking for any anomalies in its data or metadata which might prevent you from restoring snapshots from the repository or which might cause future snapshot create or delete operations to fail.
-/// </para>
-/// <para>
-/// If you suspect the integrity of the contents of one of your snapshot repositories, cease all write activity to this repository immediately, set its <c>read_only</c> option to <c>true</c>, and use this API to verify its integrity.
-/// Until you do so:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// It may not be possible to restore some snapshots from this repository.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Searchable snapshots may report errors when searched or may have unassigned shards.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Taking snapshots into this repository may fail or may appear to succeed but have created a snapshot which cannot be restored.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Deleting snapshots from this repository may fail or may appear to succeed but leave the underlying data on disk.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Continuing to write to the repository while it is in an invalid state may causing additional damage to its contents.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If the API finds any problems with the integrity of the contents of your repository, Elasticsearch will not be able to repair the damage.
-/// The only way to bring the repository back into a fully working state after its contents have been damaged is by restoring its contents from a repository backup which was taken before the damage occurred.
-/// You must also identify what caused the damage and take action to prevent it from happening again.
-/// </para>
-/// <para>
-/// If you cannot restore a repository backup, register a new repository and use this for all future snapshot operations.
-/// In some cases it may be possible to recover some of the contents of a damaged repository, either by restoring as many of its snapshots as needed and taking new snapshots of the restored data, or by using the reindex API to copy data from any searchable snapshots mounted from the damaged repository.
-/// </para>
-/// <para>
-/// Avoid all operations which write to the repository while the verify repository integrity API is running.
-/// If something changes the repository contents while an integrity verification is running then Elasticsearch may incorrectly report having detected some anomalies in its contents due to the concurrent writes.
-/// It may also incorrectly fail to report some anomalies that the concurrent writes prevented it from detecting.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for exploratory use by humans. You should expect the request parameters and the response format to vary in future versions.
-/// </para>
-/// <para>
-/// NOTE: This API may not work correctly in a mixed-version cluster.
-/// </para>
-/// <para>
-/// The default values for the parameters of this API are designed to limit the impact of the integrity verification on other activities in your cluster.
-/// For instance, by default it will only use at most half of the <c>snapshot_meta</c> threads to verify the integrity of each snapshot, allowing other snapshot operations to use the other half of this thread pool.
-/// If you modify these parameters to speed up the verification process, you risk disrupting other snapshot-related operations in your cluster.
-/// For large repositories, consider setting up a separate single-node Elasticsearch cluster just for running the integrity verification API.
-/// </para>
-/// <para>
-/// The response exposes implementation details of the analysis which may change from version to version.
-/// The response body format is therefore not considered stable and may be different in newer versions.
-/// </para>
-/// </summary>
+/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.RepositoryVerifyIntegrityRequestConverter))]
 public sealed partial class RepositoryVerifyIntegrityRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>
 {
@@ -185,147 +80,36 @@ public sealed partial class RepositoryVerifyIntegrityRequest : Elastic.Clients.E
 
 	internal override string OperationName => "snapshot.repository_verify_integrity";
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#blob_thread_pool_concurrency']/*"/>
 	public int? BlobThreadPoolConcurrency { get => Q<int?>("blob_thread_pool_concurrency"); set => Q("blob_thread_pool_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of index snapshots to verify concurrently within each index verification.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_snapshot_verification_concurrency']/*"/>
 	public int? IndexSnapshotVerificationConcurrency { get => Q<int?>("index_snapshot_verification_concurrency"); set => Q("index_snapshot_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of indices to verify concurrently.
-	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_verification_concurrency']/*"/>
 	public int? IndexVerificationConcurrency { get => Q<int?>("index_verification_concurrency"); set => Q("index_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_bytes_per_sec']/*"/>
 	public string? MaxBytesPerSec { get => Q<string?>("max_bytes_per_sec"); set => Q("max_bytes_per_sec", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
-	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_failed_shard_snapshots']/*"/>
 	public int? MaxFailedShardSnapshots { get => Q<int?>("max_failed_shard_snapshots"); set => Q("max_failed_shard_snapshots", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshot metadata operations to run concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#meta_thread_pool_concurrency']/*"/>
 	public int? MetaThreadPoolConcurrency { get => Q<int?>("meta_thread_pool_concurrency"); set => Q("meta_thread_pool_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of snapshots to verify concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#snapshot_verification_concurrency']/*"/>
 	public int? SnapshotVerificationConcurrency { get => Q<int?>("snapshot_verification_concurrency"); set => Q("snapshot_verification_concurrency", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to verify the checksum of every data blob in the repository.
-	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#verify_blob_contents']/*"/>
 	public bool? VerifyBlobContents { get => Q<bool?>("verify_blob_contents"); set => Q("verify_blob_contents", value); }
 }
 
-/// <summary>
-/// <para>
-/// Verify the repository integrity.
-/// </para>
-/// <para>
-/// Verify the integrity of the contents of a snapshot repository.
-/// </para>
-/// <para>
-/// This API enables you to perform a comprehensive check of the contents of a repository, looking for any anomalies in its data or metadata which might prevent you from restoring snapshots from the repository or which might cause future snapshot create or delete operations to fail.
-/// </para>
-/// <para>
-/// If you suspect the integrity of the contents of one of your snapshot repositories, cease all write activity to this repository immediately, set its <c>read_only</c> option to <c>true</c>, and use this API to verify its integrity.
-/// Until you do so:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// It may not be possible to restore some snapshots from this repository.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Searchable snapshots may report errors when searched or may have unassigned shards.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Taking snapshots into this repository may fail or may appear to succeed but have created a snapshot which cannot be restored.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Deleting snapshots from this repository may fail or may appear to succeed but leave the underlying data on disk.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Continuing to write to the repository while it is in an invalid state may causing additional damage to its contents.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If the API finds any problems with the integrity of the contents of your repository, Elasticsearch will not be able to repair the damage.
-/// The only way to bring the repository back into a fully working state after its contents have been damaged is by restoring its contents from a repository backup which was taken before the damage occurred.
-/// You must also identify what caused the damage and take action to prevent it from happening again.
-/// </para>
-/// <para>
-/// If you cannot restore a repository backup, register a new repository and use this for all future snapshot operations.
-/// In some cases it may be possible to recover some of the contents of a damaged repository, either by restoring as many of its snapshots as needed and taking new snapshots of the restored data, or by using the reindex API to copy data from any searchable snapshots mounted from the damaged repository.
-/// </para>
-/// <para>
-/// Avoid all operations which write to the repository while the verify repository integrity API is running.
-/// If something changes the repository contents while an integrity verification is running then Elasticsearch may incorrectly report having detected some anomalies in its contents due to the concurrent writes.
-/// It may also incorrectly fail to report some anomalies that the concurrent writes prevented it from detecting.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for exploratory use by humans. You should expect the request parameters and the response format to vary in future versions.
-/// </para>
-/// <para>
-/// NOTE: This API may not work correctly in a mixed-version cluster.
-/// </para>
-/// <para>
-/// The default values for the parameters of this API are designed to limit the impact of the integrity verification on other activities in your cluster.
-/// For instance, by default it will only use at most half of the <c>snapshot_meta</c> threads to verify the integrity of each snapshot, allowing other snapshot operations to use the other half of this thread pool.
-/// If you modify these parameters to speed up the verification process, you risk disrupting other snapshot-related operations in your cluster.
-/// For large repositories, consider setting up a separate single-node Elasticsearch cluster just for running the integrity verification API.
-/// </para>
-/// <para>
-/// The response exposes implementation details of the analysis which may change from version to version.
-/// The response body format is therefore not considered stable and may be different in newer versions.
-/// </para>
-/// </summary>
+/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 public readonly partial struct RepositoryVerifyIntegrityRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest Instance { get; init; }
@@ -350,104 +134,63 @@ public readonly partial struct RepositoryVerifyIntegrityRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies how many blobs to verify at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#blob_thread_pool_concurrency']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor BlobThreadPoolConcurrency(int? value)
 	{
 		Instance.BlobThreadPoolConcurrency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of index snapshots to verify concurrently within each index verification.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_snapshot_verification_concurrency']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor IndexSnapshotVerificationConcurrency(int? value)
 	{
 		Instance.IndexSnapshotVerificationConcurrency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of indices to verify concurrently.
-	/// The default behavior is to use the entire <c>snapshot_meta</c> thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#index_verification_concurrency']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor IndexVerificationConcurrency(int? value)
 	{
 		Instance.IndexVerificationConcurrency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>verify_blob_contents</c> is <c>true</c>, this parameter specifies the maximum amount of data that Elasticsearch will read from the repository every second.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_bytes_per_sec']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MaxBytesPerSec(string? value)
 	{
 		Instance.MaxBytesPerSec = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard snapshot failures to track during integrity verification, in order to avoid excessive resource usage.
-	/// If your repository contains more than this number of shard snapshot failures, the verification will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#max_failed_shard_snapshots']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MaxFailedShardSnapshots(int? value)
 	{
 		Instance.MaxFailedShardSnapshots = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshot metadata operations to run concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#meta_thread_pool_concurrency']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor MetaThreadPoolConcurrency(int? value)
 	{
 		Instance.MetaThreadPoolConcurrency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of snapshots to verify concurrently.
-	/// The default behavior is to use at most half of the <c>snapshot_meta</c> thread pool at once.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#snapshot_verification_concurrency']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor SnapshotVerificationConcurrency(int? value)
 	{
 		Instance.SnapshotVerificationConcurrency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to verify the checksum of every data blob in the repository.
-	/// If this feature is enabled, Elasticsearch will read the entire repository contents, which may be extremely slow and expensive.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request#verify_blob_contents']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor VerifyBlobContents(bool? value = true)
 	{
 		Instance.VerifyBlobContents = value;

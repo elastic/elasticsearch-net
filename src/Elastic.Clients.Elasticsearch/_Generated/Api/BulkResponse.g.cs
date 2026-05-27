@@ -37,25 +37,13 @@ public partial class BulkResponse : Elastic.Transport.Products.Elasticsearch.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, one or more of the operations in the bulk request did not complete successfully.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkResponse.g.xml" path="doc/member[@key='_global.bulk.Response#errors']/*"/>
 	public required bool Errors { get; set; }
 	public long? IngestTook { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The result of each operation in the bulk request, in the order they were submitted.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkResponse.g.xml" path="doc/member[@key='_global.bulk.Response#items']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> Items { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time, in milliseconds, it took to process the bulk request.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkResponse.g.xml" path="doc/member[@key='_global.bulk.Response#took']/*"/>
 	public required long Took { get; set; }
 }

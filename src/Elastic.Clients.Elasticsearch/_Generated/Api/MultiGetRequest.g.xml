@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.mget.Request"><summary><para>
+Get multiple documents.
+</para>
+<para>
+Get multiple JSON documents by ID from one or more indices.
+If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+</para>
+<para>
+<strong>Filter source fields</strong>
+</para>
+<para>
+By default, the <c>_source</c> field is returned for every document (if stored).
+Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
+You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+</para>
+<para>
+<strong>Get stored fields</strong>
+</para>
+<para>
+Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
+Any requested fields that are not stored are ignored.
+You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
+</para></summary></member>
+  <member key="_global.mget.Request#_source"><summary><para>
+True or false to return the <c>_source</c> field or not, or a list of fields to return.
+</para></summary></member>
+  <member key="_global.mget.Request#_source_excludes"><summary><para>
+A comma-separated list of source fields to exclude from the response.
+You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+</para></summary></member>
+  <member key="_global.mget.Request#_source_includes"><summary><para>
+A comma-separated list of source fields to include in the response.
+If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+</para></summary></member>
+  <member key="_global.mget.Request#docs"><summary><para>
+The documents you want to retrieve. Required if no index is specified in the request URI.
+</para></summary></member>
+  <member key="_global.mget.Request#force_synthetic_source"><summary><para>
+Should this request force synthetic _source?
+Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
+Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+</para></summary></member>
+  <member key="_global.mget.Request#ids"><summary><para>
+The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
+</para></summary></member>
+  <member key="_global.mget.Request#index"><summary><para>
+Name of the index to retrieve documents from when <c>ids</c> are specified, or when a document in the <c>docs</c> array does not specify an index.
+</para></summary></member>
+  <member key="_global.mget.Request#preference"><summary><para>
+Specifies the node or shard the operation should be performed on. Random by default.
+</para></summary></member>
+  <member key="_global.mget.Request#realtime"><summary><para>
+If <c>true</c>, the request is real-time as opposed to near-real-time.
+</para></summary></member>
+  <member key="_global.mget.Request#refresh"><summary><para>
+If <c>true</c>, the request refreshes relevant shards before retrieving documents.
+</para></summary></member>
+  <member key="_global.mget.Request#routing"><summary><para>
+Custom value used to route operations to a specific shard.
+</para></summary></member>
+  <member key="_global.mget.Request#stored_fields"><summary><para>
+If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
+</para></summary></member>
+</doc>

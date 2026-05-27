@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuNormalizationCharFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuNormalizationCharFilterConverter))]
 public sealed partial class IcuNormalizationCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
@@ -45,6 +46,7 @@ public sealed partial class IcuNormalizationCharFilter : Elastic.Clients.Elastic
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuNormalizationCharFilter']/*"/>
 public readonly partial struct IcuNormalizationCharFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter Instance { get; init; }

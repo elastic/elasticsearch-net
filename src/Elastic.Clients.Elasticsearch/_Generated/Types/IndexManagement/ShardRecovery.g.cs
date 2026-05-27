@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.recovery.ShardRecovery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardRecoveryConverter))]
 public sealed partial class ShardRecovery
 {
@@ -57,11 +58,7 @@ public sealed partial class ShardRecovery
 	public required bool Primary { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The recovery stage.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#stage']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage Stage { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus? Start { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
@@ -73,11 +70,7 @@ public sealed partial class ShardRecovery
 	public required System.TimeSpan TotalTimeInMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Translog { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The recovery source type.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardRecovery.g.xml" path="doc/member[@key='indices.recovery.ShardRecovery#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType Type { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex VerifyIndex { get; set; }
 }

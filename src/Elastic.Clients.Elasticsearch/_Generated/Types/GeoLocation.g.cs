@@ -23,33 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// as a <c>{lat, long}</c> object
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as a geo hash value
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as a <c>[lon, lat]</c> array
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as a string in <c>"&lt;lat>, &lt;lon>"</c> or WKT point formats
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GeoLocation.g.xml" path="doc/member[@key='_types.GeoLocation']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoLocation']/*"/>
 public partial class GeoLocation : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoLocation.Kind>
 {
 	public enum Kind

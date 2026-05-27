@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonSageMakerServiceSettingsConverter))]
 public sealed partial class AmazonSageMakerServiceSettings
 {
@@ -46,83 +47,38 @@ public sealed partial class AmazonSageMakerServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS access key that has permissions to use Amazon SageMaker and access to models for invoking requests.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#access_key']/*"/>
 	public required string AccessKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The API format to use when calling SageMaker.
-	/// Elasticsearch will convert the POST _inference request to this data format when invoking the SageMaker endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#api']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi Api { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of inputs in each batch. This value is used by inference ingestion pipelines
-	/// when processing semantic values. It correlates to the number of times the SageMaker endpoint is
-	/// invoked (one per batch of input).
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#batch_size']/*"/>
 	public int? BatchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions returned by the text embedding models. If this value is not provided, then
-	/// it is guessed by making invoking the endpoint for the <c>text_embedding</c> task.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the SageMaker endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#endpoint_name']/*"/>
 	public required string EndpointName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference component to directly invoke when calling a multi-component endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#inference_component_name']/*"/>
 	public string? InferenceComponentName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The region that your endpoint or Amazon Resource Name (ARN) is deployed in.
-	/// The list of available regions per model can be found in the Amazon SageMaker documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#region']/*"/>
 	public required string Region { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS secret key that is paired with the <c>access_key</c>.
-	/// For information about creating and managing access and secret keys, refer to the AWS documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#secret_key']/*"/>
 	public required string SecretKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The container to directly invoke when calling a multi-container endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#target_container_hostname']/*"/>
 	public string? TargetContainerHostname { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model ID when calling a multi-model endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#target_model']/*"/>
 	public string? TargetModel { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings']/*"/>
 public readonly partial struct AmazonSageMakerServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings Instance { get; init; }
@@ -142,116 +98,70 @@ public readonly partial struct AmazonSageMakerServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS access key that has permissions to use Amazon SageMaker and access to models for invoking requests.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#access_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor AccessKey(string value)
 	{
 		Instance.AccessKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API format to use when calling SageMaker.
-	/// Elasticsearch will convert the POST _inference request to this data format when invoking the SageMaker endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#api']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor Api(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi value)
 	{
 		Instance.Api = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of inputs in each batch. This value is used by inference ingestion pipelines
-	/// when processing semantic values. It correlates to the number of times the SageMaker endpoint is
-	/// invoked (one per batch of input).
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#batch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor BatchSize(int? value)
 	{
 		Instance.BatchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions returned by the text embedding models. If this value is not provided, then
-	/// it is guessed by making invoking the endpoint for the <c>text_embedding</c> task.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the SageMaker endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#endpoint_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor EndpointName(string value)
 	{
 		Instance.EndpointName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference component to directly invoke when calling a multi-component endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#inference_component_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor InferenceComponentName(string? value)
 	{
 		Instance.InferenceComponentName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The region that your endpoint or Amazon Resource Name (ARN) is deployed in.
-	/// The list of available regions per model can be found in the Amazon SageMaker documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#region']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor Region(string value)
 	{
 		Instance.Region = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS secret key that is paired with the <c>access_key</c>.
-	/// For information about creating and managing access and secret keys, refer to the AWS documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#secret_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor SecretKey(string value)
 	{
 		Instance.SecretKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The container to directly invoke when calling a multi-container endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#target_container_hostname']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor TargetContainerHostname(string? value)
 	{
 		Instance.TargetContainerHostname = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model ID when calling a multi-model endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerServiceSettings#target_model']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor TargetModel(string? value)
 	{
 		Instance.TargetModel = value;

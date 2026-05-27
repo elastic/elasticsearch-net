@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsAllOfConverter))]
 public sealed partial class IntervalsAllOf
 {
@@ -42,36 +43,20 @@ public sealed partial class IntervalsAllOf
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Intervals produced by the rules further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#max_gaps']/*"/>
 	public int? MaxGaps { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#ordered']/*"/>
 	public bool? Ordered { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf']/*"/>
 public readonly partial struct IntervalsAllOfDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf Instance { get; init; }
@@ -91,55 +76,35 @@ public readonly partial struct IntervalsAllOfDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
@@ -152,23 +117,14 @@ public readonly partial struct IntervalsAllOfDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Intervals produced by the rules further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#max_gaps']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> MaxGaps(int? value)
 	{
 		Instance.MaxGaps = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#ordered']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor<TDocument> Ordered(bool? value = true)
 	{
 		Instance.Ordered = value;
@@ -184,6 +140,7 @@ public readonly partial struct IntervalsAllOfDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf']/*"/>
 public readonly partial struct IntervalsAllOfDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf Instance { get; init; }
@@ -203,66 +160,42 @@ public readonly partial struct IntervalsAllOfDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule used to filter returned intervals.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> value)
 	{
 		Instance.Intervals = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals(params Elastic.Clients.Elasticsearch.QueryDsl.Intervals[] values)
 	{
 		Instance.Intervals = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
@@ -275,11 +208,7 @@ public readonly partial struct IntervalsAllOfDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of rules to combine. All rules must produce a match in a document for the overall source to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#intervals']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Intervals<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>();
@@ -292,23 +221,14 @@ public readonly partial struct IntervalsAllOfDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Intervals produced by the rules further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#max_gaps']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor MaxGaps(int? value)
 	{
 		Instance.MaxGaps = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, intervals produced by the rules should appear in the order in which they are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsAllOf.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsAllOf#ordered']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor Ordered(bool? value = true)
 	{
 		Instance.Ordered = value;

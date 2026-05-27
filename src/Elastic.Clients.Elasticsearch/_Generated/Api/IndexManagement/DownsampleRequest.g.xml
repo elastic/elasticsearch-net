@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.downsample.Request"><summary><para>
+Downsample an index.
+</para>
+<para>
+Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
+</para>
+<list type="bullet">
+<item>
+<para>
+When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
+for each metric field grouped by a configured time interval and their dimensions.
+</para>
+</item>
+<item>
+<para>
+When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
+</para>
+</item>
+</list>
+<para>
+For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+All documents within an hour interval are summarized and stored as a single document in the downsample index.
+</para>
+<para>
+NOTE: Only indices in a time series data stream are supported.
+Neither field nor document level security can be defined on the source index.
+The source index must be read-only (<c>index.blocks.write: true</c>).
+</para></summary></member>
+  <member key="indices.downsample.Request#index"><summary><para>
+Name of the time series index to downsample.
+</para></summary></member>
+  <member key="indices.downsample.Request#target_index"><summary><para>
+Name of the index to create.
+</para></summary></member>
+</doc>

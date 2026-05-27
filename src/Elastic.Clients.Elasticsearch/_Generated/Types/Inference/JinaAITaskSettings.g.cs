@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.JinaAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAITaskSettingsConverter))]
 public sealed partial class JinaAITaskSettings
 {
@@ -36,67 +37,20 @@ public sealed partial class JinaAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the task passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a classifier.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Use it for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, controls when text is split into chunks.
-	/// When set to <c>true</c>, a request from Elasticsearch contains only chunks related to a single document. Instead of batching chunks across documents, Elasticsearch sends them in separate requests. This ensures that chunk embeddings retain context from the entire document, improving semantic quality.
-	/// </para>
-	/// <para>
-	/// If a document exceeds the model's context limits, or if the document contains non-text inputs (relevant when using the multimodal <c>embedding</c> task), late chunking is automatically disabled for that document only and standard chunking is used instead.
-	/// </para>
-	/// <para>
-	/// If not specified, defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#late_chunking']/*"/>
 	public bool? LateChunking { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return the doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.JinaAITaskSettings']/*"/>
 public readonly partial struct JinaAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings Instance { get; init; }
@@ -116,76 +70,28 @@ public readonly partial struct JinaAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings(Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, the task passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a classifier.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Use it for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For an <c>embedding</c> or <c>text_embedding</c> task, controls when text is split into chunks.
-	/// When set to <c>true</c>, a request from Elasticsearch contains only chunks related to a single document. Instead of batching chunks across documents, Elasticsearch sends them in separate requests. This ensures that chunk embeddings retain context from the entire document, improving semantic quality.
-	/// </para>
-	/// <para>
-	/// If a document exceeds the model's context limits, or if the document contains non-text inputs (relevant when using the multimodal <c>embedding</c> task), late chunking is automatically disabled for that document only and standard chunking is used instead.
-	/// </para>
-	/// <para>
-	/// If not specified, defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#late_chunking']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor LateChunking(bool? value = true)
 	{
 		Instance.LateChunking = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return the doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="JinaAITaskSettings.g.xml" path="doc/member[@key='inference._types.JinaAITaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

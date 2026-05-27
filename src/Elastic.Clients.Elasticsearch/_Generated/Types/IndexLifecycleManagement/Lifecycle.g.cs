@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.get_lifecycle.Lifecycle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.LifecycleConverter))]
 public sealed partial class Lifecycle
 {

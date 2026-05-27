@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.QuestionAnsweringInferenceOptions"><summary><para>
+Question answering inference options
+</para></summary></member>
+  <member key="ml._types.QuestionAnsweringInferenceOptions#max_answer_length"><summary><para>
+The maximum answer length to consider
+</para></summary></member>
+  <member key="ml._types.QuestionAnsweringInferenceOptions#num_top_classes"><summary><para>
+Specifies the number of top class predictions to return. Defaults to 0.
+</para></summary></member>
+  <member key="ml._types.QuestionAnsweringInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.QuestionAnsweringInferenceOptions#tokenization"><summary><para>
+The tokenization options to update when inferring
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.WhitespaceTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.WhitespaceTokenizerConverter))]
 public sealed partial class WhitespaceTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -43,6 +44,7 @@ public sealed partial class WhitespaceTokenizer : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.WhitespaceTokenizer']/*"/>
 public readonly partial struct WhitespaceTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer Instance { get; init; }

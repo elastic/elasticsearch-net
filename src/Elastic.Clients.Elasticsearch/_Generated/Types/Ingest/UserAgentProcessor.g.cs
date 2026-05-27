@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UserAgentProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.UserAgentProcessorConverter))]
 public sealed partial class UserAgentProcessor
 {
@@ -42,86 +43,41 @@ public sealed partial class UserAgentProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Extracts device type from the user agent string on a best-effort basis.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#extract_device_type']/*"/>
 	public bool? ExtractDeviceType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#properties']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? Properties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#regex_file']/*"/>
 	public string? RegexFile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UserAgentProcessor']/*"/>
 public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Instance { get; init; }
@@ -141,133 +97,84 @@ public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts device type from the user agent string on a best-effort basis.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#extract_device_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> ExtractDeviceType(bool? value = true)
 	{
 		Instance.ExtractDeviceType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -280,67 +187,42 @@ public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Properties(params Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#regex_file']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> RegexFile(string? value)
 	{
 		Instance.RegexFile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -356,6 +238,7 @@ public readonly partial struct UserAgentProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UserAgentProcessor']/*"/>
 public readonly partial struct UserAgentProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor Instance { get; init; }
@@ -375,133 +258,84 @@ public readonly partial struct UserAgentProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts device type from the user agent string on a best-effort basis.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#extract_device_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor ExtractDeviceType(bool? value = true)
 	{
 		Instance.ExtractDeviceType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field containing the user agent string.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -514,11 +348,7 @@ public readonly partial struct UserAgentProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -531,67 +361,42 @@ public readonly partial struct UserAgentProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to <c>target_field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Properties(params Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#regex_file']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor RegexFile(string? value)
 	{
 		Instance.RegexFile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will be filled with the user agent details.
-	/// </para>
-	/// </summary>
+	/// <include file="UserAgentProcessor.g.xml" path="doc/member[@key='ingest._types.UserAgentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
 public sealed partial class GetFiltersRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of filters.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of filters to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get filters.
-/// </para>
-/// <para>
-/// You can get a single filter or all filters.
-/// </para>
-/// </summary>
+/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetFiltersRequestConverter))]
 public sealed partial class GetFiltersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestParameters>
 {
@@ -73,36 +61,18 @@ public sealed partial class GetFiltersRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "ml.get_filters";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? FilterId { get => P<Elastic.Clients.Elasticsearch.Ids?>("filter_id"); set => PO("filter_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of filters.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of filters to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get filters.
-/// </para>
-/// <para>
-/// You can get a single filter or all filters.
-/// </para>
-/// </summary>
+/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_filters.Request']/*"/>
 public readonly partial struct GetFiltersRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest Instance { get; init; }
@@ -126,33 +96,21 @@ public readonly partial struct GetFiltersRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.FilterId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of filters.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of filters to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFiltersRequest.g.xml" path="doc/member[@key='ml.get_filters.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetFiltersRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

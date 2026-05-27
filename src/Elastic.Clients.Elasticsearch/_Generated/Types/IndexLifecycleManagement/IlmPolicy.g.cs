@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Policy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.IlmPolicyConverter))]
 public sealed partial class IlmPolicy
 {
@@ -42,15 +43,12 @@ public sealed partial class IlmPolicy
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IlmPolicy.g.xml" path="doc/member[@key='ilm._types.Policy#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Phases { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Policy']/*"/>
 public readonly partial struct IlmPolicyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy Instance { get; init; }
@@ -70,33 +68,21 @@ public readonly partial struct IlmPolicyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IlmPolicy.g.xml" path="doc/member[@key='ilm._types.Policy#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IlmPolicy.g.xml" path="doc/member[@key='ilm._types.Policy#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that is not automatically generated or used by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="IlmPolicy.g.xml" path="doc/member[@key='ilm._types.Policy#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

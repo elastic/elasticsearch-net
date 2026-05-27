@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DatafeedTimingStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedTimingStatsConverter))]
 public sealed partial class DatafeedTimingStats
 {
@@ -46,46 +47,22 @@ public sealed partial class DatafeedTimingStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The average search time per bucket, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#average_search_time_per_bucket_ms']/*"/>
 	public System.TimeSpan? AverageSearchTimePerBucketMs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets processed.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#bucket_count']/*"/>
 	public required long BucketCount { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext? ExponentialAverageCalculationContext { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exponential average search time per hour, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#exponential_average_search_time_per_hour_ms']/*"/>
 	public required System.TimeSpan ExponentialAverageSearchTimePerHourMs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of searches run by the datafeed.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#search_count']/*"/>
 	public required long SearchCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time the datafeed spent searching, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedTimingStats.g.xml" path="doc/member[@key='ml._types.DatafeedTimingStats#total_search_time_ms']/*"/>
 	public required System.TimeSpan TotalSearchTimeMs { get; set; }
 }

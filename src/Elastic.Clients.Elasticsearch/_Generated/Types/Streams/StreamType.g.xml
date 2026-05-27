@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="streams._types.StreamType#logs"><summary><para>
+The logs stream type.
+</para></summary></member>
+  <member key="streams._types.StreamType#logs.ecs"><summary><para>
+The logs.ecs stream type, meant for ECS-formatted data.
+</para></summary></member>
+  <member key="streams._types.StreamType#logs.otel"><summary><para>
+The logs.otel stream type, meant for OTel-formatted data.
+</para></summary></member>
+</doc>

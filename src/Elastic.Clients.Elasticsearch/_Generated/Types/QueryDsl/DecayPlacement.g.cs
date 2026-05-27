@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.DecayPlacementConverterFactory))]
 public sealed partial class DecayPlacement<TOrigin, TScale>
 {
@@ -36,35 +37,20 @@ public sealed partial class DecayPlacement<TOrigin, TScale>
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how documents are scored at the distance given at scale.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#decay']/*"/>
 	public double? Decay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#offset']/*"/>
 	public TScale? Offset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public TOrigin? Origin { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#scale']/*"/>
 	public TScale? Scale { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement']/*"/>
 public readonly partial struct DecayPlacementOfDateMathDurationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> Instance { get; init; }
@@ -84,44 +70,28 @@ public readonly partial struct DecayPlacementOfDateMathDurationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how documents are scored at the distance given at scale.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#decay']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Decay(double? value)
 	{
 		Instance.Decay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Origin(Elastic.Clients.Elasticsearch.DateMath? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#scale']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor Scale(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scale = value;
@@ -142,6 +112,7 @@ public readonly partial struct DecayPlacementOfDateMathDurationDescriptor
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement']/*"/>
 public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Instance { get; init; }
@@ -161,66 +132,42 @@ public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how documents are scored at the distance given at scale.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#decay']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Decay(double? value)
 	{
 		Instance.Decay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Offset(string? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin()
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation>? action)
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#scale']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor Scale(string? value)
 	{
 		Instance.Scale = value;
@@ -241,6 +188,7 @@ public readonly partial struct DecayPlacementOfGeoLocationStringDescriptor
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement']/*"/>
 public readonly partial struct DecayPlacementOfDoubleDoubleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> Instance { get; init; }
@@ -260,44 +208,28 @@ public readonly partial struct DecayPlacementOfDoubleDoubleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how documents are scored at the distance given at scale.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#decay']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Decay(double? value)
 	{
 		Instance.Decay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Offset(double? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Origin(double? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#scale']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor Scale(double? value)
 	{
 		Instance.Scale = value;
@@ -318,6 +250,7 @@ public readonly partial struct DecayPlacementOfDoubleDoubleDescriptor
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement']/*"/>
 public readonly partial struct DecayPlacementOfObjectObjectDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> Instance { get; init; }
@@ -337,44 +270,28 @@ public readonly partial struct DecayPlacementOfObjectObjectDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object> instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<object, object>(Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how documents are scored at the distance given at scale.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#decay']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Decay(double? value)
 	{
 		Instance.Decay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, the decay function will only compute the decay function for documents with a distance greater than the defined <c>offset</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Offset(object? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Origin(object? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the distance from origin + offset at which the computed score will equal <c>decay</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="DecayPlacement.g.xml" path="doc/member[@key='_types.query_dsl.DecayPlacement#scale']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor Scale(object? value)
 	{
 		Instance.Scale = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.JvmThreads']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmThreadsConverter))]
 public sealed partial class JvmThreads
 {
@@ -36,17 +37,9 @@ public sealed partial class JvmThreads
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of active threads in use by JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmThreads.g.xml" path="doc/member[@key='nodes._types.JvmThreads#count']/*"/>
 	public long? Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Highest number of threads used by JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmThreads.g.xml" path="doc/member[@key='nodes._types.JvmThreads#peak_count']/*"/>
 	public long? PeakCount { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.ClusterStateQueue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ClusterStateQueueConverter))]
 public sealed partial class ClusterStateQueue
 {
@@ -36,24 +37,12 @@ public sealed partial class ClusterStateQueue
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of committed cluster states in queue.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateQueue.g.xml" path="doc/member[@key='nodes._types.ClusterStateQueue#committed']/*"/>
 	public long? Committed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of pending cluster states in queue.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateQueue.g.xml" path="doc/member[@key='nodes._types.ClusterStateQueue#pending']/*"/>
 	public long? Pending { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of cluster states in queue.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateQueue.g.xml" path="doc/member[@key='nodes._types.ClusterStateQueue#total']/*"/>
 	public long? Total { get; set; }
 }

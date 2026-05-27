@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.InferenceAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.InferenceAggregateConverter))]
 public sealed partial class InferenceAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -36,11 +37,6 @@ public sealed partial class InferenceAggregate : Elastic.Clients.Elasticsearch.A
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional data
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Data { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }

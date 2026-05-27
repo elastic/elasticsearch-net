@@ -23,238 +23,100 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
 public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicate if an error should be returned if there is a partial search failure or timeout
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// Affects how often partial results become available, which happens whenever shard results are reduced.
-	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#batched_reduce_size']/*"/>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default value is the only supported value.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query (AND or OR)
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_throttled']/*"/>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_on_completion']/*"/>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#max_concurrent_shard_requests']/*"/>
 	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify the node or shard the operation should be performed on
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify if request cache should be used for this request or not, defaults to true
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of specific routing values
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify suggest mode
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
-	/// <summary>
-	/// <para>
-	/// How many suggestions to return in response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_size']/*"/>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_text']/*"/>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Blocks and waits until the search is completed up to a certain timeout.
-	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run an async search.
-/// </para>
-/// <para>
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-/// </para>
-/// <para>
-/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-/// </para>
-/// <para>
-/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-/// </para>
-/// </summary>
+/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.Json.SubmitAsyncSearchRequestConverter))]
 public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestParameters>
 {
@@ -280,444 +142,178 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "async_search.submit";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicate if an error should be returned if there is a partial search failure or timeout
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// Affects how often partial results become available, which happens whenever shard results are reduced.
-	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#batched_reduce_size']/*"/>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default value is the only supported value.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query (AND or OR)
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_throttled']/*"/>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_on_completion']/*"/>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#max_concurrent_shard_requests']/*"/>
 	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify the node or shard the operation should be performed on
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify if request cache should be used for this request or not, defaults to true
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of specific routing values
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify suggest mode
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
-	/// <summary>
-	/// <para>
-	/// How many suggestions to return in response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_size']/*"/>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_text']/*"/>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Blocks and waits until the search is completed up to a certain timeout.
-	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Ext { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset. By default, you cannot page through more than 10,000
-	/// hits using the from and size parameters. To page through more hits, use the
-	/// search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#from']/*"/>
 	public int? From { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#min_score']/*"/>
 	public double? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits the search to a point in time (PIT). If you provide a PIT, you
-	/// cannot specify an &lt;index> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns sequence number and primary term of the last modification
-	/// of each hit. See Optimistic concurrency control.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#seq_no_primary_term']/*"/>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return. By default, you cannot page through more
-	/// than 10,000 hits using the from and size parameters. To page through more
-	/// hits, use the search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#size']/*"/>
 	public int? Size { get; set; }
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Stats groups to associate with the search. Each group maintains a statistics
-	/// aggregation for its associated searches. You can retrieve these stats using
-	/// the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of stored fields to return as part of a hit. If no fields are specified,
-	/// no stored fields are included in the response. If this field is specified, the _source
-	/// parameter defaults to false. You can pass _source: true to return both source fields
-	/// and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard. If a query reaches this
-	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
-	/// before sorting. Defaults to 0, which does not terminate query execution early.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard. If no response
-	/// is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#timeout']/*"/>
 	public string? Timeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_scores']/*"/>
 	public bool? TrackScores { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately. If true, the exact
-	/// number of hits is returned at the cost of some performance. If false, the
-	/// response does not include the total number of hits matching the query.
-	/// Defaults to 10,000 hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#version']/*"/>
 	public bool? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run an async search.
-/// </para>
-/// <para>
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-/// </para>
-/// <para>
-/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-/// </para>
-/// <para>
-/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-/// </para>
-/// </summary>
+/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
 public readonly partial struct SubmitAsyncSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Instance { get; init; }
@@ -741,385 +337,238 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicate if an error should be returned if there is a partial search failure or timeout
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Affects how often partial results become available, which happens whenever shard results are reduced.
-	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#batched_reduce_size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor BatchedReduceSize(long? value)
 	{
 		Instance.BatchedReduceSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default value is the only supported value.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query (AND or OR)
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify the node or shard the operation should be performed on
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify if request cache should be used for this request or not, defaults to true
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of specific routing values
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify suggest mode
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How many suggestions to return in response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestSize(long? value)
 	{
 		Instance.SuggestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_text']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SuggestText(string? value)
 	{
 		Instance.SuggestText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Blocks and waits until the search is completed up to a certain timeout.
-	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;
@@ -1189,36 +638,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1231,12 +665,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1249,44 +678,28 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -1300,36 +713,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1342,12 +740,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1360,13 +753,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset. By default, you cannot page through more than 10,000
-	/// hits using the from and size parameters. To page through more hits, use the
-	/// search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
@@ -1391,33 +778,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -1431,33 +806,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1470,11 +833,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Knn<T>(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1487,36 +846,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the search to a point in time (PIT). If you provide a PIT, you
-	/// cannot specify an &lt;index> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the search to a point in time (PIT). If you provide a PIT, you
-	/// cannot specify an &lt;index> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
@@ -1547,51 +891,28 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -1634,48 +955,28 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -1724,33 +1025,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -1783,25 +1072,14 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns sequence number and primary term of the last modification
-	/// of each hit. See Optimistic concurrency control.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return. By default, you cannot page through more
-	/// than 10,000 hits using the from and size parameters. To page through more
-	/// hits, use the search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
@@ -1862,90 +1140,49 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stats groups to associate with the search. Each group maintains a statistics
-	/// aggregation for its associated searches. You can retrieve these stats using
-	/// the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stats groups to associate with the search. Each group maintains a statistics
-	/// aggregation for its associated searches. You can retrieve these stats using
-	/// the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of stored fields to return as part of a hit. If no fields are specified,
-	/// no stored fields are included in the response. If this field is specified, the _source
-	/// parameter defaults to false. You can pass _source: true to return both source fields
-	/// and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of stored fields to return as part of a hit. If no fields are specified,
-	/// no stored fields are included in the response. If this field is specified, the _source
-	/// parameter defaults to false. You can pass _source: true to return both source fields
-	/// and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
@@ -1976,76 +1213,42 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard. If a query reaches this
-	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
-	/// before sorting. Defaults to 0, which does not terminate query execution early.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard. If no response
-	/// is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately. If true, the exact
-	/// number of hits is returned at the cost of some performance. If false, the
-	/// response does not include the total number of hits matching the query.
-	/// Defaults to 10,000 hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately. If true, the exact
-	/// number of hits is returned at the cost of some performance. If false, the
-	/// response does not include the total number of hits matching the query.
-	/// Defaults to 10,000 hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;
@@ -2113,21 +1316,8 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run an async search.
-/// </para>
-/// <para>
-/// When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field. Partial results become available following the sort criteria that was requested.
-/// </para>
-/// <para>
-/// Warning: Asynchronous search does not support scroll or search requests that include only the suggest section.
-/// </para>
-/// <para>
-/// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
-/// The maximum allowed size for a stored async search response can be set by changing the <c>search.max_async_search_response_size</c> cluster level setting.
-/// </para>
-/// </summary>
+/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.submit.Request']/*"/>
 public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest Instance { get; init; }
@@ -2151,385 +1341,238 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names to search; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicate if an error should be returned if there is a partial search failure or timeout
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Affects how often partial results become available, which happens whenever shard results are reduced.
-	/// A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#batched_reduce_size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> BatchedReduceSize(long? value)
 	{
 		Instance.BatchedReduceSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default value is the only supported value.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query (AND or OR)
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether specified concrete, expanded or aliased indices should be ignored when throttled
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, results are stored for later retrieval when the search completes within the <c>wait_for_completion_timeout</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify the node or shard the operation should be performed on
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify if request cache should be used for this request or not, defaults to true
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of specific routing values
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to extract and return from the _source field
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify suggest mode
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How many suggestions to return in response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestSize(long? value)
 	{
 		Instance.SuggestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#suggest_text']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SuggestText(string? value)
 	{
 		Instance.SuggestText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Blocks and waits until the search is completed up to a certain timeout.
-	/// When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;
@@ -2580,36 +1623,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns doc values for field
-	/// names matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -2622,44 +1650,28 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -2673,36 +1685,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -2715,13 +1712,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset. By default, you cannot page through more than 10,000
-	/// hits using the from and size parameters. To page through more hits, use the
-	/// search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
@@ -2740,33 +1731,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boosts the _score of documents from specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -2780,33 +1759,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -2819,36 +1786,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are
-	/// not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the search to a point in time (PIT). If you provide a PIT, you
-	/// cannot specify an &lt;index> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the search to a point in time (PIT). If you provide a PIT, you
-	/// cannot specify an &lt;index> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
@@ -2873,40 +1825,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -2937,36 +1870,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -3001,33 +1919,21 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -3060,25 +1966,14 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns sequence number and primary term of the last modification
-	/// of each hit. See Optimistic concurrency control.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return. By default, you cannot page through more
-	/// than 10,000 hits using the from and size parameters. To page through more
-	/// hits, use the search_after parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -3121,78 +2016,42 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates which source fields are returned for matching documents. These
-	/// fields are returned in the hits._source property of the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stats groups to associate with the search. Each group maintains a statistics
-	/// aggregation for its associated searches. You can retrieve these stats using
-	/// the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Stats groups to associate with the search. Each group maintains a statistics
-	/// aggregation for its associated searches. You can retrieve these stats using
-	/// the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of stored fields to return as part of a hit. If no fields are specified,
-	/// no stored fields are included in the response. If this field is specified, the _source
-	/// parameter defaults to false. You can pass _source: true to return both source fields
-	/// and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of stored fields to return as part of a hit. If no fields are specified,
-	/// no stored fields are included in the response. If this field is specified, the _source
-	/// parameter defaults to false. You can pass _source: true to return both source fields
-	/// and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
@@ -3217,76 +2076,42 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard. If a query reaches this
-	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
-	/// before sorting. Defaults to 0, which does not terminate query execution early.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard. If no response
-	/// is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately. If true, the exact
-	/// number of hits is returned at the cost of some performance. If false, the
-	/// response does not include the total number of hits matching the query.
-	/// Defaults to 10,000 hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately. If true, the exact
-	/// number of hits is returned at the cost of some performance. If false, the
-	/// response does not include the total number of hits matching the query.
-	/// Defaults to 10,000 hits.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.submit.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;

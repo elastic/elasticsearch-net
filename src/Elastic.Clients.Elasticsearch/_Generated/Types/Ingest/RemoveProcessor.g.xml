@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.RemoveProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#field"><summary><para>
+Fields to be removed. Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#keep"><summary><para>
+Fields to be kept. When set, all fields other than those specified are removed.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.RemoveProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

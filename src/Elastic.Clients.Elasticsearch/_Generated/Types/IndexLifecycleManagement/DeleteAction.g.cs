@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.DeleteAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.DeleteActionConverter))]
 public sealed partial class DeleteAction
 {
@@ -39,6 +40,7 @@ public sealed partial class DeleteAction
 	public bool? DeleteSearchableSnapshot { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.DeleteAction']/*"/>
 public readonly partial struct DeleteActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction Instance { get; init; }

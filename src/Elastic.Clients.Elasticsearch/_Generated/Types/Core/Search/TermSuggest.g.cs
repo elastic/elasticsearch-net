@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.TermSuggest']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.TermSuggestConverter))]
 public sealed partial class TermSuggest : Elastic.Clients.Elasticsearch.Core.Search.ISuggest
 {

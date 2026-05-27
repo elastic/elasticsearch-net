@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="streams.status.Request"><summary><para>
+Get the status of streams.
+</para>
+<para>
+Get the current status for all types of streams.
+</para></summary></member>
+  <member key="streams.status.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Data stream options template contains the same information as DataStreamOptions but allows them to be set explicitly to null.
-/// </para>
-/// </summary>
+/// <include file="DataStreamOptionsTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamOptionsTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamOptionsTemplate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamOptionsTemplateConverter))]
 public sealed partial class DataStreamOptionsTemplate
 {
@@ -44,11 +41,8 @@ public sealed partial class DataStreamOptionsTemplate
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate? FailureStore { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Data stream options template contains the same information as DataStreamOptions but allows them to be set explicitly to null.
-/// </para>
-/// </summary>
+/// <include file="DataStreamOptionsTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamOptionsTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamOptionsTemplate']/*"/>
 public readonly partial struct DataStreamOptionsTemplateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate Instance { get; init; }

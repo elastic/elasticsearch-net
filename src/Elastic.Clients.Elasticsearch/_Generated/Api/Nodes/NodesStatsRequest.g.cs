@@ -23,81 +23,40 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
 public sealed partial class NodesStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#groups']/*"/>
 	public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_unloaded_segments']/*"/>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the node, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.NodeStatsLevel?>("level"); set => Q("level", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get node statistics.
-/// </para>
-/// <para>
-/// Get statistics for nodes in a cluster.
-/// By default, all stats are returned. You can limit the returned information by using metrics.
-/// </para>
-/// </summary>
+/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodesStatsRequestConverter))]
 public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>
 {
@@ -139,100 +98,45 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "nodes.stats";
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#index_metric']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? IndexMetric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>?>("index_metric"); set => PO("index_metric", value); }
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#metric']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>?>("metric"); set => PO("metric", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#groups']/*"/>
 	public bool? Groups { get => Q<bool?>("groups"); set => Q("groups", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_unloaded_segments']/*"/>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the node, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.NodeStatsLevel?>("level"); set => Q("level", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get node statistics.
-/// </para>
-/// <para>
-/// Get statistics for nodes in a cluster.
-/// By default, all stats are returned. You can limit the returned information by using metrics.
-/// </para>
-/// </summary>
+/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
 public readonly partial struct NodesStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest Instance { get; init; }
@@ -276,198 +180,126 @@ public readonly partial struct NodesStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#index_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IndexMetric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.IndexMetric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#index_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IndexMetric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
 	{
 		Instance.IndexMetric = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)
 	{
 		Instance.Metric = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor CompletionFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor FielddataFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Groups(bool? value = true)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_segment_file_sizes']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IncludeSegmentFileSizes(bool? value = true)
 	{
 		Instance.IncludeSegmentFileSizes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_unloaded_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IncludeUnloadedSegments(bool? value = true)
 	{
 		Instance.IncludeUnloadedSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the node, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.NodeStatsLevel? value)
 	{
 		Instance.Level = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Types(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];
@@ -535,15 +367,8 @@ public readonly partial struct NodesStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get node statistics.
-/// </para>
-/// <para>
-/// Get statistics for nodes in a cluster.
-/// By default, all stats are returned. You can limit the returned information by using metrics.
-/// </para>
-/// </summary>
+/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.stats.Request']/*"/>
 public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest Instance { get; init; }
@@ -587,198 +412,126 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#index_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IndexMetric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.IndexMetric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#index_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IndexMetric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
 	{
 		Instance.IndexMetric = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)
 	{
 		Instance.Metric = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> CompletionFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> FielddataFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Groups(bool? value = true)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_segment_file_sizes']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? value = true)
 	{
 		Instance.IncludeSegmentFileSizes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#include_unloaded_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? value = true)
 	{
 		Instance.IncludeUnloadedSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the node, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.NodeStatsLevel? value)
 	{
 		Instance.Level = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Types(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of document types for the indexing index metric.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsRequest.g.xml" path="doc/member[@key='nodes.stats.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Types(params string[] values)
 	{
 		Instance.Types = [.. values];

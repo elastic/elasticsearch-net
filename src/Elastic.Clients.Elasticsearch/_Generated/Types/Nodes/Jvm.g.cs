@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Jvm']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmConverter))]
 public sealed partial class Jvm
 {
@@ -36,60 +37,27 @@ public sealed partial class Jvm
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about JVM buffer pools for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#buffer_pools']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool>? BufferPools { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about classes loaded by JVM for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#classes']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.JvmClasses? Classes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about JVM garbage collectors for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#gc']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.GarbageCollector? Gc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains JVM memory usage statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#mem']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats? Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about JVM thread usage for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#threads']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.JvmThreads? Threads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Last time JVM statistics were refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#timestamp']/*"/>
 	public long? Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human-readable JVM uptime.
-	/// Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#uptime']/*"/>
 	public string? Uptime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// JVM uptime in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="Jvm.g.xml" path="doc/member[@key='nodes._types.Jvm#uptime_in_millis']/*"/>
 	public long? UptimeInMillis { get; set; }
 }

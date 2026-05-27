@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The function that the model called.
-/// </para>
-/// </summary>
+/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ToolCallFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ToolCallFunctionConverter))]
 public sealed partial class ToolCallFunction
 {
@@ -48,26 +45,15 @@ public sealed partial class ToolCallFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The arguments to call the function with in JSON format.
-	/// </para>
-	/// </summary>
+	/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction#arguments']/*"/>
 	public required string Arguments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the function to call.
-	/// </para>
-	/// </summary>
+	/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction#name']/*"/>
 	public required string Name { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The function that the model called.
-/// </para>
-/// </summary>
+/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ToolCallFunction']/*"/>
 public readonly partial struct ToolCallFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ToolCallFunction Instance { get; init; }
@@ -87,22 +73,14 @@ public readonly partial struct ToolCallFunctionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ToolCallFunctionDescriptor(Elastic.Clients.Elasticsearch.Inference.ToolCallFunction instance) => new Elastic.Clients.Elasticsearch.Inference.ToolCallFunctionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ToolCallFunction(Elastic.Clients.Elasticsearch.Inference.ToolCallFunctionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The arguments to call the function with in JSON format.
-	/// </para>
-	/// </summary>
+	/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction#arguments']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ToolCallFunctionDescriptor Arguments(string value)
 	{
 		Instance.Arguments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the function to call.
-	/// </para>
-	/// </summary>
+	/// <include file="ToolCallFunction.g.xml" path="doc/member[@key='inference._types.ToolCallFunction#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ToolCallFunctionDescriptor Name(string value)
 	{
 		Instance.Name = value;

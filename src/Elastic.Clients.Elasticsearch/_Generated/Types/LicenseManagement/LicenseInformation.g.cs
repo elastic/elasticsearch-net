@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get.LicenseInformation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.LicenseInformationConverter))]
 public sealed partial class LicenseInformation
 {
@@ -50,87 +51,39 @@ public sealed partial class LicenseInformation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date and time the license expires in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#expiry_date']/*"/>
 	public System.DateTimeOffset? ExpiryDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date and time the license expires in milliseconds since the Unix epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#expiry_date_in_millis']/*"/>
 	public System.DateTimeOffset? ExpiryDateInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date and time the license was issued in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issue_date']/*"/>
 	public required System.DateTimeOffset IssueDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date and time the license was issued in milliseconds since the Unix epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issue_date_in_millis']/*"/>
 	public required System.DateTimeOffset IssueDateInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the customer or organization that received the license.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issued_to']/*"/>
 	public required string IssuedTo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the organization that issued the license.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#issuer']/*"/>
 	public required string Issuer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of nodes the license allows.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#max_nodes']/*"/>
 	public required long? MaxNodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of resource units the license allows (for enterprise licenses only).
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#max_resource_units']/*"/>
 	public int? MaxResourceUnits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date and time the license was started in milliseconds since the Unix epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#start_date_in_millis']/*"/>
 	public required System.DateTimeOffset StartDateInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The status of the license. For example,active, valid, invalid, or expired.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of the license. For example, trial, basic, gold, platinum, or enterprise.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the license.
-	/// </para>
-	/// </summary>
+	/// <include file="LicenseInformation.g.xml" path="doc/member[@key='license.get.LicenseInformation#uid']/*"/>
 	public required string Uid { get; set; }
 }

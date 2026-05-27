@@ -23,50 +23,20 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
+/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 public sealed partial class XpackInfoRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If used, this otherwise ignored parameter must be set to true
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#accept_enterprise']/*"/>
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#categories']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get information.
-/// </para>
-/// <para>
-/// The information provided by the API includes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Build information including the build number and timestamp.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// License information about the currently installed license.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Feature information for the features that are currently enabled and available under the current license.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.XpackInfoRequestConverter))]
 public sealed partial class XpackInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>
 {
@@ -88,48 +58,16 @@ public sealed partial class XpackInfoRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "xpack.info";
 
-	/// <summary>
-	/// <para>
-	/// If used, this otherwise ignored parameter must be set to true
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#accept_enterprise']/*"/>
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#categories']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? Categories { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>?>("categories"); set => Q("categories", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get information.
-/// </para>
-/// <para>
-/// The information provided by the API includes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Build information including the build number and timestamp.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// License information about the currently installed license.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Feature information for the features that are currently enabled and available under the current license.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.info.Request']/*"/>
 public readonly partial struct XpackInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest Instance { get; init; }
@@ -149,35 +87,21 @@ public readonly partial struct XpackInfoRequestDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor descriptor) => descriptor.Instance;
 
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
-	/// <summary>
-	/// <para>
-	/// If used, this otherwise ignored parameter must be set to true
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#accept_enterprise']/*"/>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor AcceptEnterprise(bool? value = true)
 	{
 		Instance.AcceptEnterprise = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#categories']/*"/>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>? value)
 	{
 		Instance.Categories = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the information categories to include in the response.
-	/// For example, <c>build,license,features</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="XpackInfoRequest.g.xml" path="doc/member[@key='xpack.info.Request#categories']/*"/>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor Categories(params Elastic.Clients.Elasticsearch.Xpack.XPackCategory[] values)
 	{
 		Instance.Categories = [.. values];

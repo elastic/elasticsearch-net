@@ -23,57 +23,31 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 public sealed partial class CapabilitiesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of arbitrary API capabilities to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#capabilities']/*"/>
 	public System.Collections.Generic.ICollection<string>? Capabilities { get => Q<System.Collections.Generic.ICollection<string>?>("capabilities"); set => Q("capabilities", value); }
 
-	/// <summary>
-	/// <para>
-	/// True if only the node being called should be considered
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#local_only']/*"/>
 	public bool? LocalOnly { get => Q<bool?>("local_only"); set => Q("local_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// REST method to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod? Method { get => Q<Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod?>("method"); set => Q("method", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API parameters to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#parameters']/*"/>
 	public System.Collections.Generic.ICollection<string>? Parameters { get => Q<System.Collections.Generic.ICollection<string>?>("parameters"); set => Q("parameters", value); }
 
-	/// <summary>
-	/// <para>
-	/// API path to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#path']/*"/>
 	public string? Path { get => Q<string?>("path"); set => Q("path", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
-/// </para>
-/// </summary>
+/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CapabilitiesRequestConverter))]
 public sealed partial class CapabilitiesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>
 {
@@ -95,55 +69,27 @@ public sealed partial class CapabilitiesRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "capabilities";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of arbitrary API capabilities to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#capabilities']/*"/>
 	public System.Collections.Generic.ICollection<string>? Capabilities { get => Q<System.Collections.Generic.ICollection<string>?>("capabilities"); set => Q("capabilities", value); }
 
-	/// <summary>
-	/// <para>
-	/// True if only the node being called should be considered
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#local_only']/*"/>
 	public bool? LocalOnly { get => Q<bool?>("local_only"); set => Q("local_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// REST method to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod? Method { get => Q<Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod?>("method"); set => Q("method", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API parameters to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#parameters']/*"/>
 	public System.Collections.Generic.ICollection<string>? Parameters { get => Q<System.Collections.Generic.ICollection<string>?>("parameters"); set => Q("parameters", value); }
 
-	/// <summary>
-	/// <para>
-	/// API path to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#path']/*"/>
 	public string? Path { get => Q<string?>("path"); set => Q("path", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
-/// </para>
-/// </summary>
+/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.capabilities.Request']/*"/>
 public readonly partial struct CapabilitiesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CapabilitiesRequest Instance { get; init; }
@@ -162,89 +108,56 @@ public readonly partial struct CapabilitiesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor(Elastic.Clients.Elasticsearch.CapabilitiesRequest instance) => new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CapabilitiesRequest(Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of arbitrary API capabilities to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#capabilities']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Capabilities(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Capabilities = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of arbitrary API capabilities to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#capabilities']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Capabilities(params string[] values)
 	{
 		Instance.Capabilities = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True if only the node being called should be considered
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#local_only']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor LocalOnly(bool? value = true)
 	{
 		Instance.LocalOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// REST method to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#method']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Method(Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod? value)
 	{
 		Instance.Method = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API parameters to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Parameters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Parameters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API parameters to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Parameters(params string[] values)
 	{
 		Instance.Parameters = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// API path to check
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#path']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Path(string? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CapabilitiesRequest.g.xml" path="doc/member[@key='_global.capabilities.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

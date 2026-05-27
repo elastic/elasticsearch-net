@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ExtendedBoundsConverterFactory))]
 public sealed partial class ExtendedBounds<T>
 {
@@ -36,21 +37,14 @@ public sealed partial class ExtendedBounds<T>
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#max']/*"/>
 	public T? Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#min']/*"/>
 	public T? Min { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds']/*"/>
 public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> Instance { get; init; }
@@ -70,66 +64,42 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> instance) => new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Maximum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#max']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
 		Instance.Max = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#max']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max()
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#max']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Max(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#min']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
 		Instance.Min = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#min']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min()
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#min']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor Min(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? action)
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
@@ -150,6 +120,7 @@ public readonly partial struct ExtendedBoundsOfFieldDateMathDescriptor
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds']/*"/>
 public readonly partial struct ExtendedBoundsOfDoubleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?> Instance { get; init; }
@@ -169,22 +140,14 @@ public readonly partial struct ExtendedBoundsOfDoubleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?> instance) => new Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Maximum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#max']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor Max(double? value)
 	{
 		Instance.Max = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum value for the bound.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedBounds.g.xml" path="doc/member[@key='_types.aggregations.ExtendedBounds#min']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor Min(double? value)
 	{
 		Instance.Min = value;

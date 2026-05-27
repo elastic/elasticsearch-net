@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.KeyValueProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#exclude_keys"><summary><para>
+List of keys to exclude from document.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#field"><summary><para>
+The field to be parsed.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#field_split"><summary><para>
+Regex pattern to use for splitting key-value pairs.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#include_keys"><summary><para>
+List of keys to filter and insert into document.
+Defaults to including all keys.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#prefix"><summary><para>
+Prefix to be added to extracted keys.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#strip_brackets"><summary><para>
+If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#target_field"><summary><para>
+The field to insert the extracted keys into.
+Defaults to the root of the document.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#trim_key"><summary><para>
+String of characters to trim from extracted keys.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#trim_value"><summary><para>
+String of characters to trim from extracted values.
+</para></summary></member>
+  <member key="ingest._types.KeyValueProcessor#value_split"><summary><para>
+Regex pattern to use for splitting the key from the value within a key-value pair.
+</para></summary></member>
+</doc>

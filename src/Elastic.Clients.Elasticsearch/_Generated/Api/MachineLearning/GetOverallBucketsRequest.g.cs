@@ -23,35 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
 public sealed partial class GetOverallBucketsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get overall bucket results.
-/// </para>
-/// <para>
-/// Retrievs overall bucket results that summarize the bucket results of
-/// multiple anomaly detection jobs.
-/// </para>
-/// <para>
-/// The <c>overall_score</c> is calculated by combining the scores of all the
-/// buckets within the overall bucket span. First, the maximum
-/// <c>anomaly_score</c> per anomaly detection job in the overall bucket is
-/// calculated. Then the <c>top_n</c> of those scores are averaged to result in
-/// the <c>overall_score</c>. This means that you can fine-tune the
-/// <c>overall_score</c> so that it is more or less sensitive to the number of
-/// jobs that detect an anomaly at the same time. For example, if you set
-/// <c>top_n</c> to <c>1</c>, the <c>overall_score</c> is the maximum bucket score in the
-/// overall bucket. Alternatively, if you set <c>top_n</c> to the number of jobs,
-/// the <c>overall_score</c> is high only when all jobs detect anomalies in that
-/// overall bucket. If you set the <c>bucket_span</c> parameter (to a value
-/// greater than its default), the <c>overall_score</c> is the maximum
-/// <c>overall_score</c> of the overall buckets that have a span equal to the
-/// jobs' largest bucket span.
-/// </para>
-/// </summary>
+/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetOverallBucketsRequestConverter))]
 public sealed partial class GetOverallBucketsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestParameters>
 {
@@ -78,94 +57,33 @@ public sealed partial class GetOverallBucketsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.get_overall_buckets";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, a comma-separated list of jobs or groups, or a wildcard
-	/// expression.
-	/// </para>
-	/// <para>
-	/// You can summarize the bucket results for all anomaly detection jobs by
-	/// using <c>_all</c> or by specifying <c>*</c> as the <c>&lt;job_id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>bucket_span</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#bucket_span']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? BucketSpan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#exclude_interim']/*"/>
 	public bool? ExcludeInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>overall_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#overall_score']/*"/>
 	public double? OverallScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>top_n</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get overall bucket results.
-/// </para>
-/// <para>
-/// Retrievs overall bucket results that summarize the bucket results of
-/// multiple anomaly detection jobs.
-/// </para>
-/// <para>
-/// The <c>overall_score</c> is calculated by combining the scores of all the
-/// buckets within the overall bucket span. First, the maximum
-/// <c>anomaly_score</c> per anomaly detection job in the overall bucket is
-/// calculated. Then the <c>top_n</c> of those scores are averaged to result in
-/// the <c>overall_score</c>. This means that you can fine-tune the
-/// <c>overall_score</c> so that it is more or less sensitive to the number of
-/// jobs that detect an anomaly at the same time. For example, if you set
-/// <c>top_n</c> to <c>1</c>, the <c>overall_score</c> is the maximum bucket score in the
-/// overall bucket. Alternatively, if you set <c>top_n</c> to the number of jobs,
-/// the <c>overall_score</c> is high only when all jobs detect anomalies in that
-/// overall bucket. If you set the <c>bucket_span</c> parameter (to a value
-/// greater than its default), the <c>overall_score</c> is the maximum
-/// <c>overall_score</c> of the overall buckets that have a span equal to the
-/// jobs' largest bucket span.
-/// </para>
-/// </summary>
+/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_overall_buckets.Request']/*"/>
 public readonly partial struct GetOverallBucketsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest Instance { get; init; }
@@ -190,94 +108,56 @@ public readonly partial struct GetOverallBucketsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, a comma-separated list of jobs or groups, or a wildcard
-	/// expression.
-	/// </para>
-	/// <para>
-	/// You can summarize the bucket results for all anomaly detection jobs by
-	/// using <c>_all</c> or by specifying <c>*</c> as the <c>&lt;job_id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>bucket_span</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#bucket_span']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor BucketSpan(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.BucketSpan = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>overall_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#overall_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor OverallScore(double? value)
 	{
 		Instance.OverallScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>top_n</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetOverallBucketsRequest.g.xml" path="doc/member[@key='ml.get_overall_buckets.Request#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

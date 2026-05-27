@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.CpuAcct']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CpuAcctConverter))]
 public sealed partial class CpuAcct
 {
@@ -36,17 +37,9 @@ public sealed partial class CpuAcct
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>cpuacct</c> control group to which the Elasticsearch process belongs.
-	/// </para>
-	/// </summary>
+	/// <include file="CpuAcct.g.xml" path="doc/member[@key='nodes._types.CpuAcct#control_group']/*"/>
 	public string? ControlGroup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total CPU time, in nanoseconds, consumed by all tasks in the same cgroup as the Elasticsearch process.
-	/// </para>
-	/// </summary>
+	/// <include file="CpuAcct.g.xml" path="doc/member[@key='nodes._types.CpuAcct#usage_nanos']/*"/>
 	public System.TimeSpan? UsageNanos { get; set; }
 }

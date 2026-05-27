@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CartesianCentroidAggregateConverter))]
 public sealed partial class CartesianCentroidAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

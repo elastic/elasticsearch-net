@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
 public sealed partial class PutGeoipDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a GeoIP database configuration.
-/// </para>
-/// <para>
-/// Refer to the create or update IP geolocation database configuration API.
-/// </para>
-/// </summary>
+/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PutGeoipDatabaseRequestConverter))]
 public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>
 {
@@ -83,52 +70,24 @@ public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "ingest.put_geoip_database";
 
-	/// <summary>
-	/// <para>
-	/// ID of the database configuration to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
-	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#maxmind']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a GeoIP database configuration.
-/// </para>
-/// <para>
-/// Refer to the create or update IP geolocation database configuration API.
-/// </para>
-/// </summary>
+/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_geoip_database.Request']/*"/>
 public readonly partial struct PutGeoipDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest Instance { get; init; }
@@ -155,69 +114,42 @@ public readonly partial struct PutGeoipDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// ID of the database configuration to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
-	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#maxmind']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Maxmind(Elastic.Clients.Elasticsearch.Ingest.Maxmind value)
 	{
 		Instance.Maxmind = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration necessary to identify which IP geolocation provider to use to download the database, as well as any provider-specific configuration necessary for such downloading.
-	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#maxmind']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Maxmind(System.Action<Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor> action)
 	{
 		Instance.Maxmind = Elastic.Clients.Elasticsearch.Ingest.MaxmindDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_geoip_database.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

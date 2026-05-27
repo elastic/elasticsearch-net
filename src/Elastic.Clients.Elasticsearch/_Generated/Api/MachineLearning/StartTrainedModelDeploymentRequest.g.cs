@@ -23,86 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
 public sealed partial class StartTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The inference cache size (in memory outside the JVM heap) per node for the model.
-	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
-	/// <c>0b</c> can be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#cache_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("cache_size"); set => Q("cache_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the deployment of the model.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#deployment_id']/*"/>
 	public string? DeploymentId { get => Q<string?>("deployment_id"); set => Q("deployment_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of model allocations on each node where the model is deployed.
-	/// All allocations on a node share the same copy of the model in memory but use
-	/// a separate set of threads to evaluate the model.
-	/// Increasing this value generally increases the throughput.
-	/// If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#number_of_allocations']/*"/>
 	public int? NumberOfAllocations { get => Q<int?>("number_of_allocations"); set => Q("number_of_allocations", value); }
 
-	/// <summary>
-	/// <para>
-	/// The deployment priority
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#priority']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
-	/// this value, new requests are rejected with a 429 error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#queue_capacity']/*"/>
 	public int? QueueCapacity { get => Q<int?>("queue_capacity"); set => Q("queue_capacity", value); }
 
-	/// <summary>
-	/// <para>
-	/// Sets the number of threads used by each model allocation during inference. This generally increases
-	/// the inference speed. The inference process is a compute-bound process; any number
-	/// greater than the number of available hardware threads on the machine does not increase the
-	/// inference speed. If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#threads_per_allocation']/*"/>
 	public int? ThreadsPerAllocation { get => Q<int?>("threads_per_allocation"); set => Q("threads_per_allocation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the model to deploy.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the allocation status to wait for before returning.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#wait_for']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start a trained model deployment.
-/// </para>
-/// <para>
-/// It allocates the model to every machine learning node.
-/// </para>
-/// </summary>
+/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StartTrainedModelDeploymentRequestConverter))]
 public sealed partial class StartTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>
 {
@@ -129,100 +80,39 @@ public sealed partial class StartTrainedModelDeploymentRequest : Elastic.Clients
 
 	internal override string OperationName => "ml.start_trained_model_deployment";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The inference cache size (in memory outside the JVM heap) per node for the model.
-	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
-	/// <c>0b</c> can be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#cache_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("cache_size"); set => Q("cache_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the deployment of the model.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#deployment_id']/*"/>
 	public string? DeploymentId { get => Q<string?>("deployment_id"); set => Q("deployment_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of model allocations on each node where the model is deployed.
-	/// All allocations on a node share the same copy of the model in memory but use
-	/// a separate set of threads to evaluate the model.
-	/// Increasing this value generally increases the throughput.
-	/// If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#number_of_allocations']/*"/>
 	public int? NumberOfAllocations { get => Q<int?>("number_of_allocations"); set => Q("number_of_allocations", value); }
 
-	/// <summary>
-	/// <para>
-	/// The deployment priority
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#priority']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
-	/// this value, new requests are rejected with a 429 error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#queue_capacity']/*"/>
 	public int? QueueCapacity { get => Q<int?>("queue_capacity"); set => Q("queue_capacity", value); }
 
-	/// <summary>
-	/// <para>
-	/// Sets the number of threads used by each model allocation during inference. This generally increases
-	/// the inference speed. The inference process is a compute-bound process; any number
-	/// greater than the number of available hardware threads on the machine does not increase the
-	/// inference speed. If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#threads_per_allocation']/*"/>
 	public int? ThreadsPerAllocation { get => Q<int?>("threads_per_allocation"); set => Q("threads_per_allocation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the model to deploy.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the allocation status to wait for before returning.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#wait_for']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Start a trained model deployment.
-/// </para>
-/// <para>
-/// It allocates the model to every machine learning node.
-/// </para>
-/// </summary>
+/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request']/*"/>
 public readonly partial struct StartTrainedModelDeploymentRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest Instance { get; init; }
@@ -247,151 +137,84 @@ public readonly partial struct StartTrainedModelDeploymentRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference cache size (in memory outside the JVM heap) per node for the model.
-	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
-	/// <c>0b</c> can be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#cache_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor CacheSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.CacheSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference cache size (in memory outside the JVM heap) per node for the model.
-	/// The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
-	/// <c>0b</c> can be provided.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#cache_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor CacheSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.CacheSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the deployment of the model.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#deployment_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor DeploymentId(string? value)
 	{
 		Instance.DeploymentId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of model allocations on each node where the model is deployed.
-	/// All allocations on a node share the same copy of the model in memory but use
-	/// a separate set of threads to evaluate the model.
-	/// Increasing this value generally increases the throughput.
-	/// If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? value)
 	{
 		Instance.NumberOfAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The deployment priority
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#priority']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor Priority(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? value)
 	{
 		Instance.Priority = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
-	/// this value, new requests are rejected with a 429 error.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#queue_capacity']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor QueueCapacity(int? value)
 	{
 		Instance.QueueCapacity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the number of threads used by each model allocation during inference. This generally increases
-	/// the inference speed. The inference process is a compute-bound process; any number
-	/// greater than the number of available hardware threads on the machine does not increase the
-	/// inference speed. If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#threads_per_allocation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor ThreadsPerAllocation(int? value)
 	{
 		Instance.ThreadsPerAllocation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the model to deploy.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the allocation status to wait for before returning.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#wait_for']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor WaitFor(Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState? value)
 	{
 		Instance.WaitFor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? value)
 	{
 		Instance.AdaptiveAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="StartTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.start_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> action)
 	{
 		Instance.AdaptiveAllocations = Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor.Build(action);

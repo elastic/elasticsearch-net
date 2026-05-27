@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// This setting helps to minimize the number of rate limit errors returned from the service.
-/// </para>
-/// </summary>
+/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RateLimitSettingConverter))]
 public sealed partial class RateLimitSetting
 {
@@ -41,127 +38,12 @@ public sealed partial class RateLimitSetting
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of requests allowed per minute.
-	/// By default, the number of requests allowed per minute is set by each service as follows:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>amazonbedrock</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>anthropic</c> service: <c>50</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureaistudio</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureopenai</c> service and task type <c>text_embedding</c>: <c>1440</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureopenai</c> service and task types <c>completion</c> or <c>chat_completion</c>: <c>120</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> service: <c>10000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>contextualai</c> service: <c>1000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>fireworksai</c> service: <c>6000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>googleaistudio</c> service: <c>360</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>googlevertexai</c> service: <c>30000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hugging_face</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jinaai</c> service: <c>2000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>llama</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> service and task type <c>text_embedding</c>: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> service and task type <c>completion</c>: <c>500</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openshift_ai</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>voyageai</c> service: <c>2000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>watsonxai</c> service: <c>120</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting#requests_per_minute']/*"/>
 	public int? RequestsPerMinute { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// This setting helps to minimize the number of rate limit errors returned from the service.
-/// </para>
-/// </summary>
+/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
 public readonly partial struct RateLimitSettingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RateLimitSetting Instance { get; init; }
@@ -181,119 +63,7 @@ public readonly partial struct RateLimitSettingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting instance) => new Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RateLimitSetting(Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The number of requests allowed per minute.
-	/// By default, the number of requests allowed per minute is set by each service as follows:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>amazonbedrock</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>anthropic</c> service: <c>50</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureaistudio</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureopenai</c> service and task type <c>text_embedding</c>: <c>1440</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>azureopenai</c> service and task types <c>completion</c> or <c>chat_completion</c>: <c>120</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> service: <c>10000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>contextualai</c> service: <c>1000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>fireworksai</c> service: <c>6000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>googleaistudio</c> service: <c>360</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>googlevertexai</c> service: <c>30000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hugging_face</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jinaai</c> service: <c>2000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>llama</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> service: <c>240</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> service and task type <c>text_embedding</c>: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> service and task type <c>completion</c>: <c>500</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openshift_ai</c> service: <c>3000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>voyageai</c> service: <c>2000</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>watsonxai</c> service: <c>120</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting#requests_per_minute']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor RequestsPerMinute(int? value)
 	{
 		Instance.RequestsPerMinute = value;

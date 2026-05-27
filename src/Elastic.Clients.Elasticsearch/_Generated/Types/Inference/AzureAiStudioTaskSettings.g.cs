@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureAiStudioTaskSettingsConverter))]
 public sealed partial class AzureAiStudioTaskSettings
 {
@@ -36,63 +37,29 @@ public sealed partial class AzureAiStudioTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, instruct the inference process to perform sampling.
-	/// It has no effect unless <c>temperature</c> or <c>top_p</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#do_sample']/*"/>
 	public float? DoSample { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, provide a hint for the maximum number of output tokens to be generated.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#max_new_tokens']/*"/>
 	public int? MaxNewTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, control the apparent creativity of generated completions with a sampling temperature.
-	/// It must be a number in the range of 0.0 to 2.0.
-	/// It should not be used if <c>top_p</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#temperature']/*"/>
 	public float? Temperature { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, make the model consider the results of the tokens with nucleus sampling probability.
-	/// It is an alternative value to <c>temperature</c> and must be a number in the range of 0.0 to 2.0.
-	/// It should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#top_p']/*"/>
 	public float? TopP { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings']/*"/>
 public readonly partial struct AzureAiStudioTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings Instance { get; init; }
@@ -112,84 +79,49 @@ public readonly partial struct AzureAiStudioTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, instruct the inference process to perform sampling.
-	/// It has no effect unless <c>temperature</c> or <c>top_p</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#do_sample']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor DoSample(float? value)
 	{
 		Instance.DoSample = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, provide a hint for the maximum number of output tokens to be generated.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#max_new_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor MaxNewTokens(int? value)
 	{
 		Instance.MaxNewTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, control the apparent creativity of generated completions with a sampling temperature.
-	/// It must be a number in the range of 0.0 to 2.0.
-	/// It should not be used if <c>top_p</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#temperature']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor Temperature(float? value)
 	{
 		Instance.Temperature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, make the model consider the results of the tokens with nucleus sampling probability.
-	/// It is an alternative value to <c>temperature</c> and must be a number in the range of 0.0 to 2.0.
-	/// It should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#top_p']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor TopP(float? value)
 	{
 		Instance.TopP = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioTaskSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioTaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

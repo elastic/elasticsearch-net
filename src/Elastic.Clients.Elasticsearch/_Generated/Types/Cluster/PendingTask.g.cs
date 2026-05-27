@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PendingTaskConverter))]
 public sealed partial class PendingTask
 {
@@ -46,46 +47,21 @@ public sealed partial class PendingTask
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the pending tasks are currently executing or not.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#executing']/*"/>
 	public required bool Executing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number that represents when the task has been inserted into the task queue.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#insert_order']/*"/>
 	public required int InsertOrder { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The priority of the pending task.
-	/// The valid priorities in descending priority order are: <c>IMMEDIATE</c> > <c>URGENT</c> > <c>HIGH</c> > <c>NORMAL</c> > <c>LOW</c> > <c>LANGUID</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#priority']/*"/>
 	public required string Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A general description of the cluster task that may include a reason and origin.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#source']/*"/>
 	public required string Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time since the task is waiting for being performed.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#time_in_queue']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? TimeInQueue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time expressed in milliseconds since the task is waiting for being performed.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTask.g.xml" path="doc/member[@key='cluster.pending_tasks.PendingTask#time_in_queue_millis']/*"/>
 	public required System.TimeSpan TimeInQueueMillis { get; set; }
 }

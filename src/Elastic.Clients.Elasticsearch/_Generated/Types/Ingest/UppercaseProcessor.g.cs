@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UppercaseProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.UppercaseProcessorConverter))]
 public sealed partial class UppercaseProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class UppercaseProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to make uppercase.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UppercaseProcessor']/*"/>
 public readonly partial struct UppercaseProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor Instance { get; init; }
@@ -121,122 +88,77 @@ public readonly partial struct UppercaseProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make uppercase.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make uppercase.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -249,36 +171,21 @@ public readonly partial struct UppercaseProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -294,6 +201,7 @@ public readonly partial struct UppercaseProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UppercaseProcessor']/*"/>
 public readonly partial struct UppercaseProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor Instance { get; init; }
@@ -313,122 +221,77 @@ public readonly partial struct UppercaseProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make uppercase.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make uppercase.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -441,11 +304,7 @@ public readonly partial struct UppercaseProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -458,36 +317,21 @@ public readonly partial struct UppercaseProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UppercaseProcessor.g.xml" path="doc/member[@key='ingest._types.UppercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

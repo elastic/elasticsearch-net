@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StandardAnalyzerConverter))]
 public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -36,32 +37,19 @@ public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Ana
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum token length. If a token is seen that exceeds this length then it is split at <c>max_token_length</c> intervals.
-	/// Defaults to <c>255</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#max_token_length']/*"/>
 	public int? MaxTokenLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#stopwords_path']/*"/>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "standard";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer']/*"/>
 public readonly partial struct StandardAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer Instance { get; init; }
@@ -81,35 +69,21 @@ public readonly partial struct StandardAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum token length. If a token is seen that exceeds this length then it is split at <c>max_token_length</c> intervals.
-	/// Defaults to <c>255</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#max_token_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor MaxTokenLength(int? value)
 	{
 		Instance.MaxTokenLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer#stopwords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

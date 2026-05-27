@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RangeRelation#contains"><summary><para>
+Matches documents with a range field value that entirely contains the query’s range.
+</para></summary></member>
+  <member key="_types.query_dsl.RangeRelation#intersects"><summary><para>
+Matches documents with a range field value that intersects the query’s range.
+</para></summary></member>
+  <member key="_types.query_dsl.RangeRelation#within"><summary><para>
+Matches documents with a range field value entirely within the query’s range.
+</para></summary></member>
+</doc>

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// An object containing the input data for the model to embed.
-/// </para>
-/// </summary>
+/// <include file="EmbeddingContentObjectContents.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObjectContents']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.EmbeddingContentObjectContents']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.EmbeddingContentObjectContentsConverter))]
 public sealed partial class EmbeddingContentObjectContents
 {
@@ -48,25 +45,12 @@ public sealed partial class EmbeddingContentObjectContents
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format of the input. For the <c>text</c> type this must be <c>text</c>. For the <c>image</c> type, this must be <c>base64</c>.
-	/// If not specified, this will default to <c>text</c> for the <c>text</c> type and <c>base64</c> for the <c>image</c> type.
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingContentObjectContents.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObjectContents#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of input to embed.
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingContentObjectContents.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObjectContents#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value of the input to embed. For images, this must be a base64-encoded data URI, i.e. "data:content/type;base64,..."
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingContentObjectContents.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObjectContents#value']/*"/>
 	public required string Value { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ReindexStatus']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ReindexStatusConverter))]
 public sealed partial class ReindexStatus
 {
@@ -50,97 +51,44 @@ public sealed partial class ReindexStatus
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scroll responses pulled back by the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#batches']/*"/>
 	public required long Batches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The reason for cancellation if the slice was canceled
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#cancelled']/*"/>
 	public string? Cancelled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully created.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#created']/*"/>
 	public long? Created { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#deleted']/*"/>
 	public required long Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were ignored because the script used for the reindex returned a <c>noop</c> value for <c>ctx.op</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#noops']/*"/>
 	public required long Noops { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of requests per second effectively executed during the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#requests_per_second']/*"/>
 	public required float RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of retries attempted by reindex. <c>bulk</c> is the number of bulk actions retried and <c>search</c> is the number of search actions retried.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#retries']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retries Retries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The slice ID
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#slice_id']/*"/>
 	public int? SliceId { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of milliseconds the request slept to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#throttled_millis']/*"/>
 	public required System.TimeSpan ThrottledMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field should always be equal to zero in a <c>_reindex</c> response.
-	/// It only has meaning when using the Task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be executed again in order to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#throttled_until_millis']/*"/>
 	public required System.TimeSpan ThrottledUntilMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully processed.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#total']/*"/>
 	public required long Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully updated, for example, a document with same ID already existed prior to reindex updating it.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#updated']/*"/>
 	public long? Updated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of version conflicts that reindex hits.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexStatus.g.xml" path="doc/member[@key='_types.ReindexStatus#version_conflicts']/*"/>
 	public required long VersionConflicts { get; set; }
 }

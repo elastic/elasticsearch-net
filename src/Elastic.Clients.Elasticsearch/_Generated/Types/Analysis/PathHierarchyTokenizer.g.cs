@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PathHierarchyTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.PathHierarchyTokenizerConverter))]
 public sealed partial class PathHierarchyTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -47,6 +48,7 @@ public sealed partial class PathHierarchyTokenizer : Elastic.Clients.Elasticsear
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PathHierarchyTokenizer']/*"/>
 public readonly partial struct PathHierarchyTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer Instance { get; init; }

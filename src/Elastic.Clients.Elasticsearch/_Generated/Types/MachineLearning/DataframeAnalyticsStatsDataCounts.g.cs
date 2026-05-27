@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsDataCounts']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsStatsDataCountsConverter))]
 public sealed partial class DataframeAnalyticsStatsDataCounts
 {
@@ -44,24 +45,12 @@ public sealed partial class DataframeAnalyticsStatsDataCounts
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that are skipped during the analysis because they contained values that are not supported by the analysis. For example, outlier detection does not support missing fields so it skips documents with missing fields. Likewise, all types of analysis skip documents that contain arrays with more than one element.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsDataCounts.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsDataCounts#skipped_docs_count']/*"/>
 	public required int SkippedDocsCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that are not used for training the model and can be used for testing.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsDataCounts.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsDataCounts#test_docs_count']/*"/>
 	public required int TestDocsCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that are used for training the model.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsDataCounts.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsDataCounts#training_docs_count']/*"/>
 	public required int TrainingDocsCount { get; set; }
 }

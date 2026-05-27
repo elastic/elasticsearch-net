@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.ChildrenAggregation#type"><summary><para>
+The child type that should be selected.
+</para></summary></member>
+</doc>

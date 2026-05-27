@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.SerializedClusterState#full_states"><summary><para>
+Number of published cluster states.
+</para></summary></member>
+</doc>

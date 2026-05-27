@@ -23,83 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
 public sealed partial class PutCustomRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a custom inference endpoint.
-/// </para>
-/// <para>
-/// The custom service gives more control over how to interact with external inference services that aren't explicitly supported through dedicated integrations.
-/// The custom service gives you the ability to define the headers, url, query parameters, request body, and secrets.
-/// The custom service supports the template replacement functionality, which enables you to define a template that can be replaced with the value associated with that key.
-/// Templates are portions of a string that start with <c>${</c> and end with <c>}</c>.
-/// The parameters <c>secret_parameters</c> and <c>task_settings</c> are checked for keys for template replacement. Template replacement is supported in the <c>request</c>, <c>headers</c>, <c>url</c>, and <c>query_parameters</c>.
-/// If the definition (key) is not found for a template, an error message is returned.
-/// In case of an endpoint definition like the following:
-/// </para>
-/// <code>
-/// PUT _inference/text_embedding/test-text-embedding
-/// {
-///   "service": "custom",
-///   "service_settings": {
-///      "secret_parameters": {
-///           "api_key": "&lt;some api key>"
-///      },
-///      "url": "...endpoints.huggingface.cloud/v1/embeddings",
-///      "headers": {
-///          "Authorization": "Bearer ${api_key}",
-///          "Content-Type": "application/json"
-///      },
-///      "request": "{\"input\": ${input}}",
-///      "response": {
-///          "json_parser": {
-///              "text_embeddings":"$.data[*].embedding[*]"
-///          }
-///      }
-///   }
-/// }
-/// </code>
-/// <para>
-/// To replace <c>${api_key}</c> the <c>secret_parameters</c> and <c>task_settings</c> are checked for a key named <c>api_key</c>.
-/// </para>
-/// <para>
-/// info
-/// Templates should not be surrounded by quotes.
-/// </para>
-/// <para>
-/// Pre-defined templates:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>${input}</c> refers to the array of input strings that comes from the <c>input</c> field of the subsequent inference requests.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${input_type}</c> refers to the input type translation values.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${query}</c> refers to the query field used specifically for reranking tasks.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${top_n}</c> refers to the <c>top_n</c> field available when performing rerank requests.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${return_documents}</c> refers to the <c>return_documents</c> field available when performing rerank requests.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutCustomRequestConverter))]
 public sealed partial class PutCustomRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutCustomRequestParameters>
 {
@@ -133,126 +64,27 @@ public sealed partial class PutCustomRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.put_custom";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#custom_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CustomInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("custom_inference_id"); set => PR("custom_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CustomTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.CustomTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>custom</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#service']/*"/>
 	public string Service => "custom";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>custom</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a custom inference endpoint.
-/// </para>
-/// <para>
-/// The custom service gives more control over how to interact with external inference services that aren't explicitly supported through dedicated integrations.
-/// The custom service gives you the ability to define the headers, url, query parameters, request body, and secrets.
-/// The custom service supports the template replacement functionality, which enables you to define a template that can be replaced with the value associated with that key.
-/// Templates are portions of a string that start with <c>${</c> and end with <c>}</c>.
-/// The parameters <c>secret_parameters</c> and <c>task_settings</c> are checked for keys for template replacement. Template replacement is supported in the <c>request</c>, <c>headers</c>, <c>url</c>, and <c>query_parameters</c>.
-/// If the definition (key) is not found for a template, an error message is returned.
-/// In case of an endpoint definition like the following:
-/// </para>
-/// <code>
-/// PUT _inference/text_embedding/test-text-embedding
-/// {
-///   "service": "custom",
-///   "service_settings": {
-///      "secret_parameters": {
-///           "api_key": "&lt;some api key>"
-///      },
-///      "url": "...endpoints.huggingface.cloud/v1/embeddings",
-///      "headers": {
-///          "Authorization": "Bearer ${api_key}",
-///          "Content-Type": "application/json"
-///      },
-///      "request": "{\"input\": ${input}}",
-///      "response": {
-///          "json_parser": {
-///              "text_embeddings":"$.data[*].embedding[*]"
-///          }
-///      }
-///   }
-/// }
-/// </code>
-/// <para>
-/// To replace <c>${api_key}</c> the <c>secret_parameters</c> and <c>task_settings</c> are checked for a key named <c>api_key</c>.
-/// </para>
-/// <para>
-/// info
-/// Templates should not be surrounded by quotes.
-/// </para>
-/// <para>
-/// Pre-defined templates:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>${input}</c> refers to the array of input strings that comes from the <c>input</c> field of the subsequent inference requests.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${input_type}</c> refers to the input type translation values.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${query}</c> refers to the query field used specifically for reranking tasks.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${top_n}</c> refers to the <c>top_n</c> field available when performing rerank requests.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>${return_documents}</c> refers to the <c>return_documents</c> field available when performing rerank requests.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_custom.Request']/*"/>
 public readonly partial struct PutCustomRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutCustomRequest Instance { get; init; }
@@ -279,121 +111,70 @@ public readonly partial struct PutCustomRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutCustomRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutCustomRequest(Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#custom_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor CustomInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CustomInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.CustomTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>custom</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>custom</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCustomRequest.g.xml" path="doc/member[@key='inference.put_custom.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor.Build(action);

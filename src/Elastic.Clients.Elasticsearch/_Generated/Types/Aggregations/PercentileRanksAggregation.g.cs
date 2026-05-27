@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PercentileRanksAggregationConverter))]
 public sealed partial class PercentileRanksAggregation
 {
@@ -36,53 +37,28 @@ public sealed partial class PercentileRanksAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the aggregation associates a unique string key with each bucket and returns the ranges as a hash rather than an array.
-	/// Set to <c>false</c> to disable this behavior.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#keyed']/*"/>
 	public bool? Keyed => false;
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#values']/*"/>
 	public System.Collections.Generic.ICollection<double>? Values { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation']/*"/>
 public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Instance { get; init; }
@@ -102,22 +78,14 @@ public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -130,45 +98,28 @@ public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? value)
 	{
 		Instance.Hdr = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr()
 	{
 		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Hdr(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor>? action)
 	{
 		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -193,44 +144,28 @@ public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? value)
 	{
 		Instance.TDigest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest()
 	{
 		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> TDigest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor>? action)
 	{
 		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#values']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument> Values(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Values = value;
@@ -251,6 +186,7 @@ public readonly partial struct PercentileRanksAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation']/*"/>
 public readonly partial struct PercentileRanksAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation Instance { get; init; }
@@ -270,22 +206,14 @@ public readonly partial struct PercentileRanksAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -298,45 +226,28 @@ public readonly partial struct PercentileRanksAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? value)
 	{
 		Instance.Hdr = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr()
 	{
 		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uses the alternative High Dynamic Range Histogram algorithm to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#hdr']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Hdr(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor>? action)
 	{
 		Instance.Hdr = Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -361,44 +272,28 @@ public readonly partial struct PercentileRanksAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigest? value)
 	{
 		Instance.TDigest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest()
 	{
 		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets parameters for the default TDigest algorithm used to calculate percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#tdigest']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor TDigest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor>? action)
 	{
 		Instance.TDigest = Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of values for which to calculate the percentile ranks.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentileRanksAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentileRanksAggregation#values']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor Values(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Values = value;

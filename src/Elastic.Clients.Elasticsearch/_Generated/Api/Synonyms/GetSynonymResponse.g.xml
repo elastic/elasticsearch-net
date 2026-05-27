@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.get_synonym.Response#count"><summary><para>
+The total number of synonyms rules that the synonyms set contains.
+</para></summary></member>
+  <member key="synonyms.get_synonym.Response#synonyms_set"><summary><para>
+Synonym rule details.
+</para></summary></member>
+</doc>

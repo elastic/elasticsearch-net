@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.MatrixStatsAggregation#fields"><summary><para>
+An array of fields for computing the statistics.
+</para></summary></member>
+  <member key="_types.aggregations.MatrixStatsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.MatrixStatsAggregation#mode"><summary><para>
+Array value the aggregation will use for array or multi-valued fields.
+</para></summary></member>
+</doc>

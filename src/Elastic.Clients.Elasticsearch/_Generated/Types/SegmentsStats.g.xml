@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.SegmentsStats#count"><summary><para>
+Total number of segments across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#doc_values_memory"><summary><para>
+Total amount of memory used for doc values across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#doc_values_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#file_sizes"><summary><para>
+This object is not populated by the cluster stats API.
+To get information on segment files, use the node stats API.
+</para></summary></member>
+  <member key="_types.SegmentsStats#fixed_bit_set"><summary><para>
+Total amount of memory used by fixed bit sets across all shards assigned to selected nodes.
+Fixed bit sets are used for nested object field types and type filters for join fields.
+</para></summary></member>
+  <member key="_types.SegmentsStats#fixed_bit_set_memory_in_bytes"><summary><para>
+Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#index_writer_memory"><summary><para>
+Total amount of memory used by all index writers across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#index_writer_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#max_unsafe_auto_id_timestamp"><summary><para>
+Unix timestamp, in milliseconds, of the most recently retried indexing request.
+</para></summary></member>
+  <member key="_types.SegmentsStats#memory"><summary><para>
+Total amount of memory used for segments across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#norms_memory"><summary><para>
+Total amount of memory used for normalization factors across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#norms_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#points_memory"><summary><para>
+Total amount of memory used for points across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#points_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#stored_fields_memory"><summary><para>
+Total amount of memory used for stored fields across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#stored_fields_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#term_vectors_memory"><summary><para>
+Total amount of memory used for term vectors across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#term_vectors_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#terms_memory"><summary><para>
+Total amount of memory used for terms across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#terms_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#version_map_memory"><summary><para>
+Total amount of memory used by all version maps across all shards assigned to selected nodes.
+</para></summary></member>
+  <member key="_types.SegmentsStats#version_map_memory_in_bytes"><summary><para>
+Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
+</para></summary></member>
+</doc>

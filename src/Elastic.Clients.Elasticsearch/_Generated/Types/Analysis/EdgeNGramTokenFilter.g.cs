@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.EdgeNGramTokenFilterConverter))]
 public sealed partial class EdgeNGramTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,32 +37,16 @@ public sealed partial class EdgeNGramTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum character length of a gram. For custom token filters, defaults to <c>2</c>. For the built-in edge_ngram filter, defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#max_gram']/*"/>
 	public int? MaxGram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum character length of a gram. Defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#min_gram']/*"/>
 	public int? MinGram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#preserve_original']/*"/>
 	public bool? PreserveOriginal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to truncate tokens from the <c>front</c> or <c>back</c>. Defaults to <c>front</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#side']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; set; }
 
 	public string Type => "edge_ngram";
@@ -69,6 +54,7 @@ public sealed partial class EdgeNGramTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter']/*"/>
 public readonly partial struct EdgeNGramTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter Instance { get; init; }
@@ -88,44 +74,28 @@ public readonly partial struct EdgeNGramTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Maximum character length of a gram. For custom token filters, defaults to <c>2</c>. For the built-in edge_ngram filter, defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#max_gram']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor MaxGram(int? value)
 	{
 		Instance.MaxGram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum character length of a gram. Defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#min_gram']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor MinGram(int? value)
 	{
 		Instance.MinGram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#preserve_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to truncate tokens from the <c>front</c> or <c>back</c>. Defaults to <c>front</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EdgeNGramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.EdgeNGramTokenFilter#side']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilterDescriptor Side(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? value)
 	{
 		Instance.Side = value;

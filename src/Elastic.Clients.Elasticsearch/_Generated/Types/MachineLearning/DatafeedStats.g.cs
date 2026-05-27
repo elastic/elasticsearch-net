@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DatafeedStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedStatsConverter))]
 public sealed partial class DatafeedStats
 {
@@ -43,48 +44,21 @@ public sealed partial class DatafeedStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For started datafeeds only, contains messages relating to the selection of a node.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#assignment_explanation']/*"/>
 	public string? AssignmentExplanation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed.
-	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
-	/// It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#datafeed_id']/*"/>
 	public required string DatafeedId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For started datafeeds only, this information pertains to the node upon which the datafeed is started.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#node']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeCompact? Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object containing the running state for this datafeed.
-	/// It is only provided if the datafeed is started.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#running_state']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState? RunningState { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The status of the datafeed, which can be one of the following values: <c>starting</c>, <c>started</c>, <c>stopping</c>, <c>stopped</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object that provides statistical information about timing aspect of this datafeed.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedStats.g.xml" path="doc/member[@key='ml._types.DatafeedStats#timing_stats']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats? TimingStats { get; set; }
 }

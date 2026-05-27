@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.MigrateAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.MigrateActionConverter))]
 public sealed partial class MigrateAction
 {
@@ -39,6 +40,7 @@ public sealed partial class MigrateAction
 	public bool? Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.MigrateAction']/*"/>
 public readonly partial struct MigrateActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction Instance { get; init; }

@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
 public sealed partial class EmbeddingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform dense embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.EmbeddingRequestConverter))]
 public sealed partial class EmbeddingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestParameters>
 {
@@ -71,27 +66,16 @@ public sealed partial class EmbeddingRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.embedding";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.Inference.RequestEmbedding Embedding { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform dense embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.embedding.Request']/*"/>
 public readonly partial struct EmbeddingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.EmbeddingRequest Instance { get; init; }
@@ -118,22 +102,14 @@ public readonly partial struct EmbeddingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.EmbeddingRequest instance) => new Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.EmbeddingRequest(Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingRequest.g.xml" path="doc/member[@key='inference.embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

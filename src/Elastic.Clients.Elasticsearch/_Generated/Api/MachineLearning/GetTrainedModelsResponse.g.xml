@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_trained_models.Response#trained_model_configs"><summary><para>
+An array of trained model resources, which are sorted by the model_id value in ascending order.
+</para></summary></member>
+</doc>

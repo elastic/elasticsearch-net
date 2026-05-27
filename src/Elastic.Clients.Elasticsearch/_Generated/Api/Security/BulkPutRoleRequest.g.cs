@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
 public sealed partial class BulkPutRoleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Bulk create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The bulk create or update roles API cannot update roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.BulkPutRoleRequestConverter))]
 public sealed partial class BulkPutRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>
 {
@@ -69,30 +60,15 @@ public sealed partial class BulkPutRoleRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "security.bulk_put_role";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public required System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> Roles { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Bulk create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The bulk create or update roles API cannot update roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
 public readonly partial struct BulkPutRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest Instance { get; init; }
@@ -111,55 +87,35 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> value)
 	{
 		Instance.Roles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles()
 	{
 		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>? action)
 	{
 		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>? action)
 	{
 		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action);
@@ -173,22 +129,14 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(string key)
 	{
 		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor Roles(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
@@ -278,15 +226,8 @@ public readonly partial struct BulkPutRoleRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Bulk create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The bulk create or update roles API cannot update roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.bulk_put_role.Request']/*"/>
 public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest Instance { get; init; }
@@ -305,44 +246,28 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> value)
 	{
 		Instance.Roles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles()
 	{
 		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>? action)
 	{
 		Instance.Roles = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action);
@@ -356,22 +281,14 @@ public readonly partial struct BulkPutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(string key)
 	{
 		Instance.Roles = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A dictionary of role name to RoleDescriptor objects to add or update
-	/// </para>
-	/// </summary>
+	/// <include file="BulkPutRoleRequest.g.xml" path="doc/member[@key='security.bulk_put_role.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument> Roles(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();

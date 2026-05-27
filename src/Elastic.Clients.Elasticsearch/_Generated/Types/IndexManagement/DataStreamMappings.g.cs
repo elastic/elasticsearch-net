@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_mappings.DataStreamMappings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamMappingsConverter))]
 public sealed partial class DataStreamMappings
 {
@@ -44,25 +45,12 @@ public sealed partial class DataStreamMappings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings specific to this data stream merged with the settings from its template. These <c>effective_settings</c>
-	/// are the settings that will be used when a new index is created for this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamMappings.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.DataStreamMappings#effective_mappings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping EffectiveMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings specific to this data stream
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamMappings.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.DataStreamMappings#mappings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamMappings.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.DataStreamMappings#name']/*"/>
 	public required string Name { get; set; }
 }

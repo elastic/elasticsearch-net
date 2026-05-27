@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DiversifiedSamplerAggregationConverter))]
 public sealed partial class DiversifiedSamplerAggregation
 {
@@ -36,36 +37,21 @@ public sealed partial class DiversifiedSamplerAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of value used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits how many documents are permitted per choice of de-duplicating value.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#max_docs_per_value']/*"/>
 	public int? MaxDocsPerValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation']/*"/>
 public readonly partial struct DiversifiedSamplerAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Instance { get; init; }
@@ -85,44 +71,28 @@ public readonly partial struct DiversifiedSamplerAggregationDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The type of value used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits how many documents are permitted per choice of de-duplicating value.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#max_docs_per_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> MaxDocsPerValue(int? value)
 	{
 		Instance.MaxDocsPerValue = value;
@@ -147,11 +117,7 @@ public readonly partial struct DiversifiedSamplerAggregationDescriptor<TDocument
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
@@ -172,6 +138,7 @@ public readonly partial struct DiversifiedSamplerAggregationDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation']/*"/>
 public readonly partial struct DiversifiedSamplerAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation Instance { get; init; }
@@ -191,44 +158,28 @@ public readonly partial struct DiversifiedSamplerAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The type of value used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to provide values used for de-duplication.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits how many documents are permitted per choice of de-duplicating value.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#max_docs_per_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor MaxDocsPerValue(int? value)
 	{
 		Instance.MaxDocsPerValue = value;
@@ -253,11 +204,7 @@ public readonly partial struct DiversifiedSamplerAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifiedSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.DiversifiedSamplerAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;

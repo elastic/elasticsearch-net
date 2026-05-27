@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.RollupJobSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.RollupJobSummaryConverter))]
 public sealed partial class RollupJobSummary
 {

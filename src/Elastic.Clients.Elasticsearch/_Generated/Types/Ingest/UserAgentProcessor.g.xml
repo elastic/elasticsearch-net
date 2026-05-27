@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.UserAgentProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#extract_device_type"><summary><para>
+Extracts device type from the user agent string on a best-effort basis.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#field"><summary><para>
+The field containing the user agent string.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#properties"><summary><para>
+Controls what properties are added to <c>target_field</c>.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#regex_file"><summary><para>
+The name of the file in the <c>config/ingest-user-agent</c> directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the <c>regexes.yaml</c> from uap-core it ships with.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.UserAgentProcessor#target_field"><summary><para>
+The field that will be filled with the user agent details.
+</para></summary></member>
+</doc>

@@ -40,13 +40,6 @@ public sealed partial class QueryVectorBuilder
 	}
 
 	public Elastic.Clients.Elasticsearch.Embedding? Embedding { get => GetVariant<Elastic.Clients.Elasticsearch.Embedding>("embedding"); set => SetVariant("embedding", value); }
-
-	/// <summary>
-	/// <para>
-	/// Lookup a vector from an existing document.
-	/// Must reference a dense_vector field and a single value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder? Lookup { get => GetVariant<Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder>("lookup"); set => SetVariant("lookup", value); }
 	public Elastic.Clients.Elasticsearch.TextEmbedding? TextEmbedding { get => GetVariant<Elastic.Clients.Elasticsearch.TextEmbedding>("text_embedding"); set => SetVariant("text_embedding", value); }
 
@@ -104,24 +97,12 @@ public readonly partial struct QueryVectorBuilderDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lookup a vector from an existing document.
-	/// Must reference a dense_vector field and a single value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Lookup(Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder? value)
 	{
 		Instance.Lookup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lookup a vector from an existing document.
-	/// Must reference a dense_vector field and a single value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor Lookup(System.Action<Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor> action)
 	{
 		Instance.Lookup = Elastic.Clients.Elasticsearch.LookupQueryVectorBuilderDescriptor.Build(action);

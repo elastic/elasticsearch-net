@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedObjects']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsNestedObjectsConverter))]
 public sealed partial class MappingLimitSettingsNestedObjects
 {
@@ -36,15 +37,11 @@ public sealed partial class MappingLimitSettingsNestedObjects
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps
-	/// to prevent out of memory errors when a document contains too many nested objects.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsNestedObjects.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedObjects#limit']/*"/>
 	public long? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedObjects']/*"/>
 public readonly partial struct MappingLimitSettingsNestedObjectsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects Instance { get; init; }
@@ -64,12 +61,7 @@ public readonly partial struct MappingLimitSettingsNestedObjectsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps
-	/// to prevent out of memory errors when a document contains too many nested objects.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsNestedObjects.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedObjects#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor Limit(long? value)
 	{
 		Instance.Limit = value;

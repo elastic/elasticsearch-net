@@ -23,35 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
 public sealed partial class DisableUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable a user profile.
-/// </para>
-/// <para>
-/// Disable user profiles so that they are not visible in user profile searches.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
-/// To re-enable a disabled user profile, use the enable user profile API .
-/// </para>
-/// </summary>
+/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DisableUserProfileRequestConverter))]
 public sealed partial class DisableUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>
 {
@@ -78,40 +59,15 @@ public sealed partial class DisableUserProfileRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "security.disable_user_profile";
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request#uid']/*"/>
 	public required string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable a user profile.
-/// </para>
-/// <para>
-/// Disable user profiles so that they are not visible in user profile searches.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
-/// To re-enable a disabled user profile, use the enable user profile API .
-/// </para>
-/// </summary>
+/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user_profile.Request']/*"/>
 public readonly partial struct DisableUserProfileRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest Instance { get; init; }
@@ -136,24 +92,14 @@ public readonly partial struct DisableUserProfileRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request#uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor Uid(string value)
 	{
 		Instance.Uid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserProfileRequest.g.xml" path="doc/member[@key='security.disable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

@@ -23,39 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 public sealed partial class DeleteJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a rollup job.
-/// </para>
-/// <para>
-/// A job must be stopped before it can be deleted.
-/// If you attempt to delete a started job, an error occurs.
-/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-/// </para>
-/// <para>
-/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-/// The API does not delete any previously rolled up data.
-/// This is by design; a user may wish to roll up a static data set.
-/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-/// </para>
-/// <code>
-/// POST my_rollup_index/_delete_by_query
-/// {
-///   "query": {
-///     "term": {
-///       "_rollup.id": "the_rollup_job_id"
-///     }
-///   }
-/// }
-/// </code>
-/// </summary>
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.DeleteJobRequestConverter))]
 public sealed partial class DeleteJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestParameters>
 {
@@ -82,43 +57,12 @@ public sealed partial class DeleteJobRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "rollup.delete_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a rollup job.
-/// </para>
-/// <para>
-/// A job must be stopped before it can be deleted.
-/// If you attempt to delete a started job, an error occurs.
-/// Similarly, if you attempt to delete a nonexistent job, an exception occurs.
-/// </para>
-/// <para>
-/// IMPORTANT: When you delete a job, you remove only the process that is actively monitoring and rolling up data.
-/// The API does not delete any previously rolled up data.
-/// This is by design; a user may wish to roll up a static data set.
-/// Because the data set is static, after it has been fully rolled up there is no need to keep the indexing rollup job around (as there will be no new data).
-/// Thus the job can be deleted, leaving behind the rolled up data for analysis.
-/// If you wish to also remove the rollup data and the rollup index contains the data for only a single job, you can delete the whole rollup index.
-/// If the rollup index stores data from several jobs, you must issue a delete-by-query that targets the rollup job's identifier in the rollup index. For example:
-/// </para>
-/// <code>
-/// POST my_rollup_index/_delete_by_query
-/// {
-///   "query": {
-///     "term": {
-///       "_rollup.id": "the_rollup_job_id"
-///     }
-///   }
-/// }
-/// </code>
-/// </summary>
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.delete_job.Request']/*"/>
 public readonly partial struct DeleteJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest Instance { get; init; }
@@ -143,11 +87,7 @@ public readonly partial struct DeleteJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='rollup.delete_job.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

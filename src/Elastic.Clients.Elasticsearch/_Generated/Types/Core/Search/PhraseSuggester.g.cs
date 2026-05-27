@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggester']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggesterConverter))]
 public sealed partial class PhraseSuggester
 {
@@ -42,109 +43,49 @@ public sealed partial class PhraseSuggester
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#collate']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? Collate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
-	/// Only candidates that score higher than the threshold will be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#confidence']/*"/>
 	public double? Confidence { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? ForceUnigrams { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets max size of the n-grams (shingles) in the field.
-	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
-	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#gram_size']/*"/>
 	public int? GramSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets up suggestion highlighting.
-	/// If not provided, no highlighted field is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? Highlight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
-	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#max_errors']/*"/>
 	public double? MaxErrors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#real_word_error_likelihood']/*"/>
 	public double? RealWordErrorLikelihood { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The separator that is used to separate terms in the bigram field.
-	/// If not set, the whitespace character is used as a separator.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#separator']/*"/>
 	public string? Separator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
-	/// The default model is Stupid Backoff.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#smoothing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? Smoothing { get; set; }
 	public int? TokenLimit { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggester']/*"/>
 public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester Instance { get; init; }
@@ -164,79 +105,49 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#collate']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Collate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? value)
 	{
 		Instance.Collate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#collate']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Collate(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> action)
 	{
 		Instance.Collate = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
-	/// Only candidates that score higher than the threshold will be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#confidence']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Confidence(double? value)
 	{
 		Instance.Confidence = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? value)
 	{
 		Instance.DirectGenerator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator[] values)
 	{
 		Instance.DirectGenerator = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> DirectGenerator(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>();
@@ -249,24 +160,14 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -279,118 +180,70 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets max size of the n-grams (shingles) in the field.
-	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
-	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#gram_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> GramSize(int? value)
 	{
 		Instance.GramSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets up suggestion highlighting.
-	/// If not provided, no highlighted field is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets up suggestion highlighting.
-	/// If not provided, no highlighted field is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
-	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#max_errors']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> MaxErrors(double? value)
 	{
 		Instance.MaxErrors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#real_word_error_likelihood']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> RealWordErrorLikelihood(double? value)
 	{
 		Instance.RealWordErrorLikelihood = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The separator that is used to separate terms in the bigram field.
-	/// If not set, the whitespace character is used as a separator.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Separator(string? value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
-	/// The default model is Stupid Backoff.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#smoothing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? value)
 	{
 		Instance.Smoothing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
-	/// The default model is Stupid Backoff.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#smoothing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Smoothing(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> action)
 	{
 		Instance.Smoothing = Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor.Build(action);
@@ -412,6 +265,7 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggester']/*"/>
 public readonly partial struct PhraseSuggesterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester Instance { get; init; }
@@ -431,79 +285,49 @@ public readonly partial struct PhraseSuggesterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#collate']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Collate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? value)
 	{
 		Instance.Collate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#collate']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Collate(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> action)
 	{
 		Instance.Collate = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
-	/// Only candidates that score higher than the threshold will be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#confidence']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Confidence(double? value)
 	{
 		Instance.Confidence = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? value)
 	{
 		Instance.DirectGenerator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator(params Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator[] values)
 	{
 		Instance.DirectGenerator = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>();
@@ -516,11 +340,7 @@ public readonly partial struct PhraseSuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of candidate generators that produce a list of possible terms per term in the given text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#direct_generator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor DirectGenerator<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>();
@@ -533,24 +353,14 @@ public readonly partial struct PhraseSuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -563,118 +373,70 @@ public readonly partial struct PhraseSuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets max size of the n-grams (shingles) in the field.
-	/// If the field doesn’t contain n-grams (shingles), this should be omitted or set to <c>1</c>.
-	/// If the field uses a shingle filter, the <c>gram_size</c> is set to the <c>max_shingle_size</c> if not explicitly set.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#gram_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor GramSize(int? value)
 	{
 		Instance.GramSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets up suggestion highlighting.
-	/// If not provided, no highlighted field is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets up suggestion highlighting.
-	/// If not provided, no highlighted field is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum percentage of the terms considered to be misspellings in order to form a correction.
-	/// This method accepts a float value in the range <c>[0..1)</c> as a fraction of the actual query terms or a number <c>>=1</c> as an absolute number of query terms.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#max_errors']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor MaxErrors(double? value)
 	{
 		Instance.MaxErrors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The likelihood of a term being misspelled even if the term exists in the dictionary.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#real_word_error_likelihood']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor RealWordErrorLikelihood(double? value)
 	{
 		Instance.RealWordErrorLikelihood = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The separator that is used to separate terms in the bigram field.
-	/// If not set, the whitespace character is used as a separator.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Separator(string? value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggested terms to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
-	/// The default model is Stupid Backoff.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#smoothing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? value)
 	{
 		Instance.Smoothing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
-	/// The default model is Stupid Backoff.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggester.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggester#smoothing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Smoothing(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> action)
 	{
 		Instance.Smoothing = Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor.Build(action);

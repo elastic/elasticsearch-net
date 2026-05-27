@@ -23,134 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 public sealed partial class ListRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#actions']/*"/>
 	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about the running tasks.
-	/// This information is useful to distinguish tasks from each other but is more costly to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
-	/// <summary>
-	/// <para>
-	/// A key that is used to group tasks in the response.
-	/// The task lists can be grouped either by nodes or by parent tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? Nodes { get => Q<Elastic.Clients.Elasticsearch.NodeIds?>("nodes"); set => Q("nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A parent task identifier that is used to limit returned information.
-	/// To return all tasks, omit this parameter or use a value of <c>-1</c>.
-	/// If the parent task is not found, the API does not return a 404 response code.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#parent_task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its information.
-	/// However, timed out nodes are included in the <c>node_failures</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get all tasks.
-/// </para>
-/// <para>
-/// Get information about the tasks currently running on one or more nodes in the cluster.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// <strong>Identifying running tasks</strong>
-/// </para>
-/// <para>
-/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-/// This enables you to track certain calls or associate certain tasks with the client that started them.
-/// For example:
-/// </para>
-/// <code>
-/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-/// </code>
-/// <para>
-/// The API returns the following result:
-/// </para>
-/// <code>
-/// HTTP/1.1 200 OK
-/// X-Opaque-Id: 123456
-/// content-type: application/json; charset=UTF-8
-/// content-length: 831
-/// 
-/// {
-///   "tasks" : {
-///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-///       "id" : 45,
-///       "type" : "transport",
-///       "action" : "cluster:monitor/tasks/lists",
-///       "start_time_in_millis" : 1513823752749,
-///       "running_time_in_nanos" : 293139,
-///       "cancellable" : false,
-///       "headers" : {
-///         "X-Opaque-Id" : "123456"
-///       },
-///       "children" : [
-///         {
-///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-///           "id" : 46,
-///           "type" : "direct",
-///           "action" : "cluster:monitor/tasks/lists[n]",
-///           "start_time_in_millis" : 1513823752750,
-///           "running_time_in_nanos" : 92133,
-///           "cancellable" : false,
-///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-///           "headers" : {
-///             "X-Opaque-Id" : "123456"
-///           }
-///         }
-///       ]
-///     }
-///   }
-///  }
-/// </code>
-/// <para>
-/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-/// </para>
-/// </summary>
+/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.ListRequestConverter))]
 public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>
 {
@@ -172,132 +72,30 @@ public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "tasks.list";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#actions']/*"/>
 	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about the running tasks.
-	/// This information is useful to distinguish tasks from each other but is more costly to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
-	/// <summary>
-	/// <para>
-	/// A key that is used to group tasks in the response.
-	/// The task lists can be grouped either by nodes or by parent tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? Nodes { get => Q<Elastic.Clients.Elasticsearch.NodeIds?>("nodes"); set => Q("nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A parent task identifier that is used to limit returned information.
-	/// To return all tasks, omit this parameter or use a value of <c>-1</c>.
-	/// If the parent task is not found, the API does not return a 404 response code.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#parent_task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its information.
-	/// However, timed out nodes are included in the <c>node_failures</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get all tasks.
-/// </para>
-/// <para>
-/// Get information about the tasks currently running on one or more nodes in the cluster.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// <strong>Identifying running tasks</strong>
-/// </para>
-/// <para>
-/// The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
-/// This enables you to track certain calls or associate certain tasks with the client that started them.
-/// For example:
-/// </para>
-/// <code>
-/// curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
-/// </code>
-/// <para>
-/// The API returns the following result:
-/// </para>
-/// <code>
-/// HTTP/1.1 200 OK
-/// X-Opaque-Id: 123456
-/// content-type: application/json; charset=UTF-8
-/// content-length: 831
-/// 
-/// {
-///   "tasks" : {
-///     "u5lcZHqcQhu-rUoFaqDphA:45" : {
-///       "node" : "u5lcZHqcQhu-rUoFaqDphA",
-///       "id" : 45,
-///       "type" : "transport",
-///       "action" : "cluster:monitor/tasks/lists",
-///       "start_time_in_millis" : 1513823752749,
-///       "running_time_in_nanos" : 293139,
-///       "cancellable" : false,
-///       "headers" : {
-///         "X-Opaque-Id" : "123456"
-///       },
-///       "children" : [
-///         {
-///           "node" : "u5lcZHqcQhu-rUoFaqDphA",
-///           "id" : 46,
-///           "type" : "direct",
-///           "action" : "cluster:monitor/tasks/lists[n]",
-///           "start_time_in_millis" : 1513823752750,
-///           "running_time_in_nanos" : 92133,
-///           "cancellable" : false,
-///           "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
-///           "headers" : {
-///             "X-Opaque-Id" : "123456"
-///           }
-///         }
-///       ]
-///     }
-///   }
-///  }
-/// </code>
-/// <para>
-/// In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
-/// The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
-/// The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
-/// </para>
-/// </summary>
+/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 public readonly partial struct ListRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Tasks.ListRequest Instance { get; init; }
@@ -316,96 +114,56 @@ public readonly partial struct ListRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor(Elastic.Clients.Elasticsearch.Tasks.ListRequest instance) => new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.ListRequest(Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Actions(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions used to limit the request.
-	/// For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Actions(params string[] values)
 	{
 		Instance.Actions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about the running tasks.
-	/// This information is useful to distinguish tasks from each other but is more costly to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#detailed']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Detailed(bool? value = true)
 	{
 		Instance.Detailed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A key that is used to group tasks in the response.
-	/// The task lists can be grouped either by nodes or by parent tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor GroupBy(Elastic.Clients.Elasticsearch.Tasks.GroupBy? value)
 	{
 		Instance.GroupBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Nodes(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.Nodes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent task identifier that is used to limit returned information.
-	/// To return all tasks, omit this parameter or use a value of <c>-1</c>.
-	/// If the parent task is not found, the API does not return a 404 response code.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#parent_task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor ParentTaskId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.ParentTaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its information.
-	/// However, timed out nodes are included in the <c>node_failures</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='tasks.list.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

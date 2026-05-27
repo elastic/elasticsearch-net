@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.termvectors.FieldStatistics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.Json.FieldStatisticsConverter))]
 public sealed partial class FieldStatistics
 {

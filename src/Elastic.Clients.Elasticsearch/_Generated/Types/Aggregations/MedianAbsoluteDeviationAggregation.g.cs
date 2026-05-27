@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MedianAbsoluteDeviationAggregationConverter))]
 public sealed partial class MedianAbsoluteDeviationAggregation
 {
@@ -36,39 +37,22 @@ public sealed partial class MedianAbsoluteDeviationAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#compression']/*"/>
 	public double? Compression { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
-	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? ExecutionHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation']/*"/>
 public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation Instance { get; init; }
@@ -88,45 +72,28 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor<TDoc
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#compression']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? value)
 	{
 		Instance.Compression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
-	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -139,12 +106,7 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor<TDoc
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -183,6 +145,7 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor<TDoc
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation']/*"/>
 public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation Instance { get; init; }
@@ -202,45 +165,28 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#compression']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor Compression(double? value)
 	{
 		Instance.Compression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
-	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -253,12 +199,7 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MedianAbsoluteDeviationAggregation.g.xml" path="doc/member[@key='_types.aggregations.MedianAbsoluteDeviationAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

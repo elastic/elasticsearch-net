@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LearningToRank']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.LearningToRankConverter))]
 public sealed partial class LearningToRank
 {
@@ -42,21 +43,14 @@ public sealed partial class LearningToRank
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model uploaded to Elasticsearch
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Named parameters to be passed to the query templates used for feature
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LearningToRank']/*"/>
 public readonly partial struct LearningToRankDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.LearningToRank Instance { get; init; }
@@ -76,44 +70,28 @@ public readonly partial struct LearningToRankDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank instance) => new Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.LearningToRank(Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model uploaded to Elasticsearch
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Named parameters to be passed to the query templates used for feature
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Named parameters to be passed to the query templates used for feature
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Named parameters to be passed to the query templates used for feature
-	/// </para>
-	/// </summary>
+	/// <include file="LearningToRank.g.xml" path="doc/member[@key='_global.search._types.LearningToRank#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRankDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

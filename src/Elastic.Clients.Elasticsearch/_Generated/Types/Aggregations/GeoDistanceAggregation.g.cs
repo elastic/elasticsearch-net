@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoDistanceAggregationConverter))]
 public sealed partial class GeoDistanceAggregation
 {
@@ -36,42 +37,23 @@ public sealed partial class GeoDistanceAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The distance calculation type.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The origin  used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoLocation? Origin { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The distance unit.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation']/*"/>
 public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Instance { get; init; }
@@ -91,88 +73,56 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The distance calculation type.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
 		Instance.DistanceType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin  used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin  used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
@@ -185,11 +135,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The distance unit.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
 	{
 		Instance.Unit = value;
@@ -210,6 +156,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation']/*"/>
 public readonly partial struct GeoDistanceAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Instance { get; init; }
@@ -229,88 +176,56 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The distance calculation type.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
 		Instance.DistanceType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field of type <c>geo_point</c> used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin  used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation? value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin  used to evaluate the distance.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
@@ -323,11 +238,7 @@ public readonly partial struct GeoDistanceAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The distance unit.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregation#unit']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.DistanceUnit? value)
 	{
 		Instance.Unit = value;

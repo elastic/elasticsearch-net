@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.WeightedAverageAggregation#format"><summary><para>
+A numeric response formatter.
+</para></summary></member>
+  <member key="_types.aggregations.WeightedAverageAggregation#value"><summary><para>
+Configuration for the field that provides the values.
+</para></summary></member>
+  <member key="_types.aggregations.WeightedAverageAggregation#weight"><summary><para>
+Configuration for the field or script that provides the weights.
+</para></summary></member>
+</doc>

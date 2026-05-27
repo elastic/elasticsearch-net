@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="project.delete_routing.Request"><summary><para>
+Delete a project routing expression.
+</para></summary></member>
+  <member key="project.delete_routing.Request#name"><summary><para>
+The name of project routing expression
+</para></summary></member>
+</doc>

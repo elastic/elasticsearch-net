@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FieldNamesField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.FieldNamesFieldConverter))]
 public sealed partial class FieldNamesField
 {
@@ -45,6 +46,7 @@ public sealed partial class FieldNamesField
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FieldNamesField']/*"/>
 public readonly partial struct FieldNamesFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FieldNamesField Instance { get; init; }

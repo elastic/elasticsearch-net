@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.CompletionStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CompletionStatsConverter))]
 public sealed partial class CompletionStats
 {
@@ -44,17 +45,9 @@ public sealed partial class CompletionStats
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for completion across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionStats.g.xml" path="doc/member[@key='_types.CompletionStats#size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionStats.g.xml" path="doc/member[@key='_types.CompletionStats#size_in_bytes']/*"/>
 	public required long SizeInBytes { get; set; }
 }

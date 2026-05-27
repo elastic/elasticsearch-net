@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ReplicationAccess']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ReplicationAccessConverter))]
 public sealed partial class ReplicationAccess
 {
@@ -42,21 +43,14 @@ public sealed partial class ReplicationAccess
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This needs to be set to true if the patterns in the names field should cover system indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ReplicationAccess.g.xml" path="doc/member[@key='security._types.ReplicationAccess#allow_restricted_indices']/*"/>
 	public bool? AllowRestrictedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="ReplicationAccess.g.xml" path="doc/member[@key='security._types.ReplicationAccess#names']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ReplicationAccess']/*"/>
 public readonly partial struct ReplicationAccessDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ReplicationAccess Instance { get; init; }
@@ -76,33 +70,21 @@ public readonly partial struct ReplicationAccessDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(Elastic.Clients.Elasticsearch.Security.ReplicationAccess instance) => new Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ReplicationAccess(Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// This needs to be set to true if the patterns in the names field should cover system indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ReplicationAccess.g.xml" path="doc/member[@key='security._types.ReplicationAccess#allow_restricted_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor AllowRestrictedIndices(bool? value = true)
 	{
 		Instance.AllowRestrictedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="ReplicationAccess.g.xml" path="doc/member[@key='security._types.ReplicationAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor Names(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
 		Instance.Names = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="ReplicationAccess.g.xml" path="doc/member[@key='security._types.ReplicationAccess#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ReplicationAccessDescriptor Names(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Names = [.. values];

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.processor_grok.Request"><summary><para>
+Run a grok processor.
+</para>
+<para>
+Extract structured fields out of a single text field within a document.
+You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
+A grok pattern is like a regular expression that supports aliased expressions that can be reused.
+</para></summary></member>
+</doc>

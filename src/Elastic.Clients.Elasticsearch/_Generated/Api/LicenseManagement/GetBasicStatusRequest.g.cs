@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="GetBasicStatusRequest.g.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
 public sealed partial class GetBasicStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the basic license status.
-/// </para>
-/// </summary>
+/// <include file="GetBasicStatusRequest.g.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.GetBasicStatusRequestConverter))]
 public sealed partial class GetBasicStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>
 {
@@ -54,11 +53,8 @@ public sealed partial class GetBasicStatusRequest : Elastic.Clients.Elasticsearc
 	internal override string OperationName => "license.get_basic_status";
 }
 
-/// <summary>
-/// <para>
-/// Get the basic license status.
-/// </para>
-/// </summary>
+/// <include file="GetBasicStatusRequest.g.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get_basic_status.Request']/*"/>
 public readonly partial struct GetBasicStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest Instance { get; init; }

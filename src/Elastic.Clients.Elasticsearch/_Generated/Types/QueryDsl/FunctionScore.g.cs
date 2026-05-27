@@ -39,56 +39,13 @@ public partial class FunctionScore
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Exp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("exp"); set => SetVariant("exp", value); }
-
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? FieldValueFactor { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>("field_value_factor"); set => SetVariant("field_value_factor", value); }
-
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Gauss { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("gauss"); set => SetVariant("gauss", value); }
-
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? Linear { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>("linear"); set => SetVariant("linear", value); }
-
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? RandomScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>("random_score"); set => SetVariant("random_score", value); }
-
-	/// <summary>
-	/// <para>
-	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>("script_score"); set => SetVariant("script_score", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A name to identify which function matched and influenced the score.
-	/// </para>
-	/// </summary>
 	public string? Name { get; set; }
 	public double? Weight { get; set; }
 
@@ -134,148 +91,78 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Exp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? value)
 	{
 		Instance.FieldValueFactor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> FieldValueFactor(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> action)
 	{
 		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Gauss = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? value)
 	{
 		Instance.RandomScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore()
 	{
 		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> RandomScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>>? action)
 	{
 		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? value)
 	{
 		Instance.ScriptScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> action)
 	{
 		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.Build(action);
@@ -294,11 +181,6 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A name to identify which function matched and influenced the score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
@@ -339,205 +221,108 @@ public readonly partial struct FunctionScoreDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Exp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Exp<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Exp = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction? value)
 	{
 		Instance.FieldValueFactor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor> action)
 	{
 		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function allows you to use a field from a document to influence the score.
-	/// It’s similar to using the script_score function, however, it avoids the overhead of scripting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FieldValueFactor<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<T>> action)
 	{
 		Instance.FieldValueFactor = Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Gauss = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Gauss<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Gauss = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Linear<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction> action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction? value)
 	{
 		Instance.RandomScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore()
 	{
 		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor>? action)
 	{
 		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Generates scores that are uniformly distributed from 0 up to but not including 1.
-	/// In case you want scores to be reproducible, it is possible to provide a <c>seed</c> and <c>field</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor RandomScore<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<T>>? action)
 	{
 		Instance.RandomScore = Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? value)
 	{
 		Instance.ScriptScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor ScriptScore(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor> action)
 	{
 		Instance.ScriptScore = Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.Build(action);
@@ -562,11 +347,6 @@ public readonly partial struct FunctionScoreDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A name to identify which function matched and influenced the score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Name(string? value)
 	{
 		Instance.Name = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RemoveProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RemoveProcessorConverter))]
 public sealed partial class RemoveProcessor
 {
@@ -42,65 +43,32 @@ public sealed partial class RemoveProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Fields to be removed. Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Fields to be kept. When set, all fields other than those specified are removed.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#keep']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Keep { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RemoveProcessor']/*"/>
 public readonly partial struct RemoveProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor Instance { get; init; }
@@ -120,144 +88,91 @@ public readonly partial struct RemoveProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be removed. Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be removed. Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Field(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be kept. When set, all fields other than those specified are removed.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#keep']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Keep(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Keep = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be kept. When set, all fields other than those specified are removed.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#keep']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Keep(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Keep = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -270,12 +185,7 @@ public readonly partial struct RemoveProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -291,6 +201,7 @@ public readonly partial struct RemoveProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RemoveProcessor']/*"/>
 public readonly partial struct RemoveProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor Instance { get; init; }
@@ -310,144 +221,91 @@ public readonly partial struct RemoveProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be removed. Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be removed. Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Field<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be kept. When set, all fields other than those specified are removed.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#keep']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Keep(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Keep = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to be kept. When set, all fields other than those specified are removed.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#keep']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Keep<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Keep = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -460,11 +318,7 @@ public readonly partial struct RemoveProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -477,12 +331,7 @@ public readonly partial struct RemoveProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveProcessor.g.xml" path="doc/member[@key='ingest._types.RemoveProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

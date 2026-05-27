@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
 public sealed partial class UpdateJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update an anomaly detection job.
-/// </para>
-/// <para>
-/// Updates certain properties of an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateJobRequestConverter))]
 public sealed partial class UpdateJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>
 {
@@ -61,137 +57,49 @@ public sealed partial class UpdateJobRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "ml.update_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether this job can open when
-	/// there is insufficient machine learning node capacity for it to be
-	/// immediately assigned to a node. If <c>false</c> and a machine learning node
-	/// with capacity to run the job cannot immediately be found, the open
-	/// anomaly detection jobs API returns an error. However, this is also
-	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
-	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
-	/// return an error and the job waits in the opening state until sufficient
-	/// machine learning node capacity is available.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#allow_lazy_open']/*"/>
 	public bool? AllowLazyOpen { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? AnalysisLimits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The time between each periodic persistence
-	/// of the model.
-	/// The default value is a randomized value between 3 to 4 hours, which
-	/// avoids all jobs persisting at exactly the same time. The smallest allowed
-	/// value is 1 hour.
-	/// For very large models (several GB), persistence could take 10-20 minutes,
-	/// so do not set the value too low.
-	/// If the job is open when you make the update, you must stop the datafeed,
-	/// close the job, then reopen the job and restart the datafeed for the
-	/// changes to take effect.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#background_persist_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 	public System.Collections.Generic.ICollection<string>? CategorizationFilters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? CustomSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies a period of time (in days)
-	/// after which only the first snapshot per day is retained. This period is
-	/// relative to the timestamp of the most recent snapshot for this job. Valid
-	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
-	/// before version 7.8.0, the default value matches
-	/// <c>model_snapshot_retention_days</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#daily_model_snapshot_retention_after_days']/*"/>
 	public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? Detectors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#groups']/*"/>
 	public System.Collections.Generic.ICollection<string>? Groups { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies the maximum period of time (in
-	/// days) that snapshots are retained. This period is relative to the
-	/// timestamp of the most recent snapshot for this job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#model_snapshot_retention_days']/*"/>
 	public long? ModelSnapshotRetentionDays { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period over which adjustments to the
-	/// score are applied, as new data is seen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#renormalization_window_days']/*"/>
 	public long? RenormalizationWindowDays { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period of time (in days) that results
-	/// are retained. Age is calculated relative to the timestamp of the latest
-	/// bucket result. If this property has a non-null value, once per day at
-	/// 00:30 (server time), results that are the specified number of days older
-	/// than the latest bucket result are deleted from Elasticsearch. The default
-	/// value is null, which means all results are retained.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#results_retention_days']/*"/>
 	public long? ResultsRetentionDays { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update an anomaly detection job.
-/// </para>
-/// <para>
-/// Updates certain properties of an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
 public readonly partial struct UpdateJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Instance { get; init; }
@@ -216,30 +124,14 @@ public readonly partial struct UpdateJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether this job can open when
-	/// there is insufficient machine learning node capacity for it to be
-	/// immediately assigned to a node. If <c>false</c> and a machine learning node
-	/// with capacity to run the job cannot immediately be found, the open
-	/// anomaly detection jobs API returns an error. However, this is also
-	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
-	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
-	/// return an error and the job waits in the opening state until sufficient
-	/// machine learning node capacity is available.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#allow_lazy_open']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor AllowLazyOpen(bool? value = true)
 	{
 		Instance.AllowLazyOpen = value;
@@ -258,20 +150,7 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The time between each periodic persistence
-	/// of the model.
-	/// The default value is a randomized value between 3 to 4 hours, which
-	/// avoids all jobs persisting at exactly the same time. The smallest allowed
-	/// value is 1 hour.
-	/// For very large models (several GB), persistence could take 10-20 minutes,
-	/// so do not set the value too low.
-	/// If the job is open when you make the update, you must stop the datafeed,
-	/// close the job, then reopen the job and restart the datafeed for the
-	/// changes to take effect.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#background_persist_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.BackgroundPersistInterval = value;
@@ -290,39 +169,21 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.CustomSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings()
 	{
 		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -336,61 +197,35 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies a period of time (in days)
-	/// after which only the first snapshot per day is retained. This period is
-	/// relative to the timestamp of the most recent snapshot for this job. Valid
-	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
-	/// before version 7.8.0, the default value matches
-	/// <c>model_snapshot_retention_days</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#daily_model_snapshot_retention_after_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? value)
 	{
 		Instance.DailyModelSnapshotRetentionAfterDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? value)
 	{
 		Instance.Detectors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[] values)
 	{
 		Instance.Detectors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
@@ -403,11 +238,7 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
@@ -420,22 +251,14 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
@@ -472,75 +295,42 @@ public readonly partial struct UpdateJobRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies the maximum period of time (in
-	/// days) that snapshots are retained. This period is relative to the
-	/// timestamp of the most recent snapshot for this job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#model_snapshot_retention_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelSnapshotRetentionDays(long? value)
 	{
 		Instance.ModelSnapshotRetentionDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
 		Instance.PerPartitionCategorization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization()
 	{
 		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
 		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period over which adjustments to the
-	/// score are applied, as new data is seen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#renormalization_window_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor RenormalizationWindowDays(long? value)
 	{
 		Instance.RenormalizationWindowDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period of time (in days) that results
-	/// are retained. Age is calculated relative to the timestamp of the latest
-	/// bucket result. If this property has a non-null value, once per day at
-	/// 00:30 (server time), results that are the specified number of days older
-	/// than the latest bucket result are deleted from Elasticsearch. The default
-	/// value is null, which means all results are retained.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#results_retention_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ResultsRetentionDays(long? value)
 	{
 		Instance.ResultsRetentionDays = value;
@@ -603,14 +393,8 @@ public readonly partial struct UpdateJobRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update an anomaly detection job.
-/// </para>
-/// <para>
-/// Updates certain properties of an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_job.Request']/*"/>
 public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Instance { get; init; }
@@ -635,30 +419,14 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Specifies whether this job can open when
-	/// there is insufficient machine learning node capacity for it to be
-	/// immediately assigned to a node. If <c>false</c> and a machine learning node
-	/// with capacity to run the job cannot immediately be found, the open
-	/// anomaly detection jobs API returns an error. However, this is also
-	/// subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this
-	/// option is set to <c>true</c>, the open anomaly detection jobs API does not
-	/// return an error and the job waits in the opening state until sufficient
-	/// machine learning node capacity is available.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#allow_lazy_open']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> AllowLazyOpen(bool? value = true)
 	{
 		Instance.AllowLazyOpen = value;
@@ -677,20 +445,7 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The time between each periodic persistence
-	/// of the model.
-	/// The default value is a randomized value between 3 to 4 hours, which
-	/// avoids all jobs persisting at exactly the same time. The smallest allowed
-	/// value is 1 hour.
-	/// For very large models (several GB), persistence could take 10-20 minutes,
-	/// so do not set the value too low.
-	/// If the job is open when you make the update, you must stop the datafeed,
-	/// close the job, then reopen the job and restart the datafeed for the
-	/// changes to take effect.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#background_persist_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.BackgroundPersistInterval = value;
@@ -709,39 +464,21 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.CustomSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings()
 	{
 		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. Contains custom meta data about the job.
-	/// For example, it can contain custom URL information as shown in Adding
-	/// custom URLs to machine learning results.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#custom_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -755,61 +492,35 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies a period of time (in days)
-	/// after which only the first snapshot per day is retained. This period is
-	/// relative to the timestamp of the most recent snapshot for this job. Valid
-	/// values range from 0 to <c>model_snapshot_retention_days</c>. For jobs created
-	/// before version 7.8.0, the default value matches
-	/// <c>model_snapshot_retention_days</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#daily_model_snapshot_retention_after_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? value)
 	{
 		Instance.DailyModelSnapshotRetentionAfterDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? value)
 	{
 		Instance.Detectors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[] values)
 	{
 		Instance.Detectors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of detector update objects.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
@@ -822,22 +533,14 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of job groups. A job can belong to no groups or many.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
@@ -868,75 +571,42 @@ public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option, which affects the automatic removal of old
-	/// model snapshots for this job. It specifies the maximum period of time (in
-	/// days) that snapshots are retained. This period is relative to the
-	/// timestamp of the most recent snapshot for this job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#model_snapshot_retention_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? value)
 	{
 		Instance.ModelSnapshotRetentionDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
 		Instance.PerPartitionCategorization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization()
 	{
 		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings related to how categorization interacts with partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#per_partition_categorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
 		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period over which adjustments to the
-	/// score are applied, as new data is seen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#renormalization_window_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? value)
 	{
 		Instance.RenormalizationWindowDays = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Advanced configuration option. The period of time (in days) that results
-	/// are retained. Age is calculated relative to the timestamp of the latest
-	/// bucket result. If this property has a non-null value, once per day at
-	/// 00:30 (server time), results that are the specified number of days older
-	/// than the latest bucket result are deleted from Elasticsearch. The default
-	/// value is null, which means all results are retained.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateJobRequest.g.xml" path="doc/member[@key='ml.update_job.Request#results_retention_days']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ResultsRetentionDays(long? value)
 	{
 		Instance.ResultsRetentionDays = value;

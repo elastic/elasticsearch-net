@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-/// <summary>
-/// <para>
-/// A non-materialized ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql._types.ESQLView']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.ESQLViewConverter))]
 public sealed partial class ESQLView
 {
@@ -48,17 +45,9 @@ public sealed partial class ESQLView
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the ES|QL view
-	/// </para>
-	/// </summary>
+	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query
-	/// </para>
-	/// </summary>
+	/// <include file="ESQLView.g.xml" path="doc/member[@key='esql._types.ESQLView#query']/*"/>
 	public required string Query { get; set; }
 }

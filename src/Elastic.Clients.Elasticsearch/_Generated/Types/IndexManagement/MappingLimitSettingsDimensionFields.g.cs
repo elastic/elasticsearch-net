@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDimensionFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsDimensionFieldsConverter))]
 public sealed partial class MappingLimitSettingsDimensionFields
 {
@@ -36,15 +37,11 @@ public sealed partial class MappingLimitSettingsDimensionFields
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// [preview] This functionality is in technical preview and may be changed or removed in a future release.
-	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsDimensionFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDimensionFields#limit']/*"/>
 	public long? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDimensionFields']/*"/>
 public readonly partial struct MappingLimitSettingsDimensionFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields Instance { get; init; }
@@ -64,12 +61,7 @@ public readonly partial struct MappingLimitSettingsDimensionFieldsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// [preview] This functionality is in technical preview and may be changed or removed in a future release.
-	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsDimensionFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsDimensionFields#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor Limit(long? value)
 	{
 		Instance.Limit = value;

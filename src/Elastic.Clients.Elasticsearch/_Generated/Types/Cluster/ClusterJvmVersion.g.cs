@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterJvmVersionConverter))]
 public sealed partial class ClusterJvmVersion
 {
@@ -48,53 +49,24 @@ public sealed partial class ClusterJvmVersion
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Always <c>true</c>. All distributions come with a bundled Java Development Kit (JDK).
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#bundled_jdk']/*"/>
 	public required bool BundledJdk { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of selected nodes using JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, a bundled JDK is in use by JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#using_bundled_jdk']/*"/>
 	public required bool UsingBundledJdk { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version of JVM used by one or more selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#version']/*"/>
 	public required string Version { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#vm_name']/*"/>
 	public required string VmName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Vendor of the JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#vm_vendor']/*"/>
 	public required string VmVendor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Full version number of JVM.
-	/// The full version number includes a plus sign (+) followed by the build number.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmVersion.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmVersion#vm_version']/*"/>
 	public required string VmVersion { get; set; }
 }

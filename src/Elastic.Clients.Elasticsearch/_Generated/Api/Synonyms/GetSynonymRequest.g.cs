@@ -23,28 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
 public sealed partial class GetSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The starting offset for query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// The max number of query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a synonym set.
-/// </para>
-/// </summary>
+/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.GetSynonymRequestConverter))]
 public sealed partial class GetSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters>
 {
@@ -71,33 +62,18 @@ public sealed partial class GetSynonymRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "synonyms.get_synonym";
 
-	/// <summary>
-	/// <para>
-	/// The synonyms set identifier to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The starting offset for query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// The max number of query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a synonym set.
-/// </para>
-/// </summary>
+/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym.Request']/*"/>
 public readonly partial struct GetSynonymRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest Instance { get; init; }
@@ -122,33 +98,21 @@ public readonly partial struct GetSynonymRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The synonyms set identifier to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting offset for query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The max number of query rules to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRequest.g.xml" path="doc/member[@key='synonyms.get_synonym.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

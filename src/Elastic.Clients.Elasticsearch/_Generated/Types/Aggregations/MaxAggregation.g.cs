@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MaxAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MaxAggregationConverter))]
 public sealed partial class MaxAggregation
 {
@@ -36,24 +37,16 @@ public sealed partial class MaxAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MaxAggregation']/*"/>
 public readonly partial struct MaxAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation Instance { get; init; }
@@ -73,22 +66,14 @@ public readonly partial struct MaxAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -101,12 +86,7 @@ public readonly partial struct MaxAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -145,6 +125,7 @@ public readonly partial struct MaxAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MaxAggregation']/*"/>
 public readonly partial struct MaxAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation Instance { get; init; }
@@ -164,22 +145,14 @@ public readonly partial struct MaxAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -192,12 +165,7 @@ public readonly partial struct MaxAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregation.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

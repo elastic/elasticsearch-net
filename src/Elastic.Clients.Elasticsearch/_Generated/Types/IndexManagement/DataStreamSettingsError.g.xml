@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_data_stream_settings.DataStreamSettingsError#error"><summary><para>
+A message explaining why the settings could not be applied to specific indices.
+</para></summary></member>
+</doc>

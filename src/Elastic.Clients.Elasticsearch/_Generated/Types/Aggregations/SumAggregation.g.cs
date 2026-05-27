@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SumAggregationConverter))]
 public sealed partial class SumAggregation
 {
@@ -36,24 +37,16 @@ public sealed partial class SumAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumAggregation']/*"/>
 public readonly partial struct SumAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SumAggregation Instance { get; init; }
@@ -73,22 +66,14 @@ public readonly partial struct SumAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SumAggregation(Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -101,12 +86,7 @@ public readonly partial struct SumAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -145,6 +125,7 @@ public readonly partial struct SumAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumAggregation']/*"/>
 public readonly partial struct SumAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SumAggregation Instance { get; init; }
@@ -164,22 +145,14 @@ public readonly partial struct SumAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SumAggregation(Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -192,12 +165,7 @@ public readonly partial struct SumAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

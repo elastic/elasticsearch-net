@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FlattenedProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.FlattenedPropertyConverter))]
 public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Ma
 	public bool? Index { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -62,6 +59,7 @@ public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Ma
 	public string Type => "flattened";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FlattenedProperty']/*"/>
 public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Instance { get; init; }
@@ -141,33 +139,21 @@ public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -243,6 +229,7 @@ public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FlattenedProperty']/*"/>
 public readonly partial struct FlattenedPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Instance { get; init; }
@@ -328,33 +315,21 @@ public readonly partial struct FlattenedPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FlattenedProperty.g.xml" path="doc/member[@key='_types.mapping.FlattenedProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

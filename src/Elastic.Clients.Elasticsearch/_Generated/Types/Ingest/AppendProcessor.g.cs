@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AppendProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.AppendProcessorConverter))]
 public sealed partial class AppendProcessor
 {
@@ -42,90 +43,41 @@ public sealed partial class AppendProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the processor does not append values already present in the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#allow_duplicates']/*"/>
 	public bool? AllowDuplicates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be appended to.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
-	/// rather than appending them to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_empty_values']/*"/>
 	public bool? IgnoreEmptyValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#media_type']/*"/>
 	public string? MediaType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#value']/*"/>
 	public System.Collections.Generic.ICollection<object>? Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AppendProcessor']/*"/>
 public readonly partial struct AppendProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.AppendProcessor Instance { get; init; }
@@ -145,171 +97,105 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AppendProcessor(Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the processor does not append values already present in the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#allow_duplicates']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> AllowDuplicates(bool? value = true)
 	{
 		Instance.AllowDuplicates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> CopyFrom(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be appended to.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be appended to.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
-	/// rather than appending them to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_empty_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> IgnoreEmptyValues(bool? value = true)
 	{
 		Instance.IgnoreEmptyValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#media_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> MediaType(string? value)
 	{
 		Instance.MediaType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -322,34 +208,21 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(params object[] values)
 	{
 		Instance.Value = [.. values];
@@ -365,6 +238,7 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AppendProcessor']/*"/>
 public readonly partial struct AppendProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.AppendProcessor Instance { get; init; }
@@ -384,171 +258,105 @@ public readonly partial struct AppendProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AppendProcessor(Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the processor does not append values already present in the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#allow_duplicates']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor AllowDuplicates(bool? value = true)
 	{
 		Instance.AllowDuplicates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#copy_from']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor CopyFrom<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.CopyFrom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be appended to.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be appended to.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
-	/// rather than appending them to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_empty_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor IgnoreEmptyValues(bool? value = true)
 	{
 		Instance.IgnoreEmptyValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The media type for encoding <c>value</c>.
-	/// Applies only when value is a template snippet.
-	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#media_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor MediaType(string? value)
 	{
 		Instance.MediaType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -561,11 +369,7 @@ public readonly partial struct AppendProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -578,34 +382,21 @@ public readonly partial struct AppendProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AppendProcessor.g.xml" path="doc/member[@key='ingest._types.AppendProcessor#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(params object[] values)
 	{
 		Instance.Value = [.. values];

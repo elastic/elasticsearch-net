@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of the <c>cumulative_cardinality</c> aggregation
-/// </para>
-/// </summary>
+/// <include file="CumulativeCardinalityAggregate.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CumulativeCardinalityAggregateConverter))]
 public sealed partial class CumulativeCardinalityAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

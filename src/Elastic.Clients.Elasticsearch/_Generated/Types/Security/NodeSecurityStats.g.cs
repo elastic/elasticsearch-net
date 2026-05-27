@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.NodeSecurityStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.NodeSecurityStatsConverter))]
 public sealed partial class NodeSecurityStats
 {
@@ -42,10 +43,6 @@ public sealed partial class NodeSecurityStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Role statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeSecurityStats.g.xml" path="doc/member[@key='security._types.NodeSecurityStats#roles']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.RolesStats Roles { get; set; }
 }

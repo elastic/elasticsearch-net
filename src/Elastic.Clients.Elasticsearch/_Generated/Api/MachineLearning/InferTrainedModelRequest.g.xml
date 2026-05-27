@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.infer_trained_model.Request"><summary><para>
+Evaluate a trained model.
+</para></summary></member>
+  <member key="ml.infer_trained_model.Request#docs"><summary><para>
+An array of objects to pass to the model for inference. The objects should contain a fields matching your
+configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
+Currently, for NLP models, only a single value is allowed.
+</para></summary></member>
+  <member key="ml.infer_trained_model.Request#inference_config"><summary><para>
+The inference configuration updates to apply on the API call
+</para></summary></member>
+  <member key="ml.infer_trained_model.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml.infer_trained_model.Request#timeout"><summary><para>
+Controls the amount of time to wait for inference results.
+</para></summary></member>
+</doc>

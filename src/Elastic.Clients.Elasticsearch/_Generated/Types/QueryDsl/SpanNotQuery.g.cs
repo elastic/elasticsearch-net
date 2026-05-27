@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanNotQueryConverter))]
 public sealed partial class SpanNotQuery
 {
@@ -43,54 +44,27 @@ public sealed partial class SpanNotQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
-	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#dist']/*"/>
 	public int? Dist { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens after the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#post']/*"/>
 	public int? Post { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens before the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#pre']/*"/>
 	public int? Pre { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery']/*"/>
 public readonly partial struct SpanNotQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Instance { get; init; }
@@ -110,92 +84,56 @@ public readonly partial struct SpanNotQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
-	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#dist']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Dist(int? value)
 	{
 		Instance.Dist = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Exclude(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Include(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens after the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#post']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Post(int? value)
 	{
 		Instance.Post = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens before the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#pre']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor<TDocument> Pre(int? value)
 	{
 		Instance.Pre = value;
@@ -217,6 +155,7 @@ public readonly partial struct SpanNotQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery']/*"/>
 public readonly partial struct SpanNotQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery Instance { get; init; }
@@ -236,114 +175,70 @@ public readonly partial struct SpanNotQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens from within the include span that can’t have overlap with the exclude span.
-	/// Equivalent to setting both <c>pre</c> and <c>post</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#dist']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Dist(int? value)
 	{
 		Instance.Dist = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches must not overlap those returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Exclude<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Exclude = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span query whose matches are filtered.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Include<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Include = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens after the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#post']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Post(int? value)
 	{
 		Instance.Post = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens before the include span that can’t have overlap with the exclude span.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNotQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNotQuery#pre']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor Pre(int? value)
 	{
 		Instance.Pre = value;

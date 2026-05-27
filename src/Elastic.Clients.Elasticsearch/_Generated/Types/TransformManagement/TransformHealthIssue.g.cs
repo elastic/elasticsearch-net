@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformHealthIssueConverter))]
 public sealed partial class TransformHealthIssue
 {
@@ -44,39 +45,19 @@ public sealed partial class TransformHealthIssue
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of times this issue has occurred since it started
-	/// </para>
-	/// </summary>
+	/// <include file="TransformHealthIssue.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Details about the issue
-	/// </para>
-	/// </summary>
+	/// <include file="TransformHealthIssue.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue#details']/*"/>
 	public string? Details { get; set; }
 	public System.DateTimeOffset? FirstOccurenceString { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp this issue occurred for for the first time
-	/// </para>
-	/// </summary>
+	/// <include file="TransformHealthIssue.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue#first_occurrence']/*"/>
 	public System.DateTimeOffset? FirstOccurrence { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the issue
-	/// </para>
-	/// </summary>
+	/// <include file="TransformHealthIssue.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue#issue']/*"/>
 	public required string Issue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of the issue
-	/// </para>
-	/// </summary>
+	/// <include file="TransformHealthIssue.g.xml" path="doc/member[@key='transform.get_transform_stats.TransformHealthIssue#type']/*"/>
 	public required string Type { get; set; }
 }

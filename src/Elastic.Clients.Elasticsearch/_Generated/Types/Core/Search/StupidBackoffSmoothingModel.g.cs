@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.StupidBackoffSmoothingModel']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.StupidBackoffSmoothingModelConverter))]
 public sealed partial class StupidBackoffSmoothingModel
 {
@@ -42,14 +43,11 @@ public sealed partial class StupidBackoffSmoothingModel
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A constant factor that the lower order n-gram model is discounted by.
-	/// </para>
-	/// </summary>
+	/// <include file="StupidBackoffSmoothingModel.g.xml" path="doc/member[@key='_global.search._types.StupidBackoffSmoothingModel#discount']/*"/>
 	public required double Discount { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.StupidBackoffSmoothingModel']/*"/>
 public readonly partial struct StupidBackoffSmoothingModelDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel Instance { get; init; }
@@ -69,11 +67,7 @@ public readonly partial struct StupidBackoffSmoothingModelDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A constant factor that the lower order n-gram model is discounted by.
-	/// </para>
-	/// </summary>
+	/// <include file="StupidBackoffSmoothingModel.g.xml" path="doc/member[@key='_global.search._types.StupidBackoffSmoothingModel#discount']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor Discount(double value)
 	{
 		Instance.Discount = value;

@@ -39,25 +39,8 @@ public sealed partial class SmoothingModel
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel? Laplace { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>("laplace"); set => SetVariant("laplace", value); }
-
-	/// <summary>
-	/// <para>
-	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel? LinearInterpolation { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>("linear_interpolation"); set => SetVariant("linear_interpolation", value); }
-
-	/// <summary>
-	/// <para>
-	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel? StupidBackoff { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>("stupid_backoff"); set => SetVariant("stupid_backoff", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel value) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel { Laplace = value };
@@ -102,66 +85,36 @@ public readonly partial struct SmoothingModelDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel? value)
 	{
 		Instance.Laplace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A smoothing model that uses an additive smoothing where a constant (typically <c>1.0</c> or smaller) is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor Laplace(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> action)
 	{
 		Instance.Laplace = Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel? value)
 	{
 		Instance.LinearInterpolation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A smoothing model that takes the weighted mean of the unigrams, bigrams, and trigrams based on user supplied weights (lambdas).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor LinearInterpolation(System.Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> action)
 	{
 		Instance.LinearInterpolation = Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel? value)
 	{
 		Instance.StupidBackoff = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simple backoff model that backs off to lower order n-gram models if the higher order count is <c>0</c> and discounts the lower order n-gram model by a constant factor.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor StupidBackoff(System.Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> action)
 	{
 		Instance.StupidBackoff = Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor.Build(action);

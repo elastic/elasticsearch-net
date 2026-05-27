@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuCollationTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuCollationTokenFilterConverter))]
 public sealed partial class IcuCollationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -54,6 +55,7 @@ public sealed partial class IcuCollationTokenFilter : Elastic.Clients.Elasticsea
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.IcuCollationTokenFilter']/*"/>
 public readonly partial struct IcuCollationTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter Instance { get; init; }

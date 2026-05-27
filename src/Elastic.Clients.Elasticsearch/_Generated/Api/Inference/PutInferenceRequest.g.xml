@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put.Request"><summary><para>
+Create an inference endpoint.
+</para>
+<para>
+IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
+However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+</para>
+<para>
+The following integrations are available through the inference API. You can find the available task types next to the integration name:
+</para>
+<list type="bullet">
+<item>
+<para>
+AI21 (<c>chat_completion</c>, <c>completion</c>)
+</para>
+</item>
+<item>
+<para>
+AlibabaCloud AI Search (<c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Amazon Bedrock (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Amazon SageMaker (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Anthropic (<c>completion</c>)
+</para>
+</item>
+<item>
+<para>
+Azure AI Studio (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Azure OpenAI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Cohere (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+DeepSeek (<c>chat_completion</c>, <c>completion</c>)
+</para>
+</item>
+<item>
+<para>
+Elasticsearch (<c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c> - this service is for built-in models and models uploaded through Eland)
+</para>
+</item>
+<item>
+<para>
+ELSER (<c>sparse_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Fireworks AI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Google AI Studio (<c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Google Vertex AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Groq (<c>chat_completion</c>)
+</para>
+</item>
+<item>
+<para>
+Hugging Face (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+JinaAI (<c>embedding</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Llama (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Mistral (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Nvidia (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>, <c>rerank</c>)
+</para>
+</item>
+<item>
+<para>
+OpenAI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+OpenShift AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+VoyageAI (<c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+<item>
+<para>
+Watsonx (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+</para>
+</item>
+</list></summary></member>
+  <member key="inference.put.Request#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.put.Request#task_type"><summary><para>
+The task type. Refer to the integration list in the API description for the available task types.
+</para></summary></member>
+  <member key="inference.put.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

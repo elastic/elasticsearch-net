@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeTermsAggregationConverter))]
 public sealed partial class CompositeTermsAggregation
 {
@@ -36,25 +37,18 @@ public sealed partial class CompositeTermsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation']/*"/>
 public readonly partial struct CompositeTermsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation Instance { get; init; }
@@ -74,22 +68,14 @@ public readonly partial struct CompositeTermsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -114,33 +100,21 @@ public readonly partial struct CompositeTermsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -167,6 +141,7 @@ public readonly partial struct CompositeTermsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation']/*"/>
 public readonly partial struct CompositeTermsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation Instance { get; init; }
@@ -186,22 +161,14 @@ public readonly partial struct CompositeTermsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -226,33 +193,21 @@ public readonly partial struct CompositeTermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeTermsAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

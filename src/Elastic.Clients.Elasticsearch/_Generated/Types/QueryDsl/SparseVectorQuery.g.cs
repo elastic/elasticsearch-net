@@ -45,68 +45,12 @@ public sealed partial class SparseVectorQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference ID to use to convert the query text into token-weight pairs.
-	/// It must be the same inference ID that was used to create the tokens from the input text.
-	/// Only one of inference_id and query_vector is allowed.
-	/// If inference_id is specified, query must also be specified.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => GetVariant<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => SetVariant("inference_id", value); }
-
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, float>? QueryVector { get => GetVariant<System.Collections.Generic.IDictionary<string, float>>("query_vector"); set => SetVariant("query_vector", value); }
-
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public float? Boost { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
 	public bool? Prune { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfig? PruningConfig { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The query text you want to use for search.
-	/// If inference_id is specified, query must also be specified.
-	/// </para>
-	/// </summary>
 	public string? Query { get; set; }
 	public string? QueryName { get; set; }
 
@@ -148,51 +92,24 @@ public readonly partial struct SparseVectorQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference ID to use to convert the query text into token-weight pairs.
-	/// It must be the same inference ID that was used to create the tokens from the input text.
-	/// Only one of inference_id and query_vector is allowed.
-	/// If inference_id is specified, query must also be specified.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector(System.Collections.Generic.IDictionary<string, float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector()
 	{
 		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
 		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
@@ -206,105 +123,48 @@ public readonly partial struct SparseVectorQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Prune(bool? value = true)
 	{
 		Instance.Prune = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query text you want to use for search.
-	/// If inference_id is specified, query must also be specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> Query(string? value)
 	{
 		Instance.Query = value;
@@ -345,51 +205,24 @@ public readonly partial struct SparseVectorQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference ID to use to convert the query text into token-weight pairs.
-	/// It must be the same inference ID that was used to create the tokens from the input text.
-	/// Only one of inference_id and query_vector is allowed.
-	/// If inference_id is specified, query must also be specified.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector(System.Collections.Generic.IDictionary<string, float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector()
 	{
 		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Dictionary of precomputed sparse vectors and their associated weights.
-	/// Only one of inference_id or query_vector may be supplied in a request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
 		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
@@ -403,105 +236,48 @@ public readonly partial struct SparseVectorQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the token-weight pairs to be searched against.
-	/// This field must be a mapped sparse_vector field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Prune(bool? value = true)
 	{
 		Instance.Prune = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query text you want to use for search.
-	/// If inference_id is specified, query must also be specified.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor Query(string? value)
 	{
 		Instance.Query = value;

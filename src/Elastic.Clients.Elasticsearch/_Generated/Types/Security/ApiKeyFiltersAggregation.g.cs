@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApiKeyFiltersAggregationConverter))]
 public sealed partial class ApiKeyFiltersAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class ApiKeyFiltersAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? Filters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the named filters aggregation returns the buckets as an object.
-	/// Set to <c>false</c> to return the buckets as an array of objects.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#keyed']/*"/>
 	public bool? Keyed => false;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket']/*"/>
 	public bool? OtherBucket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket_key']/*"/>
 	public string? OtherBucketKey { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation']/*"/>
 public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Instance { get; init; }
@@ -85,44 +70,28 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucket(bool? value = true)
 	{
 		Instance.OtherBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> OtherBucketKey(string? value)
 	{
 		Instance.OtherBucketKey = value;
@@ -143,6 +112,7 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation']/*"/>
 public readonly partial struct ApiKeyFiltersAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Instance { get; init; }
@@ -162,55 +132,35 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of queries from which to build buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor OtherBucket(bool? value = true)
 	{
 		Instance.OtherBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The key with which the other bucket is returned.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKeyFiltersAggregation.g.xml" path="doc/member[@key='security.query_api_keys.ApiKeyFiltersAggregation#other_bucket_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor OtherBucketKey(string? value)
 	{
 		Instance.OtherBucketKey = value;

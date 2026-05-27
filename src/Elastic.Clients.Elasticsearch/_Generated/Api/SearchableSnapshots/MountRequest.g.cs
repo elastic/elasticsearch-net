@@ -23,43 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 public sealed partial class MountRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The mount option for the searchable snapshot index.
-	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#storage']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? Storage { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption?>("storage"); set => Q("storage", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Mount a snapshot.
-/// </para>
-/// <para>
-/// Mount a snapshot as a searchable snapshot index.
-/// Do not use this API for snapshots managed by index lifecycle management (ILM).
-/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
-/// </para>
-/// </summary>
+/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.MountRequestConverter))]
 public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestParameters>
 {
@@ -93,84 +72,36 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "searchable_snapshots.mount";
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository containing the snapshot of the index to mount.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot of the index to mount.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#snapshot']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The mount option for the searchable snapshot index.
-	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#storage']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? Storage { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption?>("storage"); set => Q("storage", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// The names of settings that should be removed from the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#ignore_index_settings']/*"/>
 	public System.Collections.Generic.ICollection<string>? IgnoreIndexSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index contained in the snapshot whose data is to be mounted.
-	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that should be added to the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index_settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? IndexSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that will be created.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#renamed_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? RenamedIndex { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Mount a snapshot.
-/// </para>
-/// <para>
-/// Mount a snapshot as a searchable snapshot index.
-/// Do not use this API for snapshots managed by index lifecycle management (ILM).
-/// Manually mounting ILM-managed snapshots can interfere with ILM processes.
-/// </para>
-/// </summary>
+/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.Request']/*"/>
 public readonly partial struct MountRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest Instance { get; init; }
@@ -197,125 +128,77 @@ public readonly partial struct MountRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository containing the snapshot of the index to mount.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Repository = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot of the index to mount.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Snapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The mount option for the searchable snapshot index.
-	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#storage']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Storage(Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? value)
 	{
 		Instance.Storage = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until the operation is complete.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The names of settings that should be removed from the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#ignore_index_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IgnoreIndexSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The names of settings that should be removed from the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#ignore_index_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IgnoreIndexSettings(params string[] values)
 	{
 		Instance.IgnoreIndexSettings = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index contained in the snapshot whose data is to be mounted.
-	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that should be added to the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.IndexSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that should be added to the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings()
 	{
 		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The settings that should be added to the index when it is mounted.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#index_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor IndexSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.IndexSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -329,11 +212,7 @@ public readonly partial struct MountRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that will be created.
-	/// </para>
-	/// </summary>
+	/// <include file="MountRequest.g.xml" path="doc/member[@key='searchable_snapshots.mount.Request#renamed_index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor RenamedIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.RenamedIndex = value;

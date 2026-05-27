@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeEvaluationRegressionMetrics#huber"><summary><para>
+Pseudo Huber loss function.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationRegressionMetrics#mse"><summary><para>
+Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationRegressionMetrics#msle"><summary><para>
+Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationRegressionMetrics#r_squared"><summary><para>
+Proportion of the variance in the dependent variable that is predictable from the independent variables.
+</para></summary></member>
+</doc>

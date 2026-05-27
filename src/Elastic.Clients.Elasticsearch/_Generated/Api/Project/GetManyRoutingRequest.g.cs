@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 public sealed partial class GetManyRoutingRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get project routing expressions.
-/// </para>
-/// </summary>
+/// <include file="GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.GetManyRoutingRequestConverter))]
 public sealed partial class GetManyRoutingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>
 {
@@ -54,11 +53,8 @@ public sealed partial class GetManyRoutingRequest : Elastic.Clients.Elasticsearc
 	internal override string OperationName => "project.get_many_routing";
 }
 
-/// <summary>
-/// <para>
-/// Get project routing expressions.
-/// </para>
-/// </summary>
+/// <include file="GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 public readonly partial struct GetManyRoutingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest Instance { get; init; }

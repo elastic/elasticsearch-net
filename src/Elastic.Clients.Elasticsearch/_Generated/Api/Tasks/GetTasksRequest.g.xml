@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="tasks.get.Request"><summary><para>
+Get task information.
+</para>
+<para>
+Get information about a task currently running in the cluster.
+</para>
+<para>
+WARNING: The task management API is new and should still be considered a beta feature.
+The API may change in ways that are not backwards compatible.
+</para>
+<para>
+If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
+</para></summary></member>
+  <member key="tasks.get.Request#task_id"><summary><para>
+The task identifier.
+</para></summary></member>
+  <member key="tasks.get.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="tasks.get.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request blocks until the task has completed.
+</para></summary></member>
+</doc>

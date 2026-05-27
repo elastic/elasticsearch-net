@@ -23,83 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 public sealed partial class SearchShardsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// IT can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the search shards.
-/// </para>
-/// <para>
-/// Get the indices and shards that a search request would be run against.
-/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
-/// </para>
-/// </summary>
+/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SearchShardsRequestConverter))]
 public sealed partial class SearchShardsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchShardsRequestParameters>
 {
@@ -125,90 +76,33 @@ public sealed partial class SearchShardsRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "search_shards";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// IT can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the search shards.
-/// </para>
-/// <para>
-/// Get the indices and shards that a search request would be run against.
-/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
-/// </para>
-/// </summary>
+/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 public readonly partial struct SearchShardsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchShardsRequest Instance { get; init; }
@@ -232,115 +126,63 @@ public readonly partial struct SearchShardsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchShardsRequest instance) => new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// IT can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
@@ -408,19 +250,8 @@ public readonly partial struct SearchShardsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get the search shards.
-/// </para>
-/// <para>
-/// Get the indices and shards that a search request would be run against.
-/// This information can be useful for working out issues or planning optimizations with routing and shard preferences.
-/// When filtered aliases are used, the filter is returned as part of the <c>indices</c> section.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
-/// </para>
-/// </summary>
+/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_shards.Request']/*"/>
 public readonly partial struct SearchShardsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SearchShardsRequest Instance { get; init; }
@@ -444,115 +275,63 @@ public readonly partial struct SearchShardsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchShardsRequest instance) => new Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchShardsRequest(Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// IT can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsRequest.g.xml" path="doc/member[@key='_global.search_shards.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchShardsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.Access#replication"><summary><para>
+A list of indices permission entries for cross-cluster replication.
+</para></summary></member>
+  <member key="security._types.Access#search"><summary><para>
+A list of indices permission entries for cross-cluster search.
+</para></summary></member>
+</doc>

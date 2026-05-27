@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.rollover.RolloverConditions#max_size"><summary><para>
+The <c>max_size</c> condition has been deprecated in 9.3.0 and <c>max_primary_shard_size</c> should be used instead
+</para></summary></member>
+</doc>

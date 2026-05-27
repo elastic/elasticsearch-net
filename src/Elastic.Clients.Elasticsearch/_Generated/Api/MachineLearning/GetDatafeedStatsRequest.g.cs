@@ -23,52 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
 public sealed partial class GetDatafeedStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no datafeeds that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>datafeeds</c> array
-	/// when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is <c>false</c>, the request returns a
-	/// <c>404</c> status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get datafeed stats.
-/// </para>
-/// <para>
-/// You can get statistics for multiple datafeeds in a single API request by
-/// using a comma-separated list of datafeeds or a wildcard expression. You can
-/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
-/// <c>&lt;feed_id></c>, or by omitting the <c>&lt;feed_id></c>. If the datafeed is stopped, the
-/// only information you receive is the <c>datafeed_id</c> and the <c>state</c>.
-/// This API returns a maximum of 10,000 datafeeds.
-/// </para>
-/// </summary>
+/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetDatafeedStatsRequestConverter))]
 public sealed partial class GetDatafeedStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestParameters>
 {
@@ -94,59 +58,15 @@ public sealed partial class GetDatafeedStatsRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "ml.get_datafeed_stats";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the datafeed. It can be a datafeed identifier or a
-	/// wildcard expression. If you do not specify one of these options, the API
-	/// returns information about all datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? DatafeedId { get => P<Elastic.Clients.Elasticsearch.Ids?>("datafeed_id"); set => PO("datafeed_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no datafeeds that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>datafeeds</c> array
-	/// when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is <c>false</c>, the request returns a
-	/// <c>404</c> status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get datafeed stats.
-/// </para>
-/// <para>
-/// You can get statistics for multiple datafeeds in a single API request by
-/// using a comma-separated list of datafeeds or a wildcard expression. You can
-/// get statistics for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
-/// <c>&lt;feed_id></c>, or by omitting the <c>&lt;feed_id></c>. If the datafeed is stopped, the
-/// only information you receive is the <c>datafeed_id</c> and the <c>state</c>.
-/// This API returns a maximum of 10,000 datafeeds.
-/// </para>
-/// </summary>
+/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_datafeed_stats.Request']/*"/>
 public readonly partial struct GetDatafeedStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest Instance { get; init; }
@@ -170,47 +90,14 @@ public readonly partial struct GetDatafeedStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the datafeed. It can be a datafeed identifier or a
-	/// wildcard expression. If you do not specify one of these options, the API
-	/// returns information about all datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no datafeeds that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is <c>true</c>, which returns an empty <c>datafeeds</c> array
-	/// when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is <c>false</c>, the request returns a
-	/// <c>404</c> status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDatafeedStatsRequest.g.xml" path="doc/member[@key='ml.get_datafeed_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;

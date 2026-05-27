@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 public sealed partial class InfoRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Get basic build, version, and cluster information.
-/// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
-/// </para>
-/// </summary>
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InfoRequestConverter))]
 public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.InfoRequestParameters>
 {
@@ -58,15 +53,8 @@ public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests
 	internal override string OperationName => "info";
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Get basic build, version, and cluster information.
-/// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
-/// </para>
-/// </summary>
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 public readonly partial struct InfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.InfoRequest Instance { get; init; }

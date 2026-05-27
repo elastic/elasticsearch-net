@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
 public sealed partial class PutViewRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create or update an ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.PutViewRequestConverter))]
 public sealed partial class PutViewRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>
 {
@@ -65,26 +64,15 @@ public sealed partial class PutViewRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "esql.put_view";
 
-	/// <summary>
-	/// <para>
-	/// The view name to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Name { get => P<Elastic.Clients.Elasticsearch.Id>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query string from which to create a view.
-	/// </para>
-	/// </summary>
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#query']/*"/>
 	public required string Query { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.put_view.Request']/*"/>
 public readonly partial struct PutViewRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.PutViewRequest Instance { get; init; }
@@ -111,22 +99,14 @@ public readonly partial struct PutViewRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.PutViewRequest instance) => new Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.PutViewRequest(Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The view name to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query string from which to create a view.
-	/// </para>
-	/// </summary>
+	/// <include file="PutViewRequest.g.xml" path="doc/member[@key='esql.put_view.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;

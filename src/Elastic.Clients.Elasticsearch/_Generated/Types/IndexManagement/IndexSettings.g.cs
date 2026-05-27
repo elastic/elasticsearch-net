@@ -23,9 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsConverter))]
 public sealed partial class IndexSettings
 {
@@ -41,12 +40,7 @@ public sealed partial class IndexSettings
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? Analyze { get; set; }
 	public string? AutoExpandReplicas { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
@@ -62,21 +56,13 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? Highlight { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configure indexing back pressure limits.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? IndexingSlowlog { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
 	public bool? LoadFixedBitsetFiltersEagerly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mapping { get; set; }
 	public int? MaxDocvalueFieldsSearch { get; set; }
 	public int? MaxInnerResultWindow { get; set; }
@@ -94,12 +80,6 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.Union<int, string>? NumberOfReplicas { get; set; }
 	public int? NumberOfRoutingShards { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<int, string>? NumberOfShards { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, object>? OtherSettings { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<int, string>? Priority { get; set; }
 	public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
@@ -112,20 +92,12 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? Search { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configure custom similarity settings to customize how search results are scored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities? Similarity { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The store module allows you to control how index data is stored and accessed on disk.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.Storage? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
 	public int? TopMetricsMaxSize { get; set; }
@@ -135,9 +107,8 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
 }
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
 public readonly partial struct IndexSettingsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Instance { get; init; }
@@ -175,36 +146,21 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
 	{
 		Instance.Analyze = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze()
 	{
 		Instance.Analyze = Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)
 	{
 		Instance.Analyze = Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.Build(action);
@@ -325,22 +281,14 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure indexing back pressure limits.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? value)
 	{
 		Instance.IndexingPressure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure indexing back pressure limits.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> IndexingPressure(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor> action)
 	{
 		Instance.IndexingPressure = Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.Build(action);
@@ -389,33 +337,21 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? value)
 	{
 		Instance.Mapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Mapping()
 	{
 		Instance.Mapping = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Mapping(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor>? action)
 	{
 		Instance.Mapping = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.Build(action);
@@ -530,33 +466,18 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.OtherSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings()
 	{
 		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -690,22 +611,14 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure custom similarity settings to customize how search results are scored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure custom similarity settings to customize how search results are scored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Similarity(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor> action)
 	{
 		Instance.Similarity = Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor.Build(action);
@@ -748,22 +661,14 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The store module allows you to control how index data is stored and accessed on disk.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? value)
 	{
 		Instance.Store = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The store module allows you to control how index data is stored and accessed on disk.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
 	{
 		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(action);
@@ -856,9 +761,8 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettings']/*"/>
 public readonly partial struct IndexSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Instance { get; init; }
@@ -896,36 +800,21 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
 	{
 		Instance.Analyze = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze()
 	{
 		Instance.Analyze = Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to define analyzers, tokenizers, token filters and character filters.
-	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#analyze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)
 	{
 		Instance.Analyze = Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor.Build(action);
@@ -1052,22 +941,14 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure indexing back pressure limits.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor IndexingPressure(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? value)
 	{
 		Instance.IndexingPressure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure indexing back pressure limits.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor IndexingPressure(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor> action)
 	{
 		Instance.IndexingPressure = Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureDescriptor.Build(action);
@@ -1116,33 +997,21 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Mapping(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? value)
 	{
 		Instance.Mapping = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Mapping()
 	{
 		Instance.Mapping = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable or disable dynamic mapping for an index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#mapping']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Mapping(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor>? action)
 	{
 		Instance.Mapping = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor.Build(action);
@@ -1257,33 +1126,18 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.OtherSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings()
 	{
 		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional settings not covered in this type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor OtherSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.OtherSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -1423,22 +1277,14 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure custom similarity settings to customize how search results are scored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configure custom similarity settings to customize how search results are scored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Similarity(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor> action)
 	{
 		Instance.Similarity = Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesDescriptor.Build(action);
@@ -1487,22 +1333,14 @@ public readonly partial struct IndexSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The store module allows you to control how index data is stored and accessed on disk.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Store(Elastic.Clients.Elasticsearch.IndexManagement.Storage? value)
 	{
 		Instance.Store = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The store module allows you to control how index data is stored and accessed on disk.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettings.g.xml" path="doc/member[@key='indices._types.IndexSettings#store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Store(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor> action)
 	{
 		Instance.Store = Elastic.Clients.Elasticsearch.IndexManagement.StorageDescriptor.Build(action);

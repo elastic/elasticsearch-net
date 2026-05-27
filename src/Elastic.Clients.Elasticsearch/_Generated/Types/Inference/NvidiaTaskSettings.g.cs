@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.NvidiaTaskSettingsConverter))]
 public sealed partial class NvidiaTaskSettings
 {
@@ -36,55 +37,14 @@ public sealed partial class NvidiaTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, type of input sent to the Nvidia endpoint.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Mapped to Nvidia's <c>passage</c> value in request. Used when generating embeddings during indexing.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Mapped to Nvidia's <c>query</c> value in request. Used when generating embeddings during querying.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// IMPORTANT: For Nvidia endpoints, if the <c>input_type</c> field is not specified, it defaults to <c>query</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaTaskSettings.g.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaInputType? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the method used by the Nvidia model to handle inputs longer than the maximum token length.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaTaskSettings.g.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? Truncate { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings']/*"/>
 public readonly partial struct NvidiaTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings Instance { get; init; }
@@ -104,56 +64,14 @@ public readonly partial struct NvidiaTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettings(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, type of input sent to the Nvidia endpoint.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Mapped to Nvidia's <c>passage</c> value in request. Used when generating embeddings during indexing.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Mapped to Nvidia's <c>query</c> value in request. Used when generating embeddings during querying.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// IMPORTANT: For Nvidia endpoints, if the <c>input_type</c> field is not specified, it defaults to <c>query</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaTaskSettings.g.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.NvidiaInputType? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the method used by the Nvidia model to handle inputs longer than the maximum token length.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaTaskSettings.g.xml" path="doc/member[@key='inference._types.NvidiaTaskSettings#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaTaskSettingsDescriptor Truncate(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? value)
 	{
 		Instance.Truncate = value;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.delete.Request"><summary><para>
+Delete the license.
+</para>
+<para>
+When the license expires, your subscription level reverts to Basic.
+</para>
+<para>
+If the operator privileges feature is enabled, only operator users can use this API.
+</para></summary></member>
+  <member key="license.delete.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="license.delete.Request#timeout"><summary><para>
+The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
 public sealed partial class SuggestUserProfilesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Suggest a user profile.
-/// </para>
-/// <para>
-/// Get suggestions for user profiles that match specified search criteria.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SuggestUserProfilesRequestConverter))]
 public sealed partial class SuggestUserProfilesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>
 {
@@ -61,55 +52,21 @@ public sealed partial class SuggestUserProfilesRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "security.suggest_user_profiles";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default, the API returns no <c>data</c> content.
-	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#data']/*"/>
 	public System.Collections.Generic.ICollection<string>? Data { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Extra search criteria to improve relevance of the suggestion result.
-	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.Hint? Hint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query string used to match name-related fields in user profile documents.
-	/// Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of profiles to return.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#size']/*"/>
 	public long? Size { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Suggest a user profile.
-/// </para>
-/// <para>
-/// Get suggestions for user profiles that match specified search criteria.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.suggest_user_profiles.Request']/*"/>
 public readonly partial struct SuggestUserProfilesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest Instance { get; init; }
@@ -128,92 +85,49 @@ public readonly partial struct SuggestUserProfilesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest instance) => new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default, the API returns no <c>data</c> content.
-	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Data(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Data = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default, the API returns no <c>data</c> content.
-	/// It is an error to specify <c>data</c> as both the query parameter and the request body field.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Data(params string[] values)
 	{
 		Instance.Data = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extra search criteria to improve relevance of the suggestion result.
-	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Hint(Elastic.Clients.Elasticsearch.Security.Hint? value)
 	{
 		Instance.Hint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extra search criteria to improve relevance of the suggestion result.
-	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Hint()
 	{
 		Instance.Hint = Elastic.Clients.Elasticsearch.Security.HintDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extra search criteria to improve relevance of the suggestion result.
-	/// Profiles matching the spcified hint are ranked higher in the response.
-	/// Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Hint(System.Action<Elastic.Clients.Elasticsearch.Security.HintDescriptor>? action)
 	{
 		Instance.Hint = Elastic.Clients.Elasticsearch.Security.HintDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query string used to match name-related fields in user profile documents.
-	/// Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of profiles to return.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestUserProfilesRequest.g.xml" path="doc/member[@key='security.suggest_user_profiles.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor Size(long? value)
 	{
 		Instance.Size = value;

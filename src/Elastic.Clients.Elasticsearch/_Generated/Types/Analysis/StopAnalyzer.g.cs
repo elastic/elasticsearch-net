@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StopAnalyzerConverter))]
 public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -36,19 +37,10 @@ public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StopAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="StopAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StopAnalyzer#stopwords_path']/*"/>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "stop";
@@ -57,6 +49,7 @@ public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopAnalyzer']/*"/>
 public readonly partial struct StopAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer Instance { get; init; }
@@ -76,23 +69,14 @@ public readonly partial struct StopAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StopAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="StopAnalyzer.g.xml" path="doc/member[@key='_types.analysis.StopAnalyzer#stopwords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

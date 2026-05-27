@@ -23,288 +23,52 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 public sealed partial class IndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#op_type']/*"/>
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
-	/// If <c>false</c>, it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_alias']/*"/>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
-	/// </para>
-	/// <para>
-	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
-	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
-	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// An explicit version number for concurrency control.
-	/// It must be a non-negative long number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a document in an index.
-/// </para>
-/// <para>
-/// Add a JSON document to the specified data stream or index and make it searchable.
-/// If the target is an index and the document already exists, the request updates the document and increments its version.
-/// </para>
-/// <para>
-/// NOTE: You cannot use this API to send update requests for existing documents in a data stream.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// To add or overwrite a document using the <c>PUT /&lt;target>/_doc/&lt;_id></c> request format, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To add a document using the <c>POST /&lt;target>/_doc/</c> request format, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To automatically create a data stream or index with this API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Automatic data stream creation requires a matching index template with data stream enabled.
-/// </para>
-/// <para>
-/// NOTE: Replica shards might not all be started when an indexing operation returns successfully.
-/// By default, only the primary is required. Set <c>wait_for_active_shards</c> to change this default behavior.
-/// </para>
-/// <para>
-/// <strong>Automatically create data streams and indices</strong>
-/// </para>
-/// <para>
-/// If the request's target doesn't exist and matches an index template with a <c>data_stream</c> definition, the index operation automatically creates the data stream.
-/// </para>
-/// <para>
-/// If the target doesn't exist and doesn't match a data stream template, the operation automatically creates the index and applies any matching index templates.
-/// </para>
-/// <para>
-/// NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.
-/// </para>
-/// <para>
-/// If no mapping exists, the index operation creates a dynamic mapping.
-/// By default, new fields and objects are automatically added to the mapping if needed.
-/// </para>
-/// <para>
-/// Automatic index creation is controlled by the <c>action.auto_create_index</c> setting.
-/// If it is <c>true</c>, any index can be created automatically.
-/// You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to <c>false</c> to turn off automatic index creation entirely.
-/// Specify a comma-separated list of patterns you want to allow or prefix each pattern with <c>+</c> or <c>-</c> to indicate whether it should be allowed or blocked.
-/// When a list is specified, the default behaviour is to disallow.
-/// </para>
-/// <para>
-/// NOTE: The <c>action.auto_create_index</c> setting affects the automatic creation of indices only.
-/// It does not affect the creation of data streams.
-/// </para>
-/// <para>
-/// <strong>Optimistic concurrency control</strong>
-/// </para>
-/// <para>
-/// Index operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
-/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
-/// </para>
-/// <para>
-/// <strong>Routing</strong>
-/// </para>
-/// <para>
-/// By default, shard placement — or routing — is controlled by using a hash of the document's ID value.
-/// For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the <c>routing</c> parameter.
-/// </para>
-/// <para>
-/// When setting up explicit mapping, you can also use the <c>_routing</c> field to direct the index operation to extract the routing value from the document itself.
-/// This does come at the (very minimal) cost of an additional document parsing pass.
-/// If the <c>_routing</c> mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.
-/// </para>
-/// <para>
-/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
-/// </para>
-/// <para>
-/// <strong>Distributed</strong>
-/// </para>
-/// <para>
-/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
-/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
-/// </para>
-/// <para>
-/// <strong>Active shards</strong>
-/// </para>
-/// <para>
-/// To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation.
-/// If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
-/// By default, write operations only wait for the primary shards to be active before proceeding (that is to say <c>wait_for_active_shards</c> is <c>1</c>).
-/// This default can be overridden in the index settings dynamically by setting <c>index.write.wait_for_active_shards</c>.
-/// To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter.
-/// </para>
-/// <para>
-/// Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <c>number_of_replicas</c>+1).
-/// Specifying a negative value or a number greater than the number of shard copies will throw an error.
-/// </para>
-/// <para>
-/// For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes).
-/// If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding.
-/// This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data.
-/// If <c>wait_for_active_shards</c> is set on the request to <c>3</c> (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding.
-/// This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard.
-/// However, if you set <c>wait_for_active_shards</c> to <c>all</c> (or to <c>4</c>, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index.
-/// The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
-/// </para>
-/// <para>
-/// It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
-/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
-/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
-/// </para>
-/// <para>
-/// <strong>No operation (noop) updates</strong>
-/// </para>
-/// <para>
-/// When updating a document by using this API, a new version of the document is always created even if the document hasn't changed.
-/// If this isn't acceptable use the <c>_update</c> API with <c>detect_noop</c> set to <c>true</c>.
-/// The <c>detect_noop</c> option isn't available on this API because it doesn’t fetch the old source and isn't able to compare it against the new source.
-/// </para>
-/// <para>
-/// There isn't a definitive rule for when noop updates aren't acceptable.
-/// It's a combination of lots of factors like how frequently your data source sends updates that are actually noops and how many queries per second Elasticsearch runs on the shard receiving the updates.
-/// </para>
-/// <para>
-/// <strong>Versioning</strong>
-/// </para>
-/// <para>
-/// Each indexed document is given a version number.
-/// By default, internal versioning is used that starts at 1 and increments with each update, deletes included.
-/// Optionally, the version number can be set to an external value (for example, if maintained in a database).
-/// To enable this functionality, <c>version_type</c> should be set to <c>external</c>.
-/// The value provided must be a numeric, long value greater than or equal to 0, and less than around <c>9.2e+18</c>.
-/// </para>
-/// <para>
-/// NOTE: Versioning is completely real time, and is not affected by the near real time aspects of search operations.
-/// If no version is provided, the operation runs without any version checks.
-/// </para>
-/// <para>
-/// When using the external version type, the system checks to see if the version number passed to the index request is greater than the version of the currently stored document.
-/// If true, the document will be indexed and the new version number used.
-/// If the value provided is less than or equal to the stored document's version number, a version conflict will occur and the index operation will fail. For example:
-/// </para>
-/// <code>
-/// PUT my-index-000001/_doc/1?version=2&amp;version_type=external
-/// {
-///   "user": {
-///     "id": "elkbee"
-///   }
-/// }
-/// </code>
-/// <para>
-/// In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1.
-/// If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).
-/// </para>
-/// <para>
-/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
-/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
-/// </para>
-/// </summary>
+/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndexRequestConverterFactory))]
 public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexRequestParameters>
 {
@@ -344,305 +108,55 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "index";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document.
-	/// To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format and omit this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream or index to target.
-	/// If the target doesn't exist and matches the name or wildcard (<c>*</c>) pattern of an index template with a <c>data_stream</c> definition, this request creates the data stream.
-	/// If the target doesn't exist and doesn't match a data stream template, this request creates the index.
-	/// You can check for existing targets with the resolve index API.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#op_type']/*"/>
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
-	/// If <c>false</c>, it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_alias']/*"/>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
-	/// </para>
-	/// <para>
-	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
-	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
-	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// An explicit version number for concurrency control.
-	/// It must be a non-negative long number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	public required TDocument Document { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a document in an index.
-/// </para>
-/// <para>
-/// Add a JSON document to the specified data stream or index and make it searchable.
-/// If the target is an index and the document already exists, the request updates the document and increments its version.
-/// </para>
-/// <para>
-/// NOTE: You cannot use this API to send update requests for existing documents in a data stream.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// To add or overwrite a document using the <c>PUT /&lt;target>/_doc/&lt;_id></c> request format, you must have the <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To add a document using the <c>POST /&lt;target>/_doc/</c> request format, you must have the <c>create_doc</c>, <c>create</c>, <c>index</c>, or <c>write</c> index privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// To automatically create a data stream or index with this API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Automatic data stream creation requires a matching index template with data stream enabled.
-/// </para>
-/// <para>
-/// NOTE: Replica shards might not all be started when an indexing operation returns successfully.
-/// By default, only the primary is required. Set <c>wait_for_active_shards</c> to change this default behavior.
-/// </para>
-/// <para>
-/// <strong>Automatically create data streams and indices</strong>
-/// </para>
-/// <para>
-/// If the request's target doesn't exist and matches an index template with a <c>data_stream</c> definition, the index operation automatically creates the data stream.
-/// </para>
-/// <para>
-/// If the target doesn't exist and doesn't match a data stream template, the operation automatically creates the index and applies any matching index templates.
-/// </para>
-/// <para>
-/// NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.
-/// </para>
-/// <para>
-/// If no mapping exists, the index operation creates a dynamic mapping.
-/// By default, new fields and objects are automatically added to the mapping if needed.
-/// </para>
-/// <para>
-/// Automatic index creation is controlled by the <c>action.auto_create_index</c> setting.
-/// If it is <c>true</c>, any index can be created automatically.
-/// You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to <c>false</c> to turn off automatic index creation entirely.
-/// Specify a comma-separated list of patterns you want to allow or prefix each pattern with <c>+</c> or <c>-</c> to indicate whether it should be allowed or blocked.
-/// When a list is specified, the default behaviour is to disallow.
-/// </para>
-/// <para>
-/// NOTE: The <c>action.auto_create_index</c> setting affects the automatic creation of indices only.
-/// It does not affect the creation of data streams.
-/// </para>
-/// <para>
-/// <strong>Optimistic concurrency control</strong>
-/// </para>
-/// <para>
-/// Index operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <c>if_seq_no</c> and <c>if_primary_term</c> parameters.
-/// If a mismatch is detected, the operation will result in a <c>VersionConflictException</c> and a status code of <c>409</c>.
-/// </para>
-/// <para>
-/// <strong>Routing</strong>
-/// </para>
-/// <para>
-/// By default, shard placement — or routing — is controlled by using a hash of the document's ID value.
-/// For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the <c>routing</c> parameter.
-/// </para>
-/// <para>
-/// When setting up explicit mapping, you can also use the <c>_routing</c> field to direct the index operation to extract the routing value from the document itself.
-/// This does come at the (very minimal) cost of an additional document parsing pass.
-/// If the <c>_routing</c> mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.
-/// </para>
-/// <para>
-/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
-/// </para>
-/// <para>
-/// <strong>Distributed</strong>
-/// </para>
-/// <para>
-/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
-/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
-/// </para>
-/// <para>
-/// <strong>Active shards</strong>
-/// </para>
-/// <para>
-/// To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation.
-/// If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
-/// By default, write operations only wait for the primary shards to be active before proceeding (that is to say <c>wait_for_active_shards</c> is <c>1</c>).
-/// This default can be overridden in the index settings dynamically by setting <c>index.write.wait_for_active_shards</c>.
-/// To alter this behavior per operation, use the <c>wait_for_active_shards request</c> parameter.
-/// </para>
-/// <para>
-/// Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <c>number_of_replicas</c>+1).
-/// Specifying a negative value or a number greater than the number of shard copies will throw an error.
-/// </para>
-/// <para>
-/// For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes).
-/// If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding.
-/// This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data.
-/// If <c>wait_for_active_shards</c> is set on the request to <c>3</c> (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding.
-/// This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard.
-/// However, if you set <c>wait_for_active_shards</c> to <c>all</c> (or to <c>4</c>, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index.
-/// The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
-/// </para>
-/// <para>
-/// It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
-/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
-/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
-/// </para>
-/// <para>
-/// <strong>No operation (noop) updates</strong>
-/// </para>
-/// <para>
-/// When updating a document by using this API, a new version of the document is always created even if the document hasn't changed.
-/// If this isn't acceptable use the <c>_update</c> API with <c>detect_noop</c> set to <c>true</c>.
-/// The <c>detect_noop</c> option isn't available on this API because it doesn’t fetch the old source and isn't able to compare it against the new source.
-/// </para>
-/// <para>
-/// There isn't a definitive rule for when noop updates aren't acceptable.
-/// It's a combination of lots of factors like how frequently your data source sends updates that are actually noops and how many queries per second Elasticsearch runs on the shard receiving the updates.
-/// </para>
-/// <para>
-/// <strong>Versioning</strong>
-/// </para>
-/// <para>
-/// Each indexed document is given a version number.
-/// By default, internal versioning is used that starts at 1 and increments with each update, deletes included.
-/// Optionally, the version number can be set to an external value (for example, if maintained in a database).
-/// To enable this functionality, <c>version_type</c> should be set to <c>external</c>.
-/// The value provided must be a numeric, long value greater than or equal to 0, and less than around <c>9.2e+18</c>.
-/// </para>
-/// <para>
-/// NOTE: Versioning is completely real time, and is not affected by the near real time aspects of search operations.
-/// If no version is provided, the operation runs without any version checks.
-/// </para>
-/// <para>
-/// When using the external version type, the system checks to see if the version number passed to the index request is greater than the version of the currently stored document.
-/// If true, the document will be indexed and the new version number used.
-/// If the value provided is less than or equal to the stored document's version number, a version conflict will occur and the index operation will fail. For example:
-/// </para>
-/// <code>
-/// PUT my-index-000001/_doc/1?version=2&amp;version_type=external
-/// {
-///   "user": {
-///     "id": "elkbee"
-///   }
-/// }
-/// </code>
-/// <para>
-/// In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1.
-/// If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).
-/// </para>
-/// <para>
-/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
-/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
-/// </para>
-/// </summary>
+/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.index.Request']/*"/>
 public readonly partial struct IndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexRequest<TDocument> Instance { get; init; }
@@ -677,187 +191,105 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexRequest<TDocument> instance) => new Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document.
-	/// To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format and omit this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream or index to target.
-	/// If the target doesn't exist and matches the name or wildcard (<c>*</c>) pattern of an index template with a <c>data_stream</c> definition, this request creates the data stream.
-	/// If the target doesn't exist and doesn't match a data stream template, this request creates the index.
-	/// You can check for existing targets with the resolve index API.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> IfPrimaryTerm(long? value)
 	{
 		Instance.IfPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#if_seq_no']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> IfSeqNo(long? value)
 	{
 		Instance.IfSeqNo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#include_source_on_error']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> IncludeSourceOnError(bool? value = true)
 	{
 		Instance.IncludeSourceOnError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#op_type']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? value)
 	{
 		Instance.OpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If <c>wait_for</c>, it waits for a refresh to make this operation visible to search.
-	/// If <c>false</c>, it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireAlias(bool? value = true)
 	{
 		Instance.RequireAlias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#require_data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
 	{
 		Instance.RequireDataStream = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
-	/// </para>
-	/// <para>
-	/// This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
-	/// Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
-	/// By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An explicit version number for concurrency control.
-	/// It must be a non-negative long number.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// You can set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexRequest.g.xml" path="doc/member[@key='_global.index.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;

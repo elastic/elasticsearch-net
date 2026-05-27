@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContextualAITaskSettingsConverter))]
 public sealed partial class ContextualAITaskSettings
 {
@@ -36,24 +37,14 @@ public sealed partial class ContextualAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Instructions for the reranking model. Refer to <a href="https://docs.contextual.ai/api-reference/rerank/rerank#body-instruction">https://docs.contextual.ai/api-reference/rerank/rerank#body-instruction</a>
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAITaskSettings.g.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings#instruction']/*"/>
 	public string? Instruction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of most relevant documents to return.
-	/// If not specified, the reranking results of all documents will be returned.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAITaskSettings.g.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings#top_k']/*"/>
 	public int? TopK { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings']/*"/>
 public readonly partial struct ContextualAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings Instance { get; init; }
@@ -73,25 +64,14 @@ public readonly partial struct ContextualAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings(Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Instructions for the reranking model. Refer to <a href="https://docs.contextual.ai/api-reference/rerank/rerank#body-instruction">https://docs.contextual.ai/api-reference/rerank/rerank#body-instruction</a>
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAITaskSettings.g.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings#instruction']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor Instruction(string? value)
 	{
 		Instance.Instruction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of most relevant documents to return.
-	/// If not specified, the reranking results of all documents will be returned.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="ContextualAITaskSettings.g.xml" path="doc/member[@key='inference._types.ContextualAITaskSettings#top_k']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor TopK(int? value)
 	{
 		Instance.TopK = value;

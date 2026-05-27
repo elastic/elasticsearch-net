@@ -39,10 +39,6 @@ public sealed partial class OpenPointInTimeResponse : Elastic.Transport.Products
 
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Shards used to create the PIT
-	/// </para>
-	/// </summary>
+	/// <include file="OpenPointInTimeResponse.g.xml" path="doc/member[@key='_global.open_point_in_time.Response#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 }

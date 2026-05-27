@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.DataframePreviewConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframePreviewConfigConverter))]
 public sealed partial class DataframePreviewConfig
 {
@@ -50,6 +51,7 @@ public sealed partial class DataframePreviewConfig
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.DataframePreviewConfig']/*"/>
 public readonly partial struct DataframePreviewConfigDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Instance { get; init; }
@@ -132,6 +134,7 @@ public readonly partial struct DataframePreviewConfigDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.DataframePreviewConfig']/*"/>
 public readonly partial struct DataframePreviewConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Instance { get; init; }

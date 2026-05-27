@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexAndDataStreamActionConverter))]
 public sealed partial class IndexAndDataStreamAction
 {
@@ -43,21 +44,14 @@ public sealed partial class IndexAndDataStreamAction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data stream targeted by the action.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexAndDataStreamAction.g.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction#data_stream']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamName DataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Index for the action.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexAndDataStreamAction.g.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction']/*"/>
 public readonly partial struct IndexAndDataStreamActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct IndexAndDataStreamActionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamAction(Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Data stream targeted by the action.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexAndDataStreamAction.g.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor DataStream(Elastic.Clients.Elasticsearch.DataStreamName value)
 	{
 		Instance.DataStream = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index for the action.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexAndDataStreamAction.g.xml" path="doc/member[@key='indices.modify_data_stream.IndexAndDataStreamAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexAndDataStreamActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;

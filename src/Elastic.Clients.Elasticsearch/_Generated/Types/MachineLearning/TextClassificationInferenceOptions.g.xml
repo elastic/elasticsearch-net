@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TextClassificationInferenceOptions"><summary><para>
+Text classification configuration options
+</para></summary></member>
+  <member key="ml._types.TextClassificationInferenceOptions#classification_labels"><summary><para>
+Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
+</para></summary></member>
+  <member key="ml._types.TextClassificationInferenceOptions#num_top_classes"><summary><para>
+Specifies the number of top class predictions to return. Defaults to 0.
+</para></summary></member>
+  <member key="ml._types.TextClassificationInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.TextClassificationInferenceOptions#tokenization"><summary><para>
+The tokenization options
+</para></summary></member>
+</doc>

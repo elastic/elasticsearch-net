@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.ThreadCount#active"><summary><para>
+Number of active threads in the thread pool.
+</para></summary></member>
+  <member key="nodes._types.ThreadCount#completed"><summary><para>
+Number of tasks completed by the thread pool executor.
+</para></summary></member>
+  <member key="nodes._types.ThreadCount#largest"><summary><para>
+Highest number of active threads in the thread pool.
+</para></summary></member>
+  <member key="nodes._types.ThreadCount#queue"><summary><para>
+Number of tasks in queue for the thread pool.
+</para></summary></member>
+  <member key="nodes._types.ThreadCount#rejected"><summary><para>
+Number of tasks rejected by the thread pool executor.
+</para></summary></member>
+  <member key="nodes._types.ThreadCount#threads"><summary><para>
+Number of threads in the thread pool.
+</para></summary></member>
+</doc>

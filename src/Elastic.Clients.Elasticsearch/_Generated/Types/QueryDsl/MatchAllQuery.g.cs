@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchAllQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchAllQueryConverter))]
 public sealed partial class MatchAllQuery
 {
@@ -36,18 +37,12 @@ public sealed partial class MatchAllQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchAllQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchAllQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchAllQuery']/*"/>
 public readonly partial struct MatchAllQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery Instance { get; init; }
@@ -67,14 +62,7 @@ public readonly partial struct MatchAllQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchAllQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchAllQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

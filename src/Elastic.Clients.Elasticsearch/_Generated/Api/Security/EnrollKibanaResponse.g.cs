@@ -37,12 +37,7 @@ public sealed partial class EnrollKibanaResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The CA certificate used to sign the node certificates that Elasticsearch uses for TLS on the HTTP layer.
-	/// The certificate is returned as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollKibanaResponse.g.xml" path="doc/member[@key='security.enroll_kibana.Response#http_ca']/*"/>
 	public required string HttpCa { get; set; }
 	public required Elastic.Clients.Elasticsearch.Security.KibanaToken Token { get; set; }
 }

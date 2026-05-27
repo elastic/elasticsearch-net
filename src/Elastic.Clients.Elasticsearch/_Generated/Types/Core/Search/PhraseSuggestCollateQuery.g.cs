@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestCollateQueryConverter))]
 public sealed partial class PhraseSuggestCollateQuery
 {
@@ -36,21 +37,14 @@ public sealed partial class PhraseSuggestCollateQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template ID.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollateQuery.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query source.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollateQuery.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery#source']/*"/>
 	public string? Source { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery']/*"/>
 public readonly partial struct PhraseSuggestCollateQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct PhraseSuggestCollateQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The search template ID.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollateQuery.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query source.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollateQuery.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollateQuery#source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor Source(string? value)
 	{
 		Instance.Source = value;

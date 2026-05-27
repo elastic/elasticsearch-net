@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Wraps a retriever with an optional weight for RRF scoring.
-/// </para>
-/// </summary>
+/// <include file="RRFRetrieverComponent.g.xml" path="doc/member[@key='_types.RRFRetrieverComponent']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RRFRetrieverComponent']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RRFRetrieverComponentConverter))]
 public sealed partial class RRFRetrieverComponent
 {
@@ -47,17 +44,9 @@ public sealed partial class RRFRetrieverComponent
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetrieverComponent.g.xml" path="doc/member[@key='_types.RRFRetrieverComponent#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Weight multiplier for this retriever's contribution to the RRF score. Higher values increase influence. Defaults to 1.0 if not specified. Must be non-negative.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetrieverComponent.g.xml" path="doc/member[@key='_types.RRFRetrieverComponent#weight']/*"/>
 	public float? Weight { get; set; }
 }

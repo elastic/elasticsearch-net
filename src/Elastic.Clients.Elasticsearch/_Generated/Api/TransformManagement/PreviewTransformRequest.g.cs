@@ -23,30 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 public sealed partial class PreviewTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Preview a transform.
-/// </para>
-/// <para>
-/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-/// </para>
-/// <para>
-/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-/// types of the source index and the transform aggregations.
-/// </para>
-/// </summary>
+/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.PreviewTransformRequestConverter))]
 public sealed partial class PreviewTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>
 {
@@ -72,106 +58,42 @@ public sealed partial class PreviewTransformRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "transform.preview_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform
-	/// configuration details in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? TransformId { get => P<Elastic.Clients.Elasticsearch.Id?>("transform_id"); set => PO("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination? Dest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Source? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Preview a transform.
-/// </para>
-/// <para>
-/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-/// </para>
-/// <para>
-/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-/// types of the source index and the transform aggregations.
-/// </para>
-/// </summary>
+/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 public readonly partial struct PreviewTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest Instance { get; init; }
@@ -195,305 +117,182 @@ public readonly partial struct PreviewTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform
-	/// configuration details in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? value)
 	{
 		Instance.Latest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Latest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Latest<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<T>> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? value)
 	{
 		Instance.Pivot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Pivot()
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Pivot(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Pivot<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<T>>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor RetentionPolicy<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor Sync<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>.Build(action);
@@ -561,19 +360,8 @@ public readonly partial struct PreviewTransformRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Preview a transform.
-/// </para>
-/// <para>
-/// Generates a preview of the results that you will get when you create a transform with the same configuration.
-/// </para>
-/// <para>
-/// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
-/// generates a list of mappings and settings for the destination index. These values are determined based on the field
-/// types of the source index and the transform aggregations.
-/// </para>
-/// </summary>
+/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.preview_transform.Request']/*"/>
 public readonly partial struct PreviewTransformRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest Instance { get; init; }
@@ -597,246 +385,147 @@ public readonly partial struct PreviewTransformRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform
-	/// configuration details in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Latest(Elastic.Clients.Elasticsearch.TransformManagement.Latest? value)
 	{
 		Instance.Latest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The latest method transforms the data by finding the latest document for
-	/// each unique key.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#latest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Latest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>> action)
 	{
 		Instance.Latest = Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Pivot(Elastic.Clients.Elasticsearch.TransformManagement.Pivot? value)
 	{
 		Instance.Pivot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Pivot()
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pivot method transforms the data by aggregating and grouping it.
-	/// These objects define the group by fields and the aggregation to reduce
-	/// the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Pivot(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>>? action)
 	{
 		Instance.Pivot = Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>> action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewTransformRequest.g.xml" path="doc/member[@key='transform.preview_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor<TDocument> Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SearchAsYouTypePropertyConverter))]
 public sealed partial class SearchAsYouTypeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class SearchAsYouTypeProperty : Elastic.Clients.Elasticsea
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 	public int? MaxShingleSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? Norms { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -63,6 +60,7 @@ public sealed partial class SearchAsYouTypeProperty : Elastic.Clients.Elasticsea
 	public string Type => "search_as_you_type";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty']/*"/>
 public readonly partial struct SearchAsYouTypePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty Instance { get; init; }
@@ -142,33 +140,21 @@ public readonly partial struct SearchAsYouTypePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -250,6 +236,7 @@ public readonly partial struct SearchAsYouTypePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty']/*"/>
 public readonly partial struct SearchAsYouTypePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty Instance { get; init; }
@@ -335,33 +322,21 @@ public readonly partial struct SearchAsYouTypePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchAsYouTypeProperty.g.xml" path="doc/member[@key='_types.mapping.SearchAsYouTypeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

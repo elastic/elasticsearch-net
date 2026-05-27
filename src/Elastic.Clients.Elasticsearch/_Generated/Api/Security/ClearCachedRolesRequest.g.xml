@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.clear_cached_roles.Request"><summary><para>
+Clear the roles cache.
+</para>
+<para>
+Evict roles from the native role cache.
+</para></summary></member>
+  <member key="security.clear_cached_roles.Request#name"><summary><para>
+A comma-separated list of roles to evict from the role cache.
+To evict all roles, use an asterisk (<c>*</c>).
+It does not support other wildcard patterns.
+</para></summary></member>
+</doc>

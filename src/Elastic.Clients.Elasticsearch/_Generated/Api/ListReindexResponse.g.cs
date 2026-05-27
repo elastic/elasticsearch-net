@@ -37,24 +37,12 @@ public sealed partial class ListReindexResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Node-level failures that occurred while listing reindex tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexResponse.g.xml" path="doc/member[@key='_global.list_reindex.Response#node_failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of currently running reindex tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexResponse.g.xml" path="doc/member[@key='_global.list_reindex.Response#reindex']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexTaskInfo> Reindex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task-level failures that occurred while listing reindex tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="ListReindexResponse.g.xml" path="doc/member[@key='_global.list_reindex.Response#task_failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
 }

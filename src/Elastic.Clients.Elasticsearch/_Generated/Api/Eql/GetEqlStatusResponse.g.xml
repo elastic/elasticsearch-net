@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.get_status.Response#completion_status"><summary><para>
+For a completed search shows the http status code of the completed search.
+</para></summary></member>
+  <member key="eql.get_status.Response#expiration_time_in_millis"><summary><para>
+Shows a timestamp when the eql search will be expired, in milliseconds since the Unix epoch. When this time is reached, the search and its results are deleted, even if the search is still ongoing.
+</para></summary></member>
+  <member key="eql.get_status.Response#id"><summary><para>
+Identifier for the search.
+</para></summary></member>
+  <member key="eql.get_status.Response#is_partial"><summary><para>
+If true, the search request is still executing. If false, the search is completed.
+</para></summary></member>
+  <member key="eql.get_status.Response#is_running"><summary><para>
+If true, the response does not contain complete search results. This could be because either the search is still running (is_running status is false), or because it is already completed (is_running status is true) and results are partial due to failures or timeouts.
+</para></summary></member>
+  <member key="eql.get_status.Response#start_time_in_millis"><summary><para>
+For a running search shows a timestamp when the eql search started, in milliseconds since the Unix epoch.
+</para></summary></member>
+</doc>

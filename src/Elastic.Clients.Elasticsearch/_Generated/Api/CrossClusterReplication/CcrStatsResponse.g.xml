@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.stats.Response#auto_follow_stats"><summary><para>
+Statistics for the auto-follow coordinator.
+</para></summary></member>
+  <member key="ccr.stats.Response#follow_stats"><summary><para>
+Shard-level statistics for follower indices.
+</para></summary></member>
+</doc>

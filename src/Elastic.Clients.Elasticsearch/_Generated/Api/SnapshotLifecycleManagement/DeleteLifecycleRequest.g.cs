@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 public sealed partial class DeleteLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a policy.
-/// </para>
-/// <para>
-/// Delete a snapshot lifecycle policy definition.
-/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
-/// </para>
-/// </summary>
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.DeleteLifecycleRequestConverter))]
 public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>
 {
@@ -77,39 +62,18 @@ public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "slm.delete_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// The id of the snapshot lifecycle policy to remove
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#policy_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a policy.
-/// </para>
-/// <para>
-/// Delete a snapshot lifecycle policy definition.
-/// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
-/// </para>
-/// </summary>
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.delete_lifecycle.Request']/*"/>
 public readonly partial struct DeleteLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest Instance { get; init; }
@@ -134,35 +98,21 @@ public readonly partial struct DeleteLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The id of the snapshot lifecycle policy to remove
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#policy_id']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.PolicyId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='slm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DotExpanderProcessorConverter))]
 public sealed partial class DotExpanderProcessor
 {
@@ -42,69 +43,32 @@ public sealed partial class DotExpanderProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to expand into an object field.
-	/// If set to <c>*</c>, all top-level fields will be expanded.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
-	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
-	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#override']/*"/>
 	public bool? Override { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that contains the field to expand.
-	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#path']/*"/>
 	public string? Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor']/*"/>
 public readonly partial struct DotExpanderProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor Instance { get; init; }
@@ -124,113 +88,70 @@ public readonly partial struct DotExpanderProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to expand into an object field.
-	/// If set to <c>*</c>, all top-level fields will be expanded.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to expand into an object field.
-	/// If set to <c>*</c>, all top-level fields will be expanded.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -243,37 +164,21 @@ public readonly partial struct DotExpanderProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
-	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
-	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that contains the field to expand.
-	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Path(string? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -289,6 +194,7 @@ public readonly partial struct DotExpanderProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor']/*"/>
 public readonly partial struct DotExpanderProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor Instance { get; init; }
@@ -308,113 +214,70 @@ public readonly partial struct DotExpanderProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to expand into an object field.
-	/// If set to <c>*</c>, all top-level fields will be expanded.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to expand into an object field.
-	/// If set to <c>*</c>, all top-level fields will be expanded.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -427,11 +290,7 @@ public readonly partial struct DotExpanderProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -444,37 +303,21 @@ public readonly partial struct DotExpanderProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the behavior when there is already an existing nested object that conflicts with the expanded field.
-	/// When <c>false</c>, the processor will merge conflicts by combining the old and the new values into an array.
-	/// When <c>true</c>, the value from the expanded field will overwrite the existing value.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that contains the field to expand.
-	/// Only required if the field to expand is part another object field, because the <c>field</c> option can only understand leaf fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Path(string? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DotExpanderProcessor.g.xml" path="doc/member[@key='ingest._types.DotExpanderProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

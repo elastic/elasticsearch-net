@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingTable']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelAssignmentRoutingTableConverter))]
 public sealed partial class TrainedModelAssignmentRoutingTable
 {
@@ -44,32 +45,15 @@ public sealed partial class TrainedModelAssignmentRoutingTable
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Current number of allocations.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingTable.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingTable#current_allocations']/*"/>
 	public required int CurrentAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The reason for the current state. It is usually populated only when the
-	/// <c>routing_state</c> is <c>failed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingTable.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingTable#reason']/*"/>
 	public string? Reason { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current routing state.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingTable.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingTable#routing_state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Target number of allocations.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentRoutingTable.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentRoutingTable#target_allocations']/*"/>
 	public required int TargetAllocations { get; set; }
 }

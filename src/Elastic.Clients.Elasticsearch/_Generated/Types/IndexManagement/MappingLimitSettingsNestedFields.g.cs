@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsNestedFieldsConverter))]
 public sealed partial class MappingLimitSettingsNestedFields
 {
@@ -36,16 +37,11 @@ public sealed partial class MappingLimitSettingsNestedFields
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when
-	/// arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this
-	/// setting limits the number of unique nested types per index.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsNestedFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedFields#limit']/*"/>
 	public long? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedFields']/*"/>
 public readonly partial struct MappingLimitSettingsNestedFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields Instance { get; init; }
@@ -65,13 +61,7 @@ public readonly partial struct MappingLimitSettingsNestedFieldsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when
-	/// arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this
-	/// setting limits the number of unique nested types per index.
-	/// </para>
-	/// </summary>
+	/// <include file="MappingLimitSettingsNestedFields.g.xml" path="doc/member[@key='indices._types.MappingLimitSettingsNestedFields#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor Limit(long? value)
 	{
 		Instance.Limit = value;

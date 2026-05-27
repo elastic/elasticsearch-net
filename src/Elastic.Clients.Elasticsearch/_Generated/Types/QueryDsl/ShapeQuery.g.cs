@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ShapeQueryConverter))]
 public sealed partial class ShapeQuery
 {
@@ -43,27 +44,17 @@ public sealed partial class ShapeQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> the query ignores an unmapped field and will not match any documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery']/*"/>
 public readonly partial struct ShapeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Instance { get; init; }
@@ -83,14 +74,7 @@ public readonly partial struct ShapeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -109,11 +93,7 @@ public readonly partial struct ShapeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> the query ignores an unmapped field and will not match any documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -153,6 +133,7 @@ public readonly partial struct ShapeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery']/*"/>
 public readonly partial struct ShapeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery Instance { get; init; }
@@ -172,14 +153,7 @@ public readonly partial struct ShapeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -198,11 +172,7 @@ public readonly partial struct ShapeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> the query ignores an unmapped field and will not match any documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;

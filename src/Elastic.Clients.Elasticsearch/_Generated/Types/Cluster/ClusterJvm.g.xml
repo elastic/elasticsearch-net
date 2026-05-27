@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterJvm#max_uptime"><summary><para>
+Uptime duration since JVM last started.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvm#max_uptime_in_millis"><summary><para>
+Uptime duration, in milliseconds, since JVM last started.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvm#mem"><summary><para>
+Contains statistics about memory used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvm#threads"><summary><para>
+Number of active threads in use by JVM across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvm#versions"><summary><para>
+Contains statistics about the JVM versions used by selected nodes.
+</para></summary></member>
+</doc>

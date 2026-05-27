@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.CgroupCpu']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CgroupCpuConverter))]
 public sealed partial class CgroupCpu
 {
@@ -36,31 +37,15 @@ public sealed partial class CgroupCpu
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period of time, in microseconds, for how regularly all tasks in the same cgroup as the Elasticsearch process should have their access to CPU resources reallocated.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpu.g.xml" path="doc/member[@key='nodes._types.CgroupCpu#cfs_period_micros']/*"/>
 	public int? CfsPeriodMicros { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total amount of time, in microseconds, for which all tasks in the same cgroup as the Elasticsearch process can run during one period <c>cfs_period_micros</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpu.g.xml" path="doc/member[@key='nodes._types.CgroupCpu#cfs_quota_micros']/*"/>
 	public int? CfsQuotaMicros { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The <c>cpu</c> control group to which the Elasticsearch process belongs.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpu.g.xml" path="doc/member[@key='nodes._types.CgroupCpu#control_group']/*"/>
 	public string? ControlGroup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains CPU statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpu.g.xml" path="doc/member[@key='nodes._types.CgroupCpu#stat']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat? Stat { get; set; }
 }

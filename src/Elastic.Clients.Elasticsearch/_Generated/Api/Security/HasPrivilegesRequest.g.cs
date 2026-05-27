@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
 public sealed partial class HasPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Check user privileges.
-/// </para>
-/// <para>
-/// Determine whether the specified user has a specified list of privileges.
-/// All users can use this API, but only to determine their own privileges.
-/// To check the privileges of other users, you must use the run as feature.
-/// </para>
-/// </summary>
+/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.HasPrivilegesRequestConverter))]
 public sealed partial class HasPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>
 {
@@ -62,33 +56,17 @@ public sealed partial class HasPrivilegesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "security.has_privileges";
 
-	/// <summary>
-	/// <para>
-	/// Username
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? User { get => P<Elastic.Clients.Elasticsearch.Name?>("user"); set => PO("user", value); }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? Application { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request#cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? Index { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Check user privileges.
-/// </para>
-/// <para>
-/// Determine whether the specified user has a specified list of privileges.
-/// All users can use this API, but only to determine their own privileges.
-/// To check the privileges of other users, you must use the run as feature.
-/// </para>
-/// </summary>
+/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.Request']/*"/>
 public readonly partial struct HasPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest Instance { get; init; }
@@ -112,11 +90,7 @@ public readonly partial struct HasPrivilegesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Username
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor User(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.User = value;
@@ -147,22 +121,14 @@ public readonly partial struct HasPrivilegesRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="HasPrivilegesRequest.g.xml" path="doc/member[@key='security.has_privileges.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];

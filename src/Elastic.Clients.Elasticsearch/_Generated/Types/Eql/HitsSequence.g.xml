@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql._types.HitsSequence#events"><summary><para>
+Contains events matching the query. Each object represents a matching event.
+</para></summary></member>
+  <member key="eql._types.HitsSequence#join_keys"><summary><para>
+Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.
+</para></summary></member>
+</doc>

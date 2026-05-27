@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLinear']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionLinearConverter))]
 public sealed partial class RankFeatureFunctionLinear
 {
@@ -37,6 +38,7 @@ public sealed partial class RankFeatureFunctionLinear
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLinear']/*"/>
 public readonly partial struct RankFeatureFunctionLinearDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear Instance { get; init; }

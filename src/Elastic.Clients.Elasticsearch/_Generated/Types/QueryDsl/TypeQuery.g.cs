@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TypeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TypeQueryConverter))]
 public sealed partial class TypeQuery
 {
@@ -42,19 +43,13 @@ public sealed partial class TypeQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TypeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TypeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
 	public required string Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TypeQuery']/*"/>
 public readonly partial struct TypeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery Instance { get; init; }
@@ -74,14 +69,7 @@ public readonly partial struct TypeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery(Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TypeQuery.g.xml" path="doc/member[@key='_types.query_dsl.TypeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

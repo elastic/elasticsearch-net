@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="searchable_snapshots.cache_stats.Request"><summary><para>
+Get cache statistics.
+</para>
+<para>
+Get statistics about the shared cache for partially mounted indices.
+</para></summary></member>
+  <member key="searchable_snapshots.cache_stats.Request#node_id"><summary><para>
+The names of the nodes in the cluster to target.
+</para></summary></member>
+</doc>

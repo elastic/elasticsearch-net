@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.NlpBertTokenizationConfig"><summary><para>
+BERT and MPNet tokenization configuration options
+</para></summary></member>
+  <member key="ml._types.NlpBertTokenizationConfig#do_lower_case"><summary><para>
+Should the tokenizer lower case the text
+</para></summary></member>
+  <member key="ml._types.NlpBertTokenizationConfig#max_sequence_length"><summary><para>
+Maximum input sequence length for the model
+</para></summary></member>
+  <member key="ml._types.NlpBertTokenizationConfig#span"><summary><para>
+Tokenization spanning options. Special value of -1 indicates no spanning takes place
+</para></summary></member>
+  <member key="ml._types.NlpBertTokenizationConfig#truncate"><summary><para>
+Should tokenization input be automatically truncated before sending to the model for inference
+</para></summary></member>
+  <member key="ml._types.NlpBertTokenizationConfig#with_special_tokens"><summary><para>
+Is tokenization completed with special tokens
+</para></summary></member>
+</doc>

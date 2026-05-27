@@ -23,38 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
 public sealed partial class PutPipelineRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Required version for optimistic concurrency control for pipeline updates
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#if_version']/*"/>
 	public int? IfVersion { get => Q<int?>("if_version"); set => Q("if_version", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a pipeline.
-/// </para>
-/// <para>
-/// Changes made using this API take effect immediately.
-/// </para>
-/// </summary>
+/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PutPipelineRequestConverter))]
 public sealed partial class PutPipelineRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>
 {
@@ -81,93 +65,42 @@ public sealed partial class PutPipelineRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "ingest.put_pipeline";
 
-	/// <summary>
-	/// <para>
-	/// ID of the ingest pipeline to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Required version for optimistic concurrency control for pipeline updates
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#if_version']/*"/>
 	public int? IfVersion { get => Q<int?>("if_version"); set => Q("if_version", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Marks this ingest pipeline as deprecated.
-	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#deprecated']/*"/>
 	public bool? Deprecated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls how processors in this pipeline should read and write data on a document's source.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#field_access_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? FieldAccessPattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version number used by external systems to track ingest pipelines. This parameter is intended for external systems only. Elasticsearch does not use or validate pipeline version numbers.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#version']/*"/>
 	public long? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a pipeline.
-/// </para>
-/// <para>
-/// Changes made using this API take effect immediately.
-/// </para>
-/// </summary>
+/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
 public readonly partial struct PutPipelineRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest Instance { get; init; }
@@ -192,111 +125,70 @@ public readonly partial struct PutPipelineRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// ID of the ingest pipeline to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Required version for optimistic concurrency control for pipeline updates
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#if_version']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor IfVersion(int? value)
 	{
 		Instance.IfVersion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this ingest pipeline as deprecated.
-	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls how processors in this pipeline should read and write data on a document's source.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#field_access_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor FieldAccessPattern(Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? value)
 	{
 		Instance.FieldAccessPattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -310,33 +202,21 @@ public readonly partial struct PutPipelineRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -349,11 +229,7 @@ public readonly partial struct PutPipelineRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -366,33 +242,21 @@ public readonly partial struct PutPipelineRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Processors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.Processors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Processors(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.Processors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Processors(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -405,11 +269,7 @@ public readonly partial struct PutPipelineRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Processors<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -422,11 +282,7 @@ public readonly partial struct PutPipelineRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used by external systems to track ingest pipelines. This parameter is intended for external systems only. Elasticsearch does not use or validate pipeline version numbers.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
@@ -489,14 +345,8 @@ public readonly partial struct PutPipelineRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update a pipeline.
-/// </para>
-/// <para>
-/// Changes made using this API take effect immediately.
-/// </para>
-/// </summary>
+/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_pipeline.Request']/*"/>
 public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest Instance { get; init; }
@@ -521,111 +371,70 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// ID of the ingest pipeline to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Required version for optimistic concurrency control for pipeline updates
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#if_version']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> IfVersion(int? value)
 	{
 		Instance.IfVersion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this ingest pipeline as deprecated.
-	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls how processors in this pipeline should read and write data on a document's source.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#field_access_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> FieldAccessPattern(Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? value)
 	{
 		Instance.FieldAccessPattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata about the ingest pipeline. May have any contents. This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -639,33 +448,21 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors to run immediately after a processor failure. Each processor supports a processor-level <c>on_failure</c> value. If a processor without an <c>on_failure</c> value fails, Elasticsearch uses this pipeline-level parameter as a fallback. The processors in this parameter run sequentially in the order specified. Elasticsearch will not attempt to run the pipeline's remaining processors.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -678,33 +475,21 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Processors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.Processors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Processors(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.Processors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing. Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Processors(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -717,11 +502,7 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used by external systems to track ingest pipelines. This parameter is intended for external systems only. Elasticsearch does not use or validate pipeline version numbers.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPipelineRequest.g.xml" path="doc/member[@key='ingest.put_pipeline.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
