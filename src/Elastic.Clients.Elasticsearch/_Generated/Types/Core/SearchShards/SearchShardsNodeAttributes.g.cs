@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search_shards.SearchShardsNodeAttributes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.Json.SearchShardsNodeAttributesConverter))]
 public sealed partial class SearchShardsNodeAttributes
 {
@@ -50,36 +51,20 @@ public sealed partial class SearchShardsNodeAttributes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Lists node attributes.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsNodeAttributes.g.xml" path="doc/member[@key='_global.search_shards.SearchShardsNodeAttributes#attributes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ephemeral ID of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsNodeAttributes.g.xml" path="doc/member[@key='_global.search_shards.SearchShardsNodeAttributes#ephemeral_id']/*"/>
 	public required string EphemeralId { get; set; }
 	public required string ExternalId { get; set; }
 	public required int MaxIndexVersion { get; set; }
 	public required int MinIndexVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The human-readable identifier of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsNodeAttributes.g.xml" path="doc/member[@key='_global.search_shards.SearchShardsNodeAttributes#name']/*"/>
 	public required string Name { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The host and port where transport HTTP connections are accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchShardsNodeAttributes.g.xml" path="doc/member[@key='_global.search_shards.SearchShardsNodeAttributes#transport_address']/*"/>
 	public required string TransportAddress { get; set; }
 	public required string Version { get; set; }
 }

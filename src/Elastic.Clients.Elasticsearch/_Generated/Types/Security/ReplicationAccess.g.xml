@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.ReplicationAccess#allow_restricted_indices"><summary><para>
+This needs to be set to true if the patterns in the names field should cover system indices.
+</para></summary></member>
+  <member key="security._types.ReplicationAccess#names"><summary><para>
+A list of indices (or index name patterns) to which the permissions in this entry apply.
+</para></summary></member>
+</doc>

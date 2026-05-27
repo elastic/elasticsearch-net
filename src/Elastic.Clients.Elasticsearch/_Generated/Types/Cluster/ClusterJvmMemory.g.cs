@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterJvmMemory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterJvmMemoryConverter))]
 public sealed partial class ClusterJvmMemory
 {
@@ -43,31 +44,15 @@ public sealed partial class ClusterJvmMemory
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory available for use by the heap across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmMemory.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmMemory#heap_max']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, in bytes, available for use by the heap across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmMemory.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmMemory#heap_max_in_bytes']/*"/>
 	public required long HeapMaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory currently in use by the heap across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmMemory.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmMemory#heap_used']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapUsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory, in bytes, currently in use by the heap across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvmMemory.g.xml" path="doc/member[@key='cluster.stats.ClusterJvmMemory#heap_used_in_bytes']/*"/>
 	public required long HeapUsedInBytes { get; set; }
 }

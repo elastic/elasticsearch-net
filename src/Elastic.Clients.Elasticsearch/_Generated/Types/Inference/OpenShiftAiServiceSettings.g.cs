@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenShiftAiServiceSettingsConverter))]
 public sealed partial class OpenShiftAiServiceSettings
 {
@@ -43,71 +44,26 @@ public sealed partial class OpenShiftAiServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your OpenShift AI endpoint.
-	/// Can be found in <c>Token authentication</c> section of model related information.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#max_input_tokens']/*"/>
 	public int? MaxInputTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the hosted model's documentation for the name if needed.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>gritlm-7b</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama-31-8b-instruct</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>bge-reranker-v2-m3</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#model_id']/*"/>
 	public string? ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the OpenShift AI API.
-	/// By default, the <c>openshift_ai</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// If not specified, the default dot_product value is used.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL of the OpenShift AI hosted model endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#url']/*"/>
 	public required string Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings']/*"/>
 public readonly partial struct OpenShiftAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings Instance { get; init; }
@@ -127,112 +83,56 @@ public readonly partial struct OpenShiftAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your OpenShift AI endpoint.
-	/// Can be found in <c>Token authentication</c> section of model related information.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#max_input_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor MaxInputTokens(int? value)
 	{
 		Instance.MaxInputTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the hosted model's documentation for the name if needed.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>gritlm-7b</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama-31-8b-instruct</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>bge-reranker-v2-m3</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the OpenShift AI API.
-	/// By default, the <c>openshift_ai</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the OpenShift AI API.
-	/// By default, the <c>openshift_ai</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the OpenShift AI API.
-	/// By default, the <c>openshift_ai</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// If not specified, the default dot_product value is used.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL of the OpenShift AI hosted model endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenShiftAiServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenShiftAiServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor Url(string value)
 	{
 		Instance.Url = value;

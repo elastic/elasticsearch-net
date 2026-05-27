@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.MappingLimitSettingsDepth#limit"><summary><para>
+The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined
+at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.
+</para></summary></member>
+</doc>

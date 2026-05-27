@@ -23,39 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 public sealed partial class GetDataLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream lifecycles.
-/// </para>
-/// <para>
-/// Get the data stream lifecycle configuration of one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleRequestConverter))]
 public sealed partial class GetDataLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>
 {
@@ -82,46 +65,21 @@ public sealed partial class GetDataLifecycleRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.get_data_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream lifecycles.
-/// </para>
-/// <para>
-/// Get the data stream lifecycle configuration of one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 public readonly partial struct GetDataLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest Instance { get; init; }
@@ -146,59 +104,35 @@ public readonly partial struct GetDataLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

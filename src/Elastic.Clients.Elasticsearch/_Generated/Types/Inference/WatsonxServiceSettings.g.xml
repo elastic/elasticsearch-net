@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.WatsonxServiceSettings#api_key"><summary><para>
+A valid API key of your Watsonx account.
+You can find your Watsonx API keys or you can create a new one on the API keys page.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.WatsonxServiceSettings#api_version"><summary><para>
+A version parameter that takes a version date in the format of <c>YYYY-MM-DD</c>.
+For the active version data parameters, refer to the Wastonx documentation.
+</para></summary></member>
+  <member key="inference._types.WatsonxServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
+Refer to the IBM library - Foundation models in Watsonx.ai.
+</para></summary></member>
+  <member key="inference._types.WatsonxServiceSettings#project_id"><summary><para>
+The identifier of the IBM Cloud project to use for the inference task.
+</para></summary></member>
+  <member key="inference._types.WatsonxServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Watsonx.
+By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+</para></summary></member>
+  <member key="inference._types.WatsonxServiceSettings#url"><summary><para>
+The URL of the inference endpoint that you created on Watsonx.
+</para></summary></member>
+</doc>

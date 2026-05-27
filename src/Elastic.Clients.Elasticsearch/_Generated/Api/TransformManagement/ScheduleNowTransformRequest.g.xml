@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.schedule_now_transform.Request"><summary><para>
+Schedule a transform to start now.
+</para>
+<para>
+Instantly run a transform to process data.
+If you run this API, the transform will process the new data instantly,
+without waiting for the configured frequency interval. After the API is called,
+the transform will be processed again at <c>now + frequency</c> unless the API
+is called again in the meantime.
+</para></summary></member>
+  <member key="transform.schedule_now_transform.Request#defer"><summary><para>
+When true, defers the scheduling by the transform's configured sync delay
+instead of triggering immediately. The transform will process new data after
+the delay elapses rather than right away.
+</para></summary></member>
+  <member key="transform.schedule_now_transform.Request#timeout"><summary><para>
+Controls the time to wait for the scheduling to take place
+</para></summary></member>
+  <member key="transform.schedule_now_transform.Request#transform_id"><summary><para>
+Identifier for the transform.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LaplaceSmoothingModel']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.LaplaceSmoothingModelConverter))]
 public sealed partial class LaplaceSmoothingModel
 {
@@ -42,14 +43,11 @@ public sealed partial class LaplaceSmoothingModel
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A constant that is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
+	/// <include file="LaplaceSmoothingModel.g.xml" path="doc/member[@key='_global.search._types.LaplaceSmoothingModel#alpha']/*"/>
 	public required double Alpha { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LaplaceSmoothingModel']/*"/>
 public readonly partial struct LaplaceSmoothingModelDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel Instance { get; init; }
@@ -69,11 +67,7 @@ public readonly partial struct LaplaceSmoothingModelDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel instance) => new Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A constant that is added to all counts to balance weights.
-	/// </para>
-	/// </summary>
+	/// <include file="LaplaceSmoothingModel.g.xml" path="doc/member[@key='_global.search._types.LaplaceSmoothingModel#alpha']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor Alpha(double value)
 	{
 		Instance.Alpha = value;

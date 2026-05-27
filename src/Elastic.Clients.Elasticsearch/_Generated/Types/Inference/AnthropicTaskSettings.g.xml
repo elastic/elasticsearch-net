@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AnthropicTaskSettings#max_tokens"><summary><para>
+For a <c>completion</c> task, it is the maximum number of tokens to generate before stopping.
+</para></summary></member>
+  <member key="inference._types.AnthropicTaskSettings#temperature"><summary><para>
+For a <c>completion</c> task, it is the amount of randomness injected into the response.
+For more details about the supported range, refer to Anthropic documentation.
+</para></summary></member>
+  <member key="inference._types.AnthropicTaskSettings#top_k"><summary><para>
+For a <c>completion</c> task, it specifies to only sample from the top K options for each subsequent token.
+It is recommended for advanced use cases only.
+You usually only need to use <c>temperature</c>.
+</para></summary></member>
+  <member key="inference._types.AnthropicTaskSettings#top_p"><summary><para>
+For a <c>completion</c> task, it specifies to use Anthropic's nucleus sampling.
+In nucleus sampling, Anthropic computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches the specified probability.
+You should either alter <c>temperature</c> or <c>top_p</c>, but not both.
+It is recommended for advanced use cases only.
+You usually only need to use <c>temperature</c>.
+</para></summary></member>
+</doc>

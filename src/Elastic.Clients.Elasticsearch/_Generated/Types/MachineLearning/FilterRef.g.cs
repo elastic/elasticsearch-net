@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.FilterRef']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FilterRefConverter))]
 public sealed partial class FilterRef
 {
@@ -42,21 +43,14 @@ public sealed partial class FilterRef
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="FilterRef.g.xml" path="doc/member[@key='ml._types.FilterRef#filter_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="FilterRef.g.xml" path="doc/member[@key='ml._types.FilterRef#filter_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FilterType? FilterType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.FilterRef']/*"/>
 public readonly partial struct FilterRefDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.FilterRef Instance { get; init; }
@@ -76,22 +70,14 @@ public readonly partial struct FilterRefDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FilterRef instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="FilterRef.g.xml" path="doc/member[@key='ml._types.FilterRef#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.FilterId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>include</c>, the rule applies for values in the filter. If set to <c>exclude</c>, the rule applies for values not in the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="FilterRef.g.xml" path="doc/member[@key='ml._types.FilterRef#filter_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FilterRefDescriptor FilterType(Elastic.Clients.Elasticsearch.MachineLearning.FilterType? value)
 	{
 		Instance.FilterType = value;

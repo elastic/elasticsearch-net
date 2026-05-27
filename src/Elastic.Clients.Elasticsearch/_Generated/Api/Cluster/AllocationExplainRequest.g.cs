@@ -23,43 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
 public sealed partial class AllocationExplainRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, returns information about disk usage and shard sizes.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_disk_info']/*"/>
 	public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns YES decisions in explanation.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_yes_decisions']/*"/>
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Explain the shard allocations.
-/// </para>
-/// <para>
-/// Get explanations for shard allocations in the cluster.
-/// This API accepts the current_node, index, primary and shard parameters in the request body or in query parameters, but not in both at the same time.
-/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-/// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
-/// </para>
-/// </summary>
+/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.AllocationExplainRequestConverter))]
 public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>
 {
@@ -81,69 +60,30 @@ public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "cluster.allocation_explain";
 
-	/// <summary>
-	/// <para>
-	/// If true, returns information about disk usage and shard sizes.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_disk_info']/*"/>
 	public bool? IncludeDiskInfo { get => Q<bool?>("include_disk_info"); set => Q("include_disk_info", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns YES decisions in explanation.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_yes_decisions']/*"/>
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Explain a shard only if it is currently located on the specified node name or node ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#current_node']/*"/>
 	public string? CurrentNode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that you would like an explanation for.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns an explanation for the primary shard for the specified shard ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#primary']/*"/>
 	public bool? Primary { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the shard that you would like an explanation for.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#shard']/*"/>
 	public int? Shard { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Explain the shard allocations.
-/// </para>
-/// <para>
-/// Get explanations for shard allocations in the cluster.
-/// This API accepts the current_node, index, primary and shard parameters in the request body or in query parameters, but not in both at the same time.
-/// For unassigned shards, it provides an explanation for why the shard is unassigned.
-/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
-/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
-/// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
-/// </para>
-/// </summary>
+/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.allocation_explain.Request']/*"/>
 public readonly partial struct AllocationExplainRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Instance { get; init; }
@@ -162,77 +102,49 @@ public readonly partial struct AllocationExplainRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, returns information about disk usage and shard sizes.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_disk_info']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor IncludeDiskInfo(bool? value = true)
 	{
 		Instance.IncludeDiskInfo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns YES decisions in explanation.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#include_yes_decisions']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor IncludeYesDecisions(bool? value = true)
 	{
 		Instance.IncludeYesDecisions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Explain a shard only if it is currently located on the specified node name or node ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#current_node']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor CurrentNode(string? value)
 	{
 		Instance.CurrentNode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that you would like an explanation for.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns an explanation for the primary shard for the specified shard ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#primary']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Primary(bool? value = true)
 	{
 		Instance.Primary = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the shard that you would like an explanation for.
-	/// </para>
-	/// </summary>
+	/// <include file="AllocationExplainRequest.g.xml" path="doc/member[@key='cluster.allocation_explain.Request#shard']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Shard(int? value)
 	{
 		Instance.Shard = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ScriptedHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ScriptedHeuristicConverter))]
 public sealed partial class ScriptedHeuristic
 {
@@ -45,6 +46,7 @@ public sealed partial class ScriptedHeuristic
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ScriptedHeuristic']/*"/>
 public readonly partial struct ScriptedHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic Instance { get; init; }

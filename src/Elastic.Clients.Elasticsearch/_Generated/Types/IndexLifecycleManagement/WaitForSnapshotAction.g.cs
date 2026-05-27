@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.WaitForSnapshotAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.WaitForSnapshotActionConverter))]
 public sealed partial class WaitForSnapshotAction
 {
@@ -45,6 +46,7 @@ public sealed partial class WaitForSnapshotAction
 	public required string Policy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.WaitForSnapshotAction']/*"/>
 public readonly partial struct WaitForSnapshotActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction Instance { get; init; }

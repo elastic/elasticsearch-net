@@ -23,38 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
 public sealed partial class PendingTasksRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the pending cluster tasks.
-/// </para>
-/// <para>
-/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-/// </para>
-/// <para>
-/// NOTE: This API returns a list of any pending updates to the cluster state.
-/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-/// </para>
-/// </summary>
+/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PendingTasksRequestConverter))]
 public sealed partial class PendingTasksRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters>
 {
@@ -76,36 +57,15 @@ public sealed partial class PendingTasksRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "cluster.pending_tasks";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the pending cluster tasks.
-/// </para>
-/// <para>
-/// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
-/// </para>
-/// <para>
-/// NOTE: This API returns a list of any pending updates to the cluster state.
-/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
-/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
-/// </para>
-/// </summary>
+/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.pending_tasks.Request']/*"/>
 public readonly partial struct PendingTasksRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest Instance { get; init; }
@@ -124,24 +84,14 @@ public readonly partial struct PendingTasksRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PendingTasksRequest.g.xml" path="doc/member[@key='cluster.pending_tasks.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

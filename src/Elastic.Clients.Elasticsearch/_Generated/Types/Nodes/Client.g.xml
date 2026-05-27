@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Client#agent"><summary><para>
+Reported agent for the HTTP client.
+If unavailable, this property is not included in the response.
+</para></summary></member>
+  <member key="nodes._types.Client#closed_time_millis"><summary><para>
+Time at which the client closed the connection if the connection is closed.
+</para></summary></member>
+  <member key="nodes._types.Client#id"><summary><para>
+Unique ID for the HTTP client.
+</para></summary></member>
+  <member key="nodes._types.Client#last_request_time_millis"><summary><para>
+Time of the most recent request from this client.
+</para></summary></member>
+  <member key="nodes._types.Client#last_uri"><summary><para>
+The URI of the client’s most recent request.
+</para></summary></member>
+  <member key="nodes._types.Client#local_address"><summary><para>
+Local address for the HTTP connection.
+</para></summary></member>
+  <member key="nodes._types.Client#opened_time_millis"><summary><para>
+Time at which the client opened the connection.
+</para></summary></member>
+  <member key="nodes._types.Client#remote_address"><summary><para>
+Remote address for the HTTP connection.
+</para></summary></member>
+  <member key="nodes._types.Client#request_count"><summary><para>
+Number of requests from this client.
+</para></summary></member>
+  <member key="nodes._types.Client#request_size_bytes"><summary><para>
+Cumulative size in bytes of all requests from this client.
+</para></summary></member>
+  <member key="nodes._types.Client#x_opaque_id"><summary><para>
+Value from the client’s <c>x-opaque-id</c> HTTP header.
+If unavailable, this property is not included in the response.
+</para></summary></member>
+</doc>

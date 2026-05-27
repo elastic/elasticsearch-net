@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.VoyageAITaskSettingsConverter))]
 public sealed partial class VoyageAITaskSettings
 {
@@ -36,40 +37,20 @@ public sealed partial class VoyageAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of the input text.
-	/// Permitted values: <c>ingest</c> (maps to <c>document</c> in the VoyageAI documentation), <c>search</c> (maps to <c>query</c> in the VoyageAI documentation).
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#input_type']/*"/>
 	public string? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to return the source documents in the response.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of most relevant documents to return.
-	/// If not specified, the reranking results of all documents will be returned.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#top_k']/*"/>
 	public int? TopK { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to truncate the input texts to fit within the context length.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#truncation']/*"/>
 	public bool? Truncation { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings']/*"/>
 public readonly partial struct VoyageAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings Instance { get; init; }
@@ -89,49 +70,28 @@ public readonly partial struct VoyageAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings(Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Type of the input text.
-	/// Permitted values: <c>ingest</c> (maps to <c>document</c> in the VoyageAI documentation), <c>search</c> (maps to <c>query</c> in the VoyageAI documentation).
-	/// Only for the <c>text_embedding</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor InputType(string? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to return the source documents in the response.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of most relevant documents to return.
-	/// If not specified, the reranking results of all documents will be returned.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#top_k']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor TopK(int? value)
 	{
 		Instance.TopK = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to truncate the input texts to fit within the context length.
-	/// </para>
-	/// </summary>
+	/// <include file="VoyageAITaskSettings.g.xml" path="doc/member[@key='inference._types.VoyageAITaskSettings#truncation']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.VoyageAiTaskSettingsDescriptor Truncation(bool? value = true)
 	{
 		Instance.Truncation = value;

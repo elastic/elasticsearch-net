@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.LikeDocument#_id"><summary><para>
+ID of a document.
+</para></summary></member>
+  <member key="_types.query_dsl.LikeDocument#_index"><summary><para>
+Index of a document.
+</para></summary></member>
+  <member key="_types.query_dsl.LikeDocument#doc"><summary><para>
+A document not present in the index.
+</para></summary></member>
+  <member key="_types.query_dsl.LikeDocument#per_field_analyzer"><summary><para>
+Overrides the default analyzer.
+</para></summary></member>
+</doc>

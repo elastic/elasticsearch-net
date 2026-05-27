@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.clone_api_key.Request"><summary><para>
+Clone an API key.
+</para>
+<para>
+Create a copy of an existing API key with a new ID.
+The cloned key inherits the role descriptors of the source key.
+This is intended for applications (such as Kibana) that need to
+create API keys on behalf of a user using an existing API key credential,
+since derived API keys (API keys created by API keys) are not otherwise supported.
+</para></summary></member>
+  <member key="security.clone_api_key.Request#api_key"><summary><para>
+The credentials of the API key to clone.
+This is the secret value returned when the key was originally created.
+</para></summary></member>
+  <member key="security.clone_api_key.Request#expiration"><summary><para>
+The expiration time for the cloned API key.
+By default, API keys never expire.
+Set to <c>null</c> to explicitly create a key with no expiration.
+</para></summary></member>
+  <member key="security.clone_api_key.Request#metadata"><summary><para>
+Arbitrary metadata to associate with the cloned API key.
+It supports nested data structure.
+Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
+</para></summary></member>
+  <member key="security.clone_api_key.Request#name"><summary><para>
+A name for the cloned API key.
+If not provided, the name of the source key is used.
+</para></summary></member>
+  <member key="security.clone_api_key.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+</doc>

@@ -23,26 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 public sealed partial class ScriptsPainlessExecuteRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Run a script.
-/// </para>
-/// <para>
-/// Runs a script and returns a result.
-/// Use this API to build and test scripts, such as when defining a script for a runtime field.
-/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
-/// </para>
-/// <para>
-/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
-/// </para>
-/// <para>
-/// Each context requires a script, but additional parameters depend on the context you're using for that script.
-/// </para>
-/// </summary>
+/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScriptsPainlessExecuteRequestConverter))]
 public sealed partial class ScriptsPainlessExecuteRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>
 {
@@ -64,46 +52,18 @@ public sealed partial class ScriptsPainlessExecuteRequest : Elastic.Clients.Elas
 
 	internal override string OperationName => "scripts_painless_execute";
 
-	/// <summary>
-	/// <para>
-	/// The context that the script should run in.
-	/// NOTE: Result ordering in the field contexts is not guaranteed.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? Context { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run a script.
-/// </para>
-/// <para>
-/// Runs a script and returns a result.
-/// Use this API to build and test scripts, such as when defining a script for a runtime field.
-/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
-/// </para>
-/// <para>
-/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
-/// </para>
-/// <para>
-/// Each context requires a script, but additional parameters depend on the context you're using for that script.
-/// </para>
-/// </summary>
+/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 public readonly partial struct ScriptsPainlessExecuteRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Instance { get; init; }
@@ -122,81 +82,49 @@ public readonly partial struct ScriptsPainlessExecuteRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance) => new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The context that the script should run in.
-	/// NOTE: Result ordering in the field contexts is not guaranteed.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? value)
 	{
 		Instance.Context = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? value)
 	{
 		Instance.ContextSetup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> action)
 	{
 		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor ContextSetup<T>(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<T>> action)
 	{
 		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -264,22 +192,8 @@ public readonly partial struct ScriptsPainlessExecuteRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run a script.
-/// </para>
-/// <para>
-/// Runs a script and returns a result.
-/// Use this API to build and test scripts, such as when defining a script for a runtime field.
-/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
-/// </para>
-/// <para>
-/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
-/// </para>
-/// <para>
-/// Each context requires a script, but additional parameters depend on the context you're using for that script.
-/// </para>
-/// </summary>
+/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.Request']/*"/>
 public readonly partial struct ScriptsPainlessExecuteRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Instance { get; init; }
@@ -298,69 +212,42 @@ public readonly partial struct ScriptsPainlessExecuteRequestDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest instance) => new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The context that the script should run in.
-	/// NOTE: Result ordering in the field contexts is not guaranteed.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? value)
 	{
 		Instance.Context = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? value)
 	{
 		Instance.ContextSetup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional parameters for the <c>context</c>.
-	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#context_setup']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(System.Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> action)
 	{
 		Instance.ContextSetup = Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Painless script to run.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptsPainlessExecuteRequest.g.xml" path="doc/member[@key='_global.scripts_painless_execute.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

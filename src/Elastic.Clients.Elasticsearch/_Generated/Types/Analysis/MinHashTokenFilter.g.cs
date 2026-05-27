@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.MinHashTokenFilterConverter))]
 public sealed partial class MinHashTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,40 +37,24 @@ public sealed partial class MinHashTokenFilter : Elastic.Clients.Elasticsearch.A
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of buckets to which hashes are assigned. Defaults to <c>512</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#bucket_count']/*"/>
 	public int? BucketCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of ways to hash each token in the stream. Defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#hash_count']/*"/>
 	public int? HashCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of hashes to keep from each bucket. Defaults to <c>1</c>.
-	/// Hashes are retained by ascending size, starting with the bucket’s smallest hash first.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#hash_set_size']/*"/>
 	public int? HashSetSize { get; set; }
 
 	public string Type => "min_hash";
 
 	public string? Version { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the filter fills empty buckets with the value of the first non-empty bucket to its circular right if the <c>hash_set_size</c> is <c>1</c>. If the <c>bucket_count</c> argument is greater than 1, this parameter defaults to <c>true</c>. Otherwise, this parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#with_rotation']/*"/>
 	public bool? WithRotation { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter']/*"/>
 public readonly partial struct MinHashTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter Instance { get; init; }
@@ -89,34 +74,21 @@ public readonly partial struct MinHashTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter(Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Number of buckets to which hashes are assigned. Defaults to <c>512</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#bucket_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor BucketCount(int? value)
 	{
 		Instance.BucketCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of ways to hash each token in the stream. Defaults to <c>1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#hash_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor HashCount(int? value)
 	{
 		Instance.HashCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hashes to keep from each bucket. Defaults to <c>1</c>.
-	/// Hashes are retained by ascending size, starting with the bucket’s smallest hash first.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#hash_set_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor HashSetSize(int? value)
 	{
 		Instance.HashSetSize = value;
@@ -129,11 +101,7 @@ public readonly partial struct MinHashTokenFilterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the filter fills empty buckets with the value of the first non-empty bucket to its circular right if the <c>hash_set_size</c> is <c>1</c>. If the <c>bucket_count</c> argument is greater than 1, this parameter defaults to <c>true</c>. Otherwise, this parameter defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MinHashTokenFilter.g.xml" path="doc/member[@key='_types.analysis.MinHashTokenFilter#with_rotation']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor WithRotation(bool? value = true)
 	{
 		Instance.WithRotation = value;

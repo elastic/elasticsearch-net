@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.get_repository.Request"><summary><para>
+Get snapshot repository information.
+</para></summary></member>
+  <member key="snapshot.get_repository.Request#local"><summary><para>
+If <c>true</c>, the request gets information from the local node only.
+If <c>false</c>, the request gets information from the master node.
+</para></summary></member>
+  <member key="snapshot.get_repository.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="snapshot.get_repository.Request#repository"><summary><para>
+A comma-separated list of snapshot repository names used to limit the request.
+Wildcard (<c>*</c>) expressions are supported including combining wildcards with exclude patterns starting with <c>-</c>.
+</para>
+<para>
+To get information about all snapshot repositories registered in the cluster, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+</doc>

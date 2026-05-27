@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.Memory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.MemoryConverter))]
 public sealed partial class Memory
 {
@@ -51,38 +52,18 @@ public sealed partial class Memory
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 	public required string EphemeralId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains Java Virtual Machine (JVM) statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Memory.g.xml" path="doc/member[@key='ml.get_memory_stats.Memory#jvm']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.JvmStats Jvm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about memory usage for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Memory.g.xml" path="doc/member[@key='ml.get_memory_stats.Memory#mem']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.MemStats Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human-readable identifier for the node. Based on the Node name setting setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Memory.g.xml" path="doc/member[@key='ml.get_memory_stats.Memory#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Roles assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Memory.g.xml" path="doc/member[@key='ml.get_memory_stats.Memory#roles']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The host and port where transport HTTP connections are accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="Memory.g.xml" path="doc/member[@key='ml.get_memory_stats.Memory#transport_address']/*"/>
 	public required string TransportAddress { get; set; }
 }

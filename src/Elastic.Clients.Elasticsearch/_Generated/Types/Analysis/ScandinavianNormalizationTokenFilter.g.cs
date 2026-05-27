@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ScandinavianNormalizationTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ScandinavianNormalizationTokenFilterConverter))]
 public sealed partial class ScandinavianNormalizationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class ScandinavianNormalizationTokenFilter : Elastic.Clien
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ScandinavianNormalizationTokenFilter']/*"/>
 public readonly partial struct ScandinavianNormalizationTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter Instance { get; init; }

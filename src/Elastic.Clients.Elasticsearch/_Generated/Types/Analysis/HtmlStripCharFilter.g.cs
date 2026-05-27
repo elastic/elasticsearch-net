@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HtmlStripCharFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.HtmlStripCharFilterConverter))]
 public sealed partial class HtmlStripCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
@@ -43,6 +44,7 @@ public sealed partial class HtmlStripCharFilter : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HtmlStripCharFilter']/*"/>
 public readonly partial struct HtmlStripCharFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter Instance { get; init; }

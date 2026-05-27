@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Project;
 public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Project.ProjectNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Project.ProjectNamespacedClient> class for mocking.
 	/// </summary>
 	protected ProjectNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 	}
 
+	/// <include file="../Api/Project/CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse CreateManyRouting(Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse CreateManyRouting(System.Action<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor();
@@ -53,12 +55,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse> CreateManyRoutingAsync(Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/CreateManyRoutingRequest.g.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_many_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse> CreateManyRoutingAsync(System.Action<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor();
@@ -68,12 +74,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(string name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
@@ -82,6 +92,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
@@ -91,12 +103,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
@@ -105,6 +121,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/CreateRoutingRequest.g.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.create_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
@@ -114,12 +132,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(string name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
@@ -128,6 +150,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
@@ -137,12 +161,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
@@ -151,6 +179,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/DeleteRoutingRequest.g.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.delete_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
@@ -160,12 +190,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting(Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
@@ -174,6 +208,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting(System.Action<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
@@ -183,12 +219,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
@@ -197,6 +237,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetManyRoutingRequest.g.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_many_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(System.Action<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
@@ -206,12 +248,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(Elastic.Clients.Elasticsearch.Project.GetRoutingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(string name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
@@ -220,6 +266,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
@@ -229,12 +277,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(Elastic.Clients.Elasticsearch.Project.GetRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
@@ -243,6 +295,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/GetRoutingRequest.g.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.get_routing.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
@@ -252,12 +306,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.TagsResponse Tags(Elastic.Clients.Elasticsearch.Project.TagsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.TagsRequest, Elastic.Clients.Elasticsearch.Project.TagsResponse, Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.TagsResponse Tags()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor();
@@ -266,6 +324,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.TagsRequest, Elastic.Clients.Elasticsearch.Project.TagsResponse, Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Project.TagsResponse Tags(System.Action<Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor();
@@ -275,12 +335,16 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Project.TagsRequest, Elastic.Clients.Elasticsearch.Project.TagsResponse, Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.TagsResponse> TagsAsync(Elastic.Clients.Elasticsearch.Project.TagsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.TagsRequest, Elastic.Clients.Elasticsearch.Project.TagsResponse, Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.TagsResponse> TagsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor();
@@ -289,6 +353,8 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.TagsRequest, Elastic.Clients.Elasticsearch.Project.TagsResponse, Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Project/TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.TagsResponse> TagsAsync(System.Action<Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor();

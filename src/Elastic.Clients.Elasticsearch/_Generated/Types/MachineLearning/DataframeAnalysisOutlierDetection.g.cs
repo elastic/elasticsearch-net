@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisOutlierDetectionConverter))]
 public sealed partial class DataframeAnalysisOutlierDetection
 {
@@ -36,49 +37,26 @@ public sealed partial class DataframeAnalysisOutlierDetection
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the feature influence calculation is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#compute_feature_influence']/*"/>
 	public bool? ComputeFeatureInfluence { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum outlier score that a document needs to have in order to calculate its feature influence score. Value range: 0-1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#feature_influence_threshold']/*"/>
 	public double? FeatureInfluenceThreshold { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The method that outlier detection uses. Available methods are <c>lof</c>, <c>ldof</c>, <c>distance_kth_nn</c>, <c>distance_knn</c>, and <c>ensemble</c>. The default value is ensemble, which means that outlier detection uses an ensemble of different methods and normalises and combines their individual outlier scores to obtain the overall outlier score.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#method']/*"/>
 	public string? Method { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the value for how many nearest neighbors each method of outlier detection uses to calculate its outlier score. When the value is not set, different values are used for different ensemble members. This default behavior helps improve the diversity in the ensemble; only override it if you are confident that the value you choose is appropriate for the data set.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#n_neighbors']/*"/>
 	public int? NNeighbors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The proportion of the data set that is assumed to be outlying prior to outlier detection. For example, 0.05 means it is assumed that 5% of values are real outliers and 95% are inliers.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#outlier_fraction']/*"/>
 	public double? OutlierFraction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the following operation is performed on the columns before computing outlier scores: <c>(x_i - mean(x_i)) / sd(x_i)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#standardization_enabled']/*"/>
 	public bool? StandardizationEnabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection']/*"/>
 public readonly partial struct DataframeAnalysisOutlierDetectionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection Instance { get; init; }
@@ -98,66 +76,42 @@ public readonly partial struct DataframeAnalysisOutlierDetectionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the feature influence calculation is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#compute_feature_influence']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor ComputeFeatureInfluence(bool? value = true)
 	{
 		Instance.ComputeFeatureInfluence = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum outlier score that a document needs to have in order to calculate its feature influence score. Value range: 0-1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#feature_influence_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor FeatureInfluenceThreshold(double? value)
 	{
 		Instance.FeatureInfluenceThreshold = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The method that outlier detection uses. Available methods are <c>lof</c>, <c>ldof</c>, <c>distance_kth_nn</c>, <c>distance_knn</c>, and <c>ensemble</c>. The default value is ensemble, which means that outlier detection uses an ensemble of different methods and normalises and combines their individual outlier scores to obtain the overall outlier score.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#method']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor Method(string? value)
 	{
 		Instance.Method = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the value for how many nearest neighbors each method of outlier detection uses to calculate its outlier score. When the value is not set, different values are used for different ensemble members. This default behavior helps improve the diversity in the ensemble; only override it if you are confident that the value you choose is appropriate for the data set.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#n_neighbors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor NNeighbors(int? value)
 	{
 		Instance.NNeighbors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The proportion of the data set that is assumed to be outlying prior to outlier detection. For example, 0.05 means it is assumed that 5% of values are real outliers and 95% are inliers.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#outlier_fraction']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor OutlierFraction(double? value)
 	{
 		Instance.OutlierFraction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the following operation is performed on the columns before computing outlier scores: <c>(x_i - mean(x_i)) / sd(x_i)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisOutlierDetection#standardization_enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor StandardizationEnabled(bool? value = true)
 	{
 		Instance.StandardizationEnabled = value;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.update_model_snapshot.Request"><summary><para>
+Update a snapshot.
+</para>
+<para>
+Updates certain properties of a snapshot.
+</para></summary></member>
+  <member key="ml.update_model_snapshot.Request#description"><summary><para>
+A description of the model snapshot.
+</para></summary></member>
+  <member key="ml.update_model_snapshot.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.update_model_snapshot.Request#retain"><summary><para>
+If <c>true</c>, this snapshot will not be deleted during automatic cleanup of
+snapshots older than <c>model_snapshot_retention_days</c>. However, this
+snapshot will be deleted when the job is deleted.
+</para></summary></member>
+  <member key="ml.update_model_snapshot.Request#snapshot_id"><summary><para>
+Identifier for the model snapshot.
+</para></summary></member>
+</doc>

@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.info.Request']/*"/>
 public sealed partial class ClusterInfoRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Returns basic information about the cluster.
-/// </para>
-/// </summary>
+/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterInfoRequestConverter))]
 public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "cluster.info";
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request#target']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> Target { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget>>("target"); set => PR("target", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Returns basic information about the cluster.
-/// </para>
-/// </summary>
+/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.info.Request']/*"/>
 public readonly partial struct ClusterInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest Instance { get; init; }
@@ -101,22 +87,14 @@ public readonly partial struct ClusterInfoRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> value)
 	{
 		Instance.Target = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterInfoRequest.g.xml" path="doc/member[@key='cluster.info.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(params Elastic.Clients.Elasticsearch.ClusterInfoTarget[] values)
 	{
 		Instance.Target = [.. values];

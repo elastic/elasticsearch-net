@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DownsamplingRound']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DownsamplingRoundConverter))]
 public sealed partial class DownsamplingRound
 {
@@ -43,21 +44,14 @@ public sealed partial class DownsamplingRound
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The duration since rollover when this downsampling round should execute
-	/// </para>
-	/// </summary>
+	/// <include file="DownsamplingRound.g.xml" path="doc/member[@key='indices._types.DownsamplingRound#after']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration After { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The downsample interval.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsamplingRound.g.xml" path="doc/member[@key='indices._types.DownsamplingRound#fixed_interval']/*"/>
 	public required string FixedInterval { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DownsamplingRound']/*"/>
 public readonly partial struct DownsamplingRoundDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct DownsamplingRoundDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The duration since rollover when this downsampling round should execute
-	/// </para>
-	/// </summary>
+	/// <include file="DownsamplingRound.g.xml" path="doc/member[@key='indices._types.DownsamplingRound#after']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor After(Elastic.Clients.Elasticsearch.Duration value)
 	{
 		Instance.After = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The downsample interval.
-	/// </para>
-	/// </summary>
+	/// <include file="DownsamplingRound.g.xml" path="doc/member[@key='indices._types.DownsamplingRound#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor FixedInterval(string value)
 	{
 		Instance.FixedInterval = value;

@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.get.Request']/*"/>
 public sealed partial class GetInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get an inference endpoint.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
-/// </para>
-/// </summary>
+/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GetInferenceRequestConverter))]
 public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>
 {
@@ -68,30 +64,15 @@ public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "inference.get";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id of the endpoint to return. Using <c>_all</c> or <c>*</c> will return all endpoints with the specified
-	/// <c>task_type</c> if one is specified, or all endpoints for all task types if no <c>task_type</c> is specified
-	/// </para>
-	/// </summary>
+	/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => P<Elastic.Clients.Elasticsearch.Id?>("inference_id"); set => PO("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The task type of the endpoint to return
-	/// </para>
-	/// </summary>
+	/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get an inference endpoint.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
-/// </para>
-/// </summary>
+/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.get.Request']/*"/>
 public readonly partial struct GetInferenceRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest Instance { get; init; }
@@ -125,23 +106,14 @@ public readonly partial struct GetInferenceRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id of the endpoint to return. Using <c>_all</c> or <c>*</c> will return all endpoints with the specified
-	/// <c>task_type</c> if one is specified, or all endpoints for all task types if no <c>task_type</c> is specified
-	/// </para>
-	/// </summary>
+	/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The task type of the endpoint to return
-	/// </para>
-	/// </summary>
+	/// <include file="GetInferenceRequest.g.xml" path="doc/member[@key='inference.get.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;

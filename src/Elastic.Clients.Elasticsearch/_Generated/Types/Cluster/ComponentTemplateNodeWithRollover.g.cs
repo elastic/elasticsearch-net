@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNodeWithRollover']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ComponentTemplateNodeWithRolloverConverter))]
 public sealed partial class ComponentTemplateNodeWithRollover
 {
@@ -42,34 +43,18 @@ public sealed partial class ComponentTemplateNodeWithRollover
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNodeWithRollover.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNodeWithRollover#created_date']/*"/>
 	public System.DateTimeOffset? CreatedDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNodeWithRollover.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNodeWithRollover#created_date_millis']/*"/>
 	public System.DateTimeOffset? CreatedDateMillis { get; set; }
 	public bool? Deprecated { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNodeWithRollover.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNodeWithRollover#modified_date']/*"/>
 	public System.DateTimeOffset? ModifiedDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNodeWithRollover.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNodeWithRollover#modified_date_millis']/*"/>
 	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryRes Template { get; set; }
 	public long? Version { get; set; }

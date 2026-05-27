@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelPrefixStringsConverter))]
 public sealed partial class TrainedModelPrefixStrings
 {
@@ -36,21 +37,14 @@ public sealed partial class TrainedModelPrefixStrings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String prepended to input at ingest
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelPrefixStrings.g.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings#ingest']/*"/>
 	public string? Ingest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// String prepended to input at search
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelPrefixStrings.g.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings#search']/*"/>
 	public string? Search { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings']/*"/>
 public readonly partial struct TrainedModelPrefixStringsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct TrainedModelPrefixStringsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// String prepended to input at ingest
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelPrefixStrings.g.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings#ingest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor Ingest(string? value)
 	{
 		Instance.Ingest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String prepended to input at search
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelPrefixStrings.g.xml" path="doc/member[@key='ml._types.TrainedModelPrefixStrings#search']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor Search(string? value)
 	{
 		Instance.Search = value;

@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
 public sealed partial class DeleteGeoipDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete GeoIP database configurations.
-/// </para>
-/// <para>
-/// Delete one or more IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DeleteGeoipDatabaseRequestConverter))]
 public sealed partial class DeleteGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>
 {
@@ -75,37 +62,18 @@ public sealed partial class DeleteGeoipDatabaseRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "ingest.delete_geoip_database";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of geoip database configurations to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete GeoIP database configurations.
-/// </para>
-/// <para>
-/// Delete one or more IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_geoip_database.Request']/*"/>
 public readonly partial struct DeleteGeoipDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest Instance { get; init; }
@@ -130,34 +98,21 @@ public readonly partial struct DeleteGeoipDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of geoip database configurations to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_geoip_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

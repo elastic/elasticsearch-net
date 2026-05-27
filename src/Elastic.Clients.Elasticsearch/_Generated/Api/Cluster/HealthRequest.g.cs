@@ -23,115 +23,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.health.Request']/*"/>
 public sealed partial class HealthRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return health information at a specific level of detail.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, retrieve information from the local node only.
-	/// If false, retrieve information from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait for the specified number of active shards.
-	/// Use <c>all</c> to wait for all shards in the cluster to be active.
-	/// Use <c>0</c> to not wait.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait until all currently queued events with the given priority are processed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_events']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait until the specified number (N) of nodes is available.
-	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
-	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
-	/// If false, the request does not wait for initializing shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_initializing_shards']/*"/>
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
-	/// If false, the request not wait for relocating shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_relocating_shards']/*"/>
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
-	/// A green status is better than yellow and yellow is better than red.
-	/// By default, the request does not wait for a particular status.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_status']/*"/>
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the cluster health status.
-/// </para>
-/// <para>
-/// You can also use the API to get the health status of only specified data streams and indices.
-/// For data streams, the API retrieves the health status of the stream’s backing indices.
-/// </para>
-/// <para>
-/// The cluster health status is: green, yellow or red.
-/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-/// The index level status is controlled by the worst shard status.
-/// </para>
-/// <para>
-/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-/// The cluster status is controlled by the worst index status.
-/// </para>
-/// </summary>
+/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.health.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.HealthRequestConverter))]
 public sealed partial class HealthRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters>
 {
@@ -157,122 +88,45 @@ public sealed partial class HealthRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "cluster.health";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return health information at a specific level of detail.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, retrieve information from the local node only.
-	/// If false, retrieve information from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait for the specified number of active shards.
-	/// Use <c>all</c> to wait for all shards in the cluster to be active.
-	/// Use <c>0</c> to not wait.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait until all currently queued events with the given priority are processed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_events']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait until the specified number (N) of nodes is available.
-	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
-	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
-	/// If false, the request does not wait for initializing shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_initializing_shards']/*"/>
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
-	/// If false, the request not wait for relocating shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_relocating_shards']/*"/>
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
-	/// A green status is better than yellow and yellow is better than red.
-	/// By default, the request does not wait for a particular status.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_status']/*"/>
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the cluster health status.
-/// </para>
-/// <para>
-/// You can also use the API to get the health status of only specified data streams and indices.
-/// For data streams, the API retrieves the health status of the stream’s backing indices.
-/// </para>
-/// <para>
-/// The cluster health status is: green, yellow or red.
-/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-/// The index level status is controlled by the worst shard status.
-/// </para>
-/// <para>
-/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-/// The cluster status is controlled by the worst index status.
-/// </para>
-/// </summary>
+/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.health.Request']/*"/>
 public readonly partial struct HealthRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.HealthRequest Instance { get; init; }
@@ -296,156 +150,91 @@ public readonly partial struct HealthRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.HealthRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return health information at a specific level of detail.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
 	{
 		Instance.Level = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, retrieve information from the local node only.
-	/// If false, retrieve information from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait for the specified number of active shards.
-	/// Use <c>all</c> to wait for all shards in the cluster to be active.
-	/// Use <c>0</c> to not wait.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait until all currently queued events with the given priority are processed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_events']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? value)
 	{
 		Instance.WaitForEvents = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait until the specified number (N) of nodes is available.
-	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
-	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
 	{
 		Instance.WaitForNodes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
-	/// If false, the request does not wait for initializing shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_initializing_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNoInitializingShards(bool? value = true)
 	{
 		Instance.WaitForNoInitializingShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
-	/// If false, the request not wait for relocating shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_relocating_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNoRelocatingShards(bool? value = true)
 	{
 		Instance.WaitForNoRelocatingShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
-	/// A green status is better than yellow and yellow is better than red.
-	/// By default, the request does not wait for a particular status.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_status']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? value)
 	{
 		Instance.WaitForStatus = value;
@@ -513,24 +302,8 @@ public readonly partial struct HealthRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get the cluster health status.
-/// </para>
-/// <para>
-/// You can also use the API to get the health status of only specified data streams and indices.
-/// For data streams, the API retrieves the health status of the stream’s backing indices.
-/// </para>
-/// <para>
-/// The cluster health status is: green, yellow or red.
-/// On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
-/// The index level status is controlled by the worst shard status.
-/// </para>
-/// <para>
-/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
-/// The cluster status is controlled by the worst index status.
-/// </para>
-/// </summary>
+/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.health.Request']/*"/>
 public readonly partial struct HealthRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.HealthRequest Instance { get; init; }
@@ -554,156 +327,91 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.HealthRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.HealthRequest(Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return health information at a specific level of detail.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
 	{
 		Instance.Level = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, retrieve information from the local node only.
-	/// If false, retrieve information from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait for the specified number of active shards.
-	/// Use <c>all</c> to wait for all shards in the cluster to be active.
-	/// Use <c>0</c> to not wait.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait until all currently queued events with the given priority are processed.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_events']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? value)
 	{
 		Instance.WaitForEvents = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait until the specified number (N) of nodes is available.
-	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
-	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
 	{
 		Instance.WaitForNodes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
-	/// If false, the request does not wait for initializing shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_initializing_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? value = true)
 	{
 		Instance.WaitForNoInitializingShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
-	/// If false, the request not wait for relocating shards.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_no_relocating_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? value = true)
 	{
 		Instance.WaitForNoRelocatingShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
-	/// A green status is better than yellow and yellow is better than red.
-	/// By default, the request does not wait for a particular status.
-	/// </para>
-	/// </summary>
+	/// <include file="HealthRequest.g.xml" path="doc/member[@key='cluster.health.Request#wait_for_status']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? value)
 	{
 		Instance.WaitForStatus = value;

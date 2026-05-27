@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.DateRangeAggregation#field"><summary><para>
+The date field whose values are use to build ranges.
+</para></summary></member>
+  <member key="_types.aggregations.DateRangeAggregation#format"><summary><para>
+The date format used to format <c>from</c> and <c>to</c> in the response.
+</para></summary></member>
+  <member key="_types.aggregations.DateRangeAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.DateRangeAggregation#ranges"><summary><para>
+Array of date ranges.
+</para></summary></member>
+  <member key="_types.aggregations.DateRangeAggregation#time_zone"><summary><para>
+Time zone used to convert dates from another time zone to UTC.
+</para></summary></member>
+</doc>

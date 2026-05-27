@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TestPopulation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TestPopulationConverter))]
 public sealed partial class TestPopulation
 {
@@ -42,22 +43,15 @@ public sealed partial class TestPopulation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to aggregate.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TestPopulation']/*"/>
 public readonly partial struct TestPopulationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation Instance { get; init; }
@@ -77,44 +71,28 @@ public readonly partial struct TestPopulationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TestPopulation(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to aggregate.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to aggregate.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -148,6 +126,7 @@ public readonly partial struct TestPopulationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TestPopulation']/*"/>
 public readonly partial struct TestPopulationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TestPopulation Instance { get; init; }
@@ -167,55 +146,35 @@ public readonly partial struct TestPopulationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TestPopulation(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to aggregate.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to aggregate.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter used to define a set of records to run unpaired t-test on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestPopulation.g.xml" path="doc/member[@key='_types.aggregations.TestPopulation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

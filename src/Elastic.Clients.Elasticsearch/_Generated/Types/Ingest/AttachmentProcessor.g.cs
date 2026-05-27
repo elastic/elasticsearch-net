@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AttachmentProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.AttachmentProcessorConverter))]
 public sealed partial class AttachmentProcessor
 {
@@ -42,113 +43,50 @@ public sealed partial class AttachmentProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of chars being used for extraction to prevent huge fields.
-	/// Use <c>-1</c> for no limit.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars']/*"/>
 	public long? IndexedChars { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? IndexedCharsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
-	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
-	/// If set to <c>-1</c>, there is no per-processor limit.
-	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#max_field_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxFieldBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of properties to select to be stored.
-	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#properties']/*"/>
 	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the binary field will be removed from the document
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#remove_binary']/*"/>
 	public bool? RemoveBinary { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the name of the resource to decode.
-	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#resource_name']/*"/>
 	public string? ResourceName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AttachmentProcessor']/*"/>
 public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Instance { get; init; }
@@ -168,184 +106,112 @@ public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of chars being used for extraction to prevent huge fields.
-	/// Use <c>-1</c> for no limit.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedChars(long? value)
 	{
 		Instance.IndexedChars = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IndexedCharsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedCharsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.IndexedCharsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
-	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
-	/// If set to <c>-1</c>, there is no per-processor limit.
-	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#max_field_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> MaxFieldBytes(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxFieldBytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
-	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
-	/// If set to <c>-1</c>, there is no per-processor limit.
-	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#max_field_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> MaxFieldBytes(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxFieldBytes = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -358,81 +224,49 @@ public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of properties to select to be stored.
-	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of properties to select to be stored.
-	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the binary field will be removed from the document
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#remove_binary']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> RemoveBinary(bool? value = true)
 	{
 		Instance.RemoveBinary = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the name of the resource to decode.
-	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#resource_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> ResourceName(string? value)
 	{
 		Instance.ResourceName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -448,6 +282,7 @@ public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.AttachmentProcessor']/*"/>
 public readonly partial struct AttachmentProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor Instance { get; init; }
@@ -467,184 +302,112 @@ public readonly partial struct AttachmentProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the base64 encoded field from.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and field does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of chars being used for extraction to prevent huge fields.
-	/// Use <c>-1</c> for no limit.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedChars(long? value)
 	{
 		Instance.IndexedChars = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedCharsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IndexedCharsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field name from which you can overwrite the number of chars being used for extraction.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#indexed_chars_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedCharsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.IndexedCharsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
-	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
-	/// If set to <c>-1</c>, there is no per-processor limit.
-	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#max_field_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor MaxFieldBytes(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxFieldBytes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
-	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
-	/// If set to <c>-1</c>, there is no per-processor limit.
-	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#max_field_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor MaxFieldBytes(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxFieldBytes = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -657,11 +420,7 @@ public readonly partial struct AttachmentProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -674,81 +433,49 @@ public readonly partial struct AttachmentProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of properties to select to be stored.
-	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of properties to select to be stored.
-	/// Can be <c>content</c>, <c>title</c>, <c>name</c>, <c>author</c>, <c>keywords</c>, <c>date</c>, <c>content_type</c>, <c>content_length</c>, <c>language</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the binary field will be removed from the document
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#remove_binary']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor RemoveBinary(bool? value = true)
 	{
 		Instance.RemoveBinary = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the name of the resource to decode.
-	/// If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#resource_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor ResourceName(string? value)
 	{
 		Instance.ResourceName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the attachment information.
-	/// </para>
-	/// </summary>
+	/// <include file="AttachmentProcessor.g.xml" path="doc/member[@key='ingest._types.AttachmentProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.PerPartitionCategorization']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PerPartitionCategorizationConverter))]
 public sealed partial class PerPartitionCategorization
 {
@@ -36,21 +37,14 @@ public sealed partial class PerPartitionCategorization
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="PerPartitionCategorization.g.xml" path="doc/member[@key='ml._types.PerPartitionCategorization#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
-	/// </para>
-	/// </summary>
+	/// <include file="PerPartitionCategorization.g.xml" path="doc/member[@key='ml._types.PerPartitionCategorization#stop_on_warn']/*"/>
 	public bool? StopOnWarn { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.PerPartitionCategorization']/*"/>
 public readonly partial struct PerPartitionCategorizationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct PerPartitionCategorizationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// To enable this setting, you must also set the <c>partition_field_name</c> property to the same value in every detector that uses the keyword <c>mlcategory</c>. Otherwise, job creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="PerPartitionCategorization.g.xml" path="doc/member[@key='ml._types.PerPartitionCategorization#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting can be set to true only if per-partition categorization is enabled. If true, both categorization and subsequent anomaly detection stops for partitions where the categorization status changes to warn. This setting makes it viable to have a job where it is expected that categorization works well for some partitions but not others; you do not pay the cost of bad categorization forever in the partitions where it works badly.
-	/// </para>
-	/// </summary>
+	/// <include file="PerPartitionCategorization.g.xml" path="doc/member[@key='ml._types.PerPartitionCategorization#stop_on_warn']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor StopOnWarn(bool? value = true)
 	{
 		Instance.StopOnWarn = value;

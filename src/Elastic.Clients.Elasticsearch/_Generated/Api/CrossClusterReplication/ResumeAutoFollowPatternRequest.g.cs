@@ -23,28 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 public sealed partial class ResumeAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Resume an auto-follow pattern.
-/// </para>
-/// <para>
-/// Resume a cross-cluster replication auto-follow pattern that was paused.
-/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
-/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
-/// </para>
-/// </summary>
+/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ResumeAutoFollowPatternRequestConverter))]
 public sealed partial class ResumeAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestParameters>
 {
@@ -71,33 +59,15 @@ public sealed partial class ResumeAutoFollowPatternRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "ccr.resume_auto_follow_pattern";
 
-	/// <summary>
-	/// <para>
-	/// The name of the auto-follow pattern to resume.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Resume an auto-follow pattern.
-/// </para>
-/// <para>
-/// Resume a cross-cluster replication auto-follow pattern that was paused.
-/// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
-/// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
-/// </para>
-/// </summary>
+/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request']/*"/>
 public readonly partial struct ResumeAutoFollowPatternRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest Instance { get; init; }
@@ -122,24 +92,14 @@ public readonly partial struct ResumeAutoFollowPatternRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the auto-follow pattern to resume.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.resume_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

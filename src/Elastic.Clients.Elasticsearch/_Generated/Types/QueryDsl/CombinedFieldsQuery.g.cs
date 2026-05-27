@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.CombinedFieldsQueryConverter))]
 public sealed partial class CombinedFieldsQuery
 {
@@ -43,61 +44,30 @@ public sealed partial class CombinedFieldsQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text to search for in the provided <c>fields</c>.
-	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery']/*"/>
 public readonly partial struct CombinedFieldsQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Instance { get; init; }
@@ -117,81 +87,49 @@ public readonly partial struct CombinedFieldsQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to search for in the provided <c>fields</c>.
-	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -204,11 +142,7 @@ public readonly partial struct CombinedFieldsQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? value)
 	{
 		Instance.ZeroTermsQuery = value;
@@ -224,6 +158,7 @@ public readonly partial struct CombinedFieldsQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery']/*"/>
 public readonly partial struct CombinedFieldsQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Instance { get; init; }
@@ -243,81 +178,49 @@ public readonly partial struct CombinedFieldsQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to search for in the provided <c>fields</c>.
-	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -330,11 +233,7 @@ public readonly partial struct CombinedFieldsQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="CombinedFieldsQuery.g.xml" path="doc/member[@key='_types.query_dsl.CombinedFieldsQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? value)
 	{
 		Instance.ZeroTermsQuery = value;

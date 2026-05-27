@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Detector']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DetectorConverter))]
 public sealed partial class Detector
 {
@@ -36,77 +37,38 @@ public sealed partial class Detector
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#by_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ByFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_description']/*"/>
 	public string? DetectorDescription { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_index']/*"/>
 	public int? DetectorIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#exclude_frequent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? FieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#function']/*"/>
 	public string? Function { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#over_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? OverFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#partition_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? PartitionFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#use_null']/*"/>
 	public bool? UseNull { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Detector']/*"/>
 public readonly partial struct DetectorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Detector Instance { get; init; }
@@ -126,55 +88,35 @@ public readonly partial struct DetectorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#by_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ByFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ByFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#by_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ByFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ByFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
 		Instance.CustomRules = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
 		Instance.CustomRules = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -187,121 +129,77 @@ public readonly partial struct DetectorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorDescription(string? value)
 	{
 		Instance.DetectorDescription = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorIndex(int? value)
 	{
 		Instance.DetectorIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#exclude_frequent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? value)
 	{
 		Instance.ExcludeFrequent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> FieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.FieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> FieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.FieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#function']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> Function(string? value)
 	{
 		Instance.Function = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#over_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> OverFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.OverFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#over_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> OverFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.OverFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#partition_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> PartitionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PartitionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#partition_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> PartitionFieldName(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PartitionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#use_null']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> UseNull(bool? value = true)
 	{
 		Instance.UseNull = value;
@@ -322,6 +220,7 @@ public readonly partial struct DetectorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Detector']/*"/>
 public readonly partial struct DetectorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Detector Instance { get; init; }
@@ -341,55 +240,35 @@ public readonly partial struct DetectorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Detector instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Detector(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#by_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ByFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ByFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#by_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ByFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ByFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
 		Instance.CustomRules = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
 		Instance.CustomRules = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -402,11 +281,7 @@ public readonly partial struct DetectorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor CustomRules<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -419,121 +294,77 @@ public readonly partial struct DetectorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorDescription(string? value)
 	{
 		Instance.DetectorDescription = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#detector_index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorIndex(int? value)
 	{
 		Instance.DetectorIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#exclude_frequent']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor ExcludeFrequent(Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? value)
 	{
 		Instance.ExcludeFrequent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor FieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.FieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor FieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.FieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#function']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor Function(string? value)
 	{
 		Instance.Function = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#over_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor OverFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.OverFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#over_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor OverFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.OverFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#partition_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor PartitionFieldName(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PartitionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#partition_field_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor PartitionFieldName<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PartitionFieldName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether a new series is used as the null series when there is no value for the by or partition fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Detector.g.xml" path="doc/member[@key='ml._types.Detector#use_null']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor UseNull(bool? value = true)
 	{
 		Instance.UseNull = value;

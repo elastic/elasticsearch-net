@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsForGcsConverter))]
 public sealed partial class SourceOnlyRepositorySettingsForGcs : Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings
 {
@@ -42,62 +43,26 @@ public sealed partial class SourceOnlyRepositorySettingsForGcs : Elastic.Clients
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name used by the client when it uses the Google Cloud Storage service.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#application_name']/*"/>
 	[System.Obsolete("Deprecated in '6.3.0'.")]
 	public string? ApplicationName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the bucket.
-	/// It defaults to the root of the bucket.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#base_path']/*"/>
 	public string? BasePath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the bucket to be used for snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#bucket']/*"/>
 	public required string Bucket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the client to use to connect to Google Cloud Storage.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#client']/*"/>
 	public string? Client { get; set; }
 
 	public string DelegateType => "gcs";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#readonly']/*"/>
 	public bool? Readonly { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs']/*"/>
 public readonly partial struct SourceOnlyRepositorySettingsForGcsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs Instance { get; init; }
@@ -118,72 +83,35 @@ public readonly partial struct SourceOnlyRepositorySettingsForGcsDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor descriptor) => descriptor.Instance;
 
 	[System.Obsolete("Deprecated in '6.3.0'.")]
-	/// <summary>
-	/// <para>
-	/// The name used by the client when it uses the Google Cloud Storage service.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#application_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor ApplicationName(string? value)
 	{
 		Instance.ApplicationName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the bucket.
-	/// It defaults to the root of the bucket.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#base_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor BasePath(string? value)
 	{
 		Instance.BasePath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the bucket to be used for snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor Bucket(string value)
 	{
 		Instance.Bucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the client to use to connect to Google Cloud Storage.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#client']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor Client(string? value)
 	{
 		Instance.Client = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForGcs.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForGcs#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor Readonly(bool? value = true)
 	{
 		Instance.Readonly = value;

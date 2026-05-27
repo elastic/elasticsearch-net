@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleTemplateQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleTemplateQueryConverter))]
 public sealed partial class RoleTemplateQuery
 {
@@ -36,13 +37,6 @@ public sealed partial class RoleTemplateQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When you create a role, you can specify a query that defines the document level security permissions. You can optionally
-	/// use Mustache templates in the role query to insert the username of the current authenticated user into the role.
-	/// Like other places in Elasticsearch that support templating or scripting, you can specify inline, stored, or file-based
-	/// templates and define custom parameters. You access the details for the current authenticated user through the _user parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleTemplateQuery.g.xml" path="doc/member[@key='security._types.RoleTemplateQuery#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleTemplateScript? Template { get; set; }
 }

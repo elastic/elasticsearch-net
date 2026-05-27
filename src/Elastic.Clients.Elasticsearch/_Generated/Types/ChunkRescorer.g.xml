@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ChunkRescorer#chunking_settings"><summary><para>
+Chunking settings to apply
+</para></summary></member>
+  <member key="_types.ChunkRescorer#size"><summary><para>
+The number of chunks per document to evaluate for reranking.
+</para></summary></member>
+</doc>

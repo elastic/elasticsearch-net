@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsQueryString']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsQueryStringConverter))]
 public sealed partial class SettingsQueryString
 {
@@ -45,6 +46,7 @@ public sealed partial class SettingsQueryString
 	public required bool Lenient { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsQueryString']/*"/>
 public readonly partial struct SettingsQueryStringDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString Instance { get; init; }

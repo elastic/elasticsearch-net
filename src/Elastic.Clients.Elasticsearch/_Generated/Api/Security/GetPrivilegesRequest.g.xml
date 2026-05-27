@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_privileges.Request"><summary><para>
+Get application privileges.
+</para>
+<para>
+To use this API, you must have one of the following privileges:
+</para>
+<list type="bullet">
+<item>
+<para>
+The <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_security</c> or <c>all</c>).
+</para>
+</item>
+<item>
+<para>
+The "Manage Application Privileges" global privilege for the application being referenced in the request.
+</para>
+</item>
+</list></summary></member>
+  <member key="security.get_privileges.Request#application"><summary><para>
+The name of the application.
+Application privileges are always associated with exactly one application.
+If you do not specify this parameter, the API returns information about all privileges for all applications.
+</para></summary></member>
+  <member key="security.get_privileges.Request#name"><summary><para>
+The name of the privilege.
+If you do not specify this parameter, the API returns information about all privileges for the requested application.
+</para></summary></member>
+</doc>

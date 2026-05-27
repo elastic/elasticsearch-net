@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TurkishAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.TurkishAnalyzerConverter))]
 public sealed partial class TurkishAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -43,6 +44,7 @@ public sealed partial class TurkishAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	public string Type => "turkish";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TurkishAnalyzer']/*"/>
 public readonly partial struct TurkishAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.TurkishAnalyzer Instance { get; init; }

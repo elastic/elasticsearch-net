@@ -23,44 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
 public sealed partial class SamlAuthenticateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Authenticate SAML.
-/// </para>
-/// <para>
-/// Submit a SAML response message to Elasticsearch for consumption.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The SAML message that is submitted can be:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A response to a SAML authentication request that was previously created using the SAML prepare authentication API.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// An unsolicited SAML message in the case of an IdP-initiated single sign-on (SSO) flow.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// In either case, the SAML message needs to be a base64 encoded XML document with a root element of <c>&lt;Response></c>.
-/// </para>
-/// <para>
-/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
-/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlAuthenticateRequestConverter))]
 public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>
 {
@@ -89,62 +59,18 @@ public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "security.saml_authenticate";
 
-	/// <summary>
-	/// <para>
-	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#content']/*"/>
 	public required string Content { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#ids']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the realm that should authenticate the SAML response. Useful in cases where many SAML realms are defined.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#realm']/*"/>
 	public string? Realm { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Authenticate SAML.
-/// </para>
-/// <para>
-/// Submit a SAML response message to Elasticsearch for consumption.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The SAML message that is submitted can be:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A response to a SAML authentication request that was previously created using the SAML prepare authentication API.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// An unsolicited SAML message in the case of an IdP-initiated single sign-on (SSO) flow.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// In either case, the SAML message needs to be a base64 encoded XML document with a root element of <c>&lt;Response></c>.
-/// </para>
-/// <para>
-/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
-/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_authenticate.Request']/*"/>
 public readonly partial struct SamlAuthenticateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest Instance { get; init; }
@@ -163,33 +89,21 @@ public readonly partial struct SamlAuthenticateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#content']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Content(string value)
 	{
 		Instance.Content = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the realm that should authenticate the SAML response. Useful in cases where many SAML realms are defined.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlAuthenticateRequest.g.xml" path="doc/member[@key='security.saml_authenticate.Request#realm']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor Realm(string? value)
 	{
 		Instance.Realm = value;

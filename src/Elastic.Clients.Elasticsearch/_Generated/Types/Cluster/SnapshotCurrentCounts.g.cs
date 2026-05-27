@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.SnapshotCurrentCountsConverter))]
 public sealed partial class SnapshotCurrentCounts
 {
@@ -46,38 +47,18 @@ public sealed partial class SnapshotCurrentCounts
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Cleanups in progress, not counted in concurrent_operations as they are not concurrent
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotCurrentCounts.g.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts#cleanups']/*"/>
 	public required int Cleanups { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sum of snapshots and snapshot_deletions
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotCurrentCounts.g.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts#concurrent_operations']/*"/>
 	public required int ConcurrentOperations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Incomplete shard snapshots
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotCurrentCounts.g.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts#shard_snapshots']/*"/>
 	public required int ShardSnapshots { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Snapshots deletions in progress
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotCurrentCounts.g.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts#snapshot_deletions']/*"/>
 	public required int SnapshotDeletions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Snapshots currently in progress
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotCurrentCounts.g.xml" path="doc/member[@key='cluster.stats.SnapshotCurrentCounts#snapshots']/*"/>
 	public required int Snapshots { get; set; }
 }

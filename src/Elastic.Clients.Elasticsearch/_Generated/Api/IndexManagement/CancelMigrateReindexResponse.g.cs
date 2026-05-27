@@ -37,10 +37,6 @@ public sealed partial class CancelMigrateReindexResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelMigrateReindexResponse.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

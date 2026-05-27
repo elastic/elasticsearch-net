@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.get_reindex.Response#cancelled"><summary><para>
+Whether the reindex task has been cancelled.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#completed"><summary><para>
+Whether the reindex task has completed.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#description"><summary><para>
+A sanitized description of the reindex operation (source and destination indices, and optionally remote host info).
+</para></summary></member>
+  <member key="_global.get_reindex.Response#error"><summary><para>
+The error that caused the reindex task to fail, if any.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#id"><summary><para>
+The ID of the reindex task, in <c>nodeId:taskNum</c> format.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#response"><summary><para>
+The final result of the completed reindex operation, if the task has finished successfully.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#running_time"><summary><para>
+The elapsed running time of the reindex task, in a human-readable format.
+Only present when the request includes the <c>?human=true</c> query parameter.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#running_time_in_nanos"><summary><para>
+The elapsed running time of the reindex task, in nanoseconds.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#start_time"><summary><para>
+The time at which the reindex task started, as an ISO 8601 formatted string.
+Only present when the request includes the <c>?human=true</c> query parameter.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#start_time_in_millis"><summary><para>
+The time at which the reindex task started, in milliseconds since the Unix epoch.
+</para></summary></member>
+  <member key="_global.get_reindex.Response#status"><summary><para>
+The current progress of the reindex operation.
+</para></summary></member>
+</doc>

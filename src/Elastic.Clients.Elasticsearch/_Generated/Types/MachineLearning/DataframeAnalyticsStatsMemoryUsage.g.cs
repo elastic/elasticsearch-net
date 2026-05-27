@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsMemoryUsage']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsStatsMemoryUsageConverter))]
 public sealed partial class DataframeAnalyticsStatsMemoryUsage
 {
@@ -43,31 +44,15 @@ public sealed partial class DataframeAnalyticsStatsMemoryUsage
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value is present when the status is hard_limit and it is a new estimate of how much memory the job needs.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsMemoryUsage.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsMemoryUsage#memory_reestimate_bytes']/*"/>
 	public long? MemoryReestimateBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of bytes used at the highest peak of memory usage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsMemoryUsage.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsMemoryUsage#peak_usage_bytes']/*"/>
 	public required long PeakUsageBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The memory usage status.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsMemoryUsage.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsMemoryUsage#status']/*"/>
 	public required string Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp when memory usage was calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsMemoryUsage.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsMemoryUsage#timestamp']/*"/>
 	public System.DateTimeOffset? Timestamp { get; set; }
 }

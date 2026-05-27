@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RangeBucket']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RangeBucketConverter))]
 public sealed partial class RangeBucket
 {
@@ -42,21 +43,12 @@ public sealed partial class RangeBucket
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Nested aggregations
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public required long DocCount { get; set; }
 	public double? From { get; set; }
 	public string? FromAsString { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The bucket key. Present if the aggregation is <em>not</em> keyed
-	/// </para>
-	/// </summary>
+	/// <include file="RangeBucket.g.xml" path="doc/member[@key='_types.aggregations.RangeBucket#key']/*"/>
 	public string? Key { get; set; }
 	public double? To { get; set; }
 	public string? ToAsString { get; set; }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.delete.Request"><summary><para>
+Delete an inference endpoint.
+</para>
+<para>
+This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
+</para></summary></member>
+  <member key="inference.delete.Request#dry_run"><summary><para>
+When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
+</para></summary></member>
+  <member key="inference.delete.Request#force"><summary><para>
+When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
+</para></summary></member>
+  <member key="inference.delete.Request#inference_id"><summary><para>
+The inference identifier.
+</para></summary></member>
+  <member key="inference.delete.Request#task_type"><summary><para>
+The task type
+</para></summary></member>
+</doc>

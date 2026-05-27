@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.ExtendedMemoryStats#adjusted_total_in_bytes"><summary><para>
+If the amount of physical memory has been overridden using the <c>es</c>.<c>total_memory_bytes</c> system property then this reports the overridden value in bytes.
+Otherwise it reports the same value as <c>total_in_bytes</c>.
+</para></summary></member>
+  <member key="nodes._types.ExtendedMemoryStats#free_in_bytes"><summary><para>
+Amount of free physical memory in bytes.
+</para></summary></member>
+  <member key="nodes._types.ExtendedMemoryStats#free_percent"><summary><para>
+Percentage of free memory.
+</para></summary></member>
+  <member key="nodes._types.ExtendedMemoryStats#total_in_bytes"><summary><para>
+Total amount of physical memory in bytes.
+</para></summary></member>
+  <member key="nodes._types.ExtendedMemoryStats#used_in_bytes"><summary><para>
+Amount of used physical memory in bytes.
+</para></summary></member>
+  <member key="nodes._types.ExtendedMemoryStats#used_percent"><summary><para>
+Percentage of used memory.
+</para></summary></member>
+</doc>

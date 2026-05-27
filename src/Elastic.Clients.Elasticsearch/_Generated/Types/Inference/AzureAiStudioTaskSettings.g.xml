@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AzureAiStudioTaskSettings#do_sample"><summary><para>
+For a <c>completion</c> task, instruct the inference process to perform sampling.
+It has no effect unless <c>temperature</c> or <c>top_p</c> is specified.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#max_new_tokens"><summary><para>
+For a <c>completion</c> task, provide a hint for the maximum number of output tokens to be generated.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, return doc text within the results.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#temperature"><summary><para>
+For a <c>completion</c> task, control the apparent creativity of generated completions with a sampling temperature.
+It must be a number in the range of 0.0 to 2.0.
+It should not be used if <c>top_p</c> is specified.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of most relevant documents to return.
+It defaults to the number of the documents.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#top_p"><summary><para>
+For a <c>completion</c> task, make the model consider the results of the tokens with nucleus sampling probability.
+It is an alternative value to <c>temperature</c> and must be a number in the range of 0.0 to 2.0.
+It should not be used if <c>temperature</c> is specified.
+</para></summary></member>
+  <member key="inference._types.AzureAiStudioTaskSettings#user"><summary><para>
+For a <c>text_embedding</c> task, specify the user issuing the request.
+This information can be used for abuse detection.
+</para></summary></member>
+</doc>

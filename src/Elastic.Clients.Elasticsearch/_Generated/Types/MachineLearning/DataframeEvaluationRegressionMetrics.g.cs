@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionMetricsConverter))]
 public sealed partial class DataframeEvaluationRegressionMetrics
 {
@@ -36,35 +37,20 @@ public sealed partial class DataframeEvaluationRegressionMetrics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pseudo Huber loss function.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#huber']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#mse']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Mse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#msle']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#r_squared']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? RSquared { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics']/*"/>
 public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics Instance { get; init; }
@@ -84,66 +70,42 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Pseudo Huber loss function.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#huber']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? value)
 	{
 		Instance.Huber = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pseudo Huber loss function.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#huber']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber()
 	{
 		Instance.Huber = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pseudo Huber loss function.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#huber']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor>? action)
 	{
 		Instance.Huber = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#mse']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Mse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#mse']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse()
 	{
 		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#mse']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -157,66 +119,42 @@ public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#msle']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? value)
 	{
 		Instance.Msle = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#msle']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle()
 	{
 		Instance.Msle = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#msle']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor>? action)
 	{
 		Instance.Msle = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#r_squared']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.RSquared = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#r_squared']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared()
 	{
 		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetrics#r_squared']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

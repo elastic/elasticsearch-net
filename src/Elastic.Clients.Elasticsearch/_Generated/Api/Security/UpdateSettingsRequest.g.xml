@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.update_settings.Request"><summary><para>
+Update security index settings.
+</para>
+<para>
+Update the user-configurable settings for the security internal index (<c>.security</c> and associated indices). Only a subset of settings are allowed to be modified. This includes <c>index.auto_expand_replicas</c> and <c>index.number_of_replicas</c>.
+</para>
+<para>
+NOTE: If <c>index.auto_expand_replicas</c> is set, <c>index.number_of_replicas</c> will be ignored during updates.
+</para>
+<para>
+If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
+This API does not yet support configuring the settings for indices before they are in use.
+</para></summary></member>
+  <member key="security.update_settings.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="security.update_settings.Request#security"><summary><para>
+Settings for the index used for most security configuration, including native realm users and roles configured with the API.
+</para></summary></member>
+  <member key="security.update_settings.Request#security-profile"><summary><para>
+Settings for the index used to store profile information.
+</para></summary></member>
+  <member key="security.update_settings.Request#security-tokens"><summary><para>
+Settings for the index used to store tokens.
+</para></summary></member>
+  <member key="security.update_settings.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

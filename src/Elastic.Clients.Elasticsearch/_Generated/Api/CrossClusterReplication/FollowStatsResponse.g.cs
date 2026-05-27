@@ -37,10 +37,6 @@ public sealed partial class FollowStatsResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of follower index statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsResponse.g.xml" path="doc/member[@key='ccr.follow_stats.Response#indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> Indices { get; set; }
 }

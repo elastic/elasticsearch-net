@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.NoriTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.NoriTokenizerConverter))]
 public sealed partial class NoriTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -46,6 +47,7 @@ public sealed partial class NoriTokenizer : Elastic.Clients.Elasticsearch.Analys
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.NoriTokenizer']/*"/>
 public readonly partial struct NoriTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer Instance { get; init; }

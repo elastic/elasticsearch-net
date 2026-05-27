@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.verify_repository.Response#nodes"><summary><para>
+Information about the nodes connected to the snapshot repository.
+The key is the ID of the node.
+</para></summary></member>
+</doc>

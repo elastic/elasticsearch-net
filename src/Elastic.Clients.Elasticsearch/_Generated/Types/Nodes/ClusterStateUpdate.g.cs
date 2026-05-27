@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ClusterStateUpdateConverter))]
 public sealed partial class ClusterStateUpdate
 {
@@ -42,112 +43,48 @@ public sealed partial class ClusterStateUpdate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent waiting for a successful cluster state update to commit, which measures the time from the start of each publication until a majority of the master-eligible nodes have written the state to disk and confirmed the write to the elected master.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#commit_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? CommitTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent waiting for a successful cluster state update to commit, which measures the time from the start of each publication until a majority of the master-eligible nodes have written the state to disk and confirmed the write to the elected master.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#commit_time_millis']/*"/>
 	public System.TimeSpan? CommitTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent waiting for a successful cluster state update to complete, which measures the time from the start of each publication until all the other nodes have notified the elected master that they have applied the cluster state.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#completion_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? CompletionTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds,  spent waiting for a successful cluster state update to complete, which measures the time from the start of each publication until all the other nodes have notified the elected master that they have applied the cluster state.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#completion_time_millis']/*"/>
 	public System.TimeSpan? CompletionTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent computing no-op cluster state updates since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#computation_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ComputationTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent computing no-op cluster state updates since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#computation_time_millis']/*"/>
 	public System.TimeSpan? ComputationTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent constructing a publication context since the node started for publications that ultimately succeeded.
-	/// This statistic includes the time spent computing the difference between the current and new cluster state preparing a serialized representation of this difference.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#context_construction_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ContextConstructionTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent constructing a publication context since the node started for publications that ultimately succeeded.
-	/// This statistic includes the time spent computing the difference between the current and new cluster state preparing a serialized representation of this difference.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#context_construction_time_millis']/*"/>
 	public System.TimeSpan? ContextConstructionTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of cluster state update attempts that did not change the cluster state since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#count']/*"/>
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent successfully applying cluster state updates on the elected master since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#master_apply_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterApplyTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent successfully applying cluster state updates on the elected master since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#master_apply_time_millis']/*"/>
 	public System.TimeSpan? MasterApplyTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent notifying listeners of a no-op cluster state update since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#notification_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? NotificationTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent notifying listeners of a no-op cluster state update since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#notification_time_millis']/*"/>
 	public System.TimeSpan? NotificationTimeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time spent publishing cluster state updates which ultimately succeeded, which includes everything from the start of the publication (just after the computation of the new cluster state) until the publication has finished and the master node is ready to start processing the next state update.
-	/// This includes the time measured by <c>context_construction_time</c>, <c>commit_time</c>, <c>completion_time</c> and <c>master_apply_time</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#publication_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? PublicationTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative amount of time, in milliseconds, spent publishing cluster state updates which ultimately succeeded, which includes everything from the start of the publication (just after the computation of the new cluster state) until the publication has finished and the master node is ready to start processing the next state update.
-	/// This includes the time measured by <c>context_construction_time</c>, <c>commit_time</c>, <c>completion_time</c> and <c>master_apply_time</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStateUpdate.g.xml" path="doc/member[@key='nodes._types.ClusterStateUpdate#publication_time_millis']/*"/>
 	public System.TimeSpan? PublicationTimeMillis { get; set; }
 }

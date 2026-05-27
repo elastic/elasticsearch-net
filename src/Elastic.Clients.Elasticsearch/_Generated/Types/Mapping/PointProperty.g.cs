@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PointProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.PointPropertyConverter))]
 public sealed partial class PointProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -44,11 +45,7 @@ public sealed partial class PointProperty : Elastic.Clients.Elasticsearch.Mappin
 	public bool? IgnoreMalformed { get; set; }
 	public bool? IgnoreZValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -58,6 +55,7 @@ public sealed partial class PointProperty : Elastic.Clients.Elasticsearch.Mappin
 	public string Type => "point";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PointProperty']/*"/>
 public readonly partial struct PointPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PointProperty Instance { get; init; }
@@ -131,33 +129,21 @@ public readonly partial struct PointPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -215,6 +201,7 @@ public readonly partial struct PointPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PointProperty']/*"/>
 public readonly partial struct PointPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PointProperty Instance { get; init; }
@@ -294,33 +281,21 @@ public readonly partial struct PointPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PointProperty.g.xml" path="doc/member[@key='_types.mapping.PointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

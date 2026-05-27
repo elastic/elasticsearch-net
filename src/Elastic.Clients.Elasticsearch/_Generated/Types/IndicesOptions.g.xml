@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.IndicesOptions"><summary><para>
+Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
+to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
+</para></summary></member>
+  <member key="_types.IndicesOptions#allow_no_indices"><summary><para>
+A setting that does two separate checks on the index expression.
+If <c>false</c>, the request returns an error (1) if any wildcard expression
+(including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+complete set of resolved indices, aliases or data streams is empty after all
+expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+indices are allowed and the request returns an empty result.
+</para></summary></member>
+  <member key="_types.IndicesOptions#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument
+determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_types.IndicesOptions#ignore_throttled"><summary><para>
+If true, concrete, expanded or aliased indices are ignored when frozen.
+</para></summary></member>
+  <member key="_types.IndicesOptions#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+</doc>

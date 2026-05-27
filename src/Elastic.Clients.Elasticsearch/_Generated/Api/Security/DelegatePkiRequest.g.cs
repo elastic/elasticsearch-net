@@ -23,28 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
 public sealed partial class DelegatePkiRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delegate PKI authentication.
-/// </para>
-/// <para>
-/// This API implements the exchange of an X509Certificate chain for an Elasticsearch access token.
-/// The certificate chain is validated, according to RFC 5280, by sequentially considering the trust configuration of every installed PKI realm that has <c>delegation.enabled</c> set to <c>true</c>.
-/// A successfully trusted client certificate is also subject to the validation of the subject distinguished name according to thw <c>username_pattern</c> of the respective realm.
-/// </para>
-/// <para>
-/// This API is called by smart and trusted proxies, such as Kibana, which terminate the user's TLS session but still want to authenticate the user by using a PKI realm—-​as if the user connected directly to Elasticsearch.
-/// </para>
-/// <para>
-/// IMPORTANT: The association between the subject public key in the target certificate and the corresponding private key is not validated.
-/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
-/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
-/// </para>
-/// </summary>
+/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DelegatePkiRequestConverter))]
 public sealed partial class DelegatePkiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>
 {
@@ -72,37 +58,12 @@ public sealed partial class DelegatePkiRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "security.delegate_pki";
 
-	/// <summary>
-	/// <para>
-	/// The X509Certificate chain, which is represented as an ordered string array.
-	/// Each string in the array is a base64-encoded (Section 4 of RFC4648 - not base64url-encoded) of the certificate's DER encoding.
-	/// </para>
-	/// <para>
-	/// The first element is the target certificate that contains the subject distinguished name that is requesting access.
-	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request#x509_certificate_chain']/*"/>
 	public required System.Collections.Generic.ICollection<string> X509CertificateChain { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Delegate PKI authentication.
-/// </para>
-/// <para>
-/// This API implements the exchange of an X509Certificate chain for an Elasticsearch access token.
-/// The certificate chain is validated, according to RFC 5280, by sequentially considering the trust configuration of every installed PKI realm that has <c>delegation.enabled</c> set to <c>true</c>.
-/// A successfully trusted client certificate is also subject to the validation of the subject distinguished name according to thw <c>username_pattern</c> of the respective realm.
-/// </para>
-/// <para>
-/// This API is called by smart and trusted proxies, such as Kibana, which terminate the user's TLS session but still want to authenticate the user by using a PKI realm—-​as if the user connected directly to Elasticsearch.
-/// </para>
-/// <para>
-/// IMPORTANT: The association between the subject public key in the target certificate and the corresponding private key is not validated.
-/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
-/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
-/// </para>
-/// </summary>
+/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delegate_pki.Request']/*"/>
 public readonly partial struct DelegatePkiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest Instance { get; init; }
@@ -121,32 +82,14 @@ public readonly partial struct DelegatePkiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest instance) => new Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The X509Certificate chain, which is represented as an ordered string array.
-	/// Each string in the array is a base64-encoded (Section 4 of RFC4648 - not base64url-encoded) of the certificate's DER encoding.
-	/// </para>
-	/// <para>
-	/// The first element is the target certificate that contains the subject distinguished name that is requesting access.
-	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request#x509_certificate_chain']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor X509CertificateChain(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.X509CertificateChain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The X509Certificate chain, which is represented as an ordered string array.
-	/// Each string in the array is a base64-encoded (Section 4 of RFC4648 - not base64url-encoded) of the certificate's DER encoding.
-	/// </para>
-	/// <para>
-	/// The first element is the target certificate that contains the subject distinguished name that is requesting access.
-	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
-	/// </para>
-	/// </summary>
+	/// <include file="DelegatePkiRequest.g.xml" path="doc/member[@key='security.delegate_pki.Request#x509_certificate_chain']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor X509CertificateChain(params string[] values)
 	{
 		Instance.X509CertificateChain = [.. values];

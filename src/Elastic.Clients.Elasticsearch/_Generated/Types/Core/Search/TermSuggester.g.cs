@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.TermSuggester']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.TermSuggesterConverter))]
 public sealed partial class TermSuggester
 {
@@ -42,109 +43,48 @@ public sealed partial class TermSuggester
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? LowercaseTerms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_edits']/*"/>
 	public int? MaxEdits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_inspections']/*"/>
 	public int? MaxInspections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_term_freq']/*"/>
 	public float? MaxTermFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, then the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_doc_freq']/*"/>
 	public float? MinDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_word_length']/*"/>
 	public int? MinWordLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines how suggestions should be sorted per suggest text term.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string distance implementation to use for comparing how similar suggested terms are.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#string_distance']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.TermSuggester']/*"/>
 public readonly partial struct TermSuggesterDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Instance { get; init; }
@@ -164,36 +104,21 @@ public readonly partial struct TermSuggesterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -206,129 +131,77 @@ public readonly partial struct TermSuggesterDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_edits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxEdits(int? value)
 	{
 		Instance.MaxEdits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_inspections']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxInspections(int? value)
 	{
 		Instance.MaxInspections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MaxTermFreq(float? value)
 	{
 		Instance.MaxTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, then the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MinDocFreq(float? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how suggestions should be sorted per suggest text term.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string distance implementation to use for comparing how similar suggested terms are.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#string_distance']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? value)
 	{
 		Instance.StringDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
@@ -344,6 +217,7 @@ public readonly partial struct TermSuggesterDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.TermSuggester']/*"/>
 public readonly partial struct TermSuggesterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Instance { get; init; }
@@ -363,36 +237,21 @@ public readonly partial struct TermSuggesterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.TermSuggester(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -405,129 +264,77 @@ public readonly partial struct TermSuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_edits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxEdits(int? value)
 	{
 		Instance.MaxEdits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_inspections']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxInspections(int? value)
 	{
 		Instance.MaxInspections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#max_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MaxTermFreq(float? value)
 	{
 		Instance.MaxTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, then the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MinDocFreq(float? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate for suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of suggestions to be retrieved from each individual shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how suggestions should be sorted per suggest text term.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Sort(Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string distance implementation to use for comparing how similar suggested terms are.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#string_distance']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor StringDistance(Elastic.Clients.Elasticsearch.Core.Search.StringDistance? value)
 	{
 		Instance.StringDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
-	/// </para>
-	/// </summary>
+	/// <include file="TermSuggester.g.xml" path="doc/member[@key='_global.search._types.TermSuggester#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;

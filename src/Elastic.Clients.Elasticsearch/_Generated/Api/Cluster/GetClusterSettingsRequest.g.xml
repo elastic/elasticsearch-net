@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.get_settings.Request"><summary><para>
+Get cluster-wide settings.
+</para>
+<para>
+By default, it returns only settings that have been explicitly defined.
+</para></summary></member>
+  <member key="cluster.get_settings.Request#flat_settings"><summary><para>
+If <c>true</c>, returns settings in flat format.
+</para></summary></member>
+  <member key="cluster.get_settings.Request#include_defaults"><summary><para>
+If <c>true</c>, also returns the values of all other cluster settings set in the
+<c>elasticsearch.yml</c> file on one of the nodes in your cluster, together with the default
+values of all other cluster settings on that node. The default value of each setting may
+depend on the values of other settings on that node. If the nodes in your cluster do not all
+have the same configuration then the values returned by this API may vary from invocation to
+invocation and may not reflect the values that Elasticsearch uses in all situations. Use the
+<c>GET _nodes/settings</c> API to fetch the settings for each individual node in your cluster.
+</para></summary></member>
+  <member key="cluster.get_settings.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="cluster.get_settings.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

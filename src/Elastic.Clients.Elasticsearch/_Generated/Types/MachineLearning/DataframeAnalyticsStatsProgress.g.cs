@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsProgress']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsStatsProgressConverter))]
 public sealed partial class DataframeAnalyticsStatsProgress
 {
@@ -43,17 +44,9 @@ public sealed partial class DataframeAnalyticsStatsProgress
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the phase of the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsProgress.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsProgress#phase']/*"/>
 	public required string Phase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The progress that the data frame analytics job has made expressed in percentage.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsStatsProgress.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsStatsProgress#progress_percent']/*"/>
 	public required int ProgressPercent { get; set; }
 }

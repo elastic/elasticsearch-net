@@ -23,53 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
 public sealed partial class GetClusterSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, also returns the values of all other cluster settings set in the
-	/// <c>elasticsearch.yml</c> file on one of the nodes in your cluster, together with the default
-	/// values of all other cluster settings on that node. The default value of each setting may
-	/// depend on the values of other settings on that node. If the nodes in your cluster do not all
-	/// have the same configuration then the values returned by this API may vary from invocation to
-	/// invocation and may not reflect the values that Elasticsearch uses in all situations. Use the
-	/// <c>GET _nodes/settings</c> API to fetch the settings for each individual node in your cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster-wide settings.
-/// </para>
-/// <para>
-/// By default, it returns only settings that have been explicitly defined.
-/// </para>
-/// </summary>
+/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.GetClusterSettingsRequestConverter))]
 public sealed partial class GetClusterSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters>
 {
@@ -91,51 +63,21 @@ public sealed partial class GetClusterSettingsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "cluster.get_settings";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, also returns the values of all other cluster settings set in the
-	/// <c>elasticsearch.yml</c> file on one of the nodes in your cluster, together with the default
-	/// values of all other cluster settings on that node. The default value of each setting may
-	/// depend on the values of other settings on that node. If the nodes in your cluster do not all
-	/// have the same configuration then the values returned by this API may vary from invocation to
-	/// invocation and may not reflect the values that Elasticsearch uses in all situations. Use the
-	/// <c>GET _nodes/settings</c> API to fetch the settings for each individual node in your cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster-wide settings.
-/// </para>
-/// <para>
-/// By default, it returns only settings that have been explicitly defined.
-/// </para>
-/// </summary>
+/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_settings.Request']/*"/>
 public readonly partial struct GetClusterSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest Instance { get; init; }
@@ -154,52 +96,28 @@ public readonly partial struct GetClusterSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, also returns the values of all other cluster settings set in the
-	/// <c>elasticsearch.yml</c> file on one of the nodes in your cluster, together with the default
-	/// values of all other cluster settings on that node. The default value of each setting may
-	/// depend on the values of other settings on that node. If the nodes in your cluster do not all
-	/// have the same configuration then the values returned by this API may vary from invocation to
-	/// invocation and may not reflect the values that Elasticsearch uses in all situations. Use the
-	/// <c>GET _nodes/settings</c> API to fetch the settings for each individual node in your cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetClusterSettingsRequest.g.xml" path="doc/member[@key='cluster.get_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

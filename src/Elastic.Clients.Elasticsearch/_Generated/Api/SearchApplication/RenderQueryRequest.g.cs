@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 public sealed partial class RenderQueryRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Render a search application query.
-/// </para>
-/// <para>
-/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
-/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
-/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
-/// </para>
-/// <para>
-/// You must have <c>read</c> privileges on the backing alias of the search application.
-/// </para>
-/// </summary>
+/// <include file="RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.RenderQueryRequestConverter))]
 public sealed partial class RenderQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>
 {
@@ -66,28 +57,13 @@ public sealed partial class RenderQueryRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "search_application.render_query";
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to render teh query for.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Render a search application query.
-/// </para>
-/// <para>
-/// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
-/// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
-/// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
-/// </para>
-/// <para>
-/// You must have <c>read</c> privileges on the backing alias of the search application.
-/// </para>
-/// </summary>
+/// <include file="RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.render_query.Request']/*"/>
 public readonly partial struct RenderQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest Instance { get; init; }
@@ -112,11 +88,7 @@ public readonly partial struct RenderQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to render teh query for.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderQueryRequest.g.xml" path="doc/member[@key='search_application.render_query.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

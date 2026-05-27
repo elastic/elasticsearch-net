@@ -23,45 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
 public sealed partial class PutDataStreamMappingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the mappings on any data streams. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream mappings.
-/// </para>
-/// <para>
-/// This API can be used to override mappings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. The mapping change is only applied to new write indices
-/// that are created during rollover after this API is called. No indices are changed by this API.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataStreamMappingsRequestConverter))]
 public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>
 {
@@ -95,51 +72,22 @@ public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "indices.put_data_stream_mappings";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the mappings on any data streams. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream mappings.
-/// </para>
-/// <para>
-/// This API can be used to override mappings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. The mapping change is only applied to new write indices
-/// that are created during rollover after this API is called. No indices are changed by this API.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
 public readonly partial struct PutDataStreamMappingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest Instance { get; init; }
@@ -166,49 +114,28 @@ public readonly partial struct PutDataStreamMappingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the mappings on any data streams. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -295,16 +222,8 @@ public readonly partial struct PutDataStreamMappingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update data stream mappings.
-/// </para>
-/// <para>
-/// This API can be used to override mappings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. The mapping change is only applied to new write indices
-/// that are created during rollover after this API is called. No indices are changed by this API.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request']/*"/>
 public readonly partial struct PutDataStreamMappingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest Instance { get; init; }
@@ -332,49 +251,28 @@ public readonly partial struct PutDataStreamMappingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the mappings on any data streams. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_mappings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

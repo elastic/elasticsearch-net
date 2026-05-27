@@ -23,13 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-/// <summary>
-/// <para>
-/// Read-side variant of <c>IndicesPrivileges</c> returned by the get role API.
-/// Carries the <c>implicitly_granted</c> marker that is set on entries contributed by
-/// a registered <c>ImplicitPrivilegesProvider</c> when <c>include_implicit</c> is <c>true</c>.
-/// </para>
-/// </summary>
+/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.IndicesPrivilegesReadConverter))]
 public sealed partial class IndicesPrivilegesRead
 {
@@ -50,48 +45,21 @@ public sealed partial class IndicesPrivilegesRead
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#allow_restricted_indices']/*"/>
 	public bool? AllowRestrictedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#field_security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> on entries that were contributed by a registered <c>ImplicitPrivilegesProvider</c>
-	/// rather than explicitly stored on the role. Only present when the get role API is called with
-	/// <c>include_implicit=true</c>. The put role API rejects this field, so clients must not echo it back
-	/// on a GET-then-PUT round-trip.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#implicitly_granted']/*"/>
 	public bool? ImplicitlyGranted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#names']/*"/>
 	public required System.Collections.Generic.ICollection<string> Names { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#privileges']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesPrivilegesRead.g.xml" path="doc/member[@key='security.get_role.IndicesPrivilegesRead#query']/*"/>
 	public object? Query { get; set; }
 }

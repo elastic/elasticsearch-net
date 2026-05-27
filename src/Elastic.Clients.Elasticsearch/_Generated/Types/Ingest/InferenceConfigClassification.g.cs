@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InferenceConfigClassificationConverter))]
 public sealed partial class InferenceConfigClassification
 {
@@ -36,43 +37,23 @@ public sealed partial class InferenceConfigClassification
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_feature_importance_values']/*"/>
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the type of the predicted field to write.
-	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#prediction_field_type']/*"/>
 	public string? PredictionFieldType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification']/*"/>
 public readonly partial struct InferenceConfigClassificationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Instance { get; init; }
@@ -92,78 +73,49 @@ public readonly partial struct InferenceConfigClassificationDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the type of the predicted field to write.
-	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#prediction_field_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> PredictionFieldType(string? value)
 	{
 		Instance.PredictionFieldType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TopClassesResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TopClassesResultsField = value;
@@ -184,6 +136,7 @@ public readonly partial struct InferenceConfigClassificationDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification']/*"/>
 public readonly partial struct InferenceConfigClassificationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Instance { get; init; }
@@ -203,78 +156,49 @@ public readonly partial struct InferenceConfigClassificationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the type of the predicted field to write.
-	/// Valid values are: <c>string</c>, <c>number</c>, <c>boolean</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#prediction_field_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor PredictionFieldType(string? value)
 	{
 		Instance.PredictionFieldType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TopClassesResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigClassification.g.xml" path="doc/member[@key='ingest._types.InferenceConfigClassification#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor TopClassesResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TopClassesResultsField = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MigrateReindexConverter))]
 public sealed partial class MigrateReindex
 {
@@ -43,21 +44,14 @@ public sealed partial class MigrateReindex
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reindex mode. Currently only 'upgrade' is supported.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateReindex.g.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex#mode']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum Mode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream (only data streams are currently supported).
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateReindex.g.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex#source']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex Source { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex']/*"/>
 public readonly partial struct MigrateReindexDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex Instance { get; init; }
@@ -77,33 +71,21 @@ public readonly partial struct MigrateReindexDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Reindex mode. Currently only 'upgrade' is supported.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateReindex.g.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor Mode(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum value)
 	{
 		Instance.Mode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream (only data streams are currently supported).
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateReindex.g.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex#source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor Source(Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source index or data stream (only data streams are currently supported).
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateReindex.g.xml" path="doc/member[@key='indices.migrate_reindex.MigrateReindex#source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SourceIndexDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.IndexManagement.SourceIndexDescriptor.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NlpTokenizationUpdateOptionsConverter))]
 public sealed partial class NlpTokenizationUpdateOptions
 {
@@ -36,21 +37,14 @@ public sealed partial class NlpTokenizationUpdateOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Span options to apply
-	/// </para>
-	/// </summary>
+	/// <include file="NlpTokenizationUpdateOptions.g.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions#span']/*"/>
 	public int? Span { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Truncate options to apply
-	/// </para>
-	/// </summary>
+	/// <include file="NlpTokenizationUpdateOptions.g.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions']/*"/>
 public readonly partial struct NlpTokenizationUpdateOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct NlpTokenizationUpdateOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Span options to apply
-	/// </para>
-	/// </summary>
+	/// <include file="NlpTokenizationUpdateOptions.g.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions#span']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor Span(int? value)
 	{
 		Instance.Span = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Truncate options to apply
-	/// </para>
-	/// </summary>
+	/// <include file="NlpTokenizationUpdateOptions.g.xml" path="doc/member[@key='ml._types.NlpTokenizationUpdateOptions#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
 		Instance.Truncate = value;

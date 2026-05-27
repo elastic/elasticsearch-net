@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.PublishedClusterStates']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PublishedClusterStatesConverter))]
 public sealed partial class PublishedClusterStates
 {
@@ -36,24 +37,12 @@ public sealed partial class PublishedClusterStates
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of compatible differences between published cluster states.
-	/// </para>
-	/// </summary>
+	/// <include file="PublishedClusterStates.g.xml" path="doc/member[@key='nodes._types.PublishedClusterStates#compatible_diffs']/*"/>
 	public long? CompatibleDiffs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of published cluster states.
-	/// </para>
-	/// </summary>
+	/// <include file="PublishedClusterStates.g.xml" path="doc/member[@key='nodes._types.PublishedClusterStates#full_states']/*"/>
 	public long? FullStates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of incompatible differences between published cluster states.
-	/// </para>
-	/// </summary>
+	/// <include file="PublishedClusterStates.g.xml" path="doc/member[@key='nodes._types.PublishedClusterStates#incompatible_diffs']/*"/>
 	public long? IncompatibleDiffs { get; set; }
 }

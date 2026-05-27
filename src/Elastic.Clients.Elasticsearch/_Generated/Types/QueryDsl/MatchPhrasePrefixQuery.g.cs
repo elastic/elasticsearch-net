@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchPhrasePrefixQueryConverter))]
 public sealed partial class MatchPhrasePrefixQuery
 {
@@ -49,54 +50,28 @@ public sealed partial class MatchPhrasePrefixQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the last provided term of the query value will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#max_expansions']/*"/>
 	public int? MaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#slop']/*"/>
 	public int? Slop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery']/*"/>
 public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Instance { get; init; }
@@ -116,25 +91,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -153,22 +117,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the last provided term of the query value will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -181,22 +137,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;
@@ -212,6 +160,7 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery']/*"/>
 public readonly partial struct MatchPhrasePrefixQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery Instance { get; init; }
@@ -231,25 +180,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -268,22 +206,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the last provided term of the query value will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -296,22 +226,14 @@ public readonly partial struct MatchPhrasePrefixQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhrasePrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhrasePrefixQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;

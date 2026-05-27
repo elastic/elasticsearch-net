@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPattern']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.AutoFollowPatternConverter))]
 public sealed partial class AutoFollowPattern
 {

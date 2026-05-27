@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.KeepWordsTokenFilter#keep_words"><summary><para>
+List of words to keep. Only tokens that match words in this list are included in the output.
+Either this parameter or <c>keep_words_path</c> must be specified.
+</para></summary></member>
+  <member key="_types.analysis.KeepWordsTokenFilter#keep_words_case"><summary><para>
+If <c>true</c>, lowercase all keep words. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.KeepWordsTokenFilter#keep_words_path"><summary><para>
+Path to a file that contains a list of words to keep. Only tokens that match words in this list are included in the output.
+This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+Either this parameter or <c>keep_words</c> must be specified.
+</para></summary></member>
+</doc>

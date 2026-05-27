@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.list_rulesets.QueryRulesetListItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.QueryRulesetListItemConverter))]
 public sealed partial class QueryRulesetListItem
 {
@@ -45,34 +46,15 @@ public sealed partial class QueryRulesetListItem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of criteria type (for example, <c>exact</c>) to the number of rules of that type.
-	/// </para>
-	/// <para>
-	/// NOTE: The counts in <c>rule_criteria_types_counts</c> may be larger than the value of <c>rule_total_count</c> because a rule may have multiple criteria.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetListItem.g.xml" path="doc/member[@key='query_rules.list_rulesets.QueryRulesetListItem#rule_criteria_types_counts']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the ruleset.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetListItem.g.xml" path="doc/member[@key='query_rules.list_rulesets.QueryRulesetListItem#ruleset_id']/*"/>
 	public required string RulesetId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of rules associated with the ruleset.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetListItem.g.xml" path="doc/member[@key='query_rules.list_rulesets.QueryRulesetListItem#rule_total_count']/*"/>
 	public required int RuleTotalCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A map of rule type (for example, <c>pinned</c>) to the number of rules of that type.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetListItem.g.xml" path="doc/member[@key='query_rules.list_rulesets.QueryRulesetListItem#rule_type_counts']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RuleTypeCounts { get; set; }
 }

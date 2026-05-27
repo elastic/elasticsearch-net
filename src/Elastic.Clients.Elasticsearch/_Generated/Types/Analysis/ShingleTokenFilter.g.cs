@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ShingleTokenFilterConverter))]
 public sealed partial class ShingleTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,46 +37,22 @@ public sealed partial class ShingleTokenFilter : Elastic.Clients.Elasticsearch.A
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#filler_token']/*"/>
 	public string? FillerToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#max_shingle_size']/*"/>
 	public int? MaxShingleSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#min_shingle_size']/*"/>
 	public int? MinShingleSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#output_unigrams']/*"/>
 	public bool? OutputUnigrams { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#output_unigrams_if_no_shingles']/*"/>
 	public bool? OutputUnigramsIfNoShingles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#token_separator']/*"/>
 	public string? TokenSeparator { get; set; }
 
 	public string Type => "shingle";
@@ -83,6 +60,7 @@ public sealed partial class ShingleTokenFilter : Elastic.Clients.Elasticsearch.A
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter']/*"/>
 public readonly partial struct ShingleTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter Instance { get; init; }
@@ -102,66 +80,42 @@ public readonly partial struct ShingleTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#filler_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor FillerToken(string? value)
 	{
 		Instance.FillerToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#max_shingle_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor MaxShingleSize(int? value)
 	{
 		Instance.MaxShingleSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#min_shingle_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor MinShingleSize(int? value)
 	{
 		Instance.MinShingleSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#output_unigrams']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor OutputUnigrams(bool? value = true)
 	{
 		Instance.OutputUnigrams = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#output_unigrams_if_no_shingles']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? value = true)
 	{
 		Instance.OutputUnigramsIfNoShingles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ShingleTokenFilter.g.xml" path="doc/member[@key='_types.analysis.ShingleTokenFilter#token_separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor TokenSeparator(string? value)
 	{
 		Instance.TokenSeparator = value;

@@ -23,28 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
 public sealed partial class GetCalendarsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get calendar configuration info.
-/// </para>
-/// </summary>
+/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetCalendarsRequestConverter))]
 public sealed partial class GetCalendarsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestParameters>
 {
@@ -70,40 +61,21 @@ public sealed partial class GetCalendarsRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ml.get_calendars";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? CalendarId { get => P<Elastic.Clients.Elasticsearch.Id?>("calendar_id"); set => PO("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// This object is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get calendar configuration info.
-/// </para>
-/// </summary>
+/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendars.Request']/*"/>
 public readonly partial struct GetCalendarsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest Instance { get; init; }
@@ -127,66 +99,42 @@ public readonly partial struct GetCalendarsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of calendars. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of calendars to obtain. This parameter is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This object is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
 		Instance.Page = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This object is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page()
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This object is supported only when you omit the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarsRequest.g.xml" path="doc/member[@key='ml.get_calendars.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);

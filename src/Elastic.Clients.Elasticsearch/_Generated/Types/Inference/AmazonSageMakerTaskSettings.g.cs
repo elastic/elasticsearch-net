@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonSageMakerTaskSettingsConverter))]
 public sealed partial class AmazonSageMakerTaskSettings
 {
@@ -36,45 +37,23 @@ public sealed partial class AmazonSageMakerTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AWS custom attributes passed verbatim through to the model running in the SageMaker Endpoint.
-	/// Values will be returned in the <c>X-elastic-sagemaker-custom-attributes</c> header.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#custom_attributes']/*"/>
 	public string? CustomAttributes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The optional JMESPath expression used to override the EnableExplanations provided during endpoint creation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#enable_explanations']/*"/>
 	public string? EnableExplanations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The capture data ID when enabled in the endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#inference_id']/*"/>
 	public string? InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The stateful session identifier for a new or existing session.
-	/// New sessions will be returned in the <c>X-elastic-sagemaker-new-session-id</c> header.
-	/// Closed sessions will be returned in the <c>X-elastic-sagemaker-closed-session-id</c> header.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#session_id']/*"/>
 	public string? SessionId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the variant when running with multi-variant Endpoints.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#target_variant']/*"/>
 	public string? TargetVariant { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings']/*"/>
 public readonly partial struct AmazonSageMakerTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings Instance { get; init; }
@@ -94,58 +73,35 @@ public readonly partial struct AmazonSageMakerTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The AWS custom attributes passed verbatim through to the model running in the SageMaker Endpoint.
-	/// Values will be returned in the <c>X-elastic-sagemaker-custom-attributes</c> header.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#custom_attributes']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor CustomAttributes(string? value)
 	{
 		Instance.CustomAttributes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional JMESPath expression used to override the EnableExplanations provided during endpoint creation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#enable_explanations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor EnableExplanations(string? value)
 	{
 		Instance.EnableExplanations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The capture data ID when enabled in the endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor InferenceId(string? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stateful session identifier for a new or existing session.
-	/// New sessions will be returned in the <c>X-elastic-sagemaker-new-session-id</c> header.
-	/// Closed sessions will be returned in the <c>X-elastic-sagemaker-closed-session-id</c> header.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#session_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor SessionId(string? value)
 	{
 		Instance.SessionId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the variant when running with multi-variant Endpoints.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonSageMakerTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonSageMakerTaskSettings#target_variant']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor TargetVariant(string? value)
 	{
 		Instance.TargetVariant = value;

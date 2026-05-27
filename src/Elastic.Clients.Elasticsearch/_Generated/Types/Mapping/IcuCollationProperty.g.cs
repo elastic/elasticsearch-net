@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.IcuCollationPropertyConverter))]
 public sealed partial class IcuCollationProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -48,28 +49,16 @@ public sealed partial class IcuCollationProperty : Elastic.Clients.Elasticsearch
 	public bool? HiraganaQuaternaryMode { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should the field be searchable?
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#index']/*"/>
 	public bool? Index { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 	public string? Language { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? Norms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#null_value']/*"/>
 	public string? NullValue { get; set; }
 	public bool? Numeric { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -84,6 +73,7 @@ public sealed partial class IcuCollationProperty : Elastic.Clients.Elasticsearch
 	public string? Variant { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty']/*"/>
 public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Instance { get; init; }
@@ -181,11 +171,7 @@ public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the field be searchable?
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
 		Instance.Index = value;
@@ -204,33 +190,21 @@ public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -250,11 +224,7 @@ public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#null_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor<TDocument> NullValue(string? value)
 	{
 		Instance.NullValue = value;
@@ -329,6 +299,7 @@ public readonly partial struct IcuCollationPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty']/*"/>
 public readonly partial struct IcuCollationPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Instance { get; init; }
@@ -432,11 +403,7 @@ public readonly partial struct IcuCollationPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the field be searchable?
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Index(bool? value = true)
 	{
 		Instance.Index = value;
@@ -455,33 +422,21 @@ public readonly partial struct IcuCollationPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -501,11 +456,7 @@ public readonly partial struct IcuCollationPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accepts a string value which is substituted for any explicit null values. Defaults to null, which means the field is treated as missing.
-	/// </para>
-	/// </summary>
+	/// <include file="IcuCollationProperty.g.xml" path="doc/member[@key='_types.mapping.IcuCollationProperty#null_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IcuCollationPropertyDescriptor NullValue(string? value)
 	{
 		Instance.NullValue = value;

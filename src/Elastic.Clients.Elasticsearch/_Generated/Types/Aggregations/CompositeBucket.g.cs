@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeBucket']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeBucketConverter))]
 public sealed partial class CompositeBucket
 {
@@ -43,11 +44,6 @@ public sealed partial class CompositeBucket
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Nested aggregations
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public required long DocCount { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue> Key { get; set; }

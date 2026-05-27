@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
 public sealed partial class InferTrainedModelRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait for inference results.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Evaluate a trained model.
-/// </para>
-/// </summary>
+/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.InferTrainedModelRequestConverter))]
 public sealed partial class InferTrainedModelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestParameters>
 {
@@ -71,42 +66,21 @@ public sealed partial class InferTrainedModelRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.infer_trained_model";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait for inference results.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public required System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? InferenceConfig { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Evaluate a trained model.
-/// </para>
-/// </summary>
+/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
 public readonly partial struct InferTrainedModelRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Instance { get; init; }
@@ -133,61 +107,35 @@ public readonly partial struct InferTrainedModelRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait for inference results.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
@@ -200,33 +148,21 @@ public readonly partial struct InferTrainedModelRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<T>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<T>.Build(action);
@@ -289,11 +225,8 @@ public readonly partial struct InferTrainedModelRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Evaluate a trained model.
-/// </para>
-/// </summary>
+/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.infer_trained_model.Request']/*"/>
 public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest Instance { get; init; }
@@ -320,61 +253,35 @@ public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequest(Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait for inference results.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, object>> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Collections.Generic.IDictionary<string, object>[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects to pass to the model for inference. The objects should contain a fields matching your
-	/// configured trained model input. Typically, for NLP models, the field name is <c>text_field</c>.
-	/// Currently, for NLP models, only a single value is allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, object>>();
@@ -387,22 +294,14 @@ public readonly partial struct InferTrainedModelRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The inference configuration updates to apply on the API call
-	/// </para>
-	/// </summary>
+	/// <include file="InferTrainedModelRequest.g.xml" path="doc/member[@key='ml.infer_trained_model.Request#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelRequestDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdateDescriptor<TDocument>.Build(action);

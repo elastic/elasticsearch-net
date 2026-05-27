@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleVertexAITaskSettingsConverter))]
 public sealed partial class GoogleVertexAITaskSettings
 {
@@ -36,39 +37,20 @@ public sealed partial class GoogleVertexAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#auto_truncate']/*"/>
 	public bool? AutoTruncate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, specifies the <c>max_tokens</c> value for requests sent to the Google Model Garden <c>anthropic</c> provider.
-	/// If <c>provider</c> is not set to <c>anthropic</c>, this field is ignored.
-	/// If <c>max_tokens</c> is specified - it must be a positive integer. If not specified, the default value of 1024 is used.
-	/// Anthropic models require <c>max_tokens</c> to be set for each request. Please refer to the Anthropic documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#max_tokens']/*"/>
 	public int? MaxTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
-	/// Refer to the Google documentation for the allowable configurations for each model type.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#thinking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ThinkingConfig? ThinkingConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of the top N documents that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings']/*"/>
 public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings Instance { get; init; }
@@ -88,72 +70,42 @@ public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#auto_truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor AutoTruncate(bool? value = true)
 	{
 		Instance.AutoTruncate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks, specifies the <c>max_tokens</c> value for requests sent to the Google Model Garden <c>anthropic</c> provider.
-	/// If <c>provider</c> is not set to <c>anthropic</c>, this field is ignored.
-	/// If <c>max_tokens</c> is specified - it must be a positive integer. If not specified, the default value of 1024 is used.
-	/// Anthropic models require <c>max_tokens</c> to be set for each request. Please refer to the Anthropic documentation for more information.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#max_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor MaxTokens(int? value)
 	{
 		Instance.MaxTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
-	/// Refer to the Google documentation for the allowable configurations for each model type.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#thinking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig(Elastic.Clients.Elasticsearch.Inference.ThinkingConfig? value)
 	{
 		Instance.ThinkingConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
-	/// Refer to the Google documentation for the allowable configurations for each model type.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#thinking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig()
 	{
 		Instance.ThinkingConfig = Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
-	/// Refer to the Google documentation for the allowable configurations for each model type.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#thinking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig(System.Action<Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor>? action)
 	{
 		Instance.ThinkingConfig = Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of the top N documents that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

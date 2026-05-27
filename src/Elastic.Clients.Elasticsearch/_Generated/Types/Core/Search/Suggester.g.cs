@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Suggester']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SuggesterConverter))]
 public sealed partial class Suggester
 {
@@ -36,21 +37,13 @@ public sealed partial class Suggester
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>? Suggesters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
-	/// </para>
-	/// </summary>
+	/// <include file="Suggester.g.xml" path="doc/member[@key='_global.search._types.Suggester#text']/*"/>
 	public string? Text { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Suggester']/*"/>
 public readonly partial struct SuggesterDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.Suggester Instance { get; init; }
@@ -70,33 +63,18 @@ public readonly partial struct SuggesterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.Suggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Suggester(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>? value)
 	{
 		Instance.Suggesters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters()
 	{
 		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>>? action)
 	{
 		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<TDocument>.Build(action);
@@ -117,11 +95,7 @@ public readonly partial struct SuggesterDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
-	/// </para>
-	/// </summary>
+	/// <include file="Suggester.g.xml" path="doc/member[@key='_global.search._types.Suggester#text']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> Text(string? value)
 	{
 		Instance.Text = value;
@@ -142,6 +116,7 @@ public readonly partial struct SuggesterDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Suggester']/*"/>
 public readonly partial struct SuggesterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.Suggester Instance { get; init; }
@@ -161,44 +136,24 @@ public readonly partial struct SuggesterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Suggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Suggester(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>? value)
 	{
 		Instance.Suggesters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters()
 	{
 		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester>? action)
 	{
 		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The named suggesters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Suggesters<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<T>>? action)
 	{
 		Instance.Suggesters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFieldSuggester<T>.Build(action);
@@ -226,11 +181,7 @@ public readonly partial struct SuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Global suggest text, to avoid repetition when the same text is used in several suggesters
-	/// </para>
-	/// </summary>
+	/// <include file="Suggester.g.xml" path="doc/member[@key='_global.search._types.Suggester#text']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor Text(string? value)
 	{
 		Instance.Text = value;

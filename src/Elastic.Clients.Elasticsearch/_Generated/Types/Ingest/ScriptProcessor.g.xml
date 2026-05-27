@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.ScriptProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#id"><summary><para>
+ID of a stored script.
+If no <c>source</c> is specified, this parameter is required.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#lang"><summary><para>
+Script language.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#params"><summary><para>
+Object containing parameters for the script.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#source"><summary><para>
+Inline script.
+If no <c>id</c> is specified, this parameter is required.
+</para></summary></member>
+  <member key="ingest._types.ScriptProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

@@ -37,45 +37,21 @@ public sealed partial class EnrollNodeResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The CA certificate that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#http_ca_cert']/*"/>
 	public required string HttpCaCert { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The CA private key that can be used by the new node in order to sign its certificate for the HTTP layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#http_ca_key']/*"/>
 	public required string HttpCaKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of transport addresses in the form of <c>host:port</c> for the nodes that are already members of the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#nodes_addresses']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> NodesAddresses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The CA certificate that is used to sign the TLS certificate for the transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#transport_ca_cert']/*"/>
 	public required string TransportCaCert { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The certificate that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#transport_cert']/*"/>
 	public required string TransportCert { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The private key that the node can use for TLS for its transport layer, as a Base64 encoded string of the ASN.1 DER encoding of the key.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrollNodeResponse.g.xml" path="doc/member[@key='security.enroll_node.Response#transport_key']/*"/>
 	public required string TransportKey { get; set; }
 }

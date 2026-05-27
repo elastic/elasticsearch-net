@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SemanticQueryConverter))]
 public sealed partial class SemanticQuery
 {
@@ -43,32 +44,18 @@ public sealed partial class SemanticQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to query, which must be a semantic_text field type
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#field']/*"/>
 	public required string Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query text
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery']/*"/>
 public readonly partial struct SemanticQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery Instance { get; init; }
@@ -88,36 +75,21 @@ public readonly partial struct SemanticQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery(Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to query, which must be a semantic_text field type
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query text
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticQuery.g.xml" path="doc/member[@key='_types.query_dsl.SemanticQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.HtmlStripProcessorConverter))]
 public sealed partial class HtmlStripProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class HtmlStripProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to remove HTML tags from.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document,
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor']/*"/>
 public readonly partial struct HtmlStripProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor Instance { get; init; }
@@ -121,122 +88,77 @@ public readonly partial struct HtmlStripProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to remove HTML tags from.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to remove HTML tags from.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document,
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -249,36 +171,21 @@ public readonly partial struct HtmlStripProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -294,6 +201,7 @@ public readonly partial struct HtmlStripProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor']/*"/>
 public readonly partial struct HtmlStripProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor Instance { get; init; }
@@ -313,122 +221,77 @@ public readonly partial struct HtmlStripProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to remove HTML tags from.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to remove HTML tags from.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document,
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -441,11 +304,7 @@ public readonly partial struct HtmlStripProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -458,36 +317,21 @@ public readonly partial struct HtmlStripProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="HtmlStripProcessor.g.xml" path="doc/member[@key='ingest._types.HtmlStripProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

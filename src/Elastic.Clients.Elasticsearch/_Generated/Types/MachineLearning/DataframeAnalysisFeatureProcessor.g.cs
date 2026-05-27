@@ -39,39 +39,10 @@ public sealed partial class DataframeAnalysisFeatureProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding? FrequencyEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding>("frequency_encoding"); set => SetVariant("frequency_encoding", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform multi encoding. It allows multiple processors to be changed together. This way the output of a processor can then be passed to another as an input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding? MultiEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding>("multi_encoding"); set => SetVariant("multi_encoding", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding? NGramEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding>("n_gram_encoding"); set => SetVariant("n_gram_encoding", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding? OneHotEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding>("one_hot_encoding"); set => SetVariant("one_hot_encoding", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding? TargetMeanEncoding { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding>("target_mean_encoding"); set => SetVariant("target_mean_encoding", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor { FrequencyEncoding = value };
@@ -118,110 +89,60 @@ public readonly partial struct DataframeAnalysisFeatureProcessorDescriptor<TDocu
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding? value)
 	{
 		Instance.FrequencyEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> FrequencyEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>> action)
 	{
 		Instance.FrequencyEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform multi encoding. It allows multiple processors to be changed together. This way the output of a processor can then be passed to another as an input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> MultiEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding? value)
 	{
 		Instance.MultiEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform multi encoding. It allows multiple processors to be changed together. This way the output of a processor can then be passed to another as an input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> MultiEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> action)
 	{
 		Instance.MultiEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> NGramEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding? value)
 	{
 		Instance.NGramEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> NGramEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>> action)
 	{
 		Instance.NGramEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding? value)
 	{
 		Instance.OneHotEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> OneHotEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>> action)
 	{
 		Instance.OneHotEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding? value)
 	{
 		Instance.TargetMeanEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor<TDocument> TargetMeanEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>> action)
 	{
 		Instance.TargetMeanEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>.Build(action);
@@ -256,154 +177,84 @@ public readonly partial struct DataframeAnalysisFeatureProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor FrequencyEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncoding? value)
 	{
 		Instance.FrequencyEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor FrequencyEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor> action)
 	{
 		Instance.FrequencyEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform frequency encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor FrequencyEncoding<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<T>> action)
 	{
 		Instance.FrequencyEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform multi encoding. It allows multiple processors to be changed together. This way the output of a processor can then be passed to another as an input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor MultiEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding? value)
 	{
 		Instance.MultiEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform multi encoding. It allows multiple processors to be changed together. This way the output of a processor can then be passed to another as an input.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor MultiEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor> action)
 	{
 		Instance.MultiEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor NGramEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding? value)
 	{
 		Instance.NGramEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor NGramEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor> action)
 	{
 		Instance.NGramEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform n-gram encoding. Features created by this encoder have the following name format: &lt;feature_prefix>.&lt;ngram>&lt;string position>. For example, if the feature_prefix is f, the feature name for the second unigram in a string is f.11.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor NGramEncoding<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<T>> action)
 	{
 		Instance.NGramEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor OneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding? value)
 	{
 		Instance.OneHotEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor OneHotEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor> action)
 	{
 		Instance.OneHotEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform one hot encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor OneHotEncoding<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<T>> action)
 	{
 		Instance.OneHotEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor TargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding? value)
 	{
 		Instance.TargetMeanEncoding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor TargetMeanEncoding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor> action)
 	{
 		Instance.TargetMeanEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform target mean encoding.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorDescriptor TargetMeanEncoding<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<T>> action)
 	{
 		Instance.TargetMeanEncoding = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<T>.Build(action);

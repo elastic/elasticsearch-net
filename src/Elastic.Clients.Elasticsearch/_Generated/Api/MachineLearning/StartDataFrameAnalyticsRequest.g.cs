@@ -23,28 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
 public sealed partial class StartDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Start a data frame analytics job.
-/// </para>
-/// <para>
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// If the destination index does not exist, it is created automatically the
-/// first time you start the data frame analytics job. The
-/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
-/// destination index are copied from the source index. If there are multiple
-/// source indices, the destination index copies the highest setting values. The
-/// mappings for the destination index are also copied from the source indices.
-/// If there are any mapping conflicts, the job fails to start.
-/// If the destination index exists, it is used as is. You can therefore set up
-/// the destination index in advance with custom settings and mappings.
-/// </para>
-/// </summary>
+/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StartDataFrameAnalyticsRequestConverter))]
 public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestParameters>
 {
@@ -71,42 +57,15 @@ public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "ml.start_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// starts.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Start a data frame analytics job.
-/// </para>
-/// <para>
-/// A data frame analytics job can be started and stopped multiple times
-/// throughout its lifecycle.
-/// If the destination index does not exist, it is created automatically the
-/// first time you start the data frame analytics job. The
-/// <c>index.number_of_shards</c> and <c>index.number_of_replicas</c> settings for the
-/// destination index are copied from the source index. If there are multiple
-/// source indices, the destination index copies the highest setting values. The
-/// mappings for the destination index are also copied from the source indices.
-/// If there are any mapping conflicts, the job fails to start.
-/// If the destination index exists, it is used as is. You can therefore set up
-/// the destination index in advance with custom settings and mappings.
-/// </para>
-/// </summary>
+/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request']/*"/>
 public readonly partial struct StartDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest Instance { get; init; }
@@ -131,25 +90,14 @@ public readonly partial struct StartDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// starts.
-	/// </para>
-	/// </summary>
+	/// <include file="StartDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.start_data_frame_analytics.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartDataFrameAnalyticsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelSizeStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelSizeStatsConverter))]
 public sealed partial class TrainedModelSizeStats
 {
@@ -43,17 +44,9 @@ public sealed partial class TrainedModelSizeStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the model in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelSizeStats.g.xml" path="doc/member[@key='ml._types.TrainedModelSizeStats#model_size_bytes']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize ModelSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The amount of memory required to load the model in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelSizeStats.g.xml" path="doc/member[@key='ml._types.TrainedModelSizeStats#required_native_memory_bytes']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize RequiredNativeMemoryBytes { get; set; }
 }

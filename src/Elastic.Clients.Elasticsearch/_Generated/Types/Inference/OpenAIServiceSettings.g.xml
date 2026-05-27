@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.OpenAIServiceSettings#api_key"><summary><para>
+A valid API key of your OpenAI account.
+You can find your OpenAI API keys in your OpenAI account under the API keys section.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#dimensions"><summary><para>
+For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
+It is supported only in <c>text-embedding-3</c> and later models.
+If it is not set, the OpenAI defined default for the model is used.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the OpenAI documentation for the list of available text embedding models.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#organization_id"><summary><para>
+The unique identifier for your organization.
+You can find the Organization ID in your OpenAI account under <em>Settings > Organizations</em>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from OpenAI.
+The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
+For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
+</para></summary></member>
+  <member key="inference._types.OpenAIServiceSettings#url"><summary><para>
+The URL endpoint to use for the requests.
+It can be changed for testing purposes.
+Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
+<c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
+</para></summary></member>
+</doc>

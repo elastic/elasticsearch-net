@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TermsQueryConverter))]
 public sealed partial class TermsQuery
 {
@@ -43,20 +44,14 @@ public sealed partial class TermsQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsQuery']/*"/>
 public readonly partial struct TermsQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery Instance { get; init; }
@@ -76,14 +71,7 @@ public readonly partial struct TermsQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -129,6 +117,7 @@ public readonly partial struct TermsQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsQuery']/*"/>
 public readonly partial struct TermsQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery Instance { get; init; }
@@ -148,14 +137,7 @@ public readonly partial struct TermsQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

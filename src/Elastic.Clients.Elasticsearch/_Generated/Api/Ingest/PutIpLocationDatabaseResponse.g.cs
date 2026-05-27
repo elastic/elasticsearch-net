@@ -37,10 +37,6 @@ public sealed partial class PutIpLocationDatabaseResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseResponse.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

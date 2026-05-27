@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.TermVectorsResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Mtermvectors.Json.MultiTermVectorsResultConverter))]
 public sealed partial class MultiTermVectorsResult
 {

@@ -37,24 +37,12 @@ public sealed partial class UpgradeTransformsResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of transforms that need to be upgraded.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsResponse.g.xml" path="doc/member[@key='transform.upgrade_transforms.Response#needs_update']/*"/>
 	public required int NeedsUpdate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of transforms that don’t require upgrading.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsResponse.g.xml" path="doc/member[@key='transform.upgrade_transforms.Response#no_action']/*"/>
 	public required int NoAction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of transforms that have been upgraded.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsResponse.g.xml" path="doc/member[@key='transform.upgrade_transforms.Response#updated']/*"/>
 	public required int Updated { get; set; }
 }

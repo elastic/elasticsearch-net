@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexRoutingAllocationInitialRecovery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingAllocationInitialRecoveryConverter))]
 public sealed partial class IndexRoutingAllocationInitialRecovery
 {
@@ -39,6 +40,7 @@ public sealed partial class IndexRoutingAllocationInitialRecovery
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexRoutingAllocationInitialRecovery']/*"/>
 public readonly partial struct IndexRoutingAllocationInitialRecoveryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery Instance { get; init; }

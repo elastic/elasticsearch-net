@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CumulativeCardinalityAggregationConverter))]
 public sealed partial class CumulativeCardinalityAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class CumulativeCardinalityAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation']/*"/>
 public readonly partial struct CumulativeCardinalityAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation Instance { get; init; }
@@ -78,34 +67,21 @@ public readonly partial struct CumulativeCardinalityAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="CumulativeCardinalityAggregation.g.xml" path="doc/member[@key='_types.aggregations.CumulativeCardinalityAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;

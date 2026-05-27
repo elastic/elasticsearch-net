@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DownsampleConfig#fixed_interval"><summary><para>
+The interval at which to aggregate the original time series index.
+</para></summary></member>
+  <member key="indices._types.DownsampleConfig#sampling_method"><summary><para>
+The sampling method used to reduce the documents; it can be either <c>aggregate</c> or <c>last_value</c>. Defaults to <c>aggregate</c>.
+</para></summary></member>
+</doc>

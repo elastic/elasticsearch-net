@@ -23,36 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
 public sealed partial class EnableUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable a user profile.
-/// </para>
-/// <para>
-/// Enable user profiles to make them visible in user profile searches.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
-/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
-/// </para>
-/// </summary>
+/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.EnableUserProfileRequestConverter))]
 public sealed partial class EnableUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>
 {
@@ -79,41 +59,15 @@ public sealed partial class EnableUserProfileRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "security.enable_user_profile";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request#uid']/*"/>
 	public required string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable a user profile.
-/// </para>
-/// <para>
-/// Enable user profiles to make them visible in user profile searches.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// <para>
-/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
-/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
-/// </para>
-/// </summary>
+/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user_profile.Request']/*"/>
 public readonly partial struct EnableUserProfileRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest Instance { get; init; }
@@ -138,25 +92,14 @@ public readonly partial struct EnableUserProfileRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request#uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Uid(string value)
 	{
 		Instance.Uid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileRequest.g.xml" path="doc/member[@key='security.enable_user_profile.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="project.tags.Request"><summary><para>
+Get tags.
+</para>
+<para>
+Get the tags that are defined for the project.
+</para></summary></member>
+  <member key="project.tags.Request#project_routing"><summary><para>
+A Lucene query using project metadata tags used to filter which projects are returned in the response.
+Examples:
+_alias:my-project
+_alias:_origin
+_alias:<em>pr</em>
+Supported in serverless only.
+</para></summary></member>
+</doc>

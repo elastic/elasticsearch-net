@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.OpenShiftAiTaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, whether to return the source documents in the response.
+</para></summary></member>
+  <member key="inference._types.OpenShiftAiTaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of most relevant documents to return.
+</para></summary></member>
+</doc>

@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
 public sealed partial class DisableUserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable users.
-/// </para>
-/// <para>
-/// Disable users in the native realm.
-/// By default, when you create users, they are enabled.
-/// You can use this API to revoke a user's access to Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DisableUserRequestConverter))]
 public sealed partial class DisableUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class DisableUserRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "security.disable_user";
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request#username']/*"/>
 	public required Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable users.
-/// </para>
-/// <para>
-/// Disable users in the native realm.
-/// By default, when you create users, they are enabled.
-/// You can use this API to revoke a user's access to Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.disable_user.Request']/*"/>
 public readonly partial struct DisableUserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DisableUserRequest Instance { get; init; }
@@ -118,22 +92,14 @@ public readonly partial struct DisableUserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DisableUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DisableUserRequest(Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DisableUserRequest.g.xml" path="doc/member[@key='security.disable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

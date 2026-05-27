@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.FieldTypes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.FieldTypesConverter))]
 public sealed partial class FieldTypes
 {
@@ -44,73 +45,33 @@ public sealed partial class FieldTypes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of occurrences of the field type in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of indices containing the field type in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#index_count']/*"/>
 	public required int IndexCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, number of indexed vector types in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#indexed_vector_count']/*"/>
 	public int? IndexedVectorCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#indexed_vector_dim_max']/*"/>
 	public int? IndexedVectorDimMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#indexed_vector_dim_min']/*"/>
 	public int? IndexedVectorDimMin { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name for the field type in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of fields that declare a script.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#script_count']/*"/>
 	public int? ScriptCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, count of mappings by element type
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#vector_element_type_count']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorElementTypeCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, count of mappings by index type
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#vector_index_type_count']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorIndexTypeCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For dense_vector field types, count of mappings by similarity
-	/// </para>
-	/// </summary>
+	/// <include file="FieldTypes.g.xml" path="doc/member[@key='cluster.stats.FieldTypes#vector_similarity_type_count']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorSimilarityTypeCount { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsFuzzyConverter))]
 public sealed partial class IntervalsFuzzy
 {
@@ -42,50 +43,26 @@ public sealed partial class IntervalsFuzzy
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to normalize the term.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The term to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#term']/*"/>
 	public required string Term { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#transpositions']/*"/>
 	public bool? Transpositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy']/*"/>
 public readonly partial struct IntervalsFuzzyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Instance { get; init; }
@@ -105,90 +82,56 @@ public readonly partial struct IntervalsFuzzyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to normalize the term.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The term to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#term']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Term(string value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? value = true)
 	{
 		Instance.Transpositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.UseField = value;
@@ -204,6 +147,7 @@ public readonly partial struct IntervalsFuzzyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy']/*"/>
 public readonly partial struct IntervalsFuzzyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy Instance { get; init; }
@@ -223,90 +167,56 @@ public readonly partial struct IntervalsFuzzyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to normalize the term.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The term to match.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#term']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Term(string value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor Transpositions(bool? value = true)
 	{
 		Instance.Transpositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsFuzzy.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsFuzzy#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.UseField = value;

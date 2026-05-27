@@ -23,38 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.status.Request']/*"/>
 public sealed partial class AsyncSearchStatusRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the async search status.
-/// </para>
-/// <para>
-/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-/// If the Elasticsearch security features are enabled, the access to the status of a specific async search is restricted to:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The user or API key that submitted the original async search request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Users that have the <c>monitor</c> cluster privilege or greater privileges.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.Json.AsyncSearchStatusRequestConverter))]
 public sealed partial class AsyncSearchStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestParameters>
 {
@@ -81,43 +59,15 @@ public sealed partial class AsyncSearchStatusRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "async_search.status";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the async search status.
-/// </para>
-/// <para>
-/// Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-/// If the Elasticsearch security features are enabled, the access to the status of a specific async search is restricted to:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The user or API key that submitted the original async search request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Users that have the <c>monitor</c> cluster privilege or greater privileges.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.status.Request']/*"/>
 public readonly partial struct AsyncSearchStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest Instance { get; init; }
@@ -142,23 +92,14 @@ public readonly partial struct AsyncSearchStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequest(Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search needs to be available.
-	/// Ongoing async searches and any saved search results are deleted after this period.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusRequest.g.xml" path="doc/member[@key='async_search.status.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearchStatusRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;

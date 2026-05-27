@@ -23,58 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.get.Request']/*"/>
 public sealed partial class GetAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search should be available in the cluster.
-	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
-	/// Otherwise, it is possible to override the value and extend the validity of the request.
-	/// When this period expires, the search, if still running, is cancelled.
-	/// If the search is completed, its saved results are deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
-	/// expires or if no wait_for_completion_timeout is specified.
-	/// If true and the search is still running, the search response
-	/// will include any hits and partial aggregations that are available.
-	/// If false and the search is still running, the search response will not include any hits (but possibly include
-	/// total hits) nor will include any partial aggregations.
-	/// When not specified, the intermediate results are returned for running queries.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#return_intermediate_results']/*"/>
 	public bool? ReturnIntermediateResults { get => Q<bool?>("return_intermediate_results"); set => Q("return_intermediate_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to wait for the search to be completed up until the provided timeout.
-	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
-	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async search results.
-/// </para>
-/// <para>
-/// Retrieve the results of a previously submitted asynchronous search request.
-/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.Json.GetAsyncSearchRequestConverter))]
 public partial class GetAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestParameters>
 {
@@ -101,63 +68,24 @@ public partial class GetAsyncSearchRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "async_search.get";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search should be available in the cluster.
-	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
-	/// Otherwise, it is possible to override the value and extend the validity of the request.
-	/// When this period expires, the search, if still running, is cancelled.
-	/// If the search is completed, its saved results are deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
-	/// expires or if no wait_for_completion_timeout is specified.
-	/// If true and the search is still running, the search response
-	/// will include any hits and partial aggregations that are available.
-	/// If false and the search is still running, the search response will not include any hits (but possibly include
-	/// total hits) nor will include any partial aggregations.
-	/// When not specified, the intermediate results are returned for running queries.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#return_intermediate_results']/*"/>
 	public bool? ReturnIntermediateResults { get => Q<bool?>("return_intermediate_results"); set => Q("return_intermediate_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to wait for the search to be completed up until the provided timeout.
-	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
-	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async search results.
-/// </para>
-/// <para>
-/// Retrieve the results of a previously submitted asynchronous search request.
-/// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.get.Request']/*"/>
 public readonly partial struct GetAsyncSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest Instance { get; init; }
@@ -182,67 +110,35 @@ public readonly partial struct GetAsyncSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of time that the async search should be available in the cluster.
-	/// When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
-	/// Otherwise, it is possible to override the value and extend the validity of the request.
-	/// When this period expires, the search, if still running, is cancelled.
-	/// If the search is completed, its saved results are deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
-	/// expires or if no wait_for_completion_timeout is specified.
-	/// If true and the search is still running, the search response
-	/// will include any hits and partial aggregations that are available.
-	/// If false and the search is still running, the search response will not include any hits (but possibly include
-	/// total hits) nor will include any partial aggregations.
-	/// When not specified, the intermediate results are returned for running queries.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#return_intermediate_results']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor ReturnIntermediateResults(bool? value = true)
 	{
 		Instance.ReturnIntermediateResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies to wait for the search to be completed up until the provided timeout.
-	/// Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
-	/// By default no timeout is set meaning that the currently available results will be returned without any additional wait.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

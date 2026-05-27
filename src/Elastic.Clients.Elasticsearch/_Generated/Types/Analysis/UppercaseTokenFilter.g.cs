@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UppercaseTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.UppercaseTokenFilterConverter))]
 public sealed partial class UppercaseTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class UppercaseTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UppercaseTokenFilter']/*"/>
 public readonly partial struct UppercaseTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter Instance { get; init; }

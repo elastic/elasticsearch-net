@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.update_by_query_rethrottle.UpdateByQueryRethrottleNode']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.UpdateByQueryRethrottle.Json.UpdateByQueryRethrottleNodeConverter))]
 public sealed partial class UpdateByQueryRethrottleNode
 {

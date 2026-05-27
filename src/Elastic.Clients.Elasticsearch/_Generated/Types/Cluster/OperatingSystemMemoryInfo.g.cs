@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.OperatingSystemMemoryInfoConverter))]
 public sealed partial class OperatingSystemMemoryInfo
 {
@@ -46,73 +47,33 @@ public sealed partial class OperatingSystemMemoryInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#adjusted_total']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? AdjustedTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#adjusted_total_in_bytes']/*"/>
 	public long? AdjustedTotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of free physical memory across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#free']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Free { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount, in bytes, of free physical memory across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#free_in_bytes']/*"/>
 	public required long FreeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Percentage of free physical memory across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#free_percent']/*"/>
 	public required int FreePercent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#total']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of physical memory across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#total_in_bytes']/*"/>
 	public required long TotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of physical memory in use across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#used']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Used { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount, in bytes, of physical memory in use across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#used_in_bytes']/*"/>
 	public required long UsedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Percentage of physical memory in use across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="OperatingSystemMemoryInfo.g.xml" path="doc/member[@key='cluster.stats.OperatingSystemMemoryInfo#used_percent']/*"/>
 	public required int UsedPercent { get; set; }
 }

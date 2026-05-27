@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
 public sealed partial class PutOpenaiRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an OpenAI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-/// </para>
-/// </summary>
+/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutOpenaiRequestConverter))]
 public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>
 {
@@ -74,68 +66,30 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.put_openai";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#openai_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id OpenaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openai_inference_id"); set => PR("openai_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.OpenAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenAITaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>openai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#service']/*"/>
 	public string Service => "openai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an OpenAI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-/// </para>
-/// </summary>
+/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openai.Request']/*"/>
 public readonly partial struct PutOpenaiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest Instance { get; init; }
@@ -162,131 +116,77 @@ public readonly partial struct PutOpenaiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest(Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#openai_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor OpenaiInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.OpenaiInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenaiRequest.g.xml" path="doc/member[@key='inference.put_openai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor.Build(action);

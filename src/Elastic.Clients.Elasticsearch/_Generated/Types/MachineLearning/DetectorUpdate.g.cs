@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DetectorUpdate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DetectorUpdateConverter))]
 public sealed partial class DetectorUpdate
 {
@@ -42,31 +43,17 @@ public sealed partial class DetectorUpdate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#detector_index']/*"/>
 	public required int DetectorIndex { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DetectorUpdate']/*"/>
 public readonly partial struct DetectorUpdateDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Instance { get; init; }
@@ -86,39 +73,21 @@ public readonly partial struct DetectorUpdateDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
 		Instance.CustomRules = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
 		Instance.CustomRules = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -131,23 +100,14 @@ public readonly partial struct DetectorUpdateDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#detector_index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument> DetectorIndex(int value)
 	{
 		Instance.DetectorIndex = value;
@@ -163,6 +123,7 @@ public readonly partial struct DetectorUpdateDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DetectorUpdate']/*"/>
 public readonly partial struct DetectorUpdateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Instance { get; init; }
@@ -182,39 +143,21 @@ public readonly partial struct DetectorUpdateDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? value)
 	{
 		Instance.CustomRules = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(params Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule[] values)
 	{
 		Instance.CustomRules = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -227,13 +170,7 @@ public readonly partial struct DetectorUpdateDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#custom_rules']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor CustomRules<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRuleDescriptor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>();
@@ -246,23 +183,14 @@ public readonly partial struct DetectorUpdateDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the detector.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
-	/// </para>
-	/// </summary>
+	/// <include file="DetectorUpdate.g.xml" path="doc/member[@key='ml._types.DetectorUpdate#detector_index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor DetectorIndex(int value)
 	{
 		Instance.DetectorIndex = value;

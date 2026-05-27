@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TotalFeatureImportance']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TotalFeatureImportanceConverter))]
 public sealed partial class TotalFeatureImportance
 {
@@ -44,24 +45,12 @@ public sealed partial class TotalFeatureImportance
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the trained model is a classification model, feature importance statistics are gathered per target class value.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportance.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportance#classes']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceClass> Classes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The feature for which this importance was calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportance.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportance#feature_name']/*"/>
 	public required string FeatureName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of feature importance statistics related to the training data set for this particular feature.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportance.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportance#importance']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; set; }
 }

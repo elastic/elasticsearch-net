@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.get_rollup_caps.RollupCapabilities#rollup_jobs"><summary><para>
+There can be multiple, independent jobs configured for a single index or index pattern. Each of these jobs may have different configurations, so the API returns a list of all the various configurations available.
+</para></summary></member>
+</doc>

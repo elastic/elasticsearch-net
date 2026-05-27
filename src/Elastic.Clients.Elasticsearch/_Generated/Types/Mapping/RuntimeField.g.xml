@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.RuntimeField#fetch_fields"><summary><para>
+For type <c>lookup</c>
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#fields"><summary><para>
+For type <c>composite</c>
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#format"><summary><para>
+A custom format for <c>date</c> type runtime fields.
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#input_field"><summary><para>
+For type <c>lookup</c>
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#script"><summary><para>
+Painless script executed at query time.
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#target_field"><summary><para>
+For type <c>lookup</c>
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#target_index"><summary><para>
+For type <c>lookup</c>
+</para></summary></member>
+  <member key="_types.mapping.RuntimeField#type"><summary><para>
+Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
+</para></summary></member>
+</doc>

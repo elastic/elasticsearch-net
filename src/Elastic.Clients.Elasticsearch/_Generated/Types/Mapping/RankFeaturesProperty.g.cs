@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RankFeaturesPropertyConverter))]
 public sealed partial class RankFeaturesProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -40,11 +41,7 @@ public sealed partial class RankFeaturesProperty : Elastic.Clients.Elasticsearch
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? PositiveScoreImpact { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -53,6 +50,7 @@ public sealed partial class RankFeaturesProperty : Elastic.Clients.Elasticsearch
 	public string Type => "rank_features";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty']/*"/>
 public readonly partial struct RankFeaturesPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty Instance { get; init; }
@@ -96,33 +94,21 @@ public readonly partial struct RankFeaturesPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -174,6 +160,7 @@ public readonly partial struct RankFeaturesPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty']/*"/>
 public readonly partial struct RankFeaturesPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty Instance { get; init; }
@@ -223,33 +210,21 @@ public readonly partial struct RankFeaturesPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeaturesProperty.g.xml" path="doc/member[@key='_types.mapping.RankFeaturesProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

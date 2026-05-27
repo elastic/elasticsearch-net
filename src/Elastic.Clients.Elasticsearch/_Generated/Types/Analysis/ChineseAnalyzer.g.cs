@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ChineseAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ChineseAnalyzerConverter))]
 public sealed partial class ChineseAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -42,6 +43,7 @@ public sealed partial class ChineseAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	public string Type => "chinese";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ChineseAnalyzer']/*"/>
 public readonly partial struct ChineseAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ChineseAnalyzer Instance { get; init; }

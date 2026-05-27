@@ -23,93 +23,40 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 public sealed partial class GetSourceRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version number for concurrency control.
-	/// It must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a document's source.
-/// </para>
-/// <para>
-/// Get the source of a document.
-/// For example:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1
-/// </code>
-/// <para>
-/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
-/// </code>
-/// </summary>
+/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetSourceRequestConverter))]
 public sealed partial class GetSourceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetSourceRequestParameters>
 {
@@ -136,105 +83,42 @@ public sealed partial class GetSourceRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "get_source";
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version number for concurrency control.
-	/// It must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a document's source.
-/// </para>
-/// <para>
-/// Get the source of a document.
-/// For example:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1
-/// </code>
-/// <para>
-/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
-/// </code>
-/// </summary>
+/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 public readonly partial struct GetSourceRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GetSourceRequest Instance { get; init; }
@@ -259,168 +143,105 @@ public readonly partial struct GetSourceRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.GetSourceRequest instance) => new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version number for concurrency control.
-	/// It must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;
@@ -483,24 +304,8 @@ public readonly partial struct GetSourceRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get a document's source.
-/// </para>
-/// <para>
-/// Get the source of a document.
-/// For example:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1
-/// </code>
-/// <para>
-/// You can use the source filtering parameters to control which parts of the <c>_source</c> are returned:
-/// </para>
-/// <code>
-/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
-/// </code>
-/// </summary>
+/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_source.Request']/*"/>
 public readonly partial struct GetSourceRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.GetSourceRequest Instance { get; init; }
@@ -545,157 +350,98 @@ public readonly partial struct GetSourceRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.GetSourceRequest instance) => new Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.GetSourceRequest(Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, the operation is randomized between the shard replicas.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes the relevant shards before retrieving the document.
-	/// Setting it to <c>true</c> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to return the <c>_source</c> field (<c>true</c> or <c>false</c>) or lists the fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version number for concurrency control.
-	/// It must match the current version of the document for the request to succeed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSourceRequest.g.xml" path="doc/member[@key='_global.get_source.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;

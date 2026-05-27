@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DatafeedConfig#aggregations"><summary><para>
+If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only with low cardinality data.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#chunking_config"><summary><para>
+Datafeeds might be required to search over long time periods, for several months or years. This search is split into time chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of these time chunks are calculated and is an advanced configuration option.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#datafeed_id"><summary><para>
+A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. The default value is the job identifier.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#delayed_data_check_config"><summary><para>
+Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally search over indices that have already been read in an effort to determine whether any data has subsequently been added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> option is set too low and the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time datafeeds.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#frequency"><summary><para>
+The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#indices"><summary><para>
+An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the <c>remote_cluster_client</c> role.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#indices_options"><summary><para>
+Specifies index expansion options that are used during search.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#max_empty_searches"><summary><para>
+If a real-time datafeed has never seen any data (including during any initial training period) then it will automatically stop itself and close its associated job after this many real-time searches that return no documents. In other words, it will stop after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set then a datafeed with no end time that sees no data will remain started until it is explicitly stopped.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#query"><summary><para>
+The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#query_delay"><summary><para>
+The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance when there are multiple jobs running on the same node.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#runtime_mappings"><summary><para>
+Specifies runtime fields for the datafeed search.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#script_fields"><summary><para>
+Specifies scripts that evaluate custom expressions and returns script fields to the datafeed. The detector configuration objects in a job can contain functions that use these script fields.
+</para></summary></member>
+  <member key="ml._types.DatafeedConfig#scroll_size"><summary><para>
+The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations. The maximum value is the value of <c>index.max_result_window</c>, which is 10,000 by default.
+</para></summary></member>
+</doc>

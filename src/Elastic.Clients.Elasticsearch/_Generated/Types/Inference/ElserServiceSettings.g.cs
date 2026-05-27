@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ElserServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ElserServiceSettingsConverter))]
 public sealed partial class ElserServiceSettings
 {
@@ -43,42 +44,17 @@ public sealed partial class ElserServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration details.
-	/// If <c>enabled</c> is true, the number of allocations of the model is set based on the current load the process gets.
-	/// When the load is high, a new model allocation is automatically created, respecting the value of <c>max_number_of_allocations</c> if it's set.
-	/// When the load is low, a model allocation is automatically removed, respecting the value of <c>min_number_of_allocations</c> if it's set.
-	/// If <c>enabled</c> is true, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations? AdaptiveAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of allocations this model is assigned across machine learning nodes.
-	/// Increasing this value generally increases the throughput.
-	/// If adaptive allocations is enabled, do not set this value because it's automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#num_allocations']/*"/>
 	public required int NumAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of threads used by each model allocation during inference.
-	/// Increasing this value generally increases the speed per inference request.
-	/// The inference process is a compute-bound process; <c>threads_per_allocations</c> must not exceed the number of available allocated processors per node.
-	/// The value must be a power of 2.
-	/// The maximum value is 32.
-	/// </para>
-	/// <para>
-	/// info
-	/// If you want to optimize your ELSER endpoint for ingest, set the number of threads to 1. If you want to optimize your ELSER endpoint for search, set the number of threads to greater than 1.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#num_threads']/*"/>
 	public required int NumThreads { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ElserServiceSettings']/*"/>
 public readonly partial struct ElserServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings Instance { get; init; }
@@ -98,77 +74,35 @@ public readonly partial struct ElserServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings(Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration details.
-	/// If <c>enabled</c> is true, the number of allocations of the model is set based on the current load the process gets.
-	/// When the load is high, a new model allocation is automatically created, respecting the value of <c>max_number_of_allocations</c> if it's set.
-	/// When the load is low, a model allocation is automatically removed, respecting the value of <c>min_number_of_allocations</c> if it's set.
-	/// If <c>enabled</c> is true, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations? value)
 	{
 		Instance.AdaptiveAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration details.
-	/// If <c>enabled</c> is true, the number of allocations of the model is set based on the current load the process gets.
-	/// When the load is high, a new model allocation is automatically created, respecting the value of <c>max_number_of_allocations</c> if it's set.
-	/// When the load is low, a model allocation is automatically removed, respecting the value of <c>min_number_of_allocations</c> if it's set.
-	/// If <c>enabled</c> is true, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor AdaptiveAllocations()
 	{
 		Instance.AdaptiveAllocations = Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration details.
-	/// If <c>enabled</c> is true, the number of allocations of the model is set based on the current load the process gets.
-	/// When the load is high, a new model allocation is automatically created, respecting the value of <c>max_number_of_allocations</c> if it's set.
-	/// When the load is low, a model allocation is automatically removed, respecting the value of <c>min_number_of_allocations</c> if it's set.
-	/// If <c>enabled</c> is true, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor AdaptiveAllocations(System.Action<Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor>? action)
 	{
 		Instance.AdaptiveAllocations = Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocationsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of allocations this model is assigned across machine learning nodes.
-	/// Increasing this value generally increases the throughput.
-	/// If adaptive allocations is enabled, do not set this value because it's automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#num_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor NumAllocations(int value)
 	{
 		Instance.NumAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of threads used by each model allocation during inference.
-	/// Increasing this value generally increases the speed per inference request.
-	/// The inference process is a compute-bound process; <c>threads_per_allocations</c> must not exceed the number of available allocated processors per node.
-	/// The value must be a power of 2.
-	/// The maximum value is 32.
-	/// </para>
-	/// <para>
-	/// info
-	/// If you want to optimize your ELSER endpoint for ingest, set the number of threads to 1. If you want to optimize your ELSER endpoint for search, set the number of threads to greater than 1.
-	/// </para>
-	/// </summary>
+	/// <include file="ElserServiceSettings.g.xml" path="doc/member[@key='inference._types.ElserServiceSettings#num_threads']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor NumThreads(int value)
 	{
 		Instance.NumThreads = value;

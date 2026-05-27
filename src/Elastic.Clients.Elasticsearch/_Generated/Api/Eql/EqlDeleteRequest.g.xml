@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.delete.Request"><summary><para>
+Delete an async EQL search.
+</para>
+<para>
+Delete an async EQL search or a stored synchronous EQL search.
+The API also deletes results for the search.
+</para></summary></member>
+  <member key="eql.delete.Request#id"><summary><para>
+Identifier for the search to delete.
+A search ID is provided in the EQL search API's response for an async search.
+A search ID is also provided if the request’s <c>keep_on_completion</c> parameter is <c>true</c>.
+</para></summary></member>
+</doc>

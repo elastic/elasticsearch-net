@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CustomServiceSettingsConverter))]
 public sealed partial class CustomServiceSettings
 {
@@ -44,126 +45,32 @@ public sealed partial class CustomServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the batch size used for the semantic_text field. If the field is not provided, the default is 10.
-	/// The batch size is the maximum number of inputs in a single request to the upstream service.
-	/// The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#batch_size']/*"/>
 	public int? BatchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Authorization": "Bearer ${api_key}",
-	///   "Content-Type": "application/json;charset=utf-8"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#headers']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "input_type": {
-	///   "translation": {
-	///     "ingest": "do_ingest",
-	///     "search": "do_search"
-	///   },
-	///   "default": "a_default"
-	/// },
-	/// </code>
-	/// <para>
-	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
-	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
-	/// <c>translation</c> can be:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#input_type']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the query parameters as a list of tuples. The arrays inside the <c>query_parameters</c> must have two items, a key and a value.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "query_parameters":[
-	///   ["param_key", "some_value"],
-	///   ["param_key", "another_value"],
-	///   ["other_key", "other_value"]
-	/// ]
-	/// </code>
-	/// <para>
-	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#query_parameters']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? QueryParameters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The request configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#request']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CustomRequestParams Request { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The response configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#response']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CustomResponseParams Response { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "secret_parameters":{
-	///   "api_key":"&lt;api_key>"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#secret_parameters']/*"/>
 	public required System.Collections.Generic.IDictionary<string, string> SecretParameters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomServiceSettings']/*"/>
 public readonly partial struct CustomServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings Instance { get; init; }
@@ -183,67 +90,28 @@ public readonly partial struct CustomServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings(Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the batch size used for the semantic_text field. If the field is not provided, the default is 10.
-	/// The batch size is the maximum number of inputs in a single request to the upstream service.
-	/// The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#batch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor BatchSize(int? value)
 	{
 		Instance.BatchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Authorization": "Bearer ${api_key}",
-	///   "Content-Type": "application/json;charset=utf-8"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Authorization": "Bearer ${api_key}",
-	///   "Content-Type": "application/json;charset=utf-8"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers()
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Authorization": "Bearer ${api_key}",
-	///   "Content-Type": "application/json;charset=utf-8"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -257,144 +125,21 @@ public readonly partial struct CustomServiceSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "input_type": {
-	///   "translation": {
-	///     "ingest": "do_ingest",
-	///     "search": "do_search"
-	///   },
-	///   "default": "a_default"
-	/// },
-	/// </code>
-	/// <para>
-	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
-	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
-	/// <c>translation</c> can be:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "input_type": {
-	///   "translation": {
-	///     "ingest": "do_ingest",
-	///     "search": "do_search"
-	///   },
-	///   "default": "a_default"
-	/// },
-	/// </code>
-	/// <para>
-	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
-	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
-	/// <c>translation</c> can be:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType()
 	{
 		Instance.InputType = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "input_type": {
-	///   "translation": {
-	///     "ingest": "do_ingest",
-	///     "search": "do_search"
-	///   },
-	///   "default": "a_default"
-	/// },
-	/// </code>
-	/// <para>
-	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
-	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
-	/// <c>translation</c> can be:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString>? action)
 	{
 		Instance.InputType = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString.Build(action);
@@ -408,139 +153,63 @@ public readonly partial struct CustomServiceSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the query parameters as a list of tuples. The arrays inside the <c>query_parameters</c> must have two items, a key and a value.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "query_parameters":[
-	///   ["param_key", "some_value"],
-	///   ["param_key", "another_value"],
-	///   ["other_key", "other_value"]
-	/// ]
-	/// </code>
-	/// <para>
-	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#query_parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor QueryParameters(System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.QueryParameters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the query parameters as a list of tuples. The arrays inside the <c>query_parameters</c> must have two items, a key and a value.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "query_parameters":[
-	///   ["param_key", "some_value"],
-	///   ["param_key", "another_value"],
-	///   ["other_key", "other_value"]
-	/// ]
-	/// </code>
-	/// <para>
-	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#query_parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor QueryParameters(params System.Collections.Generic.ICollection<string>[] values)
 	{
 		Instance.QueryParameters = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The request configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Request(Elastic.Clients.Elasticsearch.Inference.CustomRequestParams value)
 	{
 		Instance.Request = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The request configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Request(System.Action<Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor> action)
 	{
 		Instance.Request = Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The response configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#response']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Response(Elastic.Clients.Elasticsearch.Inference.CustomResponseParams value)
 	{
 		Instance.Response = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The response configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#response']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Response(System.Action<Elastic.Clients.Elasticsearch.Inference.CustomResponseParamsDescriptor> action)
 	{
 		Instance.Response = Elastic.Clients.Elasticsearch.Inference.CustomResponseParamsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "secret_parameters":{
-	///   "api_key":"&lt;api_key>"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#secret_parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters(System.Collections.Generic.IDictionary<string, string> value)
 	{
 		Instance.SecretParameters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "secret_parameters":{
-	///   "api_key":"&lt;api_key>"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#secret_parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters()
 	{
 		Instance.SecretParameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "secret_parameters":{
-	///   "api_key":"&lt;api_key>"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#secret_parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.SecretParameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -554,11 +223,7 @@ public readonly partial struct CustomServiceSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomServiceSettings.g.xml" path="doc/member[@key='inference._types.CustomServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

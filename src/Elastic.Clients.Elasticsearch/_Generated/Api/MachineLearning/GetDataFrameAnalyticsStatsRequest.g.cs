@@ -23,66 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
 public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the stats response should be verbose.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#verbose']/*"/>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data frame analytics job stats.
-/// </para>
-/// </summary>
+/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetDataFrameAnalyticsStatsRequestConverter))]
 public sealed partial class GetDataFrameAnalyticsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestParameters>
 {
@@ -108,73 +67,24 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : Elastic.Clients.
 
 	internal override string OperationName => "ml.get_data_frame_analytics_stats";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. If you do not specify this
-	/// option, the API returns information for the first hundred data frame
-	/// analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the stats response should be verbose.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#verbose']/*"/>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data frame analytics job stats.
-/// </para>
-/// </summary>
+/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request']/*"/>
 public readonly partial struct GetDataFrameAnalyticsStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest Instance { get; init; }
@@ -198,81 +108,35 @@ public readonly partial struct GetDataFrameAnalyticsStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. If you do not specify this
-	/// option, the API returns information for the first hundred data frame
-	/// analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the stats response should be verbose.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsStatsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics_stats.Request#verbose']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsStatsRequestDescriptor Verbose(bool? value = true)
 	{
 		Instance.Verbose = value;

@@ -23,9 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/api-conventions#byte-units">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="ByteSize.g.xml" path="doc/member[@key='_types.ByteSize']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ByteSize']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ByteSizeConverter))]
 public sealed partial class ByteSize : Elastic.Clients.Elasticsearch.Union<long, string>
 {

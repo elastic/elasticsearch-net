@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.CountedKeywordPropertyConverter))]
 public sealed partial class CountedKeywordProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -41,11 +42,7 @@ public sealed partial class CountedKeywordProperty : Elastic.Clients.Elasticsear
 	public int? IgnoreAbove { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
@@ -53,6 +50,7 @@ public sealed partial class CountedKeywordProperty : Elastic.Clients.Elasticsear
 	public string Type => "counted_keyword";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty']/*"/>
 public readonly partial struct CountedKeywordPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty Instance { get; init; }
@@ -102,33 +100,21 @@ public readonly partial struct CountedKeywordPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -174,6 +160,7 @@ public readonly partial struct CountedKeywordPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty']/*"/>
 public readonly partial struct CountedKeywordPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty Instance { get; init; }
@@ -229,33 +216,21 @@ public readonly partial struct CountedKeywordPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CountedKeywordProperty.g.xml" path="doc/member[@key='_types.mapping.CountedKeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

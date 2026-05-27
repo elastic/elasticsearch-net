@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.LaplaceSmoothingModel#alpha"><summary><para>
+A constant that is added to all counts to balance weights.
+</para></summary></member>
+</doc>

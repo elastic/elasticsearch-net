@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.CgroupCpuStat']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CgroupCpuStatConverter))]
 public sealed partial class CgroupCpuStat
 {
@@ -36,24 +37,12 @@ public sealed partial class CgroupCpuStat
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of reporting periods (as specified by <c>cfs_period_micros</c>) that have elapsed.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpuStat.g.xml" path="doc/member[@key='nodes._types.CgroupCpuStat#number_of_elapsed_periods']/*"/>
 	public long? NumberOfElapsedPeriods { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of times all tasks in the same cgroup as the Elasticsearch process have been throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpuStat.g.xml" path="doc/member[@key='nodes._types.CgroupCpuStat#number_of_times_throttled']/*"/>
 	public long? NumberOfTimesThrottled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total amount of time, in nanoseconds, for which all tasks in the same cgroup as the Elasticsearch process have been throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="CgroupCpuStat.g.xml" path="doc/member[@key='nodes._types.CgroupCpuStat#time_throttled_nanos']/*"/>
 	public System.TimeSpan? TimeThrottledNanos { get; set; }
 }

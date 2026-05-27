@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateRangeExpressionConverter))]
 public sealed partial class DateRangeExpression
 {
@@ -36,28 +37,17 @@ public sealed partial class DateRangeExpression
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start of the range (inclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom key to return the range with.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#key']/*"/>
 	public string? Key { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// End of the range (exclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#to']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression']/*"/>
 public readonly partial struct DateRangeExpressionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression Instance { get; init; }
@@ -77,55 +67,35 @@ public readonly partial struct DateRangeExpressionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression(Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Start of the range (inclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start of the range (inclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor From(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
 		Instance.From = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom key to return the range with.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#key']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor Key(string? value)
 	{
 		Instance.Key = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End of the range (exclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#to']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor To(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? value)
 	{
 		Instance.To = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End of the range (exclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeExpression.g.xml" path="doc/member[@key='_types.aggregations.DateRangeExpression#to']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor To(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
 	{
 		Instance.To = Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory.Build(action);

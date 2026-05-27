@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_jobs.RollupJob']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.RollupJobConverter))]
 public sealed partial class RollupJob
 {
@@ -44,26 +45,12 @@ public sealed partial class RollupJob
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The rollup job configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupJob.g.xml" path="doc/member[@key='rollup.get_jobs.RollupJob#config']/*"/>
 	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration Config { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Transient statistics about the rollup job, such as how many documents have been processed and how many rollup summary docs have been indexed.
-	/// These stats are not persisted.
-	/// If a node is restarted, these stats are reset.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupJob.g.xml" path="doc/member[@key='rollup.get_jobs.RollupJob#stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobStats Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The current status of the indexer for the rollup job.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupJob.g.xml" path="doc/member[@key='rollup.get_jobs.RollupJob#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Status { get; set; }
 }

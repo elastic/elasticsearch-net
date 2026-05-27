@@ -23,31 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
 public sealed partial class PutSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a synonym rule.
-/// </para>
-/// <para>
-/// Create or update a synonym rule in a synonym set.
-/// </para>
-/// <para>
-/// If any of the synonym rules included is invalid, the API returns an error.
-/// </para>
-/// <para>
-/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-/// </para>
-/// </summary>
+/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.PutSynonymRuleRequestConverter))]
 public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters>
 {
@@ -81,50 +66,21 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "synonyms.put_synonym_rule";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to be updated or created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#set_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// The synonym rule information definition, which must be in Solr format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#synonyms']/*"/>
 	public required string Synonyms { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a synonym rule.
-/// </para>
-/// <para>
-/// Create or update a synonym rule in a synonym set.
-/// </para>
-/// <para>
-/// If any of the synonym rules included is invalid, the API returns an error.
-/// </para>
-/// <para>
-/// When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
-/// </para>
-/// </summary>
+/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request']/*"/>
 public readonly partial struct PutSynonymRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest Instance { get; init; }
@@ -151,45 +107,28 @@ public readonly partial struct PutSynonymRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to be updated or created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#set_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SetId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The synonym rule information definition, which must be in Solr format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.put_synonym_rule.Request#synonyms']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Synonyms(string value)
 	{
 		Instance.Synonyms = value;

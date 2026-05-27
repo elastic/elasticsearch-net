@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.clear_trained_model_deployment_cache.Request"><summary><para>
+Clear trained model deployment cache.
+</para>
+<para>
+Cache will be cleared on all nodes where the trained model is assigned.
+A trained model deployment may have an inference cache enabled.
+As requests are handled by each allocated node, their responses may be cached on that individual node.
+Calling this API clears the caches without restarting the deployment.
+</para></summary></member>
+  <member key="ml.clear_trained_model_deployment_cache.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+</doc>

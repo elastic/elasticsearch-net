@@ -23,57 +23,26 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
 public sealed partial class UpdateDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update a datafeed.
-/// </para>
-/// <para>
-/// You must stop and start the datafeed for the changes to be applied.
-/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
-/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
-/// those credentials are used instead.
-/// </para>
-/// </summary>
+/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateDatafeedRequestConverter))]
 public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestParameters>
 {
@@ -100,175 +69,62 @@ public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.update_datafeed";
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed.
-	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
-	/// It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#datafeed_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
-	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
-	/// these time chunks are calculated; it is an advanced configuration option.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#chunking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
-	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
-	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
-	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
-	/// datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
-	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
-	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
-	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
-	/// must be divisible by the interval of the date histogram aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
-	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
-	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
-	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#max_empty_searches']/*"/>
 	public int? MaxEmptySearches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
-	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
-	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
-	/// when there are multiple jobs running on the same node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
-	/// The maximum value is the value of <c>index.max_result_window</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#scroll_size']/*"/>
 	public int? ScrollSize { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a datafeed.
-/// </para>
-/// <para>
-/// You must stop and start the datafeed for the changes to be applied.
-/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
-/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
-/// those credentials are used instead.
-/// </para>
-/// </summary>
+/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
 public readonly partial struct UpdateDatafeedRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest Instance { get; init; }
@@ -293,53 +149,28 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed.
-	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
-	/// It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -347,72 +178,42 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -440,128 +241,70 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
-	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
-	/// these time chunks are calculated; it is an advanced configuration option.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#chunking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? value)
 	{
 		Instance.ChunkingConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
-	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
-	/// these time chunks are calculated; it is an advanced configuration option.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#chunking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ChunkingConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> action)
 	{
 		Instance.ChunkingConfig = Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
-	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
-	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
-	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
-	/// datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? value)
 	{
 		Instance.DelayedDataCheckConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
-	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
-	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
-	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
-	/// datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
 		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
-	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
-	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
-	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
-	/// must be divisible by the interval of the date histogram aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Indices(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Indices(params string[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? value)
 	{
 		Instance.IndicesOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor IndicesOptions()
 	{
 		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor IndicesOptions(System.Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor>? action)
 	{
 		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(action);
@@ -574,123 +317,63 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
-	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
-	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
-	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#max_empty_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
-	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
-	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
-	/// when there are multiple jobs running on the same node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor QueryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.QueryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -739,36 +422,21 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -789,12 +457,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
-	/// The maximum value is the value of <c>index.max_result_window</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ScrollSize(int? value)
 	{
 		Instance.ScrollSize = value;
@@ -857,17 +520,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update a datafeed.
-/// </para>
-/// <para>
-/// You must stop and start the datafeed for the changes to be applied.
-/// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
-/// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
-/// those credentials are used instead.
-/// </para>
-/// </summary>
+/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_datafeed.Request']/*"/>
 public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest Instance { get; init; }
@@ -892,53 +546,28 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the datafeed.
-	/// This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
-	/// It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> DatafeedId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -946,60 +575,35 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
-	/// with low cardinality data.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -1020,128 +624,70 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
-	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
-	/// these time chunks are calculated; it is an advanced configuration option.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#chunking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? value)
 	{
 		Instance.ChunkingConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Datafeeds might search over long time periods, for several months or years. This search is split into time
-	/// chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
-	/// these time chunks are calculated; it is an advanced configuration option.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#chunking_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ChunkingConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor> action)
 	{
 		Instance.ChunkingConfig = Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
-	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
-	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
-	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
-	/// datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? value)
 	{
 		Instance.DelayedDataCheckConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
-	/// search over indices that have already been read in an effort to determine whether any data has subsequently been
-	/// added to the index. If missing data is found, it is a good indication that the <c>query_delay</c> is set too low and
-	/// the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
-	/// datafeeds.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#delayed_data_check_config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> DelayedDataCheckConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor> action)
 	{
 		Instance.DelayedDataCheckConfig = Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
-	/// either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
-	/// span. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are
-	/// written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
-	/// must be divisible by the interval of the date histogram aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Indices(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
-	/// learning nodes must have the <c>remote_cluster_client</c> role.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Indices(params string[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions? value)
 	{
 		Instance.IndicesOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> IndicesOptions()
 	{
 		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies index expansion options that are used during search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#indices_options']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> IndicesOptions(System.Action<Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor>? action)
 	{
 		Instance.IndicesOptions = Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.Build(action);
@@ -1154,95 +700,49 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If a real-time datafeed has never seen any data (including during any initial training period), it automatically
-	/// stops and closes the associated job after this many real-time searches return no documents. In other words,
-	/// it stops after <c>frequency</c> times <c>max_empty_searches</c> of real-time operation. If not set, a datafeed with no
-	/// end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#max_empty_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> MaxEmptySearches(int? value)
 	{
 		Instance.MaxEmptySearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
-	/// Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
-	/// object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
-	/// changed. Therefore, the time required to learn might be long and the understandability of the results is
-	/// unpredictable. If you want to make significant changes to the source data, it is recommended that you
-	/// clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
-	/// when you are satisfied with the results of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
-	/// not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
-	/// value is randomly selected between <c>60s</c> and <c>120s</c>. This randomness improves the query performance
-	/// when there are multiple jobs running on the same node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#query_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> QueryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.QueryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies runtime fields for the datafeed search.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -1277,36 +777,21 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
-	/// The detector configuration objects in a job can contain functions that use these script fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -1327,12 +812,7 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
-	/// The maximum value is the value of <c>index.max_result_window</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateDatafeedRequest.g.xml" path="doc/member[@key='ml.update_datafeed.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ScrollSize(int? value)
 	{
 		Instance.ScrollSize = value;

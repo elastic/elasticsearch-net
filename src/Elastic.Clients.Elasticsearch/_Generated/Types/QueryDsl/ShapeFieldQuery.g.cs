@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ShapeFieldQueryConverter))]
 public sealed partial class ShapeFieldQuery
 {
@@ -36,28 +37,17 @@ public sealed partial class ShapeFieldQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? IndexedShape { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation between the query shape and the document shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? Relation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#shape']/*"/>
 	public object? Shape { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery']/*"/>
 public readonly partial struct ShapeFieldQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Instance { get; init; }
@@ -77,44 +67,28 @@ public readonly partial struct ShapeFieldQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? value)
 	{
 		Instance.IndexedShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> IndexedShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation between the query shape and the document shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor<TDocument> Shape(object? value)
 	{
 		Instance.Shape = value;
@@ -135,6 +109,7 @@ public readonly partial struct ShapeFieldQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery']/*"/>
 public readonly partial struct ShapeFieldQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Instance { get; init; }
@@ -154,55 +129,35 @@ public readonly partial struct ShapeFieldQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery(Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor IndexedShape(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup? value)
 	{
 		Instance.IndexedShape = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor IndexedShape(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using a pre-indexed shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#indexed_shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor IndexedShape<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<T>> action)
 	{
 		Instance.IndexedShape = Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Spatial relation between the query shape and the document shape.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor Relation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Queries using an inline shape definition in GeoJSON or Well Known Text (WKT) format.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeFieldQuery.g.xml" path="doc/member[@key='_types.query_dsl.ShapeFieldQuery#shape']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor Shape(object? value)
 	{
 		Instance.Shape = value;

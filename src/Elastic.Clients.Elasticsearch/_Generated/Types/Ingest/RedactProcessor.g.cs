@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RedactProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RedactProcessorConverter))]
 public sealed partial class RedactProcessor
 {
@@ -43,94 +44,45 @@ public sealed partial class RedactProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? PatternDefinitions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#patterns']/*"/>
 	public required System.Collections.Generic.ICollection<string> Patterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#prefix']/*"/>
 	public string? Prefix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#skip_if_unlicensed']/*"/>
 	public bool? SkipIfUnlicensed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#suffix']/*"/>
 	public string? Suffix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#trace_redact']/*"/>
 	public bool? TraceRedact { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RedactProcessor']/*"/>
 public readonly partial struct RedactProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Instance { get; init; }
@@ -150,122 +102,77 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -303,78 +210,49 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#skip_if_unlicensed']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> SkipIfUnlicensed(bool? value = true)
 	{
 		Instance.SkipIfUnlicensed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Suffix(string? value)
 	{
 		Instance.Suffix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#trace_redact']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor<TDocument> TraceRedact(bool? value = true)
 	{
 		Instance.TraceRedact = value;
@@ -390,6 +268,7 @@ public readonly partial struct RedactProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RedactProcessor']/*"/>
 public readonly partial struct RedactProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RedactProcessor Instance { get; init; }
@@ -409,122 +288,77 @@ public readonly partial struct RedactProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RedactProcessor(Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -537,11 +371,7 @@ public readonly partial struct RedactProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -579,78 +409,49 @@ public readonly partial struct RedactProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of grok expressions to match and redact named captures with
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and the current license does not support running redact processors, then the processor quietly exits without modifying the document
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#skip_if_unlicensed']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor SkipIfUnlicensed(bool? value = true)
 	{
 		Instance.SkipIfUnlicensed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End a redacted section with this token
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#suffix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Suffix(string? value)
 	{
 		Instance.Suffix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> then ingest metadata <c>_ingest._redact._is_redacted</c> is set to <c>true</c> if the document has been redacted
-	/// </para>
-	/// </summary>
+	/// <include file="RedactProcessor.g.xml" path="doc/member[@key='ingest._types.RedactProcessor#trace_redact']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor TraceRedact(bool? value = true)
 	{
 		Instance.TraceRedact = value;

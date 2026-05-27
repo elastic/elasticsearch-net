@@ -23,73 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 public sealed partial class FlushRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request forces a flush even if there are no changes to commit to the index.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the flush operation blocks until execution when another flush operation is running.
-	/// If <c>false</c>, Elasticsearch returns an error if you request a flush when another flush operation is running.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#wait_if_ongoing']/*"/>
 	public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 }
 
-/// <summary>
-/// <para>
-/// Flush data streams or indices.
-/// </para>
-/// <para>
-/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
-/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
-/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
-/// </para>
-/// <para>
-/// After each operation has been flushed it is permanently stored in the Lucene index.
-/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
-/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
-/// </para>
-/// <para>
-/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
-/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
-/// </para>
-/// </summary>
+/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FlushRequestConverter))]
 public sealed partial class FlushRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>
 {
@@ -115,80 +70,27 @@ public sealed partial class FlushRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "indices.flush";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to flush.
-	/// Supports wildcards (<c>*</c>).
-	/// To flush all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request forces a flush even if there are no changes to commit to the index.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the flush operation blocks until execution when another flush operation is running.
-	/// If <c>false</c>, Elasticsearch returns an error if you request a flush when another flush operation is running.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#wait_if_ongoing']/*"/>
 	public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 }
 
-/// <summary>
-/// <para>
-/// Flush data streams or indices.
-/// </para>
-/// <para>
-/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
-/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
-/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
-/// </para>
-/// <para>
-/// After each operation has been flushed it is permanently stored in the Lucene index.
-/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
-/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
-/// </para>
-/// <para>
-/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
-/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
-/// </para>
-/// </summary>
+/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 public readonly partial struct FlushRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest Instance { get; init; }
@@ -212,91 +114,49 @@ public readonly partial struct FlushRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to flush.
-	/// Supports wildcards (<c>*</c>).
-	/// To flush all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request forces a flush even if there are no changes to commit to the index.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the flush operation blocks until execution when another flush operation is running.
-	/// If <c>false</c>, Elasticsearch returns an error if you request a flush when another flush operation is running.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#wait_if_ongoing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor WaitIfOngoing(bool? value = true)
 	{
 		Instance.WaitIfOngoing = value;
@@ -364,25 +224,8 @@ public readonly partial struct FlushRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Flush data streams or indices.
-/// </para>
-/// <para>
-/// Flushing a data stream or index is the process of making sure that any data that is currently only stored in the transaction log is also permanently stored in the Lucene index.
-/// When restarting, Elasticsearch replays any unflushed operations from the transaction log into the Lucene index to bring it back into the state that it was in before the restart.
-/// Elasticsearch automatically triggers flushes as needed, using heuristics that trade off the size of the unflushed transaction log against the cost of performing each flush.
-/// </para>
-/// <para>
-/// After each operation has been flushed it is permanently stored in the Lucene index.
-/// This may mean that there is no need to maintain an additional copy of it in the transaction log.
-/// The transaction log is made up of multiple files, called generations, and Elasticsearch will delete any generation files when they are no longer needed, freeing up disk space.
-/// </para>
-/// <para>
-/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
-/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
-/// </para>
-/// </summary>
+/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 public readonly partial struct FlushRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest Instance { get; init; }
@@ -406,91 +249,49 @@ public readonly partial struct FlushRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases to flush.
-	/// Supports wildcards (<c>*</c>).
-	/// To flush all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request forces a flush even if there are no changes to commit to the index.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the flush operation blocks until execution when another flush operation is running.
-	/// If <c>false</c>, Elasticsearch returns an error if you request a flush when another flush operation is running.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request#wait_if_ongoing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument> WaitIfOngoing(bool? value = true)
 	{
 		Instance.WaitIfOngoing = value;

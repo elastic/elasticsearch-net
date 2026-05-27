@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetric']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricConverter))]
 public sealed partial class RankEvalMetric
 {
@@ -43,6 +44,7 @@ public sealed partial class RankEvalMetric
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? Recall { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetric']/*"/>
 public readonly partial struct RankEvalMetricDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric Instance { get; init; }

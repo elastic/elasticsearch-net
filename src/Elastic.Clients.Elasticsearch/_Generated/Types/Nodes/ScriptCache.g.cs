@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.ScriptCache']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ScriptCacheConverter))]
 public sealed partial class ScriptCache
 {
@@ -36,25 +37,13 @@ public sealed partial class ScriptCache
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of times the script cache has evicted old data.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptCache.g.xml" path="doc/member[@key='nodes._types.ScriptCache#cache_evictions']/*"/>
 	public long? CacheEvictions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of times the script compilation circuit breaker has limited inline script compilations.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptCache.g.xml" path="doc/member[@key='nodes._types.ScriptCache#compilation_limit_triggered']/*"/>
 	public long? CompilationLimitTriggered { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of inline script compilations performed by the node.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptCache.g.xml" path="doc/member[@key='nodes._types.ScriptCache#compilations']/*"/>
 	public long? Compilations { get; set; }
 	public string? Context { get; set; }
 }

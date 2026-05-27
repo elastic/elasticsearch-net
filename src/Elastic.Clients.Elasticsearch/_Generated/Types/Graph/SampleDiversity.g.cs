@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.SampleDiversity']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.SampleDiversityConverter))]
 public sealed partial class SampleDiversity
 {
@@ -47,6 +48,7 @@ public sealed partial class SampleDiversity
 	public required int MaxDocsPerValue { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.SampleDiversity']/*"/>
 public readonly partial struct SampleDiversityDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Graph.SampleDiversity Instance { get; init; }
@@ -93,6 +95,7 @@ public readonly partial struct SampleDiversityDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.SampleDiversity']/*"/>
 public readonly partial struct SampleDiversityDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.SampleDiversity Instance { get; init; }

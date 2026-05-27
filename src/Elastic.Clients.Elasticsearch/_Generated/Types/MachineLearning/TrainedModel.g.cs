@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelConverter))]
 public sealed partial class TrainedModel
 {
@@ -36,41 +37,17 @@ public sealed partial class TrainedModel
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition for an ensemble model
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#ensemble']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? Ensemble { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The definition for a binary decision tree.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? Tree { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The definition of a node in a tree.
-	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Leaf nodes only need node_index and leaf_value defined.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree_node']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? TreeNode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel']/*"/>
 public readonly partial struct TrainedModelDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Instance { get; init; }
@@ -90,92 +67,42 @@ public readonly partial struct TrainedModelDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The definition for an ensemble model
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#ensemble']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Ensemble(Elastic.Clients.Elasticsearch.MachineLearning.Ensemble? value)
 	{
 		Instance.Ensemble = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition for an ensemble model
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#ensemble']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Ensemble(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor> action)
 	{
 		Instance.Ensemble = Elastic.Clients.Elasticsearch.MachineLearning.EnsembleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition for a binary decision tree.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Tree(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree? value)
 	{
 		Instance.Tree = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition for a binary decision tree.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor Tree(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor> action)
 	{
 		Instance.Tree = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition of a node in a tree.
-	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Leaf nodes only need node_index and leaf_value defined.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree_node']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor TreeNode(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode? value)
 	{
 		Instance.TreeNode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition of a node in a tree.
-	/// There are two major types of nodes: leaf nodes and not-leaf nodes.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Leaf nodes only need node_index and leaf_value defined.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// All other nodes need split_feature, left_child, right_child, threshold, decision_type, and default_left defined.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="TrainedModel.g.xml" path="doc/member[@key='ml.put_trained_model.TrainedModel#tree_node']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor TreeNode(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor> action)
 	{
 		Instance.TreeNode = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNodeDescriptor.Build(action);

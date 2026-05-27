@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StopTokenFilterConverter))]
 public sealed partial class StopTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,33 +37,16 @@ public sealed partial class StopTokenFilter : Elastic.Clients.Elasticsearch.Anal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#ignore_case']/*"/>
 	public bool? IgnoreCase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#remove_trailing']/*"/>
 	public bool? RemoveTrailing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of stop words to remove.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#stopwords_path']/*"/>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "stop";
@@ -70,6 +54,7 @@ public sealed partial class StopTokenFilter : Elastic.Clients.Elasticsearch.Anal
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopTokenFilter']/*"/>
 public readonly partial struct StopTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter Instance { get; init; }
@@ -89,45 +74,28 @@ public readonly partial struct StopTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#ignore_case']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor IgnoreCase(bool? value = true)
 	{
 		Instance.IgnoreCase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#remove_trailing']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor RemoveTrailing(bool? value = true)
 	{
 		Instance.RemoveTrailing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of stop words to remove.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTokenFilter.g.xml" path="doc/member[@key='_types.analysis.StopTokenFilter#stopwords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

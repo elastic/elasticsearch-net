@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AlibabaCloudServiceSettingsConverter))]
 public sealed partial class AlibabaCloudServiceSettings
 {
@@ -45,96 +46,23 @@ public sealed partial class AlibabaCloudServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for the AlibabaCloud AI Search API.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the host address used for the inference task.
-	/// You can find the host address in the API keys section of the documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#host']/*"/>
 	public required string Host { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from AlibabaCloud AI Search.
-	/// By default, the <c>alibabacloud-ai-search</c> service sets the number of requests allowed per minute to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model service to use for the inference task.
-	/// The following service IDs are available for the <c>completion</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-qwen-turbo</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-turbo</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-plus</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-max ÷ qwen-max-longcontext</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service ID is available for the <c>rerank</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-bge-reranker-larger</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service ID is available for the <c>sparse_embedding</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-text-sparse-embedding-001</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service IDs are available for the <c>text_embedding</c> task:
-	/// </para>
-	/// <para>
-	/// <c>ops-text-embedding-001</c>
-	/// <c>ops-text-embedding-zh-001</c>
-	/// <c>ops-text-embedding-en-001</c>
-	/// <c>ops-text-embedding-002</c>
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#service_id']/*"/>
 	public required string ServiceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the workspace used for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#workspace']/*"/>
 	public required string Workspace { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings']/*"/>
 public readonly partial struct AlibabaCloudServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings Instance { get; init; }
@@ -154,133 +82,49 @@ public readonly partial struct AlibabaCloudServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for the AlibabaCloud AI Search API.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the host address used for the inference task.
-	/// You can find the host address in the API keys section of the documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#host']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor Host(string value)
 	{
 		Instance.Host = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from AlibabaCloud AI Search.
-	/// By default, the <c>alibabacloud-ai-search</c> service sets the number of requests allowed per minute to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from AlibabaCloud AI Search.
-	/// By default, the <c>alibabacloud-ai-search</c> service sets the number of requests allowed per minute to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from AlibabaCloud AI Search.
-	/// By default, the <c>alibabacloud-ai-search</c> service sets the number of requests allowed per minute to <c>1000</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model service to use for the inference task.
-	/// The following service IDs are available for the <c>completion</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-qwen-turbo</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-turbo</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-plus</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>qwen-max ÷ qwen-max-longcontext</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service ID is available for the <c>rerank</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-bge-reranker-larger</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service ID is available for the <c>sparse_embedding</c> task:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>ops-text-sparse-embedding-001</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The following service IDs are available for the <c>text_embedding</c> task:
-	/// </para>
-	/// <para>
-	/// <c>ops-text-embedding-001</c>
-	/// <c>ops-text-embedding-zh-001</c>
-	/// <c>ops-text-embedding-en-001</c>
-	/// <c>ops-text-embedding-002</c>
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#service_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor ServiceId(string value)
 	{
 		Instance.ServiceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the workspace used for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="AlibabaCloudServiceSettings.g.xml" path="doc/member[@key='inference._types.AlibabaCloudServiceSettings#workspace']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor Workspace(string value)
 	{
 		Instance.Workspace = value;

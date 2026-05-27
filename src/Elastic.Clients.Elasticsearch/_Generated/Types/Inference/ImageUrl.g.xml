@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ImageUrl#detail"><summary><para>
+Specifies the detail level of the image
+</para></summary></member>
+  <member key="inference._types.ImageUrl#url"><summary><para>
+The base64 encoded image data as a data URI
+</para></summary></member>
+</doc>

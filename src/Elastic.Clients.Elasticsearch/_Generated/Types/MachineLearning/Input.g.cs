@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Input']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.InputConverter))]
 public sealed partial class Input
 {
@@ -45,6 +46,7 @@ public sealed partial class Input
 	public required Elastic.Clients.Elasticsearch.Names FieldNames { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Input']/*"/>
 public readonly partial struct InputDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Input Instance { get; init; }

@@ -26,26 +26,14 @@ namespace Elastic.Clients.Elasticsearch.Streams;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.StreamTypeConverter))]
 public enum StreamType
 {
-	/// <summary>
-	/// <para>
-	/// The logs stream type.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamType.g.xml" path="doc/member[@key='streams._types.StreamType#logs']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "logs")]
 	[System.Obsolete("Deprecated in '9.4.0'. Use the 'logs.otel' and 'logs.ecs' types instead")]
 	Logs,
-	/// <summary>
-	/// <para>
-	/// The logs.ecs stream type, meant for ECS-formatted data.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamType.g.xml" path="doc/member[@key='streams._types.StreamType#logs.ecs']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "logs.ecs")]
 	LogsEcs,
-	/// <summary>
-	/// <para>
-	/// The logs.otel stream type, meant for OTel-formatted data.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamType.g.xml" path="doc/member[@key='streams._types.StreamType#logs.otel']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "logs.otel")]
 	LogsOtel
 }

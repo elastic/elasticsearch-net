@@ -26,47 +26,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TextQueryTypeConverter))]
 public enum TextQueryType
 {
-	/// <summary>
-	/// <para>
-	/// Finds documents that match any field, but uses the <c>_score</c> from the best field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#best_fields']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "best_fields")]
 	BestFields,
-	/// <summary>
-	/// <para>
-	/// Creates a <c>match_bool_prefix</c> query on each field and combines the <c>_score</c> from each field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#bool_prefix']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bool_prefix")]
 	BoolPrefix,
-	/// <summary>
-	/// <para>
-	/// Treats fields with the same analyzer as though they were one big field.
-	/// Looks for each word in any field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#cross_fields']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "cross_fields")]
 	CrossFields,
-	/// <summary>
-	/// <para>
-	/// Finds documents that match any field and combines the <c>_score</c> from each field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#most_fields']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "most_fields")]
 	MostFields,
-	/// <summary>
-	/// <para>
-	/// Runs a <c>match_phrase</c> query on each field and uses the <c>_score</c> from the best field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#phrase']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "phrase")]
 	Phrase,
-	/// <summary>
-	/// <para>
-	/// Runs a <c>match_phrase_prefix</c> query on each field and uses the <c>_score</c> from the best field.
-	/// </para>
-	/// </summary>
+	/// <include file="TextQueryType.g.xml" path="doc/member[@key='_types.query_dsl.TextQueryType#phrase_prefix']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "phrase_prefix")]
 	PhrasePrefix
 }

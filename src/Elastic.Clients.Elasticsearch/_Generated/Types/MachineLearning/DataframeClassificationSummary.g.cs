@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeClassificationSummaryConverter))]
 public sealed partial class DataframeClassificationSummary
 {
@@ -36,39 +37,18 @@ public sealed partial class DataframeClassificationSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeClassificationSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary#accuracy']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryAccuracy? Accuracy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.
-	/// It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeClassificationSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Multiclass confusion matrix.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeClassificationSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary#multiclass_confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix? MulticlassConfusionMatrix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeClassificationSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeClassificationSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummary#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall? Recall { get; set; }
 }

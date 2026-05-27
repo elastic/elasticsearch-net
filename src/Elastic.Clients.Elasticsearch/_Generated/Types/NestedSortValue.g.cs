@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.NestedSortValue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.NestedSortValueConverter))]
 public sealed partial class NestedSortValue
 {
@@ -48,6 +49,7 @@ public sealed partial class NestedSortValue
 	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.NestedSortValue']/*"/>
 public readonly partial struct NestedSortValueDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.NestedSortValue Instance { get; init; }
@@ -118,6 +120,7 @@ public readonly partial struct NestedSortValueDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.NestedSortValue']/*"/>
 public readonly partial struct NestedSortValueDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.NestedSortValue Instance { get; init; }

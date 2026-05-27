@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DerivativeAggregationConverter))]
 public sealed partial class DerivativeAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class DerivativeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation']/*"/>
 public readonly partial struct DerivativeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation Instance { get; init; }
@@ -78,34 +67,21 @@ public readonly partial struct DerivativeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="DerivativeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DerivativeAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;

@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role.Request']/*"/>
 public sealed partial class GetRoleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
-	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request#include_implicit']/*"/>
 	public bool? IncludeImplicit { get => Q<bool?>("include_implicit"); set => Q("include_implicit", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get roles.
-/// </para>
-/// <para>
-/// Get roles in the native realm.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The get roles API cannot retrieve roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetRoleRequestConverter))]
 public sealed partial class GetRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>
 {
@@ -69,34 +58,15 @@ public sealed partial class GetRoleRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "security.get_role";
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// You can specify multiple roles as a comma-separated list.
-	/// If you do not specify this parameter, the API returns information about all roles.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
-	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request#include_implicit']/*"/>
 	public bool? IncludeImplicit { get => Q<bool?>("include_implicit"); set => Q("include_implicit", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get roles.
-/// </para>
-/// <para>
-/// Get roles in the native realm.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The get roles API cannot retrieve roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_role.Request']/*"/>
 public readonly partial struct GetRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetRoleRequest Instance { get; init; }
@@ -120,25 +90,14 @@ public readonly partial struct GetRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetRoleRequest(Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// You can specify multiple roles as a comma-separated list.
-	/// If you do not specify this parameter, the API returns information about all roles.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
-	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRoleRequest.g.xml" path="doc/member[@key='security.get_role.Request#include_implicit']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor IncludeImplicit(bool? value = true)
 	{
 		Instance.IncludeImplicit = value;

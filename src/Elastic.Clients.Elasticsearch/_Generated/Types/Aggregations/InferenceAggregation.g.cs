@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.InferenceAggregationConverter))]
 public sealed partial class InferenceAggregation
 {
@@ -42,43 +43,23 @@ public sealed partial class InferenceAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation']/*"/>
 public readonly partial struct InferenceAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation Instance { get; init; }
@@ -98,67 +79,42 @@ public readonly partial struct InferenceAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.ModelId = value;
@@ -174,6 +130,7 @@ public readonly partial struct InferenceAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation']/*"/>
 public readonly partial struct InferenceAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation Instance { get; init; }
@@ -193,78 +150,49 @@ public readonly partial struct InferenceAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? value)
 	{
 		Instance.InferenceConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#inference_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<T>> action)
 	{
 		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceAggregation.g.xml" path="doc/member[@key='_types.aggregations.InferenceAggregation#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.ModelId = value;

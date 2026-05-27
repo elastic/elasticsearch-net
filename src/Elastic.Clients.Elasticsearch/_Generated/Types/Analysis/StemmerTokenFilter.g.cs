@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StemmerTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StemmerTokenFilterConverter))]
 public sealed partial class StemmerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -43,6 +44,7 @@ public sealed partial class StemmerTokenFilter : Elastic.Clients.Elasticsearch.A
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StemmerTokenFilter']/*"/>
 public readonly partial struct StemmerTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StemmerTokenFilter Instance { get; init; }

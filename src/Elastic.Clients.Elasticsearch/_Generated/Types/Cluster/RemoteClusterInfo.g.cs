@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.RemoteClusterInfoConverter))]
 public sealed partial class RemoteClusterInfo
 {
@@ -53,108 +54,48 @@ public sealed partial class RemoteClusterInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The UUID of the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#cluster_uuid']/*"/>
 	public required string ClusterUuid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of indices in the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#indices_count']/*"/>
 	public required int IndicesCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total data set size of all shards assigned to selected nodes, as a human-readable string.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#indices_total_size']/*"/>
 	public string? IndicesTotalSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total data set size, in bytes, of all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#indices_total_size_in_bytes']/*"/>
 	public required long IndicesTotalSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory available for use by the heap across the nodes of the remote cluster, as a human-readable string.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#max_heap']/*"/>
 	public string? MaxHeap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, in bytes, available for use by the heap across the nodes of the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#max_heap_in_bytes']/*"/>
 	public required long MaxHeapInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory across the nodes of the remote cluster, as a human-readable string.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#mem_total']/*"/>
 	public string? MemTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of physical memory across the nodes of the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#mem_total_in_bytes']/*"/>
 	public required long MemTotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The connection mode used to communicate with the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#mode']/*"/>
 	public required string Mode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total count of nodes in the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#nodes_count']/*"/>
 	public required int NodesCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of shards in the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#shards_count']/*"/>
 	public required int ShardsCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The <c>skip_unavailable</c> setting used for this remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#skip_unavailable']/*"/>
 	public required bool SkipUnavailable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Health status of the cluster, based on the state of its primary and replica shards.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#status']/*"/>
 	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Transport compression setting used for this remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#transport.compress']/*"/>
 	public required string TransportCompress { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of Elasticsearch versions used by the nodes on the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterInfo.g.xml" path="doc/member[@key='cluster.stats.RemoteClusterInfo#version']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Version { get; set; }
 }

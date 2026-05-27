@@ -23,34 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
+/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 public sealed partial class GetFeaturesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the features.
-/// </para>
-/// <para>
-/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-/// You can use this API to determine which feature states to include when taking a snapshot.
-/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-/// </para>
-/// <para>
-/// A feature state includes one or more system indices necessary for a given feature to function.
-/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-/// </para>
-/// <para>
-/// The features listed by this API are a combination of built-in features and features defined by plugins.
-/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-/// </para>
-/// </summary>
+/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.Json.GetFeaturesRequestConverter))]
 public sealed partial class GetFeaturesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>
 {
@@ -72,32 +54,12 @@ public sealed partial class GetFeaturesRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "features.get_features";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the features.
-/// </para>
-/// <para>
-/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
-/// You can use this API to determine which feature states to include when taking a snapshot.
-/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
-/// </para>
-/// <para>
-/// A feature state includes one or more system indices necessary for a given feature to function.
-/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
-/// </para>
-/// <para>
-/// The features listed by this API are a combination of built-in features and features defined by plugins.
-/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
-/// </para>
-/// </summary>
+/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 public readonly partial struct GetFeaturesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest Instance { get; init; }
@@ -116,11 +78,7 @@ public readonly partial struct GetFeaturesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest instance) => new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

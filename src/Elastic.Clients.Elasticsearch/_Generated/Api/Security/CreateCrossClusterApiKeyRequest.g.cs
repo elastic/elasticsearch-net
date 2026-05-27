@@ -23,38 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
 public sealed partial class CreateCrossClusterApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a cross-cluster API key.
-/// </para>
-/// <para>
-/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-/// </para>
-/// <para>
-/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-/// </para>
-/// <para>
-/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-/// </para>
-/// <para>
-/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// <para>
-/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-/// </para>
-/// </summary>
+/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CreateCrossClusterApiKeyRequestConverter))]
 public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>
 {
@@ -83,81 +59,24 @@ public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.El
 
 	internal override string OperationName => "security.create_cross_cluster_api_key";
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The certificate identity to associate with this API key.
-	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
-	/// The value should match the certificate's distinguished name (DN) pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#certificate_identity']/*"/>
 	public string? CertificateIdentity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key.
-	/// By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the name for this API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a cross-cluster API key.
-/// </para>
-/// <para>
-/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-/// </para>
-/// <para>
-/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-/// </para>
-/// <para>
-/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-/// </para>
-/// <para>
-/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// <para>
-/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-/// </para>
-/// </summary>
+/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
 public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest Instance { get; init; }
@@ -176,132 +95,63 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Access(Elastic.Clients.Elasticsearch.Security.Access value)
 	{
 		Instance.Access = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Access()
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Access<T>(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The certificate identity to associate with this API key.
-	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
-	/// The value should match the certificate's distinguished name (DN) pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#certificate_identity']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor CertificateIdentity(string? value)
 	{
 		Instance.CertificateIdentity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key.
-	/// By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -315,11 +165,7 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the name for this API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
@@ -382,34 +228,8 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create a cross-cluster API key.
-/// </para>
-/// <para>
-/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-/// </para>
-/// <para>
-/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-/// </para>
-/// <para>
-/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-/// </para>
-/// <para>
-/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// <para>
-/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-/// </para>
-/// </summary>
+/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request']/*"/>
 public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest Instance { get; init; }
@@ -428,115 +248,56 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Access(Elastic.Clients.Elasticsearch.Security.Access value)
 	{
 		Instance.Access = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Access()
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross-cluster search and cross-cluster replication.
-	/// At least one of them must be specified.
-	/// </para>
-	/// <para>
-	/// NOTE: No explicit privileges should be specified for either search or replication access.
-	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The certificate identity to associate with this API key.
-	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
-	/// The value should match the certificate's distinguished name (DN) pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#certificate_identity']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> CertificateIdentity(string? value)
 	{
 		Instance.CertificateIdentity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key.
-	/// By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -550,11 +311,7 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the name for this API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.create_cross_cluster_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

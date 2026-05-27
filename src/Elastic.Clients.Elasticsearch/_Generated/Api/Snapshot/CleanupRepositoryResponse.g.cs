@@ -37,10 +37,6 @@ public sealed partial class CleanupRepositoryResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Statistics for cleanup operations.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryResponse.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Response#results']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Results { get; set; }
 }

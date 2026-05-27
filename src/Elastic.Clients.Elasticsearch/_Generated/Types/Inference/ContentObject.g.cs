@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// An object style representation of a single portion of a conversation.
-/// </para>
-/// </summary>
+/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContentObject']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContentObjectConverter))]
 public sealed partial class ContentObject
 {
@@ -50,32 +47,15 @@ public sealed partial class ContentObject
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The file content. Only applicable for the <c>file</c> type
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#file']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.FileContent File { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The image content. Only applicable for the <c>image_url</c> type
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#image_url']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ImageUrl ImageUrl { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The text content. Only applicable for the <c>text</c> type
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#text']/*"/>
 	public required string Text { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of content. Must be one of <c>text</c>, <c>image_url</c> or <c>file</c>. Not all services/models support content
-	/// types other than "text"
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ContentType Type { get; set; }
 }

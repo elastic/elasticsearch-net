@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.IndexPrivilegesCheckConverter))]
 public sealed partial class IndexPrivilegesCheck
 {
@@ -43,30 +44,17 @@ public sealed partial class IndexPrivilegesCheck
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This needs to be set to <c>true</c> (default is <c>false</c>) if using wildcards or regexps for patterns that cover restricted indices.
-	/// Implicitly, restricted indices do not match index patterns because restricted indices usually have limited privileges and including them in pattern tests would render most such tests false.
-	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#allow_restricted_indices']/*"/>
 	public bool? AllowRestrictedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#names']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Names { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#privileges']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck']/*"/>
 public readonly partial struct IndexPrivilegesCheckDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck Instance { get; init; }
@@ -86,46 +74,28 @@ public readonly partial struct IndexPrivilegesCheckDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor(Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck instance) => new Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck(Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// This needs to be set to <c>true</c> (default is <c>false</c>) if using wildcards or regexps for patterns that cover restricted indices.
-	/// Implicitly, restricted indices do not match index patterns because restricted indices usually have limited privileges and including them in pattern tests would render most such tests false.
-	/// If restricted indices are explicitly included in the names list, privileges will be checked against them regardless of the value of <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#allow_restricted_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor AllowRestrictedIndices(bool? value = true)
 	{
 		Instance.AllowRestrictedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#names']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Names(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Names = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> value)
 	{
 		Instance.Privileges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.IndexPrivilegesCheck#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheckDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.IndexPrivilege[] values)
 	{
 		Instance.Privileges = [.. values];

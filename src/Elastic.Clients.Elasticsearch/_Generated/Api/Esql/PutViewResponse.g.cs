@@ -37,10 +37,6 @@ public sealed partial class PutViewResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutViewResponse.g.xml" path="doc/member[@key='esql.put_view.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

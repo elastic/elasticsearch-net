@@ -37,26 +37,14 @@ public sealed partial class InfoResponse : Elastic.Transport.Products.Elasticsea
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The responding cluster's name.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#cluster_name']/*"/>
 	public required string ClusterName { get; set; }
 	public required string ClusterUuid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The responding node's name.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#name']/*"/>
 	public required string Name { get; set; }
 	public required string Tagline { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version information for the Elasticsearch cluster. In Serverless, <c>version.number</c> always reports the next target Elasticsearch release version at the time of the request, not an actual deployed version. The version number is provided to maintain client compatibility but is not meaningful for assessing feature availability. Use <c>build_flavor: serverless</c> to detect a Serverless environment.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#version']/*"/>
 	public required Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; set; }
 }

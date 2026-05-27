@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.SerializedClusterState']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.SerializedClusterStateConverter))]
 public sealed partial class SerializedClusterState
 {
@@ -38,10 +39,6 @@ public sealed partial class SerializedClusterState
 
 	public Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail? Diffs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of published cluster states.
-	/// </para>
-	/// </summary>
+	/// <include file="SerializedClusterState.g.xml" path="doc/member[@key='nodes._types.SerializedClusterState#full_states']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail? FullStates { get; set; }
 }

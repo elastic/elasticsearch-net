@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_global.msearch.ResponseItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultiSearchResponseItemConverterFactory))]
 public sealed partial class MultiSearchResponseItem<TDocument> : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.ErrorResponseBase>
 {

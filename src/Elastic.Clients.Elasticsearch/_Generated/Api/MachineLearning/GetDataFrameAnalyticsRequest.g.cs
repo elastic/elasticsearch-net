@@ -23,73 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
 public sealed partial class GetDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#exclude_generated']/*"/>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data frame analytics job configuration info.
-/// </para>
-/// <para>
-/// You can get information for multiple data frame analytics jobs in a single
-/// API request by using a comma-separated list of data frame analytics jobs or a
-/// wildcard expression.
-/// </para>
-/// </summary>
+/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetDataFrameAnalyticsRequestConverter))]
 public sealed partial class GetDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestParameters>
 {
@@ -115,80 +67,24 @@ public sealed partial class GetDataFrameAnalyticsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "ml.get_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. If you do not specify this
-	/// option, the API returns information for the first hundred data frame
-	/// analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#exclude_generated']/*"/>
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data frame analytics job configuration info.
-/// </para>
-/// <para>
-/// You can get information for multiple data frame analytics jobs in a single
-/// API request by using a comma-separated list of data frame analytics jobs or a
-/// wildcard expression.
-/// </para>
-/// </summary>
+/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request']/*"/>
 public readonly partial struct GetDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest Instance { get; init; }
@@ -212,83 +108,35 @@ public readonly partial struct GetDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. If you do not specify this
-	/// option, the API returns information for the first hundred data frame
-	/// analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the <c>_all</c> string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value returns an empty data_frame_analytics array when there
-	/// are no matches and the subset of results when there are partial matches.
-	/// If this parameter is <c>false</c>, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if certain fields should be removed from the configuration on
-	/// retrieval. This allows the configuration to be in an acceptable format to
-	/// be retrieved and then added to another cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#exclude_generated']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor ExcludeGenerated(bool? value = true)
 	{
 		Instance.ExcludeGenerated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of data frame analytics jobs to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.get_data_frame_analytics.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDataFrameAnalyticsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Redact']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RedactConverter))]
 public sealed partial class Redact
 {
@@ -42,10 +43,6 @@ public sealed partial class Redact
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// indicates if document has been redacted
-	/// </para>
-	/// </summary>
+	/// <include file="Redact.g.xml" path="doc/member[@key='ingest._types.Redact#_is_redacted']/*"/>
 	public required bool IsRedacted { get; set; }
 }

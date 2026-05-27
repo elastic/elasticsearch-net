@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchBoolPrefixQueryConverter))]
 public sealed partial class MatchBoolPrefixQuery
 {
@@ -49,90 +50,40 @@ public sealed partial class MatchBoolPrefixQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_rewrite']/*"/>
 	public string? FuzzyRewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_transpositions']/*"/>
 	public bool? FuzzyTranspositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#max_expansions']/*"/>
 	public int? MaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Terms you wish to find in the provided field.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery']/*"/>
 public readonly partial struct MatchBoolPrefixQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery Instance { get; init; }
@@ -152,25 +103,14 @@ public readonly partial struct MatchBoolPrefixQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -189,108 +129,63 @@ public readonly partial struct MatchBoolPrefixQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms you wish to find in the provided field.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -312,6 +207,7 @@ public readonly partial struct MatchBoolPrefixQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery']/*"/>
 public readonly partial struct MatchBoolPrefixQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery Instance { get; init; }
@@ -331,25 +227,14 @@ public readonly partial struct MatchBoolPrefixQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -368,108 +253,63 @@ public readonly partial struct MatchBoolPrefixQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// Applied to the constructed bool query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms you wish to find in the provided field.
-	/// The last term is used in a prefix query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchBoolPrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchBoolPrefixQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsForSharedFileSystemConverter))]
 public sealed partial class SourceOnlyRepositorySettingsForSharedFileSystem : Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings
 {
@@ -44,43 +45,17 @@ public sealed partial class SourceOnlyRepositorySettingsForSharedFileSystem : El
 
 	public string DelegateType => "fs";
 
-	/// <summary>
-	/// <para>
-	/// The location of the shared filesystem used to store and retrieve snapshots.
-	/// This location must be registered in the <c>path.repo</c> setting on all master and data nodes in the cluster.
-	/// Unlike <c>path.repo</c>, this setting supports only a single file path.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#location']/*"/>
 	public required string Location { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#max_number_of_snapshots']/*"/>
 	public int? MaxNumberOfSnapshots { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#readonly']/*"/>
 	public bool? Readonly { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem']/*"/>
 public readonly partial struct SourceOnlyRepositorySettingsForSharedFileSystemDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem Instance { get; init; }
@@ -100,48 +75,21 @@ public readonly partial struct SourceOnlyRepositorySettingsForSharedFileSystemDe
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The location of the shared filesystem used to store and retrieve snapshots.
-	/// This location must be registered in the <c>path.repo</c> setting on all master and data nodes in the cluster.
-	/// Unlike <c>path.repo</c>, this setting supports only a single file path.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#location']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor Location(string value)
 	{
 		Instance.Location = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#max_number_of_snapshots']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor MaxNumberOfSnapshots(int? value)
 	{
 		Instance.MaxNumberOfSnapshots = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForSharedFileSystem.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForSharedFileSystem#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor Readonly(bool? value = true)
 	{
 		Instance.Readonly = value;

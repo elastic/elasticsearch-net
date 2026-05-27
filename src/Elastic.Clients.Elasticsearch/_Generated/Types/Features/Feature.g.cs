@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features._types.Feature']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.Json.FeatureConverter))]
 public sealed partial class Feature
 {

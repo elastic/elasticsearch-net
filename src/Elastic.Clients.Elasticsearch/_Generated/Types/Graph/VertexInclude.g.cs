@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.VertexInclude']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.VertexIncludeConverter))]
 public sealed partial class VertexInclude
 {
@@ -46,6 +47,7 @@ public sealed partial class VertexInclude
 	public required string Term { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.VertexInclude']/*"/>
 public readonly partial struct VertexIncludeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.VertexInclude Instance { get; init; }

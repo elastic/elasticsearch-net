@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_expired_data.Request"><summary><para>
+Delete expired ML data.
+</para>
+<para>
+Delete all job results, model snapshots and forecast data that have exceeded
+their retention days period. Machine learning state documents that are not
+associated with any job are also deleted.
+You can limit the request to a single or set of anomaly detection jobs by
+using a job identifier, a group name, a comma-separated list of jobs, or a
+wildcard expression. You can delete expired data for all anomaly detection
+jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
+<c>&lt;job_id></c>.
+</para></summary></member>
+  <member key="ml.delete_expired_data.Request#job_id"><summary><para>
+Identifier for an anomaly detection job. It can be a job identifier, a
+group name, or a wildcard expression.
+</para></summary></member>
+  <member key="ml.delete_expired_data.Request#requests_per_second"><summary><para>
+The desired requests per second for the deletion processes. The default
+behavior is no throttling.
+</para></summary></member>
+  <member key="ml.delete_expired_data.Request#timeout"><summary><para>
+How long can the underlying delete processes run until they are canceled.
+</para></summary></member>
+</doc>

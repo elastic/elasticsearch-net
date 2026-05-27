@@ -23,40 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
 public sealed partial class UpdateSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update security index settings.
-/// </para>
-/// <para>
-/// Update the user-configurable settings for the security internal index (<c>.security</c> and associated indices). Only a subset of settings are allowed to be modified. This includes <c>index.auto_expand_replicas</c> and <c>index.number_of_replicas</c>.
-/// </para>
-/// <para>
-/// NOTE: If <c>index.auto_expand_replicas</c> is set, <c>index.number_of_replicas</c> will be ignored during updates.
-/// </para>
-/// <para>
-/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
-/// This API does not yet support configuring the settings for indices before they are in use.
-/// </para>
-/// </summary>
+/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UpdateSettingsRequestConverter))]
 public sealed partial class UpdateSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>
 {
@@ -78,59 +57,24 @@ public sealed partial class UpdateSettingsRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.update_settings";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? Security { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityProfile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SecuritySettings? SecurityTokens { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update security index settings.
-/// </para>
-/// <para>
-/// Update the user-configurable settings for the security internal index (<c>.security</c> and associated indices). Only a subset of settings are allowed to be modified. This includes <c>index.auto_expand_replicas</c> and <c>index.number_of_replicas</c>.
-/// </para>
-/// <para>
-/// NOTE: If <c>index.auto_expand_replicas</c> is set, <c>index.number_of_replicas</c> will be ignored during updates.
-/// </para>
-/// <para>
-/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
-/// This API does not yet support configuring the settings for indices before they are in use.
-/// </para>
-/// </summary>
+/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
 public readonly partial struct UpdateSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Instance { get; init; }
@@ -149,156 +93,98 @@ public readonly partial struct UpdateSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.Security = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security()
 	{
 		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
 		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor Security<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
 	{
 		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.SecurityProfile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile()
 	{
 		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
 		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityProfile<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
 	{
 		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.SecurityTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens()
 	{
 		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor>? action)
 	{
 		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor SecurityTokens<T>(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>>? action)
 	{
 		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<T>.Build(action);
@@ -366,21 +252,8 @@ public readonly partial struct UpdateSettingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update security index settings.
-/// </para>
-/// <para>
-/// Update the user-configurable settings for the security internal index (<c>.security</c> and associated indices). Only a subset of settings are allowed to be modified. This includes <c>index.auto_expand_replicas</c> and <c>index.number_of_replicas</c>.
-/// </para>
-/// <para>
-/// NOTE: If <c>index.auto_expand_replicas</c> is set, <c>index.number_of_replicas</c> will be ignored during updates.
-/// </para>
-/// <para>
-/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
-/// This API does not yet support configuring the settings for indices before they are in use.
-/// </para>
-/// </summary>
+/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_settings.Request']/*"/>
 public readonly partial struct UpdateSettingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Instance { get; init; }
@@ -399,123 +272,77 @@ public readonly partial struct UpdateSettingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.Security = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security()
 	{
 		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> Security(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
 		Instance.Security = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.SecurityProfile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile()
 	{
 		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store profile information.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityProfile(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
 		Instance.SecurityProfile = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(Elastic.Clients.Elasticsearch.Security.SecuritySettings? value)
 	{
 		Instance.SecurityTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens()
 	{
 		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for the index used to store tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateSettingsRequest.g.xml" path="doc/member[@key='security.update_settings.Request#security-tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument> SecurityTokens(System.Action<Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>>? action)
 	{
 		Instance.SecurityTokens = Elastic.Clients.Elasticsearch.Security.SecuritySettingsDescriptor<TDocument>.Build(action);

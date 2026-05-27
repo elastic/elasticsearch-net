@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_trained_model.Definition#preprocessors"><summary><para>
+Collection of preprocessors
+</para></summary></member>
+  <member key="ml.put_trained_model.Definition#trained_model"><summary><para>
+The definition of the trained model.
+</para></summary></member>
+</doc>

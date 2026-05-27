@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DataStreamTimestamp']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DataStreamTimestampConverter))]
 public sealed partial class DataStreamTimestamp
 {
@@ -45,6 +46,7 @@ public sealed partial class DataStreamTimestamp
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DataStreamTimestamp']/*"/>
 public readonly partial struct DataStreamTimestampDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp Instance { get; init; }

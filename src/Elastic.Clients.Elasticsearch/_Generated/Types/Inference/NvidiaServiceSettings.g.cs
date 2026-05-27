@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.NvidiaServiceSettingsConverter))]
 public sealed partial class NvidiaServiceSettings
 {
@@ -43,88 +44,26 @@ public sealed partial class NvidiaServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Nvidia endpoint.
-	/// Can be found in <c>API Keys</c> section of Nvidia account settings.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input. Inputs exceeding this value are truncated prior to sending to the Nvidia API.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#max_input_tokens']/*"/>
 	public int? MaxInputTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the model's documentation for the name if needed.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>nvidia/llama-3.2-nv-embedqa-1b-v2</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>microsoft/phi-3-mini-128k-instruct</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>nv-rerank-qa-mistral-4b:1</c>.
-	/// Service doesn't support <c>text_embedding</c> task <c>baai/bge-m3</c> and <c>nvidia/nvclip</c> models due to them not recognizing the <c>input_type</c> parameter.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Nvidia API.
-	/// By default, the <c>nvidia</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL of the Nvidia model endpoint. If not provided, the default endpoint URL is used depending on the task type:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>https://integrate.api.nvidia.com/v1/embeddings</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>https://integrate.api.nvidia.com/v1/chat/completions</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>https://ai.api.nvidia.com/v1/retrieval/nvidia/reranking</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings']/*"/>
 public readonly partial struct NvidiaServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettings Instance { get; init; }
@@ -144,129 +83,56 @@ public readonly partial struct NvidiaServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettings(Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Nvidia endpoint.
-	/// Can be found in <c>API Keys</c> section of Nvidia account settings.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input. Inputs exceeding this value are truncated prior to sending to the Nvidia API.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#max_input_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor MaxInputTokens(int? value)
 	{
 		Instance.MaxInputTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the model's documentation for the name if needed.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>nvidia/llama-3.2-nv-embedqa-1b-v2</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>microsoft/phi-3-mini-128k-instruct</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>nv-rerank-qa-mistral-4b:1</c>.
-	/// Service doesn't support <c>text_embedding</c> task <c>baai/bge-m3</c> and <c>nvidia/nvclip</c> models due to them not recognizing the <c>input_type</c> parameter.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Nvidia API.
-	/// By default, the <c>nvidia</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Nvidia API.
-	/// By default, the <c>nvidia</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Nvidia API.
-	/// By default, the <c>nvidia</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.NvidiaSimilarityType? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL of the Nvidia model endpoint. If not provided, the default endpoint URL is used depending on the task type:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>https://integrate.api.nvidia.com/v1/embeddings</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>https://integrate.api.nvidia.com/v1/chat/completions</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>rerank</c> task - <c>https://ai.api.nvidia.com/v1/retrieval/nvidia/reranking</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="NvidiaServiceSettings.g.xml" path="doc/member[@key='inference._types.NvidiaServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.NvidiaServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CartesianCentroidAggregationConverter))]
 public sealed partial class CartesianCentroidAggregation
 {
@@ -36,23 +37,15 @@ public sealed partial class CartesianCentroidAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation']/*"/>
 public readonly partial struct CartesianCentroidAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation Instance { get; init; }
@@ -72,34 +65,21 @@ public readonly partial struct CartesianCentroidAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -138,6 +118,7 @@ public readonly partial struct CartesianCentroidAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation']/*"/>
 public readonly partial struct CartesianCentroidAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation Instance { get; init; }
@@ -157,34 +138,21 @@ public readonly partial struct CartesianCentroidAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianCentroidAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

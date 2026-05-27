@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TerminateProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.TerminateProcessorConverter))]
 public sealed partial class TerminateProcessor
 {
@@ -36,44 +37,23 @@ public sealed partial class TerminateProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TerminateProcessor']/*"/>
 public readonly partial struct TerminateProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor Instance { get; init; }
@@ -93,89 +73,56 @@ public readonly partial struct TerminateProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -188,12 +135,7 @@ public readonly partial struct TerminateProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -214,6 +156,7 @@ public readonly partial struct TerminateProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TerminateProcessor']/*"/>
 public readonly partial struct TerminateProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor Instance { get; init; }
@@ -233,89 +176,56 @@ public readonly partial struct TerminateProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -328,11 +238,7 @@ public readonly partial struct TerminateProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -345,12 +251,7 @@ public readonly partial struct TerminateProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TerminateProcessor.g.xml" path="doc/member[@key='ingest._types.TerminateProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

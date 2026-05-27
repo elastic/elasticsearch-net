@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateSummaryWithRollover']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateSummaryWithRolloverConverter))]
 public sealed partial class IndexTemplateSummaryWithRollover
 {
@@ -36,30 +37,14 @@ public sealed partial class IndexTemplateSummaryWithRollover
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummaryWithRollover.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummaryWithRollover#aliases']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? DataStreamOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummaryWithRollover.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummaryWithRollover#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummaryWithRollover.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummaryWithRollover#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }

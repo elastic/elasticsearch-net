@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.CgroupCpuStat#number_of_elapsed_periods"><summary><para>
+The number of reporting periods (as specified by <c>cfs_period_micros</c>) that have elapsed.
+</para></summary></member>
+  <member key="nodes._types.CgroupCpuStat#number_of_times_throttled"><summary><para>
+The number of times all tasks in the same cgroup as the Elasticsearch process have been throttled.
+</para></summary></member>
+  <member key="nodes._types.CgroupCpuStat#time_throttled_nanos"><summary><para>
+The total amount of time, in nanoseconds, for which all tasks in the same cgroup as the Elasticsearch process have been throttled.
+</para></summary></member>
+</doc>

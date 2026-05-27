@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.recovery.ShardRecovery#stage"><summary><para>
+The recovery stage.
+</para></summary></member>
+  <member key="indices.recovery.ShardRecovery#type"><summary><para>
+The recovery source type.
+</para></summary></member>
+</doc>

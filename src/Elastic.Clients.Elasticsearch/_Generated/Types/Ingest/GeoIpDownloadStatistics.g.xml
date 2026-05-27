@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#databases_count"><summary><para>
+Current number of databases available for use.
+</para></summary></member>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#expired_databases"><summary><para>
+Total number of databases not updated after 30 days
+</para></summary></member>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#failed_downloads"><summary><para>
+Total number of failed database downloads.
+</para></summary></member>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#skipped_updates"><summary><para>
+Total number of database updates skipped.
+</para></summary></member>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#successful_downloads"><summary><para>
+Total number of successful database downloads.
+</para></summary></member>
+  <member key="ingest.geo_ip_stats.GeoIpDownloadStatistics#total_download_time"><summary><para>
+Total milliseconds spent downloading databases.
+</para></summary></member>
+</doc>

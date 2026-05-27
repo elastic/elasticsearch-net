@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CohereTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CohereTaskSettingsConverter))]
 public sealed partial class CohereTaskSettings
 {
@@ -42,81 +43,20 @@ public sealed partial class CohereTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the type of input passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a text classifier.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Use it for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#input_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CohereInputType InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the method to handle inputs longer than the maximum token length.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? Truncate { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CohereTaskSettings']/*"/>
 public readonly partial struct CohereTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings Instance { get; init; }
@@ -136,90 +76,28 @@ public readonly partial struct CohereTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings(Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the type of input passed to the model.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a text classifier.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ingest</c>: Use it for storing document embeddings in a vector database.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.CohereInputType value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the method to handle inputs longer than the maximum token length.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="CohereTaskSettings.g.xml" path="doc/member[@key='inference._types.CohereTaskSettings#truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor Truncate(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? value)
 	{
 		Instance.Truncate = value;

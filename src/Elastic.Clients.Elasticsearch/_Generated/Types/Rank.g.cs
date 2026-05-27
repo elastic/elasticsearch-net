@@ -39,11 +39,6 @@ public sealed partial class Rank
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The reciprocal rank fusion parameters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RrfRank? Rrf { get => GetVariant<Elastic.Clients.Elasticsearch.RrfRank>("rrf"); set => SetVariant("rrf", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.RrfRank value) => new Elastic.Clients.Elasticsearch.Rank { Rrf = value };
@@ -86,33 +81,18 @@ public readonly partial struct RankDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RankDescriptor(Elastic.Clients.Elasticsearch.Rank instance) => new Elastic.Clients.Elasticsearch.RankDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rank(Elastic.Clients.Elasticsearch.RankDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The reciprocal rank fusion parameters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf(Elastic.Clients.Elasticsearch.RrfRank? value)
 	{
 		Instance.Rrf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The reciprocal rank fusion parameters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf()
 	{
 		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRankDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The reciprocal rank fusion parameters
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RankDescriptor Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRankDescriptor>? action)
 	{
 		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRankDescriptor.Build(action);

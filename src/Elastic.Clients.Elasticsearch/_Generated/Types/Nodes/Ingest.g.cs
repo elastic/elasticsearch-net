@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Ingest']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IngestConverter))]
 public sealed partial class Ingest
 {
@@ -36,17 +37,9 @@ public sealed partial class Ingest
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about ingest pipelines for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Ingest.g.xml" path="doc/member[@key='nodes._types.Ingest#pipelines']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.IngestStats>? Pipelines { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about ingest operations for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Ingest.g.xml" path="doc/member[@key='nodes._types.Ingest#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.IngestTotal? Total { get; set; }
 }

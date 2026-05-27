@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FielddataFrequencyFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FielddataFrequencyFilterConverter))]
 public sealed partial class FielddataFrequencyFilter
 {
@@ -49,6 +50,7 @@ public sealed partial class FielddataFrequencyFilter
 	public required int MinSegmentSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FielddataFrequencyFilter']/*"/>
 public readonly partial struct FielddataFrequencyFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter Instance { get; init; }

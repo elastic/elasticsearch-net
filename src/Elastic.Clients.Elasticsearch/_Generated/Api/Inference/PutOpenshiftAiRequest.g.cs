@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
 public sealed partial class PutOpenshiftAiRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an OpenShift AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>openshift_ai</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutOpenshiftAiRequestConverter))]
 public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>
 {
@@ -74,70 +66,30 @@ public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "inference.put_openshift_ai";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#openshiftai_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id OpenshiftaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openshiftai_inference_id"); set => PR("openshiftai_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>openshift_ai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#service']/*"/>
 	public string Service => "openshift_ai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openshift_ai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>rerank</c> task type.
-	/// Not applicable to the <c>text_embedding</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an OpenShift AI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>openshift_ai</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_openshift_ai.Request']/*"/>
 public readonly partial struct PutOpenshiftAiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest Instance { get; init; }
@@ -164,137 +116,77 @@ public readonly partial struct PutOpenshiftAiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest(Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#openshiftai_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor OpenshiftaiInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.OpenshiftaiInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openshift_ai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openshift_ai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>rerank</c> task type.
-	/// Not applicable to the <c>text_embedding</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>rerank</c> task type.
-	/// Not applicable to the <c>text_embedding</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// Applies only to the <c>rerank</c> task type.
-	/// Not applicable to the <c>text_embedding</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutOpenshiftAiRequest.g.xml" path="doc/member[@key='inference.put_openshift_ai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettingsDescriptor.Build(action);

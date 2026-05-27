@@ -23,46 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post.Request']/*"/>
 public sealed partial class PostRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
-	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update the license.
-/// </para>
-/// <para>
-/// You can update your license at runtime without shutting down your nodes.
-/// License updates take effect immediately.
-/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
-/// You must then re-submit the API request with the acknowledge parameter set to true.
-/// </para>
-/// <para>
-/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
-/// If the operator privileges feature is enabled, only operator users can use this API.
-/// </para>
-/// </summary>
+/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.PostRequestConverter))]
 public sealed partial class PostRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>
 {
@@ -84,52 +60,22 @@ public sealed partial class PostRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "license.post";
 
-	/// <summary>
-	/// <para>
-	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
-	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public Elastic.Clients.Elasticsearch.LicenseManagement.License? License { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#licenses']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? Licenses { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update the license.
-/// </para>
-/// <para>
-/// You can update your license at runtime without shutting down your nodes.
-/// License updates take effect immediately.
-/// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
-/// You must then re-submit the API request with the acknowledge parameter set to true.
-/// </para>
-/// <para>
-/// NOTE: If Elasticsearch security features are enabled and you are installing a gold or higher license, you must enable TLS on the transport networking layer before you install the license.
-/// If the operator privileges feature is enabled, only operator users can use this API.
-/// </para>
-/// </summary>
+/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post.Request']/*"/>
 public readonly partial struct PostRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest Instance { get; init; }
@@ -148,34 +94,21 @@ public readonly partial struct PostRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
-	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#acknowledge']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Acknowledge(bool? value = true)
 	{
 		Instance.Acknowledge = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -194,33 +127,21 @@ public readonly partial struct PostRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#licenses']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.LicenseManagement.License>? value)
 	{
 		Instance.Licenses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#licenses']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(params Elastic.Clients.Elasticsearch.LicenseManagement.License[] values)
 	{
 		Instance.Licenses = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sequence of one or more JSON documents containing the license information.
-	/// </para>
-	/// </summary>
+	/// <include file="PostRequest.g.xml" path="doc/member[@key='license.post.Request#licenses']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Licenses(params System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.LicenseManagement.License>();

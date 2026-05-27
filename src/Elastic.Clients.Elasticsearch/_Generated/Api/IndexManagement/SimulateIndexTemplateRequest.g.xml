@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.simulate_index_template.Request"><summary><para>
+Simulate an index.
+</para>
+<para>
+Get the index configuration that would be applied to the specified index from an existing index template.
+</para></summary></member>
+  <member key="indices.simulate_index_template.Request#cause"><summary><para>
+User defined reason for dry-run creating the new template for simulation purposes
+</para></summary></member>
+  <member key="indices.simulate_index_template.Request#create"><summary><para>
+Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+</para></summary></member>
+  <member key="indices.simulate_index_template.Request#include_defaults"><summary><para>
+If true, returns all relevant default configurations for the index template.
+</para></summary></member>
+  <member key="indices.simulate_index_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.simulate_index_template.Request#name"><summary><para>
+Name of the index to simulate
+</para></summary></member>
+</doc>

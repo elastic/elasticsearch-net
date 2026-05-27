@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModelTreeNode']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelTreeNodeConverter))]
 public sealed partial class TrainedModelTreeNode
 {
@@ -53,6 +54,7 @@ public sealed partial class TrainedModelTreeNode
 	public double? Threshold { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModelTreeNode']/*"/>
 public readonly partial struct TrainedModelTreeNodeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode Instance { get; init; }

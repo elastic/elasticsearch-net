@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
 public sealed partial class PutCalendarJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Add anomaly detection job to calendar.
-/// </para>
-/// </summary>
+/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutCalendarJobRequestConverter))]
 public sealed partial class PutCalendarJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestParameters>
 {
@@ -58,26 +57,15 @@ public sealed partial class PutCalendarJobRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.put_calendar_job";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids JobId { get => P<Elastic.Clients.Elasticsearch.Ids>("job_id"); set => PR("job_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Add anomaly detection job to calendar.
-/// </para>
-/// </summary>
+/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_calendar_job.Request']/*"/>
 public readonly partial struct PutCalendarJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest Instance { get; init; }
@@ -102,22 +90,14 @@ public readonly partial struct PutCalendarJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobRequest.g.xml" path="doc/member[@key='ml.put_calendar_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.JobId = value;

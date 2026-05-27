@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelStatsConverter))]
 public sealed partial class TrainedModelStats
 {
@@ -44,47 +45,21 @@ public sealed partial class TrainedModelStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A collection of deployment stats, which is present when the models are deployed.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#deployment_stats']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentStats? DeploymentStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of inference stats fields.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#inference_stats']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats? InferenceStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of ingest stats for the model across all nodes.
-	/// The values are summations of the individual node statistics.
-	/// The format matches the ingest section in the nodes stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#ingest']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Ingest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of model size stats.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#model_size_stats']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of ingest pipelines that currently refer to the model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelStats.g.xml" path="doc/member[@key='ml._types.TrainedModelStats#pipeline_count']/*"/>
 	public required int PipelineCount { get; set; }
 }

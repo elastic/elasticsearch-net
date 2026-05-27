@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CircleProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.CircleProcessorConverter))]
 public sealed partial class CircleProcessor
 {
@@ -44,80 +45,38 @@ public sealed partial class CircleProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for <c>geo_shape</c>, unit-less for <c>shape</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#error_distance']/*"/>
 	public required double ErrorDistance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Which field mapping type is to be used when processing the circle: <c>geo_shape</c> or <c>shape</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#shape_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CircleProcessor']/*"/>
 public readonly partial struct CircleProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CircleProcessor Instance { get; init; }
@@ -137,133 +96,84 @@ public readonly partial struct CircleProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CircleProcessor(Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for <c>geo_shape</c>, unit-less for <c>shape</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#error_distance']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> ErrorDistance(double value)
 	{
 		Instance.ErrorDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -276,47 +186,28 @@ public readonly partial struct CircleProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Which field mapping type is to be used when processing the circle: <c>geo_shape</c> or <c>shape</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#shape_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType value)
 	{
 		Instance.ShapeType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -332,6 +223,7 @@ public readonly partial struct CircleProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CircleProcessor']/*"/>
 public readonly partial struct CircleProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CircleProcessor Instance { get; init; }
@@ -351,133 +243,84 @@ public readonly partial struct CircleProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CircleProcessor(Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for <c>geo_shape</c>, unit-less for <c>shape</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#error_distance']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor ErrorDistance(double value)
 	{
 		Instance.ErrorDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -490,11 +333,7 @@ public readonly partial struct CircleProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -507,47 +346,28 @@ public readonly partial struct CircleProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Which field mapping type is to be used when processing the circle: <c>geo_shape</c> or <c>shape</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#shape_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType value)
 	{
 		Instance.ShapeType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="CircleProcessor.g.xml" path="doc/member[@key='ingest._types.CircleProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

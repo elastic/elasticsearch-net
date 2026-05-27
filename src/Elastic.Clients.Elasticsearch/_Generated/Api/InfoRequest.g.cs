@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 public sealed partial class InfoRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Get basic build, version, and cluster information.
-/// ::: In Serverless, <c>version.number</c> always reports the next target Elasticsearch release version at the time of the request. Serverless does not track to a traditional release versioning model; it is continuously updated. The version number is provided to maintain compatibility with existing clients, but it is not meaningful for assessing feature availability. Clients should detect a Serverless environment by checking for <c>build_flavor: serverless</c>.
-/// </para>
-/// </summary>
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InfoRequestConverter))]
 public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.InfoRequestParameters>
 {
@@ -58,15 +53,8 @@ public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests
 	internal override string OperationName => "info";
 }
 
-/// <summary>
-/// <para>
-/// Get cluster info.
-/// </para>
-/// <para>
-/// Get basic build, version, and cluster information.
-/// ::: In Serverless, <c>version.number</c> always reports the next target Elasticsearch release version at the time of the request. Serverless does not track to a traditional release versioning model; it is continuously updated. The version number is provided to maintain compatibility with existing clients, but it is not meaningful for assessing feature availability. Clients should detect a Serverless environment by checking for <c>build_flavor: serverless</c>.
-/// </para>
-/// </summary>
+/// <include file="InfoRequest.g.xml" path="doc/member[@key='_global.info.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.info.Request']/*"/>
 public readonly partial struct InfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.InfoRequest Instance { get; init; }

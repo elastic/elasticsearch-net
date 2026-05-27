@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterJvmMemory#heap_max"><summary><para>
+Maximum amount of memory available for use by the heap across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvmMemory#heap_max_in_bytes"><summary><para>
+Maximum amount of memory, in bytes, available for use by the heap across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvmMemory#heap_used"><summary><para>
+Memory currently in use by the heap across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterJvmMemory#heap_used_in_bytes"><summary><para>
+Memory, in bytes, currently in use by the heap across all selected nodes.
+</para></summary></member>
+</doc>

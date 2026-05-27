@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.Response#blob_count"><summary><para>
+The number of blobs written to the repository during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#blob_path"><summary><para>
+The path in the repository under which all the blobs were written during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#concurrency"><summary><para>
+The number of write operations performed concurrently during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#coordinating_node"><summary><para>
+The node that coordinated the analysis and performed the final cleanup.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#delete_elapsed"><summary><para>
+The time it took to delete all the blobs in the container.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#delete_elapsed_nanos"><summary><para>
+The time it took to delete all the blobs in the container, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#details"><summary><para>
+A description of every read and write operation performed during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#early_read_node_count"><summary><para>
+The limit on the number of nodes on which early read operations were performed after writing each blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#issues_detected"><summary><para>
+A list of correctness issues detected, which is empty if the API succeeded.
+It is included to emphasize that a successful response does not guarantee correct behaviour in future.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#listing_elapsed"><summary><para>
+The time it took to retrieve a list of all the blobs in the container.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#listing_elapsed_nanos"><summary><para>
+The time it took to retrieve a list of all the blobs in the container, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#max_blob_size"><summary><para>
+The limit on the size of a blob written during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#max_blob_size_bytes"><summary><para>
+The limit, in bytes, on the size of a blob written during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#max_total_data_size"><summary><para>
+The limit on the total size of all blob written during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#max_total_data_size_bytes"><summary><para>
+The limit, in bytes, on the total size of all blob written during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#rare_action_probability"><summary><para>
+The probability of performing rare actions during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#read_node_count"><summary><para>
+The limit on the number of nodes on which read operations were performed after writing each blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#repository"><summary><para>
+The name of the repository that was the subject of the analysis.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#seed"><summary><para>
+The seed for the pseudo-random number generator used to generate the operations used during the test.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.Response#summary"><summary><para>
+A collection of statistics that summarize the results of the test.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.RemoteSource']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Reindex.Json.RemoteSourceConverter))]
 public sealed partial class RemoteSource
 {
@@ -42,58 +43,29 @@ public sealed partial class RemoteSource
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key to use for authentication with the remote host (as an alternative to basic auth when the remote cluster is in Elastic Cloud).
-	/// (It is not permitted to set this and also to set an <c>Authorization</c> header via <c>headers</c>.)
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#api_key']/*"/>
 	public string? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote connection timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#connect_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object containing the headers of the request.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#headers']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL for the remote instance of Elasticsearch that you want to index from.
-	/// This information is required when you're indexing from remote.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#host']/*"/>
 	public required string Host { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The password to use for authentication with the remote host (required when using basic auth).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote socket read timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#socket_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The username to use for authentication with the remote host (required when using basic auth).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.RemoteSource']/*"/>
 public readonly partial struct RemoteSourceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource Instance { get; init; }
@@ -113,56 +85,35 @@ public readonly partial struct RemoteSourceDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The API key to use for authentication with the remote host (as an alternative to basic auth when the remote cluster is in Elastic Cloud).
-	/// (It is not permitted to set this and also to set an <c>Authorization</c> header via <c>headers</c>.)
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor ApiKey(string? value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The remote connection timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#connect_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ConnectTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object containing the headers of the request.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object containing the headers of the request.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers()
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object containing the headers of the request.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -176,45 +127,28 @@ public readonly partial struct RemoteSourceDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL for the remote instance of Elasticsearch that you want to index from.
-	/// This information is required when you're indexing from remote.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#host']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Host(string value)
 	{
 		Instance.Host = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The password to use for authentication with the remote host (required when using basic auth).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The remote socket read timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#socket_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.SocketTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username to use for authentication with the remote host (required when using basic auth).
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteSource.g.xml" path="doc/member[@key='_global.reindex.RemoteSource#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;

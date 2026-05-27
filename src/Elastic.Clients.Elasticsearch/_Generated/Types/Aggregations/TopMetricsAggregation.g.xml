@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TopMetricsAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.TopMetricsAggregation#metrics"><summary><para>
+The fields of the top document to return.
+</para></summary></member>
+  <member key="_types.aggregations.TopMetricsAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.TopMetricsAggregation#size"><summary><para>
+The number of top documents from which to return metrics.
+</para></summary></member>
+  <member key="_types.aggregations.TopMetricsAggregation#sort"><summary><para>
+The sort order of the documents.
+</para></summary></member>
+</doc>

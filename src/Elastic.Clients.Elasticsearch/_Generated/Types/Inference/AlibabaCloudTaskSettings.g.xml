@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AlibabaCloudTaskSettings#input_type"><summary><para>
+For a <c>sparse_embedding</c> or <c>text_embedding</c> task, specify the type of input passed to the model.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>ingest</c> for storing document embeddings in a vector database.
+</para>
+</item>
+<item>
+<para>
+<c>search</c> for storing embeddings of search queries run against a vector database to find relevant documents.
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.AlibabaCloudTaskSettings#return_token"><summary><para>
+For a <c>sparse_embedding</c> task, it affects whether the token name will be returned in the response.
+It defaults to <c>false</c>, which means only the token ID will be returned in the response.
+</para></summary></member>
+</doc>

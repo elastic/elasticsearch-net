@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.CleanupRepositoryResults']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CleanupRepositoryResultsConverter))]
 public sealed partial class CleanupRepositoryResults
 {
@@ -43,18 +44,9 @@ public sealed partial class CleanupRepositoryResults
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of binary large objects (blobs) removed from the snapshot repository during cleanup operations.
-	/// A non-zero value indicates that unreferenced blobs were found and subsequently cleaned up.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryResults.g.xml" path="doc/member[@key='snapshot.cleanup_repository.CleanupRepositoryResults#deleted_blobs']/*"/>
 	public required long DeletedBlobs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of bytes freed by cleanup operations.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryResults.g.xml" path="doc/member[@key='snapshot.cleanup_repository.CleanupRepositoryResults#deleted_bytes']/*"/>
 	public required long DeletedBytes { get; set; }
 }

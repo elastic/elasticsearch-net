@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="GetGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
 public sealed partial class GetGeoipDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get GeoIP database configurations.
-/// </para>
-/// <para>
-/// Get information about one or more IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="GetGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GetGeoipDatabaseRequestConverter))]
 public sealed partial class GetGeoipDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>
 {
@@ -60,24 +56,12 @@ public sealed partial class GetGeoipDatabaseRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "ingest.get_geoip_database";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of database configuration IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all database configurations, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_geoip_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? Id { get => P<Elastic.Clients.Elasticsearch.Ids?>("id"); set => PO("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get GeoIP database configurations.
-/// </para>
-/// <para>
-/// Get information about one or more IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="GetGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_geoip_database.Request']/*"/>
 public readonly partial struct GetGeoipDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest Instance { get; init; }
@@ -101,13 +85,7 @@ public readonly partial struct GetGeoipDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of database configuration IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all database configurations, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetGeoipDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_geoip_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Id = value;

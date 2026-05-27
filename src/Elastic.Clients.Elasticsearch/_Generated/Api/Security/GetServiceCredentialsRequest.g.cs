@@ -23,25 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
 public sealed partial class GetServiceCredentialsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get service account credentials.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_service_account</c> or <c>manage_security</c>).
-/// </para>
-/// <para>
-/// The response includes service account tokens that were created with the create service account tokens API as well as file-backed tokens from all nodes of the cluster.
-/// </para>
-/// <para>
-/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
-/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
-/// </para>
-/// </summary>
+/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetServiceCredentialsRequestConverter))]
 public sealed partial class GetServiceCredentialsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>
 {
@@ -68,36 +57,15 @@ public sealed partial class GetServiceCredentialsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "security.get_service_credentials";
 
-	/// <summary>
-	/// <para>
-	/// The name of the namespace.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request#namespace']/*"/>
 	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request#service']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Service { get => P<Elastic.Clients.Elasticsearch.Name>("service"); set => PR("service", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get service account credentials.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>read_security</c> cluster privilege (or a greater privilege such as <c>manage_service_account</c> or <c>manage_security</c>).
-/// </para>
-/// <para>
-/// The response includes service account tokens that were created with the create service account tokens API as well as file-backed tokens from all nodes of the cluster.
-/// </para>
-/// <para>
-/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
-/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
-/// </para>
-/// </summary>
+/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_credentials.Request']/*"/>
 public readonly partial struct GetServiceCredentialsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest Instance { get; init; }
@@ -122,22 +90,14 @@ public readonly partial struct GetServiceCredentialsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the namespace.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Namespace(string value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceCredentialsRequest.g.xml" path="doc/member[@key='security.get_service_credentials.Request#service']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor Service(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Service = value;

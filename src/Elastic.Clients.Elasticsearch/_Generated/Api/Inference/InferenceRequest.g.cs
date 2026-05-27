@@ -23,33 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.inference.Request']/*"/>
 public sealed partial class InferenceRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform inference on the service.
-/// </para>
-/// <para>
-/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
-/// It returns a response with the results of the tasks.
-/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
-/// </para>
-/// <para>
-/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
-/// </para>
-/// <para>
-/// info
-/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// </summary>
+/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.inference.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceRequestConverter))]
 public sealed partial class InferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>
 {
@@ -95,108 +78,30 @@ public sealed partial class InferenceRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.inference";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of inference task that the model performs.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input data type for the embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>embedding</c> or <c>text_embedding</c> task type. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// Not all services support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#input_type']/*"/>
 	public string? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query input, which is required only for the <c>rerank</c> task.
-	/// It is not required for other tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#query']/*"/>
 	public string? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request.
-	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform inference on the service.
-/// </para>
-/// <para>
-/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
-/// It returns a response with the results of the tasks.
-/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
-/// </para>
-/// <para>
-/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
-/// </para>
-/// <para>
-/// info
-/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// </summary>
+/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.inference.Request']/*"/>
 public readonly partial struct InferenceRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.InferenceRequest Instance { get; init; }
@@ -230,128 +135,56 @@ public readonly partial struct InferenceRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceRequest instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceRequest(Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of inference task that the model performs.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the input data type for the embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>embedding</c> or <c>text_embedding</c> task type. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// Not all services support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor InputType(string? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query input, which is required only for the <c>rerank</c> task.
-	/// It is not required for other tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor Query(string? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request.
-	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceRequest.g.xml" path="doc/member[@key='inference.inference.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

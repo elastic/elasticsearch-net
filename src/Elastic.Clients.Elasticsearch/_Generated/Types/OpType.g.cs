@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.OpTypeConverter))]
 public enum OpType
 {
-	/// <summary>
-	/// <para>
-	/// Only index documents that do not already exist.
-	/// </para>
-	/// </summary>
+	/// <include file="OpType.g.xml" path="doc/member[@key='_types.OpType#create']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "create")]
 	Create,
-	/// <summary>
-	/// <para>
-	/// Overwrite any documents that already exist.
-	/// </para>
-	/// </summary>
+	/// <include file="OpType.g.xml" path="doc/member[@key='_types.OpType#index']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "index")]
 	Index
 }

@@ -23,41 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 public sealed partial class UpdateTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// When true, deferrable validations are not run. This behavior may be
-	/// desired if the source index does not exist until after the transform is
-	/// created.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#defer_validation']/*"/>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update a transform.
-/// </para>
-/// <para>
-/// Updates certain properties of a transform.
-/// </para>
-/// <para>
-/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-/// time of update and runs with those privileges.
-/// </para>
-/// </summary>
+/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.UpdateTransformRequestConverter))]
 public sealed partial class UpdateTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestParameters>
 {
@@ -84,106 +62,42 @@ public sealed partial class UpdateTransformRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "transform.update_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, deferrable validations are not run. This behavior may be
-	/// desired if the source index does not exist until after the transform is
-	/// created.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#defer_validation']/*"/>
 	public bool? DeferValidation { get => Q<bool?>("defer_validation"); set => Q("defer_validation", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Destination? Dest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Settings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Source? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a transform.
-/// </para>
-/// <para>
-/// Updates certain properties of a transform.
-/// </para>
-/// <para>
-/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-/// time of update and runs with those privileges.
-/// </para>
-/// </summary>
+/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 public readonly partial struct UpdateTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Instance { get; init; }
@@ -208,127 +122,77 @@ public readonly partial struct UpdateTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, deferrable validations are not run. This behavior may be
-	/// desired if the source index does not exist until after the transform is
-	/// created.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#defer_validation']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor DeferValidation(bool? value = true)
 	{
 		Instance.DeferValidation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -342,147 +206,91 @@ public readonly partial struct UpdateTransformRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy()
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor>? action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor RetentionPolicy<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>>? action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor Sync<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<T>.Build(action);
@@ -545,21 +353,8 @@ public readonly partial struct UpdateTransformRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update a transform.
-/// </para>
-/// <para>
-/// Updates certain properties of a transform.
-/// </para>
-/// <para>
-/// All updated properties except <c>description</c> do not take effect until after the transform starts the next checkpoint,
-/// thus there is data consistency in each checkpoint. To use this API, you must have <c>read</c> and <c>view_index_metadata</c>
-/// privileges for the source indices. You must also have <c>index</c> and <c>read</c> privileges for the destination index. When
-/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
-/// time of update and runs with those privileges.
-/// </para>
-/// </summary>
+/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.update_transform.Request']/*"/>
 public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest Instance { get; init; }
@@ -584,127 +379,77 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, deferrable validations are not run. This behavior may be
-	/// desired if the source index does not exist until after the transform is
-	/// created.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#defer_validation']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> DeferValidation(bool? value = true)
 	{
 		Instance.DeferValidation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Free text description of the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination? value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest()
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor>? action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval between checks for changes in the source indices when the
-	/// transform is running continuously. Also determines the retry interval in
-	/// the event of transient failures while the transform is searching or
-	/// indexing. The minimum value is 1s and the maximum is 1h.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Frequency(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Frequency = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -718,113 +463,70 @@ public readonly partial struct UpdateTransformRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? value)
 	{
 		Instance.RetentionPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy()
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a retention policy for the transform. Data that meets the defined
-	/// criteria is deleted from the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#retention_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> RetentionPolicy(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>>? action)
 	{
 		Instance.RetentionPolicy = Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines optional transform settings.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.TransformManagement.Source? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the data for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync? value)
 	{
 		Instance.Sync = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the properties transforms require to run continuously.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTransformRequest.g.xml" path="doc/member[@key='transform.update_transform.Request#sync']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor<TDocument> Sync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>> action)
 	{
 		Instance.Sync = Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>.Build(action);

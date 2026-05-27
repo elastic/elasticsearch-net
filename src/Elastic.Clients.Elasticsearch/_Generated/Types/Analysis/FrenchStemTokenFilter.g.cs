@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FrenchStemTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FrenchStemTokenFilterConverter))]
 public sealed partial class FrenchStemTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class FrenchStemTokenFilter : Elastic.Clients.Elasticsearc
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FrenchStemTokenFilter']/*"/>
 public readonly partial struct FrenchStemTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter Instance { get; init; }

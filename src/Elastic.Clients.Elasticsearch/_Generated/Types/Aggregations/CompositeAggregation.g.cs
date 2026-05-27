@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeAggregationConverter))]
 public sealed partial class CompositeAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class CompositeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of composite buckets that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation']/*"/>
 public readonly partial struct CompositeAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Instance { get; init; }
@@ -78,33 +67,21 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.After = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After()
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>>? action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<TDocument>.Build(action);
@@ -125,47 +102,28 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of composite buckets that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
 	{
 		Instance.Sources = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources()
 	{
 		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>>? action)
 	{
 		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>.Build(action);
@@ -200,6 +158,7 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation']/*"/>
 public readonly partial struct CompositeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Instance { get; init; }
@@ -219,44 +178,28 @@ public readonly partial struct CompositeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.After = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After()
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue>? action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When paginating, use the <c>after_key</c> value returned in the previous response to retrieve the next page.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#after']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor After<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>>? action)
 	{
 		Instance.After = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldFieldValue<T>.Build(action);
@@ -277,59 +220,35 @@ public readonly partial struct CompositeAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of composite buckets that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
 	{
 		Instance.Sources = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources()
 	{
 		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource>? action)
 	{
 		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value sources used to build composite buckets.
-	/// Keys are returned in the order of the <c>sources</c> definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeAggregation#sources']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<T>>? action)
 	{
 		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<T>.Build(action);

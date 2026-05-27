@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 public sealed partial class FollowStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get follower stats.
-/// </para>
-/// <para>
-/// Get cross-cluster replication follower stats.
-/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
-/// </para>
-/// </summary>
+/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowStatsRequestConverter))]
 public sealed partial class FollowStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class FollowStatsRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "ccr.follow_stats";
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get follower stats.
-/// </para>
-/// <para>
-/// Get cross-cluster replication follower stats.
-/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
-/// </para>
-/// </summary>
+/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 public readonly partial struct FollowStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest Instance { get; init; }
@@ -118,23 +92,14 @@ public readonly partial struct FollowStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -197,15 +162,8 @@ public readonly partial struct FollowStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get follower stats.
-/// </para>
-/// <para>
-/// Get cross-cluster replication follower stats.
-/// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
-/// </para>
-/// </summary>
+/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_stats.Request']/*"/>
 public readonly partial struct FollowStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest Instance { get; init; }
@@ -229,23 +187,14 @@ public readonly partial struct FollowStatsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowStatsRequest.g.xml" path="doc/member[@key='ccr.follow_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

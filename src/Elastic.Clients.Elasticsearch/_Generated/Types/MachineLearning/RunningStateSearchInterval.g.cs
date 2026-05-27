@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RunningStateSearchInterval']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RunningStateSearchIntervalConverter))]
 public sealed partial class RunningStateSearchInterval
 {
@@ -43,31 +44,15 @@ public sealed partial class RunningStateSearchInterval
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The end time.
-	/// </para>
-	/// </summary>
+	/// <include file="RunningStateSearchInterval.g.xml" path="doc/member[@key='ml._types.RunningStateSearchInterval#end']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The end time as an epoch in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="RunningStateSearchInterval.g.xml" path="doc/member[@key='ml._types.RunningStateSearchInterval#end_ms']/*"/>
 	public required System.TimeSpan EndMs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time.
-	/// </para>
-	/// </summary>
+	/// <include file="RunningStateSearchInterval.g.xml" path="doc/member[@key='ml._types.RunningStateSearchInterval#start']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Start { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time as an epoch in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="RunningStateSearchInterval.g.xml" path="doc/member[@key='ml._types.RunningStateSearchInterval#start_ms']/*"/>
 	public required System.TimeSpan StartMs { get; set; }
 }

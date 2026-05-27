@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchPhraseQueryConverter))]
 public sealed partial class MatchPhraseQuery
 {
@@ -49,47 +50,25 @@ public sealed partial class MatchPhraseQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query terms that are analyzed and turned into a phrase query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#slop']/*"/>
 	public int? Slop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery']/*"/>
 public readonly partial struct MatchPhraseQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery Instance { get; init; }
@@ -109,25 +88,14 @@ public readonly partial struct MatchPhraseQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -146,11 +114,7 @@ public readonly partial struct MatchPhraseQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query terms that are analyzed and turned into a phrase query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -163,22 +127,14 @@ public readonly partial struct MatchPhraseQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;
@@ -194,6 +150,7 @@ public readonly partial struct MatchPhraseQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery']/*"/>
 public readonly partial struct MatchPhraseQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery Instance { get; init; }
@@ -213,25 +170,14 @@ public readonly partial struct MatchPhraseQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -250,11 +196,7 @@ public readonly partial struct MatchPhraseQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query terms that are analyzed and turned into a phrase query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -267,22 +209,14 @@ public readonly partial struct MatchPhraseQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchPhraseQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchPhraseQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;

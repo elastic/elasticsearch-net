@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.PhraseSuggestHighlight#post_tag"><summary><para>
+Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
+</para></summary></member>
+  <member key="_global.search._types.PhraseSuggestHighlight#pre_tag"><summary><para>
+Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
+</para></summary></member>
+</doc>

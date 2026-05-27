@@ -23,38 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 public sealed partial class DeleteDataStreamOptionsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data stream options.
-/// </para>
-/// <para>
-/// Removes the data stream options from a data stream.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DeleteDataStreamOptionsRequestConverter))]
 public sealed partial class DeleteDataStreamOptionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>
 {
@@ -81,44 +65,21 @@ public sealed partial class DeleteDataStreamOptionsRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "indices.delete_data_stream_options";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams of which the data stream options will be deleted.
-	/// Use <c>*</c> to get all data streams
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data stream options.
-/// </para>
-/// <para>
-/// Removes the data stream options from a data stream.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest Instance { get; init; }
@@ -143,56 +104,35 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams of which the data stream options will be deleted.
-	/// Use <c>*</c> to get all data streams
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StatsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StatsAggregationConverter))]
 public sealed partial class StatsAggregation
 {
@@ -36,24 +37,16 @@ public sealed partial class StatsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StatsAggregation']/*"/>
 public readonly partial struct StatsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation Instance { get; init; }
@@ -73,22 +66,14 @@ public readonly partial struct StatsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -101,12 +86,7 @@ public readonly partial struct StatsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -145,6 +125,7 @@ public readonly partial struct StatsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.StatsAggregation']/*"/>
 public readonly partial struct StatsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation Instance { get; init; }
@@ -164,22 +145,14 @@ public readonly partial struct StatsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -192,12 +165,7 @@ public readonly partial struct StatsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="StatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.StatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

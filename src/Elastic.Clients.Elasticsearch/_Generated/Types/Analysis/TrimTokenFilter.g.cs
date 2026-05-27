@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TrimTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.TrimTokenFilterConverter))]
 public sealed partial class TrimTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class TrimTokenFilter : Elastic.Clients.Elasticsearch.Anal
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TrimTokenFilter']/*"/>
 public readonly partial struct TrimTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.TrimTokenFilter Instance { get; init; }

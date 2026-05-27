@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TTestAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TTestAggregationConverter))]
 public sealed partial class TTestAggregation
 {
@@ -36,28 +37,17 @@ public sealed partial class TTestAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? A { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? B { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TTestAggregation']/*"/>
 public readonly partial struct TTestAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Instance { get; init; }
@@ -77,55 +67,35 @@ public readonly partial struct TTestAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> A(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
 		Instance.A = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> A(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> action)
 	{
 		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> B(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
 		Instance.B = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> B(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> action)
 	{
 		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? value)
 	{
 		Instance.Type = value;
@@ -146,6 +116,7 @@ public readonly partial struct TTestAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TTestAggregation']/*"/>
 public readonly partial struct TTestAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Instance { get; init; }
@@ -165,77 +136,49 @@ public readonly partial struct TTestAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
 		Instance.A = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> action)
 	{
 		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#a']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> action)
 	{
 		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
 		Instance.B = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> action)
 	{
 		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Test population B.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#b']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> action)
 	{
 		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of test.
-	/// </para>
-	/// </summary>
+	/// <include file="TTestAggregation.g.xml" path="doc/member[@key='_types.aggregations.TTestAggregation#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? value)
 	{
 		Instance.Type = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AverageAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AverageAggregateConverter))]
 public sealed partial class AverageAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -46,12 +47,7 @@ public sealed partial class AverageAggregate : Elastic.Clients.Elasticsearch.Agg
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "avg";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageAggregate.g.xml" path="doc/member[@key='_types.aggregations.AverageAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

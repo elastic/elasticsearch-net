@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MovingPercentilesAggregationConverter))]
 public sealed partial class MovingPercentilesAggregation
 {
@@ -36,46 +37,25 @@ public sealed partial class MovingPercentilesAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
 	public bool? Keyed => false;
 
-	/// <summary>
-	/// <para>
-	/// By default, the window consists of the last n values excluding the current bucket.
-	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#shift']/*"/>
 	public int? Shift { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of window to "slide" across the histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#window']/*"/>
 	public int? Window { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation']/*"/>
 public readonly partial struct MovingPercentilesAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation Instance { get; init; }
@@ -95,57 +75,35 @@ public readonly partial struct MovingPercentilesAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the window consists of the last n values excluding the current bucket.
-	/// Increasing <c>shift</c> by 1, moves the starting window position by 1 to the right.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#shift']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Shift(int? value)
 	{
 		Instance.Shift = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of window to "slide" across the histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="MovingPercentilesAggregation.g.xml" path="doc/member[@key='_types.aggregations.MovingPercentilesAggregation#window']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor Window(int? value)
 	{
 		Instance.Window = value;

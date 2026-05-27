@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanMultiTermQueryConverter))]
 public sealed partial class SpanMultiTermQuery
 {
@@ -42,25 +43,15 @@ public sealed partial class SpanMultiTermQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery']/*"/>
 public readonly partial struct SpanMultiTermQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Instance { get; init; }
@@ -80,36 +71,21 @@ public readonly partial struct SpanMultiTermQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -131,6 +107,7 @@ public readonly partial struct SpanMultiTermQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery']/*"/>
 public readonly partial struct SpanMultiTermQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery Instance { get; init; }
@@ -150,47 +127,28 @@ public readonly partial struct SpanMultiTermQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
-	/// </para>
-	/// </summary>
+	/// <include file="SpanMultiTermQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanMultiTermQuery#match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

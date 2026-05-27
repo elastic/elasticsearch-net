@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
 public sealed partial class DeleteCalendarEventRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete events from a calendar.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteCalendarEventRequestConverter))]
 public sealed partial class DeleteCalendarEventRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestParameters>
 {
@@ -58,27 +57,15 @@ public sealed partial class DeleteCalendarEventRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "ml.delete_calendar_event";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the scheduled event.
-	/// You can obtain this identifier by using the get calendar events API.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request#event_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id EventId { get => P<Elastic.Clients.Elasticsearch.Id>("event_id"); set => PR("event_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete events from a calendar.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_event.Request']/*"/>
 public readonly partial struct DeleteCalendarEventRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest Instance { get; init; }
@@ -103,23 +90,14 @@ public readonly partial struct DeleteCalendarEventRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the scheduled event.
-	/// You can obtain this identifier by using the get calendar events API.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarEventRequest.g.xml" path="doc/member[@key='ml.delete_calendar_event.Request#event_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor EventId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.EventId = value;

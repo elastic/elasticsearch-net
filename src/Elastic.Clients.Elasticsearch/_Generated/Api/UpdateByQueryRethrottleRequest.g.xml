@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.update_by_query_rethrottle.Request"><summary><para>
+Throttle an update by query operation.
+</para>
+<para>
+Change the number of requests per second for a particular update by query operation.
+Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
+</para></summary></member>
+  <member key="_global.update_by_query_rethrottle.Request#requests_per_second"><summary><para>
+The throttle for this request in sub-requests per second.
+To turn off throttling, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="_global.update_by_query_rethrottle.Request#task_id"><summary><para>
+The ID for the task.
+</para></summary></member>
+</doc>

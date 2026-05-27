@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.stats.CacheStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.CacheStatsConverter))]
 public sealed partial class CacheStats
 {

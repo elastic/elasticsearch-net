@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.NodeStatistics"><summary><para>
+Contains statistics about the number of nodes selected by the request.
+</para></summary></member>
+  <member key="_types.NodeStatistics#failed"><summary><para>
+Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
+</para></summary></member>
+  <member key="_types.NodeStatistics#successful"><summary><para>
+Number of nodes that responded successfully to the request.
+</para></summary></member>
+  <member key="_types.NodeStatistics#total"><summary><para>
+Total number of nodes selected by the request.
+</para></summary></member>
+</doc>

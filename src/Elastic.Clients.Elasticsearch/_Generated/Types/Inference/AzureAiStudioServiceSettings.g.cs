@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureAiStudioServiceSettingsConverter))]
 public sealed partial class AzureAiStudioServiceSettings
 {
@@ -45,85 +46,23 @@ public sealed partial class AzureAiStudioServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Azure AI Studio model deployment.
-	/// This key can be found on the overview page for your deployment in the management section of your Azure AI Studio account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of endpoint that is available for deployment through Azure AI Studio: <c>token</c> or <c>realtime</c>.
-	/// The <c>token</c> endpoint type is for "pay as you go" endpoints that are billed per token.
-	/// The <c>realtime</c> endpoint type is for "real-time" endpoints that are billed per hour of usage.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#endpoint_type']/*"/>
 	public required string EndpointType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model provider for your deployment.
-	/// Note that some providers may support only certain task types.
-	/// Supported providers include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c>, <c>rerank</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>databricks</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>meta</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>microsoft_phi</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> - available for <c>text_embedding</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#provider']/*"/>
 	public required string Provider { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure AI Studio.
-	/// By default, the <c>azureaistudio</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The target URL of your Azure AI Studio model deployment.
-	/// This can be found on the overview page for your deployment in the management section of your Azure AI Studio account.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#target']/*"/>
 	public required string Target { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings']/*"/>
 public readonly partial struct AzureAiStudioServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings Instance { get; init; }
@@ -143,122 +82,49 @@ public readonly partial struct AzureAiStudioServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Azure AI Studio model deployment.
-	/// This key can be found on the overview page for your deployment in the management section of your Azure AI Studio account.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of endpoint that is available for deployment through Azure AI Studio: <c>token</c> or <c>realtime</c>.
-	/// The <c>token</c> endpoint type is for "pay as you go" endpoints that are billed per token.
-	/// The <c>realtime</c> endpoint type is for "real-time" endpoints that are billed per hour of usage.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#endpoint_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor EndpointType(string value)
 	{
 		Instance.EndpointType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model provider for your deployment.
-	/// Note that some providers may support only certain task types.
-	/// Supported providers include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c>, <c>rerank</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>databricks</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>meta</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>microsoft_phi</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> - available for <c>completion</c> task type only
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>openai</c> - available for <c>text_embedding</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#provider']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor Provider(string value)
 	{
 		Instance.Provider = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure AI Studio.
-	/// By default, the <c>azureaistudio</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure AI Studio.
-	/// By default, the <c>azureaistudio</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure AI Studio.
-	/// By default, the <c>azureaistudio</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The target URL of your Azure AI Studio model deployment.
-	/// This can be found on the overview page for your deployment in the management section of your Azure AI Studio account.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureAiStudioServiceSettings#target']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor Target(string value)
 	{
 		Instance.Target = value;

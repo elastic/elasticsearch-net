@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexingPressureMemory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexingPressureMemoryConverter))]
 public sealed partial class IndexingPressureMemory
 {
@@ -36,16 +37,11 @@ public sealed partial class IndexingPressureMemory
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,
-	/// the node will reject new coordinating and primary operations. When replica operations consume 1.5x this limit,
-	/// the node will reject new replica operations. Defaults to 10% of the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='indices._types.IndexingPressureMemory#limit']/*"/>
 	public int? Limit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexingPressureMemory']/*"/>
 public readonly partial struct IndexingPressureMemoryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory Instance { get; init; }
@@ -65,13 +61,7 @@ public readonly partial struct IndexingPressureMemoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,
-	/// the node will reject new coordinating and primary operations. When replica operations consume 1.5x this limit,
-	/// the node will reject new replica operations. Defaults to 10% of the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='indices._types.IndexingPressureMemory#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemoryDescriptor Limit(int? value)
 	{
 		Instance.Limit = value;

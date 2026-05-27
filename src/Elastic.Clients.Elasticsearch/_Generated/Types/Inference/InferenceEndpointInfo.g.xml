@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.InferenceEndpointInfo"><summary><para>
+Represents an inference endpoint as returned by the GET API
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#chunking_settings"><summary><para>
+The chunking configuration object.
+Applies only to the <c>embedding</c>, <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#service"><summary><para>
+The service type
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#service_settings"><summary><para>
+Settings specific to the service
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#task_settings"><summary><para>
+Task settings specific to the service and task type
+</para></summary></member>
+  <member key="inference._types.InferenceEndpointInfo#task_type"><summary><para>
+The task type
+</para></summary></member>
+</doc>

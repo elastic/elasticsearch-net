@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.NodeReloadResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeReloadResultConverter))]
 public sealed partial class NodeReloadResult
 {
@@ -42,33 +43,17 @@ public sealed partial class NodeReloadResult
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A SHA-256 hash of the keystore file contents.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeReloadResult.g.xml" path="doc/member[@key='nodes._types.NodeReloadResult#keystore_digest']/*"/>
 	public string? KeystoreDigest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The last modification time of the keystore file.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeReloadResult.g.xml" path="doc/member[@key='nodes._types.NodeReloadResult#keystore_last_modified_time']/*"/>
 	public System.DateTimeOffset? KeystoreLastModifiedTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to the keystore file.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeReloadResult.g.xml" path="doc/member[@key='nodes._types.NodeReloadResult#keystore_path']/*"/>
 	public string? KeystorePath { get; set; }
 	public required string Name { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? ReloadException { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The names of the secure settings that were reloaded.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeReloadResult.g.xml" path="doc/member[@key='nodes._types.NodeReloadResult#secure_setting_names']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? SecureSettingNames { get; set; }
 }

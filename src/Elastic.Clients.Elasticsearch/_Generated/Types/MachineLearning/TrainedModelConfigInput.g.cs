@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelConfigInput']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelConfigInputConverter))]
 public sealed partial class TrainedModelConfigInput
 {
@@ -42,10 +43,6 @@ public sealed partial class TrainedModelConfigInput
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of input field names for the model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelConfigInput.g.xml" path="doc/member[@key='ml._types.TrainedModelConfigInput#field_names']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields FieldNames { get; set; }
 }

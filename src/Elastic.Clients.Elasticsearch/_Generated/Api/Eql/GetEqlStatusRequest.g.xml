@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.get_status.Request"><summary><para>
+Get the async EQL status.
+</para>
+<para>
+Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
+</para></summary></member>
+  <member key="eql.get_status.Request#id"><summary><para>
+Identifier for the search.
+</para></summary></member>
+</doc>

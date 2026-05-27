@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 public sealed partial class GetDataLifecycleStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get data stream lifecycle stats.
-/// </para>
-/// <para>
-/// Get statistics about the data streams that are managed by a data stream lifecycle.
-/// </para>
-/// </summary>
+/// <include file="GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleStatsRequestConverter))]
 public sealed partial class GetDataLifecycleStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetDataLifecycleStatsRequest : Elastic.Clients.Elast
 	internal override string OperationName => "indices.get_data_lifecycle_stats";
 }
 
-/// <summary>
-/// <para>
-/// Get data stream lifecycle stats.
-/// </para>
-/// <para>
-/// Get statistics about the data streams that are managed by a data stream lifecycle.
-/// </para>
-/// </summary>
+/// <include file="GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 public readonly partial struct GetDataLifecycleStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest Instance { get; init; }

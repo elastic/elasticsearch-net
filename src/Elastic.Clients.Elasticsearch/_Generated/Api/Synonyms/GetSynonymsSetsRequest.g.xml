@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.get_synonyms_sets.Request"><summary><para>
+Get all synonym sets.
+</para>
+<para>
+Get a summary of all defined synonym sets.
+</para></summary></member>
+  <member key="synonyms.get_synonyms_sets.Request#from"><summary><para>
+The starting offset for synonyms sets to retrieve.
+</para></summary></member>
+  <member key="synonyms.get_synonyms_sets.Request#size"><summary><para>
+The maximum number of synonyms sets to retrieve.
+</para></summary></member>
+</doc>

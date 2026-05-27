@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.MemMlStatsConverter))]
 public sealed partial class MemMlStats
 {
@@ -46,73 +47,33 @@ public sealed partial class MemMlStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory set aside for anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#anomaly_detectors']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? AnomalyDetectors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory, in bytes, set aside for anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#anomaly_detectors_in_bytes']/*"/>
 	public required int AnomalyDetectorsInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory set aside for data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#data_frame_analytics']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? DataFrameAnalytics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory, in bytes, set aside for data frame analytics jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#data_frame_analytics_in_bytes']/*"/>
 	public required int DataFrameAnalyticsInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of native memory (separate to the JVM heap) that may be used by machine learning native processes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#max']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of native memory (separate to the JVM heap), in bytes, that may be used by machine learning native processes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#max_in_bytes']/*"/>
 	public required int MaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory set aside for loading machine learning native code shared libraries.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#native_code_overhead']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? NativeCodeOverhead { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory, in bytes, set aside for loading machine learning native code shared libraries.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#native_code_overhead_in_bytes']/*"/>
 	public required int NativeCodeOverheadInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory set aside for trained models that have a PyTorch model_type.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#native_inference']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? NativeInference { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of native memory, in bytes, set aside for trained models that have a PyTorch model_type.
-	/// </para>
-	/// </summary>
+	/// <include file="MemMlStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemMlStats#native_inference_in_bytes']/*"/>
 	public required int NativeInferenceInBytes { get; set; }
 }

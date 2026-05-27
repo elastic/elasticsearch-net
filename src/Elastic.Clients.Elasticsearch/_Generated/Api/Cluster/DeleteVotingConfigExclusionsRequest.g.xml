@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.delete_voting_config_exclusions.Request"><summary><para>
+Clear cluster voting config exclusions.
+</para>
+<para>
+Remove master-eligible nodes from the voting configuration exclusion list.
+</para></summary></member>
+  <member key="cluster.delete_voting_config_exclusions.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="cluster.delete_voting_config_exclusions.Request#wait_for_removal"><summary><para>
+Specifies whether to wait for all excluded nodes to be removed from the
+cluster before clearing the voting configuration exclusions list.
+Defaults to true, meaning that all excluded nodes must be removed from
+the cluster before this API takes any action. If set to false then the
+voting configuration exclusions list is cleared even if some excluded
+nodes are still in the cluster.
+</para></summary></member>
+</doc>

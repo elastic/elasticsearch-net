@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_role.IndicesPrivilegesRead"><summary><para>
+Read-side variant of <c>IndicesPrivileges</c> returned by the get role API.
+Carries the <c>implicitly_granted</c> marker that is set on entries contributed by
+a registered <c>ImplicitPrivilegesProvider</c> when <c>include_implicit</c> is <c>true</c>.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#allow_restricted_indices"><summary><para>
+Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#field_security"><summary><para>
+The document fields that the owners of the role have read access to.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#implicitly_granted"><summary><para>
+Set to <c>true</c> on entries that were contributed by a registered <c>ImplicitPrivilegesProvider</c>
+rather than explicitly stored on the role. Only present when the get role API is called with
+<c>include_implicit=true</c>. The put role API rejects this field, so clients must not echo it back
+on a GET-then-PUT round-trip.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#names"><summary><para>
+A list of indices (or index name patterns) to which the permissions in this entry apply.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#privileges"><summary><para>
+The index level privileges that owners of the role have on the specified indices.
+</para></summary></member>
+  <member key="security.get_role.IndicesPrivilegesRead#query"><summary><para>
+A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
+</para></summary></member>
+</doc>

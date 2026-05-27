@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.ForceMergeAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ForceMergeActionConverter))]
 public sealed partial class ForceMergeAction
 {
@@ -46,6 +47,7 @@ public sealed partial class ForceMergeAction
 	public required int MaxNumSegments { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.ForceMergeAction']/*"/>
 public readonly partial struct ForceMergeActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Instance { get; init; }

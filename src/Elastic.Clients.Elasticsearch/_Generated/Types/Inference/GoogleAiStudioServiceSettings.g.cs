@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleAiStudioServiceSettingsConverter))]
 public sealed partial class GoogleAiStudioServiceSettings
 {
@@ -43,30 +44,17 @@ public sealed partial class GoogleAiStudioServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Google Gemini account.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google AI Studio.
-	/// By default, the <c>googleaistudio</c> service sets the number of requests allowed per minute to 360.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings']/*"/>
 public readonly partial struct GoogleAiStudioServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings Instance { get; init; }
@@ -86,59 +74,35 @@ public readonly partial struct GoogleAiStudioServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Google Gemini account.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google AI Studio.
-	/// By default, the <c>googleaistudio</c> service sets the number of requests allowed per minute to 360.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google AI Studio.
-	/// By default, the <c>googleaistudio</c> service sets the number of requests allowed per minute to 360.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google AI Studio.
-	/// By default, the <c>googleaistudio</c> service sets the number of requests allowed per minute to 360.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleAiStudioServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleAiStudioServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

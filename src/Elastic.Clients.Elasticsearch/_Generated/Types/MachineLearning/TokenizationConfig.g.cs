@@ -39,32 +39,9 @@ public sealed partial class TokenizationConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? Bert { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("bert"); set => SetVariant("bert", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates BERT Japanese tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? BertJa { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("bert_ja"); set => SetVariant("bert_ja", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates MPNET tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? Mpnet { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig>("mpnet"); set => SetVariant("mpnet", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates RoBERTa tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig? Roberta { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>("roberta"); set => SetVariant("roberta", value); }
 	public Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig? XlmRoberta { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig>("xlm_roberta"); set => SetVariant("xlm_roberta", value); }
 
@@ -109,132 +86,72 @@ public readonly partial struct TokenizationConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
 	{
 		Instance.Bert = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert()
 	{
 		Instance.Bert = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Bert(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
 		Instance.Bert = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT Japanese tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
 	{
 		Instance.BertJa = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT Japanese tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa()
 	{
 		Instance.BertJa = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates BERT Japanese tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor BertJa(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
 		Instance.BertJa = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates MPNET tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig? value)
 	{
 		Instance.Mpnet = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates MPNET tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet()
 	{
 		Instance.Mpnet = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates MPNET tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Mpnet(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor>? action)
 	{
 		Instance.Mpnet = Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates RoBERTa tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig? value)
 	{
 		Instance.Roberta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates RoBERTa tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta()
 	{
 		Instance.Roberta = Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates RoBERTa tokenization and its options
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor Roberta(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor>? action)
 	{
 		Instance.Roberta = Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor.Build(action);

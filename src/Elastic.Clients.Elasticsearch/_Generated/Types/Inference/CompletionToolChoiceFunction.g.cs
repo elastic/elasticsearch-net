@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The tool choice function.
-/// </para>
-/// </summary>
+/// <include file="CompletionToolChoiceFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolChoiceFunction']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionToolChoiceFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionToolChoiceFunctionConverter))]
 public sealed partial class CompletionToolChoiceFunction
 {
@@ -47,10 +44,6 @@ public sealed partial class CompletionToolChoiceFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the function to call.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionToolChoiceFunction.g.xml" path="doc/member[@key='inference._types.CompletionToolChoiceFunction#name']/*"/>
 	public required string Name { get; set; }
 }

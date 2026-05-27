@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.SplitProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#field"><summary><para>
+The field to split.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#preserve_trailing"><summary><para>
+Preserves empty trailing fields, if any.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#separator"><summary><para>
+A regex which matches the separator, for example, <c>,</c> or <c>\s+</c>.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.SplitProcessor#target_field"><summary><para>
+The field to assign the split value to.
+By default, the field is updated in-place.
+</para></summary></member>
+</doc>

@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 public sealed partial class DeleteAliasRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an alias.
-/// </para>
-/// <para>
-/// Removes a data stream or index from an alias.
-/// </para>
-/// </summary>
+/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DeleteAliasRequestConverter))]
 public sealed partial class DeleteAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>
 {
@@ -76,47 +62,21 @@ public sealed partial class DeleteAliasRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "indices.delete_alias";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to remove.
-	/// Supports wildcards (<c>*</c>). To remove all aliases, use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an alias.
-/// </para>
-/// <para>
-/// Removes a data stream or index from an alias.
-/// </para>
-/// </summary>
+/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 public readonly partial struct DeleteAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest Instance { get; init; }
@@ -141,48 +101,28 @@ public readonly partial struct DeleteAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to remove.
-	/// Supports wildcards (<c>*</c>). To remove all aliases, use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -245,14 +185,8 @@ public readonly partial struct DeleteAliasRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Delete an alias.
-/// </para>
-/// <para>
-/// Removes a data stream or index from an alias.
-/// </para>
-/// </summary>
+/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 public readonly partial struct DeleteAliasRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest Instance { get; init; }
@@ -277,48 +211,28 @@ public readonly partial struct DeleteAliasRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to remove.
-	/// Supports wildcards (<c>*</c>). To remove all aliases, use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

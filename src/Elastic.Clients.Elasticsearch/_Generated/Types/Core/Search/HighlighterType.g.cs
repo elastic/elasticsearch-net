@@ -34,25 +34,13 @@ public readonly partial struct HighlighterType : Elastic.Clients.Elasticsearch.S
 #endif
 	public readonly string Value { get; }
 
-	/// <summary>
-	/// <para>
-	/// The fvh highlighter uses the Lucene Fast Vector highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="HighlighterType.g.xml" path="doc/member[@key='_global.search._types.HighlighterType#fvh']/*"/>
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
 
-	/// <summary>
-	/// <para>
-	/// The <c>plain</c> highlighter uses the standard Lucene highlighter
-	/// </para>
-	/// </summary>
+	/// <include file="HighlighterType.g.xml" path="doc/member[@key='_global.search._types.HighlighterType#plain']/*"/>
 	public static HighlighterType Plain { get; } = new HighlighterType("plain");
 
-	/// <summary>
-	/// <para>
-	/// The unified highlighter uses the Lucene Unified Highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="HighlighterType.g.xml" path="doc/member[@key='_global.search._types.HighlighterType#unified']/*"/>
 	public static HighlighterType Unified { get; } = new HighlighterType("unified");
 
 	public override string ToString() => Value ?? string.Empty;

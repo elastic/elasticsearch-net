@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Http']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.HttpConverter))]
 public sealed partial class Http
 {
@@ -36,32 +37,15 @@ public sealed partial class Http
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Information on current and recently-closed HTTP client connections.
-	/// Clients that have been closed longer than the <c>http.client_stats.closed_channels.max_age</c> setting will not be represented here.
-	/// </para>
-	/// </summary>
+	/// <include file="Http.g.xml" path="doc/member[@key='nodes._types.Http#clients']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? Clients { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Current number of open HTTP connections for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Http.g.xml" path="doc/member[@key='nodes._types.Http#current_open']/*"/>
 	public int? CurrentOpen { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Detailed HTTP stats broken down by route
-	/// </para>
-	/// </summary>
+	/// <include file="Http.g.xml" path="doc/member[@key='nodes._types.Http#routes']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>? Routes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of HTTP connections opened for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Http.g.xml" path="doc/member[@key='nodes._types.Http#total_opened']/*"/>
 	public long? TotalOpened { get; set; }
 }

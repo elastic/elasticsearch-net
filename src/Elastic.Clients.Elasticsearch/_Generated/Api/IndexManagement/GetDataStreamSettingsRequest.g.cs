@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 public sealed partial class GetDataStreamSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream settings.
-/// </para>
-/// <para>
-/// Get setting information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataStreamSettingsRequestConverter))]
 public sealed partial class GetDataStreamSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class GetDataStreamSettingsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "indices.get_data_stream_settings";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream settings.
-/// </para>
-/// <para>
-/// Get setting information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 public readonly partial struct GetDataStreamSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest Instance { get; init; }
@@ -118,24 +92,14 @@ public readonly partial struct GetDataStreamSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -198,14 +162,8 @@ public readonly partial struct GetDataStreamSettingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get data stream settings.
-/// </para>
-/// <para>
-/// Get setting information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 public readonly partial struct GetDataStreamSettingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest Instance { get; init; }
@@ -229,24 +187,14 @@ public readonly partial struct GetDataStreamSettingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.bulk_delete_role.Request"><summary><para>
+Bulk delete roles.
+</para>
+<para>
+The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+The bulk delete roles API cannot delete roles that are defined in roles files.
+</para></summary></member>
+  <member key="security.bulk_delete_role.Request#names"><summary><para>
+An array of role names to delete
+</para></summary></member>
+  <member key="security.bulk_delete_role.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+</doc>

@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryTypeConverter))]
 public enum RecoveryType
 {
-	/// <summary>
-	/// <para>
-	/// An empty store. Indicates a new primary shard or the forced allocation of an empty primary shard using the cluster reroute API.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryType.g.xml" path="doc/member[@key='indices.recovery.RecoveryType#EMPTY_STORE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "EMPTY_STORE")]
 	EmptyStore,
-	/// <summary>
-	/// <para>
-	/// The store of an existing primary shard. Indicates recovery is related to node startup or the allocation of an existing primary shard.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryType.g.xml" path="doc/member[@key='indices.recovery.RecoveryType#EXISTING_STORE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "EXISTING_STORE")]
 	ExistingStore,
-	/// <summary>
-	/// <para>
-	/// Shards of another index on the same node. Indicates recovery is related to a clone, shrink, or split operation.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryType.g.xml" path="doc/member[@key='indices.recovery.RecoveryType#LOCAL_SHARDS']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "LOCAL_SHARDS")]
 	LocalShards,
-	/// <summary>
-	/// <para>
-	/// A primary shard on another node. Indicates recovery is related to shard replication.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryType.g.xml" path="doc/member[@key='indices.recovery.RecoveryType#PEER']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "PEER")]
 	Peer,
-	/// <summary>
-	/// <para>
-	/// A snapshot. Indicates recovery is related to a snapshot restore operation.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryType.g.xml" path="doc/member[@key='indices.recovery.RecoveryType#SNAPSHOT']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "SNAPSHOT")]
 	Snapshot
 }

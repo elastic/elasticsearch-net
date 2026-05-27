@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.AliasDefinition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.AliasDefinitionConverter))]
 public sealed partial class AliasDefinition
 {
@@ -36,52 +37,26 @@ public sealed partial class AliasDefinition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#index_routing']/*"/>
 	public string? IndexRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// All indices for the alias must have the same <c>is_hidden</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_hidden']/*"/>
 	public bool? IsHidden { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the index is the write index for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_write_index']/*"/>
 	public bool? IsWriteIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#search_routing']/*"/>
 	public string? SearchRouting { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.AliasDefinition']/*"/>
 public readonly partial struct AliasDefinitionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition Instance { get; init; }
@@ -101,80 +76,49 @@ public readonly partial struct AliasDefinitionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition(Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// All indices for the alias must have the same <c>is_hidden</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_hidden']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> IsHidden(bool? value = true)
 	{
 		Instance.IsHidden = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the index is the write index for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument> SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
@@ -195,6 +139,7 @@ public readonly partial struct AliasDefinitionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.AliasDefinition']/*"/>
 public readonly partial struct AliasDefinitionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition Instance { get; init; }
@@ -214,91 +159,56 @@ public readonly partial struct AliasDefinitionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition(Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// All indices for the alias must have the same <c>is_hidden</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_hidden']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor IsHidden(bool? value = true)
 	{
 		Instance.IsHidden = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the index is the write index for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="AliasDefinition.g.xml" path="doc/member[@key='indices._types.AliasDefinition#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;

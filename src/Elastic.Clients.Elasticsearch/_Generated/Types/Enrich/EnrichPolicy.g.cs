@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich._types.Policy']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.EnrichPolicyConverter))]
 public sealed partial class EnrichPolicy
 {
@@ -52,6 +53,7 @@ public sealed partial class EnrichPolicy
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich._types.Policy']/*"/>
 public readonly partial struct EnrichPolicyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Instance { get; init; }
@@ -134,6 +136,7 @@ public readonly partial struct EnrichPolicyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich._types.Policy']/*"/>
 public readonly partial struct EnrichPolicyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Instance { get; init; }

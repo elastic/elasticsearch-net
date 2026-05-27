@@ -23,83 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 public sealed partial class GetIndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index information.
-/// </para>
-/// <para>
-/// Get information about one or more indices. For data streams, the API returns information about the
-/// stream’s backing indices.
-/// </para>
-/// </summary>
+/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetIndexRequestConverter))]
 public sealed partial class GetIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>
 {
@@ -126,89 +80,36 @@ public sealed partial class GetIndexRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.get";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard expressions (*) are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? Features { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index information.
-/// </para>
-/// <para>
-/// Get information about one or more indices. For data streams, the API returns information about the
-/// stream’s backing indices.
-/// </para>
-/// </summary>
+/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 public readonly partial struct GetIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest Instance { get; init; }
@@ -233,133 +134,77 @@ public readonly partial struct GetIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard expressions (*) are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Features(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? value)
 	{
 		Instance.Features = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Features(params Elastic.Clients.Elasticsearch.IndexManagement.Feature[] values)
 	{
 		Instance.Features = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -422,15 +267,8 @@ public readonly partial struct GetIndexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get index information.
-/// </para>
-/// <para>
-/// Get information about one or more indices. For data streams, the API returns information about the
-/// stream’s backing indices.
-/// </para>
-/// </summary>
+/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 public readonly partial struct GetIndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest Instance { get; init; }
@@ -454,133 +292,77 @@ public readonly partial struct GetIndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard expressions (*) are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as open,hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Feature>? value)
 	{
 		Instance.Features = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return only information on specified index features
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#features']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Features(params Elastic.Clients.Elasticsearch.IndexManagement.Feature[] values)
 	{
 		Instance.Features = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

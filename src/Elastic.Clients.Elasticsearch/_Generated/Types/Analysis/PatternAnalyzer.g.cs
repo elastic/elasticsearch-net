@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.PatternAnalyzerConverter))]
 public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -36,42 +37,19 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression flags. Flags should be pipe-separated, eg "CASE_INSENSITIVE|COMMENTS".
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#flags']/*"/>
 	public string? Flags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should terms be lowercased or not.
-	/// Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#lowercase']/*"/>
 	public bool? Lowercase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A Java regular expression.
-	/// Defaults to <c>\W+</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#pattern']/*"/>
 	public string? Pattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#stopwords_path']/*"/>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "pattern";
@@ -80,6 +58,7 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer']/*"/>
 public readonly partial struct PatternAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer Instance { get; init; }
@@ -99,58 +78,35 @@ public readonly partial struct PatternAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression flags. Flags should be pipe-separated, eg "CASE_INSENSITIVE|COMMENTS".
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Flags(string? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should terms be lowercased or not.
-	/// Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#lowercase']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Lowercase(bool? value = true)
 	{
 		Instance.Lowercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A Java regular expression.
-	/// Defaults to <c>\W+</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Pattern(string? value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternAnalyzer.g.xml" path="doc/member[@key='_types.analysis.PatternAnalyzer#stopwords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

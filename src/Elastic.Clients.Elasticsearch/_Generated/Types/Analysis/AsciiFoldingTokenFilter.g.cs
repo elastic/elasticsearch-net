@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.AsciiFoldingTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.AsciiFoldingTokenFilterConverter))]
 public sealed partial class AsciiFoldingTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class AsciiFoldingTokenFilter : Elastic.Clients.Elasticsea
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsciiFoldingTokenFilter.g.xml" path="doc/member[@key='_types.analysis.AsciiFoldingTokenFilter#preserve_original']/*"/>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "asciifolding";
@@ -48,6 +45,7 @@ public sealed partial class AsciiFoldingTokenFilter : Elastic.Clients.Elasticsea
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.AsciiFoldingTokenFilter']/*"/>
 public readonly partial struct AsciiFoldingTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter Instance { get; init; }
@@ -67,11 +65,7 @@ public readonly partial struct AsciiFoldingTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsciiFoldingTokenFilter.g.xml" path="doc/member[@key='_types.analysis.AsciiFoldingTokenFilter#preserve_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

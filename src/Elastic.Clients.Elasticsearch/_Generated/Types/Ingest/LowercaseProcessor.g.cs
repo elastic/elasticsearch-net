@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.LowercaseProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.LowercaseProcessorConverter))]
 public sealed partial class LowercaseProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class LowercaseProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to make lowercase.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.LowercaseProcessor']/*"/>
 public readonly partial struct LowercaseProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor Instance { get; init; }
@@ -121,122 +88,77 @@ public readonly partial struct LowercaseProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make lowercase.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make lowercase.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -249,36 +171,21 @@ public readonly partial struct LowercaseProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -294,6 +201,7 @@ public readonly partial struct LowercaseProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.LowercaseProcessor']/*"/>
 public readonly partial struct LowercaseProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor Instance { get; init; }
@@ -313,122 +221,77 @@ public readonly partial struct LowercaseProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make lowercase.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to make lowercase.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -441,11 +304,7 @@ public readonly partial struct LowercaseProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -458,36 +317,21 @@ public readonly partial struct LowercaseProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseProcessor.g.xml" path="doc/member[@key='ingest._types.LowercaseProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

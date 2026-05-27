@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// MASTER_IS_STABLE
-/// </para>
-/// </summary>
+/// <include file="MasterIsStableIndicator.g.xml" path="doc/member[@key='_global.health_report.MasterIsStableIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.MasterIsStableIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.MasterIsStableIndicatorConverter))]
 public sealed partial class MasterIsStableIndicator
 {

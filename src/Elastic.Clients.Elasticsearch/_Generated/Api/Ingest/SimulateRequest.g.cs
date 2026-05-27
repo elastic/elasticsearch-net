@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
 public sealed partial class SimulateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#verbose']/*"/>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
-/// <summary>
-/// <para>
-/// Simulate a pipeline.
-/// </para>
-/// <para>
-/// Run an ingest pipeline against a set of provided documents.
-/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
-/// </para>
-/// </summary>
+/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.SimulateRequestConverter))]
 public sealed partial class SimulateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>
 {
@@ -81,47 +72,21 @@ public sealed partial class SimulateRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ingest.simulate";
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#verbose']/*"/>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Simulate a pipeline.
-/// </para>
-/// <para>
-/// Run an ingest pipeline against a set of provided documents.
-/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
-/// </para>
-/// </summary>
+/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
 public readonly partial struct SimulateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Instance { get; init; }
@@ -147,56 +112,35 @@ public readonly partial struct SimulateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#verbose']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Verbose(bool? value = true)
 	{
 		Instance.Verbose = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
@@ -209,52 +153,28 @@ public readonly partial struct SimulateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline()
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>? action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>>? action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>.Build(action);
@@ -317,15 +237,8 @@ public readonly partial struct SimulateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Simulate a pipeline.
-/// </para>
-/// <para>
-/// Run an ingest pipeline against a set of provided documents.
-/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
-/// </para>
-/// </summary>
+/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.simulate.Request']/*"/>
 public readonly partial struct SimulateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Instance { get; init; }
@@ -351,56 +264,35 @@ public readonly partial struct SimulateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#verbose']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Verbose(bool? value = true)
 	{
 		Instance.Verbose = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
@@ -413,39 +305,21 @@ public readonly partial struct SimulateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline()
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to test.
-	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateRequest.g.xml" path="doc/member[@key='ingest.simulate.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>? action)
 	{
 		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(action);

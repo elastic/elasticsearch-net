@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.Ai21ServiceSettingsConverter))]
 public sealed partial class Ai21ServiceSettings
 {
@@ -42,47 +43,17 @@ public sealed partial class Ai21ServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for accessing AI21 API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#api_key']/*"/>
 	public string? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the AI21 models documentation for the list of supported models and versions.
-	/// Service has been tested and confirmed to be working for <c>completion</c> and <c>chat_completion</c> tasks with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>jamba-mini</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jamba-large</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the AI21 API.
-	/// By default, the <c>ai21</c> service sets the number of requests allowed per minute to 200. Please refer to AI21 documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings']/*"/>
 public readonly partial struct Ai21ServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings Instance { get; init; }
@@ -102,76 +73,35 @@ public readonly partial struct Ai21ServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings(Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for accessing AI21 API.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor ApiKey(string? value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the AI21 models documentation for the list of supported models and versions.
-	/// Service has been tested and confirmed to be working for <c>completion</c> and <c>chat_completion</c> tasks with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>jamba-mini</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jamba-large</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the AI21 API.
-	/// By default, the <c>ai21</c> service sets the number of requests allowed per minute to 200. Please refer to AI21 documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the AI21 API.
-	/// By default, the <c>ai21</c> service sets the number of requests allowed per minute to 200. Please refer to AI21 documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the AI21 API.
-	/// By default, the <c>ai21</c> service sets the number of requests allowed per minute to 200. Please refer to AI21 documentation for more details.
-	/// </para>
-	/// </summary>
+	/// <include file="Ai21ServiceSettings.g.xml" path="doc/member[@key='inference._types.Ai21ServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

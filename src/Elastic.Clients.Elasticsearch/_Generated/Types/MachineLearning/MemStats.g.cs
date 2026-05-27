@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.MemStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.MemStatsConverter))]
 public sealed partial class MemStats
 {
@@ -44,40 +45,18 @@ public sealed partial class MemStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the amount of physical memory has been overridden using the es.total_memory_bytes system property
-	/// then this reports the overridden value. Otherwise it reports the same value as total.
-	/// </para>
-	/// </summary>
+	/// <include file="MemStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemStats#adjusted_total']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? AdjustedTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the amount of physical memory has been overridden using the <c>es.total_memory_bytes</c> system property
-	/// then this reports the overridden value in bytes. Otherwise it reports the same value as <c>total_in_bytes</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MemStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemStats#adjusted_total_in_bytes']/*"/>
 	public required int AdjustedTotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about machine learning use of native memory on the node.
-	/// </para>
-	/// </summary>
+	/// <include file="MemStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemStats#ml']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Ml { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory.
-	/// </para>
-	/// </summary>
+	/// <include file="MemStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemStats#total']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemStats.g.xml" path="doc/member[@key='ml.get_memory_stats.MemStats#total_in_bytes']/*"/>
 	public required int TotalInBytes { get; set; }
 }

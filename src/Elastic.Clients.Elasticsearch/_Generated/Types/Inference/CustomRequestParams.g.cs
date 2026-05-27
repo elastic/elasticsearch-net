@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomRequestParams']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CustomRequestParamsConverter))]
 public sealed partial class CustomRequestParams
 {
@@ -42,22 +43,11 @@ public sealed partial class CustomRequestParams
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The body structure of the request. It requires passing in the string-escaped result of the JSON format HTTP request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "request": "{\"input\":${input}}"
-	/// </code>
-	/// <para>
-	/// info
-	/// The content string needs to be a single line except when using the Kibana console.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomRequestParams.g.xml" path="doc/member[@key='inference._types.CustomRequestParams#content']/*"/>
 	public required string Content { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomRequestParams']/*"/>
 public readonly partial struct CustomRequestParamsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CustomRequestParams Instance { get; init; }
@@ -77,19 +67,7 @@ public readonly partial struct CustomRequestParamsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor(Elastic.Clients.Elasticsearch.Inference.CustomRequestParams instance) => new Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CustomRequestParams(Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The body structure of the request. It requires passing in the string-escaped result of the JSON format HTTP request body.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "request": "{\"input\":${input}}"
-	/// </code>
-	/// <para>
-	/// info
-	/// The content string needs to be a single line except when using the Kibana console.
-	/// </para>
-	/// </summary>
+	/// <include file="CustomRequestParams.g.xml" path="doc/member[@key='inference._types.CustomRequestParams#content']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomRequestParamsDescriptor Content(string value)
 	{
 		Instance.Content = value;

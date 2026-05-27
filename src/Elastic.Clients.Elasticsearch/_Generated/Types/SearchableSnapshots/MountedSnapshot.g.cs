@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.mount.MountedSnapshot']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.MountedSnapshotConverter))]
 public sealed partial class MountedSnapshot
 {

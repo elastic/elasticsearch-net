@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Ipinfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.IpinfoConverter))]
 public sealed partial class Ipinfo
 {
@@ -37,6 +38,7 @@ public sealed partial class Ipinfo
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Ipinfo']/*"/>
 public readonly partial struct IpinfoDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.Ipinfo Instance { get; init; }

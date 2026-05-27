@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityScripted']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityScriptedConverter))]
 public sealed partial class SettingsSimilarityScripted : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -49,6 +50,7 @@ public sealed partial class SettingsSimilarityScripted : Elastic.Clients.Elastic
 	public Elastic.Clients.Elasticsearch.Script? WeightScript { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityScripted']/*"/>
 public readonly partial struct SettingsSimilarityScriptedDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted Instance { get; init; }

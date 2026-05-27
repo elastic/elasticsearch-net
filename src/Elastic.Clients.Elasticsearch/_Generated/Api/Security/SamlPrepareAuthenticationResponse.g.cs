@@ -37,24 +37,12 @@ public sealed partial class SamlPrepareAuthenticationResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the SAML Request to be stored by the caller of the API.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationResponse.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Response#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the Elasticsearch realm that was used to construct the authentication request.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationResponse.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Response#realm']/*"/>
 	public required string Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL to redirect the user to.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationResponse.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Response#redirect']/*"/>
 	public required string Redirect { get; set; }
 }

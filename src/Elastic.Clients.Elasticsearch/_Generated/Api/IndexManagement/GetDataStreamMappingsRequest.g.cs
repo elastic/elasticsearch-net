@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
 public sealed partial class GetDataStreamMappingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream mappings.
-/// </para>
-/// <para>
-/// Get mapping information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataStreamMappingsRequestConverter))]
 public sealed partial class GetDataStreamMappingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class GetDataStreamMappingsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "indices.get_data_stream_mappings";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream mappings.
-/// </para>
-/// <para>
-/// Get mapping information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
 public readonly partial struct GetDataStreamMappingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest Instance { get; init; }
@@ -118,24 +92,14 @@ public readonly partial struct GetDataStreamMappingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -198,14 +162,8 @@ public readonly partial struct GetDataStreamMappingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get data stream mappings.
-/// </para>
-/// <para>
-/// Get mapping information for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request']/*"/>
 public readonly partial struct GetDataStreamMappingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest Instance { get; init; }
@@ -229,24 +187,14 @@ public readonly partial struct GetDataStreamMappingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamMappingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_mappings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

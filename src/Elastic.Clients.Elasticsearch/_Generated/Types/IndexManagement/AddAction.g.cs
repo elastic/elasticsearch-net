@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.AddAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.AddActionConverter))]
 public sealed partial class AddAction
 {
@@ -36,93 +37,41 @@ public sealed partial class AddAction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Alias for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#aliases']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
 	public string? IndexRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Data streams or indices for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_hidden']/*"/>
 	public bool? IsHidden { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_write_index']/*"/>
 	public bool? IsWriteIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias must exist to perform the action.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#must_exist']/*"/>
 	public bool? MustExist { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
 	public string? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
 	public string? SearchRouting { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.AddAction']/*"/>
 public readonly partial struct AddActionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AddAction Instance { get; init; }
@@ -142,153 +91,91 @@ public readonly partial struct AddActionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Alias for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
 		Instance.Alias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
 	{
 		Instance.Aliases = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data streams or indices for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_hidden']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IsHidden(bool? value = true)
 	{
 		Instance.IsHidden = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias must exist to perform the action.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#must_exist']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> MustExist(bool? value = true)
 	{
 		Instance.MustExist = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor<TDocument> SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
@@ -309,6 +196,7 @@ public readonly partial struct AddActionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.AddAction']/*"/>
 public readonly partial struct AddActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AddAction Instance { get; init; }
@@ -328,164 +216,98 @@ public readonly partial struct AddActionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AddAction instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AddAction(Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Alias for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? value)
 	{
 		Instance.Alias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the action.
-	/// Index alias names support date math.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexAlias[] values)
 	{
 		Instance.Aliases = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to limit documents the alias can access.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#index_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data streams or indices for the action.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias is hidden.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_hidden']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IsHidden(bool? value = true)
 	{
 		Instance.IsHidden = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, sets the write index or data stream for the alias.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#is_write_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor IsWriteIndex(bool? value = true)
 	{
 		Instance.IsWriteIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the alias must exist to perform the action.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#must_exist']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor MustExist(bool? value = true)
 	{
 		Instance.MustExist = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route indexing and search operations to a specific shard.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to route search operations to a specific shard.
-	/// If specified, this overwrites the <c>routing</c> value for search operations.
-	/// Data stream aliases don’t support this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AddAction.g.xml" path="doc/member[@key='indices.update_aliases.AddAction#search_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AddActionDescriptor SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Datafeed']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedConverter))]
 public sealed partial class Datafeed
 {
@@ -48,21 +49,13 @@ public sealed partial class Datafeed
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The security privileges that the datafeed uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the datafeed, this property is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="Datafeed.g.xml" path="doc/member[@key='ml._types.Datafeed#authorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization? Authorization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
 	public required string DatafeedId { get; set; }
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig DelayedDataCheckConfig { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="Datafeed.g.xml" path="doc/member[@key='ml._types.Datafeed#frequency']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Indexes { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }

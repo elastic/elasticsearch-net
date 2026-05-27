@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CjkBigramTokenFilterConverter))]
 public sealed partial class CjkBigramTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,18 +37,10 @@ public sealed partial class CjkBigramTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character scripts for which to disable bigrams.
-	/// </para>
-	/// </summary>
+	/// <include file="CjkBigramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter#ignored_scripts']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>? IgnoredScripts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, emit tokens in both bigram and unigram form. If <c>false</c>, a CJK character is output in unigram form when it has no adjacent characters. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CjkBigramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter#output_unigrams']/*"/>
 	public bool? OutputUnigrams { get; set; }
 
 	public string Type => "cjk_bigram";
@@ -55,6 +48,7 @@ public sealed partial class CjkBigramTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter']/*"/>
 public readonly partial struct CjkBigramTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter Instance { get; init; }
@@ -74,33 +68,21 @@ public readonly partial struct CjkBigramTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter(Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Array of character scripts for which to disable bigrams.
-	/// </para>
-	/// </summary>
+	/// <include file="CjkBigramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter#ignored_scripts']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor IgnoredScripts(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>? value)
 	{
 		Instance.IgnoredScripts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character scripts for which to disable bigrams.
-	/// </para>
-	/// </summary>
+	/// <include file="CjkBigramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter#ignored_scripts']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor IgnoredScripts(params Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript[] values)
 	{
 		Instance.IgnoredScripts = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, emit tokens in both bigram and unigram form. If <c>false</c>, a CJK character is output in unigram form when it has no adjacent characters. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CjkBigramTokenFilter.g.xml" path="doc/member[@key='_types.analysis.CjkBigramTokenFilter#output_unigrams']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor OutputUnigrams(bool? value = true)
 	{
 		Instance.OutputUnigrams = value;

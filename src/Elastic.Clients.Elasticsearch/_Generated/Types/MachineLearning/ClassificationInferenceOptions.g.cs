@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ClassificationInferenceOptionsConverter))]
 public sealed partial class ClassificationInferenceOptions
 {
@@ -36,42 +37,23 @@ public sealed partial class ClassificationInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#num_top_feature_importance_values']/*"/>
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#prediction_field_type']/*"/>
 	public string? PredictionFieldType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written. Defaults to top_classes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#top_classes_results_field']/*"/>
 	public string? TopClassesResultsField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions']/*"/>
 public readonly partial struct ClassificationInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions Instance { get; init; }
@@ -91,55 +73,35 @@ public readonly partial struct ClassificationInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the type of the predicted field to write. Acceptable values are: string, number, boolean. When boolean is provided 1.0 is transformed to true and 0.0 to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#prediction_field_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor PredictionFieldType(string? value)
 	{
 		Instance.PredictionFieldType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the field to which the top classes are written. Defaults to top_classes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ClassificationInferenceOptions#top_classes_results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor TopClassesResultsField(string? value)
 	{
 		Instance.TopClassesResultsField = value;

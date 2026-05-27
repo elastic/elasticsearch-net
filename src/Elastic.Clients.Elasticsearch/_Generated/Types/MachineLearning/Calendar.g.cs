@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendars.Calendar']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CalendarConverter))]
 public sealed partial class Calendar
 {
@@ -43,24 +44,12 @@ public sealed partial class Calendar
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="Calendar.g.xml" path="doc/member[@key='ml.get_calendars.Calendar#calendar_id']/*"/>
 	public required string CalendarId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="Calendar.g.xml" path="doc/member[@key='ml.get_calendars.Calendar#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of anomaly detection job identifiers.
-	/// </para>
-	/// </summary>
+	/// <include file="Calendar.g.xml" path="doc/member[@key='ml.get_calendars.Calendar#job_ids']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> JobIds { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.CharFilterTypes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CharFilterTypesConverter))]
 public sealed partial class CharFilterTypes
 {
@@ -50,67 +51,31 @@ public sealed partial class CharFilterTypes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about analyzer types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#analyzer_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> AnalyzerTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about built-in analyzers used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#built_in_analyzers']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInAnalyzers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about built-in character filters used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#built_in_char_filters']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInCharFilters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about built-in token filters used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#built_in_filters']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInFilters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about built-in tokenizers used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#built_in_tokenizers']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about character filter types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#char_filter_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about token filter types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#filter_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; set; }
 	public Elastic.Clients.Elasticsearch.Cluster.MultipleSynonymGraphFilter? MultipleSynonymGraphFilters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about synonyms types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#synonyms']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats> Synonyms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about tokenizer types used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="CharFilterTypes.g.xml" path="doc/member[@key='cluster.stats.CharFilterTypes#tokenizer_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> TokenizerTypes { get; set; }
 }

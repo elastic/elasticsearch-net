@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_trained_models_stats.Request"><summary><para>
+Get trained models usage info.
+</para>
+<para>
+You can get usage information for multiple trained
+models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
+</para></summary></member>
+  <member key="ml.get_trained_models_stats.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="bullet">
+<item>
+<para>
+Contains wildcard expressions and there are no models that match.
+</para>
+</item>
+<item>
+<para>
+Contains the _all string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+If true, it returns an empty array when there are no matches and the
+subset of results when there are partial matches.
+</para></summary></member>
+  <member key="ml.get_trained_models_stats.Request#from"><summary><para>
+Skips the specified number of models.
+</para></summary></member>
+  <member key="ml.get_trained_models_stats.Request#model_id"><summary><para>
+The unique identifier of the trained model or a model alias. It can be a
+comma-separated list or a wildcard expression.
+</para></summary></member>
+  <member key="ml.get_trained_models_stats.Request#size"><summary><para>
+Specifies the maximum number of models to obtain.
+</para></summary></member>
+</doc>

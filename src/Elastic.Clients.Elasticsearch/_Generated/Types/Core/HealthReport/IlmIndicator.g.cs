@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// ILM
-/// </para>
-/// </summary>
+/// <include file="IlmIndicator.g.xml" path="doc/member[@key='_global.health_report.IlmIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.IlmIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.IlmIndicatorConverter))]
 public sealed partial class IlmIndicator
 {

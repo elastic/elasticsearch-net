@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.ParentReindexTask']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.Json.ParentReindexTaskConverter))]
 public sealed partial class ParentReindexTask
 {

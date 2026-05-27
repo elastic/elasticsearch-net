@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.ScriptedMetricAggregation#combine_script"><summary><para>
+Runs once on each shard after document collection is complete.
+Allows the aggregation to consolidate the state returned from each shard.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#field"><summary><para>
+The field on which to run the aggregation.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#init_script"><summary><para>
+Runs prior to any collection of documents.
+Allows the aggregation to set up any initial state.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#map_script"><summary><para>
+Run once per document collected.
+If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#params"><summary><para>
+A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
+It is shared between the scripts.
+</para></summary></member>
+  <member key="_types.aggregations.ScriptedMetricAggregation#reduce_script"><summary><para>
+Runs once on the coordinating node after all shards have returned their results.
+The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
+</para></summary></member>
+</doc>

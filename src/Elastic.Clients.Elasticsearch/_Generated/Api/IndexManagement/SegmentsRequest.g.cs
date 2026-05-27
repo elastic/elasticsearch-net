@@ -23,48 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 public sealed partial class SegmentsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index segments.
-/// </para>
-/// <para>
-/// Get low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream's backing indices.
-/// </para>
-/// </summary>
+/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SegmentsRequestConverter))]
 public sealed partial class SegmentsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>
 {
@@ -90,55 +64,21 @@ public sealed partial class SegmentsRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.segments";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index segments.
-/// </para>
-/// <para>
-/// Get low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream's backing indices.
-/// </para>
-/// </summary>
+/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 public readonly partial struct SegmentsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest Instance { get; init; }
@@ -162,68 +102,35 @@ public readonly partial struct SegmentsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -291,15 +198,8 @@ public readonly partial struct SegmentsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get index segments.
-/// </para>
-/// <para>
-/// Get low-level information about the Lucene segments in index shards.
-/// For data streams, the API returns information about the stream's backing indices.
-/// </para>
-/// </summary>
+/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 public readonly partial struct SegmentsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest Instance { get; init; }
@@ -323,68 +223,35 @@ public readonly partial struct SegmentsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;

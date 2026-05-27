@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DateIndexNameProcessorConverter))]
 public sealed partial class DateIndexNameProcessor
 {
@@ -43,99 +44,44 @@ public sealed partial class DateIndexNameProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_formats']/*"/>
 	public System.Collections.Generic.ICollection<string>? DateFormats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How to round the date when formatting the date into the index name. Valid values are:
-	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_rounding']/*"/>
 	public required string DateRounding { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date or timestamp from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The format to be used when printing the parsed date into the index name.
-	/// A valid java time pattern is expected here.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_format']/*"/>
 	public string? IndexNameFormat { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A prefix of the index name to be prepended before the printed date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_prefix']/*"/>
 	public string? IndexNamePrefix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#locale']/*"/>
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#timezone']/*"/>
 	public string? Timezone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor']/*"/>
 public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor Instance { get; init; }
@@ -155,184 +101,112 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.DateFormats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(params string[] values)
 	{
 		Instance.DateFormats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to round the date when formatting the date into the index name. Valid values are:
-	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_rounding']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateRounding(string value)
 	{
 		Instance.DateRounding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date or timestamp from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date or timestamp from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format to be used when printing the parsed date into the index name.
-	/// A valid java time pattern is expected here.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> IndexNameFormat(string? value)
 	{
 		Instance.IndexNameFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A prefix of the index name to be prepended before the printed date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> IndexNamePrefix(string? value)
 	{
 		Instance.IndexNamePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -345,23 +219,14 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> Timezone(string? value)
 	{
 		Instance.Timezone = value;
@@ -377,6 +242,7 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor']/*"/>
 public readonly partial struct DateIndexNameProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor Instance { get; init; }
@@ -396,184 +262,112 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.DateFormats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(params string[] values)
 	{
 		Instance.DateFormats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to round the date when formatting the date into the index name. Valid values are:
-	/// <c>y</c> (year), <c>M</c> (month), <c>w</c> (week), <c>d</c> (day), <c>h</c> (hour), <c>m</c> (minute) and <c>s</c> (second).
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#date_rounding']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateRounding(string value)
 	{
 		Instance.DateRounding = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date or timestamp from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date or timestamp from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format to be used when printing the parsed date into the index name.
-	/// A valid java time pattern is expected here.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor IndexNameFormat(string? value)
 	{
 		Instance.IndexNameFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A prefix of the index name to be prepended before the printed date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#index_name_prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor IndexNamePrefix(string? value)
 	{
 		Instance.IndexNamePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -586,11 +380,7 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -603,23 +393,14 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.
-	/// </para>
-	/// </summary>
+	/// <include file="DateIndexNameProcessor.g.xml" path="doc/member[@key='ingest._types.DateIndexNameProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor Timezone(string? value)
 	{
 		Instance.Timezone = value;

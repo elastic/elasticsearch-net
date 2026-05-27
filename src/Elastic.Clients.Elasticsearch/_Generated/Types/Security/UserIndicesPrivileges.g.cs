@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.UserIndicesPrivileges']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UserIndicesPrivilegesConverter))]
 public sealed partial class UserIndicesPrivileges
 {
@@ -44,38 +45,18 @@ public sealed partial class UserIndicesPrivileges
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UserIndicesPrivileges.g.xml" path="doc/member[@key='security._types.UserIndicesPrivileges#allow_restricted_indices']/*"/>
 	public required bool AllowRestrictedIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document fields that the owners of the role have read access to.
-	/// </para>
-	/// </summary>
+	/// <include file="UserIndicesPrivileges.g.xml" path="doc/member[@key='security._types.UserIndicesPrivileges#field_security']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>? FieldSecurity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="UserIndicesPrivileges.g.xml" path="doc/member[@key='security._types.UserIndicesPrivileges#names']/*"/>
 	public required System.Collections.Generic.ICollection<string> Names { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index level privileges that owners of the role have on the specified indices.
-	/// </para>
-	/// </summary>
+	/// <include file="UserIndicesPrivileges.g.xml" path="doc/member[@key='security._types.UserIndicesPrivileges#privileges']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search queries that define the documents the user has access to. A document within the specified indices must match these queries for it to be accessible by the owners of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="UserIndicesPrivileges.g.xml" path="doc/member[@key='security._types.UserIndicesPrivileges#query']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<object>? Query { get; set; }
 }

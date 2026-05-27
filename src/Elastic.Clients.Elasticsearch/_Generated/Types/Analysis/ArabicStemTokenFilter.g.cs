@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ArabicStemTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ArabicStemTokenFilterConverter))]
 public sealed partial class ArabicStemTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class ArabicStemTokenFilter : Elastic.Clients.Elasticsearc
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ArabicStemTokenFilter']/*"/>
 public readonly partial struct ArabicStemTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter Instance { get; init; }

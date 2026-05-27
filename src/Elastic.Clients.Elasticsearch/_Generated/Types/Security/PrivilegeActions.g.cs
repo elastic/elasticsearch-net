@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_privileges.PrivilegeActions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PrivilegeActionsConverter))]
 public sealed partial class PrivilegeActions
 {
@@ -48,6 +49,7 @@ public sealed partial class PrivilegeActions
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_privileges.PrivilegeActions']/*"/>
 public readonly partial struct PrivilegeActionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.PrivilegeActions Instance { get; init; }

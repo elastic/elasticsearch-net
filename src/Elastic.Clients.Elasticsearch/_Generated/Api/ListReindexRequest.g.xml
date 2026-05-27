@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.list_reindex.Request"><summary><para>
+List active reindex tasks.
+</para>
+<para>
+Get information about all currently running reindex tasks.
+</para></summary></member>
+  <member key="_global.list_reindex.Request#detailed"><summary><para>
+If <c>true</c>, include detailed task status information in the response.
+</para></summary></member>
+</doc>

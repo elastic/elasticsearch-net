@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
 public sealed partial class DeleteSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a synonym rule.
-/// </para>
-/// <para>
-/// Delete a synonym rule from a synonym set.
-/// </para>
-/// </summary>
+/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.DeleteSynonymRuleRequestConverter))]
 public sealed partial class DeleteSynonymRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters>
 {
@@ -68,37 +59,18 @@ public sealed partial class DeleteSynonymRuleRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "synonyms.delete_synonym_rule";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set to update.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#set_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a synonym rule.
-/// </para>
-/// <para>
-/// Delete a synonym rule from a synonym set.
-/// </para>
-/// </summary>
+/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request']/*"/>
 public readonly partial struct DeleteSynonymRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest Instance { get; init; }
@@ -123,34 +95,21 @@ public readonly partial struct DeleteSynonymRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set to update.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#set_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SetId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
-	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;

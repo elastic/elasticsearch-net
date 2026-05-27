@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoConverter))]
 public sealed partial class NodeInfo
 {
@@ -58,39 +59,23 @@ public sealed partial class NodeInfo
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 	public required string BuildFlavor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Short hash of the last git commit in this release.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#build_hash']/*"/>
 	public required string BuildHash { get; set; }
 	public required string BuildType { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> ComponentVersions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node’s host name.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#host']/*"/>
 	public required string Host { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp? Http { get; set; }
 	public required long IndexVersion { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest? Ingest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node’s IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#ip']/*"/>
 	public required string Ip { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo? Jvm { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Modules { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node's name
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#name']/*"/>
 	public required string Name { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo? Os { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Plugins { get; set; }
@@ -100,33 +85,17 @@ public sealed partial class NodeInfo
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings? Settings { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>? ThreadPool { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by Indexing Buffer settings.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#total_indexing_buffer']/*"/>
 	public long? TotalIndexingBuffer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Same as total_indexing_buffer, but expressed in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#total_indexing_buffer_in_bytes']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalIndexingBufferInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoTransport? Transport { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Host and port where transport HTTP connections are accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#transport_address']/*"/>
 	public required string TransportAddress { get; set; }
 	public required long TransportVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Elasticsearch version running on this node.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeInfo.g.xml" path="doc/member[@key='nodes.info.NodeInfo#version']/*"/>
 	public required string Version { get; set; }
 }

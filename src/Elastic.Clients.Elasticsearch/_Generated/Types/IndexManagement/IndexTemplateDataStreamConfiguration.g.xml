@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexTemplateDataStreamConfiguration#allow_custom_routing"><summary><para>
+If true, the data stream supports custom routing.
+</para></summary></member>
+  <member key="indices._types.IndexTemplateDataStreamConfiguration#hidden"><summary><para>
+If true, the data stream is hidden.
+</para></summary></member>
+</doc>

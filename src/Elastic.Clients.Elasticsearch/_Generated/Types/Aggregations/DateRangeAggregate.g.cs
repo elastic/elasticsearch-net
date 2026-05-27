@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of a <c>date_range</c> aggregation. Same format as a for a <c>range</c> aggregation: <c>from</c> and <c>to</c>
-/// in <c>buckets</c> are milliseconds since the Epoch, represented as a floating point number.
-/// </para>
-/// </summary>
+/// <include file="DateRangeAggregate.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateRangeAggregateConverter))]
 public sealed partial class DateRangeAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

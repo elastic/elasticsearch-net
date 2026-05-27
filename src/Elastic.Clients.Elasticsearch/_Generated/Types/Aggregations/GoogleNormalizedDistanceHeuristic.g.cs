@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GoogleNormalizedDistanceHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GoogleNormalizedDistanceHeuristicConverter))]
 public sealed partial class GoogleNormalizedDistanceHeuristic
 {
@@ -36,14 +37,11 @@ public sealed partial class GoogleNormalizedDistanceHeuristic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleNormalizedDistanceHeuristic.g.xml" path="doc/member[@key='_types.aggregations.GoogleNormalizedDistanceHeuristic#background_is_superset']/*"/>
 	public bool? BackgroundIsSuperset { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GoogleNormalizedDistanceHeuristic']/*"/>
 public readonly partial struct GoogleNormalizedDistanceHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct GoogleNormalizedDistanceHeuristicDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleNormalizedDistanceHeuristic.g.xml" path="doc/member[@key='_types.aggregations.GoogleNormalizedDistanceHeuristic#background_is_superset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperset(bool? value = true)
 	{
 		Instance.BackgroundIsSuperset = value;

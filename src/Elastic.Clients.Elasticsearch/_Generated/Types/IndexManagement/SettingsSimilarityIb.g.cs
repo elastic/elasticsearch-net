@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityIb']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityIbConverter))]
 public sealed partial class SettingsSimilarityIb : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -51,6 +52,7 @@ public sealed partial class SettingsSimilarityIb : Elastic.Clients.Elasticsearch
 	public string Type => "IB";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityIb']/*"/>
 public readonly partial struct SettingsSimilarityIbDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb Instance { get; init; }

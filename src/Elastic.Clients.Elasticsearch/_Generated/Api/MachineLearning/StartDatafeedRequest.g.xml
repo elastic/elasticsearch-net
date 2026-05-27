@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.start_datafeed.Request"><summary><para>
+Start datafeeds.
+</para>
+<para>
+A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
+multiple times throughout its lifecycle.
+</para>
+<para>
+Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.
+</para>
+<para>
+If you restart a stopped datafeed, it continues processing input data from the next millisecond after it was stopped.
+If new data was indexed for that exact millisecond between stopping and starting, it will be ignored.
+</para>
+<para>
+When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
+update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
+authorization headers when you created or updated the datafeed, those credentials are used instead.
+</para></summary></member>
+  <member key="ml.start_datafeed.Request#datafeed_id"><summary><para>
+A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+characters.
+</para></summary></member>
+  <member key="ml.start_datafeed.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.start_datafeed.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+  <member key="ml.start_datafeed.Request#timeout"><summary><para>
+Refer to the description for the <c>timeout</c> query parameter.
+</para></summary></member>
+</doc>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.get.Request"><summary><para>
+Get snapshot information.
+</para>
+<para>
+NOTE: The <c>after</c> parameter and <c>next</c> field enable you to iterate through snapshots with some consistency guarantees regarding concurrent creation or deletion of snapshots.
+It is guaranteed that any snapshot that exists at the beginning of the iteration and is not concurrently deleted will be seen during the iteration.
+Snapshots concurrently created may be seen during an iteration.
+</para></summary></member>
+  <member key="snapshot.get.Request#after"><summary><para>
+An offset identifier to start pagination from as returned by the next field in the response body.
+</para></summary></member>
+  <member key="snapshot.get.Request#from_sort_value"><summary><para>
+The value of the current sort column at which to start retrieval.
+It can be a string <c>snapshot-</c> or a repository name when sorting by snapshot or repository name.
+It can be a millisecond time value or a number when sorting by <c>index-</c> or shard count.
+</para></summary></member>
+  <member key="snapshot.get.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error for any snapshots that are unavailable.
+</para></summary></member>
+  <member key="snapshot.get.Request#include_repository"><summary><para>
+If <c>true</c>, the response includes the repository name in each snapshot.
+</para></summary></member>
+  <member key="snapshot.get.Request#index_details"><summary><para>
+If <c>true</c>, the response includes additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index.
+The default is <c>false</c>, meaning that this information is omitted.
+</para></summary></member>
+  <member key="snapshot.get.Request#index_names"><summary><para>
+If <c>true</c>, the response includes the name of each index in each snapshot.
+</para></summary></member>
+  <member key="snapshot.get.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="snapshot.get.Request#offset"><summary><para>
+Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.
+</para></summary></member>
+  <member key="snapshot.get.Request#order"><summary><para>
+The sort order.
+Valid values are <c>asc</c> for ascending and <c>desc</c> for descending order.
+The default behavior is ascending order.
+</para></summary></member>
+  <member key="snapshot.get.Request#repository"><summary><para>
+A comma-separated list of snapshot repository names used to limit the request.
+Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+  <member key="snapshot.get.Request#size"><summary><para>
+The maximum number of snapshots to return.
+The default is -1, which means to return all that match the request without limit.
+</para></summary></member>
+  <member key="snapshot.get.Request#slm_policy_filter"><summary><para>
+Filter snapshots by a comma-separated list of snapshot lifecycle management (SLM) policy names that snapshots belong to.
+</para>
+<para>
+You can use wildcards (<c>*</c>) and combinations of wildcards followed by exclude patterns starting with <c>-</c>.
+For example, the pattern <c>*,-policy-a-\*</c> will return all snapshots except for those that were created by an SLM policy with a name starting with <c>policy-a-</c>.
+Note that the wildcard pattern <c>*</c> matches all snapshots created by an SLM policy but not those snapshots that were not created by an SLM policy.
+To include snapshots that were not created by an SLM policy, you can use the special pattern <c>_none</c> that will match all snapshots without an SLM policy.
+</para></summary></member>
+  <member key="snapshot.get.Request#snapshot"><summary><para>
+A comma-separated list of snapshot names to retrieve
+Wildcards (<c>*</c>) are supported.
+</para>
+<list type="bullet">
+<item>
+<para>
+To get information about all snapshots in a registered repository, use a wildcard (<c>*</c>) or <c>_all</c>.
+</para>
+</item>
+<item>
+<para>
+To get information about any snapshots that are currently running, use <c>_current</c>.
+</para>
+</item>
+</list></summary></member>
+  <member key="snapshot.get.Request#sort"><summary><para>
+The sort order for the result.
+The default behavior is sorting by snapshot start time stamp.
+</para></summary></member>
+  <member key="snapshot.get.Request#state"><summary><para>
+Only return snapshots with a state found in the given comma-separated list of snapshot states.
+The default is all snapshot states.
+</para></summary></member>
+  <member key="snapshot.get.Request#verbose"><summary><para>
+If <c>true</c>, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+</para>
+<para>
+NOTE: The parameters <c>size</c>, <c>order</c>, <c>after</c>, <c>from_sort_value</c>, <c>offset</c>, <c>slm_policy_filter</c>, and <c>sort</c> are not supported when you set <c>verbose=false</c> and the sort order for requests with <c>verbose=false</c> is undefined.
+</para></summary></member>
+</doc>

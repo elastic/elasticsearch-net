@@ -39,587 +39,86 @@ public sealed partial class Aggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation? AdjacencyMatrix { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation>("adjacency_matrix"); set => SetVariant("adjacency_matrix", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation? AutoDateHistogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation>("auto_date_histogram"); set => SetVariant("auto_date_histogram", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation? Avg { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation>("avg"); set => SetVariant("avg", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation? AvgBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation>("avg_bucket"); set => SetVariant("avg_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation? Boxplot { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation>("boxplot"); set => SetVariant("boxplot", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a correlation function on the configured sibling multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation? BucketCorrelation { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation>("bucket_correlation"); set => SetVariant("bucket_correlation", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation? BucketCountKsTest { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation>("bucket_count_ks_test"); set => SetVariant("bucket_count_ks_test", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation? BucketScript { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation>("bucket_script"); set => SetVariant("bucket_script", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation? BucketSelector { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation>("bucket_selector"); set => SetVariant("bucket_selector", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation? BucketSort { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation>("bucket_sort"); set => SetVariant("bucket_sort", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? Cardinality { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>("cardinality"); set => SetVariant("cardinality", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? CartesianBounds { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation>("cartesian_bounds"); set => SetVariant("cartesian_bounds", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? CartesianCentroid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation>("cartesian_centroid"); set => SetVariant("cartesian_centroid", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation? CategorizeText { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation>("categorize_text"); set => SetVariant("categorize_text", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? ChangePoint { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation>("change_point"); set => SetVariant("change_point", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation? Children { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation>("children"); set => SetVariant("children", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? Composite { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>("composite"); set => SetVariant("composite", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation? CumulativeCardinality { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation>("cumulative_cardinality"); set => SetVariant("cumulative_cardinality", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation? CumulativeSum { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation>("cumulative_sum"); set => SetVariant("cumulative_sum", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>("date_histogram"); set => SetVariant("date_histogram", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? DateRange { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>("date_range"); set => SetVariant("date_range", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation? Derivative { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation>("derivative"); set => SetVariant("derivative", value); }
-
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation? DiversifiedSampler { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation>("diversified_sampler"); set => SetVariant("diversified_sampler", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation? ExtendedStats { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation>("extended_stats"); set => SetVariant("extended_stats", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation? ExtendedStatsBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation>("extended_stats_bucket"); set => SetVariant("extended_stats_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.Query>("filter"); set => SetVariant("filter", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation? Filters { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation>("filters"); set => SetVariant("filters", value); }
-
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation? FrequentItemSets { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation>(""); set => SetVariant("", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation? GeoBounds { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation>("geo_bounds"); set => SetVariant("geo_bounds", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation? GeoCentroid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation>("geo_centroid"); set => SetVariant("geo_centroid", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation? GeoDistance { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation>("geo_distance"); set => SetVariant("geo_distance", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation? GeohashGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation>("geohash_grid"); set => SetVariant("geohash_grid", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation? GeohexGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation>("geohex_grid"); set => SetVariant("geohex_grid", value); }
-
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? GeoLine { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation>("geo_line"); set => SetVariant("geo_line", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? GeotileGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>("geotile_grid"); set => SetVariant("geotile_grid", value); }
-
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation? Global { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation>("global"); set => SetVariant("global", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>("histogram"); set => SetVariant("histogram", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation? Inference { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation>("inference"); set => SetVariant("inference", value); }
-
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation? IpPrefix { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation>("ip_prefix"); set => SetVariant("ip_prefix", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation? IpRange { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation>("ip_range"); set => SetVariant("ip_range", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? Line { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation>("line"); set => SetVariant("line", value); }
-
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation? MatrixStats { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation>("matrix_stats"); set => SetVariant("matrix_stats", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation? Max { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation>("max"); set => SetVariant("max", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation? MaxBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation>("max_bucket"); set => SetVariant("max_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation? MedianAbsoluteDeviation { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation>("median_absolute_deviation"); set => SetVariant("median_absolute_deviation", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinAggregation? Min { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation>("min"); set => SetVariant("min", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation? MinBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation>("min_bucket"); set => SetVariant("min_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? Missing { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>("missing"); set => SetVariant("missing", value); }
-
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation? MovingFn { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation>("moving_fn"); set => SetVariant("moving_fn", value); }
-
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation? MovingPercentiles { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation>("moving_percentiles"); set => SetVariant("moving_percentiles", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation? MultiTerms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation>("multi_terms"); set => SetVariant("multi_terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation? Nested { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation>("nested"); set => SetVariant("nested", value); }
-
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation? Normalize { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation>("normalize"); set => SetVariant("normalize", value); }
-
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation? Parent { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation>("parent"); set => SetVariant("parent", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation? PercentileRanks { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation>("percentile_ranks"); set => SetVariant("percentile_ranks", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation? Percentiles { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation>("percentiles"); set => SetVariant("percentiles", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation? PercentilesBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation>("percentiles_bucket"); set => SetVariant("percentiles_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that randomly includes documents in the aggregated results.
-	/// Sampling provides significant speed improvement at the cost of accuracy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation? RandomSampler { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation>("random_sampler"); set => SetVariant("random_sampler", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? Range { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>("range"); set => SetVariant("range", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation? RareTerms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation>("rare_terms"); set => SetVariant("rare_terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregation? Rate { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation>("rate"); set => SetVariant("rate", value); }
-
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation? ReverseNested { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation>("reverse_nested"); set => SetVariant("reverse_nested", value); }
-
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation? Sampler { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation>("sampler"); set => SetVariant("sampler", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation? ScriptedMetric { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation>("scripted_metric"); set => SetVariant("scripted_metric", value); }
-
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation? SerialDiff { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation>("serial_diff"); set => SetVariant("serial_diff", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation? SignificantTerms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation>("significant_terms"); set => SetVariant("significant_terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation? SignificantText { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation>("significant_text"); set => SetVariant("significant_text", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation? Stats { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation>("stats"); set => SetVariant("stats", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation? StatsBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation>("stats_bucket"); set => SetVariant("stats_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation? StringStats { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation>("string_stats"); set => SetVariant("string_stats", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumAggregation? Sum { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation>("sum"); set => SetVariant("sum", value); }
-
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation? SumBucket { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation>("sum_bucket"); set => SetVariant("sum_bucket", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>("terms"); set => SetVariant("terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation? TimeSeries { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation>("time_series"); set => SetVariant("time_series", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation? TopHits { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation>("top_hits"); set => SetVariant("top_hits", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation? TopMetrics { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation>("top_metrics"); set => SetVariant("top_metrics", value); }
-
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation? TTest { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation>("t_test"); set => SetVariant("t_test", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? ValueCount { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>("value_count"); set => SetVariant("value_count", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation? VariableWidthHistogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation>("variable_width_histogram"); set => SetVariant("variable_width_histogram", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation? WeightedAvg { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation>("weighted_avg"); set => SetVariant("weighted_avg", value); }
-
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
@@ -740,1279 +239,672 @@ public readonly partial struct AggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.Aggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation? value)
 	{
 		Instance.AdjacencyMatrix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AdjacencyMatrix()
 	{
 		Instance.AdjacencyMatrix = Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AdjacencyMatrix(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.AdjacencyMatrix = Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation? value)
 	{
 		Instance.AutoDateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AutoDateHistogram()
 	{
 		Instance.AutoDateHistogram = Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AutoDateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.AutoDateHistogram = Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation? value)
 	{
 		Instance.Avg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Avg()
 	{
 		Instance.Avg = Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Avg(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Avg = Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation? value)
 	{
 		Instance.AvgBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AvgBucket()
 	{
 		Instance.AvgBucket = Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AvgBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor>? action)
 	{
 		Instance.AvgBucket = Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation? value)
 	{
 		Instance.Boxplot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Boxplot()
 	{
 		Instance.Boxplot = Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Boxplot(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Boxplot = Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a correlation function on the configured sibling multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation? value)
 	{
 		Instance.BucketCorrelation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a correlation function on the configured sibling multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketCorrelation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor> action)
 	{
 		Instance.BucketCorrelation = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation? value)
 	{
 		Instance.BucketCountKsTest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketCountKsTest()
 	{
 		Instance.BucketCountKsTest = Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketCountKsTest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor>? action)
 	{
 		Instance.BucketCountKsTest = Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation? value)
 	{
 		Instance.BucketScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketScript()
 	{
 		Instance.BucketScript = Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketScript(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor>? action)
 	{
 		Instance.BucketScript = Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation? value)
 	{
 		Instance.BucketSelector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSelector()
 	{
 		Instance.BucketSelector = Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSelector(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor>? action)
 	{
 		Instance.BucketSelector = Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation? value)
 	{
 		Instance.BucketSort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSort()
 	{
 		Instance.BucketSort = Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> BucketSort(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.BucketSort = Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
 	{
 		Instance.Cardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Cardinality()
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? value)
 	{
 		Instance.CartesianBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds()
 	{
 		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? value)
 	{
 		Instance.CartesianCentroid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid()
 	{
 		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation? value)
 	{
 		Instance.CategorizeText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CategorizeText(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>> action)
 	{
 		Instance.CategorizeText = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint(Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? value)
 	{
 		Instance.ChangePoint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint()
 	{
 		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor>? action)
 	{
 		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation? value)
 	{
 		Instance.Children = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Children()
 	{
 		Instance.Children = Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Children(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor>? action)
 	{
 		Instance.Children = Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
 	{
 		Instance.Composite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Composite()
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation? value)
 	{
 		Instance.CumulativeCardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeCardinality()
 	{
 		Instance.CumulativeCardinality = Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeCardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor>? action)
 	{
 		Instance.CumulativeCardinality = Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation? value)
 	{
 		Instance.CumulativeSum = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeSum()
 	{
 		Instance.CumulativeSum = Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CumulativeSum(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor>? action)
 	{
 		Instance.CumulativeSum = Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? value)
 	{
 		Instance.DateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateHistogram()
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
 	{
 		Instance.DateRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateRange()
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation? value)
 	{
 		Instance.Derivative = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Derivative()
 	{
 		Instance.Derivative = Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Derivative(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor>? action)
 	{
 		Instance.Derivative = Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation? value)
 	{
 		Instance.DiversifiedSampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DiversifiedSampler()
 	{
 		Instance.DiversifiedSampler = Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> DiversifiedSampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.DiversifiedSampler = Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation? value)
 	{
 		Instance.ExtendedStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStats()
 	{
 		Instance.ExtendedStats = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.ExtendedStats = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation? value)
 	{
 		Instance.ExtendedStatsBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStatsBucket()
 	{
 		Instance.ExtendedStatsBucket = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ExtendedStatsBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor>? action)
 	{
 		Instance.ExtendedStatsBucket = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation? value)
 	{
 		Instance.FrequentItemSets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> FrequentItemSets(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>> action)
 	{
 		Instance.FrequentItemSets = Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation? value)
 	{
 		Instance.GeoBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoBounds()
 	{
 		Instance.GeoBounds = Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.GeoBounds = Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation? value)
 	{
 		Instance.GeoCentroid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoCentroid()
 	{
 		Instance.GeoCentroid = Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.GeoCentroid = Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation? value)
 	{
 		Instance.GeoDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoDistance()
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoDistance(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation? value)
 	{
 		Instance.GeohashGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeohashGrid()
 	{
 		Instance.GeohashGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeohashGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.GeohashGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation? value)
 	{
 		Instance.GeohexGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeohexGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>> action)
 	{
 		Instance.GeohexGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? value)
 	{
 		Instance.GeoLine = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeoLine(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>> action)
 	{
 		Instance.GeoLine = Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? value)
 	{
 		Instance.GeotileGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeotileGrid()
 	{
 		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Global()
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Global(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? value)
 	{
 		Instance.Histogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Histogram()
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation? value)
 	{
 		Instance.Inference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Inference(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument>> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation? value)
 	{
 		Instance.IpPrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> IpPrefix(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>> action)
 	{
 		Instance.IpPrefix = Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation? value)
 	{
 		Instance.IpRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> IpRange()
 	{
 		Instance.IpRange = Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> IpRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.IpRange = Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>.Build(action);
@@ -2031,1315 +923,708 @@ public readonly partial struct AggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation? value)
 	{
 		Instance.MatrixStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MatrixStats()
 	{
 		Instance.MatrixStats = Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MatrixStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.MatrixStats = Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation? value)
 	{
 		Instance.Max = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Max()
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Max(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation? value)
 	{
 		Instance.MaxBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MaxBucket()
 	{
 		Instance.MaxBucket = Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MaxBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor>? action)
 	{
 		Instance.MaxBucket = Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation? value)
 	{
 		Instance.MedianAbsoluteDeviation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MedianAbsoluteDeviation()
 	{
 		Instance.MedianAbsoluteDeviation = Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MedianAbsoluteDeviation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.MedianAbsoluteDeviation = Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation? value)
 	{
 		Instance.Min = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Min()
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Min(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation? value)
 	{
 		Instance.MinBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MinBucket()
 	{
 		Instance.MinBucket = Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MinBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor>? action)
 	{
 		Instance.MinBucket = Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Missing()
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation? value)
 	{
 		Instance.MovingFn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingFn()
 	{
 		Instance.MovingFn = Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingFn(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor>? action)
 	{
 		Instance.MovingFn = Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation? value)
 	{
 		Instance.MovingPercentiles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingPercentiles()
 	{
 		Instance.MovingPercentiles = Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MovingPercentiles(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor>? action)
 	{
 		Instance.MovingPercentiles = Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation? value)
 	{
 		Instance.MultiTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> MultiTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument>> action)
 	{
 		Instance.MultiTerms = Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation? value)
 	{
 		Instance.Nested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Nested()
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Nested(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation? value)
 	{
 		Instance.Normalize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Normalize()
 	{
 		Instance.Normalize = Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Normalize(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor>? action)
 	{
 		Instance.Normalize = Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation? value)
 	{
 		Instance.Parent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Parent()
 	{
 		Instance.Parent = Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Parent(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor>? action)
 	{
 		Instance.Parent = Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation? value)
 	{
 		Instance.PercentileRanks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentileRanks()
 	{
 		Instance.PercentileRanks = Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentileRanks(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.PercentileRanks = Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation? value)
 	{
 		Instance.Percentiles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Percentiles()
 	{
 		Instance.Percentiles = Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Percentiles(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Percentiles = Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation? value)
 	{
 		Instance.PercentilesBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentilesBucket()
 	{
 		Instance.PercentilesBucket = Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> PercentilesBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor>? action)
 	{
 		Instance.PercentilesBucket = Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that randomly includes documents in the aggregated results.
-	/// Sampling provides significant speed improvement at the cost of accuracy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation? value)
 	{
 		Instance.RandomSampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that randomly includes documents in the aggregated results.
-	/// Sampling provides significant speed improvement at the cost of accuracy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> RandomSampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor> action)
 	{
 		Instance.RandomSampler = Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Range()
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation? value)
 	{
 		Instance.RareTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> RareTerms()
 	{
 		Instance.RareTerms = Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> RareTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.RareTerms = Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation? value)
 	{
 		Instance.Rate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Rate()
 	{
 		Instance.Rate = Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Rate(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Rate = Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation? value)
 	{
 		Instance.ReverseNested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ReverseNested()
 	{
 		Instance.ReverseNested = Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ReverseNested(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.ReverseNested = Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation? value)
 	{
 		Instance.Sampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sampler()
 	{
 		Instance.Sampler = Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor>? action)
 	{
 		Instance.Sampler = Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation? value)
 	{
 		Instance.ScriptedMetric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ScriptedMetric()
 	{
 		Instance.ScriptedMetric = Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ScriptedMetric(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.ScriptedMetric = Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation? value)
 	{
 		Instance.SerialDiff = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SerialDiff()
 	{
 		Instance.SerialDiff = Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SerialDiff(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor>? action)
 	{
 		Instance.SerialDiff = Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation? value)
 	{
 		Instance.SignificantTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantTerms()
 	{
 		Instance.SignificantTerms = Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.SignificantTerms = Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation? value)
 	{
 		Instance.SignificantText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantText()
 	{
 		Instance.SignificantText = Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SignificantText(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.SignificantText = Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Stats()
 	{
 		Instance.Stats = Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Stats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Stats = Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation? value)
 	{
 		Instance.StatsBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StatsBucket()
 	{
 		Instance.StatsBucket = Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StatsBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor>? action)
 	{
 		Instance.StatsBucket = Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation? value)
 	{
 		Instance.StringStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StringStats()
 	{
 		Instance.StringStats = Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> StringStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.StringStats = Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation? value)
 	{
 		Instance.Sum = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sum()
 	{
 		Instance.Sum = Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Sum(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Sum = Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation? value)
 	{
 		Instance.SumBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SumBucket()
 	{
 		Instance.SumBucket = Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> SumBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor>? action)
 	{
 		Instance.SumBucket = Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Terms()
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation? value)
 	{
 		Instance.TimeSeries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TimeSeries()
 	{
 		Instance.TimeSeries = Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TimeSeries(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor>? action)
 	{
 		Instance.TimeSeries = Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation? value)
 	{
 		Instance.TopHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopHits()
 	{
 		Instance.TopHits = Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopHits(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.TopHits = Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation? value)
 	{
 		Instance.TopMetrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopMetrics()
 	{
 		Instance.TopMetrics = Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TopMetrics(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.TopMetrics = Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation? value)
 	{
 		Instance.TTest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TTest()
 	{
 		Instance.TTest = Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> TTest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.TTest = Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
 	{
 		Instance.ValueCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ValueCount()
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation? value)
 	{
 		Instance.VariableWidthHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> VariableWidthHistogram()
 	{
 		Instance.VariableWidthHistogram = Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> VariableWidthHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.VariableWidthHistogram = Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation? value)
 	{
 		Instance.WeightedAvg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> WeightedAvg()
 	{
 		Instance.WeightedAvg = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> WeightedAvg(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.WeightedAvg = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -3413,1597 +1698,840 @@ public readonly partial struct AggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.Aggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation? value)
 	{
 		Instance.AdjacencyMatrix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AdjacencyMatrix()
 	{
 		Instance.AdjacencyMatrix = Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AdjacencyMatrix(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor>? action)
 	{
 		Instance.AdjacencyMatrix = Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation returning a form of adjacency matrix.
-	/// The request provides a collection of named filter expressions, similar to the <c>filters</c> aggregation.
-	/// Each bucket in the response represents a non-empty cell in the matrix of intersecting filters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AdjacencyMatrix<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<T>>? action)
 	{
 		Instance.AdjacencyMatrix = Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation? value)
 	{
 		Instance.AutoDateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AutoDateHistogram()
 	{
 		Instance.AutoDateHistogram = Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AutoDateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor>? action)
 	{
 		Instance.AutoDateHistogram = Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the date histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AutoDateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<T>>? action)
 	{
 		Instance.AutoDateHistogram = Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation? value)
 	{
 		Instance.Avg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Avg()
 	{
 		Instance.Avg = Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Avg(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor>? action)
 	{
 		Instance.Avg = Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Avg<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<T>>? action)
 	{
 		Instance.Avg = Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation? value)
 	{
 		Instance.AvgBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AvgBucket()
 	{
 		Instance.AvgBucket = Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the mean value of a specified metric in a sibling aggregation.
-	/// The specified metric must be numeric and the sibling aggregation must be a multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AvgBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor>? action)
 	{
 		Instance.AvgBucket = Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation? value)
 	{
 		Instance.Boxplot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Boxplot()
 	{
 		Instance.Boxplot = Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Boxplot(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor>? action)
 	{
 		Instance.Boxplot = Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that computes a box plot of numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Boxplot<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<T>>? action)
 	{
 		Instance.Boxplot = Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a correlation function on the configured sibling multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation? value)
 	{
 		Instance.BucketCorrelation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a correlation function on the configured sibling multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketCorrelation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor> action)
 	{
 		Instance.BucketCorrelation = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation? value)
 	{
 		Instance.BucketCountKsTest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketCountKsTest()
 	{
 		Instance.BucketCountKsTest = Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which runs a two sample Kolmogorov–Smirnov test ("K-S test") against a provided distribution and the distribution implied by the documents counts in the configured sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketCountKsTest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor>? action)
 	{
 		Instance.BucketCountKsTest = Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation? value)
 	{
 		Instance.BucketScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketScript()
 	{
 		Instance.BucketScript = Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script which can perform per bucket computations on metrics in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketScript(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor>? action)
 	{
 		Instance.BucketScript = Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation? value)
 	{
 		Instance.BucketSelector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSelector()
 	{
 		Instance.BucketSelector = Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which runs a script to determine whether the current bucket will be retained in the parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSelector(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor>? action)
 	{
 		Instance.BucketSelector = Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation? value)
 	{
 		Instance.BucketSort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSort()
 	{
 		Instance.BucketSort = Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSort(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor>? action)
 	{
 		Instance.BucketSort = Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which sorts the buckets of its parent multi-bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor BucketSort<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<T>>? action)
 	{
 		Instance.BucketSort = Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
 	{
 		Instance.Cardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Cardinality()
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Cardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? value)
 	{
 		Instance.CartesianBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds()
 	{
 		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor>? action)
 	{
 		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<T>>? action)
 	{
 		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? value)
 	{
 		Instance.CartesianCentroid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid()
 	{
 		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor>? action)
 	{
 		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<T>>? action)
 	{
 		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation? value)
 	{
 		Instance.CategorizeText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CategorizeText(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor> action)
 	{
 		Instance.CategorizeText = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups semi-structured text into buckets.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CategorizeText<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<T>> action)
 	{
 		Instance.CategorizeText = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint(Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? value)
 	{
 		Instance.ChangePoint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint()
 	{
 		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
-	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
-	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
-	/// the largest change in the distribution of values, if they are statistically significant.
-	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor>? action)
 	{
 		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation? value)
 	{
 		Instance.Children = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Children()
 	{
 		Instance.Children = Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that selects child documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Children(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor>? action)
 	{
 		Instance.Children = Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
 	{
 		Instance.Composite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Composite()
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Composite<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation? value)
 	{
 		Instance.CumulativeCardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeCardinality()
 	{
 		Instance.CumulativeCardinality = Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative cardinality in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeCardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor>? action)
 	{
 		Instance.CumulativeCardinality = Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation? value)
 	{
 		Instance.CumulativeSum = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeSum()
 	{
 		Instance.CumulativeSum = Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the cumulative sum of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CumulativeSum(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor>? action)
 	{
 		Instance.CumulativeSum = Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? value)
 	{
 		Instance.DateHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateHistogram()
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor>? action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on date values or date range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<T>>? action)
 	{
 		Instance.DateHistogram = Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
 	{
 		Instance.DateRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateRange()
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DateRange<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation? value)
 	{
 		Instance.Derivative = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Derivative()
 	{
 		Instance.Derivative = Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the derivative of a specified metric in a parent <c>histogram</c> or <c>date_histogram</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Derivative(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor>? action)
 	{
 		Instance.Derivative = Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation? value)
 	{
 		Instance.DiversifiedSampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DiversifiedSampler()
 	{
 		Instance.DiversifiedSampler = Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DiversifiedSampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor>? action)
 	{
 		Instance.DiversifiedSampler = Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// Similar to the <c>sampler</c> aggregation, but adds the ability to limit the number of matches that share a common value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor DiversifiedSampler<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<T>>? action)
 	{
 		Instance.DiversifiedSampler = Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation? value)
 	{
 		Instance.ExtendedStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStats()
 	{
 		Instance.ExtendedStats = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor>? action)
 	{
 		Instance.ExtendedStats = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStats<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<T>>? action)
 	{
 		Instance.ExtendedStats = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation? value)
 	{
 		Instance.ExtendedStatsBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStatsBucket()
 	{
 		Instance.ExtendedStatsBucket = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ExtendedStatsBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor>? action)
 	{
 		Instance.ExtendedStatsBucket = Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<T>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation? value)
 	{
 		Instance.FrequentItemSets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor FrequentItemSets(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor> action)
 	{
 		Instance.FrequentItemSets = Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor FrequentItemSets<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<T>> action)
 	{
 		Instance.FrequentItemSets = Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation? value)
 	{
 		Instance.GeoBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoBounds()
 	{
 		Instance.GeoBounds = Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor>? action)
 	{
 		Instance.GeoBounds = Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the geographic bounding box containing all values for a Geopoint or Geoshape field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoBounds<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<T>>? action)
 	{
 		Instance.GeoBounds = Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation? value)
 	{
 		Instance.GeoCentroid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoCentroid()
 	{
 		Instance.GeoCentroid = Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor>? action)
 	{
 		Instance.GeoCentroid = Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that computes the weighted centroid from all coordinate values for geo fields.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoCentroid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<T>>? action)
 	{
 		Instance.GeoCentroid = Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation? value)
 	{
 		Instance.GeoDistance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoDistance()
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoDistance(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor>? action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that works on <c>geo_point</c> fields.
-	/// Evaluates the distance of each document value from an origin point and determines the buckets it belongs to, based on ranges defined in the request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoDistance<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<T>>? action)
 	{
 		Instance.GeoDistance = Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation? value)
 	{
 		Instance.GeohashGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohashGrid()
 	{
 		Instance.GeohashGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohashGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor>? action)
 	{
 		Instance.GeohashGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell is labeled using a geohash which is of user-definable precision.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohashGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<T>>? action)
 	{
 		Instance.GeohashGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation? value)
 	{
 		Instance.GeohexGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohexGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor> action)
 	{
 		Instance.GeohexGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a H3 cell index and is labeled using the H3Index representation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeohexGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<T>> action)
 	{
 		Instance.GeohexGrid = Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation? value)
 	{
 		Instance.GeoLine = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoLine(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor> action)
 	{
 		Instance.GeoLine = Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aggregates all <c>geo_point</c> values within a bucket into a <c>LineString</c> ordered by the chosen sort field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeoLine<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<T>> action)
 	{
 		Instance.GeoLine = Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? value)
 	{
 		Instance.GeotileGrid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeotileGrid()
 	{
 		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeotileGrid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor>? action)
 	{
 		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that groups <c>geo_point</c> and <c>geo_shape</c> values into buckets that represent a grid.
-	/// Each cell corresponds to a map tile as used by many online map sites.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor GeotileGrid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<T>>? action)
 	{
 		Instance.GeotileGrid = Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Global()
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a single bucket of all the documents within the search execution context.
-	/// This context is defined by the indices and the document types you’re searching on, but is not influenced by the search query itself.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Global(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? value)
 	{
 		Instance.Histogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Histogram()
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Histogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor>? action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket values source based aggregation that can be applied on numeric values or numeric range values extracted from the documents.
-	/// It dynamically builds fixed size (interval) buckets over the values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Histogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<T>>? action)
 	{
 		Instance.Histogram = Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation? value)
 	{
 		Instance.Inference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Inference(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which loads a pre-trained model and performs inference on the collated result fields from the parent bucket aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Inference<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<T>> action)
 	{
 		Instance.Inference = Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation? value)
 	{
 		Instance.IpPrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpPrefix(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor> action)
 	{
 		Instance.IpPrefix = Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bucket aggregation that groups documents based on the network or sub-network of an IP address.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpPrefix<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<T>> action)
 	{
 		Instance.IpPrefix = Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation? value)
 	{
 		Instance.IpRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpRange()
 	{
 		Instance.IpRange = Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor>? action)
 	{
 		Instance.IpRange = Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of IP ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor IpRange<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<T>>? action)
 	{
 		Instance.IpRange = Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<T>.Build(action);
@@ -5028,1615 +2556,870 @@ public readonly partial struct AggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation? value)
 	{
 		Instance.MatrixStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MatrixStats()
 	{
 		Instance.MatrixStats = Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MatrixStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor>? action)
 	{
 		Instance.MatrixStats = Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric aggregation that computes the following statistics over a set of document fields: <c>count</c>, <c>mean</c>, <c>variance</c>, <c>skewness</c>, <c>kurtosis</c>, <c>covariance</c>, and <c>covariance</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MatrixStats<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<T>>? action)
 	{
 		Instance.MatrixStats = Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation? value)
 	{
 		Instance.Max = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Max()
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Max(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor>? action)
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the maximum value among the numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Max<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<T>>? action)
 	{
 		Instance.Max = Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation? value)
 	{
 		Instance.MaxBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MaxBucket()
 	{
 		Instance.MaxBucket = Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the maximum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MaxBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor>? action)
 	{
 		Instance.MaxBucket = Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation? value)
 	{
 		Instance.MedianAbsoluteDeviation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MedianAbsoluteDeviation()
 	{
 		Instance.MedianAbsoluteDeviation = Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MedianAbsoluteDeviation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor>? action)
 	{
 		Instance.MedianAbsoluteDeviation = Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value aggregation that approximates the median absolute deviation of its search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MedianAbsoluteDeviation<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<T>>? action)
 	{
 		Instance.MedianAbsoluteDeviation = Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation? value)
 	{
 		Instance.Min = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Min()
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Min(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor>? action)
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that returns the minimum value among numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Min<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<T>>? action)
 	{
 		Instance.Min = Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation? value)
 	{
 		Instance.MinBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MinBucket()
 	{
 		Instance.MinBucket = Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which identifies the bucket(s) with the minimum value of a specified metric in a sibling aggregation and outputs both the value and the key(s) of the bucket(s).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MinBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor>? action)
 	{
 		Instance.MinBucket = Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Missing()
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field data based single bucket aggregation, that creates a bucket of all documents in the current document set context that are missing a field value (effectively, missing a field or having the configured NULL value set).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation? value)
 	{
 		Instance.MovingFn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingFn()
 	{
 		Instance.MovingFn = Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of data, "slides" a window across the data and runs a custom script on each window of data.
-	/// For convenience, a number of common functions are predefined such as <c>min</c>, <c>max</c>, and moving averages.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingFn(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor>? action)
 	{
 		Instance.MovingFn = Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation? value)
 	{
 		Instance.MovingPercentiles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingPercentiles()
 	{
 		Instance.MovingPercentiles = Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Given an ordered series of percentiles, "slides" a window across those percentiles and computes cumulative percentiles.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MovingPercentiles(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor>? action)
 	{
 		Instance.MovingPercentiles = Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation? value)
 	{
 		Instance.MultiTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MultiTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor> action)
 	{
 		Instance.MultiTerms = Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique set of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor MultiTerms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<T>> action)
 	{
 		Instance.MultiTerms = Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation? value)
 	{
 		Instance.Nested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Nested()
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Nested(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor>? action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating nested documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Nested<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<T>>? action)
 	{
 		Instance.Nested = Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation? value)
 	{
 		Instance.Normalize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Normalize()
 	{
 		Instance.Normalize = Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent pipeline aggregation which calculates the specific normalized/rescaled value for a specific bucket value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Normalize(System.Action<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor>? action)
 	{
 		Instance.Normalize = Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation? value)
 	{
 		Instance.Parent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Parent()
 	{
 		Instance.Parent = Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that selects parent documents that have the specified type, as defined in a <c>join</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Parent(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor>? action)
 	{
 		Instance.Parent = Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation? value)
 	{
 		Instance.PercentileRanks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentileRanks()
 	{
 		Instance.PercentileRanks = Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentileRanks(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor>? action)
 	{
 		Instance.PercentileRanks = Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentile ranks over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentileRanks<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<T>>? action)
 	{
 		Instance.PercentileRanks = Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation? value)
 	{
 		Instance.Percentiles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Percentiles()
 	{
 		Instance.Percentiles = Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Percentiles(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor>? action)
 	{
 		Instance.Percentiles = Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that calculates one or more percentiles over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Percentiles<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<T>>? action)
 	{
 		Instance.Percentiles = Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation? value)
 	{
 		Instance.PercentilesBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentilesBucket()
 	{
 		Instance.PercentilesBucket = Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates percentiles across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor PercentilesBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor>? action)
 	{
 		Instance.PercentilesBucket = Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that randomly includes documents in the aggregated results.
-	/// Sampling provides significant speed improvement at the cost of accuracy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RandomSampler(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation? value)
 	{
 		Instance.RandomSampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that randomly includes documents in the aggregated results.
-	/// Sampling provides significant speed improvement at the cost of accuracy.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RandomSampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor> action)
 	{
 		Instance.RandomSampler = Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Range()
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation? value)
 	{
 		Instance.RareTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RareTerms()
 	{
 		Instance.RareTerms = Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RareTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor>? action)
 	{
 		Instance.RareTerms = Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation which finds "rare" terms — terms that are at the long-tail of the distribution and are not frequent.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor RareTerms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<T>>? action)
 	{
 		Instance.RareTerms = Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation? value)
 	{
 		Instance.Rate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Rate()
 	{
 		Instance.Rate = Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Rate(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor>? action)
 	{
 		Instance.Rate = Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates a rate of documents or a field in each bucket.
-	/// Can only be used inside a <c>date_histogram</c> or <c>composite</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Rate<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<T>>? action)
 	{
 		Instance.Rate = Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation? value)
 	{
 		Instance.ReverseNested = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ReverseNested()
 	{
 		Instance.ReverseNested = Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ReverseNested(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor>? action)
 	{
 		Instance.ReverseNested = Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A special single bucket aggregation that enables aggregating on parent documents from nested documents.
-	/// Should only be defined inside a <c>nested</c> aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ReverseNested<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<T>>? action)
 	{
 		Instance.ReverseNested = Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation? value)
 	{
 		Instance.Sampler = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sampler()
 	{
 		Instance.Sampler = Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filtering aggregation used to limit any sub aggregations' processing to a sample of the top-scoring documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sampler(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor>? action)
 	{
 		Instance.Sampler = Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation? value)
 	{
 		Instance.ScriptedMetric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ScriptedMetric()
 	{
 		Instance.ScriptedMetric = Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ScriptedMetric(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor>? action)
 	{
 		Instance.ScriptedMetric = Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that uses scripts to provide a metric output.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ScriptedMetric<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<T>>? action)
 	{
 		Instance.ScriptedMetric = Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation? value)
 	{
 		Instance.SerialDiff = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SerialDiff()
 	{
 		Instance.SerialDiff = Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An aggregation that subtracts values in a time series from themselves at different time lags or periods.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SerialDiff(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor>? action)
 	{
 		Instance.SerialDiff = Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation? value)
 	{
 		Instance.SignificantTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantTerms()
 	{
 		Instance.SignificantTerms = Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantTerms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor>? action)
 	{
 		Instance.SignificantTerms = Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantTerms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<T>>? action)
 	{
 		Instance.SignificantTerms = Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation? value)
 	{
 		Instance.SignificantText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantText()
 	{
 		Instance.SignificantText = Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantText(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor>? action)
 	{
 		Instance.SignificantText = Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns interesting or unusual occurrences of free-text terms in a set.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SignificantText<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<T>>? action)
 	{
 		Instance.SignificantText = Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Stats()
 	{
 		Instance.Stats = Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Stats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor>? action)
 	{
 		Instance.Stats = Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes stats over numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Stats<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<T>>? action)
 	{
 		Instance.Stats = Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation? value)
 	{
 		Instance.StatsBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StatsBucket()
 	{
 		Instance.StatsBucket = Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates a variety of stats across all bucket of a specified metric in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StatsBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor>? action)
 	{
 		Instance.StatsBucket = Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation? value)
 	{
 		Instance.StringStats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StringStats()
 	{
 		Instance.StringStats = Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StringStats(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor>? action)
 	{
 		Instance.StringStats = Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-value metrics aggregation that computes statistics over string values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor StringStats<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<T>>? action)
 	{
 		Instance.StringStats = Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation? value)
 	{
 		Instance.Sum = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sum()
 	{
 		Instance.Sum = Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sum(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor>? action)
 	{
 		Instance.Sum = Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that sums numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Sum<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<T>>? action)
 	{
 		Instance.Sum = Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation? value)
 	{
 		Instance.SumBucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SumBucket()
 	{
 		Instance.SumBucket = Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sibling pipeline aggregation which calculates the sum of a specified metric across all buckets in a sibling aggregation.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor SumBucket(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor>? action)
 	{
 		Instance.SumBucket = Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Terms()
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TimeSeries(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation? value)
 	{
 		Instance.TimeSeries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TimeSeries()
 	{
 		Instance.TimeSeries = Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time series aggregation queries data created using a time series index.
-	/// This is typically data such as metrics or other data streams with a time component, and requires creating an index using the time series mode.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TimeSeries(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor>? action)
 	{
 		Instance.TimeSeries = Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation? value)
 	{
 		Instance.TopHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopHits()
 	{
 		Instance.TopHits = Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopHits(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor>? action)
 	{
 		Instance.TopHits = Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that returns the top matching documents per bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopHits<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<T>>? action)
 	{
 		Instance.TopHits = Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation? value)
 	{
 		Instance.TopMetrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopMetrics()
 	{
 		Instance.TopMetrics = Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopMetrics(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor>? action)
 	{
 		Instance.TopMetrics = Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metric aggregation that selects metrics from the document with the largest or smallest sort value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TopMetrics<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<T>>? action)
 	{
 		Instance.TopMetrics = Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation? value)
 	{
 		Instance.TTest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TTest()
 	{
 		Instance.TTest = Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TTest(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor>? action)
 	{
 		Instance.TTest = Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A metrics aggregation that performs a statistical hypothesis test in which the test statistic follows a Student’s t-distribution under the null hypothesis on numeric values extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor TTest<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<T>>? action)
 	{
 		Instance.TTest = Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
 	{
 		Instance.ValueCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ValueCount()
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ValueCount<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation? value)
 	{
 		Instance.VariableWidthHistogram = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor VariableWidthHistogram()
 	{
 		Instance.VariableWidthHistogram = Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor VariableWidthHistogram(System.Action<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor>? action)
 	{
 		Instance.VariableWidthHistogram = Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation similar to the histogram, except instead of providing an interval to use as the width of each bucket, a target number of buckets is provided.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor VariableWidthHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<T>>? action)
 	{
 		Instance.VariableWidthHistogram = Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation? value)
 	{
 		Instance.WeightedAvg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor WeightedAvg()
 	{
 		Instance.WeightedAvg = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor WeightedAvg(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor>? action)
 	{
 		Instance.WeightedAvg = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that computes the weighted average of numeric values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor WeightedAvg<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<T>>? action)
 	{
 		Instance.WeightedAvg = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StoreStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.StoreStatsConverter))]
 public sealed partial class StoreStats
 {
@@ -43,47 +44,21 @@ public sealed partial class StoreStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#reserved']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#reserved_in_bytes']/*"/>
 	public required long ReservedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size, in bytes, of all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#size_in_bytes']/*"/>
 	public required long SizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total data set size of all shards assigned to selected nodes.
-	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#total_data_set_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total data set size, in bytes, of all shards assigned to selected nodes.
-	/// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
-	/// </para>
-	/// </summary>
+	/// <include file="StoreStats.g.xml" path="doc/member[@key='_types.StoreStats#total_data_set_size_in_bytes']/*"/>
 	public long? TotalDataSetSizeInBytes { get; set; }
 }

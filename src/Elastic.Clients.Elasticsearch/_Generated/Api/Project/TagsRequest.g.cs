@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 public sealed partial class TagsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get tags.
-/// </para>
-/// <para>
-/// Get the tags that are defined for the project.
-/// </para>
-/// </summary>
+/// <include file="TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.TagsRequestConverter))]
 public sealed partial class TagsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Project.TagsRequestParameters>
 {
@@ -56,27 +52,12 @@ public sealed partial class TagsRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "project.tags";
 
-	/// <summary>
-	/// <para>
-	/// A Lucene query using project metadata tags used to filter which projects are returned in the response.
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="TagsRequest.g.xml" path="doc/member[@key='project.tags.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get tags.
-/// </para>
-/// <para>
-/// Get the tags that are defined for the project.
-/// </para>
-/// </summary>
+/// <include file="TagsRequest.g.xml" path="doc/member[@key='project.tags.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project.tags.Request']/*"/>
 public readonly partial struct TagsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.TagsRequest Instance { get; init; }
@@ -95,16 +76,7 @@ public readonly partial struct TagsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor(Elastic.Clients.Elasticsearch.Project.TagsRequest instance) => new Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Project.TagsRequest(Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A Lucene query using project metadata tags used to filter which projects are returned in the response.
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="TagsRequest.g.xml" path="doc/member[@key='project.tags.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;

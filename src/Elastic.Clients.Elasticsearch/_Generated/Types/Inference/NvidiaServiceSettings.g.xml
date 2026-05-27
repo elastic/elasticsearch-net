@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.NvidiaServiceSettings#api_key"><summary><para>
+A valid API key for your Nvidia endpoint.
+Can be found in <c>API Keys</c> section of Nvidia account settings.
+</para></summary></member>
+  <member key="inference._types.NvidiaServiceSettings#max_input_tokens"><summary><para>
+For a <c>text_embedding</c> task, the maximum number of tokens per input. Inputs exceeding this value are truncated prior to sending to the Nvidia API.
+</para></summary></member>
+  <member key="inference._types.NvidiaServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the model's documentation for the name if needed.
+Service has been tested and confirmed to be working with the following models:
+</para>
+<list type="bullet">
+<item>
+<para>
+For <c>text_embedding</c> task - <c>nvidia/llama-3.2-nv-embedqa-1b-v2</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>completion</c> and <c>chat_completion</c> tasks - <c>microsoft/phi-3-mini-128k-instruct</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>rerank</c> task - <c>nv-rerank-qa-mistral-4b:1</c>.
+Service doesn't support <c>text_embedding</c> task <c>baai/bge-m3</c> and <c>nvidia/nvclip</c> models due to them not recognizing the <c>input_type</c> parameter.
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.NvidiaServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from the Nvidia API.
+By default, the <c>nvidia</c> service sets the number of requests allowed per minute to 3000.
+</para></summary></member>
+  <member key="inference._types.NvidiaServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+</para></summary></member>
+  <member key="inference._types.NvidiaServiceSettings#url"><summary><para>
+The URL of the Nvidia model endpoint. If not provided, the default endpoint URL is used depending on the task type:
+</para>
+<list type="bullet">
+<item>
+<para>
+For <c>text_embedding</c> task - <c>https://integrate.api.nvidia.com/v1/embeddings</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>completion</c> and <c>chat_completion</c> tasks - <c>https://integrate.api.nvidia.com/v1/chat/completions</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>rerank</c> task - <c>https://ai.api.nvidia.com/v1/retrieval/nvidia/reranking</c>.
+</para>
+</item>
+</list></summary></member>
+</doc>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.evaluate_data_frame.Request"><summary><para>
+Evaluate data frame analytics.
+</para>
+<para>
+The API packages together commonly used evaluation metrics for various types
+of machine learning features. This has been designed for use on indexes
+created by data frame analytics. Evaluation requires both a ground truth
+field and an analytics result field to be present.
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.Request#evaluation"><summary><para>
+Defines the type of evaluation you want to perform.
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.Request#index"><summary><para>
+Defines the <c>index</c> in which the evaluation will be performed.
+</para></summary></member>
+  <member key="ml.evaluate_data_frame.Request#query"><summary><para>
+A query clause that retrieves a subset of data from the source index.
+</para></summary></member>
+</doc>

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-/// <summary>
-/// <para>
-/// The source of the data for the transform.
-/// </para>
-/// </summary>
+/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Settings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SettingsConverter))]
 public sealed partial class Settings
 {
@@ -41,87 +38,33 @@ public sealed partial class Settings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align
-	/// checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the
-	/// transform config. As a result, less document updates in the destination index will be performed thus improving
-	/// overall performance.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#align_checkpoints']/*"/>
 	public bool? AlignCheckpoints { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was
-	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#dates_as_epoch_millis']/*"/>
 	public bool? DatesAsEpochMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#deduce_mappings']/*"/>
 	public bool? DeduceMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a
-	/// wait time between search requests. The default value is null, which disables throttling.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#docs_per_second']/*"/>
 	public float? DocsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
-	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
-	/// maximum is <c>65,536</c>. The default value is <c>500</c> for <c>pivot</c> transforms and <c>5000</c> for <c>latest</c> transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#max_page_search_size']/*"/>
 	public int? MaxPageSearchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the number of retries on a recoverable failure before the transform task is marked as <c>failed</c>.
-	/// The minimum value is <c>0</c> and the maximum is <c>100</c>, where <c>-1</c> indicates that the transform retries indefinitely.
-	/// If unset, the cluster-level setting <c>num_transform_failure_retries</c> is used.
-	/// </para>
-	/// <para>
-	/// This setting cannot be specified when <c>unattended</c> is <c>true</c>, because unattended transforms always retry
-	/// indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#num_failure_retries']/*"/>
 	public int? NumFailureRetries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case
-	/// of an error which means the transform never fails. Setting the number of retries other than infinite fails in
-	/// validation.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#unattended']/*"/>
 	public bool? Unattended { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform checkpoint will use the Point In Time API while searching over the source index.
-	/// In general, Point In Time is an optimization that will reduce pressure on the source index by reducing the amount
-	/// of refreshes and merges, but it can be expensive if a large number of Point In Times are opened and closed for a
-	/// given index. The benefits and impact depend on the data being searched, the ingest rate into the source index, and
-	/// the amount of other consumers searching the same source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#use_point_in_time']/*"/>
 	public bool? UsePointInTime { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The source of the data for the transform.
-/// </para>
-/// </summary>
+/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Settings']/*"/>
 public readonly partial struct SettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Settings Instance { get; init; }
@@ -141,107 +84,56 @@ public readonly partial struct SettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Settings instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform checkpoint ranges should be optimized for performance. Such optimization can align
-	/// checkpoint ranges with the date histogram interval when date histogram is specified as a group source in the
-	/// transform config. As a result, less document updates in the destination index will be performed thus improving
-	/// overall performance.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#align_checkpoints']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor AlignCheckpoints(bool? value = true)
 	{
 		Instance.AlignCheckpoints = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines if dates in the ouput should be written as ISO formatted string or as millis since epoch. epoch_millis was
-	/// the default for transforms created before version 7.11. For compatible output set this value to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#dates_as_epoch_millis']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DatesAsEpochMillis(bool? value = true)
 	{
 		Instance.DatesAsEpochMillis = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform should deduce the destination index mappings from the transform configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#deduce_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DeduceMappings(bool? value = true)
 	{
 		Instance.DeduceMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a limit on the number of input documents per second. This setting throttles the transform by adding a
-	/// wait time between search requests. The default value is null, which disables throttling.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#docs_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor DocsPerSecond(float? value)
 	{
 		Instance.DocsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
-	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
-	/// maximum is <c>65,536</c>. The default value is <c>500</c> for <c>pivot</c> transforms and <c>5000</c> for <c>latest</c> transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#max_page_search_size']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor MaxPageSearchSize(int? value)
 	{
 		Instance.MaxPageSearchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the number of retries on a recoverable failure before the transform task is marked as <c>failed</c>.
-	/// The minimum value is <c>0</c> and the maximum is <c>100</c>, where <c>-1</c> indicates that the transform retries indefinitely.
-	/// If unset, the cluster-level setting <c>num_transform_failure_retries</c> is used.
-	/// </para>
-	/// <para>
-	/// This setting cannot be specified when <c>unattended</c> is <c>true</c>, because unattended transforms always retry
-	/// indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#num_failure_retries']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor NumFailureRetries(int? value)
 	{
 		Instance.NumFailureRetries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case
-	/// of an error which means the transform never fails. Setting the number of retries other than infinite fails in
-	/// validation.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#unattended']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor Unattended(bool? value = true)
 	{
 		Instance.Unattended = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the transform checkpoint will use the Point In Time API while searching over the source index.
-	/// In general, Point In Time is an optimization that will reduce pressure on the source index by reducing the amount
-	/// of refreshes and merges, but it can be expensive if a large number of Point In Times are opened and closed for a
-	/// given index. The benefits and impact depend on the data being searched, the ingest rate into the source index, and
-	/// the amount of other consumers searching the same source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Settings.g.xml" path="doc/member[@key='transform._types.Settings#use_point_in_time']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor UsePointInTime(bool? value = true)
 	{
 		Instance.UsePointInTime = value;

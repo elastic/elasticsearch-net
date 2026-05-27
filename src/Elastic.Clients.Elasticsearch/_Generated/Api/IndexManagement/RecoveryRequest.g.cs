@@ -23,112 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 public sealed partial class RecoveryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response only includes ongoing shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#active_only']/*"/>
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index recovery information.
-/// </para>
-/// <para>
-/// Get information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream's backing indices.
-/// </para>
-/// <para>
-/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
-/// </para>
-/// <para>
-/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
-/// When a shard recovery completes, the recovered shard is available for search and indexing.
-/// </para>
-/// <para>
-/// Recovery automatically occurs during the following processes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When creating an index for the first time.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Creation of new replica shard copies from the primary.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Relocation of a shard copy to a different node in the same cluster.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A snapshot restore operation.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A clone, shrink, or split operation.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
-/// </para>
-/// <para>
-/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
-/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
-/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
-/// </para>
-/// </summary>
+/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryRequestConverter))]
 public sealed partial class RecoveryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>
 {
@@ -154,119 +70,27 @@ public sealed partial class RecoveryRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.recovery";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response only includes ongoing shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#active_only']/*"/>
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#detailed']/*"/>
 	public bool? Detailed { get => Q<bool?>("detailed"); set => Q("detailed", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index recovery information.
-/// </para>
-/// <para>
-/// Get information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream's backing indices.
-/// </para>
-/// <para>
-/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
-/// </para>
-/// <para>
-/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
-/// When a shard recovery completes, the recovered shard is available for search and indexing.
-/// </para>
-/// <para>
-/// Recovery automatically occurs during the following processes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When creating an index for the first time.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Creation of new replica shard copies from the primary.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Relocation of a shard copy to a different node in the same cluster.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A snapshot restore operation.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A clone, shrink, or split operation.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
-/// </para>
-/// <para>
-/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
-/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
-/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
-/// </para>
-/// </summary>
+/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 public readonly partial struct RecoveryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest Instance { get; init; }
@@ -290,90 +114,49 @@ public readonly partial struct RecoveryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response only includes ongoing shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#active_only']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor ActiveOnly(bool? value = true)
 	{
 		Instance.ActiveOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#detailed']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor Detailed(bool? value = true)
 	{
 		Instance.Detailed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -441,65 +224,8 @@ public readonly partial struct RecoveryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get index recovery information.
-/// </para>
-/// <para>
-/// Get information about ongoing and completed shard recoveries for one or more indices.
-/// For data streams, the API returns information for the stream's backing indices.
-/// </para>
-/// <para>
-/// All recoveries, whether ongoing or complete, are kept in the cluster state and may be reported on at any time.
-/// </para>
-/// <para>
-/// Shard recovery is the process of initializing a shard copy, such as restoring a primary shard from a snapshot or creating a replica shard from a primary shard.
-/// When a shard recovery completes, the recovered shard is available for search and indexing.
-/// </para>
-/// <para>
-/// Recovery automatically occurs during the following processes:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// When creating an index for the first time.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// When a node rejoins the cluster and starts up any missing primary shard copies using the data that it holds in its data path.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Creation of new replica shard copies from the primary.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Relocation of a shard copy to a different node in the same cluster.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A snapshot restore operation.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A clone, shrink, or split operation.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can determine the cause of a shard recovery using the recovery or cat recovery APIs.
-/// </para>
-/// <para>
-/// The index recovery API reports information about completed recoveries only for shard copies that currently exist in the cluster.
-/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
-/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
-/// </para>
-/// </summary>
+/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 public readonly partial struct RecoveryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest Instance { get; init; }
@@ -523,90 +249,49 @@ public readonly partial struct RecoveryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response only includes ongoing shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#active_only']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> ActiveOnly(bool? value = true)
 	{
 		Instance.ActiveOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes detailed information about shard recoveries.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#detailed']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> Detailed(bool? value = true)
 	{
 		Instance.Detailed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;

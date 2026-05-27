@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules._types.QueryRuleActions#docs"><summary><para>
+The documents to apply the rule to.
+Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+There is a maximum value of 100 documents in a rule.
+You can specify the following attributes for each document:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>_index</c>: The index of the document to pin.
+</para>
+</item>
+<item>
+<para>
+<c>_id</c>: The unique document ID.
+</para>
+</item>
+</list></summary></member>
+  <member key="query_rules._types.QueryRuleActions#ids"><summary><para>
+The unique document IDs of the documents to apply the rule to.
+Only one of <c>ids</c> or <c>docs</c> may be specified and at least one must be specified.
+</para></summary></member>
+</doc>

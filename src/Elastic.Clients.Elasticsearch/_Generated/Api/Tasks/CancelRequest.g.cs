@@ -23,56 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 public sealed partial class CancelRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#actions']/*"/>
 	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#nodes']/*"/>
 	public System.Collections.Generic.ICollection<string>? Nodes { get => Q<System.Collections.Generic.ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A parent task ID that is used to limit the tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#parent_task_id']/*"/>
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until all found tasks are complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Cancel a task.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-/// The get task information API will continue to list these cancelled tasks until they complete.
-/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-/// </para>
-/// <para>
-/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-/// </para>
-/// </summary>
+/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.CancelRequestConverter))]
 public sealed partial class CancelRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>
 {
@@ -98,61 +67,24 @@ public sealed partial class CancelRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "tasks.cancel";
 
-	/// <summary>
-	/// <para>
-	/// The task identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId?>("task_id"); set => PO("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#actions']/*"/>
 	public System.Collections.Generic.ICollection<string>? Actions { get => Q<System.Collections.Generic.ICollection<string>?>("actions"); set => Q("actions", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#nodes']/*"/>
 	public System.Collections.Generic.ICollection<string>? Nodes { get => Q<System.Collections.Generic.ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A parent task ID that is used to limit the tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#parent_task_id']/*"/>
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until all found tasks are complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Cancel a task.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// A task may continue to run for some time after it has been cancelled because it may not be able to safely stop its current activity straight away.
-/// It is also possible that Elasticsearch must complete its work on other tasks before it can process the cancellation.
-/// The get task information API will continue to list these cancelled tasks until they complete.
-/// The cancelled flag in the response indicates that the cancellation command has been processed and the task will stop as soon as possible.
-/// </para>
-/// <para>
-/// To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
-/// You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
-/// </para>
-/// </summary>
+/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 public readonly partial struct CancelRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Tasks.CancelRequest Instance { get; init; }
@@ -176,77 +108,49 @@ public readonly partial struct CancelRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(Elastic.Clients.Elasticsearch.Tasks.CancelRequest instance) => new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.CancelRequest(Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The task identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId? value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of actions that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Actions(params string[] values)
 	{
 		Instance.Actions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Nodes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names that is used to limit the request.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor Nodes(params string[] values)
 	{
 		Instance.Nodes = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A parent task ID that is used to limit the tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#parent_task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor ParentTaskId(string? value)
 	{
 		Instance.ParentTaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request blocks until all found tasks are complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

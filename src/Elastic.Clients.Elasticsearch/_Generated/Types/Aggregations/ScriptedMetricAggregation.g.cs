@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ScriptedMetricAggregationConverter))]
 public sealed partial class ScriptedMetricAggregation
 {
@@ -36,63 +37,30 @@ public sealed partial class ScriptedMetricAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation']/*"/>
 public readonly partial struct ScriptedMetricAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Instance { get; init; }
@@ -112,178 +80,105 @@ public readonly partial struct ScriptedMetricAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.CombineScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript()
 	{
 		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> CombineScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.InitScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript()
 	{
 		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> InitScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.MapScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript()
 	{
 		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> MapScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -297,36 +192,21 @@ public readonly partial struct ScriptedMetricAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.ReduceScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript()
 	{
 		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -365,6 +245,7 @@ public readonly partial struct ScriptedMetricAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation']/*"/>
 public readonly partial struct ScriptedMetricAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Instance { get; init; }
@@ -384,178 +265,105 @@ public readonly partial struct ScriptedMetricAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.CombineScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript()
 	{
 		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on each shard after document collection is complete.
-	/// Allows the aggregation to consolidate the state returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#combine_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor CombineScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.CombineScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.InitScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript()
 	{
 		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs prior to any collection of documents.
-	/// Allows the aggregation to set up any initial state.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#init_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor InitScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.InitScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.MapScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript()
 	{
 		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run once per document collected.
-	/// If no <c>combine_script</c> is specified, the resulting state needs to be stored in the <c>state</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#map_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor MapScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.MapScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A global object with script parameters for <c>init</c>, <c>map</c> and <c>combine</c> scripts.
-	/// It is shared between the scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -569,36 +377,21 @@ public readonly partial struct ScriptedMetricAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.ReduceScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript()
 	{
 		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Runs once on the coordinating node after all shards have returned their results.
-	/// The script is provided with access to a variable <c>states</c>, which is an array of the result of the <c>combine_script</c> on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptedMetricAggregation.g.xml" path="doc/member[@key='_types.aggregations.ScriptedMetricAggregation#reduce_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor ReduceScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.ReduceScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

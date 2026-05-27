@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterIndicesShardsIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterIndicesShardsIndexConverter))]
 public sealed partial class ClusterIndicesShardsIndex
 {
@@ -44,24 +45,12 @@ public sealed partial class ClusterIndicesShardsIndex
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of primary shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndicesShardsIndex.g.xml" path="doc/member[@key='cluster.stats.ClusterIndicesShardsIndex#primaries']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Primaries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of replication shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndicesShardsIndex.g.xml" path="doc/member[@key='cluster.stats.ClusterIndicesShardsIndex#replication']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Replication { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterIndicesShardsIndex.g.xml" path="doc/member[@key='cluster.stats.ClusterIndicesShardsIndex#shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Shards { get; set; }
 }

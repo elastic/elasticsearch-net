@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.NvidiaTaskSettings#input_type"><summary><para>
+For a <c>text_embedding</c> task, type of input sent to the Nvidia endpoint.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>ingest</c>: Mapped to Nvidia's <c>passage</c> value in request. Used when generating embeddings during indexing.
+</para>
+</item>
+<item>
+<para>
+<c>search</c>: Mapped to Nvidia's <c>query</c> value in request. Used when generating embeddings during querying.
+</para>
+</item>
+</list>
+<para>
+IMPORTANT: For Nvidia endpoints, if the <c>input_type</c> field is not specified, it defaults to <c>query</c>.
+</para></summary></member>
+  <member key="inference._types.NvidiaTaskSettings#truncate"><summary><para>
+For a <c>text_embedding</c> task, the method used by the Nvidia model to handle inputs longer than the maximum token length.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>END</c>: When the input exceeds the maximum input token length, the end of the input is discarded.
+</para>
+</item>
+<item>
+<para>
+<c>NONE</c>: When the input exceeds the maximum input token length, an error is returned.
+</para>
+</item>
+<item>
+<para>
+<c>START</c>: When the input exceeds the maximum input token length, the start of the input is discarded.
+</para>
+</item>
+</list></summary></member>
+</doc>

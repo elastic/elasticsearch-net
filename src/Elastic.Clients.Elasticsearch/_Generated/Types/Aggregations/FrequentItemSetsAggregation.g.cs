@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FrequentItemSetsAggregationConverter))]
 public sealed partial class FrequentItemSetsAggregation
 {
@@ -42,42 +43,23 @@ public sealed partial class FrequentItemSetsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum size of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_set_size']/*"/>
 	public int? MinimumSetSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum support of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_support']/*"/>
 	public double? MinimumSupport { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of top item sets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation']/*"/>
 public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Instance { get; init; }
@@ -97,33 +79,21 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
@@ -136,55 +106,35 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum size of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_set_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> MinimumSetSize(int? value)
 	{
 		Instance.MinimumSetSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum support of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_support']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> MinimumSupport(double? value)
 	{
 		Instance.MinimumSupport = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top item sets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -200,6 +150,7 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation']/*"/>
 public readonly partial struct FrequentItemSetsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation Instance { get; init; }
@@ -219,33 +170,21 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(params Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
@@ -258,11 +197,7 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields to analyze.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsFieldDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>();
@@ -275,66 +210,42 @@ public readonly partial struct FrequentItemSetsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query that filters documents from analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum size of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_set_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor MinimumSetSize(int? value)
 	{
 		Instance.MinimumSetSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum support of one item set.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#minimum_support']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor MinimumSupport(double? value)
 	{
 		Instance.MinimumSupport = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top item sets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="FrequentItemSetsAggregation.g.xml" path="doc/member[@key='_types.aggregations.FrequentItemSetsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

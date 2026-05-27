@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
 public sealed partial class PostCalendarEventsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Add scheduled events to the calendar.
-/// </para>
-/// </summary>
+/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PostCalendarEventsRequestConverter))]
 public sealed partial class PostCalendarEventsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestParameters>
 {
@@ -65,26 +64,15 @@ public sealed partial class PostCalendarEventsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "ml.post_calendar_events";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#events']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> Events { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Add scheduled events to the calendar.
-/// </para>
-/// </summary>
+/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.post_calendar_events.Request']/*"/>
 public readonly partial struct PostCalendarEventsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest Instance { get; init; }
@@ -111,44 +99,28 @@ public readonly partial struct PostCalendarEventsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#events']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> value)
 	{
 		Instance.Events = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#events']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events(params Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent[] values)
 	{
 		Instance.Events = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="PostCalendarEventsRequest.g.xml" path="doc/member[@key='ml.post_calendar_events.Request#events']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor Events(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent>();

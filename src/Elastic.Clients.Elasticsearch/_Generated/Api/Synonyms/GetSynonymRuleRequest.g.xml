@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.get_synonym_rule.Request"><summary><para>
+Get a synonym rule.
+</para>
+<para>
+Get a synonym rule from a synonym set.
+</para></summary></member>
+  <member key="synonyms.get_synonym_rule.Request#rule_id"><summary><para>
+The ID of the synonym rule to retrieve.
+</para></summary></member>
+  <member key="synonyms.get_synonym_rule.Request#set_id"><summary><para>
+The ID of the synonym set to retrieve the synonym rule from.
+</para></summary></member>
+</doc>

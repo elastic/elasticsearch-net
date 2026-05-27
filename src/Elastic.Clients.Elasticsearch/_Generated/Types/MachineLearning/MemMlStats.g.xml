@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_memory_stats.MemMlStats#anomaly_detectors"><summary><para>
+Amount of native memory set aside for anomaly detection jobs.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#anomaly_detectors_in_bytes"><summary><para>
+Amount of native memory, in bytes, set aside for anomaly detection jobs.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#data_frame_analytics"><summary><para>
+Amount of native memory set aside for data frame analytics jobs.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#data_frame_analytics_in_bytes"><summary><para>
+Amount of native memory, in bytes, set aside for data frame analytics jobs.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#max"><summary><para>
+Maximum amount of native memory (separate to the JVM heap) that may be used by machine learning native processes.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#max_in_bytes"><summary><para>
+Maximum amount of native memory (separate to the JVM heap), in bytes, that may be used by machine learning native processes.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#native_code_overhead"><summary><para>
+Amount of native memory set aside for loading machine learning native code shared libraries.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#native_code_overhead_in_bytes"><summary><para>
+Amount of native memory, in bytes, set aside for loading machine learning native code shared libraries.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#native_inference"><summary><para>
+Amount of native memory set aside for trained models that have a PyTorch model_type.
+</para></summary></member>
+  <member key="ml.get_memory_stats.MemMlStats#native_inference_in_bytes"><summary><para>
+Amount of native memory, in bytes, set aside for trained models that have a PyTorch model_type.
+</para></summary></member>
+</doc>

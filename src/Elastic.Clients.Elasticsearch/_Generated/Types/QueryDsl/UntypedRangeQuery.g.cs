@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.UntypedRangeQueryConverter))]
 public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
@@ -42,70 +43,36 @@ public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.Qu
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gt']/*"/>
 	public object? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gte']/*"/>
 	public object? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lt']/*"/>
 	public object? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lte']/*"/>
 	public object? Lte { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "untyped";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery']/*"/>
 public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Instance { get; init; }
@@ -125,14 +92,7 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -151,55 +111,35 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Gt(object? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Gte(object? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Lt(object? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Lte(object? value)
 	{
 		Instance.Lte = value;
@@ -212,22 +152,14 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -243,6 +175,7 @@ public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery']/*"/>
 public readonly partial struct UntypedRangeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Instance { get; init; }
@@ -262,14 +195,7 @@ public readonly partial struct UntypedRangeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -288,55 +214,35 @@ public readonly partial struct UntypedRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date format used to convert <c>date</c> values in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Gt(object? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Gte(object? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Lt(object? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Lte(object? value)
 	{
 		Instance.Lte = value;
@@ -349,22 +255,14 @@ public readonly partial struct UntypedRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedRangeQuery#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

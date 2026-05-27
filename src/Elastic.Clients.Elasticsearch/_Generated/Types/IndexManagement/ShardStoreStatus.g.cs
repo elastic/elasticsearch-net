@@ -26,32 +26,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStoreStatusConverter))]
 public enum ShardStoreStatus
 {
-	/// <summary>
-	/// <para>
-	/// Return all shards, regardless of health status.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoreStatus.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreStatus#all']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
-	/// <summary>
-	/// <para>
-	/// The primary shard and all replica shards are assigned.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoreStatus.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreStatus#green']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "green")]
 	Green,
-	/// <summary>
-	/// <para>
-	/// The primary shard is unassigned.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoreStatus.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreStatus#red']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
-	/// <summary>
-	/// <para>
-	/// One or more replica shards are unassigned.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStoreStatus.g.xml" path="doc/member[@key='indices.shard_stores.ShardStoreStatus#yellow']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
 	Yellow
 }

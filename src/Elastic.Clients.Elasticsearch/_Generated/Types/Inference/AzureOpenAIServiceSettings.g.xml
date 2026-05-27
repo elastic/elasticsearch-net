@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AzureOpenAIServiceSettings#api_key"><summary><para>
+A valid API key for your Azure OpenAI account.
+</para>
+<para>
+IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#api_version"><summary><para>
+The Azure API version ID to use.
+It is recommended to use the latest supported non-preview version.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#client_id"><summary><para>
+For OAuth 2.0 authentication using the client credentials grant flow.
+The application ID that's assigned to your app.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#client_secret"><summary><para>
+For OAuth 2.0 authentication using the client credentials grant flow.
+The application secret that you created in the Microsoft app registration portal for your app.
+</para>
+<para>
+IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#deployment_id"><summary><para>
+The deployment name of your deployed models.
+Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#entra_id"><summary><para>
+A valid Microsoft Entra token.
+</para>
+<para>
+IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Azure.
+The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
+For <c>text_embedding</c>, it is set to <c>1440</c>.
+For <c>completion</c> and <c>chat_completion</c>, it is set to <c>120</c>.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#resource_name"><summary><para>
+The name of your Azure OpenAI resource.
+You can find this from the list of resources in the Azure Portal for your subscription.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#scopes"><summary><para>
+For OAuth 2.0 authentication using the client credentials grant flow.
+The resource identifier (application ID URI) of the resource you want, suffixed with .default
+For example:
+</para>
+<code>
+"scopes": [
+  "https://cognitiveservices.azure.com/.default"
+]
+</code>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#tenant_id"><summary><para>
+For OAuth 2.0 authentication using the client credentials grant flow.
+The directory tenant the application plans to operate against.
+</para>
+<para>
+IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+If one of the fields is missing, you will receive an error when you try to create your endpoint.
+</para></summary></member>
+</doc>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_role_mapping.Request"><summary><para>
+Delete role mappings.
+</para>
+<para>
+Role mappings define which roles are assigned to each user.
+The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
+The delete role mappings API cannot remove role mappings that are defined in role mapping files.
+</para></summary></member>
+  <member key="security.delete_role_mapping.Request#name"><summary><para>
+The distinct name that identifies the role mapping.
+The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way.
+</para></summary></member>
+  <member key="security.delete_role_mapping.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+</doc>

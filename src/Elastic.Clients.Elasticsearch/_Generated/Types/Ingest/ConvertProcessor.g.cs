@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ConvertProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.ConvertProcessorConverter))]
 public sealed partial class ConvertProcessor
 {
@@ -43,73 +44,35 @@ public sealed partial class ConvertProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field whose value is to be converted.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type to convert the existing value to.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ConvertProcessor']/*"/>
 public readonly partial struct ConvertProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor Instance { get; init; }
@@ -129,122 +92,77 @@ public readonly partial struct ConvertProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field whose value is to be converted.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field whose value is to be converted.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -257,47 +175,28 @@ public readonly partial struct ConvertProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type to convert the existing value to.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Ingest.ConvertType value)
 	{
 		Instance.Type = value;
@@ -313,6 +212,7 @@ public readonly partial struct ConvertProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ConvertProcessor']/*"/>
 public readonly partial struct ConvertProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor Instance { get; init; }
@@ -332,122 +232,77 @@ public readonly partial struct ConvertProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field whose value is to be converted.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field whose value is to be converted.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -460,11 +315,7 @@ public readonly partial struct ConvertProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -477,47 +328,28 @@ public readonly partial struct ConvertProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type to convert the existing value to.
-	/// </para>
-	/// </summary>
+	/// <include file="ConvertProcessor.g.xml" path="doc/member[@key='ingest._types.ConvertProcessor#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor Type(Elastic.Clients.Elasticsearch.Ingest.ConvertType value)
 	{
 		Instance.Type = value;

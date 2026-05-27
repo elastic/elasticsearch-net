@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LikeDocument']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.LikeDocumentConverter))]
 public sealed partial class LikeDocument
 {
@@ -36,39 +37,24 @@ public sealed partial class LikeDocument
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A document not present in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#doc']/*"/>
 	public object? Doc { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// ID of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Index of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	public long? Version { get; set; }
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LikeDocument']/*"/>
 public readonly partial struct LikeDocumentDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Instance { get; init; }
@@ -88,11 +74,7 @@ public readonly partial struct LikeDocumentDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A document not present in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#doc']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Doc(object? value)
 	{
 		Instance.Doc = value;
@@ -111,55 +93,35 @@ public readonly partial struct LikeDocumentDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// ID of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? value)
 	{
 		Instance.PerFieldAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer()
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>>? action)
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(action);
@@ -212,6 +174,7 @@ public readonly partial struct LikeDocumentDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LikeDocument']/*"/>
 public readonly partial struct LikeDocumentDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Instance { get; init; }
@@ -231,11 +194,7 @@ public readonly partial struct LikeDocumentDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A document not present in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#doc']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Doc(object? value)
 	{
 		Instance.Doc = value;
@@ -254,66 +213,42 @@ public readonly partial struct LikeDocumentDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// ID of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index of a document.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? value)
 	{
 		Instance.PerFieldAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer()
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString>? action)
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Overrides the default analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="LikeDocument.g.xml" path="doc/member[@key='_types.query_dsl.LikeDocument#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor PerFieldAnalyzer<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>>? action)
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<T>.Build(action);

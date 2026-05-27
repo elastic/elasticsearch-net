@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IdsQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IdsQueryConverter))]
 public sealed partial class IdsQuery
 {
@@ -36,25 +37,15 @@ public sealed partial class IdsQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="IdsQuery.g.xml" path="doc/member[@key='_types.query_dsl.IdsQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of document IDs.
-	/// </para>
-	/// </summary>
+	/// <include file="IdsQuery.g.xml" path="doc/member[@key='_types.query_dsl.IdsQuery#values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IdsQuery']/*"/>
 public readonly partial struct IdsQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery Instance { get; init; }
@@ -74,14 +65,7 @@ public readonly partial struct IdsQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery(Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="IdsQuery.g.xml" path="doc/member[@key='_types.query_dsl.IdsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -94,11 +78,7 @@ public readonly partial struct IdsQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of document IDs.
-	/// </para>
-	/// </summary>
+	/// <include file="IdsQuery.g.xml" path="doc/member[@key='_types.query_dsl.IdsQuery#values']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Values = value;

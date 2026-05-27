@@ -23,48 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
 public sealed partial class QueryApiKeysRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
-	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_limited_by']/*"/>
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile UID for the API key owner principal.
-	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Find API keys with a query.
-/// </para>
-/// <para>
-/// Get a paginated list of API keys and their information.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
-/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// Refer to the linked documentation for examples of how to find API keys:
-/// </para>
-/// </summary>
+/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.QueryApiKeysRequestConverter))]
 public partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
 {
@@ -86,111 +60,36 @@ public partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "security.query_api_keys";
 
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
-	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_limited_by']/*"/>
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile UID for the API key owner principal.
-	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Find API keys with a query.
-/// </para>
-/// <para>
-/// Get a paginated list of API keys and their information.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
-/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// Refer to the linked documentation for examples of how to find API keys:
-/// </para>
-/// </summary>
+/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
 public readonly partial struct QueryApiKeysRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Instance { get; init; }
@@ -209,96 +108,49 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
-	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_limited_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor WithLimitedBy(bool? value = true)
 	{
 		Instance.WithLimitedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile UID for the API key owner principal.
-	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>.Build(action);
@@ -326,153 +178,70 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -485,13 +254,7 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -565,21 +328,8 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Find API keys with a query.
-/// </para>
-/// <para>
-/// Get a paginated list of API keys and their information.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
-/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// Refer to the linked documentation for examples of how to find API keys:
-/// </para>
-/// </summary>
+/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_api_keys.Request']/*"/>
 public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest Instance { get; init; }
@@ -598,81 +348,42 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors associated with the API key.
-	/// An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
-	/// An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_limited_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> WithLimitedBy(bool? value = true)
 	{
 		Instance.WithLimitedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile UID for the API key owner principal.
-	/// If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any aggregations to run over the corpus of returned API keys.
-	/// Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
-	/// This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
-	/// <c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
-	/// Additionally, aggregations only run over the same subset of fields that query works with.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
@@ -693,132 +404,63 @@ public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which API keys to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
-	/// <c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
-	/// </para>
-	/// <para>
-	/// NOTE: The queryable string values associated with API keys are internally mapped as keywords.
-	/// Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
-	/// Such a match query is hence equivalent to a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Other than <c>id</c>, all public fields of an API key are eligible for sorting.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysRequest.g.xml" path="doc/member[@key='security.query_api_keys.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

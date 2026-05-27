@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 public sealed partial class PutBehavioralAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a behavioral analytics collection.
-/// </para>
-/// </summary>
+/// <include file="PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PutBehavioralAnalyticsRequestConverter))]
 public sealed partial class PutBehavioralAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>
 {
@@ -58,19 +57,12 @@ public sealed partial class PutBehavioralAnalyticsRequest : Elastic.Clients.Elas
 
 	internal override string OperationName => "search_application.put_behavioral_analytics";
 
-	/// <summary>
-	/// <para>
-	/// The name of the analytics collection to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a behavioral analytics collection.
-/// </para>
-/// </summary>
+/// <include file="PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request']/*"/>
 public readonly partial struct PutBehavioralAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest Instance { get; init; }
@@ -95,11 +87,7 @@ public readonly partial struct PutBehavioralAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the analytics collection to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

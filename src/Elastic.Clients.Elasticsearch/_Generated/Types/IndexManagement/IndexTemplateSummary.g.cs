@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateSummaryConverter))]
 public sealed partial class IndexTemplateSummary
 {
@@ -36,34 +37,19 @@ public sealed partial class IndexTemplateSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? DataStreamOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateSummary']/*"/>
 public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary Instance { get; init; }
@@ -83,42 +69,21 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
@@ -132,28 +97,14 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -216,69 +167,42 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
@@ -299,6 +223,7 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexTemplateSummary']/*"/>
 public readonly partial struct IndexTemplateSummaryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary Instance { get; init; }
@@ -318,56 +243,28 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
@@ -381,28 +278,14 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases to add.
-	/// If the index template includes a <c>data_stream</c> object, these are data stream aliases.
-	/// Otherwise, these are index aliases.
-	/// Data stream aliases ignore the <c>index_routing</c>, <c>routing</c>, and <c>search_routing</c> options.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -472,92 +355,56 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// If specified, this mapping can include field names, field data types, and mapping parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Mappings<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexTemplateSummary.g.xml" path="doc/member[@key='indices._types.IndexTemplateSummary#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);

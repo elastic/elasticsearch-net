@@ -23,58 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get mapping definitions.
-/// </para>
-/// <para>
-/// Retrieves mapping definitions for one or more fields.
-/// For data streams, the API retrieves field mappings for the stream’s backing indices.
-/// </para>
-/// <para>
-/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
-/// </para>
-/// </summary>
+/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetFieldMappingRequestConverter))]
 public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>
 {
@@ -106,73 +73,27 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "indices.get_field_mapping";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of fields used to limit returned information.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Fields { get => P<Elastic.Clients.Elasticsearch.Fields>("fields"); set => PR("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get mapping definitions.
-/// </para>
-/// <para>
-/// Retrieves mapping definitions for one or more fields.
-/// For data streams, the API retrieves field mappings for the stream’s backing indices.
-/// </para>
-/// <para>
-/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
-/// </para>
-/// </summary>
+/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 public readonly partial struct GetFieldMappingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest Instance { get; init; }
@@ -202,103 +123,56 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of fields used to limit returned information.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of fields used to limit returned information.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
@@ -361,18 +235,8 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get mapping definitions.
-/// </para>
-/// <para>
-/// Retrieves mapping definitions for one or more fields.
-/// For data streams, the API retrieves field mappings for the stream’s backing indices.
-/// </para>
-/// <para>
-/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
-/// </para>
-/// </summary>
+/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest Instance { get; init; }
@@ -402,103 +266,56 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of fields used to limit returned information.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expression of fields used to limit returned information.
-	/// Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;

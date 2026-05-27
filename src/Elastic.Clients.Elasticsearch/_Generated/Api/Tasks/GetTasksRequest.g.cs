@@ -23,46 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 public sealed partial class GetTasksRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Internal use only
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#follow_relocations']/*"/>
 	public bool? FollowRelocations { get => Q<bool?>("follow_relocations"); set => Q("follow_relocations", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the task has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get task information.
-/// </para>
-/// <para>
-/// Get information about a task currently running in the cluster.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-/// </para>
-/// </summary>
+/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.GetTasksRequestConverter))]
 public sealed partial class GetTasksRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>
 {
@@ -89,51 +65,21 @@ public sealed partial class GetTasksRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "tasks.get";
 
-	/// <summary>
-	/// <para>
-	/// The task identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Internal use only
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#follow_relocations']/*"/>
 	public bool? FollowRelocations { get => Q<bool?>("follow_relocations"); set => Q("follow_relocations", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the task has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get task information.
-/// </para>
-/// <para>
-/// Get information about a task currently running in the cluster.
-/// </para>
-/// <para>
-/// WARNING: The task management API is new and should still be considered a beta feature.
-/// The API may change in ways that are not backwards compatible.
-/// </para>
-/// <para>
-/// If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
-/// </para>
-/// </summary>
+/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 public readonly partial struct GetTasksRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest Instance { get; init; }
@@ -158,45 +104,28 @@ public readonly partial struct GetTasksRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest instance) => new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The task identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Internal use only
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#follow_relocations']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor FollowRelocations(bool? value = true)
 	{
 		Instance.FollowRelocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the task has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

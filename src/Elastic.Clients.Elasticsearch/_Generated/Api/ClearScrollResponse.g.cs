@@ -37,18 +37,9 @@ public sealed partial class ClearScrollResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scrolling search requests cleared.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearScrollResponse.g.xml" path="doc/member[@key='_global.clear_scroll.Response#num_freed']/*"/>
 	public required int NumFreed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request succeeded.
-	/// This does not indicate whether any scrolling search requests were cleared.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearScrollResponse.g.xml" path="doc/member[@key='_global.clear_scroll.Response#succeeded']/*"/>
 	public required bool Succeeded { get; set; }
 }

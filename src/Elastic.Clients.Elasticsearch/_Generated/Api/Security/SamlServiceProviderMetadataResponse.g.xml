@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.saml_service_provider_metadata.Response#metadata"><summary><para>
+An XML string that contains a SAML Service Provider's metadata for the realm.
+</para></summary></member>
+</doc>

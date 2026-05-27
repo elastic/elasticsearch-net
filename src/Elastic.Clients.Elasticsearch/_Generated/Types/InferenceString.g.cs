@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InferenceString']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InferenceStringConverter))]
 public sealed partial class InferenceString
 {
@@ -43,24 +44,12 @@ public sealed partial class InferenceString
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format of the data. If null, the default data format for the given type is used.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceString.g.xml" path="doc/member[@key='_types.InferenceString#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of data that the value represents.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceString.g.xml" path="doc/member[@key='_types.InferenceString#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// String which may be raw text, or the string representation of some other data such as an image in base64.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceString.g.xml" path="doc/member[@key='_types.InferenceString#value']/*"/>
 	public required string Value { get; set; }
 }

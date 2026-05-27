@@ -23,36 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
 public sealed partial class DeletePrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DeletePrivilegesRequestConverter))]
 public sealed partial class DeletePrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>
 {
@@ -79,49 +59,18 @@ public sealed partial class DeletePrivilegesRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "security.delete_privileges";
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// Application privileges are always associated with exactly one application.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#application']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the privilege.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete application privileges.
-/// </para>
-/// <para>
-/// To use this API, you must have one of the following privileges:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The <c>manage_security</c> cluster privilege (or a greater privilege such as <c>all</c>).
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The "Manage Application Privileges" global privilege for the application being referenced in the request.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_privileges.Request']/*"/>
 public readonly partial struct DeletePrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest Instance { get; init; }
@@ -146,34 +95,21 @@ public readonly partial struct DeletePrivilegesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// Application privileges are always associated with exactly one application.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Application = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the privilege.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePrivilegesRequest.g.xml" path="doc/member[@key='security.delete_privileges.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

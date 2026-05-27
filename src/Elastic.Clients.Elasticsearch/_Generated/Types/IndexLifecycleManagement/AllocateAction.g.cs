@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.AllocateAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.AllocateActionConverter))]
 public sealed partial class AllocateAction
 {
@@ -43,6 +44,7 @@ public sealed partial class AllocateAction
 	public int? TotalShardsPerNode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.AllocateAction']/*"/>
 public readonly partial struct AllocateActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction Instance { get; init; }

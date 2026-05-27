@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="ListQueriesRequest.g.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
 public sealed partial class ListQueriesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get running ES|QL queries information.
-/// </para>
-/// <para>
-/// Returns an object containing IDs and other information about the running ES|QL queries.
-/// </para>
-/// </summary>
+/// <include file="ListQueriesRequest.g.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.ListQueriesRequestConverter))]
 public sealed partial class ListQueriesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class ListQueriesRequest : Elastic.Clients.Elasticsearch.R
 	internal override string OperationName => "esql.list_queries";
 }
 
-/// <summary>
-/// <para>
-/// Get running ES|QL queries information.
-/// </para>
-/// <para>
-/// Returns an object containing IDs and other information about the running ES|QL queries.
-/// </para>
-/// </summary>
+/// <include file="ListQueriesRequest.g.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.list_queries.Request']/*"/>
 public readonly partial struct ListQueriesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest Instance { get; init; }

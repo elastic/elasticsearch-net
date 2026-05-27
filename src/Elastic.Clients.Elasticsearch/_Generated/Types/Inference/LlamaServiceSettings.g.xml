@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.LlamaServiceSettings#max_input_tokens"><summary><para>
+For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
+</para></summary></member>
+  <member key="inference._types.LlamaServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Llama downloading models documentation for different ways of getting a list of available models and downloading them.
+Service has been tested and confirmed to be working with the following models:
+</para>
+<list type="bullet">
+<item>
+<para>
+For <c>text_embedding</c> task - <c>all-MiniLM-L6-v2</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama3.2:3b</c>.
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.LlamaServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from the Llama API.
+By default, the <c>llama</c> service sets the number of requests allowed per minute to 3000.
+</para></summary></member>
+  <member key="inference._types.LlamaServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+</para></summary></member>
+  <member key="inference._types.LlamaServiceSettings#url"><summary><para>
+The URL endpoint of the Llama stack endpoint.
+URL must contain:
+</para>
+<list type="bullet">
+<item>
+<para>
+For <c>text_embedding</c> task - <c>/v1/inference/embeddings</c>.
+</para>
+</item>
+<item>
+<para>
+For <c>completion</c> and <c>chat_completion</c> tasks - <c>/v1/openai/v1/chat/completions</c>.
+</para>
+</item>
+</list></summary></member>
+</doc>

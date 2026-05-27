@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.render_query.Request"><summary><para>
+Render a search application query.
+</para>
+<para>
+Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
+If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
+The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
+</para>
+<para>
+You must have <c>read</c> privileges on the backing alias of the search application.
+</para></summary></member>
+  <member key="search_application.render_query.Request#name"><summary><para>
+The name of the search application to render teh query for.
+</para></summary></member>
+</doc>

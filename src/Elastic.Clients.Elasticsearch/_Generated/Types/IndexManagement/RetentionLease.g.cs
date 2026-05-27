@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.RetentionLease']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RetentionLeaseConverter))]
 public sealed partial class RetentionLease
 {
@@ -45,6 +46,7 @@ public sealed partial class RetentionLease
 	public required Elastic.Clients.Elasticsearch.Duration Period { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.RetentionLease']/*"/>
 public readonly partial struct RetentionLeaseDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease Instance { get; init; }

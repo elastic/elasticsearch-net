@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.FieldAliasPropertyConverter))]
 public sealed partial class FieldAliasProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -40,11 +41,7 @@ public sealed partial class FieldAliasProperty : Elastic.Clients.Elasticsearch.M
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -53,6 +50,7 @@ public sealed partial class FieldAliasProperty : Elastic.Clients.Elasticsearch.M
 	public string Type => "alias";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty']/*"/>
 public readonly partial struct FieldAliasPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty Instance { get; init; }
@@ -96,33 +94,21 @@ public readonly partial struct FieldAliasPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -180,6 +166,7 @@ public readonly partial struct FieldAliasPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty']/*"/>
 public readonly partial struct FieldAliasPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty Instance { get; init; }
@@ -229,33 +216,21 @@ public readonly partial struct FieldAliasPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAliasProperty.g.xml" path="doc/member[@key='_types.mapping.FieldAliasProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

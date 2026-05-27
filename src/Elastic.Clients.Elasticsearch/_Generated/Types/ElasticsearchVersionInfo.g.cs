@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ElasticsearchVersionInfoConverter))]
 public sealed partial class ElasticsearchVersionInfo
 {
@@ -50,72 +51,30 @@ public sealed partial class ElasticsearchVersionInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch Git commit's date.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#build_date']/*"/>
 	public required System.DateTimeOffset BuildDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The build flavor. For example, <c>default</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#build_flavor']/*"/>
 	public required string BuildFlavor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch Git commit's SHA hash.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#build_hash']/*"/>
 	public required string BuildHash { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the Elasticsearch build was a snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#build_snapshot']/*"/>
 	public required bool BuildSnapshot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The build type that corresponds to how Elasticsearch was installed.
-	/// For example, <c>docker</c>, <c>rpm</c>, or <c>tar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#build_type']/*"/>
 	public required string BuildType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The version number of Elasticsearch's underlying Lucene software.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#lucene_version']/*"/>
 	public required string LuceneVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum index version with which the responding node can read from disk.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#minimum_index_compatibility_version']/*"/>
 	public required string MinimumIndexCompatibilityVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum node version with which the responding node can communicate.
-	/// Also the minimum version from which you can perform a rolling upgrade.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#minimum_wire_compatibility_version']/*"/>
 	public required string MinimumWireCompatibilityVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch version number.
-	/// </para>
-	/// <para>
-	/// ::: IMPORTANT: For Serverless deployments, this static value is always <c>8.11.0</c> and is used solely for backward compatibility with legacy clients.
-	/// Serverless environments are versionless and automatically upgraded, so this value can be safely ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ElasticsearchVersionInfo.g.xml" path="doc/member[@key='_types.ElasticsearchVersionInfo#number']/*"/>
 	public required string Number { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Pool']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PoolConverter))]
 public sealed partial class Pool
 {
@@ -36,31 +37,15 @@ public sealed partial class Pool
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, in bytes, available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#max_in_bytes']/*"/>
 	public long? MaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Largest amount of memory, in bytes, historically used by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_max_in_bytes']/*"/>
 	public long? PeakMaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Largest amount of memory, in bytes, historically used by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#peak_used_in_bytes']/*"/>
 	public long? PeakUsedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory, in bytes, used by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="Pool.g.xml" path="doc/member[@key='nodes._types.Pool#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }
 }

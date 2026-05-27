@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 public sealed partial class DeleteTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a legacy index template.
-/// </para>
-/// <para>
-/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
-/// </para>
-/// </summary>
+/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DeleteTemplateRequestConverter))]
 public sealed partial class DeleteTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>
 {
@@ -76,39 +62,18 @@ public sealed partial class DeleteTemplateRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "indices.delete_template";
 
-	/// <summary>
-	/// <para>
-	/// The name of the legacy index template to delete.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a legacy index template.
-/// </para>
-/// <para>
-/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
-/// </para>
-/// </summary>
+/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 public readonly partial struct DeleteTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest Instance { get; init; }
@@ -133,36 +98,21 @@ public readonly partial struct DeleteTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the legacy index template to delete.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

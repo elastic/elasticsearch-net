@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Features;
 public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Features.FeaturesNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Features.FeaturesNamespacedClient> class for mocking.
 	/// </summary>
 	protected FeaturesNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse GetFeatures(System.Action<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
@@ -61,12 +65,16 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
@@ -75,6 +83,8 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Features/GetFeaturesRequest.g.xml" path="doc/member[@key='features.get_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.get_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse> GetFeaturesAsync(System.Action<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor();
@@ -84,12 +94,16 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
@@ -98,6 +112,8 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse ResetFeatures(System.Action<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
@@ -107,12 +123,16 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();
@@ -121,6 +141,8 @@ public partial class FeaturesNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest, Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Features/ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse> ResetFeaturesAsync(System.Action<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor();

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.AdaptiveSelection']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.AdaptiveSelectionConverter))]
 public sealed partial class AdaptiveSelection
 {
@@ -36,52 +37,24 @@ public sealed partial class AdaptiveSelection
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The exponentially weighted moving average queue size of search requests on the keyed node.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#avg_queue_size']/*"/>
 	public long? AvgQueueSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exponentially weighted moving average response time of search requests on the keyed node.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#avg_response_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? AvgResponseTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exponentially weighted moving average response time, in nanoseconds, of search requests on the keyed node.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#avg_response_time_ns']/*"/>
 	public long? AvgResponseTimeNs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exponentially weighted moving average service time of search requests on the keyed node.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#avg_service_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? AvgServiceTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exponentially weighted moving average service time, in nanoseconds, of search requests on the keyed node.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#avg_service_time_ns']/*"/>
 	public long? AvgServiceTimeNs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of outstanding search requests to the keyed node from the node these stats are for.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#outgoing_searches']/*"/>
 	public long? OutgoingSearches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The rank of this node; used for shard selection when routing search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="AdaptiveSelection.g.xml" path="doc/member[@key='nodes._types.AdaptiveSelection#rank']/*"/>
 	public string? Rank { get; set; }
 }

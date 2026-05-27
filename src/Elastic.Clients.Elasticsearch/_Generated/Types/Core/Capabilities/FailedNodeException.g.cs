@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Capabilities;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.capabilities.FailedNodeException']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Capabilities.Json.FailedNodeExceptionConverter))]
 public sealed partial class FailedNodeException
 {

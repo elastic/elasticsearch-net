@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.VoyageAIServiceSettings#dimensions"><summary><para>
+The number of dimensions for resulting output embeddings.
+This setting maps to <c>output_dimension</c> in the VoyageAI documentation.
+Only for the <c>text_embedding</c> task type.
+</para></summary></member>
+  <member key="inference._types.VoyageAIServiceSettings#embedding_type"><summary><para>
+The data type for the embeddings to be returned.
+This setting maps to <c>output_dtype</c> in the VoyageAI documentation.
+Permitted values: float, int8, bit.
+<c>int8</c> is a synonym of <c>byte</c> in the VoyageAI documentation.
+<c>bit</c> is a synonym of <c>binary</c> in the VoyageAI documentation.
+Only for the <c>text_embedding</c> task type.
+</para></summary></member>
+  <member key="inference._types.VoyageAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the VoyageAI documentation for the list of available text embedding and rerank models.
+</para></summary></member>
+  <member key="inference._types.VoyageAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from VoyageAI.
+The <c>voyageai</c> service sets a default number of requests allowed per minute depending on the task type.
+For both <c>text_embedding</c> and <c>rerank</c>, it is set to <c>2000</c>.
+</para></summary></member>
+</doc>

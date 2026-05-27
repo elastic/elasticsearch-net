@@ -23,61 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
 public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#allow_partial_results']/*"/>
 	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row.
-	/// It is valid only for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// <para>
-	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
-	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run an async ES|QL query.
-/// </para>
-/// <para>
-/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-/// </para>
-/// <para>
-/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.AsyncQueryRequestConverter))]
 public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters>
 {
@@ -105,172 +69,60 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "esql.async_query";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#allow_partial_results']/*"/>
 	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row.
-	/// It is valid only for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// <para>
-	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
-	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#columnar']/*"/>
 	public bool? Columnar { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_ccs_metadata']/*"/>
 	public bool? IncludeCcsMetadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_execution_metadata']/*"/>
 	public bool? IncludeExecutionMetadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_on_completion']/*"/>
 	public bool? KeepOnCompletion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#locale']/*"/>
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#query']/*"/>
 	public required string Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run an async ES|QL query.
-/// </para>
-/// <para>
-/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-/// </para>
-/// <para>
-/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
 public readonly partial struct AsyncQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Instance { get; init; }
@@ -289,244 +141,133 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#allow_partial_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor AllowPartialResults(bool? value = true)
 	{
 		Instance.AllowPartialResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row.
-	/// It is valid only for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#delimiter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// <para>
-	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
-	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_ccs_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_execution_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeExecutionMetadata(bool? value = true)
 	{
 		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;
@@ -589,17 +330,8 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run an async ES|QL query.
-/// </para>
-/// <para>
-/// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
-/// </para>
-/// <para>
-/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
-/// </para>
-/// </summary>
+/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query.Request']/*"/>
 public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest Instance { get; init; }
@@ -618,233 +350,126 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#allow_partial_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
 	{
 		Instance.AllowPartialResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row.
-	/// It is valid only for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#delimiter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether columns that are entirely <c>null</c> will be removed from the <c>columns</c> and <c>values</c> portion of the results.
-	/// If <c>true</c>, the response will include an extra section under the name <c>all_columns</c> which has the name of all the columns.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// <para>
-	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
-	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_ccs_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#include_execution_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeExecutionMetadata(bool? value = true)
 	{
 		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#keep_on_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
 	{
 		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryRequest.g.xml" path="doc/member[@key='esql.async_query.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

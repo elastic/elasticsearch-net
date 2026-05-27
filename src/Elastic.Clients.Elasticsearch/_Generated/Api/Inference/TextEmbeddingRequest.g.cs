@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
 public sealed partial class TextEmbeddingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform text embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.TextEmbeddingRequestConverter))]
 public sealed partial class TextEmbeddingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>
 {
@@ -71,76 +66,24 @@ public sealed partial class TextEmbeddingRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "inference.text_embedding";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The input data type for the text embedding model. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// Not all services support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#input_type']/*"/>
 	public string? InputType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform text embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.text_embedding.Request']/*"/>
 public readonly partial struct TextEmbeddingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest Instance { get; init; }
@@ -167,96 +110,42 @@ public readonly partial struct TextEmbeddingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest instance) => new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The input data type for the text embedding model. Possible values include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>SEARCH</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>INGEST</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLASSIFICATION</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>CLUSTERING</c>
-	/// Not all services support all values. Unsupported values will trigger a validation exception.
-	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// info
-	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#input_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor InputType(string? value)
 	{
 		Instance.InputType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingRequest.g.xml" path="doc/member[@key='inference.text_embedding.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.get.Response#hits"><summary><para>
+Contains matching events and sequences. Also contains related metadata.
+</para></summary></member>
+  <member key="eql.get.Response#id"><summary><para>
+Identifier for the search.
+</para></summary></member>
+  <member key="eql.get.Response#is_partial"><summary><para>
+If true, the response does not contain complete search results.
+</para></summary></member>
+  <member key="eql.get.Response#is_running"><summary><para>
+If true, the search request is still executing.
+</para></summary></member>
+  <member key="eql.get.Response#shard_failures"><summary><para>
+Contains information about shard failures (if any), in case allow_partial_search_results=true
+</para></summary></member>
+  <member key="eql.get.Response#timed_out"><summary><para>
+If true, the request timed out before completion.
+</para></summary></member>
+  <member key="eql.get.Response#took"><summary><para>
+Milliseconds it took Elasticsearch to execute the request.
+</para></summary></member>
+</doc>

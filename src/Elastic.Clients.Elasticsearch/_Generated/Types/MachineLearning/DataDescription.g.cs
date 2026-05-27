@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataDescription']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataDescriptionConverter))]
 public sealed partial class DataDescription
 {
@@ -38,28 +39,17 @@ public sealed partial class DataDescription
 
 	public string? FieldDelimiter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only JSON format is supported at this time.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TimeField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_format']/*"/>
 	public string? TimeFormat { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataDescription']/*"/>
 public readonly partial struct DataDescriptionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Instance { get; init; }
@@ -85,44 +75,28 @@ public readonly partial struct DataDescriptionDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only JSON format is supported at this time.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#format']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TimeField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TimeField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_format']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> TimeFormat(string? value)
 	{
 		Instance.TimeFormat = value;
@@ -143,6 +117,7 @@ public readonly partial struct DataDescriptionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataDescription']/*"/>
 public readonly partial struct DataDescriptionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Instance { get; init; }
@@ -168,44 +143,28 @@ public readonly partial struct DataDescriptionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only JSON format is supported at this time.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#format']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TimeField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field that contains the timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TimeField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time format, which can be <c>epoch</c>, <c>epoch_ms</c>, or a custom pattern. The value <c>epoch</c> refers to UNIX or Epoch time (the number of seconds since 1 Jan 1970). The value <c>epoch_ms</c> indicates that time is measured in milliseconds since the epoch. The <c>epoch</c> and <c>epoch_ms</c> time formats accept either integer or real values. Custom patterns must conform to the Java DateTimeFormatter class. When you use date-time formatting patterns, it is recommended that you provide the full date, time and time zone. For example: <c>yyyy-MM-dd'T'HH:mm:ssX</c>. If the pattern that you specify is not sufficient to produce a complete timestamp, job creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="DataDescription.g.xml" path="doc/member[@key='ml._types.DataDescription#time_format']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor TimeFormat(string? value)
 	{
 		Instance.TimeFormat = value;

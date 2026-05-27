@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich._types.Summary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.EnrichSummaryConverter))]
 public sealed partial class EnrichSummary
 {

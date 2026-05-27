@@ -23,32 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
 public sealed partial class ReloadSecureSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Reload the keystore on nodes in the cluster.
-/// </para>
-/// <para>
-/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
-/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
-/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
-/// </para>
-/// <para>
-/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
-/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
-/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
-/// </para>
-/// </summary>
+/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ReloadSecureSettingsRequestConverter))]
 public sealed partial class ReloadSecureSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>
 {
@@ -74,44 +58,18 @@ public sealed partial class ReloadSecureSettingsRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "nodes.reload_secure_settings";
 
-	/// <summary>
-	/// <para>
-	/// The names of particular nodes in the cluster to target.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The password for the Elasticsearch keystore.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#secure_settings_password']/*"/>
 	public string? SecureSettingsPassword { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Reload the keystore on nodes in the cluster.
-/// </para>
-/// <para>
-/// Secure settings are stored in an on-disk keystore. Certain of these settings are reloadable.
-/// That is, you can change them on disk and reload them without restarting any nodes in the cluster.
-/// When you have updated reloadable secure settings in your keystore, you can use this API to reload those settings on each node.
-/// </para>
-/// <para>
-/// When the Elasticsearch keystore is password protected and not simply obfuscated, you must provide the password for the keystore when you reload the secure settings.
-/// Reloading the settings for the whole cluster assumes that the keystores for all nodes are protected with the same password; this method is allowed only when inter-node communications are encrypted.
-/// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
-/// </para>
-/// </summary>
+/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.reload_secure_settings.Request']/*"/>
 public readonly partial struct ReloadSecureSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest Instance { get; init; }
@@ -135,34 +93,21 @@ public readonly partial struct ReloadSecureSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest(Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The names of particular nodes in the cluster to target.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The password for the Elasticsearch keystore.
-	/// </para>
-	/// </summary>
+	/// <include file="ReloadSecureSettingsRequest.g.xml" path="doc/member[@key='nodes.reload_secure_settings.Request#secure_settings_password']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor SecureSettingsPassword(string? value)
 	{
 		Instance.SecureSettingsPassword = value;
