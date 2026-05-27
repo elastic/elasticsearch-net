@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeOperatingSystemInfoConverter))]
 public sealed partial class NodeOperatingSystemInfo
 {
@@ -47,49 +48,25 @@ public sealed partial class NodeOperatingSystemInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of processors actually used to calculate thread pool size. This number can be set with the node.processors setting of a node and defaults to the number of processors reported by the OS.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#allocated_processors']/*"/>
 	public int? AllocatedProcessors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the JVM architecture (ex: amd64, x86)
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#arch']/*"/>
 	public required string Arch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of processors available to the Java virtual machine
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#available_processors']/*"/>
 	public required int AvailableProcessors { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU? Cpu { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the operating system (ex: Linux, Windows, Mac OS X)
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#name']/*"/>
 	public required string Name { get; set; }
 	public required string PrettyName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refresh interval for the OS statistics
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#refresh_interval_in_millis']/*"/>
 	public required System.TimeSpan RefreshIntervalInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Swap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version of the operating system
-	/// </para>
-	/// </summary>
+	/// <include file="NodeOperatingSystemInfo.g.xml" path="doc/member[@key='nodes.info.NodeOperatingSystemInfo#version']/*"/>
 	public required string Version { get; set; }
 }

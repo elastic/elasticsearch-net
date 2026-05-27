@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.BytesProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.BytesProcessorConverter))]
 public sealed partial class BytesProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class BytesProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to convert.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.BytesProcessor']/*"/>
 public readonly partial struct BytesProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.BytesProcessor Instance { get; init; }
@@ -121,100 +88,63 @@ public readonly partial struct BytesProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.BytesProcessor(Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to convert.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to convert.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -227,36 +157,21 @@ public readonly partial struct BytesProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -272,6 +187,7 @@ public readonly partial struct BytesProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.BytesProcessor']/*"/>
 public readonly partial struct BytesProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.BytesProcessor Instance { get; init; }
@@ -291,100 +207,63 @@ public readonly partial struct BytesProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.BytesProcessor(Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to convert.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to convert.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -397,11 +276,7 @@ public readonly partial struct BytesProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -414,36 +289,21 @@ public readonly partial struct BytesProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="BytesProcessor.g.xml" path="doc/member[@key='ingest._types.BytesProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

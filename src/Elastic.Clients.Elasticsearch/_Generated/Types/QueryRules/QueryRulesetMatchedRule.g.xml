@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.test.QueryRulesetMatchedRule#rule_id"><summary><para>
+Rule unique identifier within that ruleset
+</para></summary></member>
+  <member key="query_rules.test.QueryRulesetMatchedRule#ruleset_id"><summary><para>
+Ruleset unique identifier
+</para></summary></member>
+</doc>

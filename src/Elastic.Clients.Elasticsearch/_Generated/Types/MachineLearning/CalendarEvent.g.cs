@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.CalendarEvent']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CalendarEventConverter))]
 public sealed partial class CalendarEvent
 {
@@ -44,36 +45,21 @@ public sealed partial class CalendarEvent
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? CalendarId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the scheduled event.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#description']/*"/>
 	public required string Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#end_time']/*"/>
 	public required System.DateTimeOffset EndTime { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#start_time']/*"/>
 	public required System.DateTimeOffset StartTime { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.CalendarEvent']/*"/>
 public readonly partial struct CalendarEventDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent Instance { get; init; }
@@ -93,33 +79,21 @@ public readonly partial struct CalendarEventDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent instance) => new Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent(Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the scheduled event.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor Description(string value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#end_time']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor EndTime(System.DateTimeOffset value)
 	{
 		Instance.EndTime = value;
@@ -132,11 +106,7 @@ public readonly partial struct CalendarEventDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
-	/// </para>
-	/// </summary>
+	/// <include file="CalendarEvent.g.xml" path="doc/member[@key='ml._types.CalendarEvent#start_time']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor StartTime(System.DateTimeOffset value)
 	{
 		Instance.StartTime = value;

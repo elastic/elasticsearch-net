@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 public sealed partial class GetScriptRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a script or search template.
-/// Retrieves a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetScriptRequestConverter))]
 public sealed partial class GetScriptRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetScriptRequestParameters>
 {
@@ -67,29 +59,15 @@ public sealed partial class GetScriptRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "get_script";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// </para>
-	/// </summary>
+	/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a script or search template.
-/// Retrieves a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script.Request']/*"/>
 public readonly partial struct GetScriptRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GetScriptRequest Instance { get; init; }
@@ -114,24 +92,14 @@ public readonly partial struct GetScriptRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(Elastic.Clients.Elasticsearch.GetScriptRequest instance) => new Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.GetScriptRequest(Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// </para>
-	/// </summary>
+	/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="GetScriptRequest.g.xml" path="doc/member[@key='_global.get_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.GetScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

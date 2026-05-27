@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.JvmStatsConverter))]
 public sealed partial class JvmStats
 {
@@ -44,45 +45,21 @@ public sealed partial class JvmStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#heap_max']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, in bytes, available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#heap_max_in_bytes']/*"/>
 	public required int HeapMaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of Java heap currently being used for caching inference models.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#java_inference']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? JavaInference { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of Java heap, in bytes, currently being used for caching inference models.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#java_inference_in_bytes']/*"/>
 	public required int JavaInferenceInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of Java heap to be used for caching inference models.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#java_inference_max']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? JavaInferenceMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of Java heap, in bytes, to be used for caching inference models.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmStats.g.xml" path="doc/member[@key='ml.get_memory_stats.JvmStats#java_inference_max_in_bytes']/*"/>
 	public required int JavaInferenceMaxInBytes { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.BucketSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.BucketSummaryConverter))]
 public sealed partial class BucketSummary
 {
@@ -51,79 +52,34 @@ public sealed partial class BucketSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum anomaly score, between 0-100, for any of the bucket influencers. This is an overall, rate-limited
-	/// score for the job. All the anomaly records in the bucket contribute to this score. This value might be updated as
-	/// new data is analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#anomaly_score']/*"/>
 	public required double AnomalyScore { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> BucketInfluencers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#bucket_span']/*"/>
 	public required System.TimeSpan BucketSpan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of input data records processed in this bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#event_count']/*"/>
 	public required long EventCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum anomaly score for any of the bucket influencers. This is the initial value that was calculated at the
-	/// time the bucket was processed.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#initial_anomaly_score']/*"/>
 	public required double InitialAnomalyScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#is_interim']/*"/>
 	public required bool IsInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The amount of time, in milliseconds, that it took to analyze the bucket contents and calculate results.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#processing_time_ms']/*"/>
 	public required System.TimeSpan ProcessingTimeMs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Internal. This value is always set to bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#result_type']/*"/>
 	public required string ResultType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the
-	/// timestamp of the bucket are included in the results for the bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket. This timestamp uniquely identifies the bucket. Events that occur exactly at the
-	/// timestamp of the bucket are included in the results for the bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketSummary.g.xml" path="doc/member[@key='ml._types.BucketSummary#timestamp_string']/*"/>
 	public System.DateTimeOffset? TimestampString { get; set; }
 }

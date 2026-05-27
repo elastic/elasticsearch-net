@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.ReadBlobDetailsConverter))]
 public sealed partial class ReadBlobDetails
 {
@@ -44,73 +45,30 @@ public sealed partial class ReadBlobDetails
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the read operation may have started before the write operation was complete.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#before_write_complete']/*"/>
 	public bool? BeforeWriteComplete { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent reading the blob.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#elapsed']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Elapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent reading the blob, in nanoseconds.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#elapsed_nanos']/*"/>
 	public System.TimeSpan? ElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time waiting for the first byte of the read operation to be received.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#first_byte_time']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? FirstByteTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time waiting for the first byte of the read operation to be received, in nanoseconds.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#first_byte_time_nanos']/*"/>
 	public required System.TimeSpan FirstByteTimeNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the blob was found by the read operation.
-	/// If the read was started before the write completed or the write was ended before completion, it might be false.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#found']/*"/>
 	public required bool Found { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node that performed the read operation.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#node']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo Node { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles during the read of the blob.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles during the read of the blob, in nanoseconds.
-	/// If the blob was not found, this detail is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadBlobDetails.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadBlobDetails#throttled_nanos']/*"/>
 	public System.TimeSpan? ThrottledNanos { get; set; }
 }

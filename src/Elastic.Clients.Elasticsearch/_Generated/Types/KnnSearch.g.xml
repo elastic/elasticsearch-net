@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.KnnSearch#boost"><summary><para>
+Boost value to apply to kNN scores
+</para></summary></member>
+  <member key="_types.KnnSearch#field"><summary><para>
+The name of the vector field to search against
+</para></summary></member>
+  <member key="_types.KnnSearch#filter"><summary><para>
+Filters for the kNN search query
+</para></summary></member>
+  <member key="_types.KnnSearch#inner_hits"><summary><para>
+If defined, each search hit will contain inner hits.
+</para></summary></member>
+  <member key="_types.KnnSearch#k"><summary><para>
+The final number of nearest neighbors to return as top hits
+</para></summary></member>
+  <member key="_types.KnnSearch#num_candidates"><summary><para>
+The number of nearest neighbor candidates to consider per shard
+</para></summary></member>
+  <member key="_types.KnnSearch#query_vector"><summary><para>
+The query vector
+</para></summary></member>
+  <member key="_types.KnnSearch#query_vector_builder"><summary><para>
+The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
+</para></summary></member>
+  <member key="_types.KnnSearch#rescore_vector"><summary><para>
+Apply oversampling and rescoring to quantized vectors *
+</para></summary></member>
+  <member key="_types.KnnSearch#similarity"><summary><para>
+The minimum similarity for a vector to be considered a match
+</para></summary></member>
+</doc>

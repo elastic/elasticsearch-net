@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineSort']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoLineSortConverter))]
 public sealed partial class GeoLineSort
 {
@@ -42,14 +43,11 @@ public sealed partial class GeoLineSort
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineSort.g.xml" path="doc/member[@key='_types.aggregations.GeoLineSort#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineSort']/*"/>
 public readonly partial struct GeoLineSortDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct GeoLineSortDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineSort.g.xml" path="doc/member[@key='_types.aggregations.GeoLineSort#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineSort.g.xml" path="doc/member[@key='_types.aggregations.GeoLineSort#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -100,6 +90,7 @@ public readonly partial struct GeoLineSortDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineSort']/*"/>
 public readonly partial struct GeoLineSortDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Instance { get; init; }
@@ -119,22 +110,14 @@ public readonly partial struct GeoLineSortDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineSort.g.xml" path="doc/member[@key='_types.aggregations.GeoLineSort#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineSort.g.xml" path="doc/member[@key='_types.aggregations.GeoLineSort#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;

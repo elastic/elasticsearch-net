@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get.Request"><summary><para>
+Get index information.
+Get information about one or more indices. For data streams, the API returns information about the
+stream’s backing indices.
+</para></summary></member>
+  <member key="indices.get.Request#allow_no_indices"><summary><para>
+If false, the request returns an error if any wildcard expression, index alias, or _all value targets only
+missing or closed indices. This behavior applies even if the request targets other open indices. For example,
+a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+</para></summary></member>
+  <member key="indices.get.Request#expand_wildcards"><summary><para>
+Type of index that wildcard expressions can match. If the request can target data streams, this argument
+determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+such as open,hidden.
+</para></summary></member>
+  <member key="indices.get.Request#features"><summary><para>
+Return only information on specified index features
+</para></summary></member>
+  <member key="indices.get.Request#flat_settings"><summary><para>
+If true, returns settings in flat format.
+</para></summary></member>
+  <member key="indices.get.Request#ignore_unavailable"><summary><para>
+If false, requests that target a missing index return an error.
+</para></summary></member>
+  <member key="indices.get.Request#include_defaults"><summary><para>
+If true, return all default settings in the response.
+</para></summary></member>
+  <member key="indices.get.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and index aliases used to limit the request.
+Wildcard expressions (*) are supported.
+</para></summary></member>
+  <member key="indices.get.Request#local"><summary><para>
+If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+</para></summary></member>
+  <member key="indices.get.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

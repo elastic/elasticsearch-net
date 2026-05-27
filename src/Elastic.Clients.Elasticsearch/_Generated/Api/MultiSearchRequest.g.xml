@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.msearch.Request"><summary><para>
+Run multiple searches.
+</para>
+<para>
+The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+The structure is as follows:
+</para>
+<code>
+header\n
+body\n
+header\n
+body\n
+</code>
+<para>
+This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+</para>
+<para>
+IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
+Each newline character may be preceded by a carriage return <c>\r</c>.
+When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
+</para></summary></member>
+  <member key="_global.msearch.Request#allow_no_indices"><summary><para>
+If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+</para></summary></member>
+  <member key="_global.msearch.Request#ccs_minimize_roundtrips"><summary><para>
+If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
+</para></summary></member>
+  <member key="_global.msearch.Request#expand_wildcards"><summary><para>
+Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+</para></summary></member>
+  <member key="_global.msearch.Request#ignore_throttled"><summary><para>
+If true, concrete, expanded or aliased indices are ignored when frozen.
+</para></summary></member>
+  <member key="_global.msearch.Request#ignore_unavailable"><summary><para>
+If true, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="_global.msearch.Request#include_named_queries_score"><summary><para>
+Indicates whether hit.matched_queries should be rendered as a map that includes
+the name of the matched query associated with its score (true)
+or as an array containing the name of the matched queries (false)
+This functionality reruns each named query on every hit in a search response.
+Typically, this adds a small overhead to a request.
+However, using computationally expensive named queries on a large number of hits may add significant overhead.
+</para></summary></member>
+  <member key="_global.msearch.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and index aliases to search.
+</para></summary></member>
+  <member key="_global.msearch.Request#max_concurrent_searches"><summary><para>
+Maximum number of concurrent searches the multi search API can execute.
+</para></summary></member>
+  <member key="_global.msearch.Request#max_concurrent_shard_requests"><summary><para>
+Maximum number of concurrent shard requests that each sub-search request executes per node.
+</para></summary></member>
+  <member key="_global.msearch.Request#pre_filter_shard_size"><summary><para>
+Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
+</para></summary></member>
+  <member key="_global.msearch.Request#rest_total_hits_as_int"><summary><para>
+If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
+</para></summary></member>
+  <member key="_global.msearch.Request#routing"><summary><para>
+Custom routing value used to route search operations to a specific shard.
+</para></summary></member>
+  <member key="_global.msearch.Request#search_type"><summary><para>
+Indicates whether global term and document frequencies should be used when scoring returned documents.
+</para></summary></member>
+  <member key="_global.msearch.Request#typed_keys"><summary><para>
+Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
+</para></summary></member>
+</doc>

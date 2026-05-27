@@ -37,11 +37,6 @@ public sealed partial class SamlLogoutResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A URL that contains a SAML logout request as a parameter.
-	/// You can use this URL to be redirected back to the SAML IdP and to initiate Single Logout.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlLogoutResponse.g.xml" path="doc/member[@key='security.saml_logout.Response#redirect']/*"/>
 	public required string Redirect { get; set; }
 }

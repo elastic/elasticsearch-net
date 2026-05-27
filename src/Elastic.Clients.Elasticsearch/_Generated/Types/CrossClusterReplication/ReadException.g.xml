@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr._types.ReadException#exception"><summary><para>
+The exception that caused the read to fail.
+</para></summary></member>
+  <member key="ccr._types.ReadException#from_seq_no"><summary><para>
+The starting sequence number of the batch requested from the leader.
+</para></summary></member>
+  <member key="ccr._types.ReadException#retries"><summary><para>
+The number of times the batch has been retried.
+</para></summary></member>
+</doc>

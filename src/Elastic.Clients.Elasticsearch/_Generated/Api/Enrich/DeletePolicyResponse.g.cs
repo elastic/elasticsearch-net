@@ -37,10 +37,6 @@ public sealed partial class DeletePolicyResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyResponse.g.xml" path="doc/member[@key='enrich.delete_policy.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

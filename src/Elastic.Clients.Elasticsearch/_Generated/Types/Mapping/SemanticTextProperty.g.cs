@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SemanticTextPropertyConverter))]
 public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -36,53 +37,26 @@ public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for chunking text into smaller passages. If specified, these will override the
-	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
-	/// they will not be applied to existing documents until they are reindexed.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? IndexOptions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings for the field.
-	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
-	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? InferenceId { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings at query time.
-	/// You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
-	/// If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#search_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? SearchInferenceId { get; set; }
 
 	public string Type => "semantic_text";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty']/*"/>
 public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty Instance { get; init; }
@@ -102,99 +76,56 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Settings for chunking text into smaller passages. If specified, these will override the
-	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
-	/// they will not be applied to existing documents until they are reindexed.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for chunking text into smaller passages. If specified, these will override the
-	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
-	/// they will not be applied to existing documents until they are reindexed.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? value)
 	{
 		Instance.IndexOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions()
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor>? action)
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings for the field.
-	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
-	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
@@ -226,13 +157,7 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings at query time.
-	/// You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
-	/// If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#search_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> SearchInferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.SearchInferenceId = value;
@@ -253,6 +178,7 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty']/*"/>
 public readonly partial struct SemanticTextPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty Instance { get; init; }
@@ -272,111 +198,63 @@ public readonly partial struct SemanticTextPropertyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Settings for chunking text into smaller passages. If specified, these will override the
-	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
-	/// they will not be applied to existing documents until they are reindexed.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for chunking text into smaller passages. If specified, these will override the
-	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
-	/// they will not be applied to existing documents until they are reindexed.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
-	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? value)
 	{
 		Instance.IndexOptions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions()
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings for index_options that override any defaults used by semantic_text, for example
-	/// specific quantization settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#index_options']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor>? action)
 	{
 		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings for the field.
-	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
-	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
@@ -408,13 +286,7 @@ public readonly partial struct SemanticTextPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference endpoint that will be used to generate embeddings at query time.
-	/// You can update this parameter by using the Update mapping API. Use the Create inference API to create the endpoint.
-	/// If not specified, the inference endpoint defined by inference_id will be used at both index and query time.
-	/// </para>
-	/// </summary>
+	/// <include file="SemanticTextProperty.g.xml" path="doc/member[@key='_types.mapping.SemanticTextProperty#search_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor SearchInferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.SearchInferenceId = value;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RankFeatureFunctionLogarithm#scaling_factor"><summary><para>
+Configurable scaling factor.
+</para></summary></member>
+</doc>

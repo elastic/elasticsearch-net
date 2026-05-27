@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.get_transform_stats.TransformStatsHealth#issues"><summary><para>
+If a non-healthy status is returned, contains a list of issues of the transform.
+</para></summary></member>
+</doc>

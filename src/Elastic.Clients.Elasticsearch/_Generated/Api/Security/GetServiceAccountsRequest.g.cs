@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
 public sealed partial class GetServiceAccountsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get service accounts.
-/// </para>
-/// <para>
-/// Get a list of service accounts that match the provided path parameters.
-/// </para>
-/// <para>
-/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
-/// </para>
-/// </summary>
+/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetServiceAccountsRequestConverter))]
 public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>
 {
@@ -67,35 +60,15 @@ public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "security.get_service_accounts";
 
-	/// <summary>
-	/// <para>
-	/// The name of the namespace.
-	/// Omit this parameter to retrieve information about all service accounts.
-	/// If you omit this parameter, you must also omit the <c>service</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#namespace']/*"/>
 	public string? Namespace { get => P<string?>("namespace"); set => PO("namespace", value); }
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// Omit this parameter to retrieve information about all service accounts that belong to the specified <c>namespace</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#service']/*"/>
 	public string? Service { get => P<string?>("service"); set => PO("service", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get service accounts.
-/// </para>
-/// <para>
-/// Get a list of service accounts that match the provided path parameters.
-/// </para>
-/// <para>
-/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
-/// </para>
-/// </summary>
+/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_service_accounts.Request']/*"/>
 public readonly partial struct GetServiceAccountsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest Instance { get; init; }
@@ -124,25 +97,14 @@ public readonly partial struct GetServiceAccountsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the namespace.
-	/// Omit this parameter to retrieve information about all service accounts.
-	/// If you omit this parameter, you must also omit the <c>service</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Namespace(string? value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The service name.
-	/// Omit this parameter to retrieve information about all service accounts that belong to the specified <c>namespace</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetServiceAccountsRequest.g.xml" path="doc/member[@key='security.get_service_accounts.Request#service']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor Service(string? value)
 	{
 		Instance.Service = value;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_alias.Request"><summary><para>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</para></summary></member>
+  <member key="indices.put_alias.Request#filter"><summary><para>
+Query used to limit documents the alias can access.
+</para></summary></member>
+  <member key="indices.put_alias.Request#index"><summary><para>
+Comma-separated list of data streams or indices to add.
+Supports wildcards (<c>*</c>).
+Wildcard patterns that match both data streams and indices return an error.
+</para></summary></member>
+  <member key="indices.put_alias.Request#index_routing"><summary><para>
+Value used to route indexing operations to a specific shard.
+If specified, this overwrites the <c>routing</c> value for indexing operations.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+  <member key="indices.put_alias.Request#is_write_index"><summary><para>
+If <c>true</c>, sets the write index or data stream for the alias.
+If an alias points to multiple indices or data streams and <c>is_write_index</c> isn’t set, the alias rejects write requests.
+If an index alias points to one index and <c>is_write_index</c> isn’t set, the index automatically acts as the write index.
+Data stream aliases don’t automatically set a write data stream, even if the alias points to one data stream.
+</para></summary></member>
+  <member key="indices.put_alias.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.put_alias.Request#name"><summary><para>
+Alias to update.
+If the alias doesn’t exist, the request creates it.
+Index alias names support date math.
+</para></summary></member>
+  <member key="indices.put_alias.Request#routing"><summary><para>
+Value used to route indexing and search operations to a specific shard.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+  <member key="indices.put_alias.Request#search_routing"><summary><para>
+Value used to route search operations to a specific shard.
+If specified, this overwrites the <c>routing</c> value for search operations.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+  <member key="indices.put_alias.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

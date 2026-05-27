@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateHistogramAggregationConverter))]
 public sealed partial class DateHistogramAggregation
 {
@@ -36,93 +37,45 @@ public sealed partial class DateHistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calendar-aware interval.
-	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? ExtendedBounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? HardBounds { get; set; }
 	[System.Obsolete("Deprecated in '7.2.0'. use `fixed_interval` or `calendar_interval`")]
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#min_doc_count']/*"/>
 	public int? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#missing']/*"/>
 	public System.DateTimeOffset? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time zone used for bucketing and rounding.
-	/// Defaults to Coordinated Universal Time (UTC).
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation']/*"/>
 public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation Instance { get; init; }
@@ -142,123 +95,77 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Calendar-aware interval.
-	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? value)
 	{
 		Instance.ExtendedBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> ExtendedBounds()
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.FixedInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? value)
 	{
 		Instance.HardBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> HardBounds()
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
@@ -272,68 +179,42 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
@@ -397,12 +278,7 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone used for bucketing and rounding.
-	/// Defaults to Coordinated Universal Time (UTC).
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -423,6 +299,7 @@ public readonly partial struct DateHistogramAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation']/*"/>
 public readonly partial struct DateHistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation Instance { get; init; }
@@ -442,123 +319,77 @@ public readonly partial struct DateHistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Calendar-aware interval.
-	/// Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? value)
 	{
 		Instance.ExtendedBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor ExtendedBounds()
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.FixedInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>? value)
 	{
 		Instance.HardBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor HardBounds()
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the histogram to specified bounds.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfFieldDateMathDescriptor.Build(action);
@@ -572,79 +403,49 @@ public readonly partial struct DateHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, all buckets between the first bucket that matches documents and the last one are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
@@ -708,12 +509,7 @@ public readonly partial struct DateHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone used for bucketing and rounding.
-	/// Defaults to Coordinated Universal Time (UTC).
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateHistogramAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

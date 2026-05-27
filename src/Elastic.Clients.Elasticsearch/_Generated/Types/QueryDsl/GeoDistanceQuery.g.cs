@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoDistanceQueryConverter))]
 public sealed partial class GeoDistanceQuery
 {
@@ -44,52 +45,26 @@ public sealed partial class GeoDistanceQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The radius of the circle centred on the specified location.
-	/// Points which fall into this circle are considered to be matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance']/*"/>
 	public required string Distance { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How to compute the distance.
-	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 	public required Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery']/*"/>
 public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery Instance { get; init; }
@@ -109,38 +84,21 @@ public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The radius of the circle centred on the specified location.
-	/// Points which fall into this circle are considered to be matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> Distance(string value)
 	{
 		Instance.Distance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to compute the distance.
-	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
 		Instance.DistanceType = value;
@@ -159,12 +117,7 @@ public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -189,12 +142,7 @@ public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? value)
 	{
 		Instance.ValidationMethod = value;
@@ -210,6 +158,7 @@ public readonly partial struct GeoDistanceQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery']/*"/>
 public readonly partial struct GeoDistanceQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery Instance { get; init; }
@@ -229,38 +178,21 @@ public readonly partial struct GeoDistanceQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The radius of the circle centred on the specified location.
-	/// Points which fall into this circle are considered to be matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor Distance(string value)
 	{
 		Instance.Distance = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How to compute the distance.
-	/// Set to <c>plane</c> for a faster calculation that's inaccurate on long distances and close to the poles.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#distance_type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? value)
 	{
 		Instance.DistanceType = value;
@@ -279,12 +211,7 @@ public readonly partial struct GeoDistanceQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to ignore an unmapped field and not match any documents for this query.
-	/// Set to <c>false</c> to throw an exception if the field is not mapped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -309,12 +236,7 @@ public readonly partial struct GeoDistanceQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>IGNORE_MALFORMED</c> to accept geo points with invalid latitude or longitude.
-	/// Set to <c>COERCE</c> to also try to infer correct latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceQuery#validation_method']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? value)
 	{
 		Instance.ValidationMethod = value;

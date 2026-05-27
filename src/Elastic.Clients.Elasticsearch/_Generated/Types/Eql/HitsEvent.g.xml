@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql._types.HitsEvent#_id"><summary><para>
+Unique identifier for the event. This ID is only unique within the index.
+</para></summary></member>
+  <member key="eql._types.HitsEvent#_index"><summary><para>
+Name of the index containing the event.
+</para></summary></member>
+  <member key="eql._types.HitsEvent#_source"><summary><para>
+Original JSON body passed for the event at index time.
+</para></summary></member>
+  <member key="eql._types.HitsEvent#missing"><summary><para>
+Set to <c>true</c> for events in a timespan-constrained sequence that do not meet a given condition.
+</para></summary></member>
+</doc>

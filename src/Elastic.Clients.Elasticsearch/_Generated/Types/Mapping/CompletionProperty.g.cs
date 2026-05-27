@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CompletionProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.CompletionPropertyConverter))]
 public sealed partial class CompletionProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class CompletionProperty : Elastic.Clients.Elasticsearch.M
 	public int? IgnoreAbove { get; set; }
 	public int? MaxInputLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? PreservePositionIncrements { get; set; }
 	public bool? PreserveSeparators { get; set; }
@@ -61,6 +58,7 @@ public sealed partial class CompletionProperty : Elastic.Clients.Elasticsearch.M
 	public string Type => "completion";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CompletionProperty']/*"/>
 public readonly partial struct CompletionPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.CompletionProperty Instance { get; init; }
@@ -158,33 +156,21 @@ public readonly partial struct CompletionPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -254,6 +240,7 @@ public readonly partial struct CompletionPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CompletionProperty']/*"/>
 public readonly partial struct CompletionPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.CompletionProperty Instance { get; init; }
@@ -369,33 +356,21 @@ public readonly partial struct CompletionPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionProperty.g.xml" path="doc/member[@key='_types.mapping.CompletionProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

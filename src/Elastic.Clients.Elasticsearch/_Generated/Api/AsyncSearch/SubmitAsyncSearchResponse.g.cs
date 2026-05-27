@@ -37,42 +37,20 @@ public sealed partial class SubmitAsyncSearchResponse<TDocument> : Elastic.Trans
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates when the async search completed.
-	/// It is present only when the search has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchResponse.g.xml" path="doc/member[@key='async_search.submit.Response#completion_time']/*"/>
 	public System.DateTimeOffset? CompletionTime { get; set; }
 	public System.DateTimeOffset? CompletionTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates when the async search will expire.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchResponse.g.xml" path="doc/member[@key='async_search.submit.Response#expiration_time']/*"/>
 	public System.DateTimeOffset? ExpirationTime { get; set; }
 	public required System.DateTimeOffset ExpirationTimeInMillis { get; set; }
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When the query is no longer running, this property indicates whether the search failed or was successfully completed on all shards.
-	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchResponse.g.xml" path="doc/member[@key='async_search.submit.Response#is_partial']/*"/>
 	public required bool IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the search is still running or has completed.
-	/// </para>
-	/// <para>
-	/// info
-	/// If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SubmitAsyncSearchResponse.g.xml" path="doc/member[@key='async_search.submit.Response#is_running']/*"/>
 	public required bool IsRunning { get; set; }
 	public required Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }

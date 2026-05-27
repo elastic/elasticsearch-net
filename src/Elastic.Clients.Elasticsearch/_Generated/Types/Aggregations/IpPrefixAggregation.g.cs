@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.IpPrefixAggregationConverter))]
 public sealed partial class IpPrefixAggregation
 {
@@ -43,43 +44,23 @@ public sealed partial class IpPrefixAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix length is appended to IP address keys in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#append_prefix_length']/*"/>
 	public bool? AppendPrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix applies to IPv6 addresses.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#is_ipv6']/*"/>
 	public bool? IsIpv6 { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of documents in a bucket for it to be included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#min_doc_count']/*"/>
 	public long? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
-	/// For IPv6 addresses the accepted range is [0, 128].
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#prefix_length']/*"/>
 	public required int PrefixLength { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation']/*"/>
 public readonly partial struct IpPrefixAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Instance { get; init; }
@@ -99,67 +80,42 @@ public readonly partial struct IpPrefixAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix length is appended to IP address keys in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#append_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> AppendPrefixLength(bool? value = true)
 	{
 		Instance.AppendPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix applies to IPv6 addresses.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#is_ipv6']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> IsIpv6(bool? value = true)
 	{
 		Instance.IsIpv6 = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of documents in a bucket for it to be included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
-	/// For IPv6 addresses the accepted range is [0, 128].
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument> PrefixLength(int value)
 	{
 		Instance.PrefixLength = value;
@@ -175,6 +131,7 @@ public readonly partial struct IpPrefixAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation']/*"/>
 public readonly partial struct IpPrefixAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Instance { get; init; }
@@ -194,67 +151,42 @@ public readonly partial struct IpPrefixAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix length is appended to IP address keys in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#append_prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor AppendPrefixLength(bool? value = true)
 	{
 		Instance.AppendPrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines whether the prefix applies to IPv6 addresses.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#is_ipv6']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor IsIpv6(bool? value = true)
 	{
 		Instance.IsIpv6 = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of documents in a bucket for it to be included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
-	/// For IPv6 addresses the accepted range is [0, 128].
-	/// </para>
-	/// </summary>
+	/// <include file="IpPrefixAggregation.g.xml" path="doc/member[@key='_types.aggregations.IpPrefixAggregation#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor PrefixLength(int value)
 	{
 		Instance.PrefixLength = value;

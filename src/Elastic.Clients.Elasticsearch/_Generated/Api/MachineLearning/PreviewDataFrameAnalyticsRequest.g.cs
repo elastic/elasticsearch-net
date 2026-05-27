@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Preview features used by data frame analytics.
-/// Preview the extracted features used by a data frame analytics config.
-/// </para>
-/// </summary>
+/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PreviewDataFrameAnalyticsRequestConverter))]
 public sealed partial class PreviewDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestParameters>
 {
@@ -58,29 +56,15 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : Elastic.Clients.E
 
 	internal override string OperationName => "ml.preview_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? Config { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Preview features used by data frame analytics.
-/// Preview the extracted features used by a data frame analytics config.
-/// </para>
-/// </summary>
+/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Instance { get; init; }
@@ -104,50 +88,28 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? value)
 	{
 		Instance.Config = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor> action)
 	{
 		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor Config<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<T>> action)
 	{
 		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<T>.Build(action);
@@ -215,12 +177,8 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Preview features used by data frame analytics.
-/// Preview the extracted features used by a data frame analytics config.
-/// </para>
-/// </summary>
+/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request']/*"/>
 public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest Instance { get; init; }
@@ -244,37 +202,21 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor<TDocum
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig? value)
 	{
 		Instance.Config = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A data frame analytics config as described in create data frame analytics
-	/// jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
-	/// this API.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Request#config']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsRequestDescriptor<TDocument> Config(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>> action)
 	{
 		Instance.Config = Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument>.Build(action);

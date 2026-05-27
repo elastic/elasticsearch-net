@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.GoogleVertexAIServiceSettings#location"><summary><para>
+The name of the location to use for the inference task.
+Refer to the Google documentation for the list of supported locations.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Google documentation for the list of supported models.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAIServiceSettings#project_id"><summary><para>
+The name of the project to use for the inference task.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
+By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAIServiceSettings#service_account_json"><summary><para>
+A valid service account in JSON format for the Google Vertex AI API.
+</para></summary></member>
+</doc>

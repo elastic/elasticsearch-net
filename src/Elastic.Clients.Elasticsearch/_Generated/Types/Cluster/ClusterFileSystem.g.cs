@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterFileSystemConverter))]
 public sealed partial class ClusterFileSystem
 {
@@ -36,38 +37,18 @@ public sealed partial class ClusterFileSystem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes available to JVM in file stores across all selected nodes.
-	/// Depending on operating system or process-level restrictions, this number may be less than <c>nodes.fs.free_in_byes</c>.
-	/// This is the actual amount of free disk space the selected Elasticsearch nodes can use.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#available']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Available { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes available to JVM in file stores across all selected nodes.
-	/// Depending on operating system or process-level restrictions, this number may be less than <c>nodes.fs.free_in_byes</c>.
-	/// This is the actual amount of free disk space the selected Elasticsearch nodes can use.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#available_in_bytes']/*"/>
 	public long? AvailableInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? FloodStageFreeSpace { get; set; }
 	public long? FloodStageFreeSpaceInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of unallocated bytes in file stores across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#free']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Free { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number, in bytes, of unallocated bytes in file stores across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? FrozenFloodStageFreeSpace { get; set; }
 	public long? FrozenFloodStageFreeSpaceInBytes { get; set; }
@@ -78,18 +59,10 @@ public sealed partial class ClusterFileSystem
 	public string? Mount { get; set; }
 	public string? Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all file stores across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#total']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size, in bytes, of all file stores across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterFileSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterFileSystem#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 	public string? Type { get; set; }
 }

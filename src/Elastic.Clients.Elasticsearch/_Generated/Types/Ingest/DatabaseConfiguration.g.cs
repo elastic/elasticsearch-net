@@ -47,12 +47,6 @@ public sealed partial class DatabaseConfiguration
 
 	public Elastic.Clients.Elasticsearch.Ingest.Ipinfo? Ipinfo { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.Ipinfo>("ipinfo"); set => SetVariant("ipinfo", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.Maxmind? Maxmind { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.Maxmind>("maxmind"); set => SetVariant("maxmind", value); }
-
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -123,11 +117,6 @@ public readonly partial struct DatabaseConfigurationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.DatabaseConfigurationDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

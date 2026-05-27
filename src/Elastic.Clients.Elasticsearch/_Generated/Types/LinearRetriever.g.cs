@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LinearRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.LinearRetrieverConverter))]
 public sealed partial class LinearRetriever
 {
@@ -38,38 +39,23 @@ public sealed partial class LinearRetriever
 
 	public System.Collections.Generic.ICollection<string>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#_name']/*"/>
 	public string? Name { get; set; }
 	public Elastic.Clients.Elasticsearch.ScoreNormalizer? Normalizer { get; set; }
 	public string? Query { get; set; }
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>? Retrievers { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LinearRetriever']/*"/>
 public readonly partial struct LinearRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.LinearRetriever Instance { get; init; }
@@ -101,33 +87,21 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -140,22 +114,14 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
@@ -180,33 +146,21 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>? value)
 	{
 		Instance.Retrievers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.InnerRetriever[] values)
 	{
 		Instance.Retrievers = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Retrievers(params System.Action<Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.InnerRetriever>();
@@ -233,6 +187,7 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.LinearRetriever']/*"/>
 public readonly partial struct LinearRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LinearRetriever Instance { get; init; }
@@ -264,33 +219,21 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -303,11 +246,7 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -320,22 +259,14 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
@@ -360,33 +291,21 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>? value)
 	{
 		Instance.Retrievers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Retrievers(params Elastic.Clients.Elasticsearch.InnerRetriever[] values)
 	{
 		Instance.Retrievers = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Retrievers(params System.Action<Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.InnerRetriever>();
@@ -399,11 +318,7 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retrievers.
-	/// </para>
-	/// </summary>
+	/// <include file="LinearRetriever.g.xml" path="doc/member[@key='_types.LinearRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Retrievers<T>(params System.Action<Elastic.Clients.Elasticsearch.InnerRetrieverDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.InnerRetriever>();

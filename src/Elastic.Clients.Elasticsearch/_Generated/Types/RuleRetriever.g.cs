@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RuleRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RuleRetrieverConverter))]
 public sealed partial class RuleRetriever
 {
@@ -44,56 +45,29 @@ public sealed partial class RuleRetriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#match_criteria']/*"/>
 	public required object MatchCriteria { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#_name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#rank_window_size']/*"/>
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#ruleset_ids']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RuleRetriever']/*"/>
 public readonly partial struct RuleRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.RuleRetriever Instance { get; init; }
@@ -113,33 +87,21 @@ public readonly partial struct RuleRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RuleRetriever instance) => new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -152,88 +114,56 @@ public readonly partial struct RuleRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#match_criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> MatchCriteria(object value)
 	{
 		Instance.MatchCriteria = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#ruleset_ids']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
 		Instance.RulesetIds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#ruleset_ids']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument> RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.RulesetIds = [.. values];
@@ -249,6 +179,7 @@ public readonly partial struct RuleRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RuleRetriever']/*"/>
 public readonly partial struct RuleRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RuleRetriever Instance { get; init; }
@@ -268,33 +199,21 @@ public readonly partial struct RuleRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor(Elastic.Clients.Elasticsearch.RuleRetriever instance) => new Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RuleRetriever(Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -307,11 +226,7 @@ public readonly partial struct RuleRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -324,99 +239,63 @@ public readonly partial struct RuleRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#match_criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor MatchCriteria(object value)
 	{
 		Instance.MatchCriteria = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retriever whose results rules should be applied to.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#ruleset_ids']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
 	{
 		Instance.RulesetIds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ruleset IDs containing the rules this retriever is evaluating against.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleRetriever.g.xml" path="doc/member[@key='_types.RuleRetriever#ruleset_ids']/*"/>
 	public Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor RulesetIds(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.RulesetIds = [.. values];

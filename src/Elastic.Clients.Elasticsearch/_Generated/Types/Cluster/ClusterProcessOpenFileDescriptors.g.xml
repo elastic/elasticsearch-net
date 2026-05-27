@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterProcessOpenFileDescriptors#avg"><summary><para>
+Average number of concurrently open file descriptors.
+Returns <c>-1</c> if not supported.
+</para></summary></member>
+  <member key="cluster.stats.ClusterProcessOpenFileDescriptors#max"><summary><para>
+Maximum number of concurrently open file descriptors allowed across all selected nodes.
+Returns <c>-1</c> if not supported.
+</para></summary></member>
+  <member key="cluster.stats.ClusterProcessOpenFileDescriptors#min"><summary><para>
+Minimum number of concurrently open file descriptors across all selected nodes.
+Returns -1 if not supported.
+</para></summary></member>
+</doc>

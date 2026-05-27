@@ -23,17 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 public sealed partial class EqlDeleteRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete an async EQL search.
-/// Delete an async EQL search or a stored synchronous EQL search.
-/// The API also deletes results for the search.
-/// </para>
-/// </summary>
+/// <include file="EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.EqlDeleteRequestConverter))]
 public sealed partial class EqlDeleteRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>
 {
@@ -60,23 +57,12 @@ public sealed partial class EqlDeleteRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "eql.delete";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search to delete.
-	/// A search ID is provided in the EQL search API's response for an async search.
-	/// A search ID is also provided if the request’s <c>keep_on_completion</c> parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an async EQL search.
-/// Delete an async EQL search or a stored synchronous EQL search.
-/// The API also deletes results for the search.
-/// </para>
-/// </summary>
+/// <include file="EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.delete.Request']/*"/>
 public readonly partial struct EqlDeleteRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest Instance { get; init; }
@@ -101,13 +87,7 @@ public readonly partial struct EqlDeleteRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search to delete.
-	/// A search ID is provided in the EQL search API's response for an async search.
-	/// A search ID is also provided if the request’s <c>keep_on_completion</c> parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlDeleteRequest.g.xml" path="doc/member[@key='eql.delete.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

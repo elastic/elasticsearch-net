@@ -37,27 +37,14 @@ public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the request contained a size limit and there might be more results, a <c>next</c> field will be added to the response.
-	/// It can be used as the <c>after</c> query parameter to fetch additional results.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSnapshotResponse.g.xml" path="doc/member[@key='snapshot.get.Response#next']/*"/>
 	public string? Next { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the <c>next</c> field value.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSnapshotResponse.g.xml" path="doc/member[@key='snapshot.get.Response#remaining']/*"/>
 	public required int Remaining { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? Responses { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of snapshots that match the request when ignoring the size limit or <c>after</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSnapshotResponse.g.xml" path="doc/member[@key='snapshot.get.Response#total']/*"/>
 	public required int Total { get; set; }
 }

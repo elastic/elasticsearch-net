@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.BulkError']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.BulkErrorConverter))]
 public sealed partial class BulkError
 {
@@ -43,17 +44,9 @@ public sealed partial class BulkError
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of errors
-	/// </para>
-	/// </summary>
+	/// <include file="BulkError.g.xml" path="doc/member[@key='security._types.BulkError#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Details about the errors, keyed by role name
-	/// </para>
-	/// </summary>
+	/// <include file="BulkError.g.xml" path="doc/member[@key='security._types.BulkError#details']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ErrorCause> Details { get; set; }
 }

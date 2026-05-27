@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ChunkingSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ChunkingSettingsConverter))]
 public sealed partial class ChunkingSettings
 {
@@ -43,40 +44,20 @@ public sealed partial class ChunkingSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#max_chunk_size']/*"/>
 	public required int MaxChunkSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#overlap']/*"/>
 	public int? Overlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#sentence_overlap']/*"/>
 	public int? SentenceOverlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#strategy']/*"/>
 	public required string Strategy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ChunkingSettings']/*"/>
 public readonly partial struct ChunkingSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings Instance { get; init; }
@@ -96,49 +77,28 @@ public readonly partial struct ChunkingSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings instance) => new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#max_chunk_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor MaxChunkSize(int value)
 	{
 		Instance.MaxChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Overlap(int? value)
 	{
 		Instance.Overlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#sentence_overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor SentenceOverlap(int? value)
 	{
 		Instance.SentenceOverlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Strategy(string value)
 	{
 		Instance.Strategy = value;

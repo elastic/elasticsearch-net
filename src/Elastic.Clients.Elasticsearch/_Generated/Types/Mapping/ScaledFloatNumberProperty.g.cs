@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ScaledFloatNumberPropertyConverter))]
 public sealed partial class ScaledFloatNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class ScaledFloatNumberProperty : Elastic.Clients.Elastics
 	public bool? IgnoreMalformed { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public double? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -60,23 +57,16 @@ public sealed partial class ScaledFloatNumberProperty : Elastic.Clients.Elastics
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_dimension']/*"/>
 	public bool? TimeSeriesDimension { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "scaled_float";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty']/*"/>
 public readonly partial struct ScaledFloatNumberPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty Instance { get; init; }
@@ -162,33 +152,21 @@ public readonly partial struct ScaledFloatNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -262,22 +240,14 @@ public readonly partial struct ScaledFloatNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;
@@ -298,6 +268,7 @@ public readonly partial struct ScaledFloatNumberPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty']/*"/>
 public readonly partial struct ScaledFloatNumberPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty Instance { get; init; }
@@ -389,33 +360,21 @@ public readonly partial struct ScaledFloatNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -495,22 +454,14 @@ public readonly partial struct ScaledFloatNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="ScaledFloatNumberProperty.g.xml" path="doc/member[@key='_types.mapping.ScaledFloatNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;

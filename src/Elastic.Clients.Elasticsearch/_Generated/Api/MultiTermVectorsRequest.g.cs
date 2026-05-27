@@ -23,107 +23,46 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 public sealed partial class MultiTermVectorsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#field_statistics']/*"/>
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#offsets']/*"/>
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#payloads']/*"/>
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#positions']/*"/>
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes term frequency and document frequency.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#term_statistics']/*"/>
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get multiple term vectors.
-/// </para>
-/// <para>
-/// Get multiple term vectors with a single request.
-/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
-/// You can specify the index in the request body or request URI.
-/// The response contains a <c>docs</c> array with all the fetched termvectors.
-/// Each element has the structure provided by the termvectors API.
-/// </para>
-/// <para>
-/// <strong>Artificial documents</strong>
-/// </para>
-/// <para>
-/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
-/// The mapping used is determined by the specified <c>_index</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.MultiTermVectorsRequestConverter))]
 public sealed partial class MultiTermVectorsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiTermVectorsRequestParameters>
 {
@@ -149,126 +88,51 @@ public sealed partial class MultiTermVectorsRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "mtermvectors";
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#field_statistics']/*"/>
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#offsets']/*"/>
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#payloads']/*"/>
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#positions']/*"/>
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes term frequency and document frequency.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#term_statistics']/*"/>
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version']/*"/>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#ids']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get multiple term vectors.
-/// </para>
-/// <para>
-/// Get multiple term vectors with a single request.
-/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
-/// You can specify the index in the request body or request URI.
-/// The response contains a <c>docs</c> array with all the fetched termvectors.
-/// Each element has the structure provided by the termvectors API.
-/// </para>
-/// <para>
-/// <strong>Artificial documents</strong>
-/// </para>
-/// <para>
-/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
-/// The mapping used is determined by the specified <c>_index</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 public readonly partial struct MultiTermVectorsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Instance { get; init; }
@@ -292,179 +156,112 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance) => new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#field_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor FieldStatistics(bool? value = true)
 	{
 		Instance.FieldStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#offsets']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Offsets(bool? value = true)
 	{
 		Instance.Offsets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#payloads']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Payloads(bool? value = true)
 	{
 		Instance.Payloads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#positions']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Positions(bool? value = true)
 	{
 		Instance.Positions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes term frequency and document frequency.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#term_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor TermStatistics(bool? value = true)
 	{
 		Instance.TermStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
@@ -477,11 +274,7 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Docs<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
@@ -494,22 +287,14 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];
@@ -577,25 +362,8 @@ public readonly partial struct MultiTermVectorsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get multiple term vectors.
-/// </para>
-/// <para>
-/// Get multiple term vectors with a single request.
-/// You can specify existing documents by index and ID or provide artificial documents in the body of the request.
-/// You can specify the index in the request body or request URI.
-/// The response contains a <c>docs</c> array with all the fetched termvectors.
-/// Each element has the structure provided by the termvectors API.
-/// </para>
-/// <para>
-/// <strong>Artificial documents</strong>
-/// </para>
-/// <para>
-/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
-/// The mapping used is determined by the specified <c>_index</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mtermvectors.Request']/*"/>
 public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Instance { get; init; }
@@ -619,179 +387,112 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest instance) => new Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiTermVectorsRequest(Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the document count, sum of document frequencies, and sum of total term frequencies.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#field_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? value = true)
 	{
 		Instance.FieldStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#offsets']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Offsets(bool? value = true)
 	{
 		Instance.Offsets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#payloads']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Payloads(bool? value = true)
 	{
 		Instance.Payloads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#positions']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Positions(bool? value = true)
 	{
 		Instance.Positions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes term frequency and document frequency.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#term_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> TermStatistics(bool? value = true)
 	{
 		Instance.TermStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of existing or artificial documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>();
@@ -804,22 +505,14 @@ public readonly partial struct MultiTermVectorsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A simplified syntax to specify documents by their ID if they're in the same index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermVectorsRequest.g.xml" path="doc/member[@key='_global.mtermvectors.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiTermVectorsRequestDescriptor<TDocument> Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];

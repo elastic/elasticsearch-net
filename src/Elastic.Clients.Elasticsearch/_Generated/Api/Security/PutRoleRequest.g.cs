@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_role.Request']/*"/>
 public sealed partial class PutRoleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-/// The create or update roles API cannot update roles that are defined in roles files.
-/// File-based role management is not available in Elastic Serverless.
-/// </para>
-/// </summary>
+/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutRoleRequestConverter))]
 public sealed partial class PutRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>
 {
@@ -69,105 +59,45 @@ public sealed partial class PutRoleRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "security.put_role";
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Global { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#run_as']/*"/>
 	public System.Collections.Generic.ICollection<string>? RunAs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? TransientMetadata { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-/// The create or update roles API cannot update roles that are defined in roles files.
-/// File-based role management is not available in Elastic Serverless.
-/// </para>
-/// </summary>
+/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_role.Request']/*"/>
 public readonly partial struct PutRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.PutRoleRequest Instance { get; init; }
@@ -192,55 +122,35 @@ public readonly partial struct PutRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutRoleRequest(Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
 	{
 		Instance.Applications = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
 	{
 		Instance.Applications = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
@@ -253,66 +163,42 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Global(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Global()
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Global(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -326,33 +212,21 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -365,11 +239,7 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Indices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -382,33 +252,21 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -422,33 +280,21 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
 	{
 		Instance.RemoteCluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
@@ -461,45 +307,21 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
 	{
 		Instance.RemoteIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
 	{
 		Instance.RemoteIndices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -512,15 +334,7 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RemoteIndices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -533,55 +347,35 @@ public readonly partial struct PutRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor RunAs(params string[] values)
 	{
 		Instance.RunAs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor TransientMetadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.TransientMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor TransientMetadata()
 	{
 		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor TransientMetadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -651,16 +445,8 @@ public readonly partial struct PutRoleRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update roles.
-/// </para>
-/// <para>
-/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-/// The create or update roles API cannot update roles that are defined in roles files.
-/// File-based role management is not available in Elastic Serverless.
-/// </para>
-/// </summary>
+/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_role.Request']/*"/>
 public readonly partial struct PutRoleRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.PutRoleRequest Instance { get; init; }
@@ -685,55 +471,35 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.PutRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutRoleRequest(Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
 	{
 		Instance.Applications = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
 	{
 		Instance.Applications = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
@@ -746,66 +512,42 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Global(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Global()
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Global(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Global = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -819,33 +561,21 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -858,33 +588,21 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional metadata. Within the metadata object, keys that begin with an underscore (<c>_</c>) are reserved for system use.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -898,33 +616,21 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
 	{
 		Instance.RemoteCluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote cluster permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
@@ -937,45 +643,21 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
 	{
 		Instance.RemoteIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
 	{
 		Instance.RemoteIndices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of remote indices permissions entries.
-	/// </para>
-	/// <para>
-	/// NOTE: Remote indices are effective for remote clusters configured with the API key based model.
-	/// They have no effect for remote clusters configured with the certificate based model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -988,55 +670,35 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> RunAs(params string[] values)
 	{
 		Instance.RunAs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> TransientMetadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.TransientMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> TransientMetadata()
 	{
 		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <c>enabled</c> is <c>false</c>, the role is ignored, but is still listed in the response from the authenticate API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRoleRequest.g.xml" path="doc/member[@key='security.put_role.Request#transient_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> TransientMetadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.TransientMetadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

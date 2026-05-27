@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.FillMaskInferenceOptions"><summary><para>
+Fill mask inference options
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceOptions#mask_token"><summary><para>
+The string/token which will be removed from incoming documents and replaced with the inference prediction(s).
+In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer
+has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.
+However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,
+otherwise the request will fail.
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceOptions#num_top_classes"><summary><para>
+Specifies the number of top class predictions to return. Defaults to 0.
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.FillMaskInferenceOptions#tokenization"><summary><para>
+The tokenization options to update when inferring
+</para></summary></member>
+</doc>

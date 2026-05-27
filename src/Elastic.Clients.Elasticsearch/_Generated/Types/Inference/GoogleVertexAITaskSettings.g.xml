@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.GoogleVertexAITaskSettings#auto_truncate"><summary><para>
+For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
+</para></summary></member>
+  <member key="inference._types.GoogleVertexAITaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of the top N documents that should be returned.
+</para></summary></member>
+</doc>

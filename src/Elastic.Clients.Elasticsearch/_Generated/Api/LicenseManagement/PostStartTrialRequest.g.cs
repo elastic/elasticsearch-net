@@ -23,43 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
 public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of trial license to generate
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#type']/*"/>
 	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start a trial.
-/// Start a 30-day trial, which gives access to all subscription features.
-/// </para>
-/// <para>
-/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
-/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
-/// </para>
-/// <para>
-/// To check the status of your trial, use the get trial status API.
-/// </para>
-/// </summary>
+/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.PostStartTrialRequestConverter))]
 public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>
 {
@@ -81,41 +60,18 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "license.post_start_trial";
 
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of trial license to generate
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#type']/*"/>
 	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start a trial.
-/// Start a 30-day trial, which gives access to all subscription features.
-/// </para>
-/// <para>
-/// NOTE: You are allowed to start a trial only if your cluster has not already activated a trial for the current major product version.
-/// For example, if you have already activated a trial for v8.0, you cannot start a new trial until v9.0. You can, however, request an extended trial at https://www.elastic.co/trialextension.
-/// </para>
-/// <para>
-/// To check the status of your trial, use the get trial status API.
-/// </para>
-/// </summary>
+/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_trial.Request']/*"/>
 public readonly partial struct PostStartTrialRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest Instance { get; init; }
@@ -134,33 +90,21 @@ public readonly partial struct PostStartTrialRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#acknowledge']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Acknowledge(bool? value = true)
 	{
 		Instance.Acknowledge = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of trial license to generate
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartTrialRequest.g.xml" path="doc/member[@key='license.post_start_trial.Request#type']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Type(string? value)
 	{
 		Instance.Type = value;

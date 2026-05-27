@@ -23,28 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
 public sealed partial class PutAmazonbedrockRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Amazon Bedrock inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
-/// </para>
-/// <para>
-/// info
-/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-/// </para>
-/// </summary>
+/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAmazonbedrockRequestConverter))]
 public sealed partial class PutAmazonbedrockRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>
 {
@@ -78,69 +66,30 @@ public sealed partial class PutAmazonbedrockRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "inference.put_amazonbedrock";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#amazonbedrock_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AmazonbedrockInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("amazonbedrock_inference_id"); set => PR("amazonbedrock_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>amazonbedrock</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#service']/*"/>
 	public string Service => "amazonbedrock";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>amazonbedrock</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Amazon Bedrock inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
-/// </para>
-/// <para>
-/// info
-/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-/// </para>
-/// </summary>
+/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonbedrock.Request']/*"/>
 public readonly partial struct PutAmazonbedrockRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest Instance { get; init; }
@@ -167,124 +116,77 @@ public readonly partial struct PutAmazonbedrockRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest(Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#amazonbedrock_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor AmazonbedrockInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AmazonbedrockInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>amazonbedrock</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>amazonbedrock</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonbedrockRequest.g.xml" path="doc/member[@key='inference.put_amazonbedrock.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor.Build(action);

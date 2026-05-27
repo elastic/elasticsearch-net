@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.GarbageCollector']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.GarbageCollectorConverter))]
 public sealed partial class GarbageCollector
 {
@@ -36,10 +37,6 @@ public sealed partial class GarbageCollector
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about JVM garbage collectors for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="GarbageCollector.g.xml" path="doc/member[@key='nodes._types.GarbageCollector#collectors']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal>? Collectors { get; set; }
 }

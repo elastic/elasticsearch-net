@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DataStreamIndex#ilm_policy"><summary><para>
+Name of the current ILM lifecycle policy configured for this backing index.
+</para></summary></member>
+  <member key="indices._types.DataStreamIndex#index_name"><summary><para>
+Name of the backing index.
+</para></summary></member>
+  <member key="indices._types.DataStreamIndex#index_uuid"><summary><para>
+Universally unique identifier (UUID) for the index.
+</para></summary></member>
+  <member key="indices._types.DataStreamIndex#managed_by"><summary><para>
+Name of the lifecycle system that's currently managing this backing index.
+</para></summary></member>
+  <member key="indices._types.DataStreamIndex#prefer_ilm"><summary><para>
+Indicates if ILM should take precedence over DSL in case both are configured to manage this index.
+</para></summary></member>
+</doc>

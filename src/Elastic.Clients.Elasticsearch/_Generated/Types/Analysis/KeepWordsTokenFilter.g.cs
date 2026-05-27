@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KeepWordsTokenFilterConverter))]
 public sealed partial class KeepWordsTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,28 +37,13 @@ public sealed partial class KeepWordsTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of words to keep. Only tokens that match words in this list are included in the output.
-	/// Either this parameter or <c>keep_words_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words']/*"/>
 	public System.Collections.Generic.ICollection<string>? KeepWords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, lowercase all keep words. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words_case']/*"/>
 	public bool? KeepWordsCase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of words to keep. Only tokens that match words in this list are included in the output.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
-	/// Either this parameter or <c>keep_words</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words_path']/*"/>
 	public string? KeepWordsPath { get; set; }
 
 	public string Type => "keep";
@@ -65,6 +51,7 @@ public sealed partial class KeepWordsTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter']/*"/>
 public readonly partial struct KeepWordsTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter Instance { get; init; }
@@ -84,48 +71,28 @@ public readonly partial struct KeepWordsTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// List of words to keep. Only tokens that match words in this list are included in the output.
-	/// Either this parameter or <c>keep_words_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.KeepWords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of words to keep. Only tokens that match words in this list are included in the output.
-	/// Either this parameter or <c>keep_words_path</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWords(params string[] values)
 	{
 		Instance.KeepWords = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, lowercase all keep words. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words_case']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWordsCase(bool? value = true)
 	{
 		Instance.KeepWordsCase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of words to keep. Only tokens that match words in this list are included in the output.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
-	/// Either this parameter or <c>keep_words</c> must be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="KeepWordsTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeepWordsTokenFilter#keep_words_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilterDescriptor KeepWordsPath(string? value)
 	{
 		Instance.KeepWordsPath = value;

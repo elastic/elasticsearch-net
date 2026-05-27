@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="EnrollKibanaRequest.g.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
 public sealed partial class EnrollKibanaRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Enroll Kibana.
-/// </para>
-/// <para>
-/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-/// </para>
-/// <para>
-/// NOTE: This API is currently intended for internal use only by Kibana.
-/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
-/// </para>
-/// </summary>
+/// <include file="EnrollKibanaRequest.g.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.EnrollKibanaRequestConverter))]
 public sealed partial class EnrollKibanaRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>
 {
@@ -61,18 +53,8 @@ public sealed partial class EnrollKibanaRequest : Elastic.Clients.Elasticsearch.
 	internal override string OperationName => "security.enroll_kibana";
 }
 
-/// <summary>
-/// <para>
-/// Enroll Kibana.
-/// </para>
-/// <para>
-/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-/// </para>
-/// <para>
-/// NOTE: This API is currently intended for internal use only by Kibana.
-/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
-/// </para>
-/// </summary>
+/// <include file="EnrollKibanaRequest.g.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_kibana.Request']/*"/>
 public readonly partial struct EnrollKibanaRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest Instance { get; init; }

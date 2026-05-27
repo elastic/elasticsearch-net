@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Expected Reciprocal Rank (ERR)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricExpectedReciprocalRankConverter))]
 public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
@@ -48,27 +44,15 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The highest relevance grade used in the user-supplied relevance judgments.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank#maximum_relevance']/*"/>
 	public required int MaximumRelevance { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Expected Reciprocal Rank (ERR)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank']/*"/>
 public readonly partial struct RankEvalMetricExpectedReciprocalRankDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Instance { get; init; }
@@ -88,22 +72,14 @@ public readonly partial struct RankEvalMetricExpectedReciprocalRankDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank#k']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The highest relevance grade used in the user-supplied relevance judgments.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricExpectedReciprocalRank.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricExpectedReciprocalRank#maximum_relevance']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int value)
 	{
 		Instance.MaximumRelevance = value;

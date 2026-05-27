@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ArabicAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ArabicAnalyzerConverter))]
 public sealed partial class ArabicAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -43,6 +44,7 @@ public sealed partial class ArabicAnalyzer : Elastic.Clients.Elasticsearch.Analy
 	public string Type => "arabic";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ArabicAnalyzer']/*"/>
 public readonly partial struct ArabicAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ArabicAnalyzer Instance { get; init; }

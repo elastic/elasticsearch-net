@@ -38,11 +38,5 @@ public sealed partial class FieldUsageStatsResponse : Elastic.Transport.Products
 	}
 
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Per index statistics
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex>? Stats { get; set; }
 }

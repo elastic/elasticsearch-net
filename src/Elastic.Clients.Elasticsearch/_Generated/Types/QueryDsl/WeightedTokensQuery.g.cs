@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.WeightedTokensQueryConverter))]
 public sealed partial class WeightedTokensQuery
 {
@@ -49,33 +50,19 @@ public sealed partial class WeightedTokensQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfig? PruningConfig { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public required System.Collections.Generic.IDictionary<string, float> Tokens { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery']/*"/>
 public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery Instance { get; init; }
@@ -95,14 +82,7 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -121,33 +101,21 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
@@ -160,33 +128,21 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Collections.Generic.IDictionary<string, float> value)
 	{
 		Instance.Tokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens()
 	{
 		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
 		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
@@ -209,6 +165,7 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery']/*"/>
 public readonly partial struct WeightedTokensQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery Instance { get; init; }
@@ -228,14 +185,7 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery(Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -254,33 +204,21 @@ public readonly partial struct WeightedTokensQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Token pruning configurations
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
@@ -293,33 +231,21 @@ public readonly partial struct WeightedTokensQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Collections.Generic.IDictionary<string, float> value)
 	{
 		Instance.Tokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens()
 	{
 		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokens representing this query
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedTokensQuery.g.xml" path="doc/member[@key='_types.query_dsl.WeightedTokensQuery#tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
 		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);

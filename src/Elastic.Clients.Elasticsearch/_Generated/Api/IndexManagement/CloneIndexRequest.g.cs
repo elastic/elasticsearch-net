@@ -23,124 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 public sealed partial class CloneIndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clone an index.
-/// Clone an existing index into a new index.
-/// Each original primary shard is cloned into a new primary shard in the new index.
-/// </para>
-/// <para>
-/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
-/// The API also does not copy index metadata from the original index.
-/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
-/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
-/// </para>
-/// <para>
-/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
-/// To set the number of replicas in the resulting index, configure these settings in the clone request.
-/// </para>
-/// <para>
-/// Cloning works as follows:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// First, it creates a new target index with the same definition as the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The index must be marked as read-only and have a cluster health status of green.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have the same number of primary shards as the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The current write index on a data stream cannot be cloned.
-/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
-/// </para>
-/// <para>
-/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
-/// </para>
-/// <para>
-/// <strong>Monitor the cloning process</strong>
-/// </para>
-/// <para>
-/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
-/// </para>
-/// <para>
-/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
-/// At this point, all shards are in the state unassigned.
-/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
-/// </para>
-/// <para>
-/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
-/// When the clone operation completes, the shard will become active.
-/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
-/// </para>
-/// <para>
-/// <strong>Wait for active shards</strong>
-/// </para>
-/// <para>
-/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
-/// </para>
-/// </summary>
+/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CloneIndexRequestConverter))]
 public sealed partial class CloneIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>
 {
@@ -167,150 +65,30 @@ public sealed partial class CloneIndexRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.clone";
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to clone.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#target']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Target { get => P<Elastic.Clients.Elasticsearch.Name>("target"); set => PR("target", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Clone an index.
-/// Clone an existing index into a new index.
-/// Each original primary shard is cloned into a new primary shard in the new index.
-/// </para>
-/// <para>
-/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
-/// The API also does not copy index metadata from the original index.
-/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
-/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
-/// </para>
-/// <para>
-/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
-/// To set the number of replicas in the resulting index, configure these settings in the clone request.
-/// </para>
-/// <para>
-/// Cloning works as follows:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// First, it creates a new target index with the same definition as the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The index must be marked as read-only and have a cluster health status of green.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have the same number of primary shards as the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The current write index on a data stream cannot be cloned.
-/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
-/// </para>
-/// <para>
-/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
-/// </para>
-/// <para>
-/// <strong>Monitor the cloning process</strong>
-/// </para>
-/// <para>
-/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
-/// </para>
-/// <para>
-/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
-/// At this point, all shards are in the state unassigned.
-/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
-/// </para>
-/// <para>
-/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
-/// When the clone operation completes, the shard will become active.
-/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
-/// </para>
-/// <para>
-/// <strong>Wait for active shards</strong>
-/// </para>
-/// <para>
-/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
-/// </para>
-/// </summary>
+/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 public readonly partial struct CloneIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest Instance { get; init; }
@@ -335,102 +113,63 @@ public readonly partial struct CloneIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to clone.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Target(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Target = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
@@ -444,22 +183,14 @@ public readonly partial struct CloneIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -493,33 +224,21 @@ public readonly partial struct CloneIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -589,97 +308,8 @@ public readonly partial struct CloneIndexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Clone an index.
-/// Clone an existing index into a new index.
-/// Each original primary shard is cloned into a new primary shard in the new index.
-/// </para>
-/// <para>
-/// IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
-/// The API also does not copy index metadata from the original index.
-/// Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
-/// For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
-/// </para>
-/// <para>
-/// The clone API copies most index settings from the source index to the resulting index, with the exception of <c>index.number_of_replicas</c> and <c>index.auto_expand_replicas</c>.
-/// To set the number of replicas in the resulting index, configure these settings in the clone request.
-/// </para>
-/// <para>
-/// Cloning works as follows:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// First, it creates a new target index with the same definition as the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Finally, it recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be cloned if they meet the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The index must be marked as read-only and have a cluster health status of green.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have the same number of primary shards as the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The current write index on a data stream cannot be cloned.
-/// In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
-/// </para>
-/// <para>
-/// NOTE: Mappings cannot be specified in the <c>_clone</c> request. The mappings of the source index will be used for the target index.
-/// </para>
-/// <para>
-/// <strong>Monitor the cloning process</strong>
-/// </para>
-/// <para>
-/// The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <c>wait_for_status</c> parameter to <c>yellow</c>.
-/// </para>
-/// <para>
-/// The <c>_clone</c> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
-/// At this point, all shards are in the state unassigned.
-/// If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
-/// </para>
-/// <para>
-/// Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
-/// When the clone operation completes, the shard will become active.
-/// At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
-/// </para>
-/// <para>
-/// <strong>Wait for active shards</strong>
-/// </para>
-/// <para>
-/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
-/// </para>
-/// </summary>
+/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest Instance { get; init; }
@@ -704,91 +334,56 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to clone.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Target(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Target = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
@@ -802,22 +397,14 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -844,33 +431,21 @@ public readonly partial struct CloneIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

@@ -23,62 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 public sealed partial class PutTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// User defined reason for creating or updating the index template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, this request cannot replace or update existing index templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a legacy index template.
-/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
-/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
-/// </para>
-/// <para>
-/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
-/// </para>
-/// <para>
-/// Composable templates always take precedence over legacy templates.
-/// If no composable template matches a new index, matching legacy templates are applied according to their order.
-/// </para>
-/// <para>
-/// Index templates are only applied during index creation.
-/// Changes to index templates do not affect existing indices.
-/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in index templates.
-/// You can include comments anywhere in the request body, except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Indices matching multiple templates</strong>
-/// </para>
-/// <para>
-/// Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index.
-/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
-/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
-/// </para>
-/// </summary>
+/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutTemplateRequestConverter))]
 public sealed partial class PutTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>
 {
@@ -105,117 +65,39 @@ public sealed partial class PutTemplateRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "indices.put_template";
 
-	/// <summary>
-	/// <para>
-	/// The name of the template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for creating or updating the index template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, this request cannot replace or update existing index templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#index_patterns']/*"/>
 	public System.Collections.Generic.ICollection<string>? IndexPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Order in which Elasticsearch applies this template if index
-	/// matches multiple templates.
-	/// </para>
-	/// <para>
-	/// Templates with lower 'order' values are merged first. Templates with higher
-	/// 'order' values are merged later, overriding templates with lower values.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#order']/*"/>
 	public int? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally. This number
-	/// is not automatically generated by Elasticsearch.
-	/// To unset a version, replace the template without specifying one.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#version']/*"/>
 	public long? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a legacy index template.
-/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
-/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
-/// </para>
-/// <para>
-/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
-/// </para>
-/// <para>
-/// Composable templates always take precedence over legacy templates.
-/// If no composable template matches a new index, matching legacy templates are applied according to their order.
-/// </para>
-/// <para>
-/// Index templates are only applied during index creation.
-/// Changes to index templates do not affect existing indices.
-/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in index templates.
-/// You can include comments anywhere in the request body, except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Indices matching multiple templates</strong>
-/// </para>
-/// <para>
-/// Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index.
-/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
-/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
-/// </para>
-/// </summary>
+/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 public readonly partial struct PutTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest Instance { get; init; }
@@ -240,89 +122,56 @@ public readonly partial struct PutTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for creating or updating the index template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, this request cannot replace or update existing index templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
@@ -336,22 +185,14 @@ public readonly partial struct PutTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -385,141 +226,84 @@ public readonly partial struct PutTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor IndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IndexPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor IndexPatterns(params string[] values)
 	{
 		Instance.IndexPatterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Mappings<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Order in which Elasticsearch applies this template if index
-	/// matches multiple templates.
-	/// </para>
-	/// <para>
-	/// Templates with lower 'order' values are merged first. Templates with higher
-	/// 'order' values are merged later, overriding templates with lower values.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#order']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Order(int? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally. This number
-	/// is not automatically generated by Elasticsearch.
-	/// To unset a version, replace the template without specifying one.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
@@ -582,37 +366,8 @@ public readonly partial struct PutTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update a legacy index template.
-/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
-/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
-/// </para>
-/// <para>
-/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
-/// </para>
-/// <para>
-/// Composable templates always take precedence over legacy templates.
-/// If no composable template matches a new index, matching legacy templates are applied according to their order.
-/// </para>
-/// <para>
-/// Index templates are only applied during index creation.
-/// Changes to index templates do not affect existing indices.
-/// Settings and mappings specified in create index API requests override any settings or mappings specified in an index template.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in index templates.
-/// You can include comments anywhere in the request body, except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Indices matching multiple templates</strong>
-/// </para>
-/// <para>
-/// Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index.
-/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
-/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
-/// </para>
-/// </summary>
+/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest Instance { get; init; }
@@ -637,78 +392,49 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for creating or updating the index template
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, this request cannot replace or update existing index templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
@@ -722,22 +448,14 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -764,119 +482,70 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> IndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IndexPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard expressions used to match the names
-	/// of indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> IndexPatterns(params string[] values)
 	{
 		Instance.IndexPatterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.Mappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Mappings()
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for fields in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
 		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Order in which Elasticsearch applies this template if index
-	/// matches multiple templates.
-	/// </para>
-	/// <para>
-	/// Templates with lower 'order' values are merged first. Templates with higher
-	/// 'order' values are merged later, overriding templates with lower values.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#order']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Order(int? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally. This number
-	/// is not automatically generated by Elasticsearch.
-	/// To unset a version, replace the template without specifying one.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelPrefixStrings#ingest"><summary><para>
+String prepended to input at ingest
+</para></summary></member>
+  <member key="ml._types.TrainedModelPrefixStrings#search"><summary><para>
+String prepended to input at search
+</para></summary></member>
+</doc>

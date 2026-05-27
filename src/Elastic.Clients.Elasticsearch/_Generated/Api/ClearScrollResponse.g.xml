@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.clear_scroll.Response#num_freed"><summary><para>
+The number of scrolling search requests cleared.
+</para></summary></member>
+  <member key="_global.clear_scroll.Response#succeeded"><summary><para>
+If <c>true</c>, the request succeeded.
+This does not indicate whether any scrolling search requests were cleared.
+</para></summary></member>
+</doc>

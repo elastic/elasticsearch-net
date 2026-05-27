@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.allocation_explain.Request"><summary><para>
+Explain the shard allocations.
+Get explanations for shard allocations in the cluster.
+For unassigned shards, it provides an explanation for why the shard is unassigned.
+For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
+This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#current_node"><summary><para>
+Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#include_disk_info"><summary><para>
+If true, returns information about disk usage and shard sizes.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#include_yes_decisions"><summary><para>
+If true, returns YES decisions in explanation.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#index"><summary><para>
+Specifies the name of the index that you would like an explanation for.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#primary"><summary><para>
+If true, returns explanation for the primary shard for the given shard ID.
+</para></summary></member>
+  <member key="cluster.allocation_explain.Request#shard"><summary><para>
+Specifies the ID of the shard that you would like an explanation for.
+</para></summary></member>
+</doc>

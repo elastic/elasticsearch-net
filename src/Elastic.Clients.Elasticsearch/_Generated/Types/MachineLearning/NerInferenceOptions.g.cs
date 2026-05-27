@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Named entity recognition options
-/// </para>
-/// </summary>
+/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NerInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NerInferenceOptionsConverter))]
 public sealed partial class NerInferenceOptions
 {
@@ -41,34 +38,19 @@ public sealed partial class NerInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#classification_labels']/*"/>
 	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Named entity recognition options
-/// </para>
-/// </summary>
+/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.NerInferenceOptions']/*"/>
 public readonly partial struct NerInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions Instance { get; init; }
@@ -88,55 +70,35 @@ public readonly partial struct NerInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ClassificationLabels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The token classification labels. Must be IOB formatted tags
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="NerInferenceOptions.g.xml" path="doc/member[@key='ml._types.NerInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

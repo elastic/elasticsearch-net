@@ -37,144 +37,63 @@ public sealed partial class RepositoryAnalyzeResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of blobs written to the repository during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#blob_count']/*"/>
 	public required int BlobCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path in the repository under which all the blobs were written during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#blob_path']/*"/>
 	public required string BlobPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of write operations performed concurrently during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#concurrency']/*"/>
 	public required int Concurrency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node that coordinated the analysis and performed the final cleanup.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#coordinating_node']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo CoordinatingNode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time it took to delete all the blobs in the container.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#delete_elapsed']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration DeleteElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time it took to delete all the blobs in the container, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#delete_elapsed_nanos']/*"/>
 	public required System.TimeSpan DeleteElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of every read and write operation performed during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#details']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Details { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit on the number of nodes on which early read operations were performed after writing each blob.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#early_read_node_count']/*"/>
 	public required int EarlyReadNodeCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of correctness issues detected, which is empty if the API succeeded.
-	/// It is included to emphasize that a successful response does not guarantee correct behaviour in future.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#issues_detected']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> IssuesDetected { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time it took to retrieve a list of all the blobs in the container.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#listing_elapsed']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration ListingElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time it took to retrieve a list of all the blobs in the container, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#listing_elapsed_nanos']/*"/>
 	public required System.TimeSpan ListingElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit on the size of a blob written during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#max_blob_size']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize MaxBlobSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit, in bytes, on the size of a blob written during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#max_blob_size_bytes']/*"/>
 	public required long MaxBlobSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit on the total size of all blob written during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#max_total_data_size']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize MaxTotalDataSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit, in bytes, on the total size of all blob written during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#max_total_data_size_bytes']/*"/>
 	public required long MaxTotalDataSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The probability of performing rare actions during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#rare_action_probability']/*"/>
 	public required double RareActionProbability { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The limit on the number of nodes on which read operations were performed after writing each blob.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#read_node_count']/*"/>
 	public required int ReadNodeCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository that was the subject of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#repository']/*"/>
 	public required string Repository { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The seed for the pseudo-random number generator used to generate the operations used during the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#seed']/*"/>
 	public required long Seed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of statistics that summarize the results of the test.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryAnalyzeResponse.g.xml" path="doc/member[@key='snapshot.repository_analyze.Response#summary']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Summary { get; set; }
 }

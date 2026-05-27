@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.has_privileges_user_profile.PrivilegesCheck#cluster"><summary><para>
+A list of the cluster privileges that you want to check.
+</para></summary></member>
+</doc>

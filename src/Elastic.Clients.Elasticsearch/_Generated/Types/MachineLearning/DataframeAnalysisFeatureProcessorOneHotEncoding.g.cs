@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisFeatureProcessorOneHotEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 {
@@ -43,21 +44,14 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The one hot map mapping the field value with the column name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#hot_map']/*"/>
 	public required string HotMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Instance { get; init; }
@@ -77,33 +71,21 @@ public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDe
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The one hot map mapping the field value with the column name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#hot_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument> HotMap(string value)
 	{
 		Instance.HotMap = value;
@@ -119,6 +101,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDe
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding Instance { get; init; }
@@ -138,33 +121,21 @@ public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDe
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The one hot map mapping the field value with the column name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorOneHotEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorOneHotEncoding#hot_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor HotMap(string value)
 	{
 		Instance.HotMap = value;

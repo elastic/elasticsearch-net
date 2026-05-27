@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AggregationRange']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AggregationRangeConverter))]
 public sealed partial class AggregationRange
 {
@@ -36,28 +37,17 @@ public sealed partial class AggregationRange
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start of the range (inclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#from']/*"/>
 	public double? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom key to return the range with.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#key']/*"/>
 	public string? Key { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// End of the range (exclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#to']/*"/>
 	public double? To { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AggregationRange']/*"/>
 public readonly partial struct AggregationRangeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AggregationRange Instance { get; init; }
@@ -77,33 +67,21 @@ public readonly partial struct AggregationRangeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AggregationRange instance) => new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AggregationRange(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Start of the range (inclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor From(double? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom key to return the range with.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#key']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor Key(string? value)
 	{
 		Instance.Key = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End of the range (exclusive).
-	/// </para>
-	/// </summary>
+	/// <include file="AggregationRange.g.xml" path="doc/member[@key='_types.aggregations.AggregationRange#to']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor To(double? value)
 	{
 		Instance.To = value;

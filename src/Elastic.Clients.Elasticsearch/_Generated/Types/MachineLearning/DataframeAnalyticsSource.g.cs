@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsSourceConverter))]
 public sealed partial class DataframeAnalyticsSource
 {
@@ -42,35 +43,20 @@ public sealed partial class DataframeAnalyticsSource
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index or indices on which to perform the analysis. It can be a single index or index pattern as well as an array of indices or patterns. NOTE: If your source indices contain documents with the same IDs, only the document that is indexed last appears in the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? Source { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource']/*"/>
 public readonly partial struct DataframeAnalyticsSourceDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Instance { get; init; }
@@ -90,66 +76,42 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Index or indices on which to perform the analysis. It can be a single index or index pattern as well as an array of indices or patterns. NOTE: If your source indices contain documents with the same IDs, only the document that is indexed last appears in the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -184,22 +146,14 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
@@ -215,6 +169,7 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource']/*"/>
 public readonly partial struct DataframeAnalyticsSourceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Instance { get; init; }
@@ -234,88 +189,56 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Index or indices on which to perform the analysis. It can be a single index or index pattern as well as an array of indices or patterns. NOTE: If your source indices contain documents with the same IDs, only the document that is indexed last appears in the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this object is passed verbatim to Elasticsearch. By default, this property has the following value: {"match_all": {}}.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of runtime fields that will become part of the mapping of the destination index.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -364,22 +287,14 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSource.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSource#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);

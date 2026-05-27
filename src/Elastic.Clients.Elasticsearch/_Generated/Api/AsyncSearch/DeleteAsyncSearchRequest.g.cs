@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+/// <include file="DeleteAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
 public sealed partial class DeleteAsyncSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete an async search.
-/// </para>
-/// <para>
-/// If the asynchronous search is still running, it is cancelled.
-/// Otherwise, the saved search results are deleted.
-/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-/// </para>
-/// </summary>
+/// <include file="DeleteAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.Json.DeleteAsyncSearchRequestConverter))]
 public sealed partial class DeleteAsyncSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestParameters>
 {
@@ -63,24 +57,12 @@ public sealed partial class DeleteAsyncSearchRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "async_search.delete";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.delete.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an async search.
-/// </para>
-/// <para>
-/// If the asynchronous search is still running, it is cancelled.
-/// Otherwise, the saved search results are deleted.
-/// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the <c>cancel_task</c> cluster privilege.
-/// </para>
-/// </summary>
+/// <include file="DeleteAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search.delete.Request']/*"/>
 public readonly partial struct DeleteAsyncSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest Instance { get; init; }
@@ -105,11 +87,7 @@ public readonly partial struct DeleteAsyncSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest instance) => new Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the async search.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAsyncSearchRequest.g.xml" path="doc/member[@key='async_search.delete.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

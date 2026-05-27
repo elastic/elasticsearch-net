@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.list.Request"><summary><para>
+Get search applications.
+Get information about search applications.
+</para></summary></member>
+  <member key="search_application.list.Request#from"><summary><para>
+Starting offset.
+</para></summary></member>
+  <member key="search_application.list.Request#q"><summary><para>
+Query in the Lucene query string syntax.
+</para></summary></member>
+  <member key="search_application.list.Request#size"><summary><para>
+Specifies a max number of results to get.
+</para></summary></member>
+</doc>

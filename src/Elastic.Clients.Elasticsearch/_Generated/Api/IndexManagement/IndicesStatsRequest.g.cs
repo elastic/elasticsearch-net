@@ -23,92 +23,40 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, statistics are not collected from closed indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#forbid_closed_indices']/*"/>
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_unloaded_segments']/*"/>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index statistics.
-/// For data streams, the API retrieves statistics for the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
-/// <c>primaries</c> are the values for only the primary shards.
-/// <c>total</c> are the accumulated values for both primary and replica shards.
-/// </para>
-/// <para>
-/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
-/// </para>
-/// <para>
-/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
-/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
-/// </para>
-/// </summary>
+/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndicesStatsRequestConverter))]
 public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>
 {
@@ -142,104 +90,42 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "indices.stats";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned the specific metrics
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, statistics are not collected from closed indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#forbid_closed_indices']/*"/>
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public System.Collections.Generic.ICollection<string>? Groups { get => Q<System.Collections.Generic.ICollection<string>?>("groups"); set => Q("groups", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_unloaded_segments']/*"/>
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index statistics.
-/// For data streams, the API retrieves statistics for the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
-/// <c>primaries</c> are the values for only the primary shards.
-/// <c>total</c> are the accumulated values for both primary and replica shards.
-/// </para>
-/// <para>
-/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
-/// </para>
-/// <para>
-/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
-/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
-/// </para>
-/// </summary>
+/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 public readonly partial struct IndicesStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Instance { get; init; }
@@ -273,180 +159,112 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned the specific metrics
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor CompletionFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor FielddataFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, statistics are not collected from closed indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#forbid_closed_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor ForbidClosedIndices(bool? value = true)
 	{
 		Instance.ForbidClosedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor IncludeSegmentFileSizes(bool? value = true)
 	{
 		Instance.IncludeSegmentFileSizes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_unloaded_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? value = true)
 	{
 		Instance.IncludeUnloadedSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
 	{
 		Instance.Level = value;
@@ -514,24 +332,8 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get index statistics.
-/// For data streams, the API retrieves statistics for the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the returned statistics are index-level with <c>primaries</c> and <c>total</c> aggregations.
-/// <c>primaries</c> are the values for only the primary shards.
-/// <c>total</c> are the accumulated values for both primary and replica shards.
-/// </para>
-/// <para>
-/// To get shard-level statistics, set the <c>level</c> parameter to <c>shards</c>.
-/// </para>
-/// <para>
-/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
-/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
-/// </para>
-/// </summary>
+/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest Instance { get; init; }
@@ -565,180 +367,112 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the information returned the specific metrics
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#completion_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> CompletionFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.CompletionFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fielddata_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> FielddataFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.FielddataFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, statistics are not collected from closed indices.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#forbid_closed_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> ForbidClosedIndices(bool? value = true)
 	{
 		Instance.ForbidClosedIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Groups = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of search groups to include in the search statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#groups']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_segment_file_sizes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? value = true)
 	{
 		Instance.IncludeSegmentFileSizes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the response includes information from segments that are not loaded into memory.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#include_unloaded_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? value = true)
 	{
 		Instance.IncludeUnloadedSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
 	{
 		Instance.Level = value;

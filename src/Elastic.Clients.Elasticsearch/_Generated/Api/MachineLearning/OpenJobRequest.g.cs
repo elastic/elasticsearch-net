@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
 public sealed partial class OpenJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Open anomaly detection jobs.
-/// </para>
-/// <para>
-/// An anomaly detection job must be opened to be ready to receive and analyze
-/// data. It can be opened and closed multiple times throughout its lifecycle.
-/// When you open a new job, it starts with an empty model.
-/// When you open an existing job, the most recent model state is automatically
-/// loaded. The job is ready to resume its analysis from where it left off, once
-/// new data is received.
-/// </para>
-/// </summary>
+/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.OpenJobRequestConverter))]
 public sealed partial class OpenJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestParameters>
 {
@@ -66,34 +57,15 @@ public sealed partial class OpenJobRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "ml.open_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Open anomaly detection jobs.
-/// </para>
-/// <para>
-/// An anomaly detection job must be opened to be ready to receive and analyze
-/// data. It can be opened and closed multiple times throughout its lifecycle.
-/// When you open a new job, it starts with an empty model.
-/// When you open an existing job, the most recent model state is automatically
-/// loaded. The job is ready to resume its analysis from where it left off, once
-/// new data is received.
-/// </para>
-/// </summary>
+/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.open_job.Request']/*"/>
 public readonly partial struct OpenJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest Instance { get; init; }
@@ -118,22 +90,14 @@ public readonly partial struct OpenJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenJobRequest.g.xml" path="doc/member[@key='ml.open_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.OpenJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

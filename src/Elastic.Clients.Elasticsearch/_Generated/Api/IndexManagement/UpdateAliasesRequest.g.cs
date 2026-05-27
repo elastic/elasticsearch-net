@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 public sealed partial class UpdateAliasesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.UpdateAliasesRequestConverter))]
 public sealed partial class UpdateAliasesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>
 {
@@ -69,36 +57,18 @@ public sealed partial class UpdateAliasesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "indices.update_aliases";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? Actions { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 public readonly partial struct UpdateAliasesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Instance { get; init; }
@@ -117,57 +87,35 @@ public readonly partial struct UpdateAliasesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction[] values)
 	{
 		Instance.Actions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();
@@ -180,11 +128,7 @@ public readonly partial struct UpdateAliasesRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor Actions<T>(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();
@@ -258,12 +202,8 @@ public readonly partial struct UpdateAliasesRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update an alias.
-/// Adds a data stream or index to an alias.
-/// </para>
-/// </summary>
+/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 public readonly partial struct UpdateAliasesRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest Instance { get; init; }
@@ -282,57 +222,35 @@ public readonly partial struct UpdateAliasesRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>? value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction[] values)
 	{
 		Instance.Actions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument> Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction>();

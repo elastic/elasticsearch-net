@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleDescriptor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleDescriptorConverter))]
 public sealed partial class RoleDescriptor
 {
@@ -36,81 +37,39 @@ public sealed partial class RoleDescriptor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#run_as']/*"/>
 	public System.Collections.Generic.ICollection<string>? RunAs { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? TransientMetadata { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleDescriptor']/*"/>
 public readonly partial struct RoleDescriptorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.RoleDescriptor Instance { get; init; }
@@ -130,33 +89,21 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.RoleDescriptor instance) => new Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
 	{
 		Instance.Applications = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
 	{
 		Instance.Applications = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
@@ -169,66 +116,42 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
 	{
 		Instance.Global = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
@@ -241,33 +164,21 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -280,33 +191,21 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -320,36 +219,21 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
 	{
 		Instance.RemoteCluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
@@ -362,33 +246,21 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
 	{
 		Instance.RemoteIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
 	{
 		Instance.RemoteIndices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -401,48 +273,28 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? value)
 	{
 		Instance.Restriction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> Restriction(System.Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> action)
 	{
 		Instance.Restriction = Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument> RunAs(params string[] values)
 	{
 		Instance.RunAs = [.. values];
@@ -488,6 +340,7 @@ public readonly partial struct RoleDescriptorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleDescriptor']/*"/>
 public readonly partial struct RoleDescriptorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.RoleDescriptor Instance { get; init; }
@@ -507,33 +360,21 @@ public readonly partial struct RoleDescriptorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptor instance) => new Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleDescriptor(Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Applications(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? value)
 	{
 		Instance.Applications = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Applications(params Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[] values)
 	{
 		Instance.Applications = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#applications']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Applications(params System.Action<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>();
@@ -546,66 +387,42 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? value)
 	{
 		Instance.Global = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(params Elastic.Clients.Elasticsearch.Security.GlobalPrivilege[] values)
 	{
 		Instance.Global = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#global']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Global(params System.Action<Elastic.Clients.Elasticsearch.Security.GlobalPrivilegeDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>();
@@ -618,33 +435,21 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Indices(params Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Indices(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -657,11 +462,7 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Indices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>();
@@ -674,33 +475,21 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -714,36 +503,21 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteCluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteCluster(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[] values)
 	{
 		Instance.RemoteCluster = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteCluster(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>();
@@ -756,33 +530,21 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteIndices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? value)
 	{
 		Instance.RemoteIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteIndices(params Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[] values)
 	{
 		Instance.RemoteIndices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteIndices(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -795,11 +557,7 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#remote_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RemoteIndices<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>();
@@ -812,48 +570,28 @@ public readonly partial struct RoleDescriptorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Restriction(Elastic.Clients.Elasticsearch.Security.Restriction? value)
 	{
 		Instance.Restriction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor Restriction(System.Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> action)
 	{
 		Instance.Restriction = Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RunAs(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleDescriptor.g.xml" path="doc/member[@key='security._types.RoleDescriptor#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor RunAs(params string[] values)
 	{
 		Instance.RunAs = [.. values];

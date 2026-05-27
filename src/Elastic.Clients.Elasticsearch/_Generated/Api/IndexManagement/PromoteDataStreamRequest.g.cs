@@ -23,33 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 public sealed partial class PromoteDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Promote a data stream.
-/// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
-/// </para>
-/// <para>
-/// With CCR auto following, a data stream from a remote cluster can be replicated to the local cluster.
-/// These data streams can't be rolled over in the local cluster.
-/// These replicated data streams roll over only if the upstream data stream rolls over.
-/// In the event that the remote cluster is no longer available, the data stream in the local cluster can be promoted to a regular data stream, which allows these data streams to be rolled over in the local cluster.
-/// </para>
-/// <para>
-/// NOTE: When promoting a data stream, ensure the local cluster has a data stream enabled index template that matches the data stream.
-/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
-/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
-/// </para>
-/// </summary>
+/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PromoteDataStreamRequestConverter))]
 public sealed partial class PromoteDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>
 {
@@ -76,38 +59,15 @@ public sealed partial class PromoteDataStreamRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "indices.promote_data_stream";
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream to promote
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Name { get => P<Elastic.Clients.Elasticsearch.IndexName>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Promote a data stream.
-/// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
-/// </para>
-/// <para>
-/// With CCR auto following, a data stream from a remote cluster can be replicated to the local cluster.
-/// These data streams can't be rolled over in the local cluster.
-/// These replicated data streams roll over only if the upstream data stream rolls over.
-/// In the event that the remote cluster is no longer available, the data stream in the local cluster can be promoted to a regular data stream, which allows these data streams to be rolled over in the local cluster.
-/// </para>
-/// <para>
-/// NOTE: When promoting a data stream, ensure the local cluster has a data stream enabled index template that matches the data stream.
-/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
-/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
-/// </para>
-/// </summary>
+/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 public readonly partial struct PromoteDataStreamRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest Instance { get; init; }
@@ -132,22 +92,14 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream to promote
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -210,23 +162,8 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Promote a data stream.
-/// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
-/// </para>
-/// <para>
-/// With CCR auto following, a data stream from a remote cluster can be replicated to the local cluster.
-/// These data streams can't be rolled over in the local cluster.
-/// These replicated data streams roll over only if the upstream data stream rolls over.
-/// In the event that the remote cluster is no longer available, the data stream in the local cluster can be promoted to a regular data stream, which allows these data streams to be rolled over in the local cluster.
-/// </para>
-/// <para>
-/// NOTE: When promoting a data stream, ensure the local cluster has a data stream enabled index template that matches the data stream.
-/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
-/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
-/// </para>
-/// </summary>
+/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 public readonly partial struct PromoteDataStreamRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest Instance { get; init; }
@@ -250,22 +187,14 @@ public readonly partial struct PromoteDataStreamRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream to promote
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

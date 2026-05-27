@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.DocStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DocStatsConverter))]
 public sealed partial class DocStats
 {
@@ -43,35 +44,15 @@ public sealed partial class DocStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of non-deleted documents across all primary shards assigned to selected nodes.
-	/// This number is based on documents in Lucene segments and may include documents from nested fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DocStats.g.xml" path="doc/member[@key='_types.DocStats#count']/*"/>
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of deleted documents across all primary shards assigned to selected nodes.
-	/// This number is based on documents in Lucene segments.
-	/// Elasticsearch reclaims the disk space of deleted Lucene documents when a segment is merged.
-	/// </para>
-	/// </summary>
+	/// <include file="DocStats.g.xml" path="doc/member[@key='_types.DocStats#deleted']/*"/>
 	public long? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human readable total_size_in_bytes
-	/// </para>
-	/// </summary>
+	/// <include file="DocStats.g.xml" path="doc/member[@key='_types.DocStats#total_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns the total size in bytes of all documents in this stats.
-	/// This value may be more reliable than store_stats.size_in_bytes in estimating the index size.
-	/// </para>
-	/// </summary>
+	/// <include file="DocStats.g.xml" path="doc/member[@key='_types.DocStats#total_size_in_bytes']/*"/>
 	public required long TotalSizeInBytes { get; set; }
 }

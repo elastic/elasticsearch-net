@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="PutRulesetRequest.g.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
 public sealed partial class PutRulesetRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create or update a query ruleset.
-/// There is a limit of 100 rules per ruleset.
-/// This limit can be increased by using the <c>xpack.applications.rules.max_rules_per_ruleset</c> cluster setting.
-/// </para>
-/// <para>
-/// IMPORTANT: Due to limitations within pinned queries, you can only select documents using <c>ids</c> or <c>docs</c>, but cannot use both in single rule.
-/// It is advised to use one or the other in query rulesets, to avoid errors.
-/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
-/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
-/// </para>
-/// </summary>
+/// <include file="PutRulesetRequest.g.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.PutRulesetRequestConverter))]
 public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestParameters>
 {
@@ -73,28 +64,13 @@ public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "query_rules.put_ruleset";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRulesetRequest.g.xml" path="doc/member[@key='query_rules.put_ruleset.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a query ruleset.
-/// There is a limit of 100 rules per ruleset.
-/// This limit can be increased by using the <c>xpack.applications.rules.max_rules_per_ruleset</c> cluster setting.
-/// </para>
-/// <para>
-/// IMPORTANT: Due to limitations within pinned queries, you can only select documents using <c>ids</c> or <c>docs</c>, but cannot use both in single rule.
-/// It is advised to use one or the other in query rulesets, to avoid errors.
-/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
-/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
-/// </para>
-/// </summary>
+/// <include file="PutRulesetRequest.g.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_ruleset.Request']/*"/>
 public readonly partial struct PutRulesetRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest Instance { get; init; }
@@ -121,11 +97,7 @@ public readonly partial struct PutRulesetRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequest(Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRulesetRequest.g.xml" path="doc/member[@key='query_rules.put_ruleset.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;

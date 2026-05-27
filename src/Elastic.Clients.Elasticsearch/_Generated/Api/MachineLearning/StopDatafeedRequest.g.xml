@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.stop_datafeed.Request"><summary><para>
+Stop datafeeds.
+A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
+multiple times throughout its lifecycle.
+</para></summary></member>
+  <member key="ml.stop_datafeed.Request#allow_no_match"><summary><para>
+Refer to the description for the <c>allow_no_match</c> query parameter.
+</para></summary></member>
+  <member key="ml.stop_datafeed.Request#datafeed_id"><summary><para>
+Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
+list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
+the identifier.
+</para></summary></member>
+  <member key="ml.stop_datafeed.Request#force"><summary><para>
+Refer to the description for the <c>force</c> query parameter.
+</para></summary></member>
+  <member key="ml.stop_datafeed.Request#timeout"><summary><para>
+Refer to the description for the <c>timeout</c> query parameter.
+</para></summary></member>
+</doc>

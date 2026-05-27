@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SumBucketAggregationConverter))]
 public sealed partial class SumBucketAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class SumBucketAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation']/*"/>
 public readonly partial struct SumBucketAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation Instance { get; init; }
@@ -78,34 +67,21 @@ public readonly partial struct SumBucketAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="SumBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.SumBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;

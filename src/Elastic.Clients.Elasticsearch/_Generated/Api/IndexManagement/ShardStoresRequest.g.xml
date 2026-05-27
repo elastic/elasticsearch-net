@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.shard_stores.Request"><summary><para>
+Get index shard stores.
+Get store information about replica shards in one or more indices.
+For data streams, the API retrieves store information for the stream's backing indices.
+</para>
+<para>
+The index shard stores API returns the following information:
+</para>
+<list type="bullet">
+<item>
+<para>
+The node on which each replica shard exists.
+</para>
+</item>
+<item>
+<para>
+The allocation ID for each replica shard.
+</para>
+</item>
+<item>
+<para>
+A unique ID for each replica shard.
+</para>
+</item>
+<item>
+<para>
+Any errors encountered while opening the shard index or from an earlier failure.
+</para>
+</item>
+</list>
+<para>
+By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
+</para></summary></member>
+  <member key="indices.shard_stores.Request#allow_no_indices"><summary><para>
+If false, the request returns an error if any wildcard expression, index alias, or _all
+value targets only missing or closed indices. This behavior applies even if the request
+targets other open indices.
+</para></summary></member>
+  <member key="indices.shard_stores.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match. If the request can target data streams,
+this argument determines whether wildcard expressions match hidden data streams.
+</para></summary></member>
+  <member key="indices.shard_stores.Request#ignore_unavailable"><summary><para>
+If true, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="indices.shard_stores.Request#index"><summary><para>
+List of data streams, indices, and aliases used to limit the request.
+</para></summary></member>
+  <member key="indices.shard_stores.Request#status"><summary><para>
+List of shard health statuses used to limit the request.
+</para></summary></member>
+</doc>

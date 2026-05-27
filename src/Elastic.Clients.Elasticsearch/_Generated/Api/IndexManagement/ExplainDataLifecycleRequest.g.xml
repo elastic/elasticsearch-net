@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.explain_data_lifecycle.Request"><summary><para>
+Get the status for a data stream lifecycle.
+Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
+</para></summary></member>
+  <member key="indices.explain_data_lifecycle.Request#include_defaults"><summary><para>
+Indicates if the API should return the default values the system uses for the index's lifecycle
+</para></summary></member>
+  <member key="indices.explain_data_lifecycle.Request#index"><summary><para>
+Comma-separated list of index names to explain
+</para></summary></member>
+  <member key="indices.explain_data_lifecycle.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+</doc>

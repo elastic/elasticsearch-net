@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelDeploymentStatsConverter))]
 public sealed partial class TrainedModelDeploymentStats
 {
@@ -49,109 +50,48 @@ public sealed partial class TrainedModelDeploymentStats
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The detailed allocation status for the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#allocation_status']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus? AllocationStatus { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the trained model deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#deployment_id']/*"/>
 	public required string DeploymentId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sum of <c>error_count</c> for all nodes in the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#error_count']/*"/>
 	public int? ErrorCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sum of <c>inference_count</c> for all nodes in the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#inference_count']/*"/>
 	public int? InferenceCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The deployment stats for each node that currently has the model allocated.
-	/// In serverless, stats are reported for a single unnamed virtual node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#nodes']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of allocations requested.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#number_of_allocations']/*"/>
 	public int? NumberOfAllocations { get; set; }
 	public required long PeakThroughputPerMinute { get; set; }
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inference requests that can be queued before new requests are rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#queue_capacity']/*"/>
 	public int? QueueCapacity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The reason for the current deployment state. Usually only populated when
-	/// the model is not deployed to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#reason']/*"/>
 	public string? Reason { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sum of <c>rejected_execution_count</c> for all nodes in the deployment.
-	/// Individual nodes reject an inference request if the inference queue is full.
-	/// The queue size is controlled by the <c>queue_capacity</c> setting in the start
-	/// trained model deployment API.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#rejected_execution_count']/*"/>
 	public int? RejectedExecutionCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The epoch timestamp when the deployment started.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#start_time']/*"/>
 	public required System.DateTimeOffset StartTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The overall state of the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#state']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState? State { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of threads used be each allocation during inference.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#threads_per_allocation']/*"/>
 	public int? ThreadsPerAllocation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sum of <c>timeout_count</c> for all nodes in the deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentStats.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentStats#timeout_count']/*"/>
 	public int? TimeoutCount { get; set; }
 }

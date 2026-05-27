@@ -23,61 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
 public sealed partial class PutComponentTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// User defined reason for create the component template.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing component templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a component template.
-/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-/// </para>
-/// <para>
-/// An index template can be composed of multiple component templates.
-/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-/// Component templates are only applied to new data streams and indices as part of a matching index template.
-/// </para>
-/// <para>
-/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-/// </para>
-/// <para>
-/// Component templates are only used during index creation.
-/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in component templates.
-/// You can include comments anywhere in the request body except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Applying component templates</strong>
-/// </para>
-/// <para>
-/// You cannot directly apply a component template to a data stream or index.
-/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-/// </para>
-/// </summary>
+/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PutComponentTemplateRequestConverter))]
 public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>
 {
@@ -111,104 +72,33 @@ public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "cluster.put_component_template";
 
-	/// <summary>
-	/// <para>
-	/// Name of the component template to create.
-	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
-	/// Elastic Agent uses these templates to configure backing indices for its data streams.
-	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
-	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for create the component template.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing component templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#deprecated']/*"/>
 	public bool? Deprecated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping Template { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage component templates externally.
-	/// This number isn't automatically generated or incremented by Elasticsearch.
-	/// To unset a version, replace the template without specifying a version.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#version']/*"/>
 	public long? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a component template.
-/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-/// </para>
-/// <para>
-/// An index template can be composed of multiple component templates.
-/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-/// Component templates are only applied to new data streams and indices as part of a matching index template.
-/// </para>
-/// <para>
-/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-/// </para>
-/// <para>
-/// Component templates are only used during index creation.
-/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in component templates.
-/// You can include comments anywhere in the request body except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Applying component templates</strong>
-/// </para>
-/// <para>
-/// You cannot directly apply a component template to a data stream or index.
-/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-/// </para>
-/// </summary>
+/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
 public readonly partial struct PutComponentTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Instance { get; init; }
@@ -235,103 +125,56 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the component template to create.
-	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
-	/// Elastic Agent uses these templates to configure backing indices for its data streams.
-	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
-	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for create the component template.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing component templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -345,57 +188,35 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping value)
 	{
 		Instance.Template = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template()
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage component templates externally.
-	/// This number isn't automatically generated or incremented by Elasticsearch.
-	/// To unset a version, replace the template without specifying a version.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
@@ -458,36 +279,8 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create or update a component template.
-/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-/// </para>
-/// <para>
-/// An index template can be composed of multiple component templates.
-/// To use a component template, specify it in an index template’s <c>composed_of</c> list.
-/// Component templates are only applied to new data streams and indices as part of a matching index template.
-/// </para>
-/// <para>
-/// Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
-/// </para>
-/// <para>
-/// Component templates are only used during index creation.
-/// For data streams, this includes data stream creation and the creation of a stream’s backing indices.
-/// Changes to component templates do not affect existing indices, including a stream’s backing indices.
-/// </para>
-/// <para>
-/// You can use C-style <c>/* *\/</c> block comments in component templates.
-/// You can include comments anywhere in the request body except before the opening curly bracket.
-/// </para>
-/// <para>
-/// <strong>Applying component templates</strong>
-/// </para>
-/// <para>
-/// You cannot directly apply a component template to a data stream or index.
-/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
-/// </para>
-/// </summary>
+/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.put_component_template.Request']/*"/>
 public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest Instance { get; init; }
@@ -514,103 +307,56 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the component template to create.
-	/// Elasticsearch includes the following built-in component templates: <c>logs-mappings</c>; <c>logs-settings</c>; <c>metrics-mappings</c>; <c>metrics-settings</c>;<c>synthetics-mapping</c>; <c>synthetics-settings</c>.
-	/// Elastic Agent uses these templates to configure backing indices for its data streams.
-	/// If you use Elastic Agent and want to overwrite one of these templates, set the <c>version</c> for your replacement template higher than the current version.
-	/// If you don’t use Elastic Agent and want to disable all built-in component and index templates, set <c>stack.templates.enabled</c> to <c>false</c> using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for create the component template.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing component templates.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the component template.
-	/// It may have any contents. This map is not automatically generated by Elasticsearch.
-	/// This information is stored in the cluster state, so keeping it short is preferable.
-	/// To unset <c>_meta</c>, replace the template without specifying this information.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -624,46 +370,28 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping value)
 	{
 		Instance.Template = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template()
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The template to be applied which includes mappings, settings, or aliases configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage component templates externally.
-	/// This number isn't automatically generated or incremented by Elasticsearch.
-	/// To unset a version, replace the template without specifying a version.
-	/// </para>
-	/// </summary>
+	/// <include file="PutComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.put_component_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;

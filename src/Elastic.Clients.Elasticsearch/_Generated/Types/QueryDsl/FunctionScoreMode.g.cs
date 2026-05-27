@@ -26,46 +26,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FunctionScoreModeConverter))]
 public enum FunctionScoreMode
 {
-	/// <summary>
-	/// <para>
-	/// Scores are averaged.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#avg']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
-	/// <summary>
-	/// <para>
-	/// The first function that has a matching filter is applied.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#first']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "first")]
 	First,
-	/// <summary>
-	/// <para>
-	/// Maximum score is used.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#max']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
-	/// <summary>
-	/// <para>
-	/// Minimum score is used.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#min']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
 	Min,
-	/// <summary>
-	/// <para>
-	/// Scores are multiplied.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#multiply']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
 	Multiply,
-	/// <summary>
-	/// <para>
-	/// Scores are summed.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionScoreMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionScoreMode#sum']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "sum")]
 	Sum
 }

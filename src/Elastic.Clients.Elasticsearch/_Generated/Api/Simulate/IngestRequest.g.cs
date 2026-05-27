@@ -23,42 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Simulate;
 
+/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 public sealed partial class IngestRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The pipeline to use as the default pipeline.
-	/// This value can be used to override the default pipeline of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 }
 
-/// <summary>
-/// <para>
-/// Simulate data ingestion.
-/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-/// </para>
-/// <para>
-/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-/// </para>
-/// <para>
-/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-/// No data is indexed into Elasticsearch.
-/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-/// </para>
-/// <para>
-/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-/// </para>
-/// <para>
-/// By default, the pipeline definitions that are currently in the system are used.
-/// However, you can supply substitute pipeline definitions in the body of the request.
-/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-/// </para>
-/// </summary>
+/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.Json.IngestRequestConverter))]
 public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>
 {
@@ -98,80 +72,28 @@ public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "simulate.ingest";
 
-	/// <summary>
-	/// <para>
-	/// The index to simulate ingesting into.
-	/// This value can be overridden by specifying an index on each document.
-	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to use as the default pipeline.
-	/// This value can be used to override the default pipeline of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? ComponentTemplateSubstitutions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? IndexTemplateSubstitutions { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingAddition { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? PipelineSubstitutions { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Simulate data ingestion.
-/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-/// </para>
-/// <para>
-/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-/// </para>
-/// <para>
-/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-/// No data is indexed into Elasticsearch.
-/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-/// </para>
-/// <para>
-/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-/// </para>
-/// <para>
-/// By default, the pipeline definitions that are currently in the system are used.
-/// However, you can supply substitute pipeline definitions in the body of the request.
-/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-/// </para>
-/// </summary>
+/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 public readonly partial struct IngestRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Simulate.IngestRequest Instance { get; init; }
@@ -197,69 +119,42 @@ public readonly partial struct IngestRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance) => new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index to simulate ingesting into.
-	/// This value can be overridden by specifying an index on each document.
-	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to use as the default pipeline.
-	/// This value can be used to override the default pipeline of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? value)
 	{
 		Instance.ComponentTemplateSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions()
 	{
 		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode>? action)
 	{
 		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor ComponentTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<T>>? action)
 	{
 		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<T>.Build(action);
@@ -287,33 +182,21 @@ public readonly partial struct IngestRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
@@ -326,44 +209,28 @@ public readonly partial struct IngestRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? value)
 	{
 		Instance.IndexTemplateSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions()
 	{
 		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate>? action)
 	{
 		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor IndexTemplateSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<T>>? action)
 	{
 		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<T>.Build(action);
@@ -415,52 +282,28 @@ public readonly partial struct IngestRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? value)
 	{
 		Instance.PipelineSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions()
 	{
 		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline>? action)
 	{
 		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<T>>? action)
 	{
 		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<T>.Build(action);
@@ -474,26 +317,14 @@ public readonly partial struct IngestRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(string key)
 	{
 		Instance.PipelineSubstitutions = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> { { key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor PipelineSubstitutions(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();
@@ -583,31 +414,8 @@ public readonly partial struct IngestRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Simulate data ingestion.
-/// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
-/// </para>
-/// <para>
-/// This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
-/// </para>
-/// <para>
-/// The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
-/// If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
-/// No data is indexed into Elasticsearch.
-/// Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
-/// The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
-/// </para>
-/// <para>
-/// This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
-/// The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
-/// </para>
-/// <para>
-/// By default, the pipeline definitions that are currently in the system are used.
-/// However, you can supply substitute pipeline definitions in the body of the request.
-/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
-/// </para>
-/// </summary>
+/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='simulate.ingest.Request']/*"/>
 public readonly partial struct IngestRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Simulate.IngestRequest Instance { get; init; }
@@ -635,58 +443,35 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Simulate.IngestRequest instance) => new Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index to simulate ingesting into.
-	/// This value can be overridden by specifying an index on each document.
-	/// If you specify this parameter in the request path, it is used for any documents that do not explicitly specify an index argument.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pipeline to use as the default pipeline.
-	/// This value can be used to override the default pipeline of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? value)
 	{
 		Instance.ComponentTemplateSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions()
 	{
 		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of component template names to substitute component template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#component_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> ComponentTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>>? action)
 	{
 		Instance.ComponentTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringComponentTemplateNode<TDocument>.Build(action);
@@ -707,33 +492,21 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sample documents to test in the pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
@@ -746,33 +519,21 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? value)
 	{
 		Instance.IndexTemplateSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions()
 	{
 		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of index template names to substitute index template definition objects.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#index_template_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> IndexTemplateSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>>? action)
 	{
 		Instance.IndexTemplateSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringIndexTemplate<TDocument>.Build(action);
@@ -811,39 +572,21 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? value)
 	{
 		Instance.PipelineSubstitutions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions()
 	{
 		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>>? action)
 	{
 		Instance.PipelineSubstitutions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPipeline<TDocument>.Build(action);
@@ -857,26 +600,14 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(string key)
 	{
 		Instance.PipelineSubstitutions = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> { { key, Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pipelines to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
-	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestRequest.g.xml" path="doc/member[@key='simulate.ingest.Request#pipeline_substitutions']/*"/>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> PipelineSubstitutions(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>();

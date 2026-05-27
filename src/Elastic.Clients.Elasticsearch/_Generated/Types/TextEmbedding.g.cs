@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TextEmbedding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TextEmbeddingConverter))]
 public sealed partial class TextEmbedding
 {
@@ -42,16 +43,12 @@ public sealed partial class TextEmbedding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Model ID is required for all dense_vector fields but
-	/// may be inferred for semantic_text fields
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbedding.g.xml" path="doc/member[@key='_types.TextEmbedding#model_id']/*"/>
 	public string? ModelId { get; set; }
 	public required string ModelText { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TextEmbedding']/*"/>
 public readonly partial struct TextEmbeddingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TextEmbedding Instance { get; init; }
@@ -71,12 +68,7 @@ public readonly partial struct TextEmbeddingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(Elastic.Clients.Elasticsearch.TextEmbedding instance) => new Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Model ID is required for all dense_vector fields but
-	/// may be inferred for semantic_text fields
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbedding.g.xml" path="doc/member[@key='_types.TextEmbedding#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;

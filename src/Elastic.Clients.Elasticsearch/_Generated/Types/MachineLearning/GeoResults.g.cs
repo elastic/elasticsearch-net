@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.GeoResults']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GeoResultsConverter))]
 public sealed partial class GeoResults
 {
@@ -36,17 +37,9 @@ public sealed partial class GeoResults
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actual value for the bucket formatted as a <c>geo_point</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoResults.g.xml" path="doc/member[@key='ml._types.GeoResults#actual_point']/*"/>
 	public string? ActualPoint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The typical value for the bucket formatted as a <c>geo_point</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoResults.g.xml" path="doc/member[@key='ml._types.GeoResults#typical_point']/*"/>
 	public string? TypicalPoint { get; set; }
 }

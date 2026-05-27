@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.GeoIpProcessor#database_file"><summary><para>
+The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#download_database_on_pipeline_creation"><summary><para>
+If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
+Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#field"><summary><para>
+The field to get the ip address from for the geographical lookup.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#first_only"><summary><para>
+If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#properties"><summary><para>
+Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.GeoIpProcessor#target_field"><summary><para>
+The field that will hold the geographical information looked up from the MaxMind database.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.Json.PainlessContextSetupConverter))]
 public sealed partial class PainlessContextSetup
 {
@@ -43,35 +44,17 @@ public sealed partial class PainlessContextSetup
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Document that's temporarily indexed in-memory and accessible from the script.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#document']/*"/>
 	public required object Document { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Index containing a mapping that's compatible with the indexed document.
-	/// You may specify a remote index by prefixing the index with the remote cluster alias.
-	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
-	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
-	/// </para>
-	/// <para>
-	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
-	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup']/*"/>
 public readonly partial struct PainlessContextSetupDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Instance { get; init; }
@@ -91,51 +74,28 @@ public readonly partial struct PainlessContextSetupDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance) => new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Document that's temporarily indexed in-memory and accessible from the script.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#document']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Document(object value)
 	{
 		Instance.Document = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index containing a mapping that's compatible with the indexed document.
-	/// You may specify a remote index by prefixing the index with the remote cluster alias.
-	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
-	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
-	/// </para>
-	/// <para>
-	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
-	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -151,6 +111,7 @@ public readonly partial struct PainlessContextSetupDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup']/*"/>
 public readonly partial struct PainlessContextSetupDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Instance { get; init; }
@@ -170,62 +131,35 @@ public readonly partial struct PainlessContextSetupDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup instance) => new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Document that's temporarily indexed in-memory and accessible from the script.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#document']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Document(object value)
 	{
 		Instance.Document = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index containing a mapping that's compatible with the indexed document.
-	/// You may specify a remote index by prefixing the index with the remote cluster alias.
-	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
-	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
-	/// </para>
-	/// <para>
-	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
-	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use this parameter to specify a query for computing a score.
-	/// </para>
-	/// </summary>
+	/// <include file="PainlessContextSetup.g.xml" path="doc/member[@key='_global.scripts_painless_execute.PainlessContextSetup#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

@@ -23,38 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Streams;
 
+/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
 public sealed partial class LogsEnableRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable logs stream.
-/// </para>
-/// <para>
-/// Turn on the logs stream feature for this cluster.
-/// </para>
-/// <para>
-/// NOTE: To protect existing data, this feature can be turned on only if the
-/// cluster does not have existing indices or data streams that match the pattern <c>logs|logs.*</c>.
-/// If those indices or data streams exist, a <c>409 - Conflict</c> response and error is returned.
-/// </para>
-/// </summary>
+/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsEnableRequestConverter))]
 public sealed partial class LogsEnableRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>
 {
@@ -76,36 +57,15 @@ public sealed partial class LogsEnableRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "streams.logs_enable";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable logs stream.
-/// </para>
-/// <para>
-/// Turn on the logs stream feature for this cluster.
-/// </para>
-/// <para>
-/// NOTE: To protect existing data, this feature can be turned on only if the
-/// cluster does not have existing indices or data streams that match the pattern <c>logs|logs.*</c>.
-/// If those indices or data streams exist, a <c>409 - Conflict</c> response and error is returned.
-/// </para>
-/// </summary>
+/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_enable.Request']/*"/>
 public readonly partial struct LogsEnableRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest Instance { get; init; }
@@ -124,24 +84,14 @@ public readonly partial struct LogsEnableRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest instance) => new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsEnableRequest.g.xml" path="doc/member[@key='streams.logs_enable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

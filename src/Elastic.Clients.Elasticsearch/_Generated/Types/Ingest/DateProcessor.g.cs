@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DateProcessorConverter))]
 public sealed partial class DateProcessor
 {
@@ -43,90 +44,41 @@ public sealed partial class DateProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#formats']/*"/>
 	public required System.Collections.Generic.ICollection<string> Formats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date, relevant when parsing month names or week days.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#locale']/*"/>
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The format to use when writing the date to target_field. Must be a valid
-	/// java time pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#output_format']/*"/>
 	public string? OutputFormat { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the parsed date.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#timezone']/*"/>
 	public string? Timezone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateProcessor']/*"/>
 public readonly partial struct DateProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DateProcessor Instance { get; init; }
@@ -146,125 +98,77 @@ public readonly partial struct DateProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DateProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DateProcessor(Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Formats(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Formats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Formats(params string[] values)
 	{
 		Instance.Formats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date, relevant when parsing month names or week days.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -277,58 +181,35 @@ public readonly partial struct DateProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format to use when writing the date to target_field. Must be a valid
-	/// java time pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#output_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> OutputFormat(string? value)
 	{
 		Instance.OutputFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the parsed date.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the parsed date.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> Timezone(string? value)
 	{
 		Instance.Timezone = value;
@@ -344,6 +225,7 @@ public readonly partial struct DateProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DateProcessor']/*"/>
 public readonly partial struct DateProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DateProcessor Instance { get; init; }
@@ -363,125 +245,77 @@ public readonly partial struct DateProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.DateProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DateProcessor(Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the date from.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Formats(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Formats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of the expected date formats.
-	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#formats']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Formats(params string[] values)
 	{
 		Instance.Formats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The locale to use when parsing the date, relevant when parsing month names or week days.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -494,11 +328,7 @@ public readonly partial struct DateProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -511,58 +341,35 @@ public readonly partial struct DateProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format to use when writing the date to target_field. Must be a valid
-	/// java time pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#output_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor OutputFormat(string? value)
 	{
 		Instance.OutputFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the parsed date.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the parsed date.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timezone to use when parsing the date.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProcessor.g.xml" path="doc/member[@key='ingest._types.DateProcessor#timezone']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor Timezone(string? value)
 	{
 		Instance.Timezone = value;

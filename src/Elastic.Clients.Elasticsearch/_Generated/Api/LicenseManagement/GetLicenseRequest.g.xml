@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.get.Request"><summary><para>
+Get license information.
+</para>
+<para>
+Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+</para>
+<para>
+info
+If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
+If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
+</para></summary></member>
+  <member key="license.get.Request#accept_enterprise"><summary><para>
+If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
+This parameter is deprecated and will always be set to true in 8.x.
+</para></summary></member>
+  <member key="license.get.Request#local"><summary><para>
+Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+</para></summary></member>
+</doc>

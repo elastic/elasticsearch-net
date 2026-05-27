@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.StoredScript#lang"><summary><para>
+The language the script is written in.
+For serach templates, use <c>mustache</c>.
+</para></summary></member>
+  <member key="_types.StoredScript#source"><summary><para>
+The script source.
+For search templates, an object containing the search template.
+</para></summary></member>
+</doc>

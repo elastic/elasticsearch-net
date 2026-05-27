@@ -23,29 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 public sealed partial class GetRollupIndexCapsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the rollup index capabilities.
-/// Get the rollup capabilities of all jobs inside of a rollup index.
-/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// What jobs are stored in an index (or indices specified via a pattern)?
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GetRollupIndexCapsRequestConverter))]
 public sealed partial class GetRollupIndexCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>
 {
@@ -72,34 +57,12 @@ public sealed partial class GetRollupIndexCapsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "rollup.get_rollup_index_caps";
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index to check for rollup capabilities.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Index { get => P<Elastic.Clients.Elasticsearch.Ids>("index"); set => PR("index", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the rollup index capabilities.
-/// Get the rollup capabilities of all jobs inside of a rollup index.
-/// A single rollup index may store the data for multiple rollup jobs and may have a variety of capabilities depending on those jobs. This API enables you to determine:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// What jobs are stored in an index (or indices specified via a pattern)?
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request']/*"/>
 public readonly partial struct GetRollupIndexCapsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest Instance { get; init; }
@@ -124,12 +87,7 @@ public readonly partial struct GetRollupIndexCapsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Data stream or index to check for rollup capabilities.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRollupIndexCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_index_caps.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor Index(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Index = value;

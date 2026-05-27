@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of a <c>geo_distance</c> aggregation. The unit for <c>from</c> and <c>to</c> is meters by default.
-/// </para>
-/// </summary>
+/// <include file="GeoDistanceAggregate.g.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoDistanceAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoDistanceAggregateConverter))]
 public sealed partial class GeoDistanceAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

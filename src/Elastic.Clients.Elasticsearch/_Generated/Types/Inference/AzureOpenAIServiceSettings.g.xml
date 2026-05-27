@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.AzureOpenAIServiceSettings#api_key"><summary><para>
+A valid API key for your Azure OpenAI account.
+You must specify either <c>api_key</c> or <c>entra_id</c>.
+If you do not provide either or you provide both, you will receive an error when you try to create your model.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#api_version"><summary><para>
+The Azure API version ID to use.
+It is recommended to use the latest supported non-preview version.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#deployment_id"><summary><para>
+The deployment name of your deployed models.
+Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#entra_id"><summary><para>
+A valid Microsoft Entra token.
+You must specify either <c>api_key</c> or <c>entra_id</c>.
+If you do not provide either or you provide both, you will receive an error when you try to create your model.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from Azure.
+The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
+For <c>text_embedding</c>, it is set to <c>1440</c>.
+For <c>completion</c>, it is set to <c>120</c>.
+</para></summary></member>
+  <member key="inference._types.AzureOpenAIServiceSettings#resource_name"><summary><para>
+The name of your Azure OpenAI resource.
+You can find this from the list of resources in the Azure Portal for your subscription.
+</para></summary></member>
+</doc>

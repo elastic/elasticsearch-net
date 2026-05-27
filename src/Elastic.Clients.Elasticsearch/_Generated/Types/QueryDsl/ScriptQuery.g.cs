@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ScriptQueryConverter))]
 public sealed partial class ScriptQuery
 {
@@ -42,26 +43,15 @@ public sealed partial class ScriptQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains a script to run as a query.
-	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery']/*"/>
 public readonly partial struct ScriptQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery Instance { get; init; }
@@ -81,14 +71,7 @@ public readonly partial struct ScriptQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -101,36 +84,21 @@ public readonly partial struct ScriptQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains a script to run as a query.
-	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains a script to run as a query.
-	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains a script to run as a query.
-	/// This script must return a boolean value, <c>true</c> or <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

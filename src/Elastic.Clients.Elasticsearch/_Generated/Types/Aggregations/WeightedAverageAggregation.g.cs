@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.WeightedAverageAggregationConverter))]
 public sealed partial class WeightedAverageAggregation
 {
@@ -36,29 +37,18 @@ public sealed partial class WeightedAverageAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numeric response formatter.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation']/*"/>
 public readonly partial struct WeightedAverageAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation Instance { get; init; }
@@ -78,44 +68,28 @@ public readonly partial struct WeightedAverageAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numeric response formatter.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Value()
 	{
 		Instance.Value = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Value(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>>? action)
 	{
 		Instance.Value = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>.Build(action);
@@ -128,33 +102,21 @@ public readonly partial struct WeightedAverageAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		Instance.Weight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Weight()
 	{
 		Instance.Weight = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument> Weight(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>>? action)
 	{
 		Instance.Weight = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>.Build(action);
@@ -175,6 +137,7 @@ public readonly partial struct WeightedAverageAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation']/*"/>
 public readonly partial struct WeightedAverageAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation Instance { get; init; }
@@ -194,55 +157,35 @@ public readonly partial struct WeightedAverageAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A numeric response formatter.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		Instance.Value = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Value()
 	{
 		Instance.Value = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Value(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor>? action)
 	{
 		Instance.Value = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field that provides the values.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#value']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Value<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>>? action)
 	{
 		Instance.Value = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>.Build(action);
@@ -255,44 +198,28 @@ public readonly partial struct WeightedAverageAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		Instance.Weight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Weight()
 	{
 		Instance.Weight = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Weight(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor>? action)
 	{
 		Instance.Weight = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration for the field or script that provides the weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregation.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregation#weight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor Weight<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>>? action)
 	{
 		Instance.Weight = Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<T>.Build(action);

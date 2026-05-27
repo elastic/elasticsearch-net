@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchNoneQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchNoneQueryConverter))]
 public sealed partial class MatchNoneQuery
 {
@@ -36,18 +37,12 @@ public sealed partial class MatchNoneQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchNoneQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchNoneQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchNoneQuery']/*"/>
 public readonly partial struct MatchNoneQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery Instance { get; init; }
@@ -67,14 +62,7 @@ public readonly partial struct MatchNoneQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchNoneQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchNoneQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

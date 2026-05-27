@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.DocumentRating']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.DocumentRatingConverter))]
 public sealed partial class DocumentRating
 {
@@ -44,28 +45,17 @@ public sealed partial class DocumentRating
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document’s index. For data streams, this should be the document’s backing index.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#_index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The document’s relevance with regard to this search request.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#rating']/*"/>
 	public required int Rating { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.DocumentRating']/*"/>
 public readonly partial struct DocumentRatingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating Instance { get; init; }
@@ -85,33 +75,21 @@ public readonly partial struct DocumentRatingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating(Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document ID.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document’s index. For data streams, this should be the document’s backing index.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document’s relevance with regard to this search request.
-	/// </para>
-	/// </summary>
+	/// <include file="DocumentRating.g.xml" path="doc/member[@key='_global.rank_eval.DocumentRating#rating']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor Rating(int value)
 	{
 		Instance.Rating = value;

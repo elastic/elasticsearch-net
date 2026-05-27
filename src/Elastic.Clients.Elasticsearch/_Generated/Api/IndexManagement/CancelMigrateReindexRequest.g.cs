@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 public sealed partial class CancelMigrateReindexRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Cancel a migration reindex operation.
-/// </para>
-/// <para>
-/// Cancel a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CancelMigrateReindexRequestConverter))]
 public sealed partial class CancelMigrateReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class CancelMigrateReindexRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "indices.cancel_migrate_reindex";
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 }
 
-/// <summary>
-/// <para>
-/// Cancel a migration reindex operation.
-/// </para>
-/// <para>
-/// Cancel a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 public readonly partial struct CancelMigrateReindexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct CancelMigrateReindexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
@@ -168,14 +150,8 @@ public readonly partial struct CancelMigrateReindexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Cancel a migration reindex operation.
-/// </para>
-/// <para>
-/// Cancel a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 public readonly partial struct CancelMigrateReindexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest Instance { get; init; }
@@ -199,11 +175,7 @@ public readonly partial struct CancelMigrateReindexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name
-	/// </para>
-	/// </summary>
+	/// <include file="CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;

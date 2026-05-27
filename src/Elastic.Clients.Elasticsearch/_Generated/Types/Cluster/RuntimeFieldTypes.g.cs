@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.RuntimeFieldTypesConverter))]
 public sealed partial class RuntimeFieldTypes
 {
@@ -55,101 +56,45 @@ public sealed partial class RuntimeFieldTypes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of characters for a single runtime field script.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#chars_max']/*"/>
 	public required int CharsMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of characters for the scripts that define the current runtime field data type.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#chars_total']/*"/>
 	public required int CharsTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of runtime fields mapped to the field data type in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of accesses to doc_values for a single runtime field script
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#doc_max']/*"/>
 	public required int DocMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of accesses to doc_values for the scripts that define the current runtime field data type.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#doc_total']/*"/>
 	public required int DocTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of indices containing a mapping of the runtime field data type in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#index_count']/*"/>
 	public required int IndexCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Script languages used for the runtime fields scripts.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#lang']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of lines for a single runtime field script.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#lines_max']/*"/>
 	public required int LinesMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of lines for the scripts that define the current runtime field data type.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#lines_total']/*"/>
 	public required int LinesTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field data type used in selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of runtime fields that don’t declare a script.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#scriptless_count']/*"/>
 	public required int ScriptlessCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of runtime fields that shadow an indexed field.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#shadowed_count']/*"/>
 	public required int ShadowedCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of accesses to _source for a single runtime field script.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#source_max']/*"/>
 	public required int SourceMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of accesses to _source for the scripts that define the current runtime field data type.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeFieldTypes.g.xml" path="doc/member[@key='cluster.stats.RuntimeFieldTypes#source_total']/*"/>
 	public required int SourceTotal { get; set; }
 }

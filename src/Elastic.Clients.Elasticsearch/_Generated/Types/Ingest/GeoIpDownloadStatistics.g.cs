@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoIpDownloadStatisticsConverter))]
 public sealed partial class GeoIpDownloadStatistics
 {
@@ -47,45 +48,21 @@ public sealed partial class GeoIpDownloadStatistics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Current number of databases available for use.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#databases_count']/*"/>
 	public required int DatabasesCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of databases not updated after 30 days
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#expired_databases']/*"/>
 	public required int ExpiredDatabases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of failed database downloads.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#failed_downloads']/*"/>
 	public required int FailedDownloads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of database updates skipped.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#skipped_updates']/*"/>
 	public required int SkippedUpdates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of successful database downloads.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#successful_downloads']/*"/>
 	public required int SuccessfulDownloads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total milliseconds spent downloading databases.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpDownloadStatistics.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpDownloadStatistics#total_download_time']/*"/>
 	public required System.TimeSpan TotalDownloadTime { get; set; }
 }

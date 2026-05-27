@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Explain;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.explain.ExplanationDetail']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Explain.Json.ExplanationDetailConverter))]
 public sealed partial class ExplanationDetail
 {

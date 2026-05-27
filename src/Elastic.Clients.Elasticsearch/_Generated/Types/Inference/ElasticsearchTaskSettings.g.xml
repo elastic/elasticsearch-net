@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ElasticsearchTaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, return the document instead of only the index.
+</para></summary></member>
+</doc>

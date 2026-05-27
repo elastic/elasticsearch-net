@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.RankEvalMetricMeanReciprocalRank"><summary><para>
+Mean Reciprocal Rank
+</para><para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para></summary></member>
+  <member key="_global.rank_eval.RankEvalMetricMeanReciprocalRank#k"><summary><para>
+Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+</para></summary></member>
+  <member key="_global.rank_eval.RankEvalMetricMeanReciprocalRank#relevant_rating_threshold"><summary><para>
+Sets the rating threshold above which documents are considered to be "relevant".
+</para></summary></member>
+</doc>

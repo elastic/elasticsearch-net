@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.clone.Request"><summary><para>
+Clone a snapshot.
+Clone part of all of a snapshot into another snapshot in the same repository.
+</para></summary></member>
+  <member key="snapshot.clone.Request#indices"><summary><para>
+A comma-separated list of indices to include in the snapshot.
+Multi-target syntax is supported.
+</para></summary></member>
+  <member key="snapshot.clone.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="snapshot.clone.Request#repository"><summary><para>
+The name of the snapshot repository that both source and target snapshot belong to.
+</para></summary></member>
+  <member key="snapshot.clone.Request#snapshot"><summary><para>
+The source snapshot name.
+</para></summary></member>
+  <member key="snapshot.clone.Request#target_snapshot"><summary><para>
+The target snapshot name.
+</para></summary></member>
+</doc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.ContentObject"><summary><para>
+An object style representation of a single portion of a conversation.
+</para></summary></member>
+  <member key="inference._types.ContentObject#text"><summary><para>
+The text content.
+</para></summary></member>
+  <member key="inference._types.ContentObject#type"><summary><para>
+The type of content.
+</para></summary></member>
+</doc>

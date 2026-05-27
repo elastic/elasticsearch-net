@@ -49,12 +49,6 @@ public sealed partial class DatabaseConfigurationFull
 	public Elastic.Clients.Elasticsearch.Ingest.Local? Local { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.Local>("local"); set => SetVariant("local", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.Maxmind? Maxmind { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.Maxmind>("maxmind"); set => SetVariant("maxmind", value); }
 	public Elastic.Clients.Elasticsearch.Ingest.Web? Web { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.Web>("web"); set => SetVariant("web", value); }
-
-	/// <summary>
-	/// <para>
-	/// The provider-assigned name of the IP geolocation database to download.
-	/// </para>
-	/// </summary>
 	public required string Name { get; set; }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

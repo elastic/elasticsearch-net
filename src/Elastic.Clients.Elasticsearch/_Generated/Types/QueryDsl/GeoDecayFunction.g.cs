@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoDecayFunctionConverter))]
 public sealed partial class GeoDecayFunction : Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction
 {
@@ -45,17 +46,14 @@ public sealed partial class GeoDecayFunction : Elastic.Clients.Elasticsearch.Que
 
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Placement { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "geo";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction']/*"/>
 public readonly partial struct GeoDecayFunctionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Instance { get; init; }
@@ -87,11 +85,7 @@ public readonly partial struct GeoDecayFunctionDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
 		Instance.MultiValueMode = value;
@@ -125,6 +119,7 @@ public readonly partial struct GeoDecayFunctionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction']/*"/>
 public readonly partial struct GeoDecayFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction Instance { get; init; }
@@ -156,11 +151,7 @@ public readonly partial struct GeoDecayFunctionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.GeoDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
 		Instance.MultiValueMode = value;

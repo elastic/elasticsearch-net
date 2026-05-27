@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.Latest#sort"><summary><para>
+Specifies the date field that is used to identify the latest documents.
+</para></summary></member>
+  <member key="transform._types.Latest#unique_key"><summary><para>
+Specifies an array of one or more fields that are used to group the data.
+</para></summary></member>
+</doc>

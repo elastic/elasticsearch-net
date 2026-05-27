@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.IndexSettingResults']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingResultsConverter))]
 public sealed partial class IndexSettingResults
 {
@@ -43,20 +44,10 @@ public sealed partial class IndexSettingResults
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of settings that were applied to the data stream and to all of its backing indices. These settings will
-	/// also be applied to the write index the next time the data stream is rolled over.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingResults.g.xml" path="doc/member[@key='indices.put_data_stream_settings.IndexSettingResults#applied_to_data_stream_and_backing_indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamAndBackingIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of settings that were applied to the data stream but not to backing indices. These will be applied to
-	/// the write index the next time the data stream is rolled over.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingResults.g.xml" path="doc/member[@key='indices.put_data_stream_settings.IndexSettingResults#applied_to_data_stream_only']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamOnly { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamSettingsError>? Errors { get; set; }
 }

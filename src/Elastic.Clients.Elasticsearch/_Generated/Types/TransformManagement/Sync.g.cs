@@ -39,11 +39,6 @@ public sealed partial class Sync
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? Time { get => GetVariant<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>("time"); set => SetVariant("time", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync value) => new Elastic.Clients.Elasticsearch.TransformManagement.Sync { Time = value };
@@ -86,22 +81,12 @@ public readonly partial struct SyncDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? value)
 	{
 		Instance.Time = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor<TDocument> Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<TDocument>.Build(action);
@@ -136,33 +121,18 @@ public readonly partial struct SyncDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Sync instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time(Elastic.Clients.Elasticsearch.TransformManagement.TimeSync? value)
 	{
 		Instance.Time = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies that the transform uses a time field to synchronize the source and destination indices.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor Time<T>(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<T>> action)
 	{
 		Instance.Time = Elastic.Clients.Elasticsearch.TransformManagement.TimeSyncDescriptor<T>.Build(action);

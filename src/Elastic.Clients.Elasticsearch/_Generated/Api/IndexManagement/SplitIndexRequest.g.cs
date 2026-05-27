@@ -23,121 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 public sealed partial class SplitIndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Split an index.
-/// Split an index into a new index with more primary shards.
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Before you can split an index:
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The index must be read-only.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The cluster health status must be green.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can do make an index read-only with the following request using the add index block API:
-/// </para>
-/// <code>
-/// PUT /my_source_index/_block/write
-/// </code>
-/// <para>
-/// The current write index on a data stream cannot be split.
-/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
-/// </para>
-/// <para>
-/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
-/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
-/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
-/// </para>
-/// <para>
-/// A split operation:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have fewer primary shards than the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SplitIndexRequestConverter))]
 public sealed partial class SplitIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>
 {
@@ -164,147 +65,30 @@ public sealed partial class SplitIndexRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.split";
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to split.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#target']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Target { get => P<Elastic.Clients.Elasticsearch.IndexName>("target"); set => PR("target", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Split an index.
-/// Split an index into a new index with more primary shards.
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Before you can split an index:
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The index must be read-only.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The cluster health status must be green.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can do make an index read-only with the following request using the add index block API:
-/// </para>
-/// <code>
-/// PUT /my_source_index/_block/write
-/// </code>
-/// <para>
-/// The current write index on a data stream cannot be split.
-/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
-/// </para>
-/// <para>
-/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
-/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
-/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
-/// </para>
-/// <para>
-/// A split operation:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have fewer primary shards than the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 public readonly partial struct SplitIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest Instance { get; init; }
@@ -329,102 +113,63 @@ public readonly partial struct SplitIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to split.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Target(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Target = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
@@ -438,22 +183,14 @@ public readonly partial struct SplitIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -487,33 +224,21 @@ public readonly partial struct SplitIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -583,94 +308,8 @@ public readonly partial struct SplitIndexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Split an index.
-/// Split an index into a new index with more primary shards.
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Before you can split an index:
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The index must be read-only.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The cluster health status must be green.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can do make an index read-only with the following request using the add index block API:
-/// </para>
-/// <code>
-/// PUT /my_source_index/_block/write
-/// </code>
-/// <para>
-/// The current write index on a data stream cannot be split.
-/// In order to split the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be split.
-/// </para>
-/// <para>
-/// The number of times the index can be split (and the number of shards that each original shard can be split into) is determined by the <c>index.number_of_routing_shards</c> setting.
-/// The number of routing shards specifies the hashing space that is used internally to distribute documents across shards with consistent hashing.
-/// For instance, a 5 shard index with <c>number_of_routing_shards</c> set to 30 (5 x 2 x 3) could be split by a factor of 2 or 3.
-/// </para>
-/// <para>
-/// A split operation:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Creates a new target index with the same definition as the source index, but with a larger number of primary shards.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hard-links segments from the source index into the target index. If the file system doesn't support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Hashes all documents again, after low level files are created, to delete documents that belong to a different shard.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Recovers the target index as though it were a closed index which had just been re-opened.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// IMPORTANT: Indices can only be split if they satisfy the following requirements:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The target index must not exist.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The source index must have fewer primary shards than the target index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 public readonly partial struct SplitIndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest Instance { get; init; }
@@ -695,91 +334,56 @@ public readonly partial struct SplitIndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the source index to split.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the target index to create.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#target']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Target(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Target = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
 		Instance.Aliases = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Aliases()
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
 	{
 		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
@@ -793,22 +397,14 @@ public readonly partial struct SplitIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
 	{
 		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Aliases for the resulting index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#aliases']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
@@ -835,33 +431,21 @@ public readonly partial struct SplitIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
+	/// <include file="SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

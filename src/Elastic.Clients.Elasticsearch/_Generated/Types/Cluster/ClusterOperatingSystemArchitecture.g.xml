@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterOperatingSystemArchitecture#arch"><summary><para>
+Name of an architecture used by one or more selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterOperatingSystemArchitecture#count"><summary><para>
+Number of selected nodes using the architecture.
+</para></summary></member>
+</doc>

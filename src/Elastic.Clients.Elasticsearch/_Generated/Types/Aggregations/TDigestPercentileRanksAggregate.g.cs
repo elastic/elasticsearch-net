@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TDigestPercentileRanksAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TDigestPercentileRanksAggregateConverter))]
 public sealed partial class TDigestPercentileRanksAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

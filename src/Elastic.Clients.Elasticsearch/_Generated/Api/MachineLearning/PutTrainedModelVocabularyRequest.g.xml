@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_trained_model_vocabulary.Request"><summary><para>
+Create a trained model vocabulary.
+This API is supported only for natural language processing (NLP) models.
+The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
+</para></summary></member>
+  <member key="ml.put_trained_model_vocabulary.Request#merges"><summary><para>
+The optional model merges if required by the tokenizer.
+</para></summary></member>
+  <member key="ml.put_trained_model_vocabulary.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml.put_trained_model_vocabulary.Request#scores"><summary><para>
+The optional vocabulary value scores if required by the tokenizer.
+</para></summary></member>
+  <member key="ml.put_trained_model_vocabulary.Request#vocabulary"><summary><para>
+The model vocabulary, which must not be empty.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.PassthroughObjectPropertyConverter))]
 public sealed partial class PassthroughObjectProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -42,11 +43,7 @@ public sealed partial class PassthroughObjectProperty : Elastic.Clients.Elastics
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public int? Priority { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -57,6 +54,7 @@ public sealed partial class PassthroughObjectProperty : Elastic.Clients.Elastics
 	public string? Type => "passthrough";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty']/*"/>
 public readonly partial struct PassthroughObjectPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty Instance { get; init; }
@@ -118,33 +116,21 @@ public readonly partial struct PassthroughObjectPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -208,6 +194,7 @@ public readonly partial struct PassthroughObjectPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty']/*"/>
 public readonly partial struct PassthroughObjectPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty Instance { get; init; }
@@ -275,33 +262,21 @@ public readonly partial struct PassthroughObjectPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PassthroughObjectProperty.g.xml" path="doc/member[@key='_types.mapping.PassthroughObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

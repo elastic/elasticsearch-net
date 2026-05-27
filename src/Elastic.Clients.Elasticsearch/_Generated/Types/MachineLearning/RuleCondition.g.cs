@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RuleCondition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RuleConditionConverter))]
 public sealed partial class RuleCondition
 {
@@ -44,28 +45,17 @@ public sealed partial class RuleCondition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#applies_to']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesTo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#operator']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Operator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value that is compared against the <c>applies_to</c> field using the operator.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#value']/*"/>
 	public required double Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RuleCondition']/*"/>
 public readonly partial struct RuleConditionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Instance { get; init; }
@@ -85,33 +75,21 @@ public readonly partial struct RuleConditionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#applies_to']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor AppliesTo(Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo value)
 	{
 		Instance.AppliesTo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor Operator(Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value that is compared against the <c>applies_to</c> field using the operator.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleCondition.g.xml" path="doc/member[@key='ml._types.RuleCondition#value']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionDescriptor Value(double value)
 	{
 		Instance.Value = value;

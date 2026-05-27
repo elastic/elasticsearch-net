@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KeywordMarkerTokenFilterConverter))]
 public sealed partial class KeywordMarkerTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,36 +37,16 @@ public sealed partial class KeywordMarkerTokenFilter : Elastic.Clients.Elasticse
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, matching for the <c>keywords</c> and <c>keywords_path</c> parameters ignores letter case. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#ignore_case']/*"/>
 	public bool? IgnoreCase { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of keywords. Tokens that match these keywords are not stemmed.
-	/// This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords']/*"/>
 	public System.Collections.Generic.ICollection<string>? Keywords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of keywords. Tokens that match these keywords are not stemmed.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
-	/// This parameter, <c>keywords</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords_path']/*"/>
 	public string? KeywordsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression used to match tokens. Tokens that match this expression are marked as keywords and not stemmed.
-	/// This parameter, <c>keywords</c>, or <c>keywords_path</c> must be specified. You cannot specify this parameter and <c>keywords</c> or <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords_pattern']/*"/>
 	public string? KeywordsPattern { get; set; }
 
 	public string Type => "keyword_marker";
@@ -73,6 +54,7 @@ public sealed partial class KeywordMarkerTokenFilter : Elastic.Clients.Elasticse
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter']/*"/>
 public readonly partial struct KeywordMarkerTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter Instance { get; init; }
@@ -92,60 +74,35 @@ public readonly partial struct KeywordMarkerTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, matching for the <c>keywords</c> and <c>keywords_path</c> parameters ignores letter case. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#ignore_case']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? value = true)
 	{
 		Instance.IgnoreCase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of keywords. Tokens that match these keywords are not stemmed.
-	/// This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Keywords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of keywords. Tokens that match these keywords are not stemmed.
-	/// This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor Keywords(params string[] values)
 	{
 		Instance.Keywords = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to a file that contains a list of keywords. Tokens that match these keywords are not stemmed.
-	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
-	/// This parameter, <c>keywords</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor KeywordsPath(string? value)
 	{
 		Instance.KeywordsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression used to match tokens. Tokens that match this expression are marked as keywords and not stemmed.
-	/// This parameter, <c>keywords</c>, or <c>keywords_path</c> must be specified. You cannot specify this parameter and <c>keywords</c> or <c>keywords_pattern</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordMarkerTokenFilter.g.xml" path="doc/member[@key='_types.analysis.KeywordMarkerTokenFilter#keywords_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor KeywordsPattern(string? value)
 	{
 		Instance.KeywordsPattern = value;

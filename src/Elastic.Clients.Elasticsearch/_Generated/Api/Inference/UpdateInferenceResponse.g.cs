@@ -37,45 +37,21 @@ public sealed partial class UpdateInferenceResponse : Elastic.Transport.Products
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateInferenceResponse.g.xml" path="doc/member[@key='inference.update.Response#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; set; }
 }

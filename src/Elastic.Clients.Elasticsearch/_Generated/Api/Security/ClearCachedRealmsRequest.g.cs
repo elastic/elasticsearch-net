@@ -23,31 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
 public sealed partial class ClearCachedRealmsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#usernames']/*"/>
 	public System.Collections.Generic.ICollection<string>? Usernames { get => Q<System.Collections.Generic.ICollection<string>?>("usernames"); set => Q("usernames", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the user cache.
-/// </para>
-/// <para>
-/// Evict users from the user cache.
-/// You can completely clear the cache or evict specific users.
-/// </para>
-/// <para>
-/// User credentials are cached in memory on each node to avoid connecting to a remote authentication service or hitting the disk for every incoming request.
-/// There are realm settings that you can use to configure the user cache.
-/// For more information, refer to the documentation about controlling the user cache.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearCachedRealmsRequestConverter))]
 public sealed partial class ClearCachedRealmsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>
 {
@@ -74,38 +59,15 @@ public sealed partial class ClearCachedRealmsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "security.clear_cached_realms";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of realms.
-	/// To clear all realms, use an asterisk (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#realms']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Realms { get => P<Elastic.Clients.Elasticsearch.Names>("realms"); set => PR("realms", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#usernames']/*"/>
 	public System.Collections.Generic.ICollection<string>? Usernames { get => Q<System.Collections.Generic.ICollection<string>?>("usernames"); set => Q("usernames", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the user cache.
-/// </para>
-/// <para>
-/// Evict users from the user cache.
-/// You can completely clear the cache or evict specific users.
-/// </para>
-/// <para>
-/// User credentials are cached in memory on each node to avoid connecting to a remote authentication service or hitting the disk for every incoming request.
-/// There are realm settings that you can use to configure the user cache.
-/// For more information, refer to the documentation about controlling the user cache.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_realms.Request']/*"/>
 public readonly partial struct ClearCachedRealmsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest Instance { get; init; }
@@ -130,37 +92,21 @@ public readonly partial struct ClearCachedRealmsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of realms.
-	/// To clear all realms, use an asterisk (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#realms']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Realms(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Realms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#usernames']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Usernames = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of the users to clear from the cache.
-	/// If you do not specify this parameter, the API evicts all users from the user cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRealmsRequest.g.xml" path="doc/member[@key='security.clear_cached_realms.Request#usernames']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor Usernames(params string[] values)
 	{
 		Instance.Usernames = [.. values];

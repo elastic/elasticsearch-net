@@ -23,58 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
 public sealed partial class GetTrainedModelsStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no models that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If true, it returns an empty array when there are no matches and the
-	/// subset of results when there are partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of models.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of models to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get trained models usage info.
-/// You can get usage information for multiple trained
-/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
-/// </para>
-/// </summary>
+/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetTrainedModelsStatsRequestConverter))]
 public sealed partial class GetTrainedModelsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>
 {
@@ -100,64 +64,21 @@ public sealed partial class GetTrainedModelsStatsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "ml.get_trained_models_stats";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model or a model alias. It can be a
-	/// comma-separated list or a wildcard expression.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? ModelId { get => P<Elastic.Clients.Elasticsearch.Ids?>("model_id"); set => PO("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no models that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If true, it returns an empty array when there are no matches and the
-	/// subset of results when there are partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of models.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of models to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get trained models usage info.
-/// You can get usage information for multiple trained
-/// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
-/// </para>
-/// </summary>
+/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_trained_models_stats.Request']/*"/>
 public readonly partial struct GetTrainedModelsStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest Instance { get; init; }
@@ -181,66 +102,28 @@ public readonly partial struct GetTrainedModelsStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model or a model alias. It can be a
-	/// comma-separated list or a wildcard expression.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no models that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If true, it returns an empty array when there are no matches and the
-	/// subset of results when there are partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of models.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of models to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTrainedModelsStatsRequest.g.xml" path="doc/member[@key='ml.get_trained_models_stats.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

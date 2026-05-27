@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
 public sealed partial class GetSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a synonym rule.
-/// Get a synonym rule from a synonym set.
-/// </para>
-/// </summary>
+/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.GetSynonymRuleRequestConverter))]
 public sealed partial class GetSynonymRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters>
 {
@@ -59,27 +57,15 @@ public sealed partial class GetSynonymRuleRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "synonyms.get_synonym_rule";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set to retrieve the synonym rule from.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request#set_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a synonym rule.
-/// Get a synonym rule from a synonym set.
-/// </para>
-/// </summary>
+/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request']/*"/>
 public readonly partial struct GetSynonymRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest Instance { get; init; }
@@ -104,22 +90,14 @@ public readonly partial struct GetSynonymRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym rule to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonym set to retrieve the synonym rule from.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSynonymRuleRequest.g.xml" path="doc/member[@key='synonyms.get_synonym_rule.Request#set_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SetId = value;

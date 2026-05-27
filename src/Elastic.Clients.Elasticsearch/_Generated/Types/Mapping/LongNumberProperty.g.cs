@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongNumberProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.LongNumberPropertyConverter))]
 public sealed partial class LongNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class LongNumberProperty : Elastic.Clients.Elasticsearch.M
 	public bool? IgnoreMalformed { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public long? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -59,23 +56,16 @@ public sealed partial class LongNumberProperty : Elastic.Clients.Elasticsearch.M
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_dimension']/*"/>
 	public bool? TimeSeriesDimension { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "long";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongNumberProperty']/*"/>
 public readonly partial struct LongNumberPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty Instance { get; init; }
@@ -161,33 +151,21 @@ public readonly partial struct LongNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -255,22 +233,14 @@ public readonly partial struct LongNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;
@@ -291,6 +261,7 @@ public readonly partial struct LongNumberPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.LongNumberProperty']/*"/>
 public readonly partial struct LongNumberPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty Instance { get; init; }
@@ -382,33 +353,21 @@ public readonly partial struct LongNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -482,22 +441,14 @@ public readonly partial struct LongNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberProperty.g.xml" path="doc/member[@key='_types.mapping.LongNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;

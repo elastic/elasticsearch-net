@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.AutoFollowPatternSummaryConverter))]
 public sealed partial class AutoFollowPatternSummary
 {
@@ -48,38 +49,18 @@ public sealed partial class AutoFollowPatternSummary
 
 	public required bool Active { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowPatternSummary.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary#follow_index_pattern']/*"/>
 	public string? FollowIndexPattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowPatternSummary.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary#leader_index_exclusion_patterns']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexExclusionPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowPatternSummary.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary#leader_index_patterns']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowPatternSummary.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary#max_outstanding_read_requests']/*"/>
 	public required int MaxOutstandingReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader indices to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowPatternSummary.g.xml" path="doc/member[@key='ccr.get_auto_follow_pattern.AutoFollowPatternSummary#remote_cluster']/*"/>
 	public required string RemoteCluster { get; set; }
 }

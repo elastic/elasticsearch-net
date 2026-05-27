@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ManageUserPrivileges']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ManageUserPrivilegesConverter))]
 public sealed partial class ManageUserPrivileges
 {
@@ -45,6 +46,7 @@ public sealed partial class ManageUserPrivileges
 	public required System.Collections.Generic.ICollection<string> Applications { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ManageUserPrivileges']/*"/>
 public readonly partial struct ManageUserPrivilegesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ManageUserPrivileges Instance { get; init; }

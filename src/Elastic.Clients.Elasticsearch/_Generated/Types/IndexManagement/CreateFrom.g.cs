@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.CreateFrom']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateFromConverter))]
 public sealed partial class CreateFrom
 {
@@ -36,28 +37,17 @@ public sealed partial class CreateFrom
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsOverride { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If index blocks should be removed when creating destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#remove_index_blocks']/*"/>
 	public bool? RemoveIndexBlocks { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsOverride { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.CreateFrom']/*"/>
 public readonly partial struct CreateFromDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom Instance { get; init; }
@@ -77,77 +67,49 @@ public readonly partial struct CreateFromDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> MappingsOverride(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.MappingsOverride = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> MappingsOverride()
 	{
 		Instance.MappingsOverride = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> MappingsOverride(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
 		Instance.MappingsOverride = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If index blocks should be removed when creating destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#remove_index_blocks']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> RemoveIndexBlocks(bool? value = true)
 	{
 		Instance.RemoveIndexBlocks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> SettingsOverride(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.SettingsOverride = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> SettingsOverride()
 	{
 		Instance.SettingsOverride = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor<TDocument> SettingsOverride(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
 		Instance.SettingsOverride = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
@@ -168,6 +130,7 @@ public readonly partial struct CreateFromDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_from.CreateFrom']/*"/>
 public readonly partial struct CreateFromDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom Instance { get; init; }
@@ -187,99 +150,63 @@ public readonly partial struct CreateFromDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor MappingsOverride(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
 		Instance.MappingsOverride = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor MappingsOverride()
 	{
 		Instance.MappingsOverride = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor MappingsOverride(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
 		Instance.MappingsOverride = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mappings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#mappings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor MappingsOverride<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
 	{
 		Instance.MappingsOverride = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If index blocks should be removed when creating destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#remove_index_blocks']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor RemoveIndexBlocks(bool? value = true)
 	{
 		Instance.RemoveIndexBlocks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor SettingsOverride(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.SettingsOverride = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor SettingsOverride()
 	{
 		Instance.SettingsOverride = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor SettingsOverride(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
 		Instance.SettingsOverride = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings overrides to be applied to the destination index (optional)
-	/// </para>
-	/// </summary>
+	/// <include file="CreateFrom.g.xml" path="doc/member[@key='indices.create_from.CreateFrom#settings_override']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromDescriptor SettingsOverride<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
 	{
 		Instance.SettingsOverride = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);

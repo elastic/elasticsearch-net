@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DownsampleConfig#fixed_interval"><summary><para>
+The interval at which to aggregate the original time series index.
+</para></summary></member>
+</doc>

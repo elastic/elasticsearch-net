@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RuntimeFieldConverter))]
 public sealed partial class RuntimeField
 {
@@ -42,63 +43,32 @@ public sealed partial class RuntimeField
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A custom format for <c>date</c> type runtime fields.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? InputField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? TargetIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeField']/*"/>
 public readonly partial struct RuntimeFieldDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeField Instance { get; init; }
@@ -118,33 +88,21 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? value)
 	{
 		Instance.FetchFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
 	{
 		Instance.FetchFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> FetchFields(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
@@ -157,33 +115,21 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields()
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
@@ -204,110 +150,70 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom format for <c>date</c> type runtime fields.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> InputField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.InputField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> InputField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.InputField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.TargetIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType value)
 	{
 		Instance.Type = value;
@@ -323,6 +229,7 @@ public readonly partial struct RuntimeFieldDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeField']/*"/>
 public readonly partial struct RuntimeFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeField Instance { get; init; }
@@ -342,33 +249,21 @@ public readonly partial struct RuntimeFieldDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor(Elastic.Clients.Elasticsearch.Mapping.RuntimeField instance) => new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.RuntimeField(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? value)
 	{
 		Instance.FetchFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(params Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields[] values)
 	{
 		Instance.FetchFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
@@ -381,11 +276,7 @@ public readonly partial struct RuntimeFieldDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fetch_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor FetchFields<T>(params System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>();
@@ -398,33 +289,21 @@ public readonly partial struct RuntimeFieldDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.CompositeSubField>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields()
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>composite</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField>? action)
 	{
 		Instance.Fields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeSubField.Build(action);
@@ -445,110 +324,70 @@ public readonly partial struct RuntimeFieldDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom format for <c>date</c> type runtime fields.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor InputField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.InputField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#input_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor InputField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.InputField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Painless script executed at query time.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For type <c>lookup</c>
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#target_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.TargetIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RuntimeField.g.xml" path="doc/member[@key='_types.mapping.RuntimeField#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType value)
 	{
 		Instance.Type = value;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeoDistanceAggregation#distance_type"><summary><para>
+The distance calculation type.
+</para></summary></member>
+  <member key="_types.aggregations.GeoDistanceAggregation#field"><summary><para>
+A field of type <c>geo_point</c> used to evaluate the distance.
+</para></summary></member>
+  <member key="_types.aggregations.GeoDistanceAggregation#origin"><summary><para>
+The origin  used to evaluate the distance.
+</para></summary></member>
+  <member key="_types.aggregations.GeoDistanceAggregation#ranges"><summary><para>
+An array of ranges used to bucket documents.
+</para></summary></member>
+  <member key="_types.aggregations.GeoDistanceAggregation#unit"><summary><para>
+The distance unit.
+</para></summary></member>
+</doc>

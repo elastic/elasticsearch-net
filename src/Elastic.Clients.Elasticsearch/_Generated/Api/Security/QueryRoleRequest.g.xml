@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.query_role.Request"><summary><para>
+Find roles with a query.
+</para>
+<para>
+Get roles in a paginated manner.
+The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
+You can optionally filter the results with a query.
+Also, the results can be paginated and sorted.
+</para></summary></member>
+  <member key="security.query_role.Request#from"><summary><para>
+The starting document offset.
+It must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_role.Request#query"><summary><para>
+A query to filter which roles to return.
+If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+<c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
+<c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
+</para></summary></member>
+  <member key="security.query_role.Request#search_after"><summary><para>
+The search after definition.
+</para></summary></member>
+  <member key="security.query_role.Request#size"><summary><para>
+The number of hits to return.
+It must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_role.Request#sort"><summary><para>
+The sort definition.
+You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+</para></summary></member>
+</doc>

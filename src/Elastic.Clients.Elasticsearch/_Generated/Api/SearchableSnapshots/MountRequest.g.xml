@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="searchable_snapshots.mount.Request"><summary><para>
+Mount a snapshot.
+Mount a snapshot as a searchable snapshot index.
+Do not use this API for snapshots managed by index lifecycle management (ILM).
+Manually mounting ILM-managed snapshots can interfere with ILM processes.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#ignore_index_settings"><summary><para>
+The names of settings that should be removed from the index when it is mounted.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#index"><summary><para>
+The name of the index contained in the snapshot whose data is to be mounted.
+If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#index_settings"><summary><para>
+The settings that should be added to the index when it is mounted.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#master_timeout"><summary><para>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <c>-1</c>.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#renamed_index"><summary><para>
+The name of the index that will be created.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#repository"><summary><para>
+The name of the repository containing the snapshot of the index to mount.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#snapshot"><summary><para>
+The name of the snapshot of the index to mount.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#storage"><summary><para>
+The mount option for the searchable snapshot index.
+</para></summary></member>
+  <member key="searchable_snapshots.mount.Request#wait_for_completion"><summary><para>
+If true, the request blocks until the operation is complete.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsWildcardConverter))]
 public sealed partial class IntervalsWildcard
 {
@@ -42,30 +43,17 @@ public sealed partial class IntervalsWildcard
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>pattern</c>.
-	/// Defaults to the top-level field's analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern used to find matching terms.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#pattern']/*"/>
 	public required string Pattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard']/*"/>
 public readonly partial struct IntervalsWildcardDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Instance { get; init; }
@@ -85,47 +73,28 @@ public readonly partial struct IntervalsWildcardDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>pattern</c>.
-	/// Defaults to the top-level field's analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern used to find matching terms.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.UseField = value;
@@ -141,6 +110,7 @@ public readonly partial struct IntervalsWildcardDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard']/*"/>
 public readonly partial struct IntervalsWildcardDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard Instance { get; init; }
@@ -160,47 +130,28 @@ public readonly partial struct IntervalsWildcardDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze the <c>pattern</c>.
-	/// Defaults to the top-level field's analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Wildcard pattern used to find matching terms.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>pattern</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsWildcard.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsWildcard#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.UseField = value;

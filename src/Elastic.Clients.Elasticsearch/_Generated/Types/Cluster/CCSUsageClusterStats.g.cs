@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.CCSUsageClusterStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CCSUsageClusterStatsConverter))]
 public sealed partial class CCSUsageClusterStats
 {
@@ -44,24 +45,12 @@ public sealed partial class CCSUsageClusterStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of cross-cluster search requests for which this cluster was skipped.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageClusterStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageClusterStats#skipped']/*"/>
 	public required int Skipped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the time taken to execute requests against this cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageClusterStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageClusterStats#took']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of successful (not skipped) cross-cluster search requests that were executed against this cluster. This may include requests where partial results were returned, but not requests in which the cluster has been skipped entirely.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageClusterStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageClusterStats#total']/*"/>
 	public required int Total { get; set; }
 }

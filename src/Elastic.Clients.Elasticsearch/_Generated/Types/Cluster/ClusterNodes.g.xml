@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterNodes#count"><summary><para>
+Contains counts for nodes selected by the request’s node filters.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#discovery_types"><summary><para>
+Contains statistics about the discovery types used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#fs"><summary><para>
+Contains statistics about file stores by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#jvm"><summary><para>
+Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#network_types"><summary><para>
+Contains statistics about the transport and HTTP networks used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#os"><summary><para>
+Contains statistics about the operating systems used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#packaging_types"><summary><para>
+Contains statistics about Elasticsearch distributions installed on selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#plugins"><summary><para>
+Contains statistics about installed plugins and modules by selected nodes.
+If no plugins or modules are installed, this array is empty.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#process"><summary><para>
+Contains statistics about processes used by selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterNodes#versions"><summary><para>
+Array of Elasticsearch versions used on selected nodes.
+</para></summary></member>
+</doc>

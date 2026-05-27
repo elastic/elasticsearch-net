@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.IlmIndicatorDetails']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.IlmIndicatorDetailsConverter))]
 public sealed partial class IlmIndicatorDetails
 {

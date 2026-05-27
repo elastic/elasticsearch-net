@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.IpRangeAggregationRangeConverter))]
 public sealed partial class IpRangeAggregationRange
 {
@@ -36,28 +37,17 @@ public sealed partial class IpRangeAggregationRange
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start of the range.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#from']/*"/>
 	public string? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// IP range defined as a CIDR mask.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#mask']/*"/>
 	public string? Mask { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// End of the range.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#to']/*"/>
 	public string? To { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange']/*"/>
 public readonly partial struct IpRangeAggregationRangeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange Instance { get; init; }
@@ -77,33 +67,21 @@ public readonly partial struct IpRangeAggregationRangeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange instance) => new Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Start of the range.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor From(string? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// IP range defined as a CIDR mask.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#mask']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor Mask(string? value)
 	{
 		Instance.Mask = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// End of the range.
-	/// </para>
-	/// </summary>
+	/// <include file="IpRangeAggregationRange.g.xml" path="doc/member[@key='_types.aggregations.IpRangeAggregationRange#to']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRangeDescriptor To(string? value)
 	{
 		Instance.To = value;

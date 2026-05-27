@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.PipelineProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#ignore_missing_pipeline"><summary><para>
+Whether to ignore missing pipelines instead of failing.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#name"><summary><para>
+The name of the pipeline to execute.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.PipelineProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+</doc>

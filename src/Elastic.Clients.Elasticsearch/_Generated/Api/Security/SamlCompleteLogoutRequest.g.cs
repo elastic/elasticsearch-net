@@ -23,29 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
 public sealed partial class SamlCompleteLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Logout of SAML completely.
-/// </para>
-/// <para>
-/// Verifies the logout response sent from the SAML IdP.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The SAML IdP may send a logout response back to the SP after handling the SP-initiated SAML Single Logout.
-/// This API verifies the response by ensuring the content is relevant and validating its signature.
-/// An empty response is returned if the verification process is successful.
-/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
-/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
-/// </para>
-/// </summary>
+/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlCompleteLogoutRequestConverter))]
 public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>
 {
@@ -74,54 +59,21 @@ public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "security.saml_complete_logout";
 
-	/// <summary>
-	/// <para>
-	/// If the SAML IdP sends the logout response with the HTTP-Post binding, this field must be set to the value of the SAMLResponse form parameter from the logout response.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#content']/*"/>
 	public string? Content { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#ids']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the SAML IdP sends the logout response with the HTTP-Redirect binding, this field must be set to the query string of the redirect URI.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#query_string']/*"/>
 	public string? QueryString { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch for which the configuration is used to verify the logout response.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#realm']/*"/>
 	public required string Realm { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Logout of SAML completely.
-/// </para>
-/// <para>
-/// Verifies the logout response sent from the SAML IdP.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// The SAML IdP may send a logout response back to the SP after handling the SP-initiated SAML Single Logout.
-/// This API verifies the response by ensuring the content is relevant and validating its signature.
-/// An empty response is returned if the verification process is successful.
-/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
-/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
-/// </para>
-/// </summary>
+/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_complete_logout.Request']/*"/>
 public readonly partial struct SamlCompleteLogoutRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest Instance { get; init; }
@@ -140,44 +92,28 @@ public readonly partial struct SamlCompleteLogoutRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If the SAML IdP sends the logout response with the HTTP-Post binding, this field must be set to the value of the SAMLResponse form parameter from the logout response.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#content']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Content(string? value)
 	{
 		Instance.Content = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the SAML IdP sends the logout response with the HTTP-Redirect binding, this field must be set to the query string of the redirect URI.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#query_string']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor QueryString(string? value)
 	{
 		Instance.QueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch for which the configuration is used to verify the logout response.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlCompleteLogoutRequest.g.xml" path="doc/member[@key='security.saml_complete_logout.Request#realm']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor Realm(string value)
 	{
 		Instance.Realm = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Latest']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.LatestConverter))]
 public sealed partial class Latest
 {
@@ -43,21 +44,14 @@ public sealed partial class Latest
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#sort']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies an array of one or more fields that are used to group the data.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#unique_key']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Latest']/*"/>
 public readonly partial struct LatestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Latest Instance { get; init; }
@@ -77,44 +71,28 @@ public readonly partial struct LatestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies an array of one or more fields that are used to group the data.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#unique_key']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> UniqueKey(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.UniqueKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies an array of one or more fields that are used to group the data.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#unique_key']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor<TDocument> UniqueKey(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.UniqueKey = value;
@@ -130,6 +108,7 @@ public readonly partial struct LatestDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Latest']/*"/>
 public readonly partial struct LatestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Latest Instance { get; init; }
@@ -149,44 +128,28 @@ public readonly partial struct LatestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Latest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Latest(Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor Sort(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the date field that is used to identify the latest documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies an array of one or more fields that are used to group the data.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#unique_key']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor UniqueKey(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.UniqueKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies an array of one or more fields that are used to group the data.
-	/// </para>
-	/// </summary>
+	/// <include file="Latest.g.xml" path="doc/member[@key='transform._types.Latest#unique_key']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.LatestDescriptor UniqueKey<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.UniqueKey = value;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DatafeedAuthorization#api_key"><summary><para>
+If an API key was used for the most recent update to the datafeed, its name and identifier are listed in the response.
+</para></summary></member>
+  <member key="ml._types.DatafeedAuthorization#roles"><summary><para>
+If a user ID was used for the most recent update to the datafeed, its roles at the time of the update are listed in the response.
+</para></summary></member>
+  <member key="ml._types.DatafeedAuthorization#service_account"><summary><para>
+If a service account was used for the most recent update to the datafeed, the account name is listed in the response.
+</para></summary></member>
+</doc>

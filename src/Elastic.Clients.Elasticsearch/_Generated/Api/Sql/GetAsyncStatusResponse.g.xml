@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="sql.get_async_status.Response#completion_status"><summary><para>
+The HTTP status code for the search.
+The API returns this property only for completed searches.
+</para></summary></member>
+  <member key="sql.get_async_status.Response#expiration_time_in_millis"><summary><para>
+The timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete the search and its results, even if the search is still running.
+</para></summary></member>
+  <member key="sql.get_async_status.Response#id"><summary><para>
+The identifier for the search.
+</para></summary></member>
+  <member key="sql.get_async_status.Response#is_partial"><summary><para>
+If <c>true</c>, the response does not contain complete search results.
+If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
+If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
+</para></summary></member>
+  <member key="sql.get_async_status.Response#is_running"><summary><para>
+If <c>true</c>, the search is still running.
+If <c>false</c>, the search has finished.
+</para></summary></member>
+  <member key="sql.get_async_status.Response#start_time_in_millis"><summary><para>
+The timestamp, in milliseconds since the Unix epoch, when the search started.
+The API returns this property only for running searches.
+</para></summary></member>
+</doc>

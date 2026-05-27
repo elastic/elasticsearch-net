@@ -23,43 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 public sealed partial class SimulateTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index template.
-/// Get the index configuration that would be applied by a particular index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SimulateTemplateRequestConverter))]
 public sealed partial class SimulateTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>
 {
@@ -85,133 +67,54 @@ public sealed partial class SimulateTemplateRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.simulate_template";
 
-	/// <summary>
-	/// <para>
-	/// Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit
-	/// this parameter and specify the template configuration in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
-	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
-	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#allow_auto_create']/*"/>
 	public bool? AllowAutoCreate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#composed_of']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#deprecated']/*"/>
 	public bool? Deprecated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#ignore_missing_component_templates']/*"/>
 	public System.Collections.Generic.ICollection<string>? IgnoreMissingComponentTemplates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Priority to determine index template precedence when a new data stream or index is created.
-	/// The index template with the highest priority is chosen.
-	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#priority']/*"/>
 	public long? Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally.
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#version']/*"/>
 	public long? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index template.
-/// Get the index configuration that would be applied by a particular index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 public readonly partial struct SimulateTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest Instance { get; init; }
@@ -235,218 +138,126 @@ public readonly partial struct SimulateTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit
-	/// this parameter and specify the template configuration in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
-	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
-	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#allow_auto_create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor AllowAutoCreate(bool? value = true)
 	{
 		Instance.AllowAutoCreate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#composed_of']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
 		Instance.ComposedOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#composed_of']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.ComposedOf = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? value)
 	{
 		Instance.DataStream = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor DataStream()
 	{
 		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor>? action)
 	{
 		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#ignore_missing_component_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor IgnoreMissingComponentTemplates(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IgnoreMissingComponentTemplates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#ignore_missing_component_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor IgnoreMissingComponentTemplates(params string[] values)
 	{
 		Instance.IgnoreMissingComponentTemplates = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.IndexPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -460,74 +271,42 @@ public readonly partial struct SimulateTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Priority to determine index template precedence when a new data stream or index is created.
-	/// The index template with the highest priority is chosen.
-	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Priority(long? value)
 	{
 		Instance.Priority = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? value)
 	{
 		Instance.Template = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Template()
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally.
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor Version(long? value)
 	{
 		Instance.Version = value;
@@ -595,12 +374,8 @@ public readonly partial struct SimulateTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index template.
-/// Get the index configuration that would be applied by a particular index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 public readonly partial struct SimulateTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest Instance { get; init; }
@@ -624,218 +399,126 @@ public readonly partial struct SimulateTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit
-	/// this parameter and specify the template configuration in the request body.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting overrides the value of the <c>action.auto_create_index</c> cluster setting.
-	/// If set to <c>true</c> in a template, then indices can be automatically created using that template even if auto-creation of indices is disabled via <c>actions.auto_create_index</c>.
-	/// If set to <c>false</c>, then indices or data streams matching the template must always be explicitly created, and may never be automatically created.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#allow_auto_create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> AllowAutoCreate(bool? value = true)
 	{
 		Instance.AllowAutoCreate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#composed_of']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
 		Instance.ComposedOf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of component template names.
-	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#composed_of']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.ComposedOf = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? value)
 	{
 		Instance.DataStream = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> DataStream()
 	{
 		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this object is included, the template is used to create data streams and their backing indices.
-	/// Supports an empty object.
-	/// Data streams require a matching index template with a <c>data_stream</c> object.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#data_stream']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor>? action)
 	{
 		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Marks this index template as deprecated. When creating or updating a non-deprecated index template
-	/// that uses deprecated components, Elasticsearch will emit a deprecation warning.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#deprecated']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#ignore_missing_component_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IgnoreMissingComponentTemplates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration option ignore_missing_component_templates can be used when an index template
-	/// references a component template that might not exist
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#ignore_missing_component_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> IgnoreMissingComponentTemplates(params string[] values)
 	{
 		Instance.IgnoreMissingComponentTemplates = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.IndexPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional user metadata about the index template.
-	/// May have any contents.
-	/// This map is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -849,62 +532,35 @@ public readonly partial struct SimulateTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Priority to determine index template precedence when a new data stream or index is created.
-	/// The index template with the highest priority is chosen.
-	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Priority(long? value)
 	{
 		Instance.Priority = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? value)
 	{
 		Instance.Template = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Template()
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Template to be applied.
-	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#template']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>>? action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Version number used to manage index templates externally.
-	/// This number is not automatically generated by Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;

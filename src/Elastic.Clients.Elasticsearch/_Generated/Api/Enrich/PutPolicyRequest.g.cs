@@ -23,22 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
 public sealed partial class PutPolicyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an enrich policy.
-/// Creates an enrich policy.
-/// </para>
-/// </summary>
+/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.PutPolicyRequestConverter))]
 public sealed partial class PutPolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>
 {
@@ -65,48 +59,24 @@ public sealed partial class PutPolicyRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "enrich.put_policy";
 
-	/// <summary>
-	/// <para>
-	/// Name of the enrich policy to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? GeoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? Match { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? Range { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an enrich policy.
-/// Creates an enrich policy.
-/// </para>
-/// </summary>
+/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
 public readonly partial struct PutPolicyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Instance { get; init; }
@@ -131,121 +101,77 @@ public readonly partial struct PutPolicyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the enrich policy to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.GeoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
 		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor GeoMatch<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
 		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<T>.Build(action);
@@ -308,12 +234,8 @@ public readonly partial struct PutPolicyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create an enrich policy.
-/// Creates an enrich policy.
-/// </para>
-/// </summary>
+/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.put_policy.Request']/*"/>
 public readonly partial struct PutPolicyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Instance { get; init; }
@@ -338,88 +260,56 @@ public readonly partial struct PutPolicyRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the enrich policy to create or update.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.GeoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#geo_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> GeoMatch(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
 		Instance.GeoMatch = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches enrich data to incoming documents based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#match']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyRequest.g.xml" path="doc/member[@key='enrich.put_policy.Request#range']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyDescriptor<TDocument>.Build(action);

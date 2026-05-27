@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.clear_scroll.Request"><summary><para>
+Clear a scrolling search.
+Clear the search context and results for a scrolling search.
+</para></summary></member>
+  <member key="_global.clear_scroll.Request#scroll_id"><summary><para>
+The scroll IDs to clear.
+To clear all scroll IDs, use <c>_all</c>.
+</para></summary></member>
+</doc>

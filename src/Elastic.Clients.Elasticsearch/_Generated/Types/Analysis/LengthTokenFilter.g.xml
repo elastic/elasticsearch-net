@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.LengthTokenFilter#max"><summary><para>
+Maximum character length of a token. Longer tokens are excluded from the output. Defaults to <c>Integer.MAX_VALUE</c>, which is <c>2^31-1</c> or <c>2147483647</c>.
+</para></summary></member>
+  <member key="_types.analysis.LengthTokenFilter#min"><summary><para>
+Minimum character length of a token. Shorter tokens are excluded from the output. Defaults to <c>0</c>.
+</para></summary></member>
+</doc>

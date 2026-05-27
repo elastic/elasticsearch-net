@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="slm.get_lifecycle.Request"><summary><para>
+Get policy information.
+Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+</para></summary></member>
+  <member key="slm.get_lifecycle.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="slm.get_lifecycle.Request#policy_id"><summary><para>
+A comma-separated list of snapshot lifecycle policy identifiers.
+</para></summary></member>
+  <member key="slm.get_lifecycle.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.IndexingPressureMemory#current"><summary><para>
+Contains statistics for current indexing load.
+</para></summary></member>
+  <member key="nodes._types.IndexingPressureMemory#limit"><summary><para>
+Configured memory limit for the indexing requests.
+Replica requests have an automatic limit that is 1.5x this value.
+</para></summary></member>
+  <member key="nodes._types.IndexingPressureMemory#limit_in_bytes"><summary><para>
+Configured memory limit, in bytes, for the indexing requests.
+Replica requests have an automatic limit that is 1.5x this value.
+</para></summary></member>
+  <member key="nodes._types.IndexingPressureMemory#total"><summary><para>
+Contains statistics for the cumulative indexing load since the node started.
+</para></summary></member>
+</doc>

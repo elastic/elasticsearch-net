@@ -23,45 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 public sealed partial class EqlSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
-	/// (This includes <c>_all</c> string or when no indices have been specified)
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get EQL search results.
-/// Returns search results for an Event Query Language (EQL) query.
-/// EQL assumes each document in a data stream or index corresponds to an event.
-/// </para>
-/// </summary>
+/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.EqlSearchRequestConverter))]
 public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>
 {
@@ -95,139 +75,63 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "eql.search";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to scope the operation
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
-	/// (This includes <c>_all</c> string or when no indices have been specified)
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Allow query execution also in case of shard failures.
-	/// If true, the query will keep running and will return results based on the available shards.
-	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
-	/// If true, the sequence query will return results based on the available shards, ignoring the others.
-	/// If false, the sequence query will return successfully, but will always have empty results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_sequence_results']/*"/>
 	public bool? AllowPartialSequenceResults { get; set; }
 	public bool? CaseSensitive { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#event_category_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? EventCategoryField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of events to search at a time for sequence queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fetch_size']/*"/>
 	public int? FetchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 	public bool? KeepOnCompletion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#max_samples_per_key']/*"/>
 	public int? MaxSamplesPerKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// EQL query you wish to run.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#query']/*"/>
 	public required string Query { get; set; }
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For basic queries, the maximum number of matching events to return. Defaults to 10
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#tiebreaker_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TiebreakerField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#timestamp_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get EQL search results.
-/// Returns search results for an Event Query Language (EQL) query.
-/// EQL assumes each document in a data stream or index corresponds to an event.
-/// </para>
-/// </summary>
+/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 public readonly partial struct EqlSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Instance { get; init; }
@@ -254,93 +158,56 @@ public readonly partial struct EqlSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to scope the operation
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
-	/// (This includes <c>_all</c> string or when no indices have been specified)
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allow query execution also in case of shard failures.
-	/// If true, the query will keep running and will return results based on the available shards.
-	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
-	/// If true, the sequence query will return results based on the available shards, ignoring the others.
-	/// If false, the sequence query will return successfully, but will always have empty results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_sequence_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowPartialSequenceResults(bool? value = true)
 	{
 		Instance.AllowPartialSequenceResults = value;
@@ -353,66 +220,42 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#event_category_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.EventCategoryField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#event_category_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor EventCategoryField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.EventCategoryField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of events to search at a time for sequence queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -425,11 +268,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -442,33 +281,21 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -481,11 +308,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -510,24 +333,14 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#max_samples_per_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor MaxSamplesPerKey(int? value)
 	{
 		Instance.MaxSamplesPerKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// EQL query you wish to run.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -606,55 +419,35 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For basic queries, the maximum number of matching events to return. Defaults to 10
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#tiebreaker_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TiebreakerField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TiebreakerField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#tiebreaker_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TiebreakerField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TiebreakerField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#timestamp_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TimestampField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#timestamp_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TimestampField = value;
@@ -723,13 +516,8 @@ public readonly partial struct EqlSearchRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get EQL search results.
-/// Returns search results for an Event Query Language (EQL) query.
-/// EQL assumes each document in a data stream or index corresponds to an event.
-/// </para>
-/// </summary>
+/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.search.Request']/*"/>
 public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Instance { get; init; }
@@ -757,93 +545,56 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to scope the operation
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
-	/// (This includes <c>_all</c> string or when no indices have been specified)
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allow query execution also in case of shard failures.
-	/// If true, the query will keep running and will return results based on the available shards.
-	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
-	/// If true, the sequence query will return results based on the available shards, ignoring the others.
-	/// If false, the sequence query will return successfully, but will always have empty results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#allow_partial_sequence_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowPartialSequenceResults(bool? value = true)
 	{
 		Instance.AllowPartialSequenceResults = value;
@@ -856,66 +607,42 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#event_category_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.EventCategoryField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#event_category_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> EventCategoryField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.EventCategoryField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of events to search at a time for sequence queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fetch_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> FetchSize(int? value)
 	{
 		Instance.FetchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -928,33 +655,21 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -979,24 +694,14 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
-	/// parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
-	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#max_samples_per_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> MaxSamplesPerKey(int? value)
 	{
 		Instance.MaxSamplesPerKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// EQL query you wish to run.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -1055,55 +760,35 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For basic queries, the maximum number of matching events to return. Defaults to 10
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#tiebreaker_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TiebreakerField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TiebreakerField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#tiebreaker_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TiebreakerField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TiebreakerField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#timestamp_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TimestampField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlSearchRequest.g.xml" path="doc/member[@key='eql.search.Request#timestamp_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TimestampField = value;

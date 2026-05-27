@@ -37,10 +37,6 @@ public sealed partial class StopSlmResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmResponse.g.xml" path="doc/member[@key='slm.stop.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

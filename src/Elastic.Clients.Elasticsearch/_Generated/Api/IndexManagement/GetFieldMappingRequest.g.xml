@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_field_mapping.Request"><summary><para>
+Get mapping definitions.
+Retrieves mapping definitions for one or more fields.
+For data streams, the API retrieves field mappings for the stream’s backing indices.
+</para>
+<para>
+This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#fields"><summary><para>
+Comma-separated list or wildcard expression of fields used to limit returned information.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#include_defaults"><summary><para>
+If <c>true</c>, return all default settings in the response.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and aliases used to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.get_field_mapping.Request#local"><summary><para>
+If <c>true</c>, the request retrieves information from the local node only.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.JvmMemoryStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmMemoryStatsConverter))]
 public sealed partial class JvmMemoryStats
 {
@@ -36,59 +37,27 @@ public sealed partial class JvmMemoryStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Amount of memory, in bytes, available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_committed_in_bytes']/*"/>
 	public long? HeapCommittedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_max']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum amount of memory, in bytes, available for use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_max_in_bytes']/*"/>
 	public long? HeapMaxInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory, in bytes, currently in use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_used_in_bytes']/*"/>
 	public long? HeapUsedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Percentage of memory currently in use by the heap.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#heap_used_percent']/*"/>
 	public long? HeapUsedPercent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of non-heap memory available, in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_committed_in_bytes']/*"/>
 	public long? NonHeapCommittedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Non-heap memory used, in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#non_heap_used_in_bytes']/*"/>
 	public long? NonHeapUsedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about heap memory usage for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmMemoryStats.g.xml" path="doc/member[@key='nodes._types.JvmMemoryStats#pools']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Pool>? Pools { get; set; }
 }

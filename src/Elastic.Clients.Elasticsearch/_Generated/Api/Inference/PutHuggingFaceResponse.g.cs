@@ -37,45 +37,21 @@ public sealed partial class PutHuggingFaceResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutHuggingFaceResponse.g.xml" path="doc/member[@key='inference.put_hugging_face.Response#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace TaskType { get; set; }
 }

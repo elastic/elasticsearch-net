@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RoutingStateConverter))]
 public enum RoutingState
 {
-	/// <summary>
-	/// <para>
-	/// The allocation attempt failed.
-	/// </para>
-	/// </summary>
+	/// <include file="RoutingState.g.xml" path="doc/member[@key='ml._types.RoutingState#failed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "failed")]
 	Failed,
-	/// <summary>
-	/// <para>
-	/// The trained model is allocated and ready to accept inference requests.
-	/// </para>
-	/// </summary>
+	/// <include file="RoutingState.g.xml" path="doc/member[@key='ml._types.RoutingState#started']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "started")]
 	Started,
-	/// <summary>
-	/// <para>
-	/// The trained model is attempting to allocate on this node; inference requests are not yet accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="RoutingState.g.xml" path="doc/member[@key='ml._types.RoutingState#starting']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "starting")]
 	Starting,
-	/// <summary>
-	/// <para>
-	/// The trained model is fully deallocated from this node.
-	/// </para>
-	/// </summary>
+	/// <include file="RoutingState.g.xml" path="doc/member[@key='ml._types.RoutingState#stopped']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "stopped")]
 	Stopped,
-	/// <summary>
-	/// <para>
-	/// The trained model is being deallocated from this node.
-	/// </para>
-	/// </summary>
+	/// <include file="RoutingState.g.xml" path="doc/member[@key='ml._types.RoutingState#stopping']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "stopping")]
 	Stopping
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_influencers.Response#influencers"><summary><para>
+Array of influencer objects
+</para></summary></member>
+</doc>

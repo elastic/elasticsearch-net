@@ -37,38 +37,18 @@ public sealed partial class GetSearchApplicationResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analytics collection associated to the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.get.Response#analytics_collection_name']/*"/>
 	public string? AnalyticsCollectionName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.get.Response#indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search Application name
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.get.Response#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search template to use on search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.get.Response#template']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Last time the Search Application was updated.
-	/// </para>
-	/// </summary>
+	/// <include file="GetSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.get.Response#updated_at_millis']/*"/>
 	public required System.DateTimeOffset UpdatedAtMillis { get; set; }
 }

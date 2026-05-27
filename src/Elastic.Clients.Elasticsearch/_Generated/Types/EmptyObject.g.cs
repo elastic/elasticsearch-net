@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// For empty Class assignments
-/// </para>
-/// </summary>
+/// <include file="EmptyObject.g.xml" path="doc/member[@key='_types.EmptyObject']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.EmptyObject']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.EmptyObjectConverter))]
 public sealed partial class EmptyObject
 {
@@ -42,11 +39,8 @@ public sealed partial class EmptyObject
 	}
 }
 
-/// <summary>
-/// <para>
-/// For empty Class assignments
-/// </para>
-/// </summary>
+/// <include file="EmptyObject.g.xml" path="doc/member[@key='_types.EmptyObject']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.EmptyObject']/*"/>
 public readonly partial struct EmptyObjectDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.EmptyObject Instance { get; init; }

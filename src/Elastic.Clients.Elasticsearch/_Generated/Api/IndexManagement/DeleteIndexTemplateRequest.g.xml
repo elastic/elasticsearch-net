@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_index_template.Request"><summary><para>
+Delete an index template.
+The provided &lt;index-template> may contain multiple template names separated by a comma. If multiple template
+names are specified then there is no wildcard support and the provided names should match completely with
+existing templates.
+</para></summary></member>
+  <member key="indices.delete_index_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.delete_index_template.Request#name"><summary><para>
+Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+</para></summary></member>
+  <member key="indices.delete_index_template.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

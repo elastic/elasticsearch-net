@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.IpRangeAggregationRange#from"><summary><para>
+Start of the range.
+</para></summary></member>
+  <member key="_types.aggregations.IpRangeAggregationRange#mask"><summary><para>
+IP range defined as a CIDR mask.
+</para></summary></member>
+  <member key="_types.aggregations.IpRangeAggregationRange#to"><summary><para>
+End of the range.
+</para></summary></member>
+</doc>

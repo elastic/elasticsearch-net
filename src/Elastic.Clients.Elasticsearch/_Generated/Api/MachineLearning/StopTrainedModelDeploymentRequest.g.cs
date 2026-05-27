@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
 public sealed partial class StopTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Stop a trained model deployment.
-/// </para>
-/// </summary>
+/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StopTrainedModelDeploymentRequestConverter))]
 public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestParameters>
 {
@@ -58,44 +57,21 @@ public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.
 
 	internal override string OperationName => "ml.stop_trained_model_deployment";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
-	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
-	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
-	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
-	/// restart the model deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#force']/*"/>
 	public bool? Force { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If provided, must be the same identifier as in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Stop a trained model deployment.
-/// </para>
-/// </summary>
+/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request']/*"/>
 public readonly partial struct StopTrainedModelDeploymentRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest Instance { get; init; }
@@ -120,48 +96,28 @@ public readonly partial struct StopTrainedModelDeploymentRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
-	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
-	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
-	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
-	/// restart the model deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If provided, must be the same identifier as in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.stop_trained_model_deployment.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;

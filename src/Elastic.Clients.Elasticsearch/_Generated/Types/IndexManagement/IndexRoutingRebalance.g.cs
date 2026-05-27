@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexRoutingRebalance']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingRebalanceConverter))]
 public sealed partial class IndexRoutingRebalance
 {
@@ -45,6 +46,7 @@ public sealed partial class IndexRoutingRebalance
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Enable { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexRoutingRebalance']/*"/>
 public readonly partial struct IndexRoutingRebalanceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance Instance { get; init; }

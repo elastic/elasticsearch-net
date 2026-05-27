@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TextSimilarityReranker']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TextSimilarityRerankerConverter))]
 public sealed partial class TextSimilarityReranker
 {
@@ -44,63 +45,32 @@ public sealed partial class TextSimilarityReranker
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#field']/*"/>
 	public required string Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier of the inference endpoint created using the inference API.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_id']/*"/>
 	public string? InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The text snippet used as the basis for similarity comparison
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_text']/*"/>
 	public required string InferenceText { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#_name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This value determines how many documents we will consider from the nested retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#rank_window_size']/*"/>
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TextSimilarityReranker']/*"/>
 public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TextSimilarityReranker Instance { get; init; }
@@ -120,44 +90,28 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance) => new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -170,77 +124,49 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier of the inference endpoint created using the inference API.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceId(string? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text snippet used as the basis for similarity comparison
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_text']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceText(string value)
 	{
 		Instance.InferenceText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines how many documents we will consider from the nested retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
@@ -256,6 +182,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TextSimilarityReranker']/*"/>
 public readonly partial struct TextSimilarityRerankerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TextSimilarityReranker Instance { get; init; }
@@ -275,44 +202,28 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor(Elastic.Clients.Elasticsearch.TextSimilarityReranker instance) => new Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#field']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -325,11 +236,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -342,88 +249,56 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier of the inference endpoint created using the inference API.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceId(string? value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text snippet used as the basis for similarity comparison
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#inference_text']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceText(string value)
 	{
 		Instance.InferenceText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines how many documents we will consider from the nested retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
-	/// </para>
-	/// </summary>
+	/// <include file="TextSimilarityReranker.g.xml" path="doc/member[@key='_types.TextSimilarityReranker#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);

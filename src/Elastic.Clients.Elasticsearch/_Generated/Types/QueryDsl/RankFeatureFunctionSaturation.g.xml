@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RankFeatureFunctionSaturation#pivot"><summary><para>
+Configurable pivot value so that the result will be less than 0.5.
+</para></summary></member>
+</doc>

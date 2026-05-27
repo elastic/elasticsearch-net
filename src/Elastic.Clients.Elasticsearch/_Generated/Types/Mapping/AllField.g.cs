@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.AllField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.AllFieldConverter))]
 public sealed partial class AllField
 {
@@ -63,6 +64,7 @@ public sealed partial class AllField
 	public required bool StoreTermVectors { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.AllField']/*"/>
 public readonly partial struct AllFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.AllField Instance { get; init; }

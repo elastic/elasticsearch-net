@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.SearchApplicationParametersConverter))]
 public sealed partial class SearchApplicationParameters
 {
@@ -42,28 +43,17 @@ public sealed partial class SearchApplicationParameters
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analytics collection associated to the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#analytics_collection_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? AnalyticsCollectionName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#indices']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search template to use on search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#template']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters']/*"/>
 public readonly partial struct SearchApplicationParametersDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters Instance { get; init; }
@@ -83,55 +73,35 @@ public readonly partial struct SearchApplicationParametersDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters instance) => new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analytics collection associated to the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#analytics_collection_name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor AnalyticsCollectionName(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.AnalyticsCollectionName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Indices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Indices(params Elastic.Clients.Elasticsearch.IndexName[] values)
 	{
 		Instance.Indices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search template to use on search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#template']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Template(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? value)
 	{
 		Instance.Template = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search template to use on search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationParameters.g.xml" path="doc/member[@key='search_application._types.SearchApplicationParameters#template']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor> action)
 	{
 		Instance.Template = Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor.Build(action);

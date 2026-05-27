@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.SuggestSort#frequency"><summary><para>
+Sort by document frequency first, then similarity score and then the term itself.
+</para></summary></member>
+  <member key="_global.search._types.SuggestSort#score"><summary><para>
+Sort by score first, then document frequency and then the term itself.
+</para></summary></member>
+</doc>

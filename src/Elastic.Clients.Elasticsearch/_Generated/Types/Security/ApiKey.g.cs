@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ApiKey']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApiKeyConverter))]
 public sealed partial class ApiKey
 {
@@ -49,122 +50,51 @@ public sealed partial class ApiKey
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access granted to cross-cluster API keys.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.Access? Access { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Creation time for the API key in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#creation']/*"/>
 	public required System.DateTimeOffset Creation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#expiration']/*"/>
 	public System.DateTimeOffset? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Id for the API key
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Invalidation status for the API key.
-	/// If the key has been invalidated, it has a value of <c>true</c>. Otherwise, it is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#invalidated']/*"/>
 	public required bool Invalidated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the key has been invalidated, invalidation time in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#invalidation']/*"/>
 	public System.DateTimeOffset? Invalidation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The owner user’s permissions associated with the API key.
-	/// It is a point-in-time snapshot captured at creation and subsequent updates.
-	/// An API key’s effective permissions are an intersection of its assigned privileges and the owner user’s permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#limited_by']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? LimitedBy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata of the API key
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#metadata']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The profile uid for the API key owner principal, if requested and if it exists
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#profile_uid']/*"/>
 	public string? ProfileUid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Realm name of the principal for which this API key was created.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#realm']/*"/>
 	public required string Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Realm type of the principal for which this API key was created
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#realm_type']/*"/>
 	public string? RealmType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors assigned to this API key when it was created or last updated.
-	/// An empty role descriptor means the API key inherits the owner user’s permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#role_descriptors']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sorting values when using the <c>sort</c> parameter with the <c>security.query_api_keys</c> API.
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#_sort']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of the API key (e.g. <c>rest</c> or <c>cross_cluster</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.ApiKeyType Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Principal for which this API key was created
-	/// </para>
-	/// </summary>
+	/// <include file="ApiKey.g.xml" path="doc/member[@key='security._types.ApiKey#username']/*"/>
 	public required string Username { get; set; }
 }

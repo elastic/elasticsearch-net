@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.IndexingSlowlogTresholds#index"><summary><para>
+The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
+Log and the thresholds are configured in the same way as the search slowlog.
+</para></summary></member>
+</doc>

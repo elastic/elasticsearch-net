@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.get_script_languages.Request"><summary><para>
+Get script languages.
+</para>
+<para>
+Get a list of available script types, languages, and contexts.
+</para></summary></member>
+</doc>

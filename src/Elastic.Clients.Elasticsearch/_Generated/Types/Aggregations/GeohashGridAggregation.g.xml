@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeohashGridAggregation#bounds"><summary><para>
+The bounding box to filter the points in each bucket.
+</para></summary></member>
+  <member key="_types.aggregations.GeohashGridAggregation#field"><summary><para>
+Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+If the field contains an array, <c>geohash_grid</c> aggregates all array values.
+</para></summary></member>
+  <member key="_types.aggregations.GeohashGridAggregation#precision"><summary><para>
+The string length of the geohashes used to define cells/buckets in the results.
+</para></summary></member>
+  <member key="_types.aggregations.GeohashGridAggregation#shard_size"><summary><para>
+Allows for more accurate counting of the top cells returned in the final result the aggregation.
+Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
+</para></summary></member>
+  <member key="_types.aggregations.GeohashGridAggregation#size"><summary><para>
+The maximum number of geohash buckets to return.
+</para></summary></member>
+</doc>

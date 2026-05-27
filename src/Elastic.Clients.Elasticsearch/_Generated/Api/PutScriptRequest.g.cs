@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 public sealed partial class PutScriptRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a script or search template.
-/// Creates or updates a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.PutScriptRequestConverter))]
 public sealed partial class PutScriptRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.PutScriptRequestParameters>
 {
@@ -95,54 +81,24 @@ public sealed partial class PutScriptRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "put_script";
 
-	/// <summary>
-	/// <para>
-	/// The context in which the script or search template should run.
-	/// To prevent errors, the API immediately compiles the script or template in this context.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#context']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Context { get => P<Elastic.Clients.Elasticsearch.Name?>("context"); set => PO("context", value); }
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// It must be unique within the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The script or search template, its parameters, and its language.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.StoredScript Script { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a script or search template.
-/// Creates or updates a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.put_script.Request']/*"/>
 public readonly partial struct PutScriptRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.PutScriptRequest Instance { get; init; }
@@ -176,72 +132,42 @@ public readonly partial struct PutScriptRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.PutScriptRequest instance) => new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.PutScriptRequest(Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The context in which the script or search template should run.
-	/// To prevent errors, the API immediately compiles the script or template in this context.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#context']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Context(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Context = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// It must be unique within the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script or search template, its parameters, and its language.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScript value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script or search template, its parameters, and its language.
-	/// </para>
-	/// </summary>
+	/// <include file="PutScriptRequest.g.xml" path="doc/member[@key='_global.put_script.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.StoredScriptDescriptor.Build(action);

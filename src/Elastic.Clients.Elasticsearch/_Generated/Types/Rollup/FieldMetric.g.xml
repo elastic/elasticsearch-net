@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup._types.FieldMetric#field"><summary><para>
+The field to collect metrics for. This must be a numeric of some kind.
+</para></summary></member>
+  <member key="rollup._types.FieldMetric#metrics"><summary><para>
+An array of metrics to collect for the field. At least one metric must be configured.
+</para></summary></member>
+</doc>

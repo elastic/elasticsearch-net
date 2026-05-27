@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.FunctionBoostMode#avg"><summary><para>
+Query score and function score are averaged
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionBoostMode#max"><summary><para>
+Max of query score and function score
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionBoostMode#min"><summary><para>
+Min of query score and function score
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionBoostMode#multiply"><summary><para>
+Query score and function score are multiplied
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionBoostMode#replace"><summary><para>
+Only the function score is used.
+The query score is ignored.
+</para></summary></member>
+  <member key="_types.query_dsl.FunctionBoostMode#sum"><summary><para>
+Query score and function score are added
+</para></summary></member>
+</doc>

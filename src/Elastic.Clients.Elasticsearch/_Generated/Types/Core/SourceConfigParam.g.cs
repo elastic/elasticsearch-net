@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-/// <summary>
-/// <para>
-/// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
-/// Used as a query parameter along with the <c>_source_includes</c> and <c>_source_excludes</c> parameters.
-/// </para>
-/// </summary>
+/// <include file="SourceConfigParam.g.xml" path="doc/member[@key='_global.search._types.SourceConfigParam']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SourceConfigParam']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SourceConfigParamConverter))]
 public sealed partial class SourceConfigParam : Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Fields>
 {

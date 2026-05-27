@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.put_behavioral_analytics.Request"><summary><para>
+Create a behavioral analytics collection.
+</para></summary></member>
+  <member key="search_application.put_behavioral_analytics.Request#name"><summary><para>
+The name of the analytics collection to be created or updated.
+</para></summary></member>
+</doc>

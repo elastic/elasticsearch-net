@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.PinnedRetriever#_name"><summary><para>
+Retriever name.
+</para></summary></member>
+  <member key="_types.PinnedRetriever#filter"><summary><para>
+Query to filter the documents that can match.
+</para></summary></member>
+  <member key="_types.PinnedRetriever#min_score"><summary><para>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</para></summary></member>
+  <member key="_types.PinnedRetriever#retriever"><summary><para>
+Inner retriever.
+</para></summary></member>
+</doc>

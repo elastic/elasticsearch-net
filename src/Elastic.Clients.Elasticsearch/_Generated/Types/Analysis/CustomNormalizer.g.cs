@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CustomNormalizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CustomNormalizerConverter))]
 public sealed partial class CustomNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
 {
@@ -42,6 +43,7 @@ public sealed partial class CustomNormalizer : Elastic.Clients.Elasticsearch.Ana
 	public string Type => "custom";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CustomNormalizer']/*"/>
 public readonly partial struct CustomNormalizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer Instance { get; init; }

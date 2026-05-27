@@ -23,35 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph.explore.Request']/*"/>
 public sealed partial class ExploreRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Explore graph analytics.
-/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
-/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
-/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
-/// Subsequent requests enable you to spider out from one more vertices of interest.
-/// You can exclude vertices that have already been returned.
-/// </para>
-/// </summary>
+/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph.explore.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.ExploreRequestConverter))]
 public sealed partial class ExploreRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Graph.ExploreRequestParameters>
 {
@@ -78,68 +62,30 @@ public sealed partial class ExploreRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "graph.explore";
 
-	/// <summary>
-	/// <para>
-	/// Name of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreControls? Controls { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? Vertices { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Explore graph analytics.
-/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
-/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
-/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
-/// Subsequent requests enable you to spider out from one more vertices of interest.
-/// You can exclude vertices that have already been returned.
-/// </para>
-/// </summary>
+/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph.explore.Request']/*"/>
 public readonly partial struct ExploreRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.ExploreRequest Instance { get; init; }
@@ -164,167 +110,105 @@ public readonly partial struct ExploreRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor(Elastic.Clients.Elasticsearch.Graph.ExploreRequest instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreRequest(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
 	{
 		Instance.Connections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Connections<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? value)
 	{
 		Instance.Controls = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Controls(System.Action<Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor> action)
 	{
 		Instance.Controls = Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Controls<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<T>> action)
 	{
 		Instance.Controls = Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? value)
 	{
 		Instance.Vertices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
@@ -337,11 +221,7 @@ public readonly partial struct ExploreRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor Vertices<T>(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
@@ -410,16 +290,8 @@ public readonly partial struct ExploreRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Explore graph analytics.
-/// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
-/// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
-/// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
-/// Subsequent requests enable you to spider out from one more vertices of interest.
-/// You can exclude vertices that have already been returned.
-/// </para>
-/// </summary>
+/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph.explore.Request']/*"/>
 public readonly partial struct ExploreRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Graph.ExploreRequest Instance { get; init; }
@@ -443,134 +315,84 @@ public readonly partial struct ExploreRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.ExploreRequest instance) => new Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.ExploreRequest(Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
 	{
 		Instance.Connections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Controls(Elastic.Clients.Elasticsearch.Graph.ExploreControls? value)
 	{
 		Instance.Controls = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Direct the Graph API how to build the graph.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#controls']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Controls(System.Action<Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>> action)
 	{
 		Instance.Controls = Elastic.Clients.Elasticsearch.Graph.ExploreControlsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A seed query that identifies the documents of interest. Can be any valid Elasticsearch query.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? value)
 	{
 		Instance.Vertices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields that contain the terms you want to include in the graph as vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="ExploreRequest.g.xml" path="doc/member[@key='graph.explore.Request#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.ExploreRequestDescriptor<TDocument> Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();

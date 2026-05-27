@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.GreekAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.GreekAnalyzerConverter))]
 public sealed partial class GreekAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -42,6 +43,7 @@ public sealed partial class GreekAnalyzer : Elastic.Clients.Elasticsearch.Analys
 	public string Type => "greek";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.GreekAnalyzer']/*"/>
 public readonly partial struct GreekAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.GreekAnalyzer Instance { get; init; }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Highlight']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.HighlightConverter))]
 public sealed partial class Highlight
 {
@@ -42,146 +43,63 @@ public sealed partial class Highlight
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A string that contains each boundary character.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_chars']/*"/>
 	public string? BoundaryChars { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How far to scan for boundary characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_max_scan']/*"/>
 	public int? BoundaryMaxScan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how to break the highlighted fragments: chars, sentence, or word.
-	/// Only valid for the unified and fvh highlighters.
-	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls which locale is used to search for sentence and word boundaries.
-	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner_locale']/*"/>
 	public string? BoundaryScannerLocale { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? Encoder { get; set; }
 	public required System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
 	public bool? ForceSource { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how text should be broken up in highlight snippets: <c>simple</c> or <c>span</c>.
-	/// Only valid for the <c>plain</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragmenter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of the highlighted fragment in characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragment_size']/*"/>
 	public int? FragmentSize { get; set; }
 	public bool? HighlightFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set to a non-negative value, highlighting stops at this defined maximum limit.
-	/// The rest of the text is not processed, thus not highlighted and no error is returned
-	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#max_analyzed_offset']/*"/>
 	public int? MaxAnalyzedOffset { get; set; }
 	public int? MaxFragmentLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#no_match_size']/*"/>
 	public int? NoMatchSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fragments to return.
-	/// If the number of fragments is set to <c>0</c>, no fragments are returned.
-	/// Instead, the entire field contents are highlighted and returned.
-	/// This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.
-	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#number_of_fragments']/*"/>
 	public int? NumberOfFragments { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Options { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sorts highlighted fragments by score when set to <c>score</c>.
-	/// By default, fragments will be output in the order they appear in the field (order: <c>none</c>).
-	/// Setting this option to <c>score</c> will output the most relevant fragments first.
-	/// Each highlighter applies its own logic to compute relevancy scores.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the number of matching phrases in a document that are considered.
-	/// Prevents the <c>fvh</c> highlighter from analyzing too many phrases and consuming too much memory.
-	/// When using <c>matched_fields</c>, <c>phrase_limit</c> phrases per matched field are considered. Raising the limit increases query time and consumes more memory.
-	/// Only supported by the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#phrase_limit']/*"/>
 	public int? PhraseLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#post_tags']/*"/>
 	public System.Collections.Generic.ICollection<string>? PostTags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#pre_tags']/*"/>
 	public System.Collections.Generic.ICollection<string>? PreTags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, only fields that contains a query match are highlighted.
-	/// Set to <c>false</c> to highlight all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#require_field_match']/*"/>
 	public bool? RequireFieldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>styled</c> to use the built-in tag schema.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#tags_schema']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? Type { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Highlight']/*"/>
 public readonly partial struct HighlightDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.Highlight Instance { get; init; }
@@ -201,47 +119,28 @@ public readonly partial struct HighlightDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that contains each boundary character.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_chars']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryChars(string? value)
 	{
 		Instance.BoundaryChars = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How far to scan for boundary characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_max_scan']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryMaxScan(int? value)
 	{
 		Instance.BoundaryMaxScan = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how to break the highlighted fragments: chars, sentence, or word.
-	/// Only valid for the unified and fvh highlighters.
-	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? value)
 	{
 		Instance.BoundaryScanner = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls which locale is used to search for sentence and word boundaries.
-	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner_locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> BoundaryScannerLocale(string? value)
 	{
 		Instance.BoundaryScannerLocale = value;
@@ -344,23 +243,14 @@ public readonly partial struct HighlightDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how text should be broken up in highlight snippets: <c>simple</c> or <c>span</c>.
-	/// Only valid for the <c>plain</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragmenter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? value)
 	{
 		Instance.Fragmenter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the highlighted fragment in characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragment_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> FragmentSize(int? value)
 	{
 		Instance.FragmentSize = value;
@@ -373,37 +263,21 @@ public readonly partial struct HighlightDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.HighlightQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightQuery(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to a non-negative value, highlighting stops at this defined maximum limit.
-	/// The rest of the text is not processed, thus not highlighted and no error is returned
-	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#max_analyzed_offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> MaxAnalyzedOffset(int? value)
 	{
 		Instance.MaxAnalyzedOffset = value;
@@ -416,26 +290,14 @@ public readonly partial struct HighlightDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#no_match_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> NoMatchSize(int? value)
 	{
 		Instance.NoMatchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fragments to return.
-	/// If the number of fragments is set to <c>0</c>, no fragments are returned.
-	/// Instead, the entire field contents are highlighted and returned.
-	/// This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.
-	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#number_of_fragments']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> NumberOfFragments(int? value)
 	{
 		Instance.NumberOfFragments = value;
@@ -467,99 +329,56 @@ public readonly partial struct HighlightDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts highlighted fragments by score when set to <c>score</c>.
-	/// By default, fragments will be output in the order they appear in the field (order: <c>none</c>).
-	/// Setting this option to <c>score</c> will output the most relevant fragments first.
-	/// Each highlighter applies its own logic to compute relevancy scores.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the number of matching phrases in a document that are considered.
-	/// Prevents the <c>fvh</c> highlighter from analyzing too many phrases and consuming too much memory.
-	/// When using <c>matched_fields</c>, <c>phrase_limit</c> phrases per matched field are considered. Raising the limit increases query time and consumes more memory.
-	/// Only supported by the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#phrase_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PhraseLimit(int? value)
 	{
 		Instance.PhraseLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#post_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PostTags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#post_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PostTags(params string[] values)
 	{
 		Instance.PostTags = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#pre_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PreTags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#pre_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> PreTags(params string[] values)
 	{
 		Instance.PreTags = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, only fields that contains a query match are highlighted.
-	/// Set to <c>false</c> to highlight all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#require_field_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> RequireFieldMatch(bool? value = true)
 	{
 		Instance.RequireFieldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>styled</c> to use the built-in tag schema.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#tags_schema']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? value)
 	{
 		Instance.TagsSchema = value;
@@ -581,6 +400,7 @@ public readonly partial struct HighlightDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Highlight']/*"/>
 public readonly partial struct HighlightDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.Highlight Instance { get; init; }
@@ -600,47 +420,28 @@ public readonly partial struct HighlightDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.Highlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that contains each boundary character.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_chars']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryChars(string? value)
 	{
 		Instance.BoundaryChars = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How far to scan for boundary characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_max_scan']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryMaxScan(int? value)
 	{
 		Instance.BoundaryMaxScan = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how to break the highlighted fragments: chars, sentence, or word.
-	/// Only valid for the unified and fvh highlighters.
-	/// Defaults to <c>sentence</c> for the <c>unified</c> highlighter. Defaults to <c>chars</c> for the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? value)
 	{
 		Instance.BoundaryScanner = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls which locale is used to search for sentence and word boundaries.
-	/// This parameter takes a form of a language tag, for example: <c>"en-US"</c>, <c>"fr-FR"</c>, <c>"ja-JP"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#boundary_scanner_locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor BoundaryScannerLocale(string? value)
 	{
 		Instance.BoundaryScannerLocale = value;
@@ -763,23 +564,14 @@ public readonly partial struct HighlightDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how text should be broken up in highlight snippets: <c>simple</c> or <c>span</c>.
-	/// Only valid for the <c>plain</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragmenter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? value)
 	{
 		Instance.Fragmenter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the highlighted fragment in characters.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#fragment_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor FragmentSize(int? value)
 	{
 		Instance.FragmentSize = value;
@@ -792,49 +584,28 @@ public readonly partial struct HighlightDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.HighlightQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Highlight matches for a query other than the search query.
-	/// This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#highlight_query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightQuery<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.HighlightQuery = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to a non-negative value, highlighting stops at this defined maximum limit.
-	/// The rest of the text is not processed, thus not highlighted and no error is returned
-	/// The <c>max_analyzed_offset</c> query setting does not override the <c>index.highlight.max_analyzed_offset</c> setting, which prevails when it’s set to lower value than the query setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#max_analyzed_offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor MaxAnalyzedOffset(int? value)
 	{
 		Instance.MaxAnalyzedOffset = value;
@@ -847,26 +618,14 @@ public readonly partial struct HighlightDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#no_match_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor NoMatchSize(int? value)
 	{
 		Instance.NoMatchSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of fragments to return.
-	/// If the number of fragments is set to <c>0</c>, no fragments are returned.
-	/// Instead, the entire field contents are highlighted and returned.
-	/// This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.
-	/// If <c>number_of_fragments</c> is <c>0</c>, <c>fragment_size</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#number_of_fragments']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor NumberOfFragments(int? value)
 	{
 		Instance.NumberOfFragments = value;
@@ -898,99 +657,56 @@ public readonly partial struct HighlightDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sorts highlighted fragments by score when set to <c>score</c>.
-	/// By default, fragments will be output in the order they appear in the field (order: <c>none</c>).
-	/// Setting this option to <c>score</c> will output the most relevant fragments first.
-	/// Each highlighter applies its own logic to compute relevancy scores.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor Order(Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the number of matching phrases in a document that are considered.
-	/// Prevents the <c>fvh</c> highlighter from analyzing too many phrases and consuming too much memory.
-	/// When using <c>matched_fields</c>, <c>phrase_limit</c> phrases per matched field are considered. Raising the limit increases query time and consumes more memory.
-	/// Only supported by the <c>fvh</c> highlighter.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#phrase_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PhraseLimit(int? value)
 	{
 		Instance.PhraseLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#post_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PostTags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#post_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PostTags(params string[] values)
 	{
 		Instance.PostTags = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#pre_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.PreTags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tags</c> to define the HTML tags to use for the highlighted text.
-	/// By default, highlighted text is wrapped in <c>&lt;em></c> and <c>&lt;/em></c> tags.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#pre_tags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor PreTags(params string[] values)
 	{
 		Instance.PreTags = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, only fields that contains a query match are highlighted.
-	/// Set to <c>false</c> to highlight all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#require_field_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor RequireFieldMatch(bool? value = true)
 	{
 		Instance.RequireFieldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>styled</c> to use the built-in tag schema.
-	/// </para>
-	/// </summary>
+	/// <include file="Highlight.g.xml" path="doc/member[@key='_global.search._types.Highlight#tags_schema']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor TagsSchema(Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? value)
 	{
 		Instance.TagsSchema = value;

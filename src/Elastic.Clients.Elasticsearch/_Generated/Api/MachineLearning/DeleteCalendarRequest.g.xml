@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_calendar.Request"><summary><para>
+Delete a calendar.
+</para>
+<para>
+Remove all scheduled events from a calendar, then delete it.
+</para></summary></member>
+  <member key="ml.delete_calendar.Request#calendar_id"><summary><para>
+A string that uniquely identifies a calendar.
+</para></summary></member>
+</doc>

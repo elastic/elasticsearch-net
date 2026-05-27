@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SparseVectorIndexOptionsConverter))]
 public sealed partial class SparseVectorIndexOptions
 {
@@ -36,26 +37,14 @@ public sealed partial class SparseVectorIndexOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#prune']/*"/>
 	public bool? Prune { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfig? PruningConfig { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions']/*"/>
 public readonly partial struct SparseVectorIndexOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions Instance { get; init; }
@@ -75,55 +64,28 @@ public readonly partial struct SparseVectorIndexOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions instance) => new Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Whether to perform pruning, omitting the non-significant tokens from the query to improve query performance.
-	/// If prune is true but the pruning_config is not specified, pruning will occur but default values will be used.
-	/// Default: false
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#prune']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor Prune(bool? value = true)
 	{
 		Instance.Prune = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor PruningConfig()
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional pruning configuration.
-	/// If enabled, this will omit non-significant tokens from the query in order to improve query performance.
-	/// This is only used if prune is set to true.
-	/// If prune is set to true but pruning_config is not specified, default values will be used.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.SparseVectorIndexOptions#pruning_config']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
 		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);

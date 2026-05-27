@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.ReverseNestedAggregation#path"><summary><para>
+Defines the nested object field that should be joined back to.
+The default is empty, which means that it joins back to the root/main document level.
+</para></summary></member>
+</doc>

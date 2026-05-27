@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.JsonProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.JsonProcessorConverter))]
 public sealed partial class JsonProcessor
 {
@@ -42,84 +43,38 @@ public sealed partial class JsonProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Flag that forces the parsed JSON to be added at the top level of the document.
-	/// <c>target_field</c> must not be set when this option is chosen.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root']/*"/>
 	public bool? AddToRoot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
-	/// When set to <c>merge</c>, conflicting fields will be merged.
-	/// Only applicable <c>if add_to_root</c> is set to true.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root_conflict_strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? AddToRootConflictStrategy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
-	/// Instead, the last encountered value for any duplicate key wins.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#allow_duplicate_keys']/*"/>
 	public bool? AllowDuplicateKeys { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that the converted structured object will be written into.
-	/// Any existing content in this field will be overwritten.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.JsonProcessor']/*"/>
 public readonly partial struct JsonProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.JsonProcessor Instance { get; init; }
@@ -139,126 +94,77 @@ public readonly partial struct JsonProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.JsonProcessor(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Flag that forces the parsed JSON to be added at the top level of the document.
-	/// <c>target_field</c> must not be set when this option is chosen.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> AddToRoot(bool? value = true)
 	{
 		Instance.AddToRoot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
-	/// When set to <c>merge</c>, conflicting fields will be merged.
-	/// Only applicable <c>if add_to_root</c> is set to true.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root_conflict_strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> AddToRootConflictStrategy(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? value)
 	{
 		Instance.AddToRootConflictStrategy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
-	/// Instead, the last encountered value for any duplicate key wins.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#allow_duplicate_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> AllowDuplicateKeys(bool? value = true)
 	{
 		Instance.AllowDuplicateKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -271,36 +177,21 @@ public readonly partial struct JsonProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the converted structured object will be written into.
-	/// Any existing content in this field will be overwritten.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the converted structured object will be written into.
-	/// Any existing content in this field will be overwritten.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -316,6 +207,7 @@ public readonly partial struct JsonProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.JsonProcessor']/*"/>
 public readonly partial struct JsonProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.JsonProcessor Instance { get; init; }
@@ -335,126 +227,77 @@ public readonly partial struct JsonProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.JsonProcessor(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Flag that forces the parsed JSON to be added at the top level of the document.
-	/// <c>target_field</c> must not be set when this option is chosen.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor AddToRoot(bool? value = true)
 	{
 		Instance.AddToRoot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>replace</c>, root fields that conflict with fields from the parsed JSON will be overridden.
-	/// When set to <c>merge</c>, conflicting fields will be merged.
-	/// Only applicable <c>if add_to_root</c> is set to true.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#add_to_root_conflict_strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor AddToRootConflictStrategy(Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? value)
 	{
 		Instance.AddToRootConflictStrategy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the JSON parser will not fail if the JSON contains duplicate keys.
-	/// Instead, the last encountered value for any duplicate key wins.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#allow_duplicate_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor AllowDuplicateKeys(bool? value = true)
 	{
 		Instance.AllowDuplicateKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -467,11 +310,7 @@ public readonly partial struct JsonProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -484,36 +323,21 @@ public readonly partial struct JsonProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the converted structured object will be written into.
-	/// Any existing content in this field will be overwritten.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that the converted structured object will be written into.
-	/// Any existing content in this field will be overwritten.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessor.g.xml" path="doc/member[@key='ingest._types.JsonProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

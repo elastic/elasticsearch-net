@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.NodeBufferPool']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeBufferPoolConverter))]
 public sealed partial class NodeBufferPool
 {
@@ -36,38 +37,18 @@ public sealed partial class NodeBufferPool
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of buffer pools.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeBufferPool.g.xml" path="doc/member[@key='nodes._types.NodeBufferPool#count']/*"/>
 	public long? Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total capacity of buffer pools.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeBufferPool.g.xml" path="doc/member[@key='nodes._types.NodeBufferPool#total_capacity']/*"/>
 	public string? TotalCapacity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total capacity of buffer pools in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeBufferPool.g.xml" path="doc/member[@key='nodes._types.NodeBufferPool#total_capacity_in_bytes']/*"/>
 	public long? TotalCapacityInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size of buffer pools.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeBufferPool.g.xml" path="doc/member[@key='nodes._types.NodeBufferPool#used']/*"/>
 	public string? Used { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size of buffer pools in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeBufferPool.g.xml" path="doc/member[@key='nodes._types.NodeBufferPool#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.CCSUsageTimeValue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CCSUsageTimeValueConverter))]
 public sealed partial class CCSUsageTimeValue
 {
@@ -44,24 +45,12 @@ public sealed partial class CCSUsageTimeValue
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The average time taken to execute a request, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageTimeValue.g.xml" path="doc/member[@key='cluster.stats.CCSUsageTimeValue#avg']/*"/>
 	public required System.TimeSpan Avg { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time taken to execute a request, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageTimeValue.g.xml" path="doc/member[@key='cluster.stats.CCSUsageTimeValue#max']/*"/>
 	public required System.TimeSpan Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The 90th percentile of the time taken to execute requests, in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageTimeValue.g.xml" path="doc/member[@key='cluster.stats.CCSUsageTimeValue#p90']/*"/>
 	public required System.TimeSpan P90 { get; set; }
 }

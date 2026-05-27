@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Destination']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.DestinationConverter))]
 public sealed partial class Destination
 {
@@ -36,23 +37,14 @@ public sealed partial class Destination
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination index for the transform. The mappings of the destination index are deduced based on the source
-	/// fields when possible. If alternate mappings are required, use the create index API prior to starting the
-	/// transform.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for an ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#pipeline']/*"/>
 	public string? Pipeline { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Destination']/*"/>
 public readonly partial struct DestinationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Destination Instance { get; init; }
@@ -72,24 +64,14 @@ public readonly partial struct DestinationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Destination instance) => new Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Destination(Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The destination index for the transform. The mappings of the destination index are deduced based on the source
-	/// fields when possible. If alternate mappings are required, use the create index API prior to starting the
-	/// transform.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for an ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="Destination.g.xml" path="doc/member[@key='transform._types.Destination#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor Pipeline(string? value)
 	{
 		Instance.Pipeline = value;

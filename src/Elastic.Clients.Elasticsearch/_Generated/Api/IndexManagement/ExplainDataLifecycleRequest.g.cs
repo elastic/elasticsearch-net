@@ -23,29 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 public sealed partial class ExplainDataLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Indicates if the API should return the default values the system uses for the index's lifecycle
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the status for a data stream lifecycle.
-/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
-/// </para>
-/// </summary>
+/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ExplainDataLifecycleRequestConverter))]
 public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>
 {
@@ -72,34 +62,18 @@ public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "indices.explain_data_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to explain
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the API should return the default values the system uses for the index's lifecycle
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the status for a data stream lifecycle.
-/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
-/// </para>
-/// </summary>
+/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 public readonly partial struct ExplainDataLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest Instance { get; init; }
@@ -124,33 +98,21 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to explain
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the API should return the default values the system uses for the index's lifecycle
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -213,12 +175,8 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get the status for a data stream lifecycle.
-/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
-/// </para>
-/// </summary>
+/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest Instance { get; init; }
@@ -242,33 +200,21 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of index names to explain
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the API should return the default values the system uses for the index's lifecycle
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

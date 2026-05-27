@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Breaker']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.BreakerConverter))]
 public sealed partial class Breaker
 {
@@ -36,45 +37,21 @@ public sealed partial class Breaker
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Estimated memory used for the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#estimated_size']/*"/>
 	public string? EstimatedSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Estimated memory used, in bytes, for the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#estimated_size_in_bytes']/*"/>
 	public long? EstimatedSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory limit for the circuit breaker.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#limit_size']/*"/>
 	public string? LimitSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory limit, in bytes, for the circuit breaker.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#limit_size_in_bytes']/*"/>
 	public long? LimitSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A constant that all estimates for the circuit breaker are multiplied with to calculate a final estimate.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#overhead']/*"/>
 	public float? Overhead { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of times the circuit breaker has been triggered and prevented an out of memory error.
-	/// </para>
-	/// </summary>
+	/// <include file="Breaker.g.xml" path="doc/member[@key='nodes._types.Breaker#tripped']/*"/>
 	public float? Tripped { get; set; }
 }

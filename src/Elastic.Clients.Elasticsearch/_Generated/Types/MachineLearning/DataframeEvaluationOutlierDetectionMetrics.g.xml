@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeEvaluationOutlierDetectionMetrics#auc_roc"><summary><para>
+The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationOutlierDetectionMetrics#confusion_matrix"><summary><para>
+Accuracy of predictions (per-class and overall).
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationOutlierDetectionMetrics#precision"><summary><para>
+Precision of predictions (per-class and average).
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationOutlierDetectionMetrics#recall"><summary><para>
+Recall of predictions (per-class and average).
+</para></summary></member>
+</doc>

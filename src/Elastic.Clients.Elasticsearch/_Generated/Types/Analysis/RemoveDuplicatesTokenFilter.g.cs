@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.RemoveDuplicatesTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.RemoveDuplicatesTokenFilterConverter))]
 public sealed partial class RemoveDuplicatesTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class RemoveDuplicatesTokenFilter : Elastic.Clients.Elasti
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.RemoveDuplicatesTokenFilter']/*"/>
 public readonly partial struct RemoveDuplicatesTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter Instance { get; init; }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.open_point_in_time.Response#_shards"><summary><para>
+Shards used to create the PIT
+</para></summary></member>
+</doc>

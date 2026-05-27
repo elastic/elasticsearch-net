@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.start_trained_model_deployment.Request"><summary><para>
+Start a trained model deployment.
+It allocates the model to every machine learning node.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#adaptive_allocations"><summary><para>
+Adaptive allocations configuration. When enabled, the number of allocations
+is set based on the current load.
+If adaptive_allocations is enabled, do not set the number of allocations manually.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#cache_size"><summary><para>
+The inference cache size (in memory outside the JVM heap) per node for the model.
+The default value is the same size as the <c>model_size_bytes</c>. To disable the cache,
+<c>0b</c> can be provided.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#deployment_id"><summary><para>
+A unique identifier for the deployment of the model.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#model_id"><summary><para>
+The unique identifier of the trained model. Currently, only PyTorch models are supported.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#number_of_allocations"><summary><para>
+The number of model allocations on each node where the model is deployed.
+All allocations on a node share the same copy of the model in memory but use
+a separate set of threads to evaluate the model.
+Increasing this value generally increases the throughput.
+If this setting is greater than the number of hardware threads
+it will automatically be changed to a value less than the number of hardware threads.
+If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#priority"><summary><para>
+The deployment priority
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#queue_capacity"><summary><para>
+Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
+this value, new requests are rejected with a 429 error.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#threads_per_allocation"><summary><para>
+Sets the number of threads used by each model allocation during inference. This generally increases
+the inference speed. The inference process is a compute-bound process; any number
+greater than the number of available hardware threads on the machine does not increase the
+inference speed. If this setting is greater than the number of hardware threads
+it will automatically be changed to a value less than the number of hardware threads.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the model to deploy.
+</para></summary></member>
+  <member key="ml.start_trained_model_deployment.Request#wait_for"><summary><para>
+Specifies the allocation status to wait for before returning.
+</para></summary></member>
+</doc>

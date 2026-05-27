@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// An object style representation of a single portion of a conversation.
-/// </para>
-/// </summary>
+/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.ContentObject']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContentObjectConverter))]
 public sealed partial class ContentObject
 {
@@ -48,17 +45,9 @@ public sealed partial class ContentObject
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text content.
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#text']/*"/>
 	public required string Text { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of content.
-	/// </para>
-	/// </summary>
+	/// <include file="ContentObject.g.xml" path="doc/member[@key='inference._types.ContentObject#type']/*"/>
 	public required string Type { get; set; }
 }

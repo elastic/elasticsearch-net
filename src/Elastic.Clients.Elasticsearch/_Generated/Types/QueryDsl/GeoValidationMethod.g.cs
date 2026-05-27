@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoValidationMethodConverter))]
 public enum GeoValidationMethod
 {
-	/// <summary>
-	/// <para>
-	/// Accept geo points with invalid latitude or longitude and additionally try and infer correct coordinates.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoValidationMethod.g.xml" path="doc/member[@key='_types.query_dsl.GeoValidationMethod#coerce']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "coerce")]
 	Coerce,
-	/// <summary>
-	/// <para>
-	/// Accept geo points with invalid latitude or longitude.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoValidationMethod.g.xml" path="doc/member[@key='_types.query_dsl.GeoValidationMethod#ignore_malformed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "ignore_malformed")]
 	IgnoreMalformed,
 	[System.Runtime.Serialization.EnumMember(Value = "strict")]

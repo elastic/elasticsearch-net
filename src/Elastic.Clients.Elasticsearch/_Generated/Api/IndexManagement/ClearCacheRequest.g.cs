@@ -23,74 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 public sealed partial class ClearCacheRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the fields cache.
-	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fielddata']/*"/>
 	public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the query cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#query']/*"/>
 	public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the request cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#request']/*"/>
 	public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the cache.
-/// Clear the cache of one or more indices.
-/// For data streams, the API clears the caches of the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the clear cache API clears all caches.
-/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
-/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
-/// </para>
-/// </summary>
+/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ClearCacheRequestConverter))]
 public sealed partial class ClearCacheRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>
 {
@@ -116,81 +76,33 @@ public sealed partial class ClearCacheRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.clear_cache";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the fields cache.
-	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fielddata']/*"/>
 	public bool? Fielddata { get => Q<bool?>("fielddata"); set => Q("fielddata", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the query cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#query']/*"/>
 	public bool? Query { get => Q<bool?>("query"); set => Q("query", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the request cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#request']/*"/>
 	public bool? Request { get => Q<bool?>("request"); set => Q("request", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the cache.
-/// Clear the cache of one or more indices.
-/// For data streams, the API clears the caches of the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the clear cache API clears all caches.
-/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
-/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
-/// </para>
-/// </summary>
+/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 public readonly partial struct ClearCacheRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest Instance { get; init; }
@@ -214,118 +126,70 @@ public readonly partial struct ClearCacheRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the fields cache.
-	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fielddata']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Fielddata(bool? value = true)
 	{
 		Instance.Fielddata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the query cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Query(bool? value = true)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the request cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#request']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor Request(bool? value = true)
 	{
 		Instance.Request = value;
@@ -393,18 +257,8 @@ public readonly partial struct ClearCacheRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Clear the cache.
-/// Clear the cache of one or more indices.
-/// For data streams, the API clears the caches of the stream's backing indices.
-/// </para>
-/// <para>
-/// By default, the clear cache API clears all caches.
-/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
-/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
-/// </para>
-/// </summary>
+/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest Instance { get; init; }
@@ -428,118 +282,70 @@ public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the fields cache.
-	/// Use the <c>fields</c> parameter to clear the cache of specific fields only.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fielddata']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Fielddata(bool? value = true)
 	{
 		Instance.Fielddata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of field names used to limit the <c>fielddata</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the query cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Query(bool? value = true)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, clears the request cache.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request#request']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument> Request(bool? value = true)
 	{
 		Instance.Request = value;

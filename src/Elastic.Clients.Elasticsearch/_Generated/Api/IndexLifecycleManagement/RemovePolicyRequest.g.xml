@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm.remove_policy.Request"><summary><para>
+Remove policies from an index.
+Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+It also stops managing the indices.
+</para></summary></member>
+  <member key="ilm.remove_policy.Request#index"><summary><para>
+The name of the index to remove policy on
+</para></summary></member>
+</doc>

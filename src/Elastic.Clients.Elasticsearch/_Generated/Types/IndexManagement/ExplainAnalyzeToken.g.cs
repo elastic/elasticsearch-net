@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.analyze.ExplainAnalyzeToken']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ExplainAnalyzeTokenConverter))]
 public sealed partial class ExplainAnalyzeToken
 {
@@ -49,11 +50,6 @@ public sealed partial class ExplainAnalyzeToken
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional tokenizer-specific attributes
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Attributes { get; set; }
 	public required string Bytes { get; set; }
 	public required long EndOffset { get; set; }

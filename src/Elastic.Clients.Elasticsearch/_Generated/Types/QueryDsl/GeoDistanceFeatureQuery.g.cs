@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoDistanceFeatureQueryConverter))]
 public sealed partial class GeoDistanceFeatureQuery : Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery
 {
@@ -44,48 +45,23 @@ public sealed partial class GeoDistanceFeatureQuery : Elastic.Clients.Elasticsea
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#origin']/*"/>
 	public required Elastic.Clients.Elasticsearch.GeoLocation Origin { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#pivot']/*"/>
 	public required string Pivot { get; set; }
 	public string? QueryName { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.Type => "geo";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery']/*"/>
 public readonly partial struct GeoDistanceFeatureQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery Instance { get; init; }
@@ -105,82 +81,42 @@ public readonly partial struct GeoDistanceFeatureQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Origin(Elastic.Clients.Elasticsearch.GeoLocation value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor<TDocument> Pivot(string value)
 	{
 		Instance.Pivot = value;
@@ -202,6 +138,7 @@ public readonly partial struct GeoDistanceFeatureQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery']/*"/>
 public readonly partial struct GeoDistanceFeatureQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery Instance { get; init; }
@@ -221,82 +158,42 @@ public readonly partial struct GeoDistanceFeatureQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Origin(Elastic.Clients.Elasticsearch.GeoLocation value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Origin(System.Func<Elastic.Clients.Elasticsearch.GeoLocationFactory, Elastic.Clients.Elasticsearch.GeoLocation> action)
 	{
 		Instance.Origin = Elastic.Clients.Elasticsearch.GeoLocationFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoDistanceFeatureQuery#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor Pivot(string value)
 	{
 		Instance.Pivot = value;

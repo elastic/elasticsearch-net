@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FingerprintProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.FingerprintProcessorConverter))]
 public sealed partial class FingerprintProcessor
 {
@@ -42,83 +43,38 @@ public sealed partial class FingerprintProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to include in the fingerprint. For objects, the processor
-	/// hashes both the field key and value. For other fields, the processor hashes
-	/// only the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the processor ignores any missing fields. If all fields are
-	/// missing, the processor silently exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
-	/// SHA-256, SHA-512, or MurmurHash3.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? Method { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Salt value for the hash function.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#salt']/*"/>
 	public string? Salt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FingerprintProcessor']/*"/>
 public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Instance { get; init; }
@@ -138,117 +94,70 @@ public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to include in the fingerprint. For objects, the processor
-	/// hashes both the field key and value. For other fields, the processor hashes
-	/// only the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to include in the fingerprint. For objects, the processor
-	/// hashes both the field key and value. For other fields, the processor hashes
-	/// only the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the processor ignores any missing fields. If all fields are
-	/// missing, the processor silently exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
-	/// SHA-256, SHA-512, or MurmurHash3.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? value)
 	{
 		Instance.Method = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -261,45 +170,28 @@ public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Salt value for the hash function.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#salt']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Salt(string? value)
 	{
 		Instance.Salt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -315,6 +207,7 @@ public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FingerprintProcessor']/*"/>
 public readonly partial struct FingerprintProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor Instance { get; init; }
@@ -334,117 +227,70 @@ public readonly partial struct FingerprintProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to include in the fingerprint. For objects, the processor
-	/// hashes both the field key and value. For other fields, the processor hashes
-	/// only the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of fields to include in the fingerprint. For objects, the processor
-	/// hashes both the field key and value. For other fields, the processor hashes
-	/// only the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the processor ignores any missing fields. If all fields are
-	/// missing, the processor silently exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The hash method used to compute the fingerprint. Must be one of MD5, SHA-1,
-	/// SHA-256, SHA-512, or MurmurHash3.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Method(Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest? value)
 	{
 		Instance.Method = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -457,11 +303,7 @@ public readonly partial struct FingerprintProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -474,45 +316,28 @@ public readonly partial struct FingerprintProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Salt value for the hash function.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#salt']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Salt(string? value)
 	{
 		Instance.Salt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the fingerprint.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintProcessor.g.xml" path="doc/member[@key='ingest._types.FingerprintProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.PercolateQueryConverter))]
 public sealed partial class PercolateQuery
 {
@@ -42,81 +43,39 @@ public sealed partial class PercolateQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source of the document being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#document']/*"/>
 	public object? Document { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#documents']/*"/>
 	public System.Collections.Generic.ICollection<object>? Documents { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Preference used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#preference']/*"/>
 	public string? Preference { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Routing used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The expected version of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#version']/*"/>
 	public long? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery']/*"/>
 public readonly partial struct PercolateQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Instance { get; init; }
@@ -136,113 +95,70 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the document being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#document']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Document(object? value)
 	{
 		Instance.Document = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#documents']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Documents = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#documents']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Documents(params object[] values)
 	{
 		Instance.Documents = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#name']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preference used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
@@ -255,22 +171,14 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routing used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expected version of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#version']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
@@ -286,6 +194,7 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery']/*"/>
 public readonly partial struct PercolateQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Instance { get; init; }
@@ -305,113 +214,70 @@ public readonly partial struct PercolateQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source of the document being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#document']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Document(object? value)
 	{
 		Instance.Document = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#documents']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Documents = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of sources of the documents being percolated.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#documents']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Documents(params object[] values)
 	{
 		Instance.Documents = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field that holds the indexed queries. The field must use the <c>percolator</c> mapping type.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The suffix used for the <c>_percolator_document_slot</c> field when multiple <c>percolate</c> queries are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#name']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preference used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
@@ -424,22 +290,14 @@ public readonly partial struct PercolateQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Routing used to fetch document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expected version of a stored document to percolate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolateQuery.g.xml" path="doc/member[@key='_types.query_dsl.PercolateQuery#version']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Version(long? value)
 	{
 		Instance.Version = value;

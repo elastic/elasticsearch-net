@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="text_structure.test_grok_pattern.Request"><summary><para>
+Test a Grok pattern.
+Test a Grok pattern on one or more lines of text.
+The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
+</para></summary></member>
+  <member key="text_structure.test_grok_pattern.Request#ecs_compatibility"><summary><para>
+The mode of compatibility with ECS compliant Grok patterns.
+Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
+Valid values are <c>disabled</c> and <c>v1</c>.
+</para></summary></member>
+  <member key="text_structure.test_grok_pattern.Request#grok_pattern"><summary><para>
+The Grok pattern to run on the text.
+</para></summary></member>
+  <member key="text_structure.test_grok_pattern.Request#text"><summary><para>
+The lines of text to run the Grok pattern on.
+</para></summary></member>
+</doc>

@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 public sealed partial class FollowInfoRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get follower information.
-/// </para>
-/// <para>
-/// Get information about all cross-cluster replication follower indices.
-/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
-/// </para>
-/// </summary>
+/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowInfoRequestConverter))]
 public sealed partial class FollowInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestParameters>
 {
@@ -70,32 +59,15 @@ public sealed partial class FollowInfoRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "ccr.follow_info";
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of follower index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get follower information.
-/// </para>
-/// <para>
-/// Get information about all cross-cluster replication follower indices.
-/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
-/// </para>
-/// </summary>
+/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 public readonly partial struct FollowInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest Instance { get; init; }
@@ -120,24 +92,14 @@ public readonly partial struct FollowInfoRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of follower index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -200,15 +162,8 @@ public readonly partial struct FollowInfoRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get follower information.
-/// </para>
-/// <para>
-/// Get information about all cross-cluster replication follower indices.
-/// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
-/// </para>
-/// </summary>
+/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow_info.Request']/*"/>
 public readonly partial struct FollowInfoRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest Instance { get; init; }
@@ -232,24 +187,14 @@ public readonly partial struct FollowInfoRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-delimited list of follower index patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowInfoRequest.g.xml" path="doc/member[@key='ccr.follow_info.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

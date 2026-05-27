@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeFieldFetchFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RuntimeFieldFetchFieldsConverter))]
 public sealed partial class RuntimeFieldFetchFields
 {
@@ -46,6 +47,7 @@ public sealed partial class RuntimeFieldFetchFields
 	public string? Format { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeFieldFetchFields']/*"/>
 public readonly partial struct RuntimeFieldFetchFieldsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Instance { get; init; }
@@ -92,6 +94,7 @@ public readonly partial struct RuntimeFieldFetchFieldsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.RuntimeFieldFetchFields']/*"/>
 public readonly partial struct RuntimeFieldFetchFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Instance { get; init; }

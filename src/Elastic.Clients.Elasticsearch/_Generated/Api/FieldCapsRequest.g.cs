@@ -23,75 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 public sealed partial class FieldCapsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias,
-	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters to apply to the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#filters']/*"/>
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If false, empty fields are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_empty_fields']/*"/>
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, unmapped fields are included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_unmapped']/*"/>
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the field capabilities.
-/// </para>
-/// <para>
-/// Get information about the capabilities of fields among multiple indices.
-/// </para>
-/// <para>
-/// For data streams, the API returns field capabilities among the stream’s backing indices.
-/// It returns runtime fields like any other field.
-/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
-/// </para>
-/// </summary>
+/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.FieldCapsRequestConverter))]
 public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.FieldCapsRequestParameters>
 {
@@ -117,107 +76,42 @@ public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "field_caps";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias,
-	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters to apply to the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#filters']/*"/>
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If false, empty fields are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_empty_fields']/*"/>
 	public bool? IncludeEmptyFields { get => Q<bool?>("include_empty_fields"); set => Q("include_empty_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, unmapped fields are included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_unmapped']/*"/>
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public System.Collections.Generic.ICollection<string>? Types { get => Q<System.Collections.Generic.ICollection<string>?>("types"); set => Q("types", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get the field capabilities.
-/// </para>
-/// <para>
-/// Get information about the capabilities of fields among multiple indices.
-/// </para>
-/// <para>
-/// For data streams, the API returns field capabilities among the stream’s backing indices.
-/// It returns runtime fields like any other field.
-/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
-/// </para>
-/// </summary>
+/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 public readonly partial struct FieldCapsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.FieldCapsRequest Instance { get; init; }
@@ -241,234 +135,133 @@ public readonly partial struct FieldCapsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(Elastic.Clients.Elasticsearch.FieldCapsRequest instance) => new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias,
-	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters to apply to the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Filters(string? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, empty fields are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_empty_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IncludeEmptyFields(bool? value = true)
 	{
 		Instance.IncludeEmptyFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, unmapped fields are included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IncludeUnmapped(bool? value = true)
 	{
 		Instance.IncludeUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Types(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.IndexFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor IndexFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -578,19 +371,8 @@ public readonly partial struct FieldCapsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get the field capabilities.
-/// </para>
-/// <para>
-/// Get information about the capabilities of fields among multiple indices.
-/// </para>
-/// <para>
-/// For data streams, the API returns field capabilities among the stream’s backing indices.
-/// It returns runtime fields like any other field.
-/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
-/// </para>
-/// </summary>
+/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.field_caps.Request']/*"/>
 public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.FieldCapsRequest Instance { get; init; }
@@ -614,206 +396,119 @@ public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.FieldCapsRequest instance) => new Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.FieldCapsRequest(Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias,
-	/// or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters to apply to the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#filters']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Filters(string? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, empty fields are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_empty_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IncludeEmptyFields(bool? value = true)
 	{
 		Instance.IncludeEmptyFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, unmapped fields are included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#include_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IncludeUnmapped(bool? value = true)
 	{
 		Instance.IncludeUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Types(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of field types to include.
-	/// Any fields that do not match one of these types will be excluded from the results.
-	/// It defaults to empty, meaning that all field types are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#types']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Types(params string[] values)
 	{
 		Instance.Types = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.IndexFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
-	/// For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
-	/// However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#index_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> IndexFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.IndexFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
-	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapsRequest.g.xml" path="doc/member[@key='_global.field_caps.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);

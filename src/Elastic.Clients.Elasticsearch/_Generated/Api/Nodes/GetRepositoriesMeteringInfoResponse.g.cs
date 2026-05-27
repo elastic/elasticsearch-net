@@ -37,24 +37,12 @@ public sealed partial class GetRepositoriesMeteringInfoResponse : Elastic.Transp
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the cluster. Based on the <c>cluster.name</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRepositoriesMeteringInfoResponse.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Response#cluster_name']/*"/>
 	public required string ClusterName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains repositories metering information for the nodes selected by the request.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRepositoriesMeteringInfoResponse.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Response#nodes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRepositoriesMeteringInfoResponse.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Response#_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 }

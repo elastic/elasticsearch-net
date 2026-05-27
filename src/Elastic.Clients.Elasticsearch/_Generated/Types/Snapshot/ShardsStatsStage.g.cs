@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.ShardsStatsStageConverter))]
 public enum ShardsStatsStage
 {
-	/// <summary>
-	/// <para>
-	/// The number of shards in the snapshot that were successfully stored in the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStatsStage.g.xml" path="doc/member[@key='snapshot._types.ShardsStatsStage#DONE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "DONE")]
 	Done,
-	/// <summary>
-	/// <para>
-	/// The number of shards in the snapshot that were not successfully stored in the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStatsStage.g.xml" path="doc/member[@key='snapshot._types.ShardsStatsStage#FAILURE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "FAILURE")]
 	Failure,
-	/// <summary>
-	/// <para>
-	/// The number of shards in the snapshot that are in the finalizing stage of being stored in the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStatsStage.g.xml" path="doc/member[@key='snapshot._types.ShardsStatsStage#FINALIZE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "FINALIZE")]
 	Finalize,
-	/// <summary>
-	/// <para>
-	/// The number of shards in the snapshot that are in the initializing stage of being stored in the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStatsStage.g.xml" path="doc/member[@key='snapshot._types.ShardsStatsStage#INIT']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "INIT")]
 	Init,
-	/// <summary>
-	/// <para>
-	/// The number of shards in the snapshot that are in the started stage of being stored in the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardsStatsStage.g.xml" path="doc/member[@key='snapshot._types.ShardsStatsStage#STARTED']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "STARTED")]
 	Started
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.KeepTypesTokenFilter#mode"><summary><para>
+Indicates whether to keep or remove the specified token types.
+</para></summary></member>
+  <member key="_types.analysis.KeepTypesTokenFilter#types"><summary><para>
+List of token types to keep or remove.
+</para></summary></member>
+</doc>

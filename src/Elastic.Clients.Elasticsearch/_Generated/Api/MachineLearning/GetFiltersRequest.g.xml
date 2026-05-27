@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_filters.Request"><summary><para>
+Get filters.
+You can get a single filter or all filters.
+</para></summary></member>
+  <member key="ml.get_filters.Request#filter_id"><summary><para>
+A string that uniquely identifies a filter.
+</para></summary></member>
+  <member key="ml.get_filters.Request#from"><summary><para>
+Skips the specified number of filters.
+</para></summary></member>
+  <member key="ml.get_filters.Request#size"><summary><para>
+Specifies the maximum number of filters to obtain.
+</para></summary></member>
+</doc>

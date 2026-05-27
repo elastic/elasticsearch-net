@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// Chunking configuration object
-/// </para>
-/// </summary>
+/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceChunkingSettingsConverter))]
 public sealed partial class InferenceChunkingSettings
 {
@@ -41,45 +38,21 @@ public sealed partial class InferenceChunkingSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#max_chunk_size']/*"/>
 	public int? MaxChunkSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#overlap']/*"/>
 	public int? Overlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#sentence_overlap']/*"/>
 	public int? SentenceOverlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#strategy']/*"/>
 	public string? Strategy { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Chunking configuration object
-/// </para>
-/// </summary>
+/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings']/*"/>
 public readonly partial struct InferenceChunkingSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Instance { get; init; }
@@ -99,49 +72,28 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#max_chunk_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor MaxChunkSize(int? value)
 	{
 		Instance.MaxChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Overlap(int? value)
 	{
 		Instance.Overlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#sentence_overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SentenceOverlap(int? value)
 	{
 		Instance.SentenceOverlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceChunkingSettings.g.xml" path="doc/member[@key='inference._types.InferenceChunkingSettings#strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Strategy(string? value)
 	{
 		Instance.Strategy = value;

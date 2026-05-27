@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.Fuzziness"><summary><para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para></summary></member>
+</doc>

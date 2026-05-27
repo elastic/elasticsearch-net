@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-/// <summary>
-/// <para>
-/// Downloaded databases for the node. The field key is the node ID.
-/// </para>
-/// </summary>
+/// <include file="GeoIpNodeDatabases.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabases']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabases']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoIpNodeDatabasesConverter))]
 public sealed partial class GeoIpNodeDatabases
 {
@@ -48,17 +45,9 @@ public sealed partial class GeoIpNodeDatabases
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Downloaded databases for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpNodeDatabases.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabases#databases']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Downloaded database files, including related license files. Elasticsearch stores these files in the node’s temporary directory: $ES_TMPDIR/geoip-databases/&lt;node_id>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpNodeDatabases.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabases#files_in_temp']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> FilesInTemp { get; set; }
 }

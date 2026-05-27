@@ -23,38 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
 public sealed partial class UpgradeJobSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, the API won’t respond until the upgrade is complete.
-	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Upgrade a snapshot.
-/// Upgrade an anomaly detection model snapshot to the latest major version.
-/// Over time, older snapshot formats are deprecated and removed. Anomaly
-/// detection jobs support only snapshots that are from the current or previous
-/// major version.
-/// This API provides a means to upgrade a snapshot to the current major version.
-/// This aids in preparing the cluster for an upgrade to the next major version.
-/// Only one snapshot per anomaly detection job can be upgraded at a time and the
-/// upgraded snapshot cannot be the current snapshot of the anomaly detection
-/// job.
-/// </para>
-/// </summary>
+/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpgradeJobSnapshotRequestConverter))]
 public sealed partial class UpgradeJobSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestParameters>
 {
@@ -81,50 +62,21 @@ public sealed partial class UpgradeJobSnapshotRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "ml.upgrade_job_snapshot";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#snapshot_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// When true, the API won’t respond until the upgrade is complete.
-	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Upgrade a snapshot.
-/// Upgrade an anomaly detection model snapshot to the latest major version.
-/// Over time, older snapshot formats are deprecated and removed. Anomaly
-/// detection jobs support only snapshots that are from the current or previous
-/// major version.
-/// This API provides a means to upgrade a snapshot to the current major version.
-/// This aids in preparing the cluster for an upgrade to the next major version.
-/// Only one snapshot per anomaly detection job can be upgraded at a time and the
-/// upgraded snapshot cannot be the current snapshot of the anomaly detection
-/// job.
-/// </para>
-/// </summary>
+/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request']/*"/>
 public readonly partial struct UpgradeJobSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest Instance { get; init; }
@@ -149,45 +101,28 @@ public readonly partial struct UpgradeJobSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, the API won’t respond until the upgrade is complete.
-	/// Otherwise, it responds as soon as the upgrade task is assigned to a node.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotRequest.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

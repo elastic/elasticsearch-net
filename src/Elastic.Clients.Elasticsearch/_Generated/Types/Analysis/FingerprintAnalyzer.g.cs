@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FingerprintAnalyzerConverter))]
 public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -55,6 +56,7 @@ public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer']/*"/>
 public readonly partial struct FingerprintAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Instance { get; init; }

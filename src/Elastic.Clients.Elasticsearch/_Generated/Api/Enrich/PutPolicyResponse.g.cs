@@ -37,10 +37,6 @@ public sealed partial class PutPolicyResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutPolicyResponse.g.xml" path="doc/member[@key='enrich.put_policy.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

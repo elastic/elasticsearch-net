@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenAITaskSettingsConverter))]
 public sealed partial class OpenAITaskSettings
 {
@@ -36,15 +37,11 @@ public sealed partial class OpenAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAITaskSettings']/*"/>
 public readonly partial struct OpenAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings Instance { get; init; }
@@ -64,12 +61,7 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAITaskSettings.g.xml" path="doc/member[@key='inference._types.OpenAITaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

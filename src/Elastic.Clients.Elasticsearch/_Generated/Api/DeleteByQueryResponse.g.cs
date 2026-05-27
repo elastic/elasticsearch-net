@@ -37,98 +37,43 @@ public sealed partial class DeleteByQueryResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scroll responses pulled back by the delete by query.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#batches']/*"/>
 	public long? Batches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#deleted']/*"/>
 	public long? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of failures if there were any unrecoverable errors during the process.
-	/// If this array is not empty, the request ended abnormally because of those failures.
-	/// Delete by query is implemented using batches and any failures cause the entire process to end but all failures in the current batch are collected into the array.
-	/// You can use the <c>conflicts</c> option to prevent reindex from ending on version conflicts.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field is always equal to zero for delete by query.
-	/// It exists only so that delete by query, update by query, and reindex APIs return responses with the same structure.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#noops']/*"/>
 	public long? Noops { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of requests per second effectively run during the delete by query.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of retries attempted by delete by query.
-	/// <c>bulk</c> is the number of bulk actions retried.
-	/// <c>search</c> is the number of search actions retried.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 	public int? SliceId { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds the request slept to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#throttled_millis']/*"/>
 	public System.TimeSpan? ThrottledMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field should always be equal to zero in a <c>_delete_by_query</c> response.
-	/// It has meaning only when using the task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be run again in order to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#throttled_until_millis']/*"/>
 	public System.TimeSpan? ThrottledUntilMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, some requests run during the delete by query operation timed out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#timed_out']/*"/>
 	public bool? TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds from start to end of the whole operation.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#took']/*"/>
 	public System.TimeSpan? Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully processed.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#total']/*"/>
 	public long? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of version conflicts that the delete by query hit.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryResponse.g.xml" path="doc/member[@key='_global.delete_by_query.Response#version_conflicts']/*"/>
 	public long? VersionConflicts { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TokenPruningConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TokenPruningConfigConverter))]
 public sealed partial class TokenPruningConfig
 {
@@ -36,28 +37,17 @@ public sealed partial class TokenPruningConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to only score pruned tokens, vs only scoring kept tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#only_score_pruned_tokens']/*"/>
 	public bool? OnlyScorePrunedTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#tokens_freq_ratio_threshold']/*"/>
 	public int? TokensFreqRatioThreshold { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#tokens_weight_threshold']/*"/>
 	public float? TokensWeightThreshold { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.TokenPruningConfig']/*"/>
 public readonly partial struct TokenPruningConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TokenPruningConfig Instance { get; init; }
@@ -77,33 +67,21 @@ public readonly partial struct TokenPruningConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor(Elastic.Clients.Elasticsearch.TokenPruningConfig instance) => new Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TokenPruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Whether to only score pruned tokens, vs only scoring kept tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#only_score_pruned_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor OnlyScorePrunedTokens(bool? value = true)
 	{
 		Instance.OnlyScorePrunedTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokens whose frequency is more than this threshold times the average frequency of all tokens in the specified field are considered outliers and pruned.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#tokens_freq_ratio_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor TokensFreqRatioThreshold(int? value)
 	{
 		Instance.TokensFreqRatioThreshold = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokens whose weight is less than this threshold are considered nonsignificant and pruned.
-	/// </para>
-	/// </summary>
+	/// <include file="TokenPruningConfig.g.xml" path="doc/member[@key='_types.TokenPruningConfig#tokens_weight_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor TokensWeightThreshold(float? value)
 	{
 		Instance.TokensWeightThreshold = value;

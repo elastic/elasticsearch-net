@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemName']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterOperatingSystemNameConverter))]
 public sealed partial class ClusterOperatingSystemName
 {
@@ -43,17 +44,9 @@ public sealed partial class ClusterOperatingSystemName
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of selected nodes using the operating system.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystemName.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemName#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of an operating system used by one or more selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystemName.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemName#name']/*"/>
 	public required string Name { get; set; }
 }

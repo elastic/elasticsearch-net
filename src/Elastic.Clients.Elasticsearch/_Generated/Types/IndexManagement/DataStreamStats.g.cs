@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.DataStreamStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamStatsConverter))]
 public sealed partial class DataStreamStats
 {
@@ -44,24 +45,12 @@ public sealed partial class DataStreamStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The count of the backing indices for the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamStats.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.DataStreamStats#backing_indices_in_error']/*"/>
 	public required int BackingIndicesInError { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The count of the backing indices for the data stream that have encountered an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamStats.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.DataStreamStats#backing_indices_in_total']/*"/>
 	public required int BackingIndicesInTotal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamStats.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.DataStreamStats#name']/*"/>
 	public required string Name { get; set; }
 }

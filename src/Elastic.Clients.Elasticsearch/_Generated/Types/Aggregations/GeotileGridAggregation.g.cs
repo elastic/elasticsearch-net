@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeotileGridAggregationConverter))]
 public sealed partial class GeotileGridAggregation
 {
@@ -36,45 +37,23 @@ public sealed partial class GeotileGridAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to define cells/buckets in the results.
-	/// Values outside of the range [0,29] will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#precision']/*"/>
 	public long? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation']/*"/>
 public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Instance { get; init; }
@@ -94,81 +73,49 @@ public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to define cells/buckets in the results.
-	/// Values outside of the range [0,29] will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Precision(long? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -189,6 +136,7 @@ public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation']/*"/>
 public readonly partial struct GeotileGridAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation Instance { get; init; }
@@ -208,81 +156,49 @@ public readonly partial struct GeotileGridAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A bounding box to filter the geo-points or geo-shapes in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geotile_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to define cells/buckets in the results.
-	/// Values outside of the range [0,29] will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Precision(long? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeotileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeotileGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

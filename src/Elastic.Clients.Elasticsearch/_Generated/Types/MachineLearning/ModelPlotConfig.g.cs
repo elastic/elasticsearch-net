@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ModelPlotConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ModelPlotConfigConverter))]
 public sealed partial class ModelPlotConfig
 {
@@ -36,28 +37,17 @@ public sealed partial class ModelPlotConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#annotations_enabled']/*"/>
 	public bool? AnnotationsEnabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Terms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ModelPlotConfig']/*"/>
 public readonly partial struct ModelPlotConfigDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Instance { get; init; }
@@ -77,44 +67,28 @@ public readonly partial struct ModelPlotConfigDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#annotations_enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> AnnotationsEnabled(bool? value = true)
 	{
 		Instance.AnnotationsEnabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Terms(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Terms = value;
@@ -135,6 +109,7 @@ public readonly partial struct ModelPlotConfigDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ModelPlotConfig']/*"/>
 public readonly partial struct ModelPlotConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Instance { get; init; }
@@ -154,44 +129,28 @@ public readonly partial struct ModelPlotConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#annotations_enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor AnnotationsEnabled(bool? value = true)
 	{
 		Instance.AnnotationsEnabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Terms(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelPlotConfig.g.xml" path="doc/member[@key='ml._types.ModelPlotConfig#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Terms<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Terms = value;

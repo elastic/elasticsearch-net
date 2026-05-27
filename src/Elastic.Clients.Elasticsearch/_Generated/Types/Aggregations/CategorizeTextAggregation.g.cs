@@ -23,14 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// A multi-bucket aggregation that groups semi-structured text into buckets. Each text
-/// field is re-analyzed using a custom analyzer. The resulting tokens are then categorized
-/// creating buckets of similarly formatted text values. This aggregation works best with machine
-/// generated text like system logs. Only the first 100 analyzed tokens are used to categorize the text.
-/// </para>
-/// </summary>
+/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CategorizeTextAggregationConverter))]
 public sealed partial class CategorizeTextAggregation
 {
@@ -50,98 +44,39 @@ public sealed partial class CategorizeTextAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <c>_analyze</c> endpoint. This property
-	/// cannot be used at the same time as categorization_filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? CategorizationAnalyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_filters']/*"/>
 	public System.Collections.Generic.ICollection<string>? CategorizationFilters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The semi-structured text field to categorize.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of token positions to match on before attempting to merge categories. Larger
-	/// values will use more memory and create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_matched_tokens']/*"/>
 	public int? MaxMatchedTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of unique tokens at any position up to max_matched_tokens. Must be larger than 1.
-	/// Smaller values use less memory and create fewer categories. Larger values will use more memory and
-	/// create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_unique_tokens']/*"/>
 	public int? MaxUniqueTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned to the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#min_doc_count']/*"/>
 	public int? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned from the shard before merging.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_min_doc_count']/*"/>
 	public int? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of categorization buckets to return from each shard before merging all the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum percentage of tokens that must match for text to be added to the category bucket. Must
-	/// be between 1 and 100. The larger the value the narrower the categories. Larger values will increase memory
-	/// usage and create narrower categories.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#similarity_threshold']/*"/>
 	public int? SimilarityThreshold { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// A multi-bucket aggregation that groups semi-structured text into buckets. Each text
-/// field is re-analyzed using a custom analyzer. The resulting tokens are then categorized
-/// creating buckets of similarly formatted text values. This aggregation works best with machine
-/// generated text like system logs. Only the first 100 analyzed tokens are used to categorize the text.
-/// </para>
-/// </summary>
+/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
 public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation Instance { get; init; }
@@ -161,164 +96,91 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <c>_analyze</c> endpoint. This property
-	/// cannot be used at the same time as categorization_filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? value)
 	{
 		Instance.CategorizationAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <c>_analyze</c> endpoint. This property
-	/// cannot be used at the same time as categorization_filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
 	{
 		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.CategorizationFilters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The semi-structured text field to categorize.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The semi-structured text field to categorize.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of token positions to match on before attempting to merge categories. Larger
-	/// values will use more memory and create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_matched_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> MaxMatchedTokens(int? value)
 	{
 		Instance.MaxMatchedTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of unique tokens at any position up to max_matched_tokens. Must be larger than 1.
-	/// Smaller values use less memory and create fewer categories. Larger values will use more memory and
-	/// create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_unique_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> MaxUniqueTokens(int? value)
 	{
 		Instance.MaxUniqueTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned to the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned from the shard before merging.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> ShardMinDocCount(int? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of categorization buckets to return from each shard before merging all the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum percentage of tokens that must match for text to be added to the category bucket. Must
-	/// be between 1 and 100. The larger the value the narrower the categories. Larger values will increase memory
-	/// usage and create narrower categories.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#similarity_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> SimilarityThreshold(int? value)
 	{
 		Instance.SimilarityThreshold = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -334,14 +196,8 @@ public readonly partial struct CategorizeTextAggregationDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// A multi-bucket aggregation that groups semi-structured text into buckets. Each text
-/// field is re-analyzed using a custom analyzer. The resulting tokens are then categorized
-/// creating buckets of similarly formatted text values. This aggregation works best with machine
-/// generated text like system logs. Only the first 100 analyzed tokens are used to categorize the text.
-/// </para>
-/// </summary>
+/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation']/*"/>
 public readonly partial struct CategorizeTextAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation Instance { get; init; }
@@ -361,164 +217,91 @@ public readonly partial struct CategorizeTextAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <c>_analyze</c> endpoint. This property
-	/// cannot be used at the same time as categorization_filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer? value)
 	{
 		Instance.CategorizationAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
-	/// The syntax is very similar to that used to define the analyzer in the <c>_analyze</c> endpoint. This property
-	/// cannot be used at the same time as categorization_filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationAnalyzer(System.Func<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory, Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer> action)
 	{
 		Instance.CategorizationAnalyzer = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzerFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.CategorizationFilters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This property expects an array of regular expressions. The expressions are used to filter out matching
-	/// sequences from the categorization field values. You can use this functionality to fine tune the categorization
-	/// by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
-	/// statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
-	/// If you only want to define simple regular expression filters that are applied prior to tokenization, setting
-	/// this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
-	/// use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#categorization_filters']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor CategorizationFilters(params string[] values)
 	{
 		Instance.CategorizationFilters = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The semi-structured text field to categorize.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The semi-structured text field to categorize.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of token positions to match on before attempting to merge categories. Larger
-	/// values will use more memory and create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_matched_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor MaxMatchedTokens(int? value)
 	{
 		Instance.MaxMatchedTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of unique tokens at any position up to max_matched_tokens. Must be larger than 1.
-	/// Smaller values use less memory and create fewer categories. Larger values will use more memory and
-	/// create narrower categories. Max allowed value is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#max_unique_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor MaxUniqueTokens(int? value)
 	{
 		Instance.MaxUniqueTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned to the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket to be returned from the shard before merging.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor ShardMinDocCount(int? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of categorization buckets to return from each shard before merging all the results.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum percentage of tokens that must match for text to be added to the category bucket. Must
-	/// be between 1 and 100. The larger the value the narrower the categories. Larger values will increase memory
-	/// usage and create narrower categories.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#similarity_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor SimilarityThreshold(int? value)
 	{
 		Instance.SimilarityThreshold = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="CategorizeTextAggregation.g.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

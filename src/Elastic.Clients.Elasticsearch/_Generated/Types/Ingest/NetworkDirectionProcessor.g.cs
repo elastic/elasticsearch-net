@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.NetworkDirectionProcessorConverter))]
 public sealed partial class NetworkDirectionProcessor
 {
@@ -36,91 +37,41 @@ public sealed partial class NetworkDirectionProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? DestinationIp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks']/*"/>
 	public System.Collections.Generic.ICollection<string>? InternalNetworks { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A field on the given document to read the internal_networks configuration
-	/// from.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? InternalNetworksField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SourceIp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Output field for the network direction.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor']/*"/>
 public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor Instance { get; init; }
@@ -140,153 +91,91 @@ public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> DestinationIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworks(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.InternalNetworks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworks(params string[] values)
 	{
 		Instance.InternalNetworks = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field on the given document to read the internal_networks configuration
-	/// from.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworksField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.InternalNetworksField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field on the given document to read the internal_networks configuration
-	/// from.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> InternalNetworksField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.InternalNetworksField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -299,56 +188,35 @@ public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> SourceIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the network direction.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the network direction.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -369,6 +237,7 @@ public readonly partial struct NetworkDirectionProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor']/*"/>
 public readonly partial struct NetworkDirectionProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor Instance { get; init; }
@@ -388,153 +257,91 @@ public readonly partial struct NetworkDirectionProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor DestinationIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworks(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.InternalNetworks = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of internal networks. Supports IPv4 and IPv6 addresses and ranges in
-	/// CIDR notation. Also supports the named ranges listed below. These may be
-	/// constructed with template snippets. Must specify only one of
-	/// internal_networks or internal_networks_field.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworks(params string[] values)
 	{
 		Instance.InternalNetworks = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field on the given document to read the internal_networks configuration
-	/// from.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworksField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.InternalNetworksField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field on the given document to read the internal_networks configuration
-	/// from.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#internal_networks_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor InternalNetworksField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.InternalNetworksField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -547,11 +354,7 @@ public readonly partial struct NetworkDirectionProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -564,56 +367,35 @@ public readonly partial struct NetworkDirectionProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor SourceIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the network direction.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the network direction.
-	/// </para>
-	/// </summary>
+	/// <include file="NetworkDirectionProcessor.g.xml" path="doc/member[@key='ingest._types.NetworkDirectionProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.data_streams_stats.Request"><summary><para>
+Get data stream stats.
+</para>
+<para>
+Get statistics for one or more data streams.
+</para></summary></member>
+  <member key="indices.data_streams_stats.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.data_streams_stats.Request#name"><summary><para>
+Comma-separated list of data streams used to limit the request.
+Wildcard expressions (<c>*</c>) are supported.
+To target all data streams in a cluster, omit this parameter or use <c>*</c>.
+</para></summary></member>
+</doc>

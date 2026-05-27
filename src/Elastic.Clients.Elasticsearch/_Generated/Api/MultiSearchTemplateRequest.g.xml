@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.msearch_template.Request"><summary><para>
+Run multiple templated searches.
+</para>
+<para>
+Run multiple templated searches with a single request.
+If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
+For example:
+</para>
+<code>
+$ cat requests
+{ "index": "my-index" }
+{ "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+{ "index": "my-other-index" }
+{ "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+
+$ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+</code></summary></member>
+  <member key="_global.msearch_template.Request#ccs_minimize_roundtrips"><summary><para>
+If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+</para></summary></member>
+  <member key="_global.msearch_template.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases to search.
+It supports wildcards (<c>*</c>).
+To search all data streams and indices, omit this parameter or use <c>*</c>.
+</para></summary></member>
+  <member key="_global.msearch_template.Request#max_concurrent_searches"><summary><para>
+The maximum number of concurrent searches the API can run.
+</para></summary></member>
+  <member key="_global.msearch_template.Request#rest_total_hits_as_int"><summary><para>
+If <c>true</c>, the response returns <c>hits.total</c> as an integer.
+If <c>false</c>, it returns <c>hits.total</c> as an object.
+</para></summary></member>
+  <member key="_global.msearch_template.Request#search_type"><summary><para>
+The type of the search operation.
+</para></summary></member>
+  <member key="_global.msearch_template.Request#typed_keys"><summary><para>
+If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
+</para></summary></member>
+</doc>

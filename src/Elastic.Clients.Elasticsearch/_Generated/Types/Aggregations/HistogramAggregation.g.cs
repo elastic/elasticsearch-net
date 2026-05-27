@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.HistogramAggregationConverter))]
 public sealed partial class HistogramAggregation
 {
@@ -36,71 +37,34 @@ public sealed partial class HistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? ExtendedBounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? HardBounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval for the buckets.
-	/// Must be a positive decimal.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#interval']/*"/>
 	public double? Interval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, the response will fill gaps in the histogram with empty buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#min_doc_count']/*"/>
 	public int? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#missing']/*"/>
 	public double? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
-	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#offset']/*"/>
 	public double? Offset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation']/*"/>
 public readonly partial struct HistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Instance { get; init; }
@@ -120,55 +84,35 @@ public readonly partial struct HistogramAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
 		Instance.ExtendedBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds()
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -181,120 +125,70 @@ public readonly partial struct HistogramAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
 		Instance.HardBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds()
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval for the buckets.
-	/// Must be a positive decimal.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Interval(double? value)
 	{
 		Instance.Interval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, the response will fill gaps in the histogram with empty buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Missing(double? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
-	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Offset(double? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
@@ -347,6 +241,7 @@ public readonly partial struct HistogramAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation']/*"/>
 public readonly partial struct HistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Instance { get; init; }
@@ -366,55 +261,35 @@ public readonly partial struct HistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
 		Instance.ExtendedBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds()
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables extending the bounds of the histogram beyond the data itself.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#extended_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor ExtendedBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
 		Instance.ExtendedBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to aggregate on.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -427,132 +302,77 @@ public readonly partial struct HistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBounds<double?>? value)
 	{
 		Instance.HardBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds()
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the range of buckets in the histogram.
-	/// It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#hard_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor HardBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor>? action)
 	{
 		Instance.HardBounds = Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsOfDoubleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval for the buckets.
-	/// Must be a positive decimal.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Interval(double? value)
 	{
 		Instance.Interval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only returns buckets that have <c>min_doc_count</c> number of documents.
-	/// By default, the response will fill gaps in the histogram with empty buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor MinDocCount(int? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Missing(double? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, the bucket keys start with 0 and then continue in even spaced steps of <c>interval</c>.
-	/// The bucket boundaries can be shifted by using the <c>offset</c> option.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Offset(double? value)
 	{
 		Instance.Offset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order of the returned buckets.
-	/// By default, the returned buckets are sorted by their key ascending.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.HistogramAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Stats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.StatsConverter))]
 public sealed partial class Stats
 {
@@ -36,146 +37,65 @@ public sealed partial class Stats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Statistics about adaptive replica selection.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#adaptive_selection']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>? AdaptiveSelection { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains a list of attributes for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#attributes']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Attributes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the field data circuit breaker.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#breakers']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Breaker>? Breakers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains node discovery statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#discovery']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Discovery? Discovery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// File system information, data path, free disk space, read/write stats.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#fs']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.FileSystem? Fs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Network host for the node, based on the network host setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#host']/*"/>
 	public string? Host { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// HTTP connection information.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#http']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains indexing pressure statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#indexing_pressure']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.IndexingPressure? IndexingPressure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indices stats about size, document count, indexing and deletion times, search times, field cache size, merges and flushes.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStats? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about ingest preprocessing.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#ingest']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// IP address and port for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#ip']/*"/>
 	public System.Collections.Generic.ICollection<string>? Ip { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// JVM stats, memory pool information, garbage collection, buffer pools, number of loaded/unloaded classes.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#jvm']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Jvm? Jvm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human-readable identifier for the node.
-	/// Based on the node name setting.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Operating system stats, load average, mem, swap.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#os']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.OperatingSystem? Os { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Process statistics, memory consumption, cpu usage, open file descriptors.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#process']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Process? Process { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Roles assigned to the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#roles']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains script statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? ScriptCache { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about each thread pool, including current size, queue and rejected tasks.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#thread_pool']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? ThreadPool { get; set; }
 	public long? Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Transport statistics about sent and received bytes in cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Transport? Transport { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Host and port for the transport layer, used for internal communication between nodes in a cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="Stats.g.xml" path="doc/member[@key='nodes._types.Stats#transport_address']/*"/>
 	public string? TransportAddress { get; set; }
 }

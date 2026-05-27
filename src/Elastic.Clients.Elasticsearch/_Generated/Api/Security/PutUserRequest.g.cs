@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_user.Request']/*"/>
 public sealed partial class PutUserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
-	/// These values have the same meaning as in the index API, but the default value for this API is true.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update users.
-/// </para>
-/// <para>
-/// Add and update users in the native realm.
-/// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user's password without updating any other fields, use the change password API.
-/// </para>
-/// </summary>
+/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_user.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutUserRequestConverter))]
 public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>
 {
@@ -70,95 +59,36 @@ public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "security.put_user";
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// <para>
-	/// NOTE: Usernames must be at least 1 and no more than 507 characters.
-	/// They can contain alphanumeric characters (a-z, A-Z, 0-9), spaces, punctuation, and printable symbols in the Basic Latin (ASCII) block.
-	/// Leading or trailing whitespace is not allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#username']/*"/>
 	public required Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
-	/// These values have the same meaning as in the index API, but the default value for this API is true.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// The email of the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#email']/*"/>
 	public string? Email { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the user is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The full name of the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#full_name']/*"/>
 	public string? FullName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// Passwords must be at least 6 characters long.
-	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
-	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A hash of the user's password.
-	/// This must be produced using the same hashing algorithm as has been configured for password storage.
-	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
-	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
-	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#password_hash']/*"/>
 	public string? PasswordHash { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A set of roles the user has.
-	/// The roles determine the user's access permissions.
-	/// To create a user without any roles, specify an empty list (<c>[]</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#roles']/*"/>
 	public System.Collections.Generic.ICollection<string>? Roles { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update users.
-/// </para>
-/// <para>
-/// Add and update users in the native realm.
-/// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user's password without updating any other fields, use the change password API.
-/// </para>
-/// </summary>
+/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.put_user.Request']/*"/>
 public readonly partial struct PutUserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.PutUserRequest Instance { get; init; }
@@ -183,94 +113,56 @@ public readonly partial struct PutUserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// <para>
-	/// NOTE: Usernames must be at least 1 and no more than 507 characters.
-	/// They can contain alphanumeric characters (a-z, A-Z, 0-9), spaces, punctuation, and printable symbols in the Basic Latin (ASCII) block.
-	/// Leading or trailing whitespace is not allowed.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
-	/// These values have the same meaning as in the index API, but the default value for this API is true.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The email of the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#email']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Email(string? value)
 	{
 		Instance.Email = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the user is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The full name of the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#full_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor FullName(string? value)
 	{
 		Instance.FullName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the user.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -284,55 +176,28 @@ public readonly partial struct PutUserRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// Passwords must be at least 6 characters long.
-	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
-	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A hash of the user's password.
-	/// This must be produced using the same hashing algorithm as has been configured for password storage.
-	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
-	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
-	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#password_hash']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor PasswordHash(string? value)
 	{
 		Instance.PasswordHash = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of roles the user has.
-	/// The roles determine the user's access permissions.
-	/// To create a user without any roles, specify an empty list (<c>[]</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Roles = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of roles the user has.
-	/// The roles determine the user's access permissions.
-	/// To create a user without any roles, specify an empty list (<c>[]</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserRequest.g.xml" path="doc/member[@key='security.put_user.Request#roles']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(params string[] values)
 	{
 		Instance.Roles = [.. values];

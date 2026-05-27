@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StopAnalyzerConverter))]
 public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -44,6 +45,7 @@ public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StopAnalyzer']/*"/>
 public readonly partial struct StopAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer Instance { get; init; }

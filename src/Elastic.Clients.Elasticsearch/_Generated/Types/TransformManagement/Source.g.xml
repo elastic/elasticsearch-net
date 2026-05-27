@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform._types.Source#index"><summary><para>
+The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
+array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
+example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
+any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
+</para></summary></member>
+  <member key="transform._types.Source#query"><summary><para>
+A query clause that retrieves a subset of data from the source index.
+</para></summary></member>
+  <member key="transform._types.Source#runtime_mappings"><summary><para>
+Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
+nodes, including remote nodes, must be 7.12 or later.
+</para></summary></member>
+</doc>

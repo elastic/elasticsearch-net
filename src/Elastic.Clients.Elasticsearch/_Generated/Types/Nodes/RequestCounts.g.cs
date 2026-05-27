@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.RequestCounts']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RequestCountsConverter))]
 public sealed partial class RequestCounts
 {
@@ -36,82 +37,36 @@ public sealed partial class RequestCounts
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of Get Blob requests (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#GetBlob']/*"/>
 	public long? GetBlob { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of Get Blob Properties requests (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#GetBlobProperties']/*"/>
 	public long? GetBlobProperties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of get object requests (GCP, S3)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#GetObject']/*"/>
 	public long? GetObject { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of insert object requests, including simple, multipart and resumable uploads. Resumable uploads
-	/// can perform multiple http requests to insert a single object but they are considered as a single request
-	/// since they are billed as an individual operation. (GCP)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#InsertObject']/*"/>
 	public long? InsertObject { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of List Blobs requests (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#ListBlobs']/*"/>
 	public long? ListBlobs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of list objects requests (GCP, S3)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#ListObjects']/*"/>
 	public long? ListObjects { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of Put Blob requests (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#PutBlob']/*"/>
 	public long? PutBlob { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of Put Block (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#PutBlock']/*"/>
 	public long? PutBlock { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of Put Block List requests
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#PutBlockList']/*"/>
 	public long? PutBlockList { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of Multipart requests, including CreateMultipartUpload, UploadPart and CompleteMultipartUpload requests (S3)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#PutMultipartObject']/*"/>
 	public long? PutMultipartObject { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of PutObject requests (S3)
-	/// </para>
-	/// </summary>
+	/// <include file="RequestCounts.g.xml" path="doc/member[@key='nodes._types.RequestCounts#PutObject']/*"/>
 	public long? PutObject { get; set; }
 }

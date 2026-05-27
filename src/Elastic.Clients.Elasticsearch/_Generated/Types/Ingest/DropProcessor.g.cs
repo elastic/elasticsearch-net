@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DropProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DropProcessorConverter))]
 public sealed partial class DropProcessor
 {
@@ -36,44 +37,23 @@ public sealed partial class DropProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DropProcessor']/*"/>
 public readonly partial struct DropProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DropProcessor Instance { get; init; }
@@ -93,67 +73,42 @@ public readonly partial struct DropProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DropProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DropProcessor(Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -166,12 +121,7 @@ public readonly partial struct DropProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -192,6 +142,7 @@ public readonly partial struct DropProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DropProcessor']/*"/>
 public readonly partial struct DropProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DropProcessor Instance { get; init; }
@@ -211,67 +162,42 @@ public readonly partial struct DropProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.DropProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DropProcessor(Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -284,11 +210,7 @@ public readonly partial struct DropProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -301,12 +223,7 @@ public readonly partial struct DropProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DropProcessor.g.xml" path="doc/member[@key='ingest._types.DropProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

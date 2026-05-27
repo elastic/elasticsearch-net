@@ -26,47 +26,22 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FunctionBoostModeConverter))]
 public enum FunctionBoostMode
 {
-	/// <summary>
-	/// <para>
-	/// Query score and function score are averaged
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#avg']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "avg")]
 	Avg,
-	/// <summary>
-	/// <para>
-	/// Max of query score and function score
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#max']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "max")]
 	Max,
-	/// <summary>
-	/// <para>
-	/// Min of query score and function score
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#min']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "min")]
 	Min,
-	/// <summary>
-	/// <para>
-	/// Query score and function score are multiplied
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#multiply']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "multiply")]
 	Multiply,
-	/// <summary>
-	/// <para>
-	/// Only the function score is used.
-	/// The query score is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#replace']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "replace")]
 	Replace,
-	/// <summary>
-	/// <para>
-	/// Query score and function score are added
-	/// </para>
-	/// </summary>
+	/// <include file="FunctionBoostMode.g.xml" path="doc/member[@key='_types.query_dsl.FunctionBoostMode#sum']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "sum")]
 	Sum
 }

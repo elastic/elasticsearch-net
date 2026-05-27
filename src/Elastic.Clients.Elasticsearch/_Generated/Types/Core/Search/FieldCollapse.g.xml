@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.FieldCollapse#field"><summary><para>
+The field to collapse the result set on
+</para></summary></member>
+  <member key="_global.search._types.FieldCollapse#inner_hits"><summary><para>
+The number of inner hits and their sort order
+</para></summary></member>
+  <member key="_global.search._types.FieldCollapse#max_concurrent_group_searches"><summary><para>
+The number of concurrent requests allowed to retrieve the inner_hits per group
+</para></summary></member>
+</doc>

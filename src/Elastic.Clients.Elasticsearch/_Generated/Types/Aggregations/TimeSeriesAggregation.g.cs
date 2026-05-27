@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TimeSeriesAggregationConverter))]
 public sealed partial class TimeSeriesAggregation
 {
@@ -36,21 +37,14 @@ public sealed partial class TimeSeriesAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSeriesAggregation.g.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation#keyed']/*"/>
 	public bool? Keyed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of results to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSeriesAggregation.g.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation']/*"/>
 public readonly partial struct TimeSeriesAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct TimeSeriesAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to associate a unique string key with each bucket and returns the ranges as a hash rather than an array.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSeriesAggregation.g.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation#keyed']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor Keyed(bool? value = true)
 	{
 		Instance.Keyed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of results to return.
-	/// </para>
-	/// </summary>
+	/// <include file="TimeSeriesAggregation.g.xml" path="doc/member[@key='_types.aggregations.TimeSeriesAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

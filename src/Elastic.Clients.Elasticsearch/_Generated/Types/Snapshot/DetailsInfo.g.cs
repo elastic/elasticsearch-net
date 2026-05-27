@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.DetailsInfoConverter))]
 public sealed partial class DetailsInfo
 {
@@ -47,61 +48,27 @@ public sealed partial class DetailsInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the blob that was written and read.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#blob']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.BlobDetails Blob { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed time spent overwriting the blob.
-	/// If the blob was not overwritten, this information is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#overwrite_elapsed']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? OverwriteElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed time spent overwriting the blob, in nanoseconds.
-	/// If the blob was not overwritten, this information is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#overwrite_elapsed_nanos']/*"/>
 	public System.TimeSpan? OverwriteElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed time spent writing the blob.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#write_elapsed']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration WriteElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The elapsed time spent writing the blob, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#write_elapsed_nanos']/*"/>
 	public required System.TimeSpan WriteElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The node which wrote the blob and coordinated the read operations.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#writer_node']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo WriterNode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#write_throttled']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration WriteThrottled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="DetailsInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.DetailsInfo#write_throttled_nanos']/*"/>
 	public required System.TimeSpan WriteThrottledNanos { get; set; }
 }

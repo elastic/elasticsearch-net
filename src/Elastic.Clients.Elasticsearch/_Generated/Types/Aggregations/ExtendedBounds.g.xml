@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.ExtendedBounds#max"><summary><para>
+Maximum value for the bound.
+</para></summary></member>
+  <member key="_types.aggregations.ExtendedBounds#min"><summary><para>
+Minimum value for the bound.
+</para></summary></member>
+</doc>

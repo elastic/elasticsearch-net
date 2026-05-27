@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeohashGridAggregationConverter))]
 public sealed partial class GeohashGridAggregation
 {
@@ -36,44 +37,23 @@ public sealed partial class GeohashGridAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The bounding box to filter the points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohash_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string length of the geohashes used to define cells/buckets in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of geohash buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation']/*"/>
 public readonly partial struct GeohashGridAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation Instance { get; init; }
@@ -93,91 +73,56 @@ public readonly partial struct GeohashGridAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The bounding box to filter the points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The bounding box to filter the points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohash_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohash_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string length of the geohashes used to define cells/buckets in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string length of the geohashes used to define cells/buckets in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of geohash buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -198,6 +143,7 @@ public readonly partial struct GeohashGridAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation']/*"/>
 public readonly partial struct GeohashGridAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation Instance { get; init; }
@@ -217,91 +163,56 @@ public readonly partial struct GeohashGridAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The bounding box to filter the points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The bounding box to filter the points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohash_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohash_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string length of the geohashes used to define cells/buckets in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string length of the geohashes used to define cells/buckets in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows for more accurate counting of the top cells returned in the final result the aggregation.
-	/// Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of geohash buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohashGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohashGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

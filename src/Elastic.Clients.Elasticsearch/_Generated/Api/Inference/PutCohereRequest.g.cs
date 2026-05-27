@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
 public sealed partial class PutCohereRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Cohere inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutCohereRequestConverter))]
 public sealed partial class PutCohereRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>
 {
@@ -74,66 +66,30 @@ public sealed partial class PutCohereRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "inference.put_cohere";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#cohere_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CohereInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("cohere_inference_id"); set => PR("cohere_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CohereTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.CohereTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>cohere</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#service']/*"/>
 	public string Service => "cohere";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>cohere</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Cohere inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_cohere.Request']/*"/>
 public readonly partial struct PutCohereRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutCohereRequest Instance { get; init; }
@@ -160,126 +116,77 @@ public readonly partial struct PutCohereRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutCohereRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutCohereRequest(Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#cohere_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor CohereInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CohereInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.CohereTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>cohere</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>cohere</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCohereRequest.g.xml" path="doc/member[@key='inference.put_cohere.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor.Build(action);

@@ -37,10 +37,6 @@ public sealed partial class UpdateUserProfileDataResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateUserProfileDataResponse.g.xml" path="doc/member[@key='security.update_user_profile_data.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

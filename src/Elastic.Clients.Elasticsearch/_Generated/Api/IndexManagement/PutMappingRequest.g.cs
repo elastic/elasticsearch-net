@@ -23,98 +23,31 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 public sealed partial class PutMappingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#write_index_only']/*"/>
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update field mappings.
-/// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// <strong>Add multi-fields to an existing field</strong>
-/// </para>
-/// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
-/// </para>
-/// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
-/// </para>
-/// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
-/// </para>
-/// <para>
-/// <strong>Change the mapping of an existing field</strong>
-/// </para>
-/// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
-/// </para>
-/// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
-/// </para>
-/// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
-/// </para>
-/// </summary>
+/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutMappingRequestConverter))]
 public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>
 {
@@ -141,202 +74,63 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.put_mapping";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
-	/// Use <c>_all</c> or omit to add the mapping on all indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#write_index_only']/*"/>
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls whether dynamic date detection is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#date_detection']/*"/>
 	public bool? DateDetection { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls whether new fields are added dynamically.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_date_formats']/*"/>
 	public System.Collections.Generic.ICollection<string>? DynamicDateFormats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Control whether field names are enabled for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_field_names']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Automatically map strings into numeric data types for all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#numeric_detection']/*"/>
 	public bool? NumericDetection { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Enable making a routing value required on indexed documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update field mappings.
-/// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// <strong>Add multi-fields to an existing field</strong>
-/// </para>
-/// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
-/// </para>
-/// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
-/// </para>
-/// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
-/// </para>
-/// <para>
-/// <strong>Change the mapping of an existing field</strong>
-/// </para>
-/// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
-/// </para>
-/// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
-/// </para>
-/// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
-/// </para>
-/// </summary>
+/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 public readonly partial struct PutMappingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest Instance { get; init; }
@@ -361,188 +155,112 @@ public readonly partial struct PutMappingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
-	/// Use <c>_all</c> or omit to add the mapping on all indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#write_index_only']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor WriteIndexOnly(bool? value = true)
 	{
 		Instance.WriteIndexOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether dynamic date detection is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#date_detection']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DateDetection(bool? value = true)
 	{
 		Instance.DateDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether new fields are added dynamically.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
 		Instance.Dynamic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicDateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.DynamicDateFormats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? value)
 	{
 		Instance.DynamicTemplates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates()
 	{
 		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate>? action)
 	{
 		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor DynamicTemplates<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>>? action)
 	{
 		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<T>.Build(action);
@@ -570,61 +288,35 @@ public readonly partial struct PutMappingRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether field names are enabled for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_field_names']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? value)
 	{
 		Instance.FieldNames = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether field names are enabled for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_field_names']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor FieldNames(System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> action)
 	{
 		Instance.FieldNames = Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -638,161 +330,70 @@ public readonly partial struct PutMappingRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Automatically map strings into numeric data types for all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#numeric_detection']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor NumericDetection(bool? value = true)
 	{
 		Instance.NumericDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
 		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
 		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable making a routing value required on indexed documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable making a routing value required on indexed documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Routing(System.Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> action)
 	{
 		Instance.Routing = Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.Runtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime()
 	{
 		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Runtime<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -841,33 +442,21 @@ public readonly partial struct PutMappingRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Source()
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor>? action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(action);
@@ -930,48 +519,8 @@ public readonly partial struct PutMappingRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update field mappings.
-/// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// <strong>Add multi-fields to an existing field</strong>
-/// </para>
-/// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
-/// </para>
-/// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
-/// </para>
-/// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
-/// </para>
-/// <para>
-/// <strong>Change the mapping of an existing field</strong>
-/// </para>
-/// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
-/// </para>
-/// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
-/// </para>
-/// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
-/// </para>
-/// </summary>
+/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 public readonly partial struct PutMappingRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest Instance { get; init; }
@@ -995,177 +544,105 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
-	/// Use <c>_all</c> or omit to add the mapping on all indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the mappings are applied only to the current write index for the target.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#write_index_only']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> WriteIndexOnly(bool? value = true)
 	{
 		Instance.WriteIndexOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether dynamic date detection is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#date_detection']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DateDetection(bool? value = true)
 	{
 		Instance.DateDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether new fields are added dynamically.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
 		Instance.Dynamic = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicDateFormats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.DynamicDateFormats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If date detection is enabled then new string fields are checked
-	/// against 'dynamic_date_formats' and if the value matches then
-	/// a new date field is added instead of string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_date_formats']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicDateFormats(params string[] values)
 	{
 		Instance.DynamicDateFormats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? value)
 	{
 		Instance.DynamicTemplates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates()
 	{
 		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify dynamic templates for the mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#dynamic_templates']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> DynamicTemplates(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>>? action)
 	{
 		Instance.DynamicTemplates = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate<TDocument>.Build(action);
@@ -1186,61 +663,35 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether field names are enabled for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_field_names']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? value)
 	{
 		Instance.FieldNames = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether field names are enabled for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_field_names']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> FieldNames(System.Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> action)
 	{
 		Instance.FieldNames = Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A mapping type can have custom meta data associated with it. These are
-	/// not used at all by Elasticsearch, but can be used to store
-	/// application-specific metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_meta']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -1254,122 +705,56 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Automatically map strings into numeric data types for all fields.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#numeric_detection']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> NumericDetection(bool? value = true)
 	{
 		Instance.NumericDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping for a field. For new fields, this mapping can include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Field name
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Field data type
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Mapping parameters
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
 		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable making a routing value required on indexed documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enable making a routing value required on indexed documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Routing(System.Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> action)
 	{
 		Instance.Routing = Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.Runtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime()
 	{
 		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mapping of runtime fields for the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#runtime']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Runtime(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.Runtime = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -1404,33 +789,21 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceField? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Source()
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Control whether the _source field is enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor>? action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.Build(action);

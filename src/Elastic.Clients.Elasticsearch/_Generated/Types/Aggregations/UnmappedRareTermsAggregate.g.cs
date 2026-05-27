@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of a <c>rare_terms</c> aggregation when the field is unmapped. <c>buckets</c> is always empty.
-/// </para>
-/// </summary>
+/// <include file="UnmappedRareTermsAggregate.g.xml" path="doc/member[@key='_types.aggregations.UnmappedRareTermsAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.UnmappedRareTermsAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.UnmappedRareTermsAggregateConverter))]
 public sealed partial class UnmappedRareTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

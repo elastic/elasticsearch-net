@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 public sealed partial class FollowRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
-	/// active.
-	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
-	/// remote Lucene segment files to the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a follower.
-/// Create a cross-cluster replication follower index that follows a specific leader index.
-/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
-/// </para>
-/// </summary>
+/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowRequestConverter))]
 public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestParameters>
 {
@@ -84,141 +70,60 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "ccr.follow";
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
-	/// active.
-	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
-	/// remote Lucene segment files to the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#data_stream_name']/*"/>
 	public string? DataStreamName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index in the leader cluster to follow.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#leader_index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName LeaderIndex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_read_requests']/*"/>
 	public long? MaxOutstandingReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_write_requests']/*"/>
 	public int? MaxOutstandingWriteRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_operation_count']/*"/>
 	public int? MaxReadRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
-	/// retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
-	/// deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_count']/*"/>
 	public int? MaxWriteBufferCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_operation_count']/*"/>
 	public int? MaxWriteRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
-	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
-	/// Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#remote_cluster']/*"/>
 	public required string RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a follower.
-/// Create a cross-cluster replication follower index that follows a specific leader index.
-/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
-/// </para>
-/// </summary>
+/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 public readonly partial struct FollowRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Instance { get; init; }
@@ -245,262 +150,161 @@ public readonly partial struct FollowRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
-	/// active.
-	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
-	/// remote Lucene segment files to the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#data_stream_name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor DataStreamName(string? value)
 	{
 		Instance.DataStreamName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index in the leader cluster to follow.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#leader_index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor LeaderIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.LeaderIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_read_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxOutstandingReadRequests(long? value)
 	{
 		Instance.MaxOutstandingReadRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_write_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxOutstandingWriteRequests(int? value)
 	{
 		Instance.MaxOutstandingWriteRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestOperationCount(int? value)
 	{
 		Instance.MaxReadRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxReadRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
-	/// retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MaxRetryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
-	/// deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferCount(int? value)
 	{
 		Instance.MaxWriteBufferCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteBufferSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestOperationCount(int? value)
 	{
 		Instance.MaxWriteRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
-	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
-	/// Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ReadPollTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor RemoteCluster(string value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
@@ -563,13 +367,8 @@ public readonly partial struct FollowRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create a follower.
-/// Create a cross-cluster replication follower index that follows a specific leader index.
-/// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
-/// </para>
-/// </summary>
+/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.follow.Request']/*"/>
 public readonly partial struct FollowRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest Instance { get; init; }
@@ -597,251 +396,154 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of shards to wait on being active before responding. This defaults to waiting on none of the shards to be
-	/// active.
-	/// A shard must be restored from the leader index before being active. Restoring a follower shard requires transferring all the
-	/// remote Lucene segment files to the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the leader index is part of a data stream, the name to which the local data stream for the followed index should be renamed.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#data_stream_name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> DataStreamName(string? value)
 	{
 		Instance.DataStreamName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index in the leader cluster to follow.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#leader_index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> LeaderIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.LeaderIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_read_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxOutstandingReadRequests(long? value)
 	{
 		Instance.MaxOutstandingReadRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding write requests on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_outstanding_write_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxOutstandingWriteRequests(int? value)
 	{
 		Instance.MaxOutstandingWriteRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestOperationCount(int? value)
 	{
 		Instance.MaxReadRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxReadRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when
-	/// retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MaxRetryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be
-	/// deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferCount(int? value)
 	{
 		Instance.MaxWriteBufferCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteBufferSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will
-	/// be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestOperationCount(int? value)
 	{
 		Instance.MaxWriteRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index.
-	/// When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics.
-	/// Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ReadPollTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> RemoteCluster(string value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowRequest.g.xml" path="doc/member[@key='ccr.follow.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);

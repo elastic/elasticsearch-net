@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlServiceProviderMetadataRequest.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
 public sealed partial class SamlServiceProviderMetadataRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create SAML service provider metadata.
-/// </para>
-/// <para>
-/// Generate SAML metadata for a SAML 2.0 Service Provider.
-/// </para>
-/// <para>
-/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
-/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="SamlServiceProviderMetadataRequest.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlServiceProviderMetadataRequestConverter))]
 public sealed partial class SamlServiceProviderMetadataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>
 {
@@ -65,26 +57,12 @@ public sealed partial class SamlServiceProviderMetadataRequest : Elastic.Clients
 
 	internal override string OperationName => "security.saml_service_provider_metadata";
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlServiceProviderMetadataRequest.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request#realm_name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name RealmName { get => P<Elastic.Clients.Elasticsearch.Name>("realm_name"); set => PR("realm_name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create SAML service provider metadata.
-/// </para>
-/// <para>
-/// Generate SAML metadata for a SAML 2.0 Service Provider.
-/// </para>
-/// <para>
-/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
-/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
-/// </para>
-/// </summary>
+/// <include file="SamlServiceProviderMetadataRequest.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request']/*"/>
 public readonly partial struct SamlServiceProviderMetadataRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest Instance { get; init; }
@@ -109,11 +87,7 @@ public readonly partial struct SamlServiceProviderMetadataRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlServiceProviderMetadataRequest.g.xml" path="doc/member[@key='security.saml_service_provider_metadata.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.RealmName = value;

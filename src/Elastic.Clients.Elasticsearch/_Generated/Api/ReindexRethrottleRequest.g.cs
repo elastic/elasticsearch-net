@@ -23,34 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 public sealed partial class ReindexRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle a reindex operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular reindex operation.
-/// For example:
-/// </para>
-/// <code>
-/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
-/// </code>
-/// <para>
-/// Rethrottling that speeds up the query takes effect immediately.
-/// Rethrottling that slows down the query will take effect after completing the current batch.
-/// This behavior prevents scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ReindexRethrottleRequestConverter))]
 public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>
 {
@@ -77,39 +59,15 @@ public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "reindex_rethrottle";
 
-	/// <summary>
-	/// <para>
-	/// The task identifier, which can be found by using the tasks API.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle a reindex operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular reindex operation.
-/// For example:
-/// </para>
-/// <code>
-/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
-/// </code>
-/// <para>
-/// Rethrottling that speeds up the query takes effect immediately.
-/// Rethrottling that slows down the query will take effect after completing the current batch.
-/// This behavior prevents scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 public readonly partial struct ReindexRethrottleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ReindexRethrottleRequest Instance { get; init; }
@@ -134,23 +92,14 @@ public readonly partial struct ReindexRethrottleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The task identifier, which can be found by using the tasks API.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RequestChatCompletion']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RequestChatCompletionConverter))]
 public sealed partial class RequestChatCompletion
 {
@@ -42,102 +43,32 @@ public sealed partial class RequestChatCompletion
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The upper bound limit for the number of tokens that can be generated for a completion request.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#max_completion_tokens']/*"/>
 	public long? MaxCompletionTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// Requests should generally only add new messages from the user (role <c>user</c>).
-	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#messages']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> Messages { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the model to use.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#model']/*"/>
 	public string? Model { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A sequence of strings to control when the model should stop generating additional tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#stop']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sampling temperature to use.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#temperature']/*"/>
 	public float? Temperature { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls which tool is called by the model.
-	/// String representation: One of <c>auto</c>, <c>none</c>, or <c>requrired</c>. <c>auto</c> allows the model to choose between calling tools and generating a message. <c>none</c> causes the model to not call any tools. <c>required</c> forces the model to call one or more tools.
-	/// Example (object representation):
-	/// </para>
-	/// <code>
-	/// {
-	///   "tool_choice": {
-	///       "type": "function",
-	///       "function": {
-	///           "name": "get_current_weather"
-	///       }
-	///   }
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tool_choice']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? ToolChoice { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// Example:
-	/// </para>
-	/// <code>
-	/// {
-	///   "tools": [
-	///       {
-	///           "type": "function",
-	///           "function": {
-	///               "name": "get_price_of_item",
-	///               "description": "Get the current price of an item",
-	///               "parameters": {
-	///                   "type": "object",
-	///                   "properties": {
-	///                       "item": {
-	///                           "id": "12345"
-	///                       },
-	///                       "unit": {
-	///                           "type": "currency"
-	///                       }
-	///                   }
-	///               }
-	///           }
-	///       }
-	///   ]
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tools']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? Tools { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Nucleus sampling, an alternative to sampling with temperature.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#top_p']/*"/>
 	public float? TopP { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RequestChatCompletion']/*"/>
 public readonly partial struct RequestChatCompletionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion Instance { get; init; }
@@ -157,50 +88,28 @@ public readonly partial struct RequestChatCompletionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion instance) => new Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The upper bound limit for the number of tokens that can be generated for a completion request.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#max_completion_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor MaxCompletionTokens(long? value)
 	{
 		Instance.MaxCompletionTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// Requests should generally only add new messages from the user (role <c>user</c>).
-	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#messages']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> value)
 	{
 		Instance.Messages = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// Requests should generally only add new messages from the user (role <c>user</c>).
-	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#messages']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages(params Elastic.Clients.Elasticsearch.Inference.Message[] values)
 	{
 		Instance.Messages = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of objects representing the conversation.
-	/// Requests should generally only add new messages from the user (role <c>user</c>).
-	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#messages']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Messages(params System.Action<Elastic.Clients.Elasticsearch.Inference.MessageDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.Message>();
@@ -213,175 +122,56 @@ public readonly partial struct RequestChatCompletionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the model to use.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#model']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Model(string? value)
 	{
 		Instance.Model = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sequence of strings to control when the model should stop generating additional tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#stop']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Stop(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sequence of strings to control when the model should stop generating additional tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#stop']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Stop(params string[] values)
 	{
 		Instance.Stop = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sampling temperature to use.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#temperature']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Temperature(float? value)
 	{
 		Instance.Temperature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls which tool is called by the model.
-	/// String representation: One of <c>auto</c>, <c>none</c>, or <c>requrired</c>. <c>auto</c> allows the model to choose between calling tools and generating a message. <c>none</c> causes the model to not call any tools. <c>required</c> forces the model to call one or more tools.
-	/// Example (object representation):
-	/// </para>
-	/// <code>
-	/// {
-	///   "tool_choice": {
-	///       "type": "function",
-	///       "function": {
-	///           "name": "get_current_weather"
-	///       }
-	///   }
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tool_choice']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor ToolChoice(Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? value)
 	{
 		Instance.ToolChoice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// Example:
-	/// </para>
-	/// <code>
-	/// {
-	///   "tools": [
-	///       {
-	///           "type": "function",
-	///           "function": {
-	///               "name": "get_price_of_item",
-	///               "description": "Get the current price of an item",
-	///               "parameters": {
-	///                   "type": "object",
-	///                   "properties": {
-	///                       "item": {
-	///                           "id": "12345"
-	///                       },
-	///                       "unit": {
-	///                           "type": "currency"
-	///                       }
-	///                   }
-	///               }
-	///           }
-	///       }
-	///   ]
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tools']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? value)
 	{
 		Instance.Tools = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// Example:
-	/// </para>
-	/// <code>
-	/// {
-	///   "tools": [
-	///       {
-	///           "type": "function",
-	///           "function": {
-	///               "name": "get_price_of_item",
-	///               "description": "Get the current price of an item",
-	///               "parameters": {
-	///                   "type": "object",
-	///                   "properties": {
-	///                       "item": {
-	///                           "id": "12345"
-	///                       },
-	///                       "unit": {
-	///                           "type": "currency"
-	///                       }
-	///                   }
-	///               }
-	///           }
-	///       }
-	///   ]
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tools']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(params Elastic.Clients.Elasticsearch.Inference.CompletionTool[] values)
 	{
 		Instance.Tools = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of tools that the model can call.
-	/// Example:
-	/// </para>
-	/// <code>
-	/// {
-	///   "tools": [
-	///       {
-	///           "type": "function",
-	///           "function": {
-	///               "name": "get_price_of_item",
-	///               "description": "Get the current price of an item",
-	///               "parameters": {
-	///                   "type": "object",
-	///                   "properties": {
-	///                       "item": {
-	///                           "id": "12345"
-	///                       },
-	///                       "unit": {
-	///                           "type": "currency"
-	///                       }
-	///                   }
-	///               }
-	///           }
-	///       }
-	///   ]
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#tools']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(params System.Action<Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Inference.CompletionTool>();
@@ -394,11 +184,7 @@ public readonly partial struct RequestChatCompletionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Nucleus sampling, an alternative to sampling with temperature.
-	/// </para>
-	/// </summary>
+	/// <include file="RequestChatCompletion.g.xml" path="doc/member[@key='inference._types.RequestChatCompletion#top_p']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor TopP(float? value)
 	{
 		Instance.TopP = value;

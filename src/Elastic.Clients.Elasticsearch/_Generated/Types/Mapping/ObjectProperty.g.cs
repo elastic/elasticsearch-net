@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ObjectProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ObjectPropertyConverter))]
 public sealed partial class ObjectProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -42,11 +43,7 @@ public sealed partial class ObjectProperty : Elastic.Clients.Elasticsearch.Mappi
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -56,6 +53,7 @@ public sealed partial class ObjectProperty : Elastic.Clients.Elasticsearch.Mappi
 	public string? Type => "object";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ObjectProperty']/*"/>
 public readonly partial struct ObjectPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ObjectProperty Instance { get; init; }
@@ -117,33 +115,21 @@ public readonly partial struct ObjectPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -201,6 +187,7 @@ public readonly partial struct ObjectPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ObjectProperty']/*"/>
 public readonly partial struct ObjectPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ObjectProperty Instance { get; init; }
@@ -268,33 +255,21 @@ public readonly partial struct ObjectPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ObjectProperty.g.xml" path="doc/member[@key='_types.mapping.ObjectProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

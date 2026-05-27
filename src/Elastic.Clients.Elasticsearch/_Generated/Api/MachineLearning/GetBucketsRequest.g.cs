@@ -23,29 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
 public sealed partial class GetBucketsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of buckets to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for buckets.
-/// The API presents a chronological view of the records, grouped by bucket.
-/// </para>
-/// </summary>
+/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetBucketsRequestConverter))]
 public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestParameters>
 {
@@ -77,92 +67,43 @@ public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "ml.get_buckets";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp of a single bucket result. If you do not specify this
-	/// parameter, the API returns information about all buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#timestamp']/*"/>
 	public System.DateTimeOffset? Timestamp { get => P<System.DateTimeOffset?>("timestamp"); set => PO("timestamp", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of buckets to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>anomaly_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#anomaly_score']/*"/>
 	public double? AnomalyScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#desc']/*"/>
 	public bool? Desc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#exclude_interim']/*"/>
 	public bool? ExcludeInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>expand</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#expand']/*"/>
 	public bool? Expand { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the desription for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for buckets.
-/// The API presents a chronological view of the records, grouped by bucket.
-/// </para>
-/// </summary>
+/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
 public readonly partial struct GetBucketsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest Instance { get; init; }
@@ -192,100 +133,63 @@ public readonly partial struct GetBucketsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timestamp of a single bucket result. If you do not specify this
-	/// parameter, the API returns information about all buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#timestamp']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Timestamp(System.DateTimeOffset? value)
 	{
 		Instance.Timestamp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of buckets to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>anomaly_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#anomaly_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor AnomalyScore(double? value)
 	{
 		Instance.AnomalyScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>expand</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#expand']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Expand(bool? value = true)
 	{
 		Instance.Expand = value;
@@ -310,33 +214,21 @@ public readonly partial struct GetBucketsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the desription for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the desription for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
@@ -399,12 +291,8 @@ public readonly partial struct GetBucketsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for buckets.
-/// The API presents a chronological view of the records, grouped by bucket.
-/// </para>
-/// </summary>
+/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_buckets.Request']/*"/>
 public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest Instance { get; init; }
@@ -434,100 +322,63 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The timestamp of a single bucket result. If you do not specify this
-	/// parameter, the API returns information about all buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#timestamp']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Timestamp(System.DateTimeOffset? value)
 	{
 		Instance.Timestamp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of buckets to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>anomaly_score</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#anomaly_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> AnomalyScore(double? value)
 	{
 		Instance.AnomalyScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>exclude_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#exclude_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> ExcludeInterim(bool? value = true)
 	{
 		Instance.ExcludeInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>expand</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#expand']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Expand(bool? value = true)
 	{
 		Instance.Expand = value;
@@ -552,33 +403,21 @@ public readonly partial struct GetBucketsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the desription for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the desription for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetBucketsRequest.g.xml" path="doc/member[@key='ml.get_buckets.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetBucketsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;

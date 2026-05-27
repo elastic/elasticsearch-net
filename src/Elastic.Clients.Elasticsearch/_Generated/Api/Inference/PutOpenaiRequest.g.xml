@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_openai.Request"><summary><para>
+Create an OpenAI inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+</para></summary></member>
+  <member key="inference.put_openai.Request#chunking_settings"><summary><para>
+The chunking configuration object.
+</para></summary></member>
+  <member key="inference.put_openai.Request#openai_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+  <member key="inference.put_openai.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>openai</c>.
+</para></summary></member>
+  <member key="inference.put_openai.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
+</para></summary></member>
+  <member key="inference.put_openai.Request#task_settings"><summary><para>
+Settings to configure the inference task.
+These settings are specific to the task type you specified.
+</para></summary></member>
+  <member key="inference.put_openai.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
+</para></summary></member>
+  <member key="inference.put_openai.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.get_synonyms_sets.SynonymsSetItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.SynonymsSetItemConverter))]
 public sealed partial class SynonymsSetItem
 {
@@ -43,17 +44,9 @@ public sealed partial class SynonymsSetItem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of synonym rules that the synonym set contains
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymsSetItem.g.xml" path="doc/member[@key='synonyms.get_synonyms_sets.SynonymsSetItem#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Synonyms set identifier
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymsSetItem.g.xml" path="doc/member[@key='synonyms.get_synonyms_sets.SynonymsSetItem#synonyms_set']/*"/>
 	public required string SynonymsSet { get; set; }
 }

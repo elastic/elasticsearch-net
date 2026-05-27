@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.delete_synonym_rule.Request"><summary><para>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Request#rule_id"><summary><para>
+The ID of the synonym rule to delete.
+</para></summary></member>
+  <member key="synonyms.delete_synonym_rule.Request#set_id"><summary><para>
+The ID of the synonym set to update.
+</para></summary></member>
+</doc>

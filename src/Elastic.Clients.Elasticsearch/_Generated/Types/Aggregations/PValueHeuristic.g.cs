@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PValueHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PValueHeuristicConverter))]
 public sealed partial class PValueHeuristic
 {
@@ -38,16 +39,11 @@ public sealed partial class PValueHeuristic
 
 	public bool? BackgroundIsSuperset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Should the results be normalized when above the given value.
-	/// Allows for consistent significance results at various scales.
-	/// Note: <c>0</c> is a special value which means no normalization
-	/// </para>
-	/// </summary>
+	/// <include file="PValueHeuristic.g.xml" path="doc/member[@key='_types.aggregations.PValueHeuristic#normalize_above']/*"/>
 	public long? NormalizeAbove { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PValueHeuristic']/*"/>
 public readonly partial struct PValueHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic Instance { get; init; }
@@ -73,13 +69,7 @@ public readonly partial struct PValueHeuristicDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the results be normalized when above the given value.
-	/// Allows for consistent significance results at various scales.
-	/// Note: <c>0</c> is a special value which means no normalization
-	/// </para>
-	/// </summary>
+	/// <include file="PValueHeuristic.g.xml" path="doc/member[@key='_types.aggregations.PValueHeuristic#normalize_above']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor NormalizeAbove(long? value)
 	{
 		Instance.NormalizeAbove = value;

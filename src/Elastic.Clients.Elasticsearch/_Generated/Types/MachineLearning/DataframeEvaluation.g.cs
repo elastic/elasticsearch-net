@@ -39,25 +39,8 @@ public sealed partial class DataframeEvaluation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification>("classification"); set => SetVariant("classification", value); }
-
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection? OutlierDetection { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection>("outlier_detection"); set => SetVariant("outlier_detection", value); }
-
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression>("regression"); set => SetVariant("regression", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation { Classification = value };
@@ -102,66 +85,36 @@ public readonly partial struct DataframeEvaluationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection? value)
 	{
 		Instance.OutlierDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>> action)
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>.Build(action);
@@ -196,99 +149,54 @@ public readonly partial struct DataframeEvaluationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification evaluation evaluates the results of a classification analysis which outputs a prediction that identifies to which of the classes each document belongs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Classification<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<T>> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection? value)
 	{
 		Instance.OutlierDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor> action)
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Outlier detection evaluates the results of an outlier detection analysis which outputs the probability that each document is an outlier.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor OutlierDetection<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<T>> action)
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regression evaluation evaluates the results of a regression analysis which outputs a prediction of values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<T>> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<T>.Build(action);

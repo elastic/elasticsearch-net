@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationOutlierDetectionConverter))]
 public sealed partial class DataframeEvaluationOutlierDetection
 {
@@ -43,28 +44,17 @@ public sealed partial class DataframeEvaluationOutlierDetection
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#actual_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? Metrics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#predicted_probability_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection']/*"/>
 public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Instance { get; init; }
@@ -84,77 +74,49 @@ public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor<TDo
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#predicted_probability_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.PredictedProbabilityField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#predicted_probability_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor<TDocument> PredictedProbabilityField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PredictedProbabilityField = value;
@@ -170,6 +132,7 @@ public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor<TDo
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection']/*"/>
 public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Instance { get; init; }
@@ -189,77 +152,49 @@ public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#predicted_probability_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.PredictedProbabilityField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationOutlierDetection.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationOutlierDetection#predicted_probability_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionDescriptor PredictedProbabilityField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PredictedProbabilityField = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.FloatRangePropertyConverter))]
 public sealed partial class FloatRangeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class FloatRangeProperty : Elastic.Clients.Elasticsearch.M
 	public int? IgnoreAbove { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -58,6 +55,7 @@ public sealed partial class FloatRangeProperty : Elastic.Clients.Elasticsearch.M
 	public string Type => "float_range";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty']/*"/>
 public readonly partial struct FloatRangePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty Instance { get; init; }
@@ -137,33 +135,21 @@ public readonly partial struct FloatRangePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -215,6 +201,7 @@ public readonly partial struct FloatRangePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty']/*"/>
 public readonly partial struct FloatRangePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty Instance { get; init; }
@@ -300,33 +287,21 @@ public readonly partial struct FloatRangePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FloatRangeProperty.g.xml" path="doc/member[@key='_types.mapping.FloatRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

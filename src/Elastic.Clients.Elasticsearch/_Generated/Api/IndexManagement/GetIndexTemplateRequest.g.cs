@@ -23,44 +23,26 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 public sealed partial class GetIndexTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index templates.
-/// Get information about one or more index templates.
-/// </para>
-/// </summary>
+/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetIndexTemplateRequestConverter))]
 public sealed partial class GetIndexTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>
 {
@@ -86,49 +68,25 @@ public sealed partial class GetIndexTemplateRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.get_index_template";
 
-	/// <summary>
-	/// <para>
-	/// Name of index template to retrieve. Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get index templates.
-/// Get information about one or more index templates.
-/// </para>
-/// </summary>
+/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 public readonly partial struct GetIndexTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest Instance { get; init; }
@@ -152,33 +110,21 @@ public readonly partial struct GetIndexTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of index template to retrieve. Wildcard (*) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
@@ -186,22 +132,14 @@ public readonly partial struct GetIndexTemplateRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
-	/// <summary>
-	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

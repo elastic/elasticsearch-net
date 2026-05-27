@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ScriptLanguage#expression"><summary><para>
+Lucene’s expressions language, compiles a JavaScript expression to bytecode.
+</para></summary></member>
+  <member key="_types.ScriptLanguage#java"><summary><para>
+Expert Java API
+</para></summary></member>
+  <member key="_types.ScriptLanguage#mustache"><summary><para>
+Mustache templated, used for templates.
+</para></summary></member>
+  <member key="_types.ScriptLanguage#painless"><summary><para>
+Painless scripting language, purpose-built for Elasticsearch.
+</para></summary></member>
+</doc>

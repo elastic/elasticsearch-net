@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.AnalysisMemoryLimit']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AnalysisMemoryLimitConverter))]
 public sealed partial class AnalysisMemoryLimit
 {
@@ -42,14 +43,11 @@ public sealed partial class AnalysisMemoryLimit
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalysisMemoryLimit.g.xml" path="doc/member[@key='ml._types.AnalysisMemoryLimit#model_memory_limit']/*"/>
 	public required string ModelMemoryLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.AnalysisMemoryLimit']/*"/>
 public readonly partial struct AnalysisMemoryLimitDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit Instance { get; init; }
@@ -69,11 +67,7 @@ public readonly partial struct AnalysisMemoryLimitDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalysisMemoryLimit.g.xml" path="doc/member[@key='ml._types.AnalysisMemoryLimit#model_memory_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor ModelMemoryLimit(string value)
 	{
 		Instance.ModelMemoryLimit = value;

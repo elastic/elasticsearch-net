@@ -23,22 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
 public sealed partial class DeletePolicyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an enrich policy.
-/// Deletes an existing enrich policy and its enrich index.
-/// </para>
-/// </summary>
+/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.DeletePolicyRequestConverter))]
 public sealed partial class DeletePolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestParameters>
 {
@@ -65,27 +59,15 @@ public sealed partial class DeletePolicyRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "enrich.delete_policy";
 
-	/// <summary>
-	/// <para>
-	/// Enrich policy to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an enrich policy.
-/// Deletes an existing enrich policy and its enrich index.
-/// </para>
-/// </summary>
+/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.delete_policy.Request']/*"/>
 public readonly partial struct DeletePolicyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest Instance { get; init; }
@@ -110,22 +92,14 @@ public readonly partial struct DeletePolicyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Enrich policy to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeletePolicyRequest.g.xml" path="doc/member[@key='enrich.delete_policy.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

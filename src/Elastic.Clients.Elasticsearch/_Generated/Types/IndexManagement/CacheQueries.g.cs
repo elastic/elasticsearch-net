@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.CacheQueries']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CacheQueriesConverter))]
 public sealed partial class CacheQueries
 {
@@ -45,6 +46,7 @@ public sealed partial class CacheQueries
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.CacheQueries']/*"/>
 public readonly partial struct CacheQueriesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries Instance { get; init; }

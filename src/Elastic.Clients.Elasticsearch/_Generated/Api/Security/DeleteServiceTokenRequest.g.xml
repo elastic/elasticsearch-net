@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_service_token.Request"><summary><para>
+Delete service account tokens.
+</para>
+<para>
+Delete service account tokens for a service in a specified namespace.
+</para></summary></member>
+  <member key="security.delete_service_token.Request#name"><summary><para>
+The name of the service account token.
+</para></summary></member>
+  <member key="security.delete_service_token.Request#namespace"><summary><para>
+The namespace, which is a top-level grouping of service accounts.
+</para></summary></member>
+  <member key="security.delete_service_token.Request#refresh"><summary><para>
+If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+</para></summary></member>
+  <member key="security.delete_service_token.Request#service"><summary><para>
+The service name.
+</para></summary></member>
+</doc>

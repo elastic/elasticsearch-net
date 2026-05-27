@@ -37,17 +37,9 @@ public sealed partial class PutBehavioralAnalyticsResponse : Elastic.Transport.P
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutBehavioralAnalyticsResponse.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the analytics collection created or updated
-	/// </para>
-	/// </summary>
+	/// <include file="PutBehavioralAnalyticsResponse.g.xml" path="doc/member[@key='search_application.put_behavioral_analytics.Response#name']/*"/>
 	public required string Name { get; set; }
 }

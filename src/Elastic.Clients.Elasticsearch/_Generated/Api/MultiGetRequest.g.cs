@@ -23,103 +23,40 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 public sealed partial class MultiGetRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get multiple documents.
-/// </para>
-/// <para>
-/// Get multiple JSON documents by ID from one or more indices.
-/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
-/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
-/// </para>
-/// <para>
-/// <strong>Filter source fields</strong>
-/// </para>
-/// <para>
-/// By default, the <c>_source</c> field is returned for every document (if stored).
-/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
-/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// <para>
-/// <strong>Get stored fields</strong>
-/// </para>
-/// <para>
-/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
-/// Any requested fields that are not stored are ignored.
-/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// </summary>
+/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.MultiGetRequestConverter))]
 public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiGetRequestParameters>
 {
@@ -145,122 +82,45 @@ public sealed partial class MultiGetRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "mget";
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to retrieve documents from when <c>ids</c> are specified, or when a document in the <c>docs</c> array does not specify an index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? Ids { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get multiple documents.
-/// </para>
-/// <para>
-/// Get multiple JSON documents by ID from one or more indices.
-/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
-/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
-/// </para>
-/// <para>
-/// <strong>Filter source fields</strong>
-/// </para>
-/// <para>
-/// By default, the <c>_source</c> field is returned for every document (if stored).
-/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
-/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// <para>
-/// <strong>Get stored fields</strong>
-/// </para>
-/// <para>
-/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
-/// Any requested fields that are not stored are ignored.
-/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// </summary>
+/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 public readonly partial struct MultiGetRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MultiGetRequest Instance { get; init; }
@@ -284,206 +144,126 @@ public readonly partial struct MultiGetRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.MultiGetRequest instance) => new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiGetRequest(Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to retrieve documents from when <c>ids</c> are specified, or when a document in the <c>docs</c> array does not specify an index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#force_synthetic_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor ForceSyntheticSource(bool? value = true)
 	{
 		Instance.ForceSyntheticSource = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>();
@@ -496,11 +276,7 @@ public readonly partial struct MultiGetRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Docs<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>();
@@ -513,11 +289,7 @@ public readonly partial struct MultiGetRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Ids = value;
@@ -585,32 +357,8 @@ public readonly partial struct MultiGetRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get multiple documents.
-/// </para>
-/// <para>
-/// Get multiple JSON documents by ID from one or more indices.
-/// If you specify an index in the request URI, you only need to specify the document IDs in the request body.
-/// To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
-/// </para>
-/// <para>
-/// <strong>Filter source fields</strong>
-/// </para>
-/// <para>
-/// By default, the <c>_source</c> field is returned for every document (if stored).
-/// Use the <c>_source</c> and <c>_source_include</c> or <c>source_exclude</c> attributes to filter what fields are returned for a particular document.
-/// You can include the <c>_source</c>, <c>_source_includes</c>, and <c>_source_excludes</c> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// <para>
-/// <strong>Get stored fields</strong>
-/// </para>
-/// <para>
-/// Use the <c>stored_fields</c> attribute to specify the set of stored fields you want to retrieve.
-/// Any requested fields that are not stored are ignored.
-/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
-/// </para>
-/// </summary>
+/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.mget.Request']/*"/>
 public readonly partial struct MultiGetRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MultiGetRequest Instance { get; init; }
@@ -634,195 +382,119 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiGetRequest instance) => new Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiGetRequest(Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to retrieve documents from when <c>ids</c> are specified, or when a document in the <c>docs</c> array does not specify an index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#force_synthetic_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> ForceSyntheticSource(bool? value = true)
 	{
 		Instance.ForceSyntheticSource = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the node or shard the operation should be performed on. Random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request refreshes relevant shards before retrieving documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false to return the <c>_source</c> field or not, or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, retrieves the document fields stored in the index rather than the document <c>_source</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? value)
 	{
 		Instance.Docs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation[] values)
 	{
 		Instance.Docs = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents you want to retrieve. Required if no index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#docs']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>();
@@ -835,11 +507,7 @@ public readonly partial struct MultiGetRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiGetRequest.g.xml" path="doc/member[@key='_global.mget.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Ids = value;

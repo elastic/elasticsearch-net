@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GsubProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GsubProcessorConverter))]
 public sealed partial class GsubProcessor
 {
@@ -44,80 +45,38 @@ public sealed partial class GsubProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to apply the replacement to.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pattern to be replaced.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#pattern']/*"/>
 	public required string Pattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string to replace the matching patterns with.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#replacement']/*"/>
 	public required string Replacement { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GsubProcessor']/*"/>
 public readonly partial struct GsubProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GsubProcessor Instance { get; init; }
@@ -137,100 +96,63 @@ public readonly partial struct GsubProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GsubProcessor(Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to apply the replacement to.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to apply the replacement to.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -243,58 +165,35 @@ public readonly partial struct GsubProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pattern to be replaced.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to replace the matching patterns with.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#replacement']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Replacement(string value)
 	{
 		Instance.Replacement = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -310,6 +209,7 @@ public readonly partial struct GsubProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GsubProcessor']/*"/>
 public readonly partial struct GsubProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GsubProcessor Instance { get; init; }
@@ -329,100 +229,63 @@ public readonly partial struct GsubProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GsubProcessor(Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to apply the replacement to.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to apply the replacement to.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -435,11 +298,7 @@ public readonly partial struct GsubProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -452,58 +311,35 @@ public readonly partial struct GsubProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pattern to be replaced.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string to replace the matching patterns with.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#replacement']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Replacement(string value)
 	{
 		Instance.Replacement = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to
-	/// By default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GsubProcessor.g.xml" path="doc/member[@key='ingest._types.GsubProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

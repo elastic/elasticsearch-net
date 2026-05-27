@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SerbianNormalizationTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SerbianNormalizationTokenFilterConverter))]
 public sealed partial class SerbianNormalizationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class SerbianNormalizationTokenFilter : Elastic.Clients.El
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SerbianNormalizationTokenFilter']/*"/>
 public readonly partial struct SerbianNormalizationTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter Instance { get; init; }

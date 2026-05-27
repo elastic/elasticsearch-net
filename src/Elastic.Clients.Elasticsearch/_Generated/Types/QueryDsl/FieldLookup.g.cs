@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldLookup']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FieldLookupConverter))]
 public sealed partial class FieldLookup
 {
@@ -42,35 +43,20 @@ public sealed partial class FieldLookup
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>id</c> of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Index from which to retrieve the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#path']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldLookup']/*"/>
 public readonly partial struct FieldLookupDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Instance { get; init; }
@@ -90,55 +76,35 @@ public readonly partial struct FieldLookupDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// <c>id</c> of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index from which to retrieve the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
@@ -154,6 +120,7 @@ public readonly partial struct FieldLookupDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldLookup']/*"/>
 public readonly partial struct FieldLookupDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup Instance { get; init; }
@@ -173,55 +140,35 @@ public readonly partial struct FieldLookupDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup(Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// <c>id</c> of the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index from which to retrieve the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#index']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldLookup.g.xml" path="doc/member[@key='_types.query_dsl.FieldLookup#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;

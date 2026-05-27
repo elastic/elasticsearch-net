@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.get_trial_status.Request"><summary><para>
+Get the trial status.
+</para></summary></member>
+</doc>

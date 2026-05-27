@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LetterTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.LetterTokenizerConverter))]
 public sealed partial class LetterTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -41,6 +42,7 @@ public sealed partial class LetterTokenizer : Elastic.Clients.Elasticsearch.Anal
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LetterTokenizer']/*"/>
 public readonly partial struct LetterTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer Instance { get; init; }

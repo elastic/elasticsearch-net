@@ -23,23 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
 public sealed partial class FlushJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Force buffered data to be processed.
-/// The flush jobs API is only applicable when sending data for analysis using
-/// the post data API. Depending on the content of the buffer, then it might
-/// additionally calculate new results. Both flush and close operations are
-/// similar, however the flush is more efficient if you are expecting to send
-/// more data for analysis. When flushing, the job remains open and is available
-/// to continue analyzing data. A close operation additionally prunes and
-/// persists the model state to disk and the job must be opened again before
-/// analyzing further data.
-/// </para>
-/// </summary>
+/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FlushJobRequestConverter))]
 public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>
 {
@@ -66,62 +57,27 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ml.flush_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>advance_time</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#advance_time']/*"/>
 	public System.DateTimeOffset? AdvanceTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>calc_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#calc_interim']/*"/>
 	public bool? CalcInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>skip_time</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#skip_time']/*"/>
 	public System.DateTimeOffset? SkipTime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Force buffered data to be processed.
-/// The flush jobs API is only applicable when sending data for analysis using
-/// the post data API. Depending on the content of the buffer, then it might
-/// additionally calculate new results. Both flush and close operations are
-/// similar, however the flush is more efficient if you are expecting to send
-/// more data for analysis. When flushing, the job remains open and is available
-/// to continue analyzing data. A close operation additionally prunes and
-/// persists the model state to disk and the job must be opened again before
-/// analyzing further data.
-/// </para>
-/// </summary>
+/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.flush_job.Request']/*"/>
 public readonly partial struct FlushJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Instance { get; init; }
@@ -146,66 +102,42 @@ public readonly partial struct FlushJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>advance_time</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#advance_time']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor AdvanceTime(System.DateTimeOffset? value)
 	{
 		Instance.AdvanceTime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>calc_interim</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#calc_interim']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor CalcInterim(bool? value = true)
 	{
 		Instance.CalcInterim = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>skip_time</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#skip_time']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor SkipTime(System.DateTimeOffset? value)
 	{
 		Instance.SkipTime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FlushJobRequest.g.xml" path="doc/member[@key='ml.flush_job.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;

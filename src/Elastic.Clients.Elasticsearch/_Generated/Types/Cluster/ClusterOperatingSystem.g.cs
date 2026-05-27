@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterOperatingSystemConverter))]
 public sealed partial class ClusterOperatingSystem
 {
@@ -46,47 +47,21 @@ public sealed partial class ClusterOperatingSystem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of processors used to calculate thread pool size across all selected nodes.
-	/// This number can be set with the processors setting of a node and defaults to the number of processors reported by the operating system.
-	/// In both cases, this number will never be larger than 32.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#allocated_processors']/*"/>
 	public required int AllocatedProcessors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about processor architectures (for example, x86_64 or aarch64) used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#architectures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemArchitecture>? Architectures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of processors available to JVM across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#available_processors']/*"/>
 	public required int AvailableProcessors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about memory used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#mem']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about operating systems used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#names']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemName> Names { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about operating systems used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystem.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystem#pretty_names']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemPrettyName> PrettyNames { get; set; }
 }

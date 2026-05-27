@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.HasChildQueryConverter))]
 public sealed partial class HasChildQuery
 {
@@ -43,70 +44,33 @@ public sealed partial class HasChildQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of child documents that match the query allowed for a returned parent document.
-	/// If the parent document exceeds this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#max_children']/*"/>
 	public int? MaxChildren { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
-	/// If the parent document does not meet this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#min_children']/*"/>
 	public int? MinChildren { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the child relationship mapped for the <c>join</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#type']/*"/>
 	public required string Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery']/*"/>
 public readonly partial struct HasChildQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Instance { get; init; }
@@ -126,106 +90,63 @@ public readonly partial struct HasChildQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of child documents that match the query allowed for a returned parent document.
-	/// If the parent document exceeds this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#max_children']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> MaxChildren(int? value)
 	{
 		Instance.MaxChildren = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
-	/// If the parent document does not meet this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#min_children']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> MinChildren(int? value)
 	{
 		Instance.MinChildren = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -238,22 +159,14 @@ public readonly partial struct HasChildQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
 		Instance.ScoreMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the child relationship mapped for the <c>join</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument> Type(string value)
 	{
 		Instance.Type = value;
@@ -269,6 +182,7 @@ public readonly partial struct HasChildQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery']/*"/>
 public readonly partial struct HasChildQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery Instance { get; init; }
@@ -288,129 +202,77 @@ public readonly partial struct HasChildQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of child documents that match the query allowed for a returned parent document.
-	/// If the parent document exceeds this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#max_children']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor MaxChildren(int? value)
 	{
 		Instance.MaxChildren = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of child documents that match the query required to match the query for a returned parent document.
-	/// If the parent document does not meet this limit, it is excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#min_children']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor MinChildren(int? value)
 	{
 		Instance.MinChildren = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on child documents of the <c>type</c> field.
-	/// If a child document matches the search, the query returns the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -423,22 +285,14 @@ public readonly partial struct HasChildQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how scores for matching child documents affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
 		Instance.ScoreMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the child relationship mapped for the <c>join</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="HasChildQuery.g.xml" path="doc/member[@key='_types.query_dsl.HasChildQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor Type(string value)
 	{
 		Instance.Type = value;

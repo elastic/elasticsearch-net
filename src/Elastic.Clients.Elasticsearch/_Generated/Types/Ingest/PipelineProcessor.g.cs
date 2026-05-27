@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.PipelineProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PipelineProcessorConverter))]
 public sealed partial class PipelineProcessor
 {
@@ -42,59 +43,29 @@ public sealed partial class PipelineProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore missing pipelines instead of failing.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_missing_pipeline']/*"/>
 	public bool? IgnoreMissingPipeline { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the pipeline to execute.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.PipelineProcessor']/*"/>
 public readonly partial struct PipelineProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor Instance { get; init; }
@@ -114,90 +85,56 @@ public readonly partial struct PipelineProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore missing pipelines instead of failing.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_missing_pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> IgnoreMissingPipeline(bool? value = true)
 	{
 		Instance.IgnoreMissingPipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the pipeline to execute.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -210,12 +147,7 @@ public readonly partial struct PipelineProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -231,6 +163,7 @@ public readonly partial struct PipelineProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.PipelineProcessor']/*"/>
 public readonly partial struct PipelineProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor Instance { get; init; }
@@ -250,90 +183,56 @@ public readonly partial struct PipelineProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to ignore missing pipelines instead of failing.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#ignore_missing_pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor IgnoreMissingPipeline(bool? value = true)
 	{
 		Instance.IgnoreMissingPipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the pipeline to execute.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -346,11 +245,7 @@ public readonly partial struct PipelineProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -363,12 +258,7 @@ public readonly partial struct PipelineProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineProcessor.g.xml" path="doc/member[@key='ingest._types.PipelineProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

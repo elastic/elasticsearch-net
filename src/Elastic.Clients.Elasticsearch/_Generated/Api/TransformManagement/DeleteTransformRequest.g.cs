@@ -23,37 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 public sealed partial class DeleteTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If this value is true, the destination index is deleted together with the transform. If false, the destination
-	/// index will not be deleted
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#delete_dest_index']/*"/>
 	public bool? DeleteDestIndex { get => Q<bool?>("delete_dest_index"); set => Q("delete_dest_index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
-	/// deleted regardless of its current state.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a transform.
-/// </para>
-/// </summary>
+/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.DeleteTransformRequestConverter))]
 public sealed partial class DeleteTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>
 {
@@ -80,42 +65,21 @@ public sealed partial class DeleteTransformRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "transform.delete_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If this value is true, the destination index is deleted together with the transform. If false, the destination
-	/// index will not be deleted
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#delete_dest_index']/*"/>
 	public bool? DeleteDestIndex { get => Q<bool?>("delete_dest_index"); set => Q("delete_dest_index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
-	/// deleted regardless of its current state.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a transform.
-/// </para>
-/// </summary>
+/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.delete_transform.Request']/*"/>
 public readonly partial struct DeleteTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest Instance { get; init; }
@@ -140,46 +104,28 @@ public readonly partial struct DeleteTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this value is true, the destination index is deleted together with the transform. If false, the destination
-	/// index will not be deleted
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#delete_dest_index']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor DeleteDestIndex(bool? value = true)
 	{
 		Instance.DeleteDestIndex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
-	/// deleted regardless of its current state.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTransformRequest.g.xml" path="doc/member[@key='transform.delete_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

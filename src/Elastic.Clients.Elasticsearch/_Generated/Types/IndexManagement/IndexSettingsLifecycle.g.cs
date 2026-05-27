@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsLifecycleConverter))]
 public sealed partial class IndexSettingsLifecycle
 {
@@ -36,59 +37,27 @@ public sealed partial class IndexSettingsLifecycle
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.
-	/// You can explicitly set it to skip rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#indexing_complete']/*"/>
 	public bool? IndexingComplete { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, this is the timestamp used to calculate the index age for its phase transitions. Use this setting
-	/// if you create a new index that contains old data and want to use the original creation date to calculate the index
-	/// age. Specified as a Unix epoch value in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#origination_date']/*"/>
 	public long? OriginationDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to true to parse the origination date from the index name. This origination date is used to calculate the index age
-	/// for its phase transitions. The index name must match the pattern ^.*-{date_format}-\d+, where the date_format is
-	/// yyyy.MM.dd and the trailing digits are optional. An index that was rolled over would normally match the full format,
-	/// for example logs-2016.10.31-000002). If the index name doesn’t match the pattern, index creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#parse_origination_date']/*"/>
 	public bool? ParseOriginationDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Preference for the system that manages a data stream backing index (preferring ILM when both ILM and DLM are
-	/// applicable for an index).
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#prefer_ilm']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<bool, string>? PreferIlm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The index alias to update when the index rolls over. Specify when using a policy that contains a rollover action.
-	/// When the index rolls over, the alias is updated to reflect that the index is no longer the write index. For more
-	/// information about rolling indices, see Rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#rollover_alias']/*"/>
 	public string? RolloverAlias { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? Step { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle']/*"/>
 public readonly partial struct IndexSettingsLifecycleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle Instance { get; init; }
@@ -108,75 +77,42 @@ public readonly partial struct IndexSettingsLifecycleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.
-	/// You can explicitly set it to skip rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#indexing_complete']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor IndexingComplete(bool? value = true)
 	{
 		Instance.IndexingComplete = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, this is the timestamp used to calculate the index age for its phase transitions. Use this setting
-	/// if you create a new index that contains old data and want to use the original creation date to calculate the index
-	/// age. Specified as a Unix epoch value in milliseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#origination_date']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor OriginationDate(long? value)
 	{
 		Instance.OriginationDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to true to parse the origination date from the index name. This origination date is used to calculate the index age
-	/// for its phase transitions. The index name must match the pattern ^.*-{date_format}-\d+, where the date_format is
-	/// yyyy.MM.dd and the trailing digits are optional. An index that was rolled over would normally match the full format,
-	/// for example logs-2016.10.31-000002). If the index name doesn’t match the pattern, index creation fails.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#parse_origination_date']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor ParseOriginationDate(bool? value = true)
 	{
 		Instance.ParseOriginationDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Preference for the system that manages a data stream backing index (preferring ILM when both ILM and DLM are
-	/// applicable for an index).
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#prefer_ilm']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor PreferIlm(Elastic.Clients.Elasticsearch.Union<bool, string>? value)
 	{
 		Instance.PreferIlm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The index alias to update when the index rolls over. Specify when using a policy that contains a rollover action.
-	/// When the index rolls over, the alias is updated to reflect that the index is no longer the write index. For more
-	/// information about rolling indices, see Rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexSettingsLifecycle.g.xml" path="doc/member[@key='indices._types.IndexSettingsLifecycle#rollover_alias']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleDescriptor RolloverAlias(string? value)
 	{
 		Instance.RolloverAlias = value;

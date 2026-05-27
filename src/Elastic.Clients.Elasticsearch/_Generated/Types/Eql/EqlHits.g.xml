@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql._types.EqlHits#events"><summary><para>
+Contains events matching the query. Each object represents a matching event.
+</para></summary></member>
+  <member key="eql._types.EqlHits#sequences"><summary><para>
+Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.
+</para></summary></member>
+  <member key="eql._types.EqlHits#total"><summary><para>
+Metadata about the number of matching events or sequences.
+</para></summary></member>
+</doc>

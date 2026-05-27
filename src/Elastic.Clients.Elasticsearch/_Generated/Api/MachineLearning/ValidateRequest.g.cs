@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="ValidateRequest.g.xml" path="doc/member[@key='ml.validate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate.Request']/*"/>
 public sealed partial class ValidateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateRequest.g.xml" path="doc/member[@key='ml.validate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ValidateRequestConverter))]
 public sealed partial class ValidateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>
 {
@@ -64,11 +63,8 @@ public sealed partial class ValidateRequest : Elastic.Clients.Elasticsearch.Requ
 	public Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateRequest.g.xml" path="doc/member[@key='ml.validate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate.Request']/*"/>
 public readonly partial struct ValidateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest Instance { get; init; }
@@ -262,11 +258,8 @@ public readonly partial struct ValidateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Validate an anomaly detection job.
-/// </para>
-/// </summary>
+/// <include file="ValidateRequest.g.xml" path="doc/member[@key='ml.validate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.validate.Request']/*"/>
 public readonly partial struct ValidateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest Instance { get; init; }

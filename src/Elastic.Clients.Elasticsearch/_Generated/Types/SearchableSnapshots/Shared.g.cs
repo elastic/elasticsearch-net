@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.cache_stats.Shared']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.SharedConverter))]
 public sealed partial class Shared
 {

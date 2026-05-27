@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterOperatingSystemName#count"><summary><para>
+Number of selected nodes using the operating system.
+</para></summary></member>
+  <member key="cluster.stats.ClusterOperatingSystemName#name"><summary><para>
+Name of an operating system used by one or more selected nodes.
+</para></summary></member>
+</doc>

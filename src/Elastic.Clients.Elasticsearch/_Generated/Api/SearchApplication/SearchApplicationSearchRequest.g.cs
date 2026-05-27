@@ -23,23 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 public sealed partial class SearchApplicationSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run a search application search.
-/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
-/// Unspecified template parameters are assigned their default values if applicable.
-/// </para>
-/// </summary>
+/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.SearchApplicationSearchRequestConverter))]
 public partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>
 {
@@ -66,35 +59,18 @@ public partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "search_application.search";
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to be searched.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query parameters specific to this request, which will override any defaults specified in the template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run a search application search.
-/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
-/// Unspecified template parameters are assigned their default values if applicable.
-/// </para>
-/// </summary>
+/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.search.Request']/*"/>
 public readonly partial struct SearchApplicationSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest Instance { get; init; }
@@ -119,55 +95,35 @@ public readonly partial struct SearchApplicationSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to be searched.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether aggregation names are prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query parameters specific to this request, which will override any defaults specified in the template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query parameters specific to this request, which will override any defaults specified in the template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query parameters specific to this request, which will override any defaults specified in the template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationSearchRequest.g.xml" path="doc/member[@key='search_application.search.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

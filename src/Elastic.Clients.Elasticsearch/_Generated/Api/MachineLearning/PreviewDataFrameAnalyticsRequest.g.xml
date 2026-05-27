@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.preview_data_frame_analytics.Request"><summary><para>
+Preview features used by data frame analytics.
+Preview the extracted features used by a data frame analytics config.
+</para></summary></member>
+  <member key="ml.preview_data_frame_analytics.Request#config"><summary><para>
+A data frame analytics config as described in create data frame analytics
+jobs. Note that <c>id</c> and <c>dest</c> don’t need to be provided in the context of
+this API.
+</para></summary></member>
+  <member key="ml.preview_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job.
+</para></summary></member>
+</doc>

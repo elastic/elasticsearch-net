@@ -23,63 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
 public sealed partial class GrantApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Grant an API key.
-/// </para>
-/// <para>
-/// Create an API key on behalf of another user.
-/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user's credentials.
-/// The supported user authentication credential types are:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// username and password
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Elasticsearch access tokens
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JWTs
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-/// In this case, the API key will be created on behalf of the impersonated user.
-/// </para>
-/// <para>
-/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-/// If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// </summary>
+/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GrantApiKeyRequestConverter))]
 public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>
 {
@@ -108,109 +61,30 @@ public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "security.grant_api_key";
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// The user's access token.
-	/// If you specify the <c>access_token</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#access_token']/*"/>
 	public string? AccessToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the user to be impersonated.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? RunAs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The user name that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Grant an API key.
-/// </para>
-/// <para>
-/// Create an API key on behalf of another user.
-/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user's credentials.
-/// The supported user authentication credential types are:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// username and password
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Elasticsearch access tokens
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JWTs
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-/// In this case, the API key will be created on behalf of the impersonated user.
-/// </para>
-/// <para>
-/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-/// If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// </summary>
+/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
 public readonly partial struct GrantApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Instance { get; init; }
@@ -229,108 +103,63 @@ public readonly partial struct GrantApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's access token.
-	/// If you specify the <c>access_token</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#access_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor AccessToken(string? value)
 	{
 		Instance.AccessToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor> action)
 	{
 		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey<T>(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<T>> action)
 	{
 		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
 		Instance.GrantType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the user to be impersonated.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user name that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;
@@ -393,50 +222,8 @@ public readonly partial struct GrantApiKeyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Grant an API key.
-/// </para>
-/// <para>
-/// Create an API key on behalf of another user.
-/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user's credentials.
-/// The supported user authentication credential types are:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// username and password
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Elasticsearch access tokens
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JWTs
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-/// In this case, the API key will be created on behalf of the impersonated user.
-/// </para>
-/// <para>
-/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
-/// </para>
-/// <para>
-/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-/// If applicable, it also returns expiration information for the API key in milliseconds.
-/// </para>
-/// <para>
-/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-/// </para>
-/// </summary>
+/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.Request']/*"/>
 public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Instance { get; init; }
@@ -455,97 +242,56 @@ public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
-	/// visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', nothing is done with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's access token.
-	/// If you specify the <c>access_token</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#access_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> AccessToken(string? value)
 	{
 		Instance.AccessToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The API key.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>> action)
 	{
 		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
 		Instance.GrantType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the user to be impersonated.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#run_as']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.RunAs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user name that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// It is not valid with other grant types.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKeyRequest.g.xml" path="doc/member[@key='security.grant_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.PressureMemory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PressureMemoryConverter))]
 public sealed partial class PressureMemory
 {
@@ -36,98 +37,44 @@ public sealed partial class PressureMemory
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed by indexing requests in the coordinating, primary, or replica stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#all']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? All { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed, in bytes, by indexing requests in the coordinating, primary, or replica stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#all_in_bytes']/*"/>
 	public long? AllInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed by indexing requests in the coordinating or primary stage.
-	/// This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#combined_coordinating_and_primary']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? CombinedCoordinatingAndPrimary { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed, in bytes, by indexing requests in the coordinating or primary stage.
-	/// This value is not the sum of coordinating and primary as a node can reuse the coordinating memory if the primary stage is executed locally.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#combined_coordinating_and_primary_in_bytes']/*"/>
 	public long? CombinedCoordinatingAndPrimaryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed by indexing requests in the coordinating stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#coordinating']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Coordinating { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed, in bytes, by indexing requests in the coordinating stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#coordinating_in_bytes']/*"/>
 	public long? CoordinatingInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of indexing requests rejected in the coordinating stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#coordinating_rejections']/*"/>
 	public long? CoordinatingRejections { get; set; }
 	public long? LargeOperationRejections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed by indexing requests in the primary stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#primary']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Primary { get; set; }
 	public long? PrimaryDocumentRejections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed, in bytes, by indexing requests in the primary stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#primary_in_bytes']/*"/>
 	public long? PrimaryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of indexing requests rejected in the primary stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#primary_rejections']/*"/>
 	public long? PrimaryRejections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed by indexing requests in the replica stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#replica']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Replica { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Memory consumed, in bytes, by indexing requests in the replica stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#replica_in_bytes']/*"/>
 	public long? ReplicaInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of indexing requests rejected in the replica stage.
-	/// </para>
-	/// </summary>
+	/// <include file="PressureMemory.g.xml" path="doc/member[@key='nodes._types.PressureMemory#replica_rejections']/*"/>
 	public long? ReplicaRejections { get; set; }
 }

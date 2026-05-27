@@ -37,18 +37,9 @@ public sealed partial class DeleteSynonymRuleResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updating synonyms in a synonym set reloads the associated analyzers.
-	/// This information is the analyzers reloading result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Response#reload_analyzers_details']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The update operation result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSynonymRuleResponse.g.xml" path="doc/member[@key='synonyms.delete_synonym_rule.Response#result']/*"/>
 	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisFeatureProcessorTargetMeanEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 {
@@ -45,35 +46,20 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default value if field value is not found in the target_map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#default_value']/*"/>
 	public required int DefaultValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#feature_name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public required System.Collections.Generic.IDictionary<string, object> TargetMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding Instance { get; init; }
@@ -93,77 +79,49 @@ public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodi
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The default value if field value is not found in the target_map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#default_value']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> DefaultValue(int value)
 	{
 		Instance.DefaultValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#feature_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.FeatureName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> TargetMap(System.Collections.Generic.IDictionary<string, object> value)
 	{
 		Instance.TargetMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> TargetMap()
 	{
 		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument> TargetMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -186,6 +144,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodi
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding Instance { get; init; }
@@ -205,77 +164,49 @@ public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodi
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The default value if field value is not found in the target_map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#default_value']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor DefaultValue(int value)
 	{
 		Instance.DefaultValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The resulting feature name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#feature_name']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor FeatureName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.FeatureName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor TargetMap(System.Collections.Generic.IDictionary<string, object> value)
 	{
 		Instance.TargetMap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor TargetMap()
 	{
 		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field value to target mean transition map.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorTargetMeanEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorTargetMeanEncoding#target_map']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor TargetMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.TargetMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

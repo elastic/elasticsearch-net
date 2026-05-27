@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.BlobDetails#name"><summary><para>
+The name of the blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#overwritten"><summary><para>
+Indicates whether the blob was overwritten while the read operations were ongoing.
+/**
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#read_end"><summary><para>
+The position, in bytes, at which read operations completed.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#read_start"><summary><para>
+The position, in bytes, at which read operations started.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#reads"><summary><para>
+A description of every read operation performed on the blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#size"><summary><para>
+The size of the blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.BlobDetails#size_bytes"><summary><para>
+The size of the blob in bytes.
+</para></summary></member>
+</doc>

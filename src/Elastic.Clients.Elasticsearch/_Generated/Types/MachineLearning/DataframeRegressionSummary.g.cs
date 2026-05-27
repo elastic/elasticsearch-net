@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeRegressionSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeRegressionSummaryConverter))]
 public sealed partial class DataframeRegressionSummary
 {
@@ -36,31 +37,15 @@ public sealed partial class DataframeRegressionSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Pseudo Huber loss function.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeRegressionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeRegressionSummary#huber']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Huber { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the predicted values and the actual (<c>ground truth</c>) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeRegressionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeRegressionSummary#mse']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Mse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (<c>ground truth</c>) value.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeRegressionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeRegressionSummary#msle']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? Msle { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeRegressionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeRegressionSummary#r_squared']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationValue? RSquared { get; set; }
 }

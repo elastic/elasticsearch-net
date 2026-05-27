@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="enrich.stats.Request"><summary><para>
+Get enrich stats.
+Returns enrich coordinator statistics and information about enrich policies that are currently executing.
+</para></summary></member>
+  <member key="enrich.stats.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+</doc>

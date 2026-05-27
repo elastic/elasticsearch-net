@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="tasks.list.Request"><summary><para>
+Get all tasks.
+Get information about the tasks currently running on one or more nodes in the cluster.
+</para>
+<para>
+WARNING: The task management API is new and should still be considered a beta feature.
+The API may change in ways that are not backwards compatible.
+</para>
+<para>
+<strong>Identifying running tasks</strong>
+</para>
+<para>
+The <c>X-Opaque-Id header</c>, when provided on the HTTP request header, is going to be returned as a header in the response as well as in the headers field for in the task information.
+This enables you to track certain calls or associate certain tasks with the client that started them.
+For example:
+</para>
+<code>
+curl -i -H "X-Opaque-Id: 123456" "http://localhost:9200/_tasks?group_by=parents"
+</code>
+<para>
+The API returns the following result:
+</para>
+<code>
+HTTP/1.1 200 OK
+X-Opaque-Id: 123456
+content-type: application/json; charset=UTF-8
+content-length: 831
+
+{
+  "tasks" : {
+    "u5lcZHqcQhu-rUoFaqDphA:45" : {
+      "node" : "u5lcZHqcQhu-rUoFaqDphA",
+      "id" : 45,
+      "type" : "transport",
+      "action" : "cluster:monitor/tasks/lists",
+      "start_time_in_millis" : 1513823752749,
+      "running_time_in_nanos" : 293139,
+      "cancellable" : false,
+      "headers" : {
+        "X-Opaque-Id" : "123456"
+      },
+      "children" : [
+        {
+          "node" : "u5lcZHqcQhu-rUoFaqDphA",
+          "id" : 46,
+          "type" : "direct",
+          "action" : "cluster:monitor/tasks/lists[n]",
+          "start_time_in_millis" : 1513823752750,
+          "running_time_in_nanos" : 92133,
+          "cancellable" : false,
+          "parent_task_id" : "u5lcZHqcQhu-rUoFaqDphA:45",
+          "headers" : {
+            "X-Opaque-Id" : "123456"
+          }
+        }
+      ]
+    }
+  }
+ }
+</code>
+<para>
+In this example, <c>X-Opaque-Id: 123456</c> is the ID as a part of the response header.
+The <c>X-Opaque-Id</c> in the task <c>headers</c> is the ID for the task that was initiated by the REST request.
+The <c>X-Opaque-Id</c> in the children <c>headers</c> is the child task of the task that was initiated by the REST request.
+</para></summary></member>
+  <member key="tasks.list.Request#actions"><summary><para>
+A comma-separated list or wildcard expression of actions used to limit the request.
+For example, you can use <c>cluser:*</c> to retrieve all cluster-related tasks.
+</para></summary></member>
+  <member key="tasks.list.Request#detailed"><summary><para>
+If <c>true</c>, the response includes detailed information about the running tasks.
+This information is useful to distinguish tasks from each other but is more costly to run.
+</para></summary></member>
+  <member key="tasks.list.Request#group_by"><summary><para>
+A key that is used to group tasks in the response.
+The task lists can be grouped either by nodes or by parent tasks.
+</para></summary></member>
+  <member key="tasks.list.Request#nodes"><summary><para>
+A comma-separated list of node IDs or names that is used to limit the returned information.
+</para></summary></member>
+  <member key="tasks.list.Request#parent_task_id"><summary><para>
+A parent task identifier that is used to limit returned information.
+To return all tasks, omit this parameter or use a value of <c>-1</c>.
+If the parent task is not found, the API does not return a 404 response code.
+</para></summary></member>
+  <member key="tasks.list.Request#timeout"><summary><para>
+The period to wait for each node to respond.
+If a node does not respond before its timeout expires, the response does not include its information.
+However, timed out nodes are included in the <c>node_failures</c> property.
+</para></summary></member>
+  <member key="tasks.list.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request blocks until the operation is complete.
+</para></summary></member>
+</doc>

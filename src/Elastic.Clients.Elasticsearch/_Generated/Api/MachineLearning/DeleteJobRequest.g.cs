@@ -23,47 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
 public sealed partial class DeleteJobRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#delete_user_annotations']/*"/>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete an opened job; this method is quicker than
-	/// closing and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the request should return immediately or wait until the
-	/// job deletion completes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an anomaly detection job.
-/// </para>
-/// <para>
-/// All job configuration, model state and results are deleted.
-/// It is not currently possible to delete multiple jobs using wildcards or a
-/// comma separated list. If you delete a job that has a datafeed, the request
-/// first tries to delete the datafeed. This behavior is equivalent to calling
-/// the delete datafeed API with the same timeout and force parameters as the
-/// delete job request.
-/// </para>
-/// </summary>
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteJobRequestConverter))]
 public sealed partial class DeleteJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestParameters>
 {
@@ -90,52 +65,21 @@ public sealed partial class DeleteJobRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "ml.delete_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#delete_user_annotations']/*"/>
 	public bool? DeleteUserAnnotations { get => Q<bool?>("delete_user_annotations"); set => Q("delete_user_annotations", value); }
 
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete an opened job; this method is quicker than
-	/// closing and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the request should return immediately or wait until the
-	/// job deletion completes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an anomaly detection job.
-/// </para>
-/// <para>
-/// All job configuration, model state and results are deleted.
-/// It is not currently possible to delete multiple jobs using wildcards or a
-/// comma separated list. If you delete a job that has a datafeed, the request
-/// first tries to delete the datafeed. This behavior is equivalent to calling
-/// the delete datafeed API with the same timeout and force parameters as the
-/// delete job request.
-/// </para>
-/// </summary>
+/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_job.Request']/*"/>
 public readonly partial struct DeleteJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest Instance { get; init; }
@@ -160,48 +104,28 @@ public readonly partial struct DeleteJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether annotations that have been added by the
-	/// user should be deleted along with any auto-generated annotations when the job is
-	/// reset.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#delete_user_annotations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor DeleteUserAnnotations(bool? value = true)
 	{
 		Instance.DeleteUserAnnotations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use to forcefully delete an opened job; this method is quicker than
-	/// closing and deleting the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the request should return immediately or wait until the
-	/// job deletion completes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteJobRequest.g.xml" path="doc/member[@key='ml.delete_job.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteJobRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

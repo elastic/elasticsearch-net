@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.ping.Request"><summary><para>
+Ping the cluster.
+Get information about whether the cluster is running.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.UntypedDistanceFeatureQueryConverter))]
 public sealed partial class UntypedDistanceFeatureQuery : Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery
 {
@@ -44,48 +45,23 @@ public sealed partial class UntypedDistanceFeatureQuery : Elastic.Clients.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#origin']/*"/>
 	public required object Origin { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#pivot']/*"/>
 	public required object Pivot { get; set; }
 	public string? QueryName { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.Type => "untyped";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery']/*"/>
 public readonly partial struct UntypedDistanceFeatureQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Instance { get; init; }
@@ -105,68 +81,35 @@ public readonly partial struct UntypedDistanceFeatureQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Origin(object value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor<TDocument> Pivot(object value)
 	{
 		Instance.Pivot = value;
@@ -188,6 +131,7 @@ public readonly partial struct UntypedDistanceFeatureQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery']/*"/>
 public readonly partial struct UntypedDistanceFeatureQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery Instance { get; init; }
@@ -207,68 +151,35 @@ public readonly partial struct UntypedDistanceFeatureQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field used to calculate distances. This field must meet the following criteria:
-	/// be a <c>date</c>, <c>date_nanos</c> or <c>geo_point</c> field;
-	/// have an <c>index</c> mapping parameter value of <c>true</c>, which is the default;
-	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date or point of origin used to calculate distances.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>origin</c> value must be a date.
-	/// Date Math, such as <c>now-1h</c>, is supported.
-	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#origin']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Origin(object value)
 	{
 		Instance.Origin = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Distance from the <c>origin</c> at which relevance scores receive half of the <c>boost</c> value.
-	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UntypedDistanceFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.UntypedDistanceFeatureQuery#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor Pivot(object value)
 	{
 		Instance.Pivot = value;

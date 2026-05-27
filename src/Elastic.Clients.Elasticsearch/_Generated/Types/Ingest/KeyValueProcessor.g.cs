@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.KeyValueProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.KeyValueProcessorConverter))]
 public sealed partial class KeyValueProcessor
 {
@@ -44,125 +45,56 @@ public sealed partial class KeyValueProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#exclude_keys']/*"/>
 	public System.Collections.Generic.ICollection<string>? ExcludeKeys { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting key-value pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field_split']/*"/>
 	public required string FieldSplit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#include_keys']/*"/>
 	public System.Collections.Generic.ICollection<string>? IncludeKeys { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Prefix to be added to extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#prefix']/*"/>
 	public string? Prefix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#strip_brackets']/*"/>
 	public bool? StripBrackets { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_key']/*"/>
 	public string? TrimKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_value']/*"/>
 	public string? TrimValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting the key from the value within a key-value pair.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#value_split']/*"/>
 	public required string ValueSplit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.KeyValueProcessor']/*"/>
 public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Instance { get; init; }
@@ -182,159 +114,98 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#exclude_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ExcludeKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#exclude_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ExcludeKeys(params string[] values)
 	{
 		Instance.ExcludeKeys = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting key-value pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field_split']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> FieldSplit(string value)
 	{
 		Instance.FieldSplit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#include_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IncludeKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#include_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> IncludeKeys(params string[] values)
 	{
 		Instance.IncludeKeys = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -347,93 +218,56 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prefix to be added to extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#strip_brackets']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? value = true)
 	{
 		Instance.StripBrackets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TrimKey(string? value)
 	{
 		Instance.TrimKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> TrimValue(string? value)
 	{
 		Instance.TrimValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting the key from the value within a key-value pair.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#value_split']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor<TDocument> ValueSplit(string value)
 	{
 		Instance.ValueSplit = value;
@@ -449,6 +283,7 @@ public readonly partial struct KeyValueProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.KeyValueProcessor']/*"/>
 public readonly partial struct KeyValueProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor Instance { get; init; }
@@ -468,159 +303,98 @@ public readonly partial struct KeyValueProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#exclude_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ExcludeKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to exclude from document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#exclude_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ExcludeKeys(params string[] values)
 	{
 		Instance.ExcludeKeys = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be parsed.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting key-value pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#field_split']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor FieldSplit(string value)
 	{
 		Instance.FieldSplit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#include_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.IncludeKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of keys to filter and insert into document.
-	/// Defaults to including all keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#include_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor IncludeKeys(params string[] values)
 	{
 		Instance.IncludeKeys = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -633,11 +407,7 @@ public readonly partial struct KeyValueProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -650,93 +420,56 @@ public readonly partial struct KeyValueProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prefix to be added to extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>. strip brackets <c>()</c>, <c>&lt;></c>, <c>[]</c> as well as quotes <c>'</c> and <c>"</c> from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#strip_brackets']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor StripBrackets(bool? value = true)
 	{
 		Instance.StripBrackets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to insert the extracted keys into.
-	/// Defaults to the root of the document.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted keys.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TrimKey(string? value)
 	{
 		Instance.TrimKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// String of characters to trim from extracted values.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#trim_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor TrimValue(string? value)
 	{
 		Instance.TrimValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regex pattern to use for splitting the key from the value within a key-value pair.
-	/// </para>
-	/// </summary>
+	/// <include file="KeyValueProcessor.g.xml" path="doc/member[@key='ingest._types.KeyValueProcessor#value_split']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor ValueSplit(string value)
 	{
 		Instance.ValueSplit = value;

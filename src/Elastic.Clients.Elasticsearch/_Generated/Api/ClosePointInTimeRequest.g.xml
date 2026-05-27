@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.close_point_in_time.Request"><summary><para>
+Close a point in time.
+A point in time must be opened explicitly before being used in search requests.
+The <c>keep_alive</c> parameter tells Elasticsearch how long it should persist.
+A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
+However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+</para></summary></member>
+  <member key="_global.close_point_in_time.Request#id"><summary><para>
+The ID of the point-in-time.
+</para></summary></member>
+</doc>

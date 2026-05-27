@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 public sealed partial class StartSlmRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start snapshot lifecycle management.
-/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
-/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
-/// </para>
-/// </summary>
+/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.StartSlmRequestConverter))]
 public sealed partial class StartSlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>
 {
@@ -72,32 +57,15 @@ public sealed partial class StartSlmRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "slm.start";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start snapshot lifecycle management.
-/// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
-/// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
-/// </para>
-/// </summary>
+/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.start.Request']/*"/>
 public readonly partial struct StartSlmRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest Instance { get; init; }
@@ -116,26 +84,14 @@ public readonly partial struct StartSlmRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StartSlmRequest.g.xml" path="doc/member[@key='slm.start.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

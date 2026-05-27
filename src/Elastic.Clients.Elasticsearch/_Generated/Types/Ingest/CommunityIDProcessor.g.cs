@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.CommunityIDProcessorConverter))]
 public sealed partial class CommunityIDProcessor
 {
@@ -36,126 +37,56 @@ public sealed partial class CommunityIDProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? DestinationIp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? DestinationPort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#iana_number']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? IanaNumber { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_code']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? IcmpCode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? IcmpType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Seed for the community ID hash. Must be between 0 and 65535 (inclusive). The
-	/// seed can prevent hash collisions between network domains, such as a staging
-	/// and production network that use the same addressing scheme.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#seed']/*"/>
 	public int? Seed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SourceIp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SourcePort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Transport { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor']/*"/>
 public readonly partial struct CommunityIdProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Instance { get; init; }
@@ -175,189 +106,119 @@ public readonly partial struct CommunityIdProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationPort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationPort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> DestinationPort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.DestinationPort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#iana_number']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IanaNumber(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IanaNumber = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#iana_number']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IanaNumber(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.IanaNumber = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_code']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpCode(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IcmpCode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_code']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpCode(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.IcmpCode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpType(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IcmpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IcmpType(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.IcmpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -370,117 +231,70 @@ public readonly partial struct CommunityIdProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Seed for the community ID hash. Must be between 0 and 65535 (inclusive). The
-	/// seed can prevent hash collisions between network domains, such as a staging
-	/// and production network that use the same addressing scheme.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#seed']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Seed(int? value)
 	{
 		Instance.Seed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourceIp(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourcePort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourcePort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> SourcePort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.SourcePort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Transport(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Transport = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor<TDocument> Transport(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Transport = value;
@@ -501,6 +315,7 @@ public readonly partial struct CommunityIdProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor']/*"/>
 public readonly partial struct CommunityIdProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Instance { get; init; }
@@ -520,189 +335,119 @@ public readonly partial struct CommunityIdProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor(Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.DestinationIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationPort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.DestinationPort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the destination port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#destination_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor DestinationPort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.DestinationPort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#iana_number']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IanaNumber(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IanaNumber = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the IANA number.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#iana_number']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IanaNumber<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.IanaNumber = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_code']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpCode(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IcmpCode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP code.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_code']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpCode<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.IcmpCode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpType(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.IcmpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the ICMP type.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#icmp_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IcmpType<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.IcmpType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true and any required fields are missing, the processor quietly exits
-	/// without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -715,11 +460,7 @@ public readonly partial struct CommunityIdProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -732,117 +473,70 @@ public readonly partial struct CommunityIdProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Seed for the community ID hash. Must be between 0 and 65535 (inclusive). The
-	/// seed can prevent hash collisions between network domains, such as a staging
-	/// and production network that use the same addressing scheme.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#seed']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Seed(int? value)
 	{
 		Instance.Seed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourceIp(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source IP address.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_ip']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourceIp<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.SourceIp = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourcePort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SourcePort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the source port.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#source_port']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor SourcePort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.SourcePort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the community ID.
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Transport(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Transport = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the transport protocol name or number. Used only when the
-	/// iana_number field is not present. The following protocol names are currently
-	/// supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
-	/// </para>
-	/// </summary>
+	/// <include file="CommunityIDProcessor.g.xml" path="doc/member[@key='ingest._types.CommunityIDProcessor#transport']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CommunityIdProcessorDescriptor Transport<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Transport = value;

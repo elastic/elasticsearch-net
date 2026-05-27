@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoGridProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoGridProcessorConverter))]
 public sealed partial class GeoGridProcessor
 {
@@ -43,108 +44,50 @@ public sealed partial class GeoGridProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ChildrenField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a geo-tile.=
-	/// The field format is determined by the <c>tile_type</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#field']/*"/>
 	public required string Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#non_children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? NonChildrenField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#parent_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ParentField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#precision_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? PrecisionField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Which format to save the generated polygon in.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? TargetFormat { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Three tile formats are understood: geohash, geotile and geohex.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tile_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoGridProcessor']/*"/>
 public readonly partial struct GeoGridProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Instance { get; init; }
@@ -164,134 +107,84 @@ public readonly partial struct GeoGridProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ChildrenField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a geo-tile.=
-	/// The field format is determined by the <c>tile_type</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#non_children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> NonChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.NonChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#non_children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> NonChildrenField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.NonChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -304,100 +197,63 @@ public readonly partial struct GeoGridProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#parent_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ParentField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ParentField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#parent_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> ParentField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ParentField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#precision_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> PrecisionField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PrecisionField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#precision_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> PrecisionField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PrecisionField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Which format to save the generated polygon in.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? value)
 	{
 		Instance.TargetFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Three tile formats are understood: geohash, geotile and geohex.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tile_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor<TDocument> TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType value)
 	{
 		Instance.TileType = value;
@@ -413,6 +269,7 @@ public readonly partial struct GeoGridProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoGridProcessor']/*"/>
 public readonly partial struct GeoGridProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor Instance { get; init; }
@@ -432,134 +289,84 @@ public readonly partial struct GeoGridProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and children tiles exist, save those tile addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ChildrenField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to interpret as a geo-tile.=
-	/// The field format is determined by the <c>tile_type</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#non_children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor NonChildrenField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.NonChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and intersecting non-child tiles exist, save their addresses to this field as an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#non_children_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor NonChildrenField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.NonChildrenField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -572,11 +379,7 @@ public readonly partial struct GeoGridProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -589,100 +392,63 @@ public readonly partial struct GeoGridProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#parent_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ParentField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ParentField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified and a parent tile exists, save that tile address to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#parent_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor ParentField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ParentField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#precision_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor PrecisionField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.PrecisionField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, save the tile precision (zoom) as an integer to this field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#precision_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor PrecisionField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PrecisionField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the polygon shape to, by default, the <c>field</c> is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Which format to save the generated polygon in.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#target_format']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TargetFormat(Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat? value)
 	{
 		Instance.TargetFormat = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Three tile formats are understood: geohash, geotile and geohex.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoGridProcessor.g.xml" path="doc/member[@key='ingest._types.GeoGridProcessor#tile_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor TileType(Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType value)
 	{
 		Instance.TileType = value;

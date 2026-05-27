@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
 public sealed partial class DeleteRoleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete roles.
-/// </para>
-/// <para>
-/// Delete roles in the native realm.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The delete roles API cannot remove roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DeleteRoleRequestConverter))]
 public sealed partial class DeleteRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class DeleteRoleRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "security.delete_role";
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete roles.
-/// </para>
-/// <para>
-/// Delete roles in the native realm.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The delete roles API cannot remove roles that are defined in roles files.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role.Request']/*"/>
 public readonly partial struct DeleteRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest Instance { get; init; }
@@ -118,22 +92,14 @@ public readonly partial struct DeleteRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleRequest.g.xml" path="doc/member[@key='security.delete_role.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

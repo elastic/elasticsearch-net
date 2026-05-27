@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabaseName']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoIpNodeDatabaseNameConverter))]
 public sealed partial class GeoIpNodeDatabaseName
 {
@@ -42,10 +43,6 @@ public sealed partial class GeoIpNodeDatabaseName
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpNodeDatabaseName.g.xml" path="doc/member[@key='ingest.geo_ip_stats.GeoIpNodeDatabaseName#name']/*"/>
 	public required string Name { get; set; }
 }

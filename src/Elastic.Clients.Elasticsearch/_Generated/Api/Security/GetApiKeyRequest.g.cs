@@ -23,84 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
 public sealed partial class GetApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys that are currently active. An API key is considered active if it is neither invalidated, nor expired at query time. You can specify this together with other parameters such as <c>owner</c> or <c>name</c>. If <c>active_only</c> is false, the response will include both active and inactive (expired or invalidated) keys.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#active_only']/*"/>
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// An API key id.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c> or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => Q<Elastic.Clients.Elasticsearch.Id?>("id"); set => Q("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// An API key name.
-	/// This parameter cannot be used with any of <c>id</c>, <c>realm_name</c> or <c>username</c>.
-	/// It supports prefix search with wildcard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => Q<Elastic.Clients.Elasticsearch.Name?>("name"); set => Q("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys owned by the currently authenticated user.
-	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#owner']/*"/>
 	public bool? Owner { get => Q<bool?>("owner"); set => Q("owner", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? RealmName { get => Q<Elastic.Clients.Elasticsearch.Name?>("realm_name"); set => Q("realm_name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get => Q<Elastic.Clients.Elasticsearch.Username?>("username"); set => Q("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors
-	/// associated with the API key. An API key's actual
-	/// permission is the intersection of its assigned role
-	/// descriptors and the owner user's role descriptors.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_limited_by']/*"/>
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get API key information.
-/// </para>
-/// <para>
-/// Retrieves information for one or more API keys.
-/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// </para>
-/// </summary>
+/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetApiKeyRequestConverter))]
 public sealed partial class GetApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>
 {
@@ -122,82 +75,33 @@ public sealed partial class GetApiKeyRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "security.get_api_key";
 
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys that are currently active. An API key is considered active if it is neither invalidated, nor expired at query time. You can specify this together with other parameters such as <c>owner</c> or <c>name</c>. If <c>active_only</c> is false, the response will include both active and inactive (expired or invalidated) keys.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#active_only']/*"/>
 	public bool? ActiveOnly { get => Q<bool?>("active_only"); set => Q("active_only", value); }
 
-	/// <summary>
-	/// <para>
-	/// An API key id.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c> or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => Q<Elastic.Clients.Elasticsearch.Id?>("id"); set => Q("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// An API key name.
-	/// This parameter cannot be used with any of <c>id</c>, <c>realm_name</c> or <c>username</c>.
-	/// It supports prefix search with wildcard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => Q<Elastic.Clients.Elasticsearch.Name?>("name"); set => Q("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys owned by the currently authenticated user.
-	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#owner']/*"/>
 	public bool? Owner { get => Q<bool?>("owner"); set => Q("owner", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? RealmName { get => Q<Elastic.Clients.Elasticsearch.Name?>("realm_name"); set => Q("realm_name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get => Q<Elastic.Clients.Elasticsearch.Username?>("username"); set => Q("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors
-	/// associated with the API key. An API key's actual
-	/// permission is the intersection of its assigned role
-	/// descriptors and the owner user's role descriptors.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_limited_by']/*"/>
 	public bool? WithLimitedBy { get => Q<bool?>("with_limited_by"); set => Q("with_limited_by", value); }
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get API key information.
-/// </para>
-/// <para>
-/// Retrieves information for one or more API keys.
-/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-/// </para>
-/// </summary>
+/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_api_key.Request']/*"/>
 public readonly partial struct GetApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest Instance { get; init; }
@@ -216,97 +120,56 @@ public readonly partial struct GetApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys that are currently active. An API key is considered active if it is neither invalidated, nor expired at query time. You can specify this together with other parameters such as <c>owner</c> or <c>name</c>. If <c>active_only</c> is false, the response will include both active and inactive (expired or invalidated) keys.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#active_only']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor ActiveOnly(bool? value = true)
 	{
 		Instance.ActiveOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An API key id.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c> or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An API key name.
-	/// This parameter cannot be used with any of <c>id</c>, <c>realm_name</c> or <c>username</c>.
-	/// It supports prefix search with wildcard.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A boolean flag that can be used to query API keys owned by the currently authenticated user.
-	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#owner']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor Owner(bool? value = true)
 	{
 		Instance.Owner = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.RealmName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>id</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return the snapshot of the owner user's role descriptors
-	/// associated with the API key. An API key's actual
-	/// permission is the intersection of its assigned role
-	/// descriptors and the owner user's role descriptors.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_limited_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor WithLimitedBy(bool? value = true)
 	{
 		Instance.WithLimitedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
-	/// </para>
-	/// </summary>
+	/// <include file="GetApiKeyRequest.g.xml" path="doc/member[@key='security.get_api_key.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;

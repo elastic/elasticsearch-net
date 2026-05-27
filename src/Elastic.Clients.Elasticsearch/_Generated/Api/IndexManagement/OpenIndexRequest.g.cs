@@ -23,90 +23,31 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 public sealed partial class OpenIndexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Open a closed index.
-/// For data streams, the API opens any closed backing indices.
-/// </para>
-/// <para>
-/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
-/// It is not possible to index documents or to search for documents in a closed index.
-/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
-/// </para>
-/// <para>
-/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
-/// The shards will then go through the normal recovery process.
-/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
-/// </para>
-/// <para>
-/// You can open and close multiple indices.
-/// An error is thrown if the request explicitly refers to a missing index.
-/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
-/// </para>
-/// <para>
-/// By default, you must explicitly name the indices you are opening or closing.
-/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-/// This setting can also be changed with the cluster update settings API.
-/// </para>
-/// <para>
-/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
-/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
-/// </para>
-/// <para>
-/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
-/// </para>
-/// </summary>
+/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.OpenIndexRequestConverter))]
 public sealed partial class OpenIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>
 {
@@ -133,99 +74,30 @@ public sealed partial class OpenIndexRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "indices.open";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// By default, you must explicitly name the indices you using to limit the request.
-	/// To limit a request using <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to false.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Open a closed index.
-/// For data streams, the API opens any closed backing indices.
-/// </para>
-/// <para>
-/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
-/// It is not possible to index documents or to search for documents in a closed index.
-/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
-/// </para>
-/// <para>
-/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
-/// The shards will then go through the normal recovery process.
-/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
-/// </para>
-/// <para>
-/// You can open and close multiple indices.
-/// An error is thrown if the request explicitly refers to a missing index.
-/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
-/// </para>
-/// <para>
-/// By default, you must explicitly name the indices you are opening or closing.
-/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-/// This setting can also be changed with the cluster update settings API.
-/// </para>
-/// <para>
-/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
-/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
-/// </para>
-/// <para>
-/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
-/// </para>
-/// </summary>
+/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 public readonly partial struct OpenIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest Instance { get; init; }
@@ -250,100 +122,56 @@ public readonly partial struct OpenIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// By default, you must explicitly name the indices you using to limit the request.
-	/// To limit a request using <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to false.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
@@ -406,39 +234,8 @@ public readonly partial struct OpenIndexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Open a closed index.
-/// For data streams, the API opens any closed backing indices.
-/// </para>
-/// <para>
-/// A closed index is blocked for read/write operations and does not allow all operations that opened indices allow.
-/// It is not possible to index documents or to search for documents in a closed index.
-/// This allows closed indices to not have to maintain internal data structures for indexing or searching documents, resulting in a smaller overhead on the cluster.
-/// </para>
-/// <para>
-/// When opening or closing an index, the master is responsible for restarting the index shards to reflect the new state of the index.
-/// The shards will then go through the normal recovery process.
-/// The data of opened or closed indices is automatically replicated by the cluster to ensure that enough shard copies are safely kept around at all times.
-/// </para>
-/// <para>
-/// You can open and close multiple indices.
-/// An error is thrown if the request explicitly refers to a missing index.
-/// This behavior can be turned off by using the <c>ignore_unavailable=true</c> parameter.
-/// </para>
-/// <para>
-/// By default, you must explicitly name the indices you are opening or closing.
-/// To open or close indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-/// This setting can also be changed with the cluster update settings API.
-/// </para>
-/// <para>
-/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
-/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
-/// </para>
-/// <para>
-/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
-/// </para>
-/// </summary>
+/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 public readonly partial struct OpenIndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest Instance { get; init; }
@@ -462,100 +259,56 @@ public readonly partial struct OpenIndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// By default, you must explicitly name the indices you using to limit the request.
-	/// To limit a request using <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to false.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;

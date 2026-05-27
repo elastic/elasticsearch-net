@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.FieldCollapse']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.FieldCollapseConverter))]
 public sealed partial class FieldCollapse
 {
@@ -44,28 +45,17 @@ public sealed partial class FieldCollapse
 
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to collapse the result set on
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent requests allowed to retrieve the inner_hits per group
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#max_concurrent_group_searches']/*"/>
 	public int? MaxConcurrentGroupSearches { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.FieldCollapse']/*"/>
 public readonly partial struct FieldCollapseDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse Instance { get; init; }
@@ -97,55 +87,35 @@ public readonly partial struct FieldCollapseDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collapse the result set on
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collapse the result set on
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits(params Elastic.Clients.Elasticsearch.Core.Search.InnerHits[] values)
 	{
 		Instance.InnerHits = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> InnerHits(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>();
@@ -158,11 +128,7 @@ public readonly partial struct FieldCollapseDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent requests allowed to retrieve the inner_hits per group
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#max_concurrent_group_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> MaxConcurrentGroupSearches(int? value)
 	{
 		Instance.MaxConcurrentGroupSearches = value;
@@ -178,6 +144,7 @@ public readonly partial struct FieldCollapseDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.FieldCollapse']/*"/>
 public readonly partial struct FieldCollapseDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse Instance { get; init; }
@@ -215,55 +182,35 @@ public readonly partial struct FieldCollapseDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collapse the result set on
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collapse the result set on
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits(params Elastic.Clients.Elasticsearch.Core.Search.InnerHits[] values)
 	{
 		Instance.InnerHits = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>();
@@ -276,11 +223,7 @@ public readonly partial struct FieldCollapseDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of inner hits and their sort order
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor InnerHits<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>();
@@ -293,11 +236,7 @@ public readonly partial struct FieldCollapseDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent requests allowed to retrieve the inner_hits per group
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCollapse.g.xml" path="doc/member[@key='_global.search._types.FieldCollapse#max_concurrent_group_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor MaxConcurrentGroupSearches(int? value)
 	{
 		Instance.MaxConcurrentGroupSearches = value;

@@ -23,28 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
 public sealed partial class GetModelSnapshotsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of snapshots to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get model snapshots info.
-/// </para>
-/// </summary>
+/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetModelSnapshotsRequestConverter))]
 public sealed partial class GetModelSnapshotsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestParameters>
 {
@@ -76,71 +67,34 @@ public sealed partial class GetModelSnapshotsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.get_model_snapshots";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
-	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
-	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id?>("snapshot_id"); set => PO("snapshot_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of snapshots to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#desc']/*"/>
 	public bool? Desc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#end']/*"/>
 	public System.DateTimeOffset? End { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get model snapshots info.
-/// </para>
-/// </summary>
+/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
 public readonly partial struct GetModelSnapshotsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Instance { get; init; }
@@ -170,68 +124,42 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
-	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
-	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of snapshots to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
@@ -256,33 +184,21 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Sort<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;
@@ -345,11 +261,8 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get model snapshots info.
-/// </para>
-/// </summary>
+/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshots.Request']/*"/>
 public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Instance { get; init; }
@@ -379,68 +292,42 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
-	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
-	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> SnapshotId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of snapshots to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>desc</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#desc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Desc(bool? value = true)
 	{
 		Instance.Desc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>end</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
@@ -465,33 +352,21 @@ public readonly partial struct GetModelSnapshotsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>sort</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Sort(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>start</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshots.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequestDescriptor<TDocument> Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;

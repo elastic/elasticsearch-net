@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InlineGet']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InlineGetConverterFactory))]
 public sealed partial class InlineGet<TDocument>
 {
@@ -44,12 +45,6 @@ public sealed partial class InlineGet<TDocument>
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public required bool Found { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Document metadata
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 	public long? PrimaryTerm { get; set; }
 	public string? Routing { get; set; }

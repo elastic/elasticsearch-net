@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="searchable_snapshots.clear_cache.Request"><summary><para>
+Clear the cache.
+Clear indices and data streams from the shared cache for partially mounted indices.
+</para></summary></member>
+  <member key="searchable_snapshots.clear_cache.Request#allow_no_indices"><summary><para>
+Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+(This includes <c>_all</c> string or when no indices have been specified)
+</para></summary></member>
+  <member key="searchable_snapshots.clear_cache.Request#expand_wildcards"><summary><para>
+Whether to expand wildcard expression to concrete indices that are open, closed or both
+</para></summary></member>
+  <member key="searchable_snapshots.clear_cache.Request#ignore_unavailable"><summary><para>
+Whether specified concrete indices should be ignored when unavailable (missing or closed)
+</para></summary></member>
+  <member key="searchable_snapshots.clear_cache.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases to clear from the cache.
+It supports wildcards (<c>*</c>).
+</para></summary></member>
+</doc>

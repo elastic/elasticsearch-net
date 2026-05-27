@@ -23,44 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
 public sealed partial class GetJobStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If <c>true</c>, the API returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If <c>false</c>, the API returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job stats.
-/// </para>
-/// </summary>
+/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetJobStatsRequestConverter))]
 public sealed partial class GetJobStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestParameters>
 {
@@ -86,52 +58,15 @@ public sealed partial class GetJobStatsRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "ml.get_job_stats";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, a comma-separated list of jobs, or a wildcard expression. If
-	/// you do not specify one of these options, the API returns information for
-	/// all anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? JobId { get => P<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => PO("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If <c>true</c>, the API returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If <c>false</c>, the API returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job stats.
-/// </para>
-/// </summary>
+/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_job_stats.Request']/*"/>
 public readonly partial struct GetJobStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest Instance { get; init; }
@@ -155,48 +90,14 @@ public readonly partial struct GetJobStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. It can be a job identifier, a
-	/// group name, a comma-separated list of jobs, or a wildcard expression. If
-	/// you do not specify one of these options, the API returns information for
-	/// all anomaly detection jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If <c>true</c>, the API returns an empty <c>jobs</c> array when
-	/// there are no matches and the subset of results when there are partial
-	/// matches. If <c>false</c>, the API returns a <c>404</c> status
-	/// code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetJobStatsRequest.g.xml" path="doc/member[@key='ml.get_job_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetJobStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;

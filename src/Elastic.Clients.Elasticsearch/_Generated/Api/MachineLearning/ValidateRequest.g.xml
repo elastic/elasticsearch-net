@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.validate.Request"><summary><para>
+Validate an anomaly detection job.
+</para></summary></member>
+</doc>

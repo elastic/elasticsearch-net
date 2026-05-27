@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.IntegerNumberPropertyConverter))]
 public sealed partial class IntegerNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class IntegerNumberProperty : Elastic.Clients.Elasticsearc
 	public bool? IgnoreMalformed { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public int? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -59,23 +56,16 @@ public sealed partial class IntegerNumberProperty : Elastic.Clients.Elasticsearc
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_dimension']/*"/>
 	public bool? TimeSeriesDimension { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "integer";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty']/*"/>
 public readonly partial struct IntegerNumberPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Instance { get; init; }
@@ -161,33 +151,21 @@ public readonly partial struct IntegerNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -255,22 +233,14 @@ public readonly partial struct IntegerNumberPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;
@@ -291,6 +261,7 @@ public readonly partial struct IntegerNumberPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty']/*"/>
 public readonly partial struct IntegerNumberPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty Instance { get; init; }
@@ -382,33 +353,21 @@ public readonly partial struct IntegerNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -482,22 +441,14 @@ public readonly partial struct IntegerNumberPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="IntegerNumberProperty.g.xml" path="doc/member[@key='_types.mapping.IntegerNumberProperty#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
 		Instance.TimeSeriesMetric = value;

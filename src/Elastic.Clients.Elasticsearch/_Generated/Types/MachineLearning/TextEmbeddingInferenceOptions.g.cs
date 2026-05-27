@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Text embedding inference options
-/// </para>
-/// </summary>
+/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextEmbeddingInferenceOptionsConverter))]
 public sealed partial class TextEmbeddingInferenceOptions
 {
@@ -41,34 +38,19 @@ public sealed partial class TextEmbeddingInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions in the embedding output
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#embedding_size']/*"/>
 	public int? EmbeddingSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Text embedding inference options
-/// </para>
-/// </summary>
+/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions']/*"/>
 public readonly partial struct TextEmbeddingInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions Instance { get; init; }
@@ -88,44 +70,28 @@ public readonly partial struct TextEmbeddingInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The number of dimensions in the embedding output
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#embedding_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor EmbeddingSize(int? value)
 	{
 		Instance.EmbeddingSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="TextEmbeddingInferenceOptions.g.xml" path="doc/member[@key='ml._types.TextEmbeddingInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

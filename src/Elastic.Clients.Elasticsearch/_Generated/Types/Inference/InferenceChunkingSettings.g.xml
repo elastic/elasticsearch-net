@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.InferenceChunkingSettings"><summary><para>
+Chunking configuration object
+</para></summary></member>
+  <member key="inference._types.InferenceChunkingSettings#max_chunk_size"><summary><para>
+The maximum size of a chunk in words.
+This value cannot be higher than <c>300</c> or lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
+</para></summary></member>
+  <member key="inference._types.InferenceChunkingSettings#overlap"><summary><para>
+The number of overlapping words for chunks.
+It is applicable only to a <c>word</c> chunking strategy.
+This value cannot be higher than half the <c>max_chunk_size</c> value.
+</para></summary></member>
+  <member key="inference._types.InferenceChunkingSettings#sentence_overlap"><summary><para>
+The number of overlapping sentences for chunks.
+It is applicable only for a <c>sentence</c> chunking strategy.
+It can be either <c>1</c> or <c>0</c>.
+</para></summary></member>
+  <member key="inference._types.InferenceChunkingSettings#strategy"><summary><para>
+The chunking strategy: <c>sentence</c> or <c>word</c>.
+</para></summary></member>
+</doc>

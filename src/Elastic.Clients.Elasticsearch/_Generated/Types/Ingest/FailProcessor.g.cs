@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FailProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.FailProcessorConverter))]
 public sealed partial class FailProcessor
 {
@@ -42,52 +43,26 @@ public sealed partial class FailProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The error message thrown by the processor.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#message']/*"/>
 	public required string Message { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FailProcessor']/*"/>
 public readonly partial struct FailProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.FailProcessor Instance { get; init; }
@@ -107,79 +82,49 @@ public readonly partial struct FailProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.FailProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FailProcessor(Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The error message thrown by the processor.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#message']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> Message(string value)
 	{
 		Instance.Message = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -192,12 +137,7 @@ public readonly partial struct FailProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -213,6 +153,7 @@ public readonly partial struct FailProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.FailProcessor']/*"/>
 public readonly partial struct FailProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.FailProcessor Instance { get; init; }
@@ -232,79 +173,49 @@ public readonly partial struct FailProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.FailProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.FailProcessor(Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The error message thrown by the processor.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#message']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor Message(string value)
 	{
 		Instance.Message = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -317,11 +228,7 @@ public readonly partial struct FailProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -334,12 +241,7 @@ public readonly partial struct FailProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="FailProcessor.g.xml" path="doc/member[@key='ingest._types.FailProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

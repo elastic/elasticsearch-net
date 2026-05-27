@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_data_frame_analytics.Request"><summary><para>
+Create a data frame analytics job.
+This API creates a data frame analytics job that performs an analysis on the
+source indices and stores the outcome in a destination index.
+By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
+</para>
+<para>
+If the destination index does not exist, it is created automatically when you start the job.
+</para>
+<para>
+If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#allow_lazy_start"><summary><para>
+Specifies whether this job can start when there is insufficient machine
+learning node capacity for it to be immediately assigned to a node. If
+set to <c>false</c> and a machine learning node with capacity to run the job
+cannot be immediately found, the API returns an error. If set to <c>true</c>,
+the API does not return an error; the job waits in the <c>starting</c> state
+until sufficient machine learning node capacity is available. This
+behavior is also affected by the cluster-wide
+<c>xpack.ml.max_lazy_ml_nodes</c> setting.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#analysis"><summary><para>
+The analysis configuration, which contains the information necessary to
+perform one of the following types of analysis: classification, outlier
+detection, or regression.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#analyzed_fields"><summary><para>
+Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
+will be included in the analysis. The patterns specified in <c>excludes</c>
+are applied last, therefore <c>excludes</c> takes precedence. In other words,
+if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
+the field will not be included in the analysis. If <c>analyzed_fields</c> is
+not set, only the relevant fields will be included. For example, all the
+numeric fields for outlier detection.
+The supported fields vary for each type of analysis. Outlier detection
+requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
+support missing values therefore fields that have data types other than
+numeric or boolean are ignored. Documents where included fields contain
+missing values, null values, or an array are also ignored. Therefore the
+<c>dest</c> index may contain documents that don’t have an outlier score.
+Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+<c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+Fields that are supported are included in the analysis, other fields are
+ignored. Documents where included fields contain an array with two or
+more values are also ignored. Documents in the <c>dest</c> index that don’t
+contain a results field are not included in the regression analysis.
+Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
+<c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
+Fields that are supported are included in the analysis, other fields are
+ignored. Documents where included fields contain an array with two or
+more values are also ignored. Documents in the <c>dest</c> index that don’t
+contain a results field are not included in the classification analysis.
+Classification analysis can be improved by mapping ordinal variable
+values to a single number. For example, in case of age ranges, you can
+model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#description"><summary><para>
+A description of the job.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#dest"><summary><para>
+The destination configuration.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job. This identifier can contain
+lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+underscores. It must start and end with alphanumeric characters.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#max_num_threads"><summary><para>
+The maximum number of threads to be used by the analysis. Using more
+threads may decrease the time necessary to complete the analysis at the
+cost of using more CPU. Note that the process may use additional threads
+for operational functionality other than the analysis itself.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#model_memory_limit"><summary><para>
+The approximate maximum amount of memory resources that are permitted for
+analytical processing. If your <c>elasticsearch.yml</c> file contains an
+<c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
+to create data frame analytics jobs that have <c>model_memory_limit</c> values
+greater than that setting.
+</para></summary></member>
+  <member key="ml.put_data_frame_analytics.Request#source"><summary><para>
+The configuration of how to source the analysis data.
+</para></summary></member>
+</doc>

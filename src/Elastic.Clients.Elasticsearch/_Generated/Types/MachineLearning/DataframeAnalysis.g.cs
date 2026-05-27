@@ -39,25 +39,8 @@ public sealed partial class DataframeAnalysis
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification>("classification"); set => SetVariant("classification", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? OutlierDetection { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>("outlier_detection"); set => SetVariant("outlier_detection", value); }
-
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>("regression"); set => SetVariant("regression", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis { Classification = value };
@@ -102,77 +85,42 @@ public readonly partial struct DataframeAnalysisDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<TDocument>> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? value)
 	{
 		Instance.OutlierDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection()
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor>? action)
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>.Build(action);
@@ -207,99 +155,54 @@ public readonly partial struct DataframeAnalysisDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? value)
 	{
 		Instance.Classification = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform classification.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<T>> action)
 	{
 		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? value)
 	{
 		Instance.OutlierDetection = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection()
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor>? action)
 	{
 		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? value)
 	{
 		Instance.Regression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<T>> action)
 	{
 		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<T>.Build(action);

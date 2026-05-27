@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ScriptSort']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScriptSortConverter))]
 public sealed partial class ScriptSort
 {
@@ -49,6 +50,7 @@ public sealed partial class ScriptSort
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ScriptSort']/*"/>
 public readonly partial struct ScriptSortDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.ScriptSort Instance { get; init; }
@@ -125,6 +127,7 @@ public readonly partial struct ScriptSortDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ScriptSort']/*"/>
 public readonly partial struct ScriptSortDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ScriptSort Instance { get; init; }

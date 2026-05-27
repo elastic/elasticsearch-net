@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.RolloverConditions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RolloverConditionsConverter))]
 public sealed partial class RolloverConditions
 {
@@ -53,6 +54,7 @@ public sealed partial class RolloverConditions
 	public long? MinSizeBytes { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.rollover.RolloverConditions']/*"/>
 public readonly partial struct RolloverConditionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions Instance { get; init; }

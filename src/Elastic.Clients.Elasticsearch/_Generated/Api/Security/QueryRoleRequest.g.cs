@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_role.Request']/*"/>
 public sealed partial class QueryRoleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Find roles with a query.
-/// </para>
-/// <para>
-/// Get roles in a paginated manner.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
-/// You can optionally filter the results with a query.
-/// Also, the results can be paginated and sorted.
-/// </para>
-/// </summary>
+/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_role.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.QueryRoleRequestConverter))]
 public sealed partial class QueryRoleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>
 {
@@ -60,67 +52,24 @@ public sealed partial class QueryRoleRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "security.query_role";
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RoleQuery? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Find roles with a query.
-/// </para>
-/// <para>
-/// Get roles in a paginated manner.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
-/// You can optionally filter the results with a query.
-/// Also, the results can be paginated and sorted.
-/// </para>
-/// </summary>
+/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_role.Request']/*"/>
 public readonly partial struct QueryRoleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Instance { get; init; }
@@ -139,137 +88,70 @@ public readonly partial struct QueryRoleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -282,13 +164,7 @@ public readonly partial struct QueryRoleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -362,18 +238,8 @@ public readonly partial struct QueryRoleRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Find roles with a query.
-/// </para>
-/// <para>
-/// Get roles in a paginated manner.
-/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-/// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
-/// You can optionally filter the results with a query.
-/// Also, the results can be paginated and sorted.
-/// </para>
-/// </summary>
+/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_role.Request']/*"/>
 public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryRoleRequest Instance { get; init; }
@@ -392,121 +258,63 @@ public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryRoleRequest(Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.RoleQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which roles to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with roles: <c>name</c>, <c>description</c>, <c>metadata</c>,
-	/// <c>applications.application</c>, <c>applications.privileges</c>, and <c>applications.resources</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.RoleQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRoleRequest.g.xml" path="doc/member[@key='security.query_role.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

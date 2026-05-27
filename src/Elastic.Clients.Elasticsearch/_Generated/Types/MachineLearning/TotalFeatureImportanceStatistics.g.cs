@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceStatistics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TotalFeatureImportanceStatisticsConverter))]
 public sealed partial class TotalFeatureImportanceStatistics
 {
@@ -44,24 +45,12 @@ public sealed partial class TotalFeatureImportanceStatistics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum importance value across all the training data for this feature.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportanceStatistics.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceStatistics#max']/*"/>
 	public required int Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportanceStatistics.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceStatistics#mean_magnitude']/*"/>
 	public required double MeanMagnitude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum importance value across all the training data for this feature.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportanceStatistics.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceStatistics#min']/*"/>
 	public required int Min { get; set; }
 }

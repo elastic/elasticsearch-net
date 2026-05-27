@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.RepositoryLocation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RepositoryLocationConverter))]
 public sealed partial class RepositoryLocation
 {
@@ -44,17 +45,9 @@ public sealed partial class RepositoryLocation
 
 	public required string BasePath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Bucket name (GCP, S3)
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryLocation.g.xml" path="doc/member[@key='nodes._types.RepositoryLocation#bucket']/*"/>
 	public string? Bucket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Container name (Azure)
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryLocation.g.xml" path="doc/member[@key='nodes._types.RepositoryLocation#container']/*"/>
 	public string? Container { get; set; }
 }

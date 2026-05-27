@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_lifecycle_stats.Request"><summary><para>
+Get data stream lifecycle stats.
+Get statistics about the data streams that are managed by a data stream lifecycle.
+</para></summary></member>
+</doc>

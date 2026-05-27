@@ -37,17 +37,9 @@ public sealed partial class UpgradeJobSnapshotResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When true, this means the task is complete. When false, it is still running.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotResponse.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Response#completed']/*"/>
 	public required bool Completed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the node that the upgrade task was started on if it is still running. In serverless this will be the "serverless".
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeJobSnapshotResponse.g.xml" path="doc/member[@key='ml.upgrade_job_snapshot.Response#node']/*"/>
 	public required string Node { get; set; }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_stream_options.Request"><summary><para>
+Get data stream options.
+</para>
+<para>
+Get the data stream options configuration of one or more data streams.
+</para></summary></member>
+  <member key="indices.get_data_stream_options.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match.
+Supports comma-separated values, such as <c>open,hidden</c>.
+Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+</para></summary></member>
+  <member key="indices.get_data_stream_options.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.get_data_stream_options.Request#name"><summary><para>
+Comma-separated list of data streams to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+</doc>

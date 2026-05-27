@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.put_script.Request"><summary><para>
+Create or update a script or search template.
+Creates or updates a stored script or search template.
+</para></summary></member>
+  <member key="_global.put_script.Request#context"><summary><para>
+The context in which the script or search template should run.
+To prevent errors, the API immediately compiles the script or template in this context.
+</para></summary></member>
+  <member key="_global.put_script.Request#id"><summary><para>
+The identifier for the stored script or search template.
+It must be unique within the cluster.
+</para></summary></member>
+  <member key="_global.put_script.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+It can also be set to <c>-1</c> to indicate that the request should never timeout.
+</para></summary></member>
+  <member key="_global.put_script.Request#script"><summary><para>
+The script or search template, its parameters, and its language.
+</para></summary></member>
+  <member key="_global.put_script.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+It can also be set to <c>-1</c> to indicate that the request should never timeout.
+</para></summary></member>
+</doc>

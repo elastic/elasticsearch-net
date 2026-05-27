@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.BucketInfluencer#anomaly_score"><summary><para>
+A normalized score between 0-100, which is calculated for each bucket influencer. This score might be updated as
+newer data is analyzed.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#bucket_span"><summary><para>
+The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#influencer_field_name"><summary><para>
+The field name of the influencer.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#initial_anomaly_score"><summary><para>
+The score between 0-100 for each bucket influencer. This score is the initial value that was calculated at the
+time the bucket was processed.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#is_interim"><summary><para>
+If true, this is an interim result. In other words, the results are calculated based on partial input data.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#probability"><summary><para>
+The probability that the bucket has this behavior, in the range 0 to 1. This value can be held to a high precision
+of over 300 decimal places, so the <c>anomaly_score</c> is provided as a human-readable and friendly interpretation of
+this.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#raw_anomaly_score"><summary><para>
+Internal.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#result_type"><summary><para>
+Internal. This value is always set to <c>bucket_influencer</c>.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#timestamp"><summary><para>
+The start time of the bucket for which these results were calculated.
+</para></summary></member>
+  <member key="ml._types.BucketInfluencer#timestamp_string"><summary><para>
+The start time of the bucket for which these results were calculated.
+</para></summary></member>
+</doc>

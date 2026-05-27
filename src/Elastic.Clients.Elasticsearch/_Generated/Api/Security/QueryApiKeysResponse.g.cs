@@ -37,31 +37,15 @@ public sealed partial class QueryApiKeysResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The aggregations result, if requested.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysResponse.g.xml" path="doc/member[@key='security.query_api_keys.Response#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of API key information.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysResponse.g.xml" path="doc/member[@key='security.query_api_keys.Response#api_keys']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of API keys returned in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysResponse.g.xml" path="doc/member[@key='security.query_api_keys.Response#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of API keys found.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryApiKeysResponse.g.xml" path="doc/member[@key='security.query_api_keys.Response#total']/*"/>
 	public required int Total { get; set; }
 }

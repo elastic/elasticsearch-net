@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RateLimitSettingConverter))]
 public sealed partial class RateLimitSetting
 {
@@ -36,14 +37,11 @@ public sealed partial class RateLimitSetting
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of requests allowed per minute.
-	/// </para>
-	/// </summary>
+	/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting#requests_per_minute']/*"/>
 	public int? RequestsPerMinute { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RateLimitSetting']/*"/>
 public readonly partial struct RateLimitSettingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RateLimitSetting Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct RateLimitSettingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting instance) => new Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RateLimitSetting(Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The number of requests allowed per minute.
-	/// </para>
-	/// </summary>
+	/// <include file="RateLimitSetting.g.xml" path="doc/member[@key='inference._types.RateLimitSetting#requests_per_minute']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor RequestsPerMinute(int? value)
 	{
 		Instance.RequestsPerMinute = value;

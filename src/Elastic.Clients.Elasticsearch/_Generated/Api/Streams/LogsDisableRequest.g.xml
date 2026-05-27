@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="streams.logs_disable.Request"><summary><para>
+Disable logs stream.
+</para>
+<para>
+Turn off the logs stream feature for this cluster.
+</para></summary></member>
+  <member key="streams.logs_disable.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="streams.logs_disable.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

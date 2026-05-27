@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.InferenceEndpoint"><summary><para>
+Configuration options when storing the inference endpoint
+</para></summary></member>
+  <member key="inference._types.InferenceEndpoint#chunking_settings"><summary><para>
+Chunking configuration object
+</para></summary></member>
+  <member key="inference._types.InferenceEndpoint#service"><summary><para>
+The service type
+</para></summary></member>
+  <member key="inference._types.InferenceEndpoint#service_settings"><summary><para>
+Settings specific to the service
+</para></summary></member>
+  <member key="inference._types.InferenceEndpoint#task_settings"><summary><para>
+Task settings specific to the service and task type
+</para></summary></member>
+</doc>

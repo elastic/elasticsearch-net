@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.reindex.RemoteSource#connect_timeout"><summary><para>
+The remote connection timeout.
+</para></summary></member>
+  <member key="_global.reindex.RemoteSource#headers"><summary><para>
+An object containing the headers of the request.
+</para></summary></member>
+  <member key="_global.reindex.RemoteSource#host"><summary><para>
+The URL for the remote instance of Elasticsearch that you want to index from.
+This information is required when you're indexing from remote.
+</para></summary></member>
+  <member key="_global.reindex.RemoteSource#password"><summary><para>
+The password to use for authentication with the remote host.
+</para></summary></member>
+  <member key="_global.reindex.RemoteSource#socket_timeout"><summary><para>
+The remote socket read timeout.
+</para></summary></member>
+  <member key="_global.reindex.RemoteSource#username"><summary><para>
+The username to use for authentication with the remote host.
+</para></summary></member>
+</doc>

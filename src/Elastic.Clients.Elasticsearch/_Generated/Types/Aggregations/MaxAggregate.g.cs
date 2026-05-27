@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MaxAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MaxAggregateConverter))]
 public sealed partial class MaxAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -46,12 +47,7 @@ public sealed partial class MaxAggregate : Elastic.Clients.Elasticsearch.Aggrega
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "max";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="MaxAggregate.g.xml" path="doc/member[@key='_types.aggregations.MaxAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

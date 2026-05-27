@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DoubleRangePropertyConverter))]
 public sealed partial class DoubleRangeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class DoubleRangeProperty : Elastic.Clients.Elasticsearch.
 	public int? IgnoreAbove { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public bool? Store { get; set; }
@@ -58,6 +55,7 @@ public sealed partial class DoubleRangeProperty : Elastic.Clients.Elasticsearch.
 	public string Type => "double_range";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty']/*"/>
 public readonly partial struct DoubleRangePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty Instance { get; init; }
@@ -137,33 +135,21 @@ public readonly partial struct DoubleRangePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -215,6 +201,7 @@ public readonly partial struct DoubleRangePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty']/*"/>
 public readonly partial struct DoubleRangePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty Instance { get; init; }
@@ -300,33 +287,21 @@ public readonly partial struct DoubleRangePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DoubleRangeProperty.g.xml" path="doc/member[@key='_types.mapping.DoubleRangeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
 public sealed partial class GetRuleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a query rule.
-/// Get details about a query rule within a query ruleset.
-/// </para>
-/// </summary>
+/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.GetRuleRequestConverter))]
 public sealed partial class GetRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestParameters>
 {
@@ -59,27 +57,15 @@ public sealed partial class GetRuleRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "query_rules.get_rule";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to retrieve
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to retrieve
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a query rule.
-/// Get details about a query rule within a query ruleset.
-/// </para>
-/// </summary>
+/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.get_rule.Request']/*"/>
 public readonly partial struct GetRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest Instance { get; init; }
@@ -104,22 +90,14 @@ public readonly partial struct GetRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequest(Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to retrieve
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to retrieve
-	/// </para>
-	/// </summary>
+	/// <include file="GetRuleRequest.g.xml" path="doc/member[@key='query_rules.get_rule.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.GetRuleRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SuggestFuzzinessConverter))]
 public sealed partial class SuggestFuzziness
 {
@@ -36,43 +37,23 @@ public sealed partial class SuggestFuzziness
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fuzziness factor.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum length of the input before fuzzy suggestions are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#min_length']/*"/>
 	public int? MinLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum length of the input, which is not checked for fuzzy alternatives.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#transpositions']/*"/>
 	public bool? Transpositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.
-	/// This is slightly slower than raw bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#unicode_aware']/*"/>
 	public bool? UnicodeAware { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness']/*"/>
 public readonly partial struct SuggestFuzzinessDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness Instance { get; init; }
@@ -92,67 +73,42 @@ public readonly partial struct SuggestFuzzinessDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness instance) => new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The fuzziness factor.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fuzziness factor.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum length of the input before fuzzy suggestions are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#min_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor MinLength(int? value)
 	{
 		Instance.MinLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum length of the input, which is not checked for fuzzy alternatives.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c>, transpositions are counted as one change instead of two.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor Transpositions(bool? value = true)
 	{
 		Instance.Transpositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes.
-	/// This is slightly slower than raw bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SuggestFuzziness.g.xml" path="doc/member[@key='_global.search._types.SuggestFuzziness#unicode_aware']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor UnicodeAware(bool? value = true)
 	{
 		Instance.UnicodeAware = value;

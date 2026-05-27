@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Slices configuration used to parallelize a process.
-/// </para>
-/// </summary>
+/// <include file="Slices.g.xml" path="doc/member[@key='_types.Slices']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.Slices']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SlicesConverter))]
 public sealed partial class Slices : Elastic.Clients.Elasticsearch.Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {

@@ -34,40 +34,16 @@ public readonly partial struct StorageType : Elastic.Clients.Elasticsearch.Seria
 #endif
 	public readonly string Value { get; }
 
-	/// <summary>
-	/// <para>
-	/// Default file system implementation. This will pick the best implementation depending on the operating environment, which
-	/// is currently hybridfs on all supported systems but is subject to change.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageType.g.xml" path="doc/member[@key='indices._types.StorageType#fs']/*"/>
 	public static StorageType Fs { get; } = new StorageType("fs");
 
-	/// <summary>
-	/// <para>
-	/// The hybridfs type is a hybrid of niofs and mmapfs, which chooses the best file system type for each type of file
-	/// based on the read access pattern. Currently only the Lucene term dictionary, norms and doc values files are memory
-	/// mapped. All other files are opened using Lucene NIOFSDirectory. Similarly to mmapfs be sure you have allowed
-	/// plenty of virtual address space.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageType.g.xml" path="doc/member[@key='indices._types.StorageType#hybridfs']/*"/>
 	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
 
-	/// <summary>
-	/// <para>
-	/// The MMap FS type stores the shard index on the file system (maps to Lucene MMapDirectory) by mapping a file into
-	/// memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size
-	/// of the file being mapped. Before using this class, be sure you have allowed plenty of virtual address space.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageType.g.xml" path="doc/member[@key='indices._types.StorageType#mmapfs']/*"/>
 	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
 
-	/// <summary>
-	/// <para>
-	/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple
-	/// threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java
-	/// implementation and disables some optimizations for heap memory usage.
-	/// </para>
-	/// </summary>
+	/// <include file="StorageType.g.xml" path="doc/member[@key='indices._types.StorageType#niofs']/*"/>
 	public static StorageType Niofs { get; } = new StorageType("niofs");
 
 	public override string ToString() => Value ?? string.Empty;

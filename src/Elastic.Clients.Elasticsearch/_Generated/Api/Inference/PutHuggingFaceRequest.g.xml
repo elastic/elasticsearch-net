@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_hugging_face.Request"><summary><para>
+Create a Hugging Face inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+Supported tasks include: <c>text_embedding</c>, <c>completion</c>, and <c>chat_completion</c>.
+</para>
+<para>
+To configure the endpoint, first visit the Hugging Face Inference Endpoints page and create a new endpoint.
+Select a model that supports the task you intend to use.
+</para>
+<para>
+For Elastic's <c>text_embedding</c> task:
+The selected model must support the <c>Sentence Embeddings</c> task. On the new endpoint creation page, select the <c>Sentence Embeddings</c> task under the <c>Advanced Configuration</c> section.
+After the endpoint has initialized, copy the generated endpoint URL.
+Recommended models for <c>text_embedding</c> task:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>all-MiniLM-L6-v2</c>
+</para>
+</item>
+<item>
+<para>
+<c>all-MiniLM-L12-v2</c>
+</para>
+</item>
+<item>
+<para>
+<c>all-mpnet-base-v2</c>
+</para>
+</item>
+<item>
+<para>
+<c>e5-base-v2</c>
+</para>
+</item>
+<item>
+<para>
+<c>e5-small-v2</c>
+</para>
+</item>
+<item>
+<para>
+<c>multilingual-e5-base</c>
+</para>
+</item>
+<item>
+<para>
+<c>multilingual-e5-small</c>
+</para>
+</item>
+</list>
+<para>
+For Elastic's <c>chat_completion</c> and <c>completion</c> tasks:
+The selected model must support the <c>Text Generation</c> task and expose OpenAI API. HuggingFace supports both serverless and dedicated endpoints for <c>Text Generation</c>. When creating dedicated endpoint select the <c>Text Generation</c> task.
+After the endpoint is initialized (for dedicated) or ready (for serverless), ensure it supports the OpenAI API and includes <c>/v1/chat/completions</c> part in URL. Then, copy the full endpoint URL for use.
+Recommended models for <c>chat_completion</c> and <c>completion</c> tasks:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>Mistral-7B-Instruct-v0.2</c>
+</para>
+</item>
+<item>
+<para>
+<c>QwQ-32B</c>
+</para>
+</item>
+<item>
+<para>
+<c>Phi-3-mini-128k-instruct</c>
+</para>
+</item>
+</list>
+<para>
+For Elastic's <c>rerank</c> task:
+The selected model must support the <c>sentence-ranking</c> task and expose OpenAI API.
+HuggingFace supports only dedicated (not serverless) endpoints for <c>Rerank</c> so far.
+After the endpoint is initialized, copy the full endpoint URL for use.
+Tested models for <c>rerank</c> task:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>bge-reranker-base</c>
+</para>
+</item>
+<item>
+<para>
+<c>jina-reranker-v1-turbo-en-GGUF</c>
+</para>
+</item>
+</list></summary></member>
+  <member key="inference.put_hugging_face.Request#chunking_settings"><summary><para>
+The chunking configuration object.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#huggingface_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>hugging_face</c>.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>hugging_face</c> service.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#task_settings"><summary><para>
+Settings to configure the inference task.
+These settings are specific to the task type you specified.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+</para></summary></member>
+  <member key="inference.put_hugging_face.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

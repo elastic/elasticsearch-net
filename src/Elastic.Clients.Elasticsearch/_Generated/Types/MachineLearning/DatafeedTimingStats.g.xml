@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DatafeedTimingStats#average_search_time_per_bucket_ms"><summary><para>
+The average search time per bucket, in milliseconds.
+</para></summary></member>
+  <member key="ml._types.DatafeedTimingStats#bucket_count"><summary><para>
+The number of buckets processed.
+</para></summary></member>
+  <member key="ml._types.DatafeedTimingStats#exponential_average_search_time_per_hour_ms"><summary><para>
+The exponential average search time per hour, in milliseconds.
+</para></summary></member>
+  <member key="ml._types.DatafeedTimingStats#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml._types.DatafeedTimingStats#search_count"><summary><para>
+The number of searches run by the datafeed.
+</para></summary></member>
+  <member key="ml._types.DatafeedTimingStats#total_search_time_ms"><summary><para>
+The total time the datafeed spent searching, in milliseconds.
+</para></summary></member>
+</doc>

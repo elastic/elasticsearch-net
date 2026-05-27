@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.HuggingFaceTaskSettingsConverter))]
 public sealed partial class HuggingFaceTaskSettings
 {
@@ -36,22 +37,14 @@ public sealed partial class HuggingFaceTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceTaskSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings#return_documents']/*"/>
 	public bool? ReturnDocuments { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceTaskSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings']/*"/>
 public readonly partial struct HuggingFaceTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings Instance { get; init; }
@@ -71,23 +64,14 @@ public readonly partial struct HuggingFaceTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, return doc text within the results.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceTaskSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings#return_documents']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor ReturnDocuments(bool? value = true)
 	{
 		Instance.ReturnDocuments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of most relevant documents to return.
-	/// It defaults to the number of the documents.
-	/// </para>
-	/// </summary>
+	/// <include file="HuggingFaceTaskSettings.g.xml" path="doc/member[@key='inference._types.HuggingFaceTaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

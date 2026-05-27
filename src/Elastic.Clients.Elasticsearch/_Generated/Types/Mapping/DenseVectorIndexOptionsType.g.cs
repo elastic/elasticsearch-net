@@ -26,75 +26,28 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DenseVectorIndexOptionsTypeConverter))]
 public enum DenseVectorIndexOptionsType
 {
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm in addition to automatically quantizing to binary vectors.
-	/// Only supports <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#bbq_flat']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bbq_flat")]
 	BbqFlat,
-	/// <summary>
-	/// <para>
-	/// This utilizes the HNSW algorithm in addition to automatic binary quantization for scalable approximate kNN
-	/// search with <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// <para>
-	/// This can reduce the memory footprint by nearly 32x at the cost of some accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#bbq_hnsw']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "bbq_hnsw")]
 	BbqHnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm for exact kNN search. This supports all <c>element_type</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#flat']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "flat")]
 	Flat,
-	/// <summary>
-	/// <para>
-	/// This utilizes the HNSW algorithm for scalable approximate kNN search. This supports all <c>element_type</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#hnsw']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "hnsw")]
 	Hnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm in addition to automatically half-byte scalar quantization.
-	/// Only supports <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#int4_flat']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "int4_flat")]
 	Int4Flat,
-	/// <summary>
-	/// <para>
-	/// This utilizes the HNSW algorithm in addition to automatically scalar quantization for scalable approximate kNN
-	/// search with <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// <para>
-	/// This can reduce the memory footprint by 8x at the cost of some accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#int4_hnsw']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "int4_hnsw")]
 	Int4Hnsw,
-	/// <summary>
-	/// <para>
-	/// This utilizes a brute-force search algorithm in addition to automatically scalar quantization. Only supports
-	/// <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#int8_flat']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "int8_flat")]
 	Int8Flat,
-	/// <summary>
-	/// <para>
-	/// The default index type for <c>float</c> vectors. This utilizes the HNSW algorithm in addition to automatically scalar
-	/// quantization for scalable approximate kNN search with <c>element_type</c> of <c>float</c>.
-	/// </para>
-	/// <para>
-	/// This can reduce the memory footprint by 4x at the cost of some accuracy.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsType.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsType#int8_hnsw']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "int8_hnsw")]
 	Int8Hnsw
 }

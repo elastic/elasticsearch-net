@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureOpenAIServiceSettingsConverter))]
 public sealed partial class AzureOpenAIServiceSettings
 {
@@ -44,63 +45,26 @@ public sealed partial class AzureOpenAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Azure OpenAI account.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#api_key']/*"/>
 	public string? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Azure API version ID to use.
-	/// It is recommended to use the latest supported non-preview version.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#api_version']/*"/>
 	public required string ApiVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The deployment name of your deployed models.
-	/// Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#deployment_id']/*"/>
 	public required string DeploymentId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A valid Microsoft Entra token.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#entra_id']/*"/>
 	public string? EntraId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure.
-	/// The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>1440</c>.
-	/// For <c>completion</c>, it is set to <c>120</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of your Azure OpenAI resource.
-	/// You can find this from the list of resources in the Azure Portal for your subscription.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#resource_name']/*"/>
 	public required string ResourceName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings']/*"/>
 public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings Instance { get; init; }
@@ -120,108 +84,56 @@ public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Azure OpenAI account.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ApiKey(string? value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Azure API version ID to use.
-	/// It is recommended to use the latest supported non-preview version.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#api_version']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ApiVersion(string value)
 	{
 		Instance.ApiVersion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The deployment name of your deployed models.
-	/// Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#deployment_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor DeploymentId(string value)
 	{
 		Instance.DeploymentId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid Microsoft Entra token.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#entra_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor EntraId(string? value)
 	{
 		Instance.EntraId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure.
-	/// The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>1440</c>.
-	/// For <c>completion</c>, it is set to <c>120</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure.
-	/// The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>1440</c>.
-	/// For <c>completion</c>, it is set to <c>120</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Azure.
-	/// The <c>azureopenai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>1440</c>.
-	/// For <c>completion</c>, it is set to <c>120</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of your Azure OpenAI resource.
-	/// You can find this from the list of resources in the Azure Portal for your subscription.
-	/// </para>
-	/// </summary>
+	/// <include file="AzureOpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.AzureOpenAIServiceSettings#resource_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ResourceName(string value)
 	{
 		Instance.ResourceName = value;

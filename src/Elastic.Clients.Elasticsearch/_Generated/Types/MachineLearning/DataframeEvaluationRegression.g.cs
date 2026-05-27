@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionConverter))]
 public sealed partial class DataframeEvaluationRegression
 {
@@ -43,28 +44,17 @@ public sealed partial class DataframeEvaluationRegression
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#actual_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? Metrics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#predicted_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression']/*"/>
 public readonly partial struct DataframeEvaluationRegressionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Instance { get; init; }
@@ -84,77 +74,49 @@ public readonly partial struct DataframeEvaluationRegressionDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor<TDocument> PredictedField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.PredictedField = value;
@@ -170,6 +132,7 @@ public readonly partial struct DataframeEvaluationRegressionDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression']/*"/>
 public readonly partial struct DataframeEvaluationRegressionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Instance { get; init; }
@@ -189,77 +152,49 @@ public readonly partial struct DataframeEvaluationRegressionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#actual_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ActualField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics? value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics()
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor>? action)
 	{
 		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.PredictedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegression.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegression#predicted_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionDescriptor PredictedField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.PredictedField = value;

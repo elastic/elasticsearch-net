@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.PatternReplaceTokenFilterConverter))]
 public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,26 +43,14 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#all']/*"/>
 	public bool? All { get; set; }
 	public string? Flags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#pattern']/*"/>
 	public required string Pattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#replacement']/*"/>
 	public string? Replacement { get; set; }
 
 	public string Type => "pattern_replace";
@@ -69,6 +58,7 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter']/*"/>
 public readonly partial struct PatternReplaceTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter Instance { get; init; }
@@ -88,11 +78,7 @@ public readonly partial struct PatternReplaceTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#all']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor All(bool? value = true)
 	{
 		Instance.All = value;
@@ -105,22 +91,14 @@ public readonly partial struct PatternReplaceTokenFilterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="PatternReplaceTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PatternReplaceTokenFilter#replacement']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Replacement(string? value)
 	{
 		Instance.Replacement = value;

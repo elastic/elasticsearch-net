@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.GeoLine"><summary><para>
+A GeoJson GeoLine.
+</para></summary></member>
+  <member key="_types.GeoLine#coordinates"><summary><para>
+Array of <c>[lon, lat]</c> coordinates
+</para></summary></member>
+  <member key="_types.GeoLine#type"><summary><para>
+Always <c>"LineString"</c>
+</para></summary></member>
+</doc>

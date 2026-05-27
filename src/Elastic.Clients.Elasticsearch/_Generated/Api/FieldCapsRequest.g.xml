@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.field_caps.Request"><summary><para>
+Get the field capabilities.
+</para>
+<para>
+Get information about the capabilities of fields among multiple indices.
+</para>
+<para>
+For data streams, the API returns field capabilities among the stream’s backing indices.
+It returns runtime fields like any other field.
+For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
+</para></summary></member>
+  <member key="_global.field_caps.Request#allow_no_indices"><summary><para>
+If false, the request returns an error if any wildcard expression, index alias,
+or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+targeting <c>foo*,bar*</c> returns an error if an index starts with foo but no index starts with bar.
+</para></summary></member>
+  <member key="_global.field_caps.Request#expand_wildcards"><summary><para>
+The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_global.field_caps.Request#fields"><summary><para>
+A list of fields to retrieve capabilities for. Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+  <member key="_global.field_caps.Request#filters"><summary><para>
+A comma-separated list of filters to apply to the response.
+</para></summary></member>
+  <member key="_global.field_caps.Request#ignore_unavailable"><summary><para>
+If <c>true</c>, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="_global.field_caps.Request#include_empty_fields"><summary><para>
+If false, empty fields are not included in the response.
+</para></summary></member>
+  <member key="_global.field_caps.Request#include_unmapped"><summary><para>
+If true, unmapped fields are included in the response.
+</para></summary></member>
+  <member key="_global.field_caps.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+</para></summary></member>
+  <member key="_global.field_caps.Request#index_filter"><summary><para>
+Filter indices if the provided query rewrites to <c>match_none</c> on every shard.
+</para>
+<para>
+IMPORTANT: The filtering is done on a best-effort basis, it uses index statistics and mappings to rewrite queries to <c>match_none</c> instead of fully running the request.
+For instance a range query over a date field can rewrite to <c>match_none</c> if all documents within a shard (including deleted documents) are outside of the provided range.
+However, not all queries can rewrite to <c>match_none</c> so this API may return an index even if the provided filter matches no document.
+</para></summary></member>
+  <member key="_global.field_caps.Request#runtime_mappings"><summary><para>
+Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
+These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
+</para></summary></member>
+  <member key="_global.field_caps.Request#types"><summary><para>
+A comma-separated list of field types to include.
+Any fields that do not match one of these types will be excluded from the results.
+It defaults to empty, meaning that all field types are returned.
+</para></summary></member>
+</doc>

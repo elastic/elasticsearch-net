@@ -23,38 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 public sealed partial class MigrateToDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Convert an index alias to a data stream.
-/// Converts an index alias to a data stream.
-/// You must have a matching index template that is data stream enabled.
-/// The alias must meet the following criteria:
-/// The alias must have a write index;
-/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
-/// The alias must not have any filters;
-/// The alias must not use custom routing.
-/// If successful, the request removes the alias and creates a data stream with the same name.
-/// The indices for the alias become hidden backing indices for the stream.
-/// The write index for the alias becomes the write index for the stream.
-/// </para>
-/// </summary>
+/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MigrateToDataStreamRequestConverter))]
 public sealed partial class MigrateToDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>
 {
@@ -81,43 +62,18 @@ public sealed partial class MigrateToDataStreamRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "indices.migrate_to_data_stream";
 
-	/// <summary>
-	/// <para>
-	/// Name of the index alias to convert to a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Name { get => P<Elastic.Clients.Elasticsearch.IndexName>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Convert an index alias to a data stream.
-/// Converts an index alias to a data stream.
-/// You must have a matching index template that is data stream enabled.
-/// The alias must meet the following criteria:
-/// The alias must have a write index;
-/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
-/// The alias must not have any filters;
-/// The alias must not use custom routing.
-/// If successful, the request removes the alias and creates a data stream with the same name.
-/// The indices for the alias become hidden backing indices for the stream.
-/// The write index for the alias becomes the write index for the stream.
-/// </para>
-/// </summary>
+/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 public readonly partial struct MigrateToDataStreamRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest Instance { get; init; }
@@ -142,33 +98,21 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index alias to convert to a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -231,21 +175,8 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Convert an index alias to a data stream.
-/// Converts an index alias to a data stream.
-/// You must have a matching index template that is data stream enabled.
-/// The alias must meet the following criteria:
-/// The alias must have a write index;
-/// All indices for the alias must have a <c>@timestamp</c> field mapping of a <c>date</c> or <c>date_nanos</c> field type;
-/// The alias must not have any filters;
-/// The alias must not use custom routing.
-/// If successful, the request removes the alias and creates a data stream with the same name.
-/// The indices for the alias become hidden backing indices for the stream.
-/// The write index for the alias becomes the write index for the stream.
-/// </para>
-/// </summary>
+/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 public readonly partial struct MigrateToDataStreamRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest Instance { get; init; }
@@ -269,33 +200,21 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index alias to convert to a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

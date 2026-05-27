@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.stop_data_frame_analytics.Request"><summary><para>
+Stop data frame analytics jobs.
+A data frame analytics job can be started and stopped multiple times
+throughout its lifecycle.
+</para></summary></member>
+  <member key="ml.stop_data_frame_analytics.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="number">
+<item>
+<para>
+Contains wildcard expressions and there are no data frame analytics
+jobs that match.
+</para>
+</item>
+<item>
+<para>
+Contains the _all string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+The default value is true, which returns an empty data_frame_analytics
+array when there are no matches and the subset of results when there are
+partial matches. If this parameter is false, the request returns a 404
+status code when there are no matches or only partial matches.
+</para></summary></member>
+  <member key="ml.stop_data_frame_analytics.Request#force"><summary><para>
+If true, the data frame analytics job is stopped forcefully.
+</para></summary></member>
+  <member key="ml.stop_data_frame_analytics.Request#id"><summary><para>
+Identifier for the data frame analytics job. This identifier can contain
+lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+underscores. It must start and end with alphanumeric characters.
+</para></summary></member>
+  <member key="ml.stop_data_frame_analytics.Request#timeout"><summary><para>
+Controls the amount of time to wait until the data frame analytics job
+stops. Defaults to 20 seconds.
+</para></summary></member>
+</doc>

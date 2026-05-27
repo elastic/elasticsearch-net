@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// A precision that can be expressed as a geohash length between 1 and 12, or a distance measure like "1km", "10m".
-/// </para>
-/// </summary>
+/// <include file="GeohashPrecision.g.xml" path="doc/member[@key='_types.GeohashPrecision']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeohashPrecision']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeohashPrecisionConverter))]
 public sealed partial class GeohashPrecision : Elastic.Clients.Elasticsearch.Union<long, string>
 {

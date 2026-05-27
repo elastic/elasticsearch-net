@@ -23,40 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 public sealed partial class PutDataLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream lifecycles.
-/// Update the data stream lifecycle of the specified data streams.
-/// </para>
-/// </summary>
+/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataLifecycleRequestConverter))]
 public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>
 {
@@ -83,71 +65,30 @@ public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.put_data_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#downsampling']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? Downsampling { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#enabled']/*"/>
 	public bool? Enabled { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream lifecycles.
-/// Update the data stream lifecycle of the specified data streams.
-/// </para>
-/// </summary>
+/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 public readonly partial struct PutDataLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest Instance { get; init; }
@@ -172,108 +113,63 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.DataRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? value)
 	{
 		Instance.Downsampling = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
 		Instance.Downsampling = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
@@ -286,12 +182,7 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;

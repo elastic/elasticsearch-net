@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_data_stream.Request"><summary><para>
+Delete data streams.
+Deletes one or more data streams and their backing indices.
+</para></summary></member>
+  <member key="indices.delete_data_stream.Request#expand_wildcards"><summary><para>
+Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.delete_data_stream.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.delete_data_stream.Request#name"><summary><para>
+Comma-separated list of data streams to delete. Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+</doc>

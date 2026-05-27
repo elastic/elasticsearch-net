@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeClassificationSummaryMulticlassConfusionMatrix']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeClassificationSummaryMulticlassConfusionMatrixConverter))]
 public sealed partial class DataframeClassificationSummaryMulticlassConfusionMatrix
 {

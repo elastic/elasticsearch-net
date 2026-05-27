@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.create.Response#_id"><summary><para>
+The unique identifier for the added document.
+</para></summary></member>
+  <member key="_global.create.Response#_index"><summary><para>
+The name of the index the document was added to.
+</para></summary></member>
+  <member key="_global.create.Response#_primary_term"><summary><para>
+The primary term assigned to the document for the indexing operation.
+</para></summary></member>
+  <member key="_global.create.Response#_seq_no"><summary><para>
+The sequence number assigned to the document for the indexing operation.
+Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
+</para></summary></member>
+  <member key="_global.create.Response#_shards"><summary><para>
+Information about the replication process of the operation.
+</para></summary></member>
+  <member key="_global.create.Response#_version"><summary><para>
+The document version, which is incremented each time the document is updated.
+</para></summary></member>
+  <member key="_global.create.Response#failure_store"><summary><para>
+The role of the failure store in this document response
+</para></summary></member>
+  <member key="_global.create.Response#result"><summary><para>
+The result of the indexing operation: <c>created</c> or <c>updated</c>.
+</para></summary></member>
+</doc>

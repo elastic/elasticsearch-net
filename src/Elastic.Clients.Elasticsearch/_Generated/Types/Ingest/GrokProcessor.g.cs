@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GrokProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GrokProcessorConverter))]
 public sealed partial class GrokProcessor
 {
@@ -43,89 +44,41 @@ public sealed partial class GrokProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
-	/// Common Schema (ECS) field names.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ecs_compatibility']/*"/>
 	public string? EcsCompatibility { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to use for grok expression parsing.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? PatternDefinitions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#patterns']/*"/>
 	public required System.Collections.Generic.ICollection<string> Patterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#trace_match']/*"/>
 	public bool? TraceMatch { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GrokProcessor']/*"/>
 public readonly partial struct GrokProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GrokProcessor Instance { get; init; }
@@ -145,112 +98,70 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GrokProcessor(Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
-	/// Common Schema (ECS) field names.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ecs_compatibility']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> EcsCompatibility(string? value)
 	{
 		Instance.EcsCompatibility = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for grok expression parsing.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for grok expression parsing.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -263,36 +174,21 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.PatternDefinitions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions()
 	{
 		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -306,47 +202,28 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#trace_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> TraceMatch(bool? value = true)
 	{
 		Instance.TraceMatch = value;
@@ -362,6 +239,7 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GrokProcessor']/*"/>
 public readonly partial struct GrokProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GrokProcessor Instance { get; init; }
@@ -381,112 +259,70 @@ public readonly partial struct GrokProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GrokProcessor(Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Must be disabled or v1. If v1, the processor uses patterns with Elastic
-	/// Common Schema (ECS) field names.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ecs_compatibility']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor EcsCompatibility(string? value)
 	{
 		Instance.EcsCompatibility = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for grok expression parsing.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for grok expression parsing.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -499,11 +335,7 @@ public readonly partial struct GrokProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -516,36 +348,21 @@ public readonly partial struct GrokProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.PatternDefinitions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions()
 	{
 		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.
-	/// Patterns matching existing names will override the pre-existing definition.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#pattern_definitions']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor PatternDefinitions(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.PatternDefinitions = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -559,47 +376,28 @@ public readonly partial struct GrokProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An ordered list of grok expression to match and extract named captures with.
-	/// Returns on the first expression in the list that matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, <c>_ingest._grok_match_index</c> will be inserted into your matched document’s metadata with the index into the pattern found in <c>patterns</c> that matched.
-	/// </para>
-	/// </summary>
+	/// <include file="GrokProcessor.g.xml" path="doc/member[@key='ingest._types.GrokProcessor#trace_match']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor TraceMatch(bool? value = true)
 	{
 		Instance.TraceMatch = value;

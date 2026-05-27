@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
 public sealed partial class DeleteTrainedModelAliasRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a trained model alias.
-/// </para>
-/// <para>
-/// This API deletes an existing model alias that refers to a trained model. If
-/// the model alias is missing or refers to a model other than the one identified
-/// by the <c>model_id</c>, this API returns an error.
-/// </para>
-/// </summary>
+/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteTrainedModelAliasRequestConverter))]
 public sealed partial class DeleteTrainedModelAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestParameters>
 {
@@ -63,31 +57,15 @@ public sealed partial class DeleteTrainedModelAliasRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "ml.delete_trained_model_alias";
 
-	/// <summary>
-	/// <para>
-	/// The model alias to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request#model_alias']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// The trained model ID to which the model alias refers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a trained model alias.
-/// </para>
-/// <para>
-/// This API deletes an existing model alias that refers to a trained model. If
-/// the model alias is missing or refers to a model other than the one identified
-/// by the <c>model_id</c>, this API returns an error.
-/// </para>
-/// </summary>
+/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request']/*"/>
 public readonly partial struct DeleteTrainedModelAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest Instance { get; init; }
@@ -112,22 +90,14 @@ public readonly partial struct DeleteTrainedModelAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The model alias to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request#model_alias']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.ModelAlias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The trained model ID to which the model alias refers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.delete_trained_model_alias.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;

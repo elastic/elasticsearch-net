@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license._types.License']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.LicenseConverter))]
 public sealed partial class License
 {
@@ -60,6 +61,7 @@ public sealed partial class License
 	public required string Uid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license._types.License']/*"/>
 public readonly partial struct LicenseDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.License Instance { get; init; }

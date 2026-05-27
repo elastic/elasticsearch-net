@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.AggregateMetricDoublePropertyConverter))]
 public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -49,11 +50,7 @@ public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elas
 	public int? IgnoreAbove { get; set; }
 	public bool? IgnoreMalformed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public required System.Collections.Generic.ICollection<string> Metrics { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -63,6 +60,7 @@ public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elas
 	public string Type => "aggregate_metric_double";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty']/*"/>
 public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty Instance { get; init; }
@@ -118,33 +116,21 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -203,6 +189,7 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty']/*"/>
 public readonly partial struct AggregateMetricDoublePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty Instance { get; init; }
@@ -264,33 +251,21 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="AggregateMetricDoubleProperty.g.xml" path="doc/member[@key='_types.mapping.AggregateMetricDoubleProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

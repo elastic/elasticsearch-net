@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
+/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 public sealed partial class TestGrokPatternRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The mode of compatibility with ECS compliant Grok patterns.
-	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
-	/// Valid values are <c>disabled</c> and <c>v1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#ecs_compatibility']/*"/>
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 }
 
-/// <summary>
-/// <para>
-/// Test a Grok pattern.
-/// Test a Grok pattern on one or more lines of text.
-/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
-/// </para>
-/// </summary>
+/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.TestGrokPatternRequestConverter))]
 public sealed partial class TestGrokPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>
 {
@@ -70,37 +61,18 @@ public sealed partial class TestGrokPatternRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "text_structure.test_grok_pattern";
 
-	/// <summary>
-	/// <para>
-	/// The mode of compatibility with ECS compliant Grok patterns.
-	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
-	/// Valid values are <c>disabled</c> and <c>v1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#ecs_compatibility']/*"/>
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 
-	/// <summary>
-	/// <para>
-	/// The Grok pattern to run on the text.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#grok_pattern']/*"/>
 	public required string GrokPattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The lines of text to run the Grok pattern on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#text']/*"/>
 	public required System.Collections.Generic.ICollection<string> Text { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Test a Grok pattern.
-/// Test a Grok pattern on one or more lines of text.
-/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
-/// </para>
-/// </summary>
+/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request']/*"/>
 public readonly partial struct TestGrokPatternRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest Instance { get; init; }
@@ -119,46 +91,28 @@ public readonly partial struct TestGrokPatternRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest instance) => new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The mode of compatibility with ECS compliant Grok patterns.
-	/// Use this parameter to specify whether to use ECS Grok patterns instead of legacy ones when the structure finder creates a Grok pattern.
-	/// Valid values are <c>disabled</c> and <c>v1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#ecs_compatibility']/*"/>
 	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor EcsCompatibility(string? value)
 	{
 		Instance.EcsCompatibility = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Grok pattern to run on the text.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#grok_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor GrokPattern(string value)
 	{
 		Instance.GrokPattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The lines of text to run the Grok pattern on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor Text(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Text = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The lines of text to run the Grok pattern on.
-	/// </para>
-	/// </summary>
+	/// <include file="TestGrokPatternRequest.g.xml" path="doc/member[@key='text_structure.test_grok_pattern.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor Text(params string[] values)
 	{
 		Instance.Text = [.. values];

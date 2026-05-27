@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="enrich.delete_policy.Request"><summary><para>
+Delete an enrich policy.
+Deletes an existing enrich policy and its enrich index.
+</para></summary></member>
+  <member key="enrich.delete_policy.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="enrich.delete_policy.Request#name"><summary><para>
+Enrich policy to delete.
+</para></summary></member>
+</doc>

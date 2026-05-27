@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.info.Request"><summary><para>
+Get cluster info.
+Returns basic information about the cluster.
+</para></summary></member>
+  <member key="cluster.info.Request#target"><summary><para>
+Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
+</para></summary></member>
+</doc>

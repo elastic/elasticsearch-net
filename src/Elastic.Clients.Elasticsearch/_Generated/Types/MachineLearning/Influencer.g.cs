@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Influencer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.InfluencerConverter))]
 public sealed partial class Influencer
 {
@@ -51,87 +52,36 @@ public sealed partial class Influencer
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#bucket_span']/*"/>
 	public required System.TimeSpan BucketSpan { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Additional influencer properties are added, depending on the fields being analyzed. For example, if it’s
-	/// analyzing <c>user_name</c> as an influencer, a field <c>user_name</c> is added to the result document. This
-	/// information enables you to filter the anomaly results more easily.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#foo']/*"/>
 	public string? Foo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field name of the influencer.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#influencer_field_name']/*"/>
 	public required string InfluencerFieldName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The entity that influenced, contributed to, or was to blame for the anomaly.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#influencer_field_value']/*"/>
 	public required string InfluencerFieldValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A normalized score between 0-100, which is based on the probability of the influencer in this bucket aggregated
-	/// across detectors. Unlike <c>initial_influencer_score</c>, this value is updated by a re-normalization process as new
-	/// data is analyzed.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#influencer_score']/*"/>
 	public required double InfluencerScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A normalized score between 0-100, which is based on the probability of the influencer aggregated across detectors.
-	/// This is the initial value that was calculated at the time the bucket was processed.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#initial_influencer_score']/*"/>
 	public required double InitialInfluencerScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#is_interim']/*"/>
 	public required bool IsInterim { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The probability that the influencer has this behavior, in the range 0 to 1. This value can be held to a high
-	/// precision of over 300 decimal places, so the <c>influencer_score</c> is provided as a human-readable and friendly
-	/// interpretation of this value.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#probability']/*"/>
 	public required double Probability { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Internal. This value is always set to <c>influencer</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#result_type']/*"/>
 	public required string ResultType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The start time of the bucket for which these results were calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="Influencer.g.xml" path="doc/member[@key='ml._types.Influencer#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 }
