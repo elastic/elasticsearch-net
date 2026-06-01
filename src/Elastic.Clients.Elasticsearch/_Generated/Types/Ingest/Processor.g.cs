@@ -150,6 +150,20 @@ public sealed partial class Processor
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct ProcessorDescriptor<TDocument>
@@ -756,6 +770,13 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> UserAgent(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>> action)
 	{
 		Instance.UserAgent = Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
@@ -1648,6 +1669,13 @@ public readonly partial struct ProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor UserAgent<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<T>> action)
 	{
 		Instance.UserAgent = Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
