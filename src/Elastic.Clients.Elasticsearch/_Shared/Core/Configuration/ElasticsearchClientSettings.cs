@@ -113,6 +113,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	private readonly FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new();
 	private readonly FluentDictionary<Type, string> _routeProperties = new();
 	private readonly Serializer _sourceSerializer;
+	private readonly VariantRegistry _variantRegistry = new();
 	private BeforeRequestEvent? _onBeforeRequest;
 	private bool _experimentalEnableSerializeNullInferredValues;
 	private FloatVectorDataEncoding _floatVectorDataEncoding = Serialization.FloatVectorDataEncoding.Base64;
@@ -151,6 +152,9 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 	public Serializer SourceSerializer => _sourceSerializer;
 
+	/// <inheritdoc cref="IElasticsearchClientSettings.Variants" />
+	public VariantRegistry Variants => _variantRegistry;
+
 	bool IElasticsearchClientSettings.DefaultDisableIdInference => _defaultDisableAllInference;
 	Func<string, string> IElasticsearchClientSettings.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 	string IElasticsearchClientSettings.DefaultIndex => _defaultIndex;
@@ -170,6 +174,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	FloatVectorDataEncoding IElasticsearchClientSettings.FloatVectorDataEncoding => _floatVectorDataEncoding;
 	ByteVectorDataEncoding IElasticsearchClientSettings.ByteVectorDataEncoding => _byteVectorDataEncoding;
 	ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
+	VariantRegistry IElasticsearchClientSettings.Variants => _variantRegistry;
 
 	bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
 

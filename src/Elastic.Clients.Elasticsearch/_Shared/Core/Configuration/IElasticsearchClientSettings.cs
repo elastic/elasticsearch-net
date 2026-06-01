@@ -154,6 +154,11 @@ public interface IElasticsearchClientSettings : ITransportConfiguration
 	/// Experimental settings.
 	/// </summary>
 	ExperimentalSettings Experimental { get; }
+
+	/// <summary>
+	/// The registry of plugin-defined CLR types for non-exhaustive variant families.
+	/// </summary>
+	VariantRegistry Variants { get; }
 }
 
 public sealed class ExperimentalSettings
