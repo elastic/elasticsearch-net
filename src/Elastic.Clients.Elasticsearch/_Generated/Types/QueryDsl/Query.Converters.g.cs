@@ -582,13 +582,18 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			variantType = reader.GetString()!;
+			reader.Read();
+			if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetContainerReader(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query), variantType!, out var variantReader))
 			{
-				reader.SafeSkip();
-				continue;
+				variant = variantReader(ref reader, options);
+			}
+			else
+			{
+				variant = System.Text.Json.JsonElement.ParseValue(ref reader);
 			}
 
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+			continue;
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -790,7 +795,31 @@ public sealed partial class QueryConverter : System.Text.Json.Serialization.Json
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery)value.Variant, null, null);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.Query)}'.");
+				if (value.Variant is null)
+				{
+					break;
+				}
+
+				if (value.Variant is System.Text.Json.JsonElement element)
+				{
+					writer.WritePropertyName(value.VariantType!);
+					element.WriteTo(writer);
+					break;
+				}
+
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetContainerWriter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query), value.Variant.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.VariantType, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Container variant of runtime type '{value.Variant.GetType().Name}' is registered for variant name '{variantWriter.Discriminator}' but reports '{value.VariantType}' for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.Query)}'.");
+					}
+
+					writer.WritePropertyName(variantWriter.Discriminator);
+					variantWriter.Write(writer, value.Variant, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Container variant of runtime type '{value.Variant.GetType().Name}' for variant '{value.VariantType}' is not registered. Call settings.Variants.RegisterContainer<{nameof(Elastic.Clients.Elasticsearch.QueryDsl.Query)}, T>(\"{value.VariantType}\") at startup.");
 		}
 
 		writer.WriteEndObject();

@@ -67,6 +67,20 @@ public sealed partial class FieldSuggester
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct FieldSuggesterDescriptor<TDocument>
@@ -139,6 +153,13 @@ public readonly partial struct FieldSuggesterDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Text(string? value)
 	{
 		Instance.Text = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
@@ -239,6 +260,13 @@ public readonly partial struct FieldSuggesterDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Text(string? value)
 	{
 		Instance.Text = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 

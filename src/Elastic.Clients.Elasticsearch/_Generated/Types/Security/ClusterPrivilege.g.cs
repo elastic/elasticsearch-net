@@ -59,6 +59,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege ManageOwnApiKey { get; } = new ClusterPrivilege("manage_own_api_key");
 	public static ClusterPrivilege ManagePipeline { get; } = new ClusterPrivilege("manage_pipeline");
 	public static ClusterPrivilege ManageProjectRouting { get; } = new ClusterPrivilege("manage_project_routing");
+	public static ClusterPrivilege ManageReindex { get; } = new ClusterPrivilege("manage_reindex");
 	public static ClusterPrivilege ManageRollup { get; } = new ClusterPrivilege("manage_rollup");
 	public static ClusterPrivilege ManageSaml { get; } = new ClusterPrivilege("manage_saml");
 	public static ClusterPrivilege ManageSearchApplication { get; } = new ClusterPrivilege("manage_search_application");
@@ -78,6 +79,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege MonitorEsql { get; } = new ClusterPrivilege("monitor_esql");
 	public static ClusterPrivilege MonitorInference { get; } = new ClusterPrivilege("monitor_inference");
 	public static ClusterPrivilege MonitorMl { get; } = new ClusterPrivilege("monitor_ml");
+	public static ClusterPrivilege MonitorReindex { get; } = new ClusterPrivilege("monitor_reindex");
 	public static ClusterPrivilege MonitorRollup { get; } = new ClusterPrivilege("monitor_rollup");
 	public static ClusterPrivilege MonitorSnapshot { get; } = new ClusterPrivilege("monitor_snapshot");
 	public static ClusterPrivilege MonitorStats { get; } = new ClusterPrivilege("monitor_stats");

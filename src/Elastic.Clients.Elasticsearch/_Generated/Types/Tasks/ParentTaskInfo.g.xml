@@ -6,6 +6,16 @@ For example, it might identify the search request being performed by a search ta
 Other kinds of tasks have different descriptions, like <c>_reindex</c> which has the source and the destination, or <c>_bulk</c> which just has the number of requests and the destination indices.
 Many requests will have only an empty description because more detailed information about the request is not easily available or particularly helpful in identifying the request.
 </para></summary></member>
+  <member key="tasks._types.ParentTaskInfo#original_start_time"><summary><para>
+The time at which the original task started, as an ISO 8601 formatted string. Only present together with <c>original_task_id</c> and when the request includes the <c>?human=true</c> query parameter.
+</para></summary></member>
+  <member key="tasks._types.ParentTaskInfo#original_start_time_in_millis"><summary><para>
+The time at which the original task started, in milliseconds since the Unix epoch. Only present together with <c>original_task_id</c>.
+</para></summary></member>
+  <member key="tasks._types.ParentTaskInfo#original_task_id"><summary><para>
+The task ID of the original task. Only present when the task is continuing the work of an earlier task that was running on a node which has since shut down (i.e. a relocatable task).
+For tasks that have not been relocated this is always equal to the task's own ID and is omitted from the response.
+</para></summary></member>
   <member key="tasks._types.ParentTaskInfo#status"><summary><para>
 The internal status of the task, which varies from task to task.
 The format also varies.

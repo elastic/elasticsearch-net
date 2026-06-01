@@ -107,8 +107,8 @@ If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attemp
 If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
 </para></summary></member>
   <member key="_global.reindex.Request#requests_per_second"><summary><para>
-The throttle for this request in sub-requests per second.
-By default, there is no throttle.
+The maximum number of documents to index per second, across the entire reindex operation (including slices).
+It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 </para></summary></member>
   <member key="_global.reindex.Request#require_alias"><summary><para>
 If <c>true</c>, the destination must be an index alias.
@@ -118,6 +118,9 @@ The script to run to update the document source or metadata when reindexing.
 </para></summary></member>
   <member key="_global.reindex.Request#scroll"><summary><para>
 The period of time that a consistent view of the index should be maintained for scrolled search.
+In serverless, and stack versions >= v9.5.0, we use PIT rather than scroll for pagination.
+We only use scroll for reindexing from remote clusters that are older than v7.10.0.
+Therefore, this parameter is ignored unless you are reindexing from a remote cluster that is older than v7.10.0.
 </para></summary></member>
   <member key="_global.reindex.Request#slices"><summary><para>
 The number of slices this task should be divided into.

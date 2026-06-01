@@ -60,6 +60,15 @@ public sealed partial class ParentTaskInfo
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Headers { get; set; }
 	public required long Id { get; set; }
 	public required string Node { get; set; }
+
+	/// <include file="ParentTaskInfo.g.xml" path="doc/member[@key='tasks._types.ParentTaskInfo#original_start_time']/*"/>
+	public string? OriginalStartTime { get; set; }
+
+	/// <include file="ParentTaskInfo.g.xml" path="doc/member[@key='tasks._types.ParentTaskInfo#original_start_time_in_millis']/*"/>
+	public System.DateTimeOffset? OriginalStartTimeInMillis { get; set; }
+
+	/// <include file="ParentTaskInfo.g.xml" path="doc/member[@key='tasks._types.ParentTaskInfo#original_task_id']/*"/>
+	public Elastic.Clients.Elasticsearch.TaskId? OriginalTaskId { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; set; }
 	public required System.TimeSpan RunningTimeInNanos { get; set; }

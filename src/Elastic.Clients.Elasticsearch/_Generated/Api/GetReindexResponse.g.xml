@@ -13,7 +13,7 @@ A sanitized description of the reindex operation (source and destination indices
 The error that caused the reindex task to fail, if any.
 </para></summary></member>
   <member key="_global.get_reindex.Response#id"><summary><para>
-The ID of the reindex task, in <c>nodeId:taskNum</c> format.
+The ID of the reindex task. The value is the ID assigned when the task was first created and remains stable across node-shutdown relocations.
 </para></summary></member>
   <member key="_global.get_reindex.Response#response"><summary><para>
 The final result of the completed reindex operation, if the task has finished successfully.

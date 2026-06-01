@@ -33,6 +33,9 @@ public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOriginalStartTime = System.Text.Json.JsonEncodedText.Encode("original_start_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOriginalStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("original_start_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOriginalTaskId = System.Text.Json.JsonEncodedText.Encode("original_task_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropParentTaskId = System.Text.Json.JsonEncodedText.Encode("parent_task_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRunningTime = System.Text.Json.JsonEncodedText.Encode("running_time"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeInNanos = System.Text.Json.JsonEncodedText.Encode("running_time_in_nanos"u8);
@@ -51,6 +54,9 @@ public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serializa
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propHeaders = default;
 		LocalJsonValue<long> propId = default;
 		LocalJsonValue<string> propNode = default;
+		LocalJsonValue<string?> propOriginalStartTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propOriginalStartTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propOriginalTaskId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propParentTaskId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRunningTime = default;
 		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
@@ -95,6 +101,21 @@ public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serializa
 			}
 
 			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			{
+				continue;
+			}
+
+			if (propOriginalStartTime.TryReadProperty(ref reader, options, PropOriginalStartTime, null))
+			{
+				continue;
+			}
+
+			if (propOriginalStartTimeInMillis.TryReadProperty(ref reader, options, PropOriginalStartTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propOriginalTaskId.TryReadProperty(ref reader, options, PropOriginalTaskId, null))
 			{
 				continue;
 			}
@@ -149,6 +170,9 @@ public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serializa
 			Headers = propHeaders.Value,
 			Id = propId.Value,
 			Node = propNode.Value,
+			OriginalStartTime = propOriginalStartTime.Value,
+			OriginalStartTimeInMillis = propOriginalStartTimeInMillis.Value,
+			OriginalTaskId = propOriginalTaskId.Value,
 			ParentTaskId = propParentTaskId.Value,
 			RunningTime = propRunningTime.Value,
 			RunningTimeInNanos = propRunningTimeInNanos.Value,
@@ -169,6 +193,9 @@ public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropOriginalStartTime, value.OriginalStartTime, null, null);
+		writer.WriteProperty(options, PropOriginalStartTimeInMillis, value.OriginalStartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropOriginalTaskId, value.OriginalTaskId, null, null);
 		writer.WriteProperty(options, PropParentTaskId, value.ParentTaskId, null, null);
 		writer.WriteProperty(options, PropRunningTime, value.RunningTime, null, null);
 		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));

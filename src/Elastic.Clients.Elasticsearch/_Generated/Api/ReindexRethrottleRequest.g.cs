@@ -27,6 +27,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <include file="../SpecReferences.xml" path="doc/member[@key='_global.reindex_rethrottle.Request']/*"/>
 public sealed partial class ReindexRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#requests_per_second']/*"/>
@@ -63,6 +64,8 @@ public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticse
 
 	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
+
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#requests_per_second']/*"/>
@@ -102,6 +105,7 @@ public readonly partial struct ReindexRethrottleRequestDescriptor
 		return this;
 	}
 
+	/// <include file="ReindexRethrottleRequest.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Request#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor GroupBy(Elastic.Clients.Elasticsearch.Tasks.GroupBy? value)
 	{
 		Instance.GroupBy = value;

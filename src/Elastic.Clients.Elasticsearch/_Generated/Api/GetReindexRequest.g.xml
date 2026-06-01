@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="_global.get_reindex.Request"><summary><para>
-Get a reindex task.
+Get the status and progress of a specific reindex task.
 </para>
 <para>
-Get the status and progress of a specific reindex task.
-</para></summary></member>
+This API follows reindex tasks across node-shutdown relocations, so callers can
+keep using the original task ID throughout the lifetime of the operation.
+Returned task IDs and timings reflect the original task, not its relocated successor.
+Relocated task IDs are also supported. They are followed transparently and return the task ID and timings of the original task.
+</para>
+<para>
+When the task ID cannot be resolved, the API returns the response below with a 404 status code.
+This response is used whether the ID is unknown, refers to a non-reindex task, refers to a sliced child subtask, or refers to a task whose node left the cluster with no stored result (e.g. a non-graceful shutdown).
+</para>
+<code>
+{
+  "error": {
+    "type": "resource_not_found_exception",
+    "reason": "Reindex operation [r1A2WoRbTwKZ516z6NEs5A:36619] not found"
+  },
+  "status": 404
+}
+</code></summary></member>
   <member key="_global.get_reindex.Request#task_id"><summary><para>
 The ID of the reindex task to retrieve.
 </para></summary></member>

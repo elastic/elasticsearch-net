@@ -11,6 +11,11 @@ WARNING: The task management API is new and should still be considered a beta fe
 The API may change in ways that are not backwards compatible.
 </para>
 <para>
+For relocatable tasks, this API transparently follows the task across graceful shutdown relocations,
+so callers can keep using the original task ID. The returned task reports its <c>original_task_id</c> and <c>original_start_time_in_millis</c>
+if it is continuing work from an earlier task.
+</para>
+<para>
 <strong>Identifying running tasks</strong>
 </para>
 <para>

@@ -37,8 +37,15 @@ public sealed partial class ReindexRethrottleResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
+	/// <include file="ReindexRethrottleResponse.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Response#node_failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; set; }
+
+	/// <include file="ReindexRethrottleResponse.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Response#nodes']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>? Nodes { get; set; }
+
+	/// <include file="ReindexRethrottleResponse.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Response#task_failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
+
+	/// <include file="ReindexRethrottleResponse.g.xml" path="doc/member[@key='_global.reindex_rethrottle.Response#tasks']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>? Tasks { get; set; }
 }

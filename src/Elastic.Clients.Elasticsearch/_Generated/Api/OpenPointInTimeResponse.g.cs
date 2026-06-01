@@ -37,6 +37,8 @@ public sealed partial class OpenPointInTimeResponse : Elastic.Transport.Products
 		_ = sentinel;
 	}
 
+	/// <include file="OpenPointInTimeResponse.g.xml" path="doc/member[@key='_global.open_point_in_time.Response#_clusters']/*"/>
+	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 	public required string Id { get; set; }
 
 	/// <include file="OpenPointInTimeResponse.g.xml" path="doc/member[@key='_global.open_point_in_time.Response#_shards']/*"/>

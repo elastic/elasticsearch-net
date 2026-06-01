@@ -16,7 +16,7 @@ A sanitized description of the reindex operation.
 The error that caused the reindex task to fail, if any.
 </para></summary></member>
   <member key="_global.cancel_reindex.Response#id"><summary><para>
-The ID of the reindex task, in <c>nodeId:taskNum</c> format. Present when <c>wait_for_completion=true</c>.
+The ID of the reindex task. The value is the ID assigned when the task was first created and remains stable across node-shutdown relocations. Present when <c>wait_for_completion=true</c>.
 </para></summary></member>
   <member key="_global.cancel_reindex.Response#response"><summary><para>
 The final result of the reindex operation, if it completed before being cancelled.

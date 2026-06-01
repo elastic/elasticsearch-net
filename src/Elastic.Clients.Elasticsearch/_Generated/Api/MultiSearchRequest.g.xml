@@ -21,6 +21,13 @@ IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
 Each newline character may be preceded by a carriage return <c>\r</c>.
 When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 </para></summary></member>
+  <member key="_global.msearch.Request#_slice"><summary><para>
+The slice identifier for routing the search to a specific slice.
+When provided at the top level, all sub-searches are routed to shards matching the given slice value.
+Use the special value <c>_all</c> to query all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+Individual sub-search headers can also specify <c>_slice</c> to override the top-level setting.
+</para></summary></member>
   <member key="_global.msearch.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -78,6 +85,7 @@ If true, hits.total are returned as an integer in the response. Defaults to fals
 </para></summary></member>
   <member key="_global.msearch.Request#routing"><summary><para>
 Custom routing value used to route search operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
   <member key="_global.msearch.Request#search_type"><summary><para>
 Indicates whether global term and document frequencies should be used when scoring returned documents.
