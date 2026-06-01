@@ -12,6 +12,7 @@ toc:
         children:
           - file: source-serialization.md
           - file: request-response-serialization.md
+          - file: plugin-defined-variants.md
   - file: using-net-client.md
     children:
       - file: aggregations.md

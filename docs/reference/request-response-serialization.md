@@ -135,3 +135,7 @@ When deserializing a request type, it may happen that otherwise required path or
 A few request and response types in Elasticsearch do not support JSON bodies and therefore cannot be serialized in the above described way.
 
 Two prominent examples are the `Bulk` or `MultiGet` APIs, which use NDJSON bodies. Binary responses also occur in some cases.
+
+## See also
+
+For (de)serialization of variants introduced by Elasticsearch plugins (custom field types, token filters, analyzers, char filters, tokenizers, query types, aggregation types), see [Plugin-defined variant types](plugin-defined-variants.md).
