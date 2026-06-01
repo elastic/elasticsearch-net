@@ -11,18 +11,12 @@ Elasticsearch plugins can introduce additional field types, token filters, char 
   - [Reading a plugin field type](#carrier-read)
   - [Writing a plugin token filter](#carrier-write)
 - [Registering a strongly-typed CLR variant](#register)
-- [Per-family registration surface](#per-family)
 - [Container variants](#containers)
-- [Native AOT](#aot)
 - [Limitations](#limitations)
 
 ## Round-trip carrier [carrier]
 
 For every non-container variant family that accepts plugin-defined values, the client emits a public `Unknown{Family}` class that implements the family's interface. When the deserializer encounters a discriminator value that is not part of the closed variant set and that has not been registered, it produces an instance of this carrier instead of throwing.
-
-For internally tagged families such as `IProperty`, `IAnalyzer`, or `ITokenFilter`, the carrier captures the discriminator on a `Type` property and the full JSON object on a `Content` property. The write side emits the discriminator from `Type`, then replays the remaining properties from `Content`, so a value read into the carrier can be written back out without losing fields.
-
-For externally tagged typed-key families such as `IAggregate`, the discriminator comes from the response property name (`type#name`). The carrier still exposes `Type`, but `Content` contains only the JSON value body under that typed key.
 
 ### Reading a plugin field type [carrier-read]
 
@@ -45,13 +39,17 @@ var property = client.RequestResponseSerializer.Deserialize<IProperty>(json)!;
 
 if (property is UnknownProperty unknown)
 {
-    Console.WriteLine(unknown.Type);                                 // "truncated_collation"
-    Console.WriteLine(unknown.Content.GetProperty("max_length"));     // 64
-    Console.WriteLine(unknown.Content.EnumerateObject().Count());     // 3  (type + max_length + rules)
+    Console.WriteLine(unknown.Type); <1>
+    Console.WriteLine(unknown.Content.GetProperty("max_length")); <2>
+    Console.WriteLine(unknown.Content.EnumerateObject().Count()); <3>
 }
 ```
 
-`Deserialize<IProperty>` produces an `UnknownProperty` carrier because `truncated_collation` is not in the closed `IProperty` variant set. The carrier exposes `Type` (the JSON discriminator) and `Content` (the full JSON object as a `JsonElement`).
+`Deserialize<IProperty>` produces an `UnknownProperty` carrier because `truncated_collation` is not in the closed `IProperty` variant set.
+
+1. Outputs: `"truncated_collation"` (the JSON discriminator, stored on `Type`).
+2. Outputs: `64`. Individual properties of the plugin object are accessible via `Content`.
+3. Outputs: `3`. `Content` preserves all fields from the original JSON object, including `type`, `max_length`, and `rules`.
 
 ### Writing a plugin token filter [carrier-write]
 
@@ -77,7 +75,7 @@ Construct the carrier with the discriminator the server-side plugin expects and 
 
 ## Registering a strongly-typed CLR variant [register]
 
-When the same plugin variant appears in several places, working with raw `JsonElement` content can become awkward. For these cases the client settings expose a per-instance registry, `ElasticsearchClientSettings.Variants`, whose `Register<TUnion, TImpl>(string discriminator)` method binds a caller-defined CLR type to a discriminator of the variant family `TUnion`. After registration the deserializer produces instances of the CLR type directly. The serializer writes them through the CLR type's own `JsonConverter`. Because the registry lives on the settings instance, different `ElasticsearchClient` instances in the same process can register different CLR types (or none) independently.
+When the same plugin variant appears in several places, working with raw `JsonElement` content can become awkward. For these cases the client settings expose a per-instance registry, `ElasticsearchClientSettings.Variants`, whose `Register<TVariantFamily, TImplementation>(string discriminator)` method binds a caller-defined CLR type to a discriminator of the variant family `TVariantFamily`. After registration the deserializer produces instances of the CLR type directly. The serializer writes them through the CLR type's own `JsonConverter`. Because the registry lives on the settings instance, different `ElasticsearchClient` instances in the same process can register different CLR types (or none) independently.
 
 ```csharp
 using System.Text.Json;
@@ -113,44 +111,24 @@ var property = client.RequestResponseSerializer.Deserialize<IProperty>(json)!;
 var typed = (TruncatedCollationProperty)property;
 ```
 
-The user-defined type carries its own `[JsonConverter]` attribute. The client never reflects on the type — registration captures a typed delegate, so the converter must be resolvable through the `JsonSerializerOptions` used by the client.
+::::{warning}
 
-`Variants.Register<TUnion, TImpl>(string)` is scoped to the settings instance. Calling it again with the same discriminator replaces the previous registration on that instance. On write, the value's `Type` must match the registered discriminator. A registered discriminator overrides the carrier fallback — discriminators that are not registered continue to land in `UnknownProperty`.
+A `[JsonConverter]` attribute on the registered type is **required**. Without it, the client falls back to a reflection-based converter driven by its own `JsonSerializerOptions`, which produces incorrect JSON and fails at runtime in AOT-published applications.
 
-## Per-family registration surface [per-family]
+Source-generated `JsonSerializerContext` implementations cannot be used. A context registers its type metadata on a specific `JsonSerializerOptions` instance, and there is currently no way to compose a user-supplied context with the client's internal serializer options. Only a hand-written `JsonConverter<TImplementation>` attached via `[JsonConverter]` on the type is supported.
 
-All registrations are made on `settings.Variants` (an instance of `VariantRegistry`).
+::::
 
-| Family | Registration | Carrier |
-|---|---|---|
-| `IProperty` | `Variants.Register<Mapping.IProperty, T>(string)` | `Mapping.UnknownProperty` |
-| `IAnalyzer` | `Variants.Register<Analysis.IAnalyzer, T>(string)` | `Analysis.UnknownAnalyzer` |
-| `ITokenFilter` | `Variants.Register<Analysis.ITokenFilter, T>(string)` | `Analysis.UnknownTokenFilter` |
-| `ICharFilter` | `Variants.Register<Analysis.ICharFilter, T>(string)` | `Analysis.UnknownCharFilter` |
-| `ITokenizer` | `Variants.Register<Analysis.ITokenizer, T>(string)` | `Analysis.UnknownTokenizer` |
-| `IAggregate` | `Variants.Register<Aggregations.IAggregate, T>(string)` | `Aggregations.UnknownAggregate` |
-| `IRepository` | `Variants.Register<Snapshot.IRepository, T>(string)` | `Snapshot.UnknownRepository` |
-| `ISettingsSimilarity` | `Variants.Register<IndexManagement.ISettingsSimilarity, T>(string)` | `IndexManagement.UnknownSettingsSimilarity` |
-| `Query` (container) | `Variants.RegisterContainer<QueryDsl.Query, T>(string)` | accessed via container methods (see below) |
-| `SpanQuery` (container) | `Variants.RegisterContainer<QueryDsl.SpanQuery, T>(string)` | accessed via container methods |
-| `Aggregation` (container) | `Variants.RegisterContainer<Aggregations.Aggregation, T>(string)` | accessed via container methods (see below) |
-| `Processor` (container) | `Variants.RegisterContainer<Ingest.Processor, T>(string)` | accessed via container methods |
-| `Rescore` (container) | `Variants.RegisterContainer<Core.Search.Rescore, T>(string)` | accessed via container methods |
-| `FieldSuggester` (container) | `Variants.RegisterContainer<Core.Search.FieldSuggester, T>(string)` | accessed via container methods |
-| `ApiKeyQuery` (container) | `Variants.RegisterContainer<Security.ApiKeyQuery, T>(string)` | accessed via container methods |
-| `ApiKeyAggregation` (container) | `Variants.RegisterContainer<Security.ApiKeyAggregation, T>(string)` | accessed via container methods |
-| `RoleQuery` (container) | `Variants.RegisterContainer<Security.RoleQuery, T>(string)` | accessed via container methods |
-| `UserQuery` (container) | `Variants.RegisterContainer<Security.UserQuery, T>(string)` | accessed via container methods |
 
-Namespaces are abbreviated. Each family lives under `Elastic.Clients.Elasticsearch`.
+`Variants.Register<TVariantFamily, TImplementation>(string)` is scoped to the settings instance. Calling it again with the same discriminator replaces the previous registration on that instance. On write, the value's `Type` must match the registered discriminator. A registered discriminator overrides the carrier fallback. Discriminators that are not registered continue to land in `UnknownProperty`.
 
 ## Container variants [containers]
 
-Container types (`Query`, `Aggregation`) don't use a separate `Unknown{Family}` carrier — the container itself holds the variant. Known variants are reached through their typed accessors (`Query.Match`, `Query.Bool`, and so on). For plugin-defined variants the container exposes three additional members:
+Container types (for example `Query` or `Aggregation`) don't use a separate `Unknown{Family}` carrier. The container itself holds the variant. Known variants are reached through their typed accessors (`Query.Match`, `Query.Bool`, and so on). For plugin-defined variants the container exposes three additional members:
 
-- `string? VariantName { get; }` — the JSON property name of the variant the container currently holds.
-- `T? GetCustomVariant<T>(string variantName)` — returns the stored variant when the container's current name matches, otherwise `null`.
-- `void SetCustomVariant<T>(string variantName, T? value)` — sets the container's variant to the given `(name, value)` pair.
+- `string? VariantName { get; }`: the JSON property name of the variant the container currently holds.
+- `T? GetCustomVariant<T>(string variantName)`: returns the stored variant when the container's current name matches, otherwise `null`.
+- `void SetCustomVariant<T>(string variantName, T? value)`: sets the container's variant to the given `(name, value)` pair.
 - Fluent descriptors expose `CustomVariant<T>(string variantName, T? value)` for writing plugin-defined variants in descriptor-based APIs.
 
 ```csharp
@@ -182,18 +160,8 @@ Query descriptorQuery = new QueryDescriptor<object>()
     .CustomVariant("my_custom_query", new MyCustomQuery { Field = "title", Pattern = "^foo" });
 ```
 
-Register the CLR type for the variant name on the client settings at application startup. Deserialization then produces instances of `MyCustomQuery` rather than a raw `JsonElement`. `GetCustomVariant<T>(variantName)` returns `null` when the container's variant doesn't match the requested name — for example, when the container holds a known typed variant instead. `SetCustomVariant<T>(variantName, value)` and the descriptor `CustomVariant<T>(variantName, value)` are intended for plugin-defined variants. Known variants are still set through their typed properties (`outgoing.Match = ...`).
-
-## Native AOT [aot]
-
-The registration mechanism avoids runtime type-keyed serialization. `Variants.Register<TUnion, TImpl>(string)` (and `Variants.RegisterContainer<TContainer, TImpl>(string)`) captures `TImpl` as a generic context inside a static lambda; the delegate body dispatches through `ReadValue<TImpl>` / `WriteValue<TImpl>`, which resolve their converter through the `JsonSerializerOptions` already configured on the client. There is no runtime use of `JsonSerializer.Deserialize(Type)` or `JsonSerializer.Serialize(object, Type)`.
-
-For the registration to remain trim-safe in published AOT applications, the registered CLR type must be discoverable by the client's serializer options. For request/response variant registration, prefer a `[JsonConverter]` attribute on the type itself, as in the preceding example. A source-generated `JsonSerializerContext` only helps when it is actually added to the serializer options used for the registered variant type.
+Register the CLR type for the variant name on the client settings at application startup. Deserialization then produces instances of `MyCustomQuery` rather than a raw `JsonElement`. `GetCustomVariant<T>(variantName)` returns `null` when the container's variant doesn't match the requested name, for example when the container holds a known typed variant instead. `SetCustomVariant<T>(variantName, value)` and the descriptor `CustomVariant<T>(variantName, value)` are intended for plugin-defined variants. Known variants are still set through their typed properties (`outgoing.Match = ...`).
 
 ## Limitations [limitations]
 
-::::{note}
-
-Registrations are scoped to the `ElasticsearchClientSettings` instance they are made on. A client only sees the variants registered on the settings it was constructed from, so different `ElasticsearchClient` instances in the same process can use different plugin-variant mappings. Register on `settings.Variants` before performing (de)serialization with the client built from those settings.
-
-::::
+The registration mechanism captures the registered CLR type as a generic type argument inside a static delegate. There is no runtime use of `JsonSerializer.Deserialize(Type)` or `JsonSerializer.Serialize(object, Type)`. For this to remain trim-safe in AOT-published applications, the registered type must be discoverable by the client's serializer options. In practice, this means a `[JsonConverter]` attribute on the type is required. A source-generated `JsonSerializerContext` cannot be used, because there is currently no way to compose a user-supplied context with the client's internal serializer options.
