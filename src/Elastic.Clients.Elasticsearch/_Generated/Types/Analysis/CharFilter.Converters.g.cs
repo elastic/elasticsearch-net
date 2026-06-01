@@ -50,7 +50,7 @@ public sealed partial class ICharFilterConverter : System.Text.Json.Serializatio
 			"kuromoji_iteration_mark" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(options, null),
 			"mapping" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(options, null),
 			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}'.")
+			_ => ReadCustomVariant(ref reader, options, discriminator!)
 		};
 	}
 
@@ -74,7 +74,34 @@ public sealed partial class ICharFilterConverter : System.Text.Json.Serializatio
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter)value, null);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}'.");
+				if (value is Elastic.Clients.Elasticsearch.Analysis.UnknownCharFilter custom)
+				{
+					writer.WriteValue(options, custom, null);
+					break;
+				}
+
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetWriter<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(value.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.Type, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' is registered for discriminator '{variantWriter.Discriminator}' but reports '{value.Type}' for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}'.");
+					}
+
+					variantWriter.Write(writer, value, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' with discriminator '{value.Type}' is not registered. Call settings.Variants.Register<{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}, T>(\"{value.Type}\") at startup.");
 		}
+	}
+
+	private static Elastic.Clients.Elasticsearch.Analysis.ICharFilter ReadCustomVariant(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, string discriminator)
+	{
+		if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetReader<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(discriminator, out var variantReader))
+		{
+			return variantReader(ref reader, options)!;
+		}
+
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UnknownCharFilter>(options)!;
 	}
 }
