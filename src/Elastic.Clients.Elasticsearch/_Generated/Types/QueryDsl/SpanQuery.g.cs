@@ -78,6 +78,20 @@ public sealed partial class SpanQuery
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct SpanQueryDescriptor<TDocument>
@@ -222,6 +236,13 @@ public readonly partial struct SpanQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> SpanWithin(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>> action)
 	{
 		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
@@ -430,6 +451,13 @@ public readonly partial struct SpanQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor SpanWithin<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>> action)
 	{
 		Instance.SpanWithin = Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 

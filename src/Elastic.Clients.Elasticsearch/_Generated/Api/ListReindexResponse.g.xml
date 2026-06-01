@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="_global.list_reindex.Response#node_failures"><summary><para>
-Node-level failures that occurred while listing reindex tasks.
+Node-level failures encountered while listing reindex tasks.
+Typically populated when a node disconnects or stops responding mid-request,
+reindex tasks running on such nodes will be missing from the <c>reindex</c> array for the duration of the disruption.
 </para></summary></member>
   <member key="_global.list_reindex.Response#reindex"><summary><para>
 The list of currently running reindex tasks.
 </para></summary></member>
   <member key="_global.list_reindex.Response#task_failures"><summary><para>
-Task-level failures that occurred while listing reindex tasks.
+Per-task failures encountered while listing reindex tasks. Tasks that failed are not included in the <c>reindex</c> array.
 </para></summary></member>
 </doc>

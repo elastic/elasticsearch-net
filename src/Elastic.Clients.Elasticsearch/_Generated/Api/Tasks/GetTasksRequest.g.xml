@@ -12,6 +12,11 @@ The API may change in ways that are not backwards compatible.
 </para>
 <para>
 If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
+</para>
+<para>
+For relocatable tasks, this API transparently follows the task across graceful shutdown relocations,
+so callers can keep using the original task ID. The returned task reports its <c>original_task_id</c> and <c>original_start_time_in_millis</c>
+if it is continuing work from an earlier task.
 </para></summary></member>
   <member key="tasks.get.Request#follow_relocations"><summary><para>
 Internal use only

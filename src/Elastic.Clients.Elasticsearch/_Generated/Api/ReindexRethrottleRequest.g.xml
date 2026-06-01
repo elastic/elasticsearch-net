@@ -4,22 +4,40 @@
 Throttle a reindex operation.
 </para>
 <para>
-Change the number of requests per second for a particular reindex operation.
-For example:
+Change the maximum number of documents to index per second for a particular reindex operation.
+For example, to unthrottle to unlimited documents per second:
 </para>
 <code>
 POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
 </code>
 <para>
 Rethrottling that speeds up the query takes effect immediately.
-Rethrottling that slows down the query will take effect after completing the current batch.
+Rethrottling that slows down the query will take effect after completing the current batch of documents.
 This behavior prevents scroll timeouts.
+</para>
+<para>
+This API follows reindex tasks across node-shutdown relocations, so callers can keep using
+the original task ID throughout the lifetime of the operation.
+The relocated task ID is also accepted and is followed transparently.
+In either case, returned task IDs and timings reflect the original task, not its relocated successor.
+</para>
+<para>
+The rethrottle may not have been applied to any tasks if either <c>node_failures</c> or <c>task_failures</c> are non-empty, or if the response contains
+no successfully rethrottled tasks — that is, no entries under <c>nodes</c> (returned with the default
+<c>group_by=nodes</c> in stack) or under <c>tasks</c> (returned in serverless, or in stack with
+<c>group_by=none</c> or <c>group_by=parents</c>).
+</para></summary></member>
+  <member key="_global.reindex_rethrottle.Request#group_by"><summary><para>
+The way to group the tasks in the response.
+We recommend setting this to <c>none</c>, which provides the cleanest response format.
 </para></summary></member>
   <member key="_global.reindex_rethrottle.Request#requests_per_second"><summary><para>
-The throttle for this request in sub-requests per second.
+The maximum number of documents to index per second, across the entire reindex operation (including slices).
 It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 </para></summary></member>
   <member key="_global.reindex_rethrottle.Request#task_id"><summary><para>
-The task identifier, which can be found by using the tasks API.
+The task identifier, returned when creating a reindex task, or by listing tasks via
+<c>GET /_reindex</c> or <c>GET /_tasks</c>.
+In stack, can be either the original task ID or the task ID of the relocated task.
 </para></summary></member>
 </doc>

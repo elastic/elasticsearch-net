@@ -21,7 +21,8 @@ These settings are specific to the task type you specified.
 </para></summary></member>
   <member key="inference.put_anthropic.Request#task_type"><summary><para>
 The task type.
-The only valid task type for the model to perform is <c>completion</c>.
+The valid task types for the model to perform are <c>completion</c> and <c>chat_completion</c>.
+NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
 </para></summary></member>
   <member key="inference.put_anthropic.Request#timeout"><summary><para>
 Specifies the amount of time to wait for the inference endpoint to be created.

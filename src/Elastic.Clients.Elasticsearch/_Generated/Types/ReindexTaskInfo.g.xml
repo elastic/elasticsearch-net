@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="_types.ReindexTaskInfo"><summary><para>
-Information about a single reindex task, as returned by the reindex management APIs.
+Information about a single parent reindex task, as returned by the reindex management APIs.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#cancelled"><summary><para>
 Whether the reindex task has been cancelled.
@@ -10,21 +10,21 @@ Whether the reindex task has been cancelled.
 A sanitized description of the reindex operation (source and destination indices, and optionally remote host info).
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#id"><summary><para>
-The ID of the reindex task, in <c>nodeId:taskNum</c> format.
+The ID of the reindex task. The ID is assigned when the task was first created and remains the same across graceful shutdown relocations.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#running_time"><summary><para>
-The elapsed running time of the reindex task, in a human-readable format.
+The elapsed running time of the reindex task, including relocations, in a human-readable format.
 Only present when the request includes the <c>?human=true</c> query parameter.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#running_time_in_nanos"><summary><para>
-The elapsed running time of the reindex task, in nanoseconds.
+The elapsed running time of the reindex task, including relocations, in nanoseconds.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#start_time"><summary><para>
-The time at which the reindex task started, as an ISO 8601 formatted string.
+The time at which the reindex task started, as an ISO-8601 formatted string. Remains the same across graceful shutdown relocations.
 Only present when the request includes the <c>?human=true</c> query parameter.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#start_time_in_millis"><summary><para>
-The time at which the reindex task started, in milliseconds since the Unix epoch.
+The time at which the reindex task started, in milliseconds since the Unix epoch. Remains the same across graceful shutdown relocations.
 </para></summary></member>
   <member key="_types.ReindexTaskInfo#status"><summary><para>
 The current progress of the reindex operation.

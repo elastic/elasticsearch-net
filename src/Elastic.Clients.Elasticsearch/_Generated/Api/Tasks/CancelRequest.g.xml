@@ -16,6 +16,11 @@ The cancelled flag in the response indicates that the cancellation command has b
 <para>
 To troubleshoot why a cancelled task does not complete promptly, use the get task information API with the <c>?detailed</c> parameter to identify the other tasks the system is running.
 You can also use the node hot threads API to obtain detailed information about the work the system is doing instead of completing the cancelled task.
+</para>
+<para>
+For relocatable tasks, this API transparently follows the task across graceful shutdown relocations,
+so callers can keep using the original task ID. The returned task reports its <c>original_task_id</c> and <c>original_start_time_in_millis</c>
+if it is continuing work from an earlier task.
 </para></summary></member>
   <member key="tasks.cancel.Request#actions"><summary><para>
 A comma-separated list or wildcard expression of actions that is used to limit the request.

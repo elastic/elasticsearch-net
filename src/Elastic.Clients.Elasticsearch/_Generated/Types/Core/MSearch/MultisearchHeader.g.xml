@@ -3,6 +3,11 @@
   <member key="_global.msearch.MultisearchHeader"><summary><para>
 Contains parameters used to limit or change the subsequent search body request.
 </para></summary></member>
+  <member key="_global.msearch.MultisearchHeader#_slice"><summary><para>
+The slice identifier for routing the search to a specific slice.
+Use the special value <c>_all</c> to query all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.msearch.MultisearchHeader#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -15,5 +20,9 @@ indices are allowed and the request returns an empty result.
 If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
 index, alias, or data stream that is missing, closed, or otherwise unavailable.
 If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="_global.msearch.MultisearchHeader#routing"><summary><para>
+A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
 </doc>

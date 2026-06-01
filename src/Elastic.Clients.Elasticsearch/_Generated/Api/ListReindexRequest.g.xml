@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <member key="_global.list_reindex.Request"><summary><para>
-List active reindex tasks.
+Get information about all currently running reindex tasks.
 </para>
 <para>
-Get information about all currently running reindex tasks.
+Reindex tasks that are mid-relocation between nodes are reported once,
+under their original task ID, so callers do not see duplicates across the relocation chain.
+</para>
+<para>
+If the API returns a HTTP status of <c>200 OK</c>, but <c>node_failures</c> or <c>task_failures</c> are non-empty in the body, the listing is not a complete authoritative listing and may be missing tasks.
 </para></summary></member>
   <member key="_global.list_reindex.Request#detailed"><summary><para>
 If <c>true</c>, include detailed task status information in the response.

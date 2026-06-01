@@ -8,8 +8,8 @@ Change the number of requests per second for a particular delete by query operat
 Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 </para></summary></member>
   <member key="_global.delete_by_query_rethrottle.Request#requests_per_second"><summary><para>
-The throttle for this request in sub-requests per second.
-To disable throttling, set it to <c>-1</c>.
+The maximum number of documents to delete per second, across the entire delete-by-query operation (including slices).
+It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 </para></summary></member>
   <member key="_global.delete_by_query_rethrottle.Request#task_id"><summary><para>
 The ID for the task.

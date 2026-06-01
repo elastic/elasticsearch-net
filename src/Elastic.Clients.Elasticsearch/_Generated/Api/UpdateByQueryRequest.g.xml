@@ -244,7 +244,8 @@ If <c>true</c>, the request cache is used for this request.
 It defaults to the index-level setting.
 </para></summary></member>
   <member key="_global.update_by_query.Request#requests_per_second"><summary><para>
-The throttle for this request in sub-requests per second.
+The maximum number of documents to update per second, across the entire update_by_query operation (including slices).
+It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 </para></summary></member>
   <member key="_global.update_by_query.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.

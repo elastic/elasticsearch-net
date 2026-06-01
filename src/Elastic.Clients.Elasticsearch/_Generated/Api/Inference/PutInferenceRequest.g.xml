@@ -34,7 +34,7 @@ Amazon SageMaker (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>s
 </item>
 <item>
 <para>
-Anthropic (<c>completion</c>)
+Anthropic (<c>chat_completion</c>, <c>completion</c>)
 </para>
 </item>
 <item>

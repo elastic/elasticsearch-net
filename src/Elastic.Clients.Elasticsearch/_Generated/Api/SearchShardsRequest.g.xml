@@ -11,6 +11,12 @@ When filtered aliases are used, the filter is returned as part of the <c>indices
 <para>
 If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 </para></summary></member>
+  <member key="_global.search_shards.Request#_slice"><summary><para>
+The slice identifier for routing the search to a specific slice.
+When provided, the request is limited to shards that match the given slice value.
+Use the special value <c>_all</c> to query all slices without restricting to a routing value.
+Required when <c>index.slice.enabled</c> is <c>true</c> for the target index; not allowed when <c>index.slice.enabled</c> is <c>false</c>.
+</para></summary></member>
   <member key="_global.search_shards.Request#allow_no_indices"><summary><para>
 A setting that does two separate checks on the index expression.
 If <c>false</c>, the request returns an error (1) if any wildcard expression
@@ -48,5 +54,6 @@ It is random by default.
 </para></summary></member>
   <member key="_global.search_shards.Request#routing"><summary><para>
 A custom value used to route operations to a specific shard.
+Not allowed when <c>index.slice.enabled</c> is <c>true</c> for the target index; use <c>_slice</c> instead.
 </para></summary></member>
 </doc>
