@@ -37,7 +37,7 @@ var json = """
 {
   "type": "truncated_collation",
   "max_length": 64,
-  "rules": "<.*?>"
+  "rules": "latin_to_base"
 }
 """;
 
