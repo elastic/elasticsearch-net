@@ -22,7 +22,7 @@ To check for security updates, go to [Security announcements for the Elastic sta
 
 #### 1. Plugin-defined variant types [1-plugin-defined-variant-types]
 
-Field types, token filters, char filters, analyzers, tokenizers, query types, and aggregation types introduced by Elasticsearch plugins (for example `icu_collation_keyword`, `truncated_collation`, or `sql_normalizer`) round-trip through the typed client. Unknown discriminators on interface-union families deserialize into an `Unknown{Family}` carrier; callers can opt into strongly-typed dispatch by registering a CLR type for a discriminator on the client settings (`settings.Variants`) at application startup. Registrations are scoped to the settings instance, so different client instances can map plugin variants independently:
+Field types, token filters, char filters, analyzers, tokenizers, query types, and aggregation types introduced by Elasticsearch plugins (for example `icu_collation_keyword`, `truncated_collation`, or `sql_normalizer`) round-trip through the typed client. Unknown discriminators on interface-union families deserialize into an `Unknown{Family}` carrier. Callers can opt into strongly-typed dispatch by registering a CLR type for a discriminator on the client settings (`settings.Variants`) at application startup. Registrations are scoped to the settings instance, so different client instances can map plugin variants independently:
 
 ```csharp
 settings.Variants.Register<IProperty, TruncatedCollationProperty>("truncated_collation");

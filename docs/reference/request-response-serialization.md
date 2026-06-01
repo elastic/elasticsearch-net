@@ -134,7 +134,7 @@ When deserializing a request type, it may happen that otherwise required path or
 
 A few request and response types in Elasticsearch do not support JSON bodies and therefore cannot be serialized in the above described way.
 
-Two prominent examples are the `Bulk` or `MultiGet` APIs, which use NDJSON bodies. Binary responses also occur in some cases.
+Two prominent examples are the `Bulk` or `MultiGet` APIs, which use NDJSON bodies. Binary responses also occur sometimes.
 
 ## See also
 
