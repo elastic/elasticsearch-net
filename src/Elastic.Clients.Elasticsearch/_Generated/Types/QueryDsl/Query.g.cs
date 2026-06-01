@@ -201,6 +201,20 @@ public partial class Query
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct QueryDescriptor<TDocument>
@@ -997,6 +1011,13 @@ public readonly partial struct QueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> Wrapper(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor> action)
 	{
 		Instance.Wrapper = Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
@@ -2125,6 +2146,13 @@ public readonly partial struct QueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor Wrapper(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor> action)
 	{
 		Instance.Wrapper = Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 

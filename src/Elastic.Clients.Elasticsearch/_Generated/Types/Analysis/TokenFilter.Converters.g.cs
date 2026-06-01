@@ -119,7 +119,7 @@ public sealed partial class ITokenFilterConverter : System.Text.Json.Serializati
 			"uppercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UppercaseTokenFilter>(options, null),
 			"word_delimiter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>(options, null),
 			"word_delimiter_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ITokenFilter)}'.")
+			_ => ReadCustomVariant(ref reader, options, discriminator!)
 		};
 	}
 
@@ -350,7 +350,34 @@ public sealed partial class ITokenFilterConverter : System.Text.Json.Serializati
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter)value, null);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ITokenFilter)}'.");
+				if (value is Elastic.Clients.Elasticsearch.Analysis.UnknownTokenFilter custom)
+				{
+					writer.WriteValue(options, custom, null);
+					break;
+				}
+
+				if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetWriter<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(value.GetType(), out var variantWriter))
+				{
+					if (!string.Equals(value.Type, variantWriter.Discriminator, System.StringComparison.Ordinal))
+					{
+						throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' is registered for discriminator '{variantWriter.Discriminator}' but reports '{value.Type}' for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ITokenFilter)}'.");
+					}
+
+					variantWriter.Write(writer, value, options);
+					break;
+				}
+
+				throw new System.Text.Json.JsonException($"Variant of runtime type '{value.GetType().Name}' with discriminator '{value.Type}' is not registered. Call settings.Variants.Register<{nameof(Elastic.Clients.Elasticsearch.Analysis.ITokenFilter)}, T>(\"{value.Type}\") at startup.");
 		}
+	}
+
+	private static Elastic.Clients.Elasticsearch.Analysis.ITokenFilter ReadCustomVariant(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, string discriminator)
+	{
+		if (options.TryGetContext<Elastic.Clients.Elasticsearch.IElasticsearchClientSettings>(out var settings) && settings.Variants.TryGetReader<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(discriminator, out var variantReader))
+		{
+			return variantReader(ref reader, options)!;
+		}
+
+		return reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.UnknownTokenFilter>(options)!;
 	}
 }

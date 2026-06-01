@@ -60,6 +60,20 @@ public sealed partial class FieldRule
 		VariantType = type;
 		Variant = value;
 	}
+
+	public string? VariantName { get => VariantType; }
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public T? GetCustomVariant<T>(string variantName)
+	{
+		return GetVariant<T>(variantName);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public void SetCustomVariant<T>(string variantName, T? value)
+	{
+		SetVariant<T>(variantName, value);
+	}
 }
 
 public readonly partial struct FieldRuleDescriptor
@@ -96,6 +110,13 @@ public readonly partial struct FieldRuleDescriptor
 	public Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor Username(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Username = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	public Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor CustomVariant<T>(string variantName, T? value)
+	{
+		Instance.SetCustomVariant<T>(variantName, value);
 		return this;
 	}
 
