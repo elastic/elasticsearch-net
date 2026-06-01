@@ -12,10 +12,25 @@ To check for security updates, go to [Security announcements for the Elastic sta
 
 % Release notes include only features, enhancements, and fixes. Add breaking changes, deprecations, and known issues to the applicable release notes sections.
 
-% ## version.next [felasticsearch-net-client-next-release-notes]
+## version.next [felasticsearch-net-client-next-release-notes]
 
-% ### Features and enhancements [elasticsearch-net-client-next-features-enhancements]
-% *
+### Overview
+
+- [1. Plugin-defined variant types](#1-plugin-defined-variant-types)
+
+### Features and enhancements [elasticsearch-net-client-next-features-enhancements]
+
+#### 1. Plugin-defined variant types [1-plugin-defined-variant-types]
+
+Field types, token filters, char filters, analyzers, tokenizers, query types, and aggregation types introduced by Elasticsearch plugins (for example `icu_collation_keyword`, `truncated_collation`, or `sql_normalizer`) round-trip through the typed client. Unknown discriminators on interface-union families deserialize into an `Unknown{Family}` carrier. Callers can opt into strongly-typed dispatch by registering a CLR type for a discriminator on the client settings (`settings.Variants`) at application startup. Registrations are scoped to the settings instance, so different client instances can map plugin variants independently:
+
+```csharp
+settings.Variants.Register<IProperty, TruncatedCollationProperty>("truncated_collation");
+settings.Variants.Register<ITokenFilter, SqlNormalizerTokenFilter>("sql_normalizer");
+settings.Variants.RegisterContainer<Query, MyCustomQuery>("my_custom_query");
+```
+
+Refer to the [Plugin-defined variant types](../reference/plugin-defined-variants.md) documentation for details.
 
 % ### Fixes [elasticsearch-net-client-next-fixes]
 % *
