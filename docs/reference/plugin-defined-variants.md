@@ -75,29 +75,20 @@ Construct the carrier with the discriminator the server-side plugin expects and 
 
 ## Registering a strongly-typed CLR variant [register]
 
-When the same plugin variant appears in several places, working with raw `JsonElement` content can become awkward. For these cases the client settings expose a per-instance registry, `ElasticsearchClientSettings.Variants`, whose `Register<TVariantFamily, TImplementation>(string discriminator)` method binds a caller-defined CLR type to a discriminator of the variant family `TVariantFamily`. After registration the deserializer produces instances of the CLR type directly. The serializer writes them through the CLR type's own `JsonConverter`. Because the registry lives on the settings instance, different `ElasticsearchClient` instances in the same process can register different CLR types (or none) independently.
+When the same plugin variant appears in several places, working with raw `JsonElement` content can become awkward. For these cases the client settings expose a per-instance registry, `ElasticsearchClientSettings.Variants`, whose `Register<TVariantFamily, TImplementation>(string discriminator)` method binds a caller-defined CLR type to a discriminator of the variant family `TVariantFamily`. After registration the deserializer produces instances of the CLR type directly. The serializer writes them using the converter resolved from the client's `JsonSerializerOptions`. Because the registry lives on the settings instance, different `ElasticsearchClient` instances in the same process can register different CLR types (or none) independently.
 
 ```csharp
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Mapping;
 
-[JsonConverter(typeof(TruncatedCollationPropertyConverter))]
 public sealed class TruncatedCollationProperty : IProperty
 {
     public string Type => "truncated_collation";
+
+    [JsonPropertyName("max_length")]
     public int? MaxLength { get; set; }
+
     public string? Rules { get; set; }
-}
-
-public sealed class TruncatedCollationPropertyConverter
-    : JsonConverter<TruncatedCollationProperty>
-{
-    public override TruncatedCollationProperty Read(
-        ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) { /* ... */ }
-
-    public override void Write(
-        Utf8JsonWriter writer, TruncatedCollationProperty value, JsonSerializerOptions options) { /* ... */ }
 }
 
 // Register on the client settings at application startup, then build the client from those settings:
@@ -113,9 +104,9 @@ var typed = (TruncatedCollationProperty)property;
 
 ::::{warning}
 
-A `[JsonConverter]` attribute on the registered type is **required**. Without it, the client falls back to a reflection-based converter driven by its own `JsonSerializerOptions`, which produces incorrect JSON and fails at runtime in AOT-published applications.
+For AOT-published applications, a `[JsonConverter]` attribute is **required** on the registered type. The reflection-based fallback used in non-AOT applications cannot be trimmed safely.
 
-Source-generated `JsonSerializerContext` implementations cannot be used. A context registers its type metadata on a specific `JsonSerializerOptions` instance, and there is currently no way to compose a user-supplied context with the client's internal serializer options. Only a hand-written `JsonConverter<TImplementation>` attached via `[JsonConverter]` on the type is supported.
+Source-generated `JsonSerializerContext` implementations cannot be used. A context registers its type metadata on a specific `JsonSerializerOptions` instance, and there is currently no way to compose a user-supplied context with the client's internal serializer options.
 
 ::::
 
@@ -164,4 +155,4 @@ Register the CLR type for the variant name on the client settings at application
 
 ## Limitations [limitations]
 
-The registration mechanism captures the registered CLR type as a generic type argument inside a static delegate. There is no runtime use of `JsonSerializer.Deserialize(Type)` or `JsonSerializer.Serialize(object, Type)`. For this to remain trim-safe in AOT-published applications, the registered type must be discoverable by the client's serializer options. In practice, this means a `[JsonConverter]` attribute on the type is required. A source-generated `JsonSerializerContext` cannot be used, because there is currently no way to compose a user-supplied context with the client's internal serializer options.
+The registration mechanism captures the registered CLR type as a generic type argument inside a static delegate. There is no runtime use of `JsonSerializer.Deserialize(Type)` or `JsonSerializer.Serialize(object, Type)`. For this to remain trim-safe in AOT-published applications, the registered type must be discoverable by the client's serializer options without reflection. In practice, this means a `[JsonConverter]` attribute on the type is required for AOT. A source-generated `JsonSerializerContext` cannot be used, because there is currently no way to compose a user-supplied context with the client's internal serializer options.
