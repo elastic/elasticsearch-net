@@ -9,6 +9,11 @@ on:
         description: 'The new version number to branch'
         required: true
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   createBranches:
     name: "Bump ${{ github.event.inputs.version }} on branch ${{ github.event.inputs.branch }} "

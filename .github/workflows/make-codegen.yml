@@ -1,7 +1,11 @@
-name: Code Generation 
+name: Code Generation
 on:
   schedule:
     - cron: "0 0/2 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   active-branches:

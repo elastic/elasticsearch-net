@@ -13,6 +13,9 @@ on:
         required: false
         default: ${{ github.ref_name }}
 
+permissions:
+  contents: write
+
 concurrency:
   group: 'docfx'
   cancel-in-progress: false
